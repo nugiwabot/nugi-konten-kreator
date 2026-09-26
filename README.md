@@ -125,9 +125,14 @@ nugi-konten-kreator/
 │
 ├── engine/                   # Engine Python Ringan & CLI
 │   ├── config.py             # Parser environment variables
-│   ├── providers/            # Abstraksi provider (Embedding, Reranker, Search)
+│   ├── providers/            # Abstraksi provider (Embedding, Reranker, Search, Media)
 │   ├── ingestion/            # Pipeline ekstraksi PDF lokal & vector indexer
-│   └── pipeline/             # Two-stage retriever, research runner, & CLI
+│   └── pipeline/             # Two-stage retriever, research runner, media pipeline, & CLI
+│
+├── assets/                   # Asset lokal (logo, media download results)
+│   ├── logo/
+│   ├── narasi_01/
+│   └── media/                # Destination folder untuk Media Retrieval Agent downloads
 │
 └── tests/                    # Test Suite Otomatis (100% Pass)
     ├── test_providers.py     # Pengujian provider & offline fallback
@@ -169,8 +174,47 @@ Mengekstrak kembali buku PDF lokal di folder Downloads dan modul markdown:
 python -m engine.pipeline.engine_cli reindex --pages 30
 ```
 
-### 5. Menjalankan Test Suite
-Memverifikasi 15 pengujian unit otomatis:
+### 5. 🎬 Media Retrieval Agent — Preview Hasil Pencarian
+Mencari media visual dari Wikimedia Commons + Internet Archive tanpa download (preview):
+```powershell
+# Preview hasil pencarian (tidak ada file yang didownload)
+python -m engine.pipeline.engine_cli media search "D-Day 1944 Normandy" --count 10 --type video
+
+# Preview foto bertema emosi
+python -m engine.pipeline.engine_cli media search "orang yang merasa sendirian di keramaian" --type image
+```
+
+### 6. 📥 Media Retrieval Agent — Download
+Cari dan download media langsung ke folder project:
+```powershell
+# Download 5 footage D-Day ke assets/media/ww2/d-day/
+python -m engine.pipeline.engine_cli media download "D-Day 1944 Normandy landing" \
+    --count 5 --folder ww2/d-day --type video
+
+# Download foto Albert Einstein
+python -m engine.pipeline.engine_cli media download "Albert Einstein portrait 1921" \
+    --count 3 --folder people/einstein --type image
+
+# Download dengan batas ukuran file
+python -m engine.pipeline.engine_cli media download "WWII archival footage" \
+    --count 5 --folder ww2/general --max-size-mb 200
+```
+
+### 7. 📄 Media Retrieval Agent — Script to Asset
+Ekstrak kebutuhan visual otomatis dari script narasi dan download per scene:
+```powershell
+python -m engine.pipeline.engine_cli media from-script "assets/narasi_01/narasi.md" \
+    --folder narasi-01 --count-per-scene 3
+```
+
+### 8. 🩺 Media Retrieval Agent — Health Check
+Cek ketersediaan semua layanan (Wikimedia, Internet Archive, Embedding, Reranker):
+```powershell
+python -m engine.pipeline.engine_cli media doctor
+```
+
+### 9. Menjalankan Test Suite
+Memverifikasi 103 pengujian unit otomatis:
 ```powershell
 python -m pytest tests/ -v
 ```

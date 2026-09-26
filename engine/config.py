@@ -22,3 +22,11 @@ DEFAULT_PDF_DIR = Path(os.getenv("PDF_DIR", r"C:\Users\Nugi\Downloads"))
 
 # Web Research Configuration
 WEB_SEARCH_MAX_RESULTS = int(os.getenv("WEB_SEARCH_MAX_RESULTS", "6"))
+
+# Media Retrieval Configuration
+MEDIA_ASSETS_DIR = Path(os.getenv("MEDIA_ASSETS_DIR", str(BASE_DIR / "assets" / "media")))
+MEDIA_SEARCH_MAX_RESULTS = int(os.getenv("MEDIA_SEARCH_MAX_RESULTS", "20"))
+MEDIA_DOWNLOAD_TIMEOUT = int(os.getenv("MEDIA_DOWNLOAD_TIMEOUT", "60"))
+MEDIA_MAX_FILE_SIZE_MB = int(os.getenv("MEDIA_MAX_FILE_SIZE_MB", "500"))
+WIKIMEDIA_API_URL = os.getenv("WIKIMEDIA_API_URL", "https://commons.wikimedia.org/w/api.php")
+INTERNET_ARCHIVE_API_URL = os.getenv("INTERNET_ARCHIVE_API_URL", "https://archive.org")

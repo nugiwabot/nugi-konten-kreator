@@ -59,10 +59,14 @@ class LocalRerankerProvider(RerankerProvider):
         self.timeout = timeout
         self.enable_fallback = enable_fallback
         self.fallback = FallbackRerankerProvider()
+        self._is_available: Optional[bool] = None
 
     def rerank(self, query: str, documents: List[str], top_n: Optional[int] = None) -> List[Dict[str, Any]]:
         if not documents:
             return []
+            
+        if self._is_available is False and self.enable_fallback:
+            return self.fallback.rerank(query, documents, top_n)
             
         payload = {
             "query": query,
@@ -96,6 +100,7 @@ class LocalRerankerProvider(RerankerProvider):
                     formatted = formatted[:top_n]
                 return formatted
         except Exception as e:
+            self._is_available = False
             logger.warning(
                 f"Local reranker endpoint {self.endpoint_url} failed: {e}. "
                 f"Fallback status: {self.enable_fallback}"

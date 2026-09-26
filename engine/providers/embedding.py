@@ -81,6 +81,7 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         self.timeout = timeout
         self.enable_fallback = enable_fallback
         self.fallback = FallbackEmbeddingProvider()
+        self._is_available: Optional[bool] = None
 
     def get_embedding(self, text: str) -> List[float]:
         embeddings = self.get_embeddings([text])
@@ -89,6 +90,9 @@ class LocalEmbeddingProvider(EmbeddingProvider):
     def get_embeddings(self, texts: List[str]) -> List[List[float]]:
         if not texts:
             return []
+        
+        if self._is_available is False and self.enable_fallback:
+            return self.fallback.get_embeddings(texts)
         
         payload = {
             "model": self.model_name,
@@ -108,6 +112,7 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                 data_list = sorted(result.get("data", []), key=lambda x: x.get("index", 0))
                 return [item["embedding"] for item in data_list]
         except Exception as e:
+            self._is_available = False
             logger.warning(
                 f"Local embedding endpoint {self.endpoint_url} failed: {e}. "
                 f"Fallback status: {self.enable_fallback}"
