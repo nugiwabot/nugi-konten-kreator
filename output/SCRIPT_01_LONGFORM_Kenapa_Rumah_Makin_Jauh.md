@@ -46,7 +46,7 @@ Bukan karena tidak mau. Bukan karena tidak sadar. Waktu saya tanya langsung, jaw
 
 Dan di sinilah cerita yang sesungguhnya dimulai.
 
-Karena kalau kita jujur, cerita itu bukan tentang satu orang. Ini tentang jutaan orang. Data dari Badan Pusat Statistik menunjukkan pola yang sama sejak 2010-an: pusat perumahan baru di Jabodetabek terus bergeser semakin jauh dari pusat kota. Orang-orang yang kerja di Jakarta perlahan pindah ke Bogor, Bekasi, Tangerang — bahkan sampai ke Karawang dan Purwakarta.
+Karena kalau kita jujur, cerita itu bukan tentang satu orang. Ini tentang jutaan orang. Data dari **Badan Pusat Statistik (BPS)** menunjukkan pola yang sama sejak 2010-an: pusat perumahan baru di Jabodetabek terus bergeser semakin jauh dari pusat kota. Orang-orang yang kerja di Jakarta perlahan pindah ke Bogor, Bekasi, Tangerang — bahkan sampai ke Karawang dan Purwakarta.
 
 Pertanyaan yang jarang dijawab dengan jujur: **kenapa manusia, dalam jumlah yang sangat besar, memilih situasi seperti ini?**
 
@@ -100,7 +100,7 @@ Enam tahun. Cuma buat duduk di kemacetan.
 
 Waktu itu bukan angka abstrak. Waktu itu adalah jam yang harusnya bisa kamu pakai untuk main sama anak yang tumbuh cepat. Untuk belajar hal baru. Untuk masak makan malam. Untuk tidur cukup. Atau sekadar jadi manusia yang nggak selalu terburu-buru.
 
-Ada penelitian dari Universitas McGill di Kanada yang ngukur kebahagiaan orang-orang di berbagai kota. Hasilnya menarik: dari semua kegiatan sehari-hari yang diteliti, **macet dan perjalanan jauh ke kantor adalah kegiatan yang paling bikin orang tidak bahagia** — bahkan lebih buruk dari kerjaan itu sendiri. Lembur 2 jam di kantor ternyata secara psikologis masih lebih bisa ditoleransi dibanding macet 1 jam yang nggak bisa diprediksi kapan selesainya.
+Ada penelitian dari **Universitas McGill** di Kanada yang ngukur kebahagiaan orang-orang di berbagai kota. Hasilnya menarik: dari semua kegiatan sehari-hari yang diteliti, **macet dan perjalanan jauh ke kantor adalah kegiatan yang paling bikin orang tidak bahagia** — bahkan lebih buruk dari kerjaan itu sendiri. Lembur 2 jam di kantor ternyata secara psikologis masih lebih bisa ditoleransi dibanding macet 1 jam yang nggak bisa diprediksi kapan selesainya.
 
 Kenapa bisa begitu?
 
@@ -125,7 +125,7 @@ Dalam banyak kasus, kalau seseorang mau menghitung total biaya yang sesungguhnya
 
 Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang cara otak kita bekerja.
 
-Ada penelitian dari dua psikolog bernama Tversky dan Kahneman — mereka meneliti bagaimana manusia membuat keputusan — dan hasilnya cukup mengejutkan. Ternyata, otak kita sangat buruk dalam menghitung biaya yang nggak langsung terlihat dan tersebar dalam waktu yang panjang. Seperti waktu, stres, dan dampak kesehatan jangka panjang.
+Ada penelitian dari dua psikolog bernama **Tversky dan Kahneman** — mereka meneliti bagaimana manusia membuat keputusan — dan hasilnya cukup mengejutkan. Ternyata, otak kita sangat buruk dalam menghitung biaya yang nggak langsung terlihat dan tersebar dalam waktu yang panjang. Seperti waktu, stres, dan dampak kesehatan jangka panjang.
 
 Sebaliknya, kita sangat peka terhadap biaya yang angkanya jelas, langsung kelihatan, dan nyata sekarang juga.
 
@@ -145,7 +145,7 @@ Yang nggak pernah masuk ke dalam hitungan: **biaya transportasi yang harus ditan
 
 Biaya itu nggak masuk ke harga jual rumah. Biaya itu ditanggung bareng-bareng: lewat pajak, lewat subsidi BBM, lewat kemacetan yang menggerus produktivitas seluruh kota, dan lewat waktu hidup jutaan orang yang habis di jalan.
 
-Seorang peneliti perkotaan bernama Alain Bertaud pernah menemukan bahwa kota-kota yang berkembang ke luar seperti ini — menyebar ke segala penjuru tanpa perencanaan yang baik — secara konsisten menghasilkan biaya transportasi per orang yang jauh lebih mahal dibanding kota yang tumbuh lebih rapat dan terencana. Dan biaya transportasi yang mahal itu, dalam jangka panjang, bikin daya beli warganya turun dan akses ke peluang ekonomi jadi nggak merata.
+Seorang peneliti perkotaan bernama **Alain Bertaud** pernah menemukan bahwa kota-kota yang berkembang ke luar seperti ini — menyebar ke segala penjuru tanpa perencanaan yang baik — secara konsisten menghasilkan biaya transportasi per orang yang jauh lebih mahal dibanding kota yang tumbuh lebih rapat dan terencana. Dan biaya transportasi yang mahal itu, dalam jangka panjang, bikin daya beli warganya turun dan akses ke peluang ekonomi jadi nggak merata.
 
 Intinya: kita bayar bukan cuma dengan waktu. Kita bayar dengan peluang yang nggak pernah kita sadari hilang.
 
@@ -374,11 +374,11 @@ Tidak perlu menambah re-hook lain hanya demi mempertahankan retensi secara mekan
 
 | Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
 | :-: | :--- | :--- | :--- |
-| 1 | Pola pergeseran perumahan Jabodetabek | Peta / diagram pertumbuhan Jabodetabek | BPS |
-| 2 | Dampak perjalanan/commuting terhadap well-being | Chart / kutipan temuan penelitian | Universitas McGill |
-| 3 | Perjalanan kerja panjang dan indikator kesehatan/kesejahteraan | Grafik durasi perjalanan vs indikator kesehatan | Royal Society for Public Health |
-| 4 | Cara manusia menimbang biaya yang langsung terlihat vs biaya tertunda | Diagram sederhana decision-making / loss framing | Tversky & Kahneman |
-| 5 | Hubungan bentuk kota, kepadatan, dan biaya transportasi | Diagram kepadatan kota vs mobilitas | Alain Bertaud |
+| 1 | Pola pergeseran perumahan Jabodetabek | Peta / diagram pertumbuhan Jabodetabek | **BPS** |
+| 2 | Dampak perjalanan/commuting terhadap well-being | Chart / kutipan temuan penelitian | **Universitas McGill** |
+| 3 | Perjalanan kerja panjang dan indikator kesehatan/kesejahteraan | Grafik durasi perjalanan vs indikator kesehatan | **Royal Society for Public Health** |
+| 4 | Cara manusia menimbang biaya yang langsung terlihat vs biaya tertunda | Diagram sederhana decision-making / loss framing | **Tversky & Kahneman** |
+| 5 | Hubungan bentuk kota, kepadatan, dan biaya transportasi | Diagram kepadatan kota vs mobilitas | **Alain Bertaud** |
 
 **Production rule:**
 - Jangan menampilkan angka statistik besar hanya karena ada di narration.
@@ -462,11 +462,11 @@ Kenapa orang rela tinggal semakin jauh dari pusat kota demi rumah yang terasa le
 - Human × Place
 
 **Primary Sources Mentioned in Script:**
-- Badan Pusat Statistik (BPS)
-- Universitas McGill
-- Royal Society for Public Health
-- Tversky & Kahneman
-- Alain Bertaud
+- **Badan Pusat Statistik (BPS)**
+- **Universitas McGill**
+- **Royal Society for Public Health**
+- **Tversky & Kahneman**
+- **Alain Bertaud**
 
 **Related Video Direction:**
 Pilih video Nugi lain yang memperluas pertanyaan tentang rumah, kota, tanah, atau bagaimana tempat memengaruhi kehidupan manusia.
@@ -506,3 +506,30 @@ Angka harus tetap sesuai dengan perhitungan yang dipakai di video.
 - [x] Tidak ada folder baru.
 - [x] Tidak ada refactor repository.
 - [x] Script asli sebelum section ini tetap dipertahankan.
+
+
+---
+
+## EDITOR SOURCE HIGHLIGHT — PHASE 5.1 PILOT
+
+> **Tujuan:** memudahkan editor menemukan nama rujukan yang perlu ditampilkan sebagai logo / source card / teks sumber saat kalimat tersebut diucapkan.
+
+**Aturan pilot:**
+- Nama lembaga, peneliti, atau sumber yang disebut langsung di naskah diberi **bold**.
+- Tidak menambahkan URL, link website, atau citation panjang ke teleprompter.
+- Jika sebuah klaim hanya menyebut "ada penelitian" tetapi sumber spesifiknya belum disebut di naskah, **jangan mengarang nama sumber baru**.
+- Sumber pada bagian production/evidence juga dibuat **bold** agar mudah discan editor.
+- Ini hanya formatting/editorial annotation; isi argumentasi tidak diubah.
+
+### Sumber yang dapat muncul di layar dari naskah #01
+- **Badan Pusat Statistik (BPS)**
+- **Universitas McGill**
+- **Royal Society for Public Health (RSPH)**
+- **Tversky dan Kahneman**
+- **Alain Bertaud**
+
+### Bentuk visual yang disarankan
+Saat nama sumber dibacakan:
+> **[LOGO SUMBER]  Nama Sumber**
+
+Tidak perlu menampilkan URL website dalam video.
