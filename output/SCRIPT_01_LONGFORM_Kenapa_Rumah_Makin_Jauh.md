@@ -1,4 +1,4 @@
-﻿# NASKAH KONTEN NUGI — LONG FORM #01
+# NASKAH KONTEN NUGI — LONG FORM #01
 ## *"Kenapa Kita Rela Tinggal Semakin Jauh dari Kota Sendiri?"*
 
 **Format:** LONG-FORM YouTube Video Esai (Target: 17–20 Menit)
