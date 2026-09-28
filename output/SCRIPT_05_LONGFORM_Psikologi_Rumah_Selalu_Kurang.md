@@ -72,7 +72,7 @@ Data kebahagiaan menjawab: **nggak, nggak se-proporsional itu**.
 
 Bahkan, sejumlah penelitian yang dipublikasikan di jurnal psikologi terkemuka menunjukkan bahwa di atas batas tertentu — setelah kebutuhan dasar sudah terpenuhi dan ruang sudah memadai — menambah luas hunian nggak banyak menambah kebahagiaan. Kita memang jauh lebih bahagia pindah dari kos yang sempit ke rumah yang layak. Tapi kita nggak dua kali lebih bahagia ketika pindah dari rumah 150m² ke 300m².
 
-Ada penelitian menarik dari UCLA — Universitas California Los Angeles — yang selama beberapa tahun mendokumentasikan kehidupan sehari-hari keluarga kelas menengah Amerika di dalam rumah-rumah mereka. Salah satu temuan yang paling mengejutkan para peneliti: rata-rata anggota keluarga hanya menggunakan sebagian kecil dari luas rumah mereka secara aktif.
+Ada penelitian menarik dari **UCLA** — **Universitas California Los Angeles** — yang selama beberapa tahun mendokumentasikan kehidupan sehari-hari keluarga kelas menengah Amerika di dalam rumah-rumah mereka. Salah satu temuan yang paling mengejutkan para peneliti: rata-rata anggota keluarga hanya menggunakan sebagian kecil dari luas rumah mereka secara aktif.
 
 Kamar-kamar tambahan sering jadi gudang barang. Ruang tamu formal hampir nggak pernah dipakai. Halaman belakang yang luas lebih sering jadi pemandangan indah yang dilihat dari balik jendela daripada ruang yang benar-benar dinikmati.
 
@@ -91,7 +91,7 @@ Untuk jawab itu, kita perlu pinjam cara pandang dari beberapa ilmu yang jarang b
 
 **Dari ilmu sosial: rumah sebagai cara kita "bicara" ke dunia.**
 
-Ada seorang sosiolog bernama Erving Goffman yang punya ide menarik: manusia itu selalu "tampil" — kita selalu mengelola kesan yang kita berikan ke orang lain. Dan rumah adalah salah satu panggung paling penting untuk pertunjukan sosial itu.
+Ada seorang sosiolog bernama **Erving Goffman** yang punya ide menarik: manusia itu selalu "tampil" — kita selalu mengelola kesan yang kita berikan ke orang lain. Dan rumah adalah salah satu panggung paling penting untuk pertunjukan sosial itu.
 
 Rumah bukan hanya tempat tinggal. Ia adalah pernyataan. Ia "bilang" ke orang yang datang berkunjung — dan ke diri kita sendiri setiap kali pulang ke dalamnya — siapa kita, seberapa jauh kita sudah datang, dan ke kelompok sosial mana kita termasuk.
 
@@ -107,7 +107,7 @@ Ada dimensi yang lebih dalam lagi — lebih dalam dari sekadar status sosial.
 
 Otak manusia berkembang selama ratusan ribu tahun dalam kondisi di mana punya tempat berlindung yang aman dari bahaya adalah urusan hidup dan mati. Nenek moyang kita yang nggak punya tempat berlindung nggak bertahan hidup untuk punya keturunan.
 
-Akibatnya, kita mewarisi otak yang sangat sensitif terhadap ancaman terhadap tempat tinggal. Kehilangan rumah, atau terancam kehilangan rumah, memicu respons stres yang sangat dalam. Penelitian dari American Psychological Association menemukan bahwa kehilangan rumah atau menghadapi ancaman penggusuran menghasilkan trauma psikologis yang bisa sebanding dengan kehilangan orang yang dicintai.
+Akibatnya, kita mewarisi otak yang sangat sensitif terhadap ancaman terhadap tempat tinggal. Kehilangan rumah, atau terancam kehilangan rumah, memicu respons stres yang sangat dalam. Penelitian dari **American Psychological Association** menemukan bahwa kehilangan rumah atau menghadapi ancaman penggusuran menghasilkan trauma psikologis yang bisa sebanding dengan kehilangan orang yang dicintai.
 
 Tapi ada paradoks menarik di sini.
 
@@ -142,7 +142,7 @@ Kita perlu bicara tentang **ketakutan terhadap kematian**.
 
 Saya tahu kedengarannya jauh dari obrolan soal rumah. Tapi dengarkan dulu.
 
-Ada seorang psikolog bernama Ernest Becker yang menulis buku pemenang Penghargaan Pulitzer berjudul *The Denial of Death*. Tesisnya sederhana tapi mengusik: sebagian besar perilaku manusia yang kelihatannya nggak masuk akal — termasuk obsesi terhadap kekayaan, status, dan kepemilikan barang-barang material — adalah cara manusia menghadapi satu kenyataan yang paling menakutkan: bahwa kita akan mati.
+Ada seorang psikolog bernama **Ernest Becker** yang menulis buku pemenang Penghargaan Pulitzer berjudul *The Denial of Death*. Tesisnya sederhana tapi mengusik: sebagian besar perilaku manusia yang kelihatannya nggak masuk akal — termasuk obsesi terhadap kekayaan, status, dan kepemilikan barang-barang material — adalah cara manusia menghadapi satu kenyataan yang paling menakutkan: bahwa kita akan mati.
 
 Manusia adalah satu-satunya makhluk yang tahu bahwa ia akan mati. Dan kesadaran itu — terutama kalau kita biarkan benar-benar muncul ke permukaan — menciptakan kecemasan yang sangat dalam.
 
@@ -241,7 +241,7 @@ Mungkin jawabannya lebih sederhana dari yang selama ini kita bayangkan.
 - [x] Brand Fit: Menantang asumsi umum tentang hunian dari sudut psikologi yang dalam — DNA Nugi.
 - [x] Human-Place Anchor: Kriteria I, C, G terpenuhi.
 - [x] Human Relevance: Menyentuh salah satu keputusan finansial paling besar dalam hidup audiens.
-- [x] Evidence Check: UCLA study, APA, Goffman, Becker, data perbandingan hunian AS.
+- [x] Evidence Check: **UCLA** study, APA, Goffman, Becker, data perbandingan hunian AS.
 - [x] Why Depth: Menembus sampai psikologi keabadian dan ketakutan eksistensial yang mendasar.
 - [x] Originality: Framing psikologi eksistensial pada keputusan hunian sangat unik.
 - [x] Non-Sales: Nol promosi produk atau konsep hunian tertentu.
@@ -349,10 +349,10 @@ Tidak perlu menambah re-hook dengan interval tetap.
 | :-: | :--- | :--- | :--- |
 | 1 | Perubahan luas hunian per orang di Amerika Serikat dari 1950 ke 2020 | Grafik luas hunian per orang berdasarkan tahun | Data perbandingan hunian AS yang dipakai dalam script |
 | 2 | Hubungan luas hunian dan kebahagiaan tidak meningkat secara proporsional | Grafik konseptual / kutipan temuan penelitian | Studi psikologi yang disebut dalam script |
-| 3 | Penggunaan ruang rumah yang tidak merata / sebagian ruang jarang digunakan | Diagram denah rumah + highlight area aktif | UCLA study yang disebut dalam script |
-| 4 | Rumah sebagai simbol status dan pengelolaan kesan sosial | Diagram "rumah → kesan → status" | Erving Goffman / sumber yang digunakan dalam script |
-| 5 | Ancaman kehilangan rumah berkaitan dengan tekanan psikologis | Quote / data penelitian dengan konteks yang jelas | American Psychological Association |
-| 6 | Rumah, kepemilikan, dan simbol permanensi dalam kerangka existential anxiety | Visual konseptual, bukan grafik kuantitatif | Ernest Becker, *The Denial of Death* |
+| 3 | Penggunaan ruang rumah yang tidak merata / sebagian ruang jarang digunakan | Diagram denah rumah + highlight area aktif | **UCLA** study yang disebut dalam script |
+| 4 | Rumah sebagai simbol status dan pengelolaan kesan sosial | Diagram "rumah → kesan → status" | **Erving Goffman** / sumber yang digunakan dalam script |
+| 5 | Ancaman kehilangan rumah berkaitan dengan tekanan psikologis | Quote / data penelitian dengan konteks yang jelas | **American Psychological Association** |
+| 6 | Rumah, kepemilikan, dan simbol permanensi dalam kerangka existential anxiety | Visual konseptual, bukan grafik kuantitatif | **Ernest Becker**, *The Denial of Death* |
 | 7 | Insentif industri properti, pembiayaan, furnitur, media sosial | Diagram ekosistem kepentingan | Sumber spesifik perlu diverifikasi sebelum final |
 | 8 | Waktu yang dikorbankan untuk membayar rumah dibanding waktu menikmati rumah | Ilustrasi waktu kerja → cicilan → rumah | Perhitungan / ilustrasi dari narasi script, bukan data populasi tanpa sumber |
 
@@ -371,7 +371,7 @@ Tidak perlu menambah re-hook dengan interval tetap.
 |---|---|
 | Rata-rata luas hunian per orang AS meningkat tajam dari 1950 ke 2020 | **FACT CLAIM** yang harus dicocokkan dengan dataset dan definisi luas |
 | Luas rumah yang lebih besar tidak otomatis membuat kebahagiaan meningkat secara proporsional | **RESEARCH SYNTHESIS / FACT CLAIM** yang harus mengikuti studi yang dirujuk |
-| Temuan UCLA tentang sebagian ruang rumah yang jarang digunakan | **FACT CLAIM FROM STUDY** |
+| Temuan **UCLA** tentang sebagian ruang rumah yang jarang digunakan | **FACT CLAIM FROM STUDY** |
 | Rumah sebagai panggung / simbol pengelolaan kesan sosial | **THEORETICAL INTERPRETATION** dari Goffman |
 | Rasa aman modern mencakup penilaian sosial dan status | **INTERPRETATION / SYNTHESIS** |
 | Kehilangan rumah atau ancaman penggusuran dapat memicu tekanan psikologis berat | **FACT / RESEARCH CLAIM** yang harus mengikuti sumber APA yang dirujuk |
@@ -443,10 +443,10 @@ Kenapa rumah yang sudah cukup sering masih terasa belum cukup? Video ini membong
 - Human × Place × WHY
 
 **Primary Sources / References Mentioned in Script:**
-- UCLA study
-- American Psychological Association
-- Erving Goffman
-- Ernest Becker, *The Denial of Death*
+- **UCLA** study
+- **American Psychological Association**
+- **Erving Goffman**
+- **Ernest Becker**, *The Denial of Death*
 - Data perbandingan luas hunian AS
 
 **Related Video Direction:**
@@ -491,3 +491,27 @@ Jangan membuat thumbnail seolah-olah rumah kecil selalu lebih baik daripada ruma
 - [x] Tidak ada folder baru.
 - [x] Tidak ada refactor repository.
 - [x] SCRIPT_01, SCRIPT_02, SCRIPT_03, dan SCRIPT_04 tidak disentuh pada tahap ini.
+
+
+---
+
+## EDITOR SOURCE HIGHLIGHT — PHASE 5.1
+
+> **Tujuan:** memudahkan editor menemukan nama rujukan yang perlu ditampilkan sebagai logo / source card / teks sumber saat kalimat tersebut diucapkan.
+>
+> **Aturan:**
+> - Nama lembaga, peneliti, atau sumber yang disebut di naskah diberi **bold**.
+> - Tidak menambahkan URL atau link website ke teleprompter.
+> - Jangan mengarang nama sumber baru untuk klaim yang belum menyebut sumber spesifik.
+> - Saat nama sumber terdengar, editor dapat menampilkan **logo + nama sumber** secara singkat.
+
+### Sumber yang ditandai di script ini
+- **UCLA / Universitas California Los Angeles**
+- **American Psychological Association**
+- **Erving Goffman**
+- **Ernest Becker**
+
+### Bentuk visual
+> **[LOGO SUMBER]  Nama Sumber**
+
+Tidak perlu menampilkan URL website dalam video.
