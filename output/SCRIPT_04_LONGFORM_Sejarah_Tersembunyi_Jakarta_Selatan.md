@@ -222,3 +222,234 @@ Pertanyaan yang saya tinggalkan:
   1. "Peta Jakarta Adalah Peta Kekuasaan: Kenapa Selatan Selalu Lebih Mahal?"
   2. "Kenapa Jakarta Tumbuh ke Arah yang Sama Selama 400 Tahun?"
   3. "Rahasia Sejarah di Balik Kenapa Tanah Jakarta Utara Selalu Lebih Murah"
+
+
+---
+
+## YOUTUBE PRODUCTION LAYER — PHASE 5 PILOT FOR SCRIPT #04
+
+> **Catatan:** Ini hanya lapisan produksi YouTube. Isi utama teleprompter, Story Type PLACE, dan struktur existing script tidak dirombak.
+
+### COLD OPEN
+
+**Fungsi:** membuka misteri spasial dari utara ke selatan Jakarta sebelum masuk ke penjelasan sejarah.
+
+**Draft spoken cold open:**
+
+> "Kalau kamu bergerak dari Kota Tua ke Jakarta Selatan, kamu sebenarnya sedang melewati ratusan tahun keputusan manusia. Tapi kenapa pusat kota, kawasan elite, dan bisnis justru terus bergerak ke arah selatan?"
+
+**Visual awal:**
+- Kota Tua / kawasan pelabuhan.
+- Peta Jakarta dengan garis perjalanan utara → selatan.
+- Cut cepat ke Menteng, Sudirman, Kebayoran Baru, lalu kawasan selatan yang lebih jauh.
+- Hindari pembukaan logo panjang.
+
+**Transition:**
+Masuk ke micro bumper, lalu langsung ke STAGE 1.
+
+### MICRO BUMPER
+
+**Durasi:** sangat singkat.
+
+**Visual:**
+- Nugi wordmark / logo sederhana.
+- Audio sting pendek.
+- Tidak ada dialog panjang.
+
+**Catatan:**
+Bumper hanya sebagai identitas transisi, bukan bagian utama hook.
+
+---
+
+### RE-HOOKS
+
+Gunakan titik transisi yang mengikuti misteri spasial dan urutan sejarah dalam naskah.
+
+**Re-hook 1 — sekitar akhir STAGE 2 → STAGE 3**
+
+> "Kalau bentuk kota ini bukan kebetulan, kita perlu mulai dari sesuatu yang jauh lebih tua: geografinya."
+
+Fungsi:
+- membawa penonton dari pertanyaan utama ke kondisi fisik Jakarta.
+
+**Re-hook 2 — sekitar akhir STAGE 3 → STAGE 4**
+
+> "Tapi geografi bukan satu-satunya yang menentukan arah kota."
+
+Fungsi:
+- membuka lapisan keputusan manusia, kekuasaan, dan perencanaan.
+
+**Re-hook 3 — sekitar akhir STAGE 5 → STAGE 6**
+
+> "Kalau semua pola ini kita tarik menjadi satu garis, ternyata peta kota sedang menceritakan sesuatu."
+
+Fungsi:
+- membawa data historis dan spasial menuju epifani.
+
+Tidak perlu menambah re-hook dengan interval tetap.
+
+---
+
+### CHAPTER CANDIDATES
+
+> Timestamp mengikuti arahan visual yang sudah ada dan tetap perlu disesuaikan setelah final edit.
+
+| Timestamp | Public Chapter Title |
+| :-: | :--- |
+| 00:00 | Kenapa Jakarta Terus Bergerak ke Selatan? |
+| 02:30 | Apakah Tempat Tinggal Benar-Benar Pilihan Kita? |
+| 04:00 | Geografi Jakarta Sebelum Kota Dibangun |
+| 07:00 | Bagaimana Keputusan Manusia Membentuk Kota |
+| 13:00 | Apa Kata Data tentang Utara dan Selatan? |
+| 15:00 | Peta Kota Adalah Catatan Keputusan Lama |
+
+---
+
+### SOURCE / ON-SCREEN EVIDENCE CUES
+
+> **Catatan penting:** Cue ini diturunkan dari sumber dan evidence yang disebut di script. Ini bukan verifikasi sumber pada Phase 5.
+
+| Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
+| :-: | :--- | :--- | :--- |
+| 1 | Lokasi Batavia dan hubungan dengan Ciliwung / laut | Peta Batavia historis | Sejarah Batavia / sumber sejarah yang digunakan saat final research |
+| 2 | Kondisi rawa, genangan, kesehatan, dan sejarah perpindahan permukiman | Peta / arsip / timeline | Sumber sejarah yang diverifikasi sebelum final |
+| 3 | Perkembangan Menteng sebagai kawasan perencanaan kolonial | Denah / foto / arsip Menteng | Arsip sejarah / studi perkotaan yang diverifikasi |
+| 4 | Perkembangan koridor Sudirman–Thamrin, Senayan, Kebayoran Baru | Timeline pembangunan + peta | Sumber sejarah/perencanaan kota yang diverifikasi |
+| 5 | Perbedaan nilai tanah Jakarta Selatan dan Jakarta Utara | Peta / chart NJOP | Pemprov DKI Jakarta |
+| 6 | Pola IPM antarkecamatan | Heatmap / chart | BPS / data IPM Jakarta yang disebut di script |
+| 7 | Konsentrasi banjir di koridor tertentu | Peta banjir / data historis | Penelitian / data banjir yang diverifikasi sebelum final |
+| 8 | Perubahan kawasan utara dan isu penurunan muka tanah | Arsip perubahan garis pantai / peta | Sumber teknis / pemerintah yang diverifikasi sebelum final |
+
+**Production rule:**
+- Jangan menampilkan gradien "murah → mahal" sebagai fakta umum tanpa dataset dan periode yang jelas.
+- Setiap angka seperti rasio nilai tanah harus ditampilkan bersama tahun, wilayah, dan definisi metriknya.
+- Klaim sebab-akibat historis perlu dibedakan dari interpretasi editorial.
+- Arsip sejarah diberi tahun / keterangan sumber agar penonton memahami konteks visual.
+
+---
+
+### EVIDENCE CLASSIFICATION — PILOT
+
+| Bagian | Level |
+|---|---|
+| Perjalanan Kota Tua → Menteng → Sudirman → Kebayoran Baru → kawasan selatan | **FACT / SCENE SETTING** |
+| Batavia didirikan VOC pada 1619 di lokasi Kota Tua | **HISTORICAL FACT CLAIM** yang perlu dipertahankan sesuai sumber sejarah |
+| Kondisi rawa / kesehatan mendorong perpindahan kalangan tertentu ke selatan | **HISTORICAL CAUSAL CLAIM** yang perlu sumber spesifik |
+| Menteng sebagai proyek pemisahan sosial terencana | **HISTORICAL INTERPRETATION / CLAIM** yang perlu evidence arsitektur, kebijakan, dan sejarah sosial |
+| Infrastruktur yang mengikuti koridor tertentu lalu memperkuat permintaan properti | **SYSTEM SYNTHESIS / CAUSAL INTERPRETATION** |
+| Nilai tanah Jakarta Selatan beberapa kali lebih tinggi daripada Jakarta Utara | **FACT CLAIM** yang harus dicocokkan dengan dataset NJOP, tahun, dan cara menghitung rata-ratanya |
+| Pola IPM semakin ke selatan semakin tinggi | **FACT CLAIM / DATA INTERPRETATION** yang perlu ditampilkan dengan batas wilayah dan tahun |
+| Banjir dan penurunan tanah di wilayah utara | **FACT CLAIM**, dengan sebab dan tingkat generalisasi harus mengikuti sumber teknis |
+| "Peta kota adalah catatan hidup dari keputusan-keputusan lama" | **EDITORIAL SYNTHESIS / INTERPRETATION** |
+| Perubahan pola kota di masa depan dapat terjadi melalui pilihan manusia | **INTERPRETATION / GENERAL PRINCIPLE** |
+
+Penanda ini bersifat internal dan tidak dibacakan oleh narator.
+
+---
+
+### CLOSING IDENTITY
+
+Letakkan setelah pertanyaan terbuka terakhir.
+
+**Draft:**
+
+> "Mungkin yang kita lihat sebagai peta kota hari ini sebenarnya adalah kumpulan keputusan lama yang masih hidup di sekitar kita."
+
+Jeda singkat.
+
+**Visual:**
+- Aerial Jakarta malam.
+- Garis jalan / koridor kota dari utara ke selatan.
+- Aktivitas manusia di kawasan yang berbeda.
+- Musik turun perlahan.
+
+Tidak perlu logo animation panjang.
+
+---
+
+### OPTIONAL SOFT CTA
+
+Jangan memasukkan CTA ke dalam argumen utama.
+
+Pilihan soft CTA:
+
+> "Kalau kamu suka membongkar kenapa tempat yang kelihatannya biasa ternyata punya sejarah panjang di belakangnya, kamu bisa subscribe."
+
+Satu kalimat cukup.
+
+CTA dapat dihilangkan bila ending terasa lebih kuat tanpa CTA.
+
+---
+
+### END SCREEN
+
+Rekomendasi:
+- Arahkan ke video Nugi yang membahas **rumah, harga tanah, kota, sejarah ruang, atau bagaimana keputusan masa lalu membentuk tempat hidup hari ini**.
+- Tombol subscribe.
+
+Prioritaskan kesinambungan pertanyaan: bagaimana kota yang kita tinggali terbentuk.
+
+---
+
+### DESCRIPTION PACKAGE
+
+**Synopsis:**
+Kenapa Jakarta berkembang dari Kota Tua menuju koridor Menteng, Sudirman, Kebayoran Baru, dan kawasan selatan? Video ini menelusuri hubungan antara geografi, sejarah kolonial, perencanaan kota, pembangunan modern, infrastruktur, dan nilai tanah untuk melihat bagaimana keputusan masa lalu masih membentuk tempat manusia tinggal hari ini.
+
+**Key Topics:**
+- Jakarta history
+- urban development
+- Batavia
+- Menteng
+- Jakarta Selatan
+- Jakarta Utara
+- land value
+- city planning
+- Human × Place × History
+
+**Primary Sources / Evidence Mentioned in Script:**
+- Pemprov DKI Jakarta / NJOP
+- BPS / IPM
+- Arsip dan sumber sejarah Batavia / Jakarta
+- Penelitian / data banjir dan penurunan tanah yang digunakan pada final research
+
+**Related Video Direction:**
+Pilih video Nugi yang memperluas pertanyaan tentang tanah, rumah, kota, sejarah, atau warisan keputusan masa lalu.
+
+---
+
+### THUMBNAIL CONCEPT — PHASE 5
+
+**Dominant Idea:**
+Satu kota dengan dua arah yang terasa berbeda: utara dan selatan.
+
+**Visual Tension:**
+Peta Jakarta dengan jalur utara → selatan dan kontras kawasan kota.
+
+**Text:**
+**"KENAPA KE SELATAN?"**
+
+**Catatan:**
+Jangan menggunakan skala warna "murah → mahal" sebagai fakta visual tanpa dataset yang jelas. Untuk pilot, gunakan peta arah / koridor agar thumbnail tetap aman terhadap overclaim.
+
+---
+
+## PHASE 5 CHECK — SCRIPT #04
+
+- [x] Story Type tetap PLACE.
+- [x] Isi utama naskah tidak dirombak.
+- [x] Cold open ditambahkan sebagai production wrapper.
+- [x] Micro bumper ditambahkan.
+- [x] Re-hook mengikuti misteri spasial dan urutan sejarah.
+- [x] Revelation dan reflection tetap berada di posisi asli.
+- [x] Closing identity dipisahkan dari editorial reflection.
+- [x] Soft CTA bersifat opsional.
+- [x] Chapter candidates tersedia.
+- [x] Source/on-screen evidence cues tersedia berdasarkan evidence yang disebut script.
+- [x] Evidence classification ditambahkan sebagai panduan internal.
+- [x] Klaim sejarah dan sebab-akibat dibedakan dari editorial synthesis.
+- [x] Tidak ada Python yang diubah.
+- [x] Tidak ada engine yang diubah.
+- [x] Tidak ada folder baru.
+- [x] Tidak ada refactor repository.
+- [x] SCRIPT_01, SCRIPT_02, SCRIPT_03, dan SCRIPT_05 tidak disentuh pada tahap ini.
