@@ -38,7 +38,7 @@ Dan di sisi lain, ada orang yang kerja keras puluhan tahun, hemat, nggak boros �
 
 Ini bukan cerita yang kebetulan. Ini terjadi dengan konsisten dan terukur.
 
-Data dari Bank Indonesia menunjukkan bahwa kenaikan harga properti di kota-kota besar Indonesia secara konsisten mengalahkan inflasi dan kenaikan gaji selama lebih dari dua dekade. Di Jakarta, harga tanah di beberapa zona premium naik rata-rata 15–20% per tahun dalam satu dekade terakhir. Gaji rata-rata pekerja formal naik sekitar 5–7% per tahun — itu pun kalau beruntung.
+Data dari **Bank Indonesia** menunjukkan bahwa kenaikan harga properti di kota-kota besar Indonesia secara konsisten mengalahkan inflasi dan kenaikan gaji selama lebih dari dua dekade. Di Jakarta, harga tanah di beberapa zona premium naik rata-rata 15–20% per tahun dalam satu dekade terakhir. Gaji rata-rata pekerja formal naik sekitar 5–7% per tahun — itu pun kalau beruntung.
 
 Matematikanya sederhana dan cukup pahit: kalau gaji naik 5% tapi tanah naik 15%, jarak antara "masih bisa beli" dan "sudah nggak mungkin" nggak menyempit — dia melebar tiap tahun.
 
@@ -114,7 +114,7 @@ Ini yang paling jarang dibahas tapi paling menentukan.
 
 Struktur kepemilikan tanah di Indonesia hari ini bukan lahir dari nol. Ia adalah hasil dari sistem agraria kolonial Belanda yang dirancang untuk memusatkan kontrol atas tanah di tangan kelompok-kelompok tertentu — perkebunan besar, keluarga bangsawan lokal yang bekerja sama dengan sistem kolonial, dan kemudian negara yang mewarisi aset-aset itu.
 
-Reforma agraria yang dijanjikan sejak merdeka tidak pernah berjalan menyeluruh. Data pertanian BPS secara konsisten menunjukkan bahwa sebagian kecil pemilik menguasai sebagian besar lahan produktif di Indonesia.
+Reforma agraria yang dijanjikan sejak merdeka tidak pernah berjalan menyeluruh. Data pertanian **BPS** secara konsisten menunjukkan bahwa sebagian kecil pemilik menguasai sebagian besar lahan produktif di Indonesia.
 
 Di kota-kota besar, polanya sama: lahan-lahan luas di lokasi strategis cenderung berada di tangan korporasi besar atau keluarga-keluarga yang berhasil mempertahankan kepemilikan lintas generasi.
 
@@ -127,9 +127,9 @@ Mereka yang mewarisi kepemilikan tanah itu tidak harus berbuat apa-apa — cukup
 
 Mari kita kasih angka pada semua ini biar lebih konkret.
 
-Penelitian dari LPEM UI — Lembaga Penyelidikan Ekonomi dan Masyarakat Universitas Indonesia — mencatat bahwa ketimpangan kepemilikan tanah di Indonesia bahkan lebih parah dari ketimpangan penghasilan. Artinya, distribusi tanah lebih nggak merata dibanding distribusi pendapatan.
+Penelitian dari **LPEM UI** — Lembaga Penyelidikan Ekonomi dan Masyarakat Universitas Indonesia — mencatat bahwa ketimpangan kepemilikan tanah di Indonesia bahkan lebih parah dari ketimpangan penghasilan. Artinya, distribusi tanah lebih nggak merata dibanding distribusi pendapatan.
 
-Ada juga riset dari Lincoln Institute of Land Policy — lembaga nirlaba yang mengkhususkan diri di ekonomi tanah dan perkotaan — yang menunjukkan bahwa di banyak kota Asia Tenggara, 60 sampai 80 persen dari kenaikan nilai properti sebenarnya berasal dari infrastruktur yang dibangun pakai uang publik. Dengan kata lain, sebagian besar kenaikan nilai yang dinikmati pemilik tanah privat itu sebenarnya adalah hasil kerja kita bersama.
+Ada juga riset dari **Lincoln Institute of Land Policy** — lembaga nirlaba yang mengkhususkan diri di ekonomi tanah dan perkotaan — yang menunjukkan bahwa di banyak kota Asia Tenggara, 60 sampai 80 persen dari kenaikan nilai properti sebenarnya berasal dari infrastruktur yang dibangun pakai uang publik. Dengan kata lain, sebagian besar kenaikan nilai yang dinikmati pemilik tanah privat itu sebenarnya adalah hasil kerja kita bersama.
 
 Di level yang lebih personal: seseorang yang beli tanah di pinggiran Jakarta pada tahun 2005 dan tidak berbuat apa-apa — tidak membangun, tidak mengolah — akan dapat keuntungan yang jauh lebih besar dari seseorang yang bekerja keras sebagai profesional selama dua puluh tahun di periode yang sama. Tanpa risiko di-PHK. Tanpa tekanan kerja. Tanpa stres penilaian performa.
 
@@ -226,7 +226,7 @@ Ini bukan pertanyaan yang nyaman. Tapi justru pertanyaan yang tidak nyaman itula
 | 1 | 00:00–02:30 | Hook anomali | Tanah kosong berdebu vs gedung mewah berdampingan | Drone footage |
 | 2 | 02:30–05:00 | Penjelasan umum | Grafik kenaikan harga tanah vs gaji | Motion graphics |
 | 3 | 05:00–11:00 | 4 Cara kerja sistem | Animasi diagram (infrastruktur, pajak, investasi) | Infografis |
-| 4 | 11:00–14:00 | Angka dan data | Chart HPPI Bank Indonesia, data LPEM UI | Infografis data |
+| 4 | 11:00–14:00 | Angka dan data | Chart HPPI **Bank Indonesia**, data **LPEM UI** | Infografis data |
 | 5 | 14:00–17:00 | Dampak nyata | Wajah muda yang nggak mampu beli rumah, kota padat | B-roll urban |
 | 6 | 17:00–20:00 | Epifani dan refleksi | Talking head Nugi | Recording studio |
 
@@ -237,7 +237,7 @@ Ini bukan pertanyaan yang nyaman. Tapi justru pertanyaan yang tidak nyaman itula
 - [x] Brand Fit: Membongkar sistem tersembunyi di balik harga tanah — DNA Nugi.
 - [x] Human-Place Anchor: Kriteria E, J, G terpenuhi.
 - [x] Human Relevance: Menyentuh keresahan fundamental generasi muda soal kepemilikan tanah.
-- [x] Evidence Check: LPEM UI, Lincoln Institute, Bank Indonesia, BPS.
+- [x] Evidence Check: **LPEM UI**, Lincoln Institute, **Bank Indonesia**, **BPS**.
 - [x] Why Depth: Mengupas 4 cara kerja sistemik dengan bahasa yang mudah dipahami.
 - [x] Originality: Framing sistem tersembunyi ini jarang dieksplor kreator Indonesia.
 - [x] Non-Sales: Nol promosi investasi properti atau produk tertentu.
@@ -343,9 +343,9 @@ Tidak perlu menambah re-hook baru secara mekanis.
 
 | Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
 | :-: | :--- | :--- | :--- |
-| 1 | Pergerakan harga properti dibanding inflasi / pendapatan | Chart harga properti vs inflasi / pendapatan | Bank Indonesia |
-| 2 | Ketimpangan kepemilikan tanah | Grafik / tabel distribusi kepemilikan | BPS / LPEM UI |
-| 3 | Kenaikan nilai properti yang berkaitan dengan investasi publik | Diagram infrastruktur → kenaikan nilai tanah | Lincoln Institute of Land Policy |
+| 1 | Pergerakan harga properti dibanding inflasi / pendapatan | Chart harga properti vs inflasi / pendapatan | **Bank Indonesia** |
+| 2 | Ketimpangan kepemilikan tanah | Grafik / tabel distribusi kepemilikan | **BPS** / **LPEM UI** |
+| 3 | Kenaikan nilai properti yang berkaitan dengan investasi publik | Diagram infrastruktur → kenaikan nilai tanah | **Lincoln Institute of Land Policy** |
 | 4 | Mekanisme pajak, tanah idle, dan insentif penggunaan lahan | Diagram insentif | Data / kebijakan yang benar-benar diverifikasi sebelum final |
 | 5 | Dampak sistem terhadap akses generasi baru ke hunian / tanah | Grafik affordability atau ilustrasi konseptual | Sumber spesifik harus dipilih sebelum final |
 | 6 | Warisan historis kepemilikan tanah | Timeline / arsip agraria | Sumber sejarah primer/sekunder yang diverifikasi |
@@ -431,10 +431,10 @@ Harga tanah sering terlihat seperti sesuatu yang terjadi secara alami: kota tumb
 - Human × Place
 
 **Primary Sources Mentioned in Script:**
-- Bank Indonesia
-- BPS
-- LPEM UI
-- Lincoln Institute of Land Policy
+- **Bank Indonesia**
+- **BPS**
+- **LPEM UI**
+- **Lincoln Institute of Land Policy**
 
 **Related Video Direction:**
 Pilih video Nugi yang memperluas pertanyaan tentang rumah, kota, tanah, atau bagaimana nilai ruang terbentuk.
@@ -475,3 +475,27 @@ Hindari thumbnail yang seolah menjanjikan kepastian bahwa harga tanah selalu nai
 - [x] Tidak ada folder baru.
 - [x] Tidak ada refactor repository.
 - [x] SCRIPT_03–05 belum disentuh.
+
+
+---
+
+## EDITOR SOURCE HIGHLIGHT — PHASE 5.1
+
+> **Tujuan:** memudahkan editor menemukan nama rujukan yang perlu ditampilkan sebagai logo / source card / teks sumber saat kalimat tersebut diucapkan.
+>
+> **Aturan:**
+> - Nama lembaga, peneliti, atau sumber yang disebut di naskah diberi **bold**.
+> - Tidak menambahkan URL atau link website ke teleprompter.
+> - Jangan mengarang nama sumber baru untuk klaim yang belum menyebut sumber spesifik.
+> - Saat nama sumber terdengar, editor dapat menampilkan **logo + nama sumber** secara singkat.
+
+### Sumber yang ditandai di script ini
+- **Bank Indonesia**
+- **BPS**
+- **LPEM UI**
+- **Lincoln Institute of Land Policy**
+
+### Bentuk visual
+> **[LOGO SUMBER]  Nama Sumber**
+
+Tidak perlu menampilkan URL website dalam video.
