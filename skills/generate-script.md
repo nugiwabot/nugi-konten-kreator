@@ -26,7 +26,7 @@ format_mode: short | long | master_plus_shorts (default: short)
 platform: string (opsional: "YouTube Long-Form" | "YouTube Shorts / TikTok / Reels")
 duration_target: string (opsional: "60-90 detik" untuk short, "16-20 menit" sebagai working profile long-form saat ini)
 tone: string (default: "Conversational, tajam, membumi, reflektif, tenang, non-sales")
-youtube_layer: string (opsional: true untuk menerapkan production layer dari core/youtube-format.md; default untuk YouTube long-form = true)
+youtube_layer: boolean (opsional: menerapkan production layer dari core/youtube-format.md; default untuk YouTube long-form = true)
 ```
 
 ### Aturan YouTube Production Layer
