@@ -61,9 +61,9 @@ Mulai dari efek pertama yang sudah bisa kita amati langsung.
 
 Bukan sekadar naik-turun seperti biasanya mengikuti kondisi ekonomi. Tapi berubah secara struktural — seperti internet yang mengubah industri musik bukan untuk sementara, tapi untuk selamanya.
 
-Data dari Colliers Indonesia menunjukkan bahwa tingkat pemakaian gedung perkantoran kelas A di Jakarta pada 2024–2025 belum pulih ke level sebelum pandemi 2019, meski ekonomi sudah tumbuh positif. Ini bukan karena perusahaan-perusahaan itu bangkrut. Tapi karena mereka menyadari bahwa mereka bisa beroperasi lebih efisien dengan lebih sedikit ruang fisik per karyawan.
+Data dari **Colliers Indonesia** menunjukkan bahwa tingkat pemakaian gedung perkantoran kelas A di Jakarta pada 2024–2025 belum pulih ke level sebelum pandemi 2019, meski ekonomi sudah tumbuh positif. Ini bukan karena perusahaan-perusahaan itu bangkrut. Tapi karena mereka menyadari bahwa mereka bisa beroperasi lebih efisien dengan lebih sedikit ruang fisik per karyawan.
 
-Di sisi pekerjaan, laporan McKinsey Global Institute memperkirakan bahwa antara 2025 dan 2030, sekitar 30-40% tugas rutin yang saat ini dikerjakan oleh pekerja kantoran — ngolah data, bikin laporan, balas email, bahkan sebagian coding dan desain — akan diotomasi secara signifikan oleh sistem AI.
+Di sisi pekerjaan, laporan **McKinsey Global Institute** memperkirakan bahwa antara 2025 dan 2030, sekitar 30-40% tugas rutin yang saat ini dikerjakan oleh pekerja kantoran — ngolah data, bikin laporan, balas email, bahkan sebagian coding dan desain — akan diotomasi secara signifikan oleh sistem AI.
 
 Ini bukan berarti semua profesi itu akan hilang. Tapi artinya: untuk hasil kerja yang sama, perusahaan butuh lebih sedikit orang. Dan orang yang masih bekerja mungkin tidak perlu hadir fisik setiap hari.
 
@@ -141,8 +141,8 @@ Investasi infrastruktur yang sudah terlanjur dibangun nggak bisa dipindah. Dia j
 Saya mau jujur di sini: nggak semua yang saya ceritakan tadi sudah selesai terjadi. Sebagian adalah proyeksi berdasarkan tren yang sudah kelihatan, sebagian adalah analogi dari pola yang sudah terjadi di negara lain.
 
 Yang sudah terjadi dan ada datanya:
-- Tingkat pemakaian gedung perkantoran Jakarta belum pulih ke level 2019 (Colliers Indonesia, 2025).
-- Harga properti di Bali, Yogyakarta, dan Malang naik signifikan dalam 3 tahun terakhir, melampaui kota-kota besar (data HPPI Bank Indonesia).
+- Tingkat pemakaian gedung perkantoran Jakarta belum pulih ke level 2019 (**Colliers Indonesia**, 2025).
+- Harga properti di Bali, Yogyakarta, dan Malang naik signifikan dalam 3 tahun terakhir, melampaui kota-kota besar (data **HPPI Bank Indonesia**).
 - Jumlah pekerja remote dan digital nomad Indonesia meningkat — terdeteksi dari pemakaian coworking space dan berbagai indikator lain.
 
 Yang masih belum pasti:
@@ -229,7 +229,7 @@ Pertanyaan ini nggak ada jawaban yang mudah. Tapi saya pikir inilah pertanyaan y
 - [x] Brand Fit: Membedah dampak lanjutan AI ke tempat hidup manusia — DNA Nugi.
 - [x] Human-Place Anchor: Kriteria H, F, D terpenuhi.
 - [x] Human Relevance: Relevan dengan keputusan lokasi hidup generasi muda.
-- [x] Evidence Check: Colliers Indonesia, McKinsey Global Institute, Bank Indonesia HPPI.
+- [x] Evidence Check: **Colliers Indonesia**, **McKinsey Global Institute**, Bank Indonesia HPPI.
 - [x] Why Depth: Menembus sampai polarisasi kelas, infrastruktur yang tertinggal, krisis identitas kota.
 - [x] Originality: Efek domino AI ke geografi hunian jarang dieksplor dalam bahasa Indonesia.
 - [x] Non-Sales: Nol promosi properti di kota tertentu.
@@ -335,9 +335,9 @@ Tidak perlu menambah re-hook dengan interval tetap.
 
 | Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
 | :-: | :--- | :--- | :--- |
-| 1 | Tingkat pemakaian gedung perkantoran kelas A Jakarta belum kembali ke level 2019 | Vacancy / occupancy chart 2019 vs 2024–2025 | Colliers Indonesia |
-| 2 | Proyeksi otomasi tugas rutin oleh AI | Grafik rentang proyeksi / teks kutipan angka dengan konteks metodologi | McKinsey Global Institute |
-| 3 | Pergerakan harga properti di beberapa kota tujuan | Perbandingan data kota yang disebut dalam script | HPPI Bank Indonesia |
+| 1 | Tingkat pemakaian gedung perkantoran kelas A Jakarta belum kembali ke level 2019 | Vacancy / occupancy chart 2019 vs 2024–2025 | **Colliers Indonesia** |
+| 2 | Proyeksi otomasi tugas rutin oleh AI | Grafik rentang proyeksi / teks kutipan angka dengan konteks metodologi | **McKinsey Global Institute** |
+| 3 | Pergerakan harga properti di beberapa kota tujuan | Perbandingan data kota yang disebut dalam script | **HPPI Bank Indonesia** |
 | 4 | Perubahan pola kerja dan perpindahan pekerja remote / digital nomad | Peta perpindahan + indikator pendukung | Sumber yang disebut / dipakai saat final research |
 | 5 | Perbedaan pekerjaan yang dapat dikerjakan remote vs pekerjaan yang membutuhkan kehadiran fisik | Split-screen kategori pekerjaan | Data / sumber spesifik harus dipilih sebelum final |
 | 6 | Infrastruktur kota dibangun berdasarkan pola mobilitas tertentu | Diagram pola lama → pola mobilitas baru | Sumber spesifik harus diverifikasi sebelum final |
@@ -429,8 +429,8 @@ Video ini menelusuri efek domino dari perubahan kerja ke kantor, perpindahan man
 - Human × Place × Change
 
 **Primary Sources Mentioned in Script:**
-- Colliers Indonesia
-- McKinsey Global Institute
+- **Colliers Indonesia**
+- **McKinsey Global Institute**
 - Bank Indonesia / HPPI
 
 **Related Video Direction:**
@@ -473,3 +473,26 @@ Hindari thumbnail yang menyiratkan bahwa satu hasil geografis tertentu sudah pas
 - [x] Tidak ada folder baru.
 - [x] Tidak ada refactor repository.
 - [x] SCRIPT_01, SCRIPT_02, SCRIPT_04, dan SCRIPT_05 tidak disentuh pada tahap ini.
+
+
+---
+
+## EDITOR SOURCE HIGHLIGHT — PHASE 5.1
+
+> **Tujuan:** memudahkan editor menemukan nama rujukan yang perlu ditampilkan sebagai logo / source card / teks sumber saat kalimat tersebut diucapkan.
+>
+> **Aturan:**
+> - Nama lembaga, peneliti, atau sumber yang disebut di naskah diberi **bold**.
+> - Tidak menambahkan URL atau link website ke teleprompter.
+> - Jangan mengarang nama sumber baru untuk klaim yang belum menyebut sumber spesifik.
+> - Saat nama sumber terdengar, editor dapat menampilkan **logo + nama sumber** secara singkat.
+
+### Sumber yang ditandai di script ini
+- **Colliers Indonesia**
+- **McKinsey Global Institute**
+- **HPPI Bank Indonesia**
+
+### Bentuk visual
+> **[LOGO SUMBER]  Nama Sumber**
+
+Tidak perlu menampilkan URL website dalam video.
