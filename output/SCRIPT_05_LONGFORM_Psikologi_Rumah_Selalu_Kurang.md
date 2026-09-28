@@ -258,3 +258,236 @@ Mungkin jawabannya lebih sederhana dari yang selama ini kita bayangkan.
   1. "Kenapa Kita Selalu Merasa Rumah Kita Belum Cukup?"
   2. "Psikologi di Balik Obsesi Manusia dengan Rumah yang Lebih Besar"
   3. "Kita Beli Ruang yang Nggak Kita Pakai — dan Ini Alasannya"
+
+
+---
+
+## YOUTUBE PRODUCTION LAYER — PHASE 5 PILOT FOR SCRIPT #05
+
+> **Catatan:** Ini hanya lapisan produksi YouTube. Isi utama teleprompter, Story Type REFRAME, dan struktur existing script tidak dirombak.
+
+### COLD OPEN
+
+**Fungsi:** langsung menantang asumsi "lebih besar selalu lebih baik" tanpa membuka dengan penjelasan akademis.
+
+**Draft spoken cold open:**
+
+> "Pernah nggak kamu masuk ke rumah yang jauh lebih besar dari rumahmu sekarang, lalu beberapa menit kemudian kepikiran: kapan rumah saya bisa sebesar ini? Tapi ada pertanyaan yang lebih aneh: sebenarnya, kapan sebuah rumah terasa cukup?"
+
+**Visual awal:**
+- Montase rumah besar yang terlihat aspiratif.
+- Cut ke ruangan rumah biasa yang benar-benar digunakan: dapur, ruang keluarga, kamar.
+- Detail ruangan kosong / kamar yang jarang dipakai.
+- Hindari pembukaan logo panjang.
+
+**Transition:**
+Masuk ke micro bumper, lalu langsung ke STAGE 1.
+
+### MICRO BUMPER
+
+**Durasi:** sangat singkat.
+
+**Visual:**
+- Nugi wordmark / logo sederhana.
+- Audio sting pendek.
+- Tidak ada dialog panjang.
+
+**Catatan:**
+Bumper hanya sebagai identitas transisi, bukan bagian utama hook.
+
+---
+
+### RE-HOOKS
+
+Gunakan titik transisi yang mengikuti proses reframe dari asumsi → data → psikologi → makna.
+
+**Re-hook 1 — sekitar akhir STAGE 2 → STAGE 3**
+
+> "Sebelum menjawab kenapa kita merasa begitu, coba kita lihat dulu apa yang terjadi ketika ruang benar-benar bertambah."
+
+Fungsi:
+- membawa penonton dari pertanyaan psikologis menuju data.
+
+**Re-hook 2 — sekitar akhir STAGE 3 → STAGE 4**
+
+> "Jadi kalau tambahan ruang nggak otomatis menambah rasa cukup, mungkin yang kita cari memang bukan ruang."
+
+Fungsi:
+- membuka pembacaan ulang dari sisi sosial, rasa aman, dan sistem kepentingan.
+
+**Re-hook 3 — sekitar akhir STAGE 5 → STAGE 6**
+
+> "Kalau begitu, mungkin pertanyaannya bukan rumah sebesar apa yang kita butuhkan — tapi kebutuhan apa yang sebenarnya sedang kita coba penuhi."
+
+Fungsi:
+- mengantar dari lapisan eksistensial menuju reframing.
+
+Tidak perlu menambah re-hook dengan interval tetap.
+
+---
+
+### CHAPTER CANDIDATES
+
+> Timestamp mengikuti arahan visual yang sudah ada dan tetap perlu disesuaikan setelah final edit.
+
+| Timestamp | Public Chapter Title |
+| :-: | :--- |
+| 00:00 | Kapan Sebuah Rumah Terasa Cukup? |
+| 02:30 | Kenapa Kita Selalu Ingin Lebih Besar? |
+| 04:00 | Apakah Ruang Lebih Banyak Membuat Kita Lebih Bahagia? |
+| 07:00 | Rumah sebagai Status dan Rasa Aman |
+| 13:00 | Kenapa Kita Mengejar Rumah yang Lebih Besar? |
+| 16:00 | Mungkin yang Kita Cari Bukan Ruang |
+
+---
+
+### SOURCE / ON-SCREEN EVIDENCE CUES
+
+> **Catatan penting:** Cue ini diturunkan dari sumber dan referensi yang sudah disebut di script. Ini bukan verifikasi sumber pada Phase 5.
+
+| Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
+| :-: | :--- | :--- | :--- |
+| 1 | Perubahan luas hunian per orang di Amerika Serikat dari 1950 ke 2020 | Grafik luas hunian per orang berdasarkan tahun | Data perbandingan hunian AS yang dipakai dalam script |
+| 2 | Hubungan luas hunian dan kebahagiaan tidak meningkat secara proporsional | Grafik konseptual / kutipan temuan penelitian | Studi psikologi yang disebut dalam script |
+| 3 | Penggunaan ruang rumah yang tidak merata / sebagian ruang jarang digunakan | Diagram denah rumah + highlight area aktif | UCLA study yang disebut dalam script |
+| 4 | Rumah sebagai simbol status dan pengelolaan kesan sosial | Diagram "rumah → kesan → status" | Erving Goffman / sumber yang digunakan dalam script |
+| 5 | Ancaman kehilangan rumah berkaitan dengan tekanan psikologis | Quote / data penelitian dengan konteks yang jelas | American Psychological Association |
+| 6 | Rumah, kepemilikan, dan simbol permanensi dalam kerangka existential anxiety | Visual konseptual, bukan grafik kuantitatif | Ernest Becker, *The Denial of Death* |
+| 7 | Insentif industri properti, pembiayaan, furnitur, media sosial | Diagram ekosistem kepentingan | Sumber spesifik perlu diverifikasi sebelum final |
+| 8 | Waktu yang dikorbankan untuk membayar rumah dibanding waktu menikmati rumah | Ilustrasi waktu kerja → cicilan → rumah | Perhitungan / ilustrasi dari narasi script, bukan data populasi tanpa sumber |
+
+**Production rule:**
+- Jangan mengubah interpretasi psikologis menjadi seolah-olah hasil eksperimen yang pasti.
+- Kutipan atau temuan akademik harus ditampilkan bersama nama studi / peneliti dan konteks bila tersedia.
+- Kerangka Goffman dan Becker harus divisualkan sebagai teori / interpretasi, bukan fakta biologis universal.
+- Data perbandingan hunian dan kebahagiaan harus mempertahankan populasi, periode, dan definisi pengukurannya.
+- Gunakan visual rumah yang nyata dan manusiawi; hindari estetika iklan properti.
+
+---
+
+### EVIDENCE CLASSIFICATION — PILOT
+
+| Bagian | Level |
+|---|---|
+| Rata-rata luas hunian per orang AS meningkat tajam dari 1950 ke 2020 | **FACT CLAIM** yang harus dicocokkan dengan dataset dan definisi luas |
+| Luas rumah yang lebih besar tidak otomatis membuat kebahagiaan meningkat secara proporsional | **RESEARCH SYNTHESIS / FACT CLAIM** yang harus mengikuti studi yang dirujuk |
+| Temuan UCLA tentang sebagian ruang rumah yang jarang digunakan | **FACT CLAIM FROM STUDY** |
+| Rumah sebagai panggung / simbol pengelolaan kesan sosial | **THEORETICAL INTERPRETATION** dari Goffman |
+| Rasa aman modern mencakup penilaian sosial dan status | **INTERPRETATION / SYNTHESIS** |
+| Kehilangan rumah atau ancaman penggusuran dapat memicu tekanan psikologis berat | **FACT / RESEARCH CLAIM** yang harus mengikuti sumber APA yang dirujuk |
+| Rumah sebagai simbol permanensi dalam menghadapi kesadaran akan kematian | **THEORETICAL INTERPRETATION** berdasarkan Becker |
+| Industri memiliki insentif ekonomi untuk terus menjual produk dan aspirasi hunian | **SYSTEM INTERPRETATION / INCENTIVE CLAIM** |
+| "Lebih besar selalu lebih baik" sebagai cerita yang dipertahankan sistem | **EDITORIAL REFRAME**, bukan fakta empiris universal |
+| Pengejaran rumah yang lebih besar dapat mengorbankan waktu yang sebenarnya ingin dinikmati | **ILLUSTRATIVE / INTERPRETIVE CLAIM** kecuali didukung data spesifik |
+
+Penanda ini bersifat internal dan tidak dibacakan oleh narator.
+
+---
+
+### CLOSING IDENTITY
+
+Letakkan setelah pertanyaan terbuka terakhir.
+
+**Draft:**
+
+> "Mungkin rumah yang terasa paling cukup bukan yang paling besar, tapi yang paling sesuai dengan kehidupan yang benar-benar ingin kita jalani."
+
+Jeda singkat.
+
+**Visual:**
+- Rumah sederhana pada sore atau malam hari.
+- Aktivitas keluarga / penghuni yang natural.
+- Ruangan yang benar-benar digunakan.
+- Musik turun perlahan.
+
+Tidak perlu logo animation panjang.
+
+---
+
+### OPTIONAL SOFT CTA
+
+Jangan memasukkan CTA ke dalam argumen utama.
+
+Pilihan soft CTA:
+
+> "Kalau kamu suka membongkar hal-hal yang kita anggap normal sampai tahu alasan di baliknya, kamu bisa subscribe."
+
+Satu kalimat cukup.
+
+CTA dapat dihilangkan bila ending terasa lebih kuat tanpa CTA.
+
+---
+
+### END SCREEN
+
+Rekomendasi:
+- Arahkan ke video Nugi yang membahas **rumah, tanah, kota, atau bagaimana manusia mengambil keputusan tentang tempat hidupnya**.
+- Tombol subscribe.
+
+Prioritaskan kesinambungan pertanyaan tentang apa yang sebenarnya membuat sebuah tempat terasa layak disebut rumah.
+
+---
+
+### DESCRIPTION PACKAGE
+
+**Synopsis:**
+Kenapa rumah yang sudah cukup sering masih terasa belum cukup? Video ini membongkar asumsi bahwa ruang yang lebih besar selalu berarti kehidupan yang lebih baik, lalu melihat persoalan tersebut melalui data hunian, psikologi sosial, rasa aman, teori eksistensial, dan insentif ekonomi di sekitar industri hunian.
+
+**Key Topics:**
+- housing psychology
+- home and status
+- happiness and space
+- housing affordability
+- social comparison
+- existential psychology
+- Human × Place × WHY
+
+**Primary Sources / References Mentioned in Script:**
+- UCLA study
+- American Psychological Association
+- Erving Goffman
+- Ernest Becker, *The Denial of Death*
+- Data perbandingan luas hunian AS
+
+**Related Video Direction:**
+Pilih video Nugi yang memperluas pertanyaan tentang rumah, ruang, tanah, kota, atau keputusan manusia tentang tempat tinggal.
+
+---
+
+### THUMBNAIL CONCEPT — PHASE 5
+
+**Dominant Idea:**
+Rumah besar belum tentu terasa penuh atau cukup.
+
+**Visual Tension:**
+Split-screen:
+- Rumah besar, ruang luas tetapi terasa kosong.
+- Ruang lebih kecil dengan aktivitas kehidupan yang hangat.
+
+**Text:**
+**"KENAPA MASIH KURANG?"**
+
+**Catatan:**
+Jangan membuat thumbnail seolah-olah rumah kecil selalu lebih baik daripada rumah besar. Kontrasnya harus berupa pertanyaan tentang rasa cukup, bukan penilaian atas ukuran rumah.
+
+---
+
+## PHASE 5 CHECK — SCRIPT #05
+
+- [x] Story Type tetap REFRAME.
+- [x] Isi utama naskah tidak dirombak.
+- [x] Cold open ditambahkan sebagai production wrapper.
+- [x] Micro bumper ditambahkan.
+- [x] Re-hook mengikuti alur assumption challenge → evidence → reframe.
+- [x] Revelation / reframing tetap berada di posisi asli.
+- [x] Closing identity dipisahkan dari editorial reflection.
+- [x] Soft CTA bersifat opsional.
+- [x] Chapter candidates tersedia.
+- [x] Source/on-screen evidence cues tersedia berdasarkan referensi yang disebut script.
+- [x] Evidence classification ditambahkan sebagai panduan internal.
+- [x] Teori psikologi / sosial dibedakan dari fact claim empiris.
+- [x] Tidak ada Python yang diubah.
+- [x] Tidak ada engine yang diubah.
+- [x] Tidak ada folder baru.
+- [x] Tidak ada refactor repository.
+- [x] SCRIPT_01, SCRIPT_02, SCRIPT_03, dan SCRIPT_04 tidak disentuh pada tahap ini.
