@@ -125,7 +125,7 @@ Ini bukan "nasib alami." Ini hasil dari puluhan tahun kebijakan yang secara sist
 
 Beberapa angka yang menunjukkan pola ini nyata:
 
-Berdasarkan data NJOP — nilai jual objek pajak — yang dipublikasikan Pemprov DKI Jakarta, rata-rata nilai tanah di kelurahan-kelurahan Jakarta Selatan secara konsisten 3 sampai 5 kali lebih tinggi dibanding rata-rata nilai tanah di kelurahan-kelurahan Jakarta Utara dengan aksesibilitas ke pusat kota yang sebanding.
+Berdasarkan data NJOP — nilai jual objek pajak — yang dipublikasikan **Pemprov DKI Jakarta**, rata-rata nilai tanah di kelurahan-kelurahan Jakarta Selatan secara konsisten 3 sampai 5 kali lebih tinggi dibanding rata-rata nilai tanah di kelurahan-kelurahan Jakarta Utara dengan aksesibilitas ke pusat kota yang sebanding.
 
 Indeks Pembangunan Manusia per kecamatan di Jakarta — yang mencakup pendidikan, kesehatan, dan pendapatan — menunjukkan pola yang sangat konsisten: semakin ke selatan, umumnya semakin tinggi; semakin ke utara, umumnya semakin rendah.
 
@@ -206,7 +206,7 @@ Pertanyaan yang saya tinggalkan:
 - [x] Brand Fit: Membongkar kekuasaan dan sejarah di balik bentuk kota — DNA Nugi.
 - [x] Human-Place Anchor: Kriteria D, J, B terpenuhi.
 - [x] Human Relevance: Membantu audiens memahami keputusan properti dalam konteks historis.
-- [x] Evidence Check: Data NJOP DKI, IPM BPS, sejarah kolonial Batavia.
+- [x] Evidence Check: Data NJOP DKI, IPM **BPS**, sejarah kolonial Batavia.
 - [x] Why Depth: Menyentuh pemisahan sosial kolonial, kepentingan bisnis Orde Baru, dan efek jalur yang sudah dipilih.
 - [x] Originality: Narasi "peta kota sebagai catatan kekuasaan" jarang dieksplor.
 - [x] Non-Sales: Nol promosi kawasan atau properti spesifik.
@@ -315,8 +315,8 @@ Tidak perlu menambah re-hook dengan interval tetap.
 | 2 | Kondisi rawa, genangan, kesehatan, dan sejarah perpindahan permukiman | Peta / arsip / timeline | Sumber sejarah yang diverifikasi sebelum final |
 | 3 | Perkembangan Menteng sebagai kawasan perencanaan kolonial | Denah / foto / arsip Menteng | Arsip sejarah / studi perkotaan yang diverifikasi |
 | 4 | Perkembangan koridor Sudirman–Thamrin, Senayan, Kebayoran Baru | Timeline pembangunan + peta | Sumber sejarah/perencanaan kota yang diverifikasi |
-| 5 | Perbedaan nilai tanah Jakarta Selatan dan Jakarta Utara | Peta / chart NJOP | Pemprov DKI Jakarta |
-| 6 | Pola IPM antarkecamatan | Heatmap / chart | BPS / data IPM Jakarta yang disebut di script |
+| 5 | Perbedaan nilai tanah Jakarta Selatan dan Jakarta Utara | Peta / chart NJOP | **Pemprov DKI Jakarta** |
+| 6 | Pola IPM antarkecamatan | Heatmap / chart | **BPS** / data IPM Jakarta yang disebut di script |
 | 7 | Konsentrasi banjir di koridor tertentu | Peta banjir / data historis | Penelitian / data banjir yang diverifikasi sebelum final |
 | 8 | Perubahan kawasan utara dan isu penurunan muka tanah | Arsip perubahan garis pantai / peta | Sumber teknis / pemerintah yang diverifikasi sebelum final |
 
@@ -408,8 +408,8 @@ Kenapa Jakarta berkembang dari Kota Tua menuju koridor Menteng, Sudirman, Kebayo
 - Human × Place × History
 
 **Primary Sources / Evidence Mentioned in Script:**
-- Pemprov DKI Jakarta / NJOP
-- BPS / IPM
+- **Pemprov DKI Jakarta** / NJOP
+- **BPS** / IPM
 - Arsip dan sumber sejarah Batavia / Jakarta
 - Penelitian / data banjir dan penurunan tanah yang digunakan pada final research
 
@@ -453,3 +453,25 @@ Jangan menggunakan skala warna "murah → mahal" sebagai fakta visual tanpa data
 - [x] Tidak ada folder baru.
 - [x] Tidak ada refactor repository.
 - [x] SCRIPT_01, SCRIPT_02, SCRIPT_03, dan SCRIPT_05 tidak disentuh pada tahap ini.
+
+
+---
+
+## EDITOR SOURCE HIGHLIGHT — PHASE 5.1
+
+> **Tujuan:** memudahkan editor menemukan nama rujukan yang perlu ditampilkan sebagai logo / source card / teks sumber saat kalimat tersebut diucapkan.
+>
+> **Aturan:**
+> - Nama lembaga, peneliti, atau sumber yang disebut di naskah diberi **bold**.
+> - Tidak menambahkan URL atau link website ke teleprompter.
+> - Jangan mengarang nama sumber baru untuk klaim yang belum menyebut sumber spesifik.
+> - Saat nama sumber terdengar, editor dapat menampilkan **logo + nama sumber** secara singkat.
+
+### Sumber yang ditandai di script ini
+- **Pemprov DKI Jakarta**
+- **BPS**
+
+### Bentuk visual
+> **[LOGO SUMBER]  Nama Sumber**
+
+Tidak perlu menampilkan URL website dalam video.
