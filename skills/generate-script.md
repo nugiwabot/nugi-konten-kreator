@@ -138,22 +138,25 @@ Dirancang untuk retensi tinggi dan memantik perenungan cepat tanpa forced CTA:
 ---
 
 ### NASKAH TELEPROMPTER / VOICE-OVER
-*(Catatan: Babak di bawah mengikuti alur dinamis sesuai Story Type yang dipilih di Section 3/4)*
+*(Catatan: Babak di bawah **harus mengikuti alur dinamis sesuai Story Type & Narrative Device** yang dipilih di Section 3/4. Jumlah stage tidak fixed.)*
 
-**[STAGE 1: PEMBUKA SESUAI STORY TYPE]**
-[Teks kalimat pembuka]
+**[STORY-TYPE-DRIVEN STAGES]**
 
-**[STAGE 2: EKSPLORASI / KONTEKS]**
-[Teks eksplorasi fakta dan realitas lapangan]
+Gunakan stage sesuai struktur Story Type yang dipilih. Jangan memaksa semua naskah menjadi lima stage atau menggunakan nama stage yang sama untuk semua tipe cerita.
 
-**[STAGE 3: MEKANISME / PERUBAHAN / PENYEBAB]**
-[Teks bedah struktural atau kausalitas]
+Contoh:
+- HUMAN_DILEMMA → Situation → Choice A → Choice B → Trade-off → Systemic Cause → Human Consequence → Revelation → Reflection
+- HIDDEN_SYSTEM → Observation → Question → Surface → Hidden Mechanism → Evidence → Consequences → Revelation → Reflection
+- SECOND_ORDER → Initial Change → First-Order Effect → Question → Second-Order Effect → Evidence → Revelation → Reflection
 
-**[STAGE 4: THE REVELATION]**
-[Teks epifani pencerahan sudut pandang baru]
+Setiap stage harus memiliki fungsi naratif yang jelas dan dapat memiliki panjang yang berbeda sesuai kebutuhan cerita.
 
-**[STAGE 5: REFLECTION / OPEN QUESTION]**
-[Teks pertanyaan reflektif penutup yang tenang tanpa paksaan]
+**[REVELATION]**
+[Titik epifani utama yang muncul sesuai struktur Story Type.]
+
+**[REFLECTION / OPEN QUESTION]**
+[Penutup reflektif yang tenang dan memberi ruang berpikir mandiri.]
+
 ```
 
 ### 5.2 YouTube Production Layer (untuk YouTube Long-Form)
