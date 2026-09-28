@@ -50,3 +50,7 @@ htmlcov/
 *.epub
 engine/data/*.json
 !engine/data/.gitkeep
+
+# AI Workspace Lock — machine-local state & ACL backups
+.ai-guard/backups/*/
+.ai-guard/lock.state
