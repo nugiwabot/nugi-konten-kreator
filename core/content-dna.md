@@ -1,50 +1,81 @@
 # Content DNA: Nugi
 
-## 1. Persimpangan Alami (The Natural Intersection Matrix)
+## 1. Internal Formula & Editorial Hierarchy
 
-Formula utama: **`AI × PROPERTY × HUMAN × WHY`**
+Formula editorial internal Nugi adalah:
+> **`AI × PROPERTY × HUMAN × WHY`**
 
-Pilar ini bukan formula kaku yang harus dipaksakan ke setiap konten. Jika sebuah berita murni tentang AI dan etika manusia, jangan memaksakan kata "properti". Jika berita murni tentang krisis perumahan anak muda, jangan memaksakan teknologi AI. Hubungan yang dicari harus **organik dan tidak dipaksakan**.
-
-### 6 Pola Kombinasi Alami:
-1. **AI × HUMAN (Kecerdasan & Identitas Manusia):**
-   - Bagaimana AI mengubah rasa harga diri manusia, cara kita berpikir, cara kita belajar, dan ketakutan akan kehilangan kendali.
-   - Contoh: Ketika coding atau menulis diambil alih AI, apa yang membuat hasil karya manusia tetap bernilai?
-2. **PROPERTY × HUMAN (Ruang, Rasa Aman & Status):**
-   - Mengapa manusia rela berhutang puluhan tahun demi sepetak tanah? Mengapa hunian bukan sekadar tempat tidur, melainkan simbol eksistensi dan rasa aman mendasar?
-   - Hubungan antara urbanisasi, keterasingan perkotaan, dan kebutuhan ruang komunal.
-3. **AI × PROPERTY (Teknologi yang Mengubah Ruang Fisik):**
-   - Otomasi kerja jarak jauh (remote work / AI agents) mengubah peta perumahan: dari sentralisasi megapolitan ke kota sekunder / pinggiran.
-   - Smart living vs privasi: ketika ruang privat dipantau algoritma.
-4. **TECHNOLOGY × HUMAN (Kenyamanan vs Otonomi):**
-   - Ketergantungan psikologis pada platform digital, ilusi koneksi di media sosial, dan hilangnya kemampuan manusia untuk mentolerir kebosanan.
-5. **WORK × HUMAN (Makna Kerja & Waktu):**
-   - Efisiensi AI menjanjikan waktu luang lebih banyak, tapi mengapa manusia justru merasa semakin sibuk dan kelelahan (*burnout*)?
-6. **FUTURE × HUMAN (Masa Depan yang Membumi):**
-   - Membedah masa depan bukan dari kacamata fiksi ilmiah mewah, melainkan dari kacamata keseharian: dapur kita, anak-anak kita, jalanan macet kita, dan cara kita bertahan hidup.
-
----
-
-## 2. Lapisan Pemikiran "WHY" (The Deeper Layer)
-
-`WHY` bukanlah sekadar kata tanya yang ditaruh di awal judul. `WHY` adalah investigasi tingkat lanjut terhadap motif tersembunyi.
+Ini bukan formula matematis kaku yang harus dipaksakan ke setiap judul, melainkan kompas editorial agar seluruh konten berakar pada kehidupan manusia nyata dan berpijak pada anchor ruang fisik.
 
 ```text
-Level 1 (Fakta/Peristiwa): "AI semakin pintar membuat desain interior dan arsitektur."
-   ↓ Kenapa ini penting?
-Level 2 (Efek Praktis): "Pekerjaan drafter dan desainer junior mulai tergerus."
-   ↓ Kenapa manusia bereaksi cemas?
-Level 3 (Psikologi Kerja): "Manusia takut keterampilan yang dipelajari bertahun-tahun jadi tidak berguna."
-   ↓ Kenapa identitas kita begitu terikat pada keterampilan teknis?
-Level 4 (THE DEEPER WHY): "Karena selama 100 tahun revolusi industri, nilai manusia diukur dari 'apa yang bisa kita produksi secara efisien'. Ketika mesin lebih efisien, manusia kehilangan definisi nilainya sendiri."
+LEVEL 1 — Human Life    : Apa yang sedang berubah dalam hidup manusia?
+LEVEL 2 — Anchor        : Properti, rumah, tanah, kota, ruang, tempat tinggal, mobilitas, aset fisik.
+LEVEL 3 — Subjects      : Property, Housing, Land, Cities, Urbanization, Economy, Work, AI, History, Society.
+LEVEL 4 — Lens          : WHY (Akar struktural, psikologi motif, dan insentif tersembunyi).
+LEVEL 5 — Story         : Observation → Question → Contradiction → Evidence → Deeper Why → Revelation → Reflection.
 ```
-
-Inilah yang membuat audiens berhenti scrolling dan berkata: *"Saya belum pernah memikirkannya sejauh itu."*
 
 ---
 
-## 3. Integrasi Suara Pelanggan (Customer Voice / VOC)
-Berdasarkan data observasi lapangan dan interaksi audiens:
-- **Kecemasan Properti:** Ketakutan anak muda tidak akan pernah sanggup beli rumah; ilusi investasi vs beban biaya perawatan; kebingungan memilih tinggal dekat kantor atau hidup tenang di pinggiran.
-- **Kecemasan AI & Karier:** Rasa tertinggal (*FOMO*) terhadap tools baru; ketakutan digantikan algoritma; kebingungan apa yang harus diajarkan kepada anak-anak untuk masa depan.
-- **Kebutuhan Sejati Audiens:** Bukan tutorial teknis yang rumit, melainkan kejernihan (*clarity*), ketenangan psikologis, dan sudut pandang objektif yang membantu mereka mengambil keputusan hidup.
+## 2. Portofolio Konten Editorial (Target Distribusi)
+
+Untuk menjaga konsistensi identitas dan mencegah channel berubah menjadi sekadar "akun AI acak yang sesekali membahas properti", engine menerapkan proporsi editorial internal:
+
+```text
+┌────────────────────────────────────────────────────────┐
+│  40%  PROPERTY & HOUSING                               │
+│       Harga rumah, tanah, KPR, pengembang, housing     │
+│       crisis, kepemilikan hunian, lokasi, aset fisik   │
+├────────────────────────────────────────────────────────┤
+│  25%  CITY, SPACE & ECONOMY                            │
+│       Urbanisasi, tata ruang kota, transportasi publik,│
+│       kemacetan, migrasi, supply-demand tanah          │
+├────────────────────────────────────────────────────────┤
+│  20%  AI, TECHNOLOGY & WORK                            │
+│       Remote work & disrupsi kantor, AI dan pergeseran │
+│       geografis tempat tinggal, privasi ruang privat   │
+├────────────────────────────────────────────────────────┤
+│  15%  HUMAN, HISTORY & FUTURE                          │
+│       Sejarah kepemilikan lahan, evolusi perumahan,    │
+│       psikologi rasa aman manusia, masa depan ruang    │
+└────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. Uji Wajib: Property / Life Anchor Test
+
+Setiap ide topik yang masuk ke dalam sistem **WAJIB** melewati 5 pertanyaan filter:
+
+1. **Tempat Hidup:** Apakah topik berhubungan dengan tempat manusia tinggal dan beristirahat?
+2. **Cara Bekerja:** Apakah topik berhubungan dengan bagaimana manusia mencari nafkah dan menata aktivitasnya?
+3. **Ruang & Kota:** Apakah topik berhubungan dengan kota, rumah, tanah, ruang, aset fisik, atau mobilitas?
+4. **Perubahan Hidup:** Apakah topik menjelaskan perubahan mendasar dalam cara manusia menjalani hidupnya?
+5. **Hubungan Struktural:** Apakah ada hubungan kausal dengan properti/ruang meskipun kata "properti" tidak tertulis di judul?
+
+> **ATURAN MUTLAK:**  
+> Minimal **SATU** hubungan kausal yang jelas harus terbukti.  
+> Jika **TIDAK ADA HUBUNGAN SAMA SEKALI** → **REJECT / OUT OF BRAND**.
+
+### Contoh Penerapan Uji Anchor:
+- ❌ **REJECT:** *"5 AI Tools Gratis yang Wajib Kamu Coba Minggu Ini."*  
+  *(Tidak ada kaitan dengan ruang, kota, rumah, atau cara hidup manusia — hanya tutorial dangkal).*
+- ✅ **ACCEPT:** *"Kalau AI membuat pekerjaan bisa dilakukan dari mana saja, kenapa rumah di pusat kota tetap mahal?"*  
+  *(AI → remote work → geografi kota → perumahan → nilai tanah).*
+- ✅ **ACCEPT:** *"Kenapa manusia rela berutang 20 tahun untuk memiliki sepetak rumah?"*  
+  *(Rumah → psikologi rasa aman → keluarga → beban finansial → ekonomi).*
+- ✅ **ACCEPT:** *"Kenapa kota-kota besar di Indonesia selalu tumbuh melebar ke pinggiran, bukan ke atas?"*  
+  *(Kota → regulasi lahan → transportasi → perumahan tapak → sosial ekonomi).*
+
+---
+
+## 4. Matriks Kombinasi (The 8 Bridges)
+
+1. **Matrix A (`PROPERTY × HUMAN`):** Psikologi rasa aman, kebutuhan ruang personal, dan simbol status hunian.
+2. **Matrix B (`PROPERTY × ECONOMY`):** Dinamika harga tanah, disparitas upah vs harga rumah, inflasi material, dan suku bunga.
+3. **Matrix C (`PROPERTY × CITY`):** Tata ruang, kemacetan, aglomerasi industri, dan desentralisasi pemukiman.
+4. **Matrix D (`AI × PROPERTY`):** Otomasi kantor, pergeseran minat hunian ke sub-urban, dan smart living vs privasi.
+5. **Matrix E (`AI × HUMAN`):** Nilai keahlian manusia, ketakutan akan disrupsi, dan otonomi berpikir.
+6. **Matrix F (`WORK × SPACE`):** Hubungan jarak rumah-kantor, komuter, dan barter waktu vs kenyamanan fisik.
+7. **Matrix G (`HISTORY × PROPERTY`):** Sejarah kolonial pusat kota, asal-usul sertifikat tanah, dan evolusi kampung kota.
+8. **Matrix H (`FUTURE × PROPERTY`):** Konsep hunian saat AI menangani pekerjaan rumah dan pekerjaan jarak jauh terwujud penuh.

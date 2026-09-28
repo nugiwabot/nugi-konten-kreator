@@ -1,28 +1,35 @@
 # Audience Psychology: Nugi
 
 ## 1. Profil Audiens Utama (The Ideal Reader / Viewer)
-Audiens Nugi adalah individu yang berpikiran kritis dan sedang menavigasi perubahan hidup besar di era modern:
-- **Profesional Muda & Pelaku Usaha (Usia 24 - 42 tahun):**
-  - Bekerja di sektor modern (teknologi, kreatif, korporat, atau wirausaha).
-  - Mulai memikirkan kepemilikan aset riil (rumah, tanah, investasi properti) sekaligus dihadapkan pada ancaman disrupsi AI di tempat kerja.
+
+Audiens Nugi adalah individu berpikiran kritis yang sedang menavigasi perubahan hidup besar di Indonesia modern:
+- **Demografi & Profesi (Usia 24 - 42 tahun):**
+  - Profesional muda, keluarga muda, akademisi, kreator, dan pelaku usaha.
+  - Berada di fase krusial: menentukan karier di tengah gelombang AI, merencanakan kepemilikan rumah/tanah, dan membesarkan anak di lingkungan perkotaan.
 - **Karakteristik Psikologis:**
-  - Lelah dengan konten clickbait murahan, tips 30 detik yang dangkal, dan flexing kekayaan palsu.
-  - Menghargai pemikiran yang mendalam, argumen berbasis data, dan refleksi jujur.
-  - Menginginkan kejernihan berpikir (*clarity of thought*) agar tidak salah mengambil keputusan hidup besar (misal: mengambil KPR 25 tahun, beralih karier, atau mengadopsi AI).
+  - Jenuh dengan konten clickbait murahan, tutorial 30 detik yang dangkal, dan flexing kekayaan palsu.
+  - Menghargai pemikiran yang mendalam, argumen berbasis data/evidence, dan kejujuran narasi.
+  - Membutuhkan kejernihan berpikir (*clarity of thought*) sebelum mengambil keputusan finansial dan hidup jangka panjang (misalnya: mengambil KPR 20 tahun, pindah ke kota sekunder, atau berinvestasi pada keterampilan masa depan).
 
 ---
 
 ## 2. Bahasa & Frasa Khas Audiens (Voice of Customer / VOC)
-Dari observasi interaksi nyata dan catatan pasar:
-- *"Kadang ngerasa makin ke sini kerjaan makin cepat, tapi waktu luang malah makin habis."*
-- *"Pengen punya rumah, tapi harganya udah nggak masuk akal sama gaji sekarang."*
-- *"Tiap minggu ada AI baru, capek ngikutin hype-nya, sebenarnya yang beneran ngaruh ke hidup kita yang mana?"*
-- *"Takut anak kita nanti kalah saing sama mesin kalau kita salah arahin pendidikannya."*
-- *"Gue ngerasa kota makin padat dan sesak, tapi kalau pindah ke pinggiran atau desa, kerja apa?"*
+
+Verbatim yang terekam dari percakapan nyata audiens:
+- *"Gaji naik 5% per tahun, tapi harga rumah di Bandung atau Jakarta naik berlipat-lipat. Masuk akal nggak sih?"*
+- *"Tiap minggu ada AI baru yang viral, capek ngikutin hype-nya. Sebenarnya mana yang beneran ngubah hidup kita sehari-hari?"*
+- *"Rela macet 2 jam di jalan demi punya rumah tapak di pinggiran, tapi rasanya hidup habis di jalan tol."*
+- *"Kenapa ya manusia rela berutang 20 tahun cuma buat sepetak tanah yang belum tentu bakal ditempati sampai tua?"*
+- *"Kalau kerjaan sekarang bisa dikerjain dari mana saja, kenapa kantor dan kota besar tetap bikin orang bertahan?"*
+- *"Kita pengen rasa aman, tapi sistem perumahan sekarang rasanya malah bikin cemas."*
 
 ---
 
 ## 3. Titik Tekan Psikologis (Psychological Triggers & Desires)
-1. **Rasa Ingin Tahu Eksistensial (Existential Curiosity):** Dorongan ingin tahu "apa yang sebenarnya sedang terjadi di dunia ini di balik berita resmi?".
-2. **Kebutuhan Validasi Emosional (Emotional Validation):** Audiens merasa lega saat mendengar seseorang mengartikulasikan keresahan mereka yang selama ini belum terucap.
-3. **Pencarian Kepastian yang Realistis:** Bukan janji surga atau solusi instan, melainkan navigasi yang masuk akal dan jujur mengenai risiko masa depan.
+
+1. **Rasa Ingin Tahu Eksistensial (Existential Curiosity):**  
+   Dorongan mendalam untuk memahami *"apa yang sebenarnya sedang terjadi di balik layar kehidupan kita?"*.
+2. **Validasi Emosional (Emotional Validation):**  
+   Kelegaan ketika mendengar keresahan pribadi (kesulitan punya rumah, kecemasan karier, rasa lelah komuter) ternyata bukan kegagalan individu, melainkan fenomena struktural yang sistemik.
+3. **Pencarian Kejernihan Realistis (Clarity Over Hype):**  
+   Bukan janji surga atau jalan pintas instan, melainkan lensa objektif yang membantu mereka membuat keputusan hidup dengan kepala dingin.

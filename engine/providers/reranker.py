@@ -4,7 +4,7 @@ import urllib.request
 import urllib.error
 from typing import List, Dict, Any, Optional
 
-from engine.config import RERANKER_URL, RERANKER_TIMEOUT
+from engine.config import RERANKER_URL, RERANKER_TIMEOUT, ALLOW_FALLBACK
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +18,8 @@ class RerankerProvider:
 
 class FallbackRerankerProvider(RerankerProvider):
     """
-    Pass-through / token-overlap fallback reranker.
-    Used when the local reranker server is offline.
+    Token-overlap fallback reranker.
+    Used when the local reranker server is offline during development/testing.
     """
     
     def rerank(self, query: str, documents: List[str], top_n: Optional[int] = None) -> List[Dict[str, Any]]:
@@ -45,28 +45,42 @@ class FallbackRerankerProvider(RerankerProvider):
 class LocalRerankerProvider(RerankerProvider):
     """
     Calls local TEI/vLLM/LM Studio compatible rerank API endpoint.
-    Default: http://127.0.0.1:8080/v1/rerank
-    Automatically falls back to FallbackRerankerProvider if offline.
+    Default: http://192.168.0.114:8080/v1/rerank
+    Enforces fail-fast policy when ALLOW_FALLBACK is False.
     """
     
     def __init__(
         self,
         endpoint_url: str = RERANKER_URL,
         timeout: int = RERANKER_TIMEOUT,
-        enable_fallback: bool = True
+        enable_fallback: Optional[bool] = None
     ):
         self.endpoint_url = endpoint_url
         self.timeout = timeout
-        self.enable_fallback = enable_fallback
+        self.enable_fallback = enable_fallback if enable_fallback is not None else ALLOW_FALLBACK
         self.fallback = FallbackRerankerProvider()
         self._is_available: Optional[bool] = None
+
+    def is_alive(self) -> bool:
+        """Pings reranker service with a lightweight test query."""
+        try:
+            res = self.rerank("test", ["test doc 1", "test doc 2"], top_n=1)
+            self._is_available = bool(res)
+            return self._is_available
+        except Exception:
+            self._is_available = False
+            return False
 
     def rerank(self, query: str, documents: List[str], top_n: Optional[int] = None) -> List[Dict[str, Any]]:
         if not documents:
             return []
             
-        if self._is_available is False and self.enable_fallback:
-            return self.fallback.rerank(query, documents, top_n)
+        if self._is_available is False:
+            if self.enable_fallback:
+                return self.fallback.rerank(query, documents, top_n)
+            raise ConnectionError(
+                f"Reranker server unreachable at {self.endpoint_url} and ALLOW_FALLBACK is False."
+            )
             
         payload = {
             "query": query,
@@ -98,6 +112,7 @@ class LocalRerankerProvider(RerankerProvider):
                 formatted.sort(key=lambda x: x["relevance_score"], reverse=True)
                 if top_n is not None:
                     formatted = formatted[:top_n]
+                self._is_available = True
                 return formatted
         except Exception as e:
             self._is_available = False
@@ -107,4 +122,6 @@ class LocalRerankerProvider(RerankerProvider):
             )
             if self.enable_fallback:
                 return self.fallback.rerank(query, documents, top_n)
-            raise ConnectionError(f"Reranker server unreachable: {e}")
+            raise ConnectionError(
+                f"Reranker server unreachable at {self.endpoint_url}: {e} (ALLOW_FALLBACK=False)"
+            )

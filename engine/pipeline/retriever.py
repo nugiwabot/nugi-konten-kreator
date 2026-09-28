@@ -12,9 +12,10 @@ logger = logging.getLogger(__name__)
 
 class KnowledgeRetriever:
     """
-    Two-stage knowledge retrieval pipeline:
-    Stage 1: Vector/Semantic Retrieval via EmbeddingProvider (Top-N candidates)
-    Stage 2: Precision Reranking via RerankerProvider (Top-K relevant chunks)
+    Two-stage knowledge retrieval pipeline v2:
+    Stage 1: Vector/Semantic Retrieval via EmbeddingProvider (Top-15 candidates)
+    Stage 2: Precision Reranking via RerankerProvider (Top 3-5 relevant chunks)
+    Includes Model & Dimension Mismatch Guardrails.
     """
 
     def __init__(
@@ -27,6 +28,7 @@ class KnowledgeRetriever:
         self.embedding_provider = embedding_provider or LocalEmbeddingProvider()
         self.reranker_provider = reranker_provider or LocalRerankerProvider()
         self._chunks: List[Dict[str, Any]] = []
+        self._store_metadata: Dict[str, Any] = {}
         self._load_store()
 
     def _load_store(self):
@@ -35,26 +37,37 @@ class KnowledgeRetriever:
                 with open(self.store_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self._chunks = data.get("chunks", [])
+                    self._store_metadata = {k: v for k, v in data.items() if k != "chunks"}
             except Exception as e:
                 logger.error(f"Error loading knowledge store from {self.store_path}: {e}")
                 self._chunks = []
+                self._store_metadata = {}
         else:
             logger.warning(f"Knowledge store not found at {self.store_path}")
             self._chunks = []
+            self._store_metadata = {}
 
     @property
     def total_chunks(self) -> int:
         return len(self._chunks)
+
+    @property
+    def metadata(self) -> Dict[str, Any]:
+        return self._store_metadata
 
     def retrieve(
         self,
         query: str,
         top_k_candidates: int = 15,
         top_k_reranked: int = 5,
-        category_filter: Optional[str] = None
+        category_filter: Optional[str] = None,
+        domain_filter: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
         Executes 2-stage retrieval for the given query.
+        Guarantees retrieval policy limits:
+        1. Candidates: up to top_k_candidates (default 15)
+        2. Reranked: top_k_reranked (default 3 to 5)
         """
         if not self._chunks:
             self._load_store()
@@ -66,11 +79,25 @@ class KnowledgeRetriever:
         if not query_emb:
             return []
 
+        # Check dimension consistency with index
+        if self._chunks:
+            first_chunk_emb = self._chunks[0].get("embedding", [])
+            expected_dim = len(first_chunk_emb)
+            if expected_dim > 0 and len(query_emb) != expected_dim:
+                logger.warning(
+                    f"WARN: Dimension mismatch detected! Query embedding dimension ({len(query_emb)}) "
+                    f"does not match knowledge store dimension ({expected_dim}). "
+                    f"A reindex with 'python -m engine.pipeline.engine_cli reindex' is strongly recommended."
+                )
+
         # 2. Stage 1: Cosine similarity vector search
         scored_candidates = []
         for chunk in self._chunks:
             if category_filter and category_filter.lower() not in chunk.get("book", "").lower():
                 continue
+            if domain_filter and domain_filter.lower() != chunk.get("domain", "").lower():
+                continue
+                
             chunk_emb = chunk.get("embedding", [])
             sim = cosine_similarity(query_emb, chunk_emb)
             scored_candidates.append({
@@ -98,21 +125,18 @@ class KnowledgeRetriever:
             final_results = []
             for r in rerank_results:
                 orig_candidate = top_candidates[r["index"]]
-                res = dict(orig_candidate["chunk"])
-                # Remove large embedding vector from output payload for efficiency
-                res.pop("embedding", None)
-                res["similarity_score"] = orig_candidate["similarity_score"]
-                res["rerank_score"] = r["relevance_score"]
-                final_results.append(res)
+                chunk_data = dict(orig_candidate["chunk"])
+                chunk_data["similarity_score"] = orig_candidate["similarity_score"]
+                chunk_data["rerank_score"] = r["relevance_score"]
+                final_results.append(chunk_data)
+                
             return final_results
-
         except Exception as e:
-            logger.warning(f"Reranking failed ({e}), falling back to Stage 1 vector ranking.")
+            logger.warning(f"Reranker failed during stage 2: {e}. Falling back to similarity scores.")
             final_results = []
-            for item in top_candidates[:top_k_reranked]:
-                res = dict(item["chunk"])
-                res.pop("embedding", None)
-                res["similarity_score"] = item["similarity_score"]
-                res["rerank_score"] = item["similarity_score"]
-                final_results.append(res)
+            for cand in top_candidates[:top_k_reranked]:
+                chunk_data = dict(cand["chunk"])
+                chunk_data["similarity_score"] = cand["similarity_score"]
+                chunk_data["rerank_score"] = cand["similarity_score"]
+                final_results.append(chunk_data)
             return final_results

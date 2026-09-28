@@ -1,43 +1,50 @@
-# Skill: RESEARCH-TOPIC
+# Skill: RESEARCH-TOPIC v2
 
 ## 1. Deskripsi & Tujuan
-Melakukan riset terstruktur secara runtime terhadap suatu topik, berita terkini, atau fenomena industri, menyaring fakta dari sekadar opini, dan membedah implikasi manusiawinya.
+Melakukan penyelidikan riset mendalam (*deep inquiry*) terhadap suatu topik, pertanyaan fundamental, atau fenomena terkini. Skill ini menghasilkan **Master Research Dossier** yang memisahkan fakta dari klaim/spekulasi, mengevaluasi sumber via 7-Tier Registry, memetakan rantai kausal ke ruang hidup, dan menggali hingga akar struktural WHY.
 
 ---
 
 ## 2. Input Kontrak
 ```yaml
-topic: string (Wajib: topik atau kata kunci pencarian)
-recency: string (opsional: 'd' untuk hari ini, 'w' untuk minggu ini, 'm' untuk bulan ini, default: 'm')
-max_sources: integer (opsional, default: 5)
+topic: string (Wajib: pertanyaan, hipotesis, atau kata kunci pencarian)
+research_mode: evergreen | current | historical | data_driven (default: auto-detect)
+recency: string (opsional: 'all' untuk evergreen/historical, 'm' untuk 1 bulan, 'w' untuk 1 minggu)
+max_sources: integer (opsional, default: 6)
 ```
 
 ---
 
-## 3. Output Kontrak
+## 3. Output Kontrak: Master Research Dossier
 
 ```markdown
-# HASIL RISET RUNTIME: [Topik]
+# MASTER RESEARCH DOSSIER: [Topik]
 
-### 1. RINGKASAN INTELIGENSI DUNIA NYATA
-- **Peristiwa Utama:** [Apa yang baru saja terjadi?]
-- **Apa yang Berubah (The Shift):** [Perubahan dibanding kondisi sebelumnya]
-- **Siapa yang Terdampak:** [Kelompok masyarakat yang terkena dampak langsung/tak langsung]
+### 1. METADATA RISET
+- **Research Mode:** [Evergreen | Current | Historical | Data-Driven]
+- **Primary Domain & Anchor:** [Domain: property/city/ai/work | Anchor: housing/land/space/city]
+- **Property Causal Bridge:** [Rantai kausal penghubung topik ke ruang fisik manusia]
 
-### 2. MATRIKS EVALUASI SUMBER (7-TIER HIERARCHY)
-| No | Nama Sumber & Domain | Tingkat Kredibilitas | Jenis Data | URL |
-| :---: | :--- | :--- | :--- | :--- |
-| 1 | [Nama Media] | Tier 1/4/5 | Fakta Primer / Riset | [Link] |
+### 2. INTELIGENSI & FAKTA UTAMA (CORE EVIDENCE)
+- **Fakta Objektif (Verified Facts):**
+  - [Fakta 1 beserta rujukan data/angka konkret]
+  - [Fakta 2 beserta tahun dan basis data]
+- **Pemisahan Status Epistemik:**
+  - **CLAIMS (Klaim Pihak Berkepentingan):** [Pernyataan pejabat/pengembang/korporat]
+  - **INTERPRETATION (Analisis Pakar/Ekonom):** [Sudut pandang analisis independen]
+  - **SPECULATION (Prediksi Masa Depan):** [Skenario yang belum terbukti]
 
-### 3. PEMISAHAN STATUS EPISTEMIK
-- **Fakta Terverifikasi:**
-  - Poin fakta 1 (didukung data).
-- **Klaim & Pernyataan Pihak Terkait:**
-  - Poin klaim 1 (klaim pengembang/perusahaan).
-- **Opini & Spekulasi Publik:**
-  - Poin opini 1.
+### 3. EVALUASI SUMBER (7-TIER REGISTRY)
+| No | Nama Sumber & Institusi | Tier (1–7) | Jenis Bukti | Catatan Kredibilitas |
+| :-: | :--- | :---: | :--- | :--- |
+| 1 | [Nama Institusi / Jurnal / Media] | Tier 1–5 | Data Resmi / Paper | [Tingkat keandalan fakta] |
 
-### 4. AKAR MASALAH (THE DEEPER WHY) & KONTRADIKSI
-- **Kontradiksi Utama:** [Di mana paradoks situasinya?]
-- **The Root Why:** [Alasan psikologis/struktural mendalam]
+### 4. KONTRADIKSI & HUMAN CONSEQUENCE
+- **Kontradiksi Utama (The Paradox):** [Jurang antara asumsi publik vs data nyata]
+- **Human Consequence:** [Bagaimana hal ini mengubah dompet, waktu, dan rasa aman manusia sehari-hari]
+
+### 5. THE DEEPER WHY & EDITORIAL ANGLE
+- **Penyebab Struktural (Level 4 WHY):** [Sistem perpajakan, insentif regulasi, atau hukum ekonomi yang menopangnya]
+- **Akar Eksistensial (Level 5 WHY):** [Kebutuhan psikologis purba manusia yang mendasari perilaku tersebut]
+- **Rekomendasi Sudut Pandang (Angles):** [2–3 sudut pandang narasi unik khas Nugi]
 ```

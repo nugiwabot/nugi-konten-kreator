@@ -1,22 +1,41 @@
-# Fact-Checking & Verification Protocol
+# Fact-Checking & Verification Protocol v2
 
-## 1. Prinsip Utama: Anti-Halusinasi & Ketelitian Data
-Dalam konten Nugi, reputasi jangka panjang dibangun di atas kebenaran faktual. Menghasilkan satu klaim palsu atau kutipan fiktif akan menghancurkan kepercayaan audiens yang dibangun berbulan-bulan.
+## 1. Prinsip Utama: Anti-Halusinasi & Zero-Tolerance Fake Data
 
-## 2. Checklist Verifikasi Fakta Sebelum Konten Dibuat
-Setiap poin data kunci dalam ide/script wajib melalui 5 gerbang uji:
-1. **Pemeriksaan Angka & Statistik:**
-   - Apakah angka ini berasal dari riset resmi atau sekadar kutipan berulang dari artikel clickbait?
-   - Kapan tahun data ini diterbitkan? (Jangan gunakan data 2019 seolah-olah terjadi kemarin).
-   - Apakah satuan dan basis populasinya benar? (misal: persentase kenaikan vs persentase dari total).
-2. **Pemeriksaan Kutipan Tokoh (Quotes):**
-   - DILARANG mengarang kutipan tokoh ("Seperti yang pernah dikatakan Sam Altman...").
-   - Jika mengutip ucapan seseorang, wajib bersumber dari wawancara publik yang terverifikasi, podcast resmi, atau postingan publik langsung.
-3. **Pemisahan Korelasi vs Kausalitas:**
-   - Dua hal yang terjadi bersamaan tidak berarti yang satu menyebabkan yang lain.
-   - Contoh: "Harga tanah naik di saat AI berkembang" adalah korelasi waktu, bukan kausalitas langsung kecuali ada data perantara yang valid (misal: pusat data AI dibangun di kawasan tersebut).
-4. **Deklarasi Tingkat Kepastian (Epistemic Humility):**
-   - Jika sebuah isu masih dalam tahap perdebatan atau belum ada konsensus, gunakan frasa terukur:
-     - *"Data awal menunjukkan kecenderungan..."*
-     - *"Laporan ini masih berupa uji coba terbatas..."*
-     - *"Para ahli masih terbelah mengenai apakah efek ini bersifat sementara atau permanen."*
+Integritas media Nugi dibangun di atas validitas data empiris. Menghasilkan satu statistik palsu, angka yang dilebih-lebihkan, atau kutipan rekaan akan menghancurkan reputasi independen yang diperjuangkan.
+
+---
+
+## 2. Prosedur 5 Langkah Verifikasi Fakta (Fact-Checking Workflow)
+
+```text
+KLAIM DATA / ANGKA / KUTIPAN
+            ↓
+1. LACAK SUMBER ASLI (BPS / BI / Lembaga Riset / Jurnal)
+            ↓
+2. CEK TAHUN PENERBITAN (Apakah relevan dengan konteks waktu?)
+            ↓
+3. CEK KONTEKS METODOLOGI (Apakah populasi sampel & definisi istilah cocok?)
+            ↓
+4. PISAHKAN KORELASI vs KAUSALITAS (Apakah ada rantai sebab-akibat yang nyata?)
+            ↓
+5. VERIFIKASI DUA SUMBER INDEPENDEN (Cross-Verification)
+```
+
+---
+
+## 3. Aturan Khusus Kutipan Tokoh & Sejarah
+
+1. **Dilarang Menulis Kutipan Rekaan:**  
+   Jangan pernah menggunakan kutipan yang terdengar pintar tetapi tidak pernah diucapkan oleh tokoh terkait (misalnya mengaitkan kutipan acak internet ke Adam Smith, Bung Karno, atau Sam Altman).
+2. **Wajib Rujukan Otentik:**  
+   Setiap kutipan langsung harus dapat ditelusuri ke buku, rekaman video publik, atau rilis tertulis resmi. Jika berupa parafrase, sebutkan secara jujur: *"Dalam buku X, ia menggarisbawahi gagasan bahwa..."*.
+
+---
+
+## 4. Bahasa Epistemik yang Jujur (Epistemic Humility)
+
+Jika suatu data masih berupa estimasi awal atau perdebatan terbuka antar pakar, naskah wajib mencerminkan tingkat kepastian yang proporsional:
+- *"Data pendahuluan dari survei X mengindikasikan..."*
+- *"Di kalangan ekonom tata kota, masih ada perdebatan apakah fenomena ini bersifat sementara atau struktural..."*
+- *"Angka ini perlu kita sikapi dengan hati-hati karena sampel yang diambil hanya mencakup kota-kota besar."*

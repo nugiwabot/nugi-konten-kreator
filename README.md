@@ -1,229 +1,182 @@
-# 🧠 Nugi Content Intelligence & Influence Engine
+# 🧠 Nugi Content Creator — Editorial Intelligence Engine v2
 
-> *"Store the thinking. Fetch the current world at runtime."*
+> *"Nugi membongkar hal-hal yang kelihatannya biasa, tetapi ternyata menentukan cara kita hidup."*
 
-Repositori ini adalah sistem kecerdasan konten (*content intelligence engine*) dan nalar pengaruh jangka panjang untuk personal brand **Nugi**. Repositori ini **BUKAN** tempat menyimpan kumpulan script, bukan database ide statis, bukan kalender konten, dan bukan arsip berita. Repositori ini menyimpan **cara berpikir, framework psikologi pengaruh, algoritma penceritaan, dan protokol evaluasi** sebelum sebuah ide atau naskah diproduksi.
-
----
-
-## 🎯 Core Identity & Content DNA
-
-- **Core Mission:** *"Nugi membongkar WHY di balik AI, properti, dan perubahan cara manusia hidup."*
-- **Content Philosophy:** *"Membuat orang melihat sesuatu yang sebelumnya tidak mereka pikirkan."*
-- **Content DNA:** `AI × PROPERTY × HUMAN × WHY`
-
-### Siapa Nugi Sebenarnya:
-- **Bukan** guru AI generik yang membagikan list 10 tools AI gratis.
-- **Bukan** akun berita atau aggregator headline.
-- **Bukan** agen properti yang jualan brosur cicilan atau hard-selling.
-- **Bukan** motivator yang menebar optimisme klise tanpa data.
-- **Nugi adalah** pengamat kritis yang mempertanyakan hal biasa, mencari akar masalah (*the deeper WHY*), menghubungkan teknologi dengan perilaku manusia nyata, dan membuka perspektif baru melalui percakapan santai, tajam, dan reflektif.
+Repositori ini bukan sekadar pembuat naskah otomatis (*script generator*).  
+Repositori ini adalah **Editorial Intelligence Engine** untuk membangun personal media Nugi di Indonesia dengan mengubah satu pertanyaan menarik tentang dunia nyata menjadi konten yang:
+1. Relevan bagi kehidupan manusia,
+2. Memiliki benang merah kausal dengan properti, tanah, kota, atau ruang hidup (*Property/Life Anchor*),
+3. Didukung riset empiris dan evidence kredibel (BPS, BI, jurnal, think-tank resmi),
+4. Mempunyai sudut pandang penyelidikan mendalam (*WHY Lens* Level 3–5),
+5. Terdengar 100% seperti manusia berbicara,
+6. Dapat diproduksi berulang kali secara terstruktur,
+7. Didistribusikan lintas platform: YouTube Long-Form (Master Story), Shorts, TikTok, dan Instagram Reels.
 
 ---
 
-## 🏗️ Arsitektur Sistem
+## 🏛️ Brand Architecture & Hierarki Editorial
 
+- **Audience Promise:** *"Nugi membongkar hal-hal yang kelihatannya biasa, tetapi ternyata menentukan cara kita hidup."*
+- **Internal Content DNA:** `AI × PROPERTY × HUMAN × WHY` *(DNA internal, bukan headline klise).*
+- **Hierarki 5 Tingkat:**
+  ```text
+  LEVEL 1 — Human Life    : Apa yang sedang berubah dalam kehidupan manusia?
+  LEVEL 2 — Anchor        : Properti, rumah, tanah, kota, ruang, pekerjaan, aset fisik.
+  LEVEL 3 — Subjects      : Property, Housing, Land, Cities, Urbanization, Economy, Work, AI, History.
+  LEVEL 4 — Lens          : WHY (Mengapa terjadi? Mengapa manusia berperilaku demikian?).
+  LEVEL 5 — Story         : Observation → Question → Contradiction → Evidence → Deeper Why → Revelation → Reflection.
+  ```
+
+---
+
+## 🏠 Definisi Properti & Property Anchor Test
+
+Properti adalah **anchor utama**, namun dengan batasan filosofis dan sosiologis:
+- ❌ **BUKAN:** Jualan rumah, promo diskon developer, listing komersial, brosur cicilan KPR, atau review klaster.
+- ✅ **ADALAH:** Rumah, tanah fisik terbatas, tempat tinggal, kota, ruang hidup, kepemilikan aset riil, lokasi, mobilitas komuter, dan urbanisasi.
+
+### Uji Wajib: Property / Life Anchor Test
+Setiap ide yang masuk engine **WAJIB** menjawab 5 pertanyaan uji:
+1. Apakah berhubungan dengan tempat manusia hidup?
+2. Apakah berhubungan dengan bagaimana manusia bekerja?
+3. Apakah berhubungan dengan kota, rumah, tanah, ruang, aset, atau mobilitas?
+4. Apakah menjelaskan perubahan cara manusia hidup?
+5. Apakah ada hubungan struktural kausal dengan properti/ruang meskipun tidak disebut di judul?
+
+> **Minimal 1 hubungan kausal yang jelas harus ada.** Jika tidak ada → **REJECT / OUT OF BRAND**.
+
+---
+
+## 📊 Target Portofolio Konten Editorial
 ```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ PERMANENT KNOWLEDGE (Buku Cialdini, Berger, Heath) + PSYCHOLOGY + RULES     │
-└──────────────────────────────────────┬──────────────────────────────────────┘
-                                       │
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       CONTENT INTELLIGENCE ENGINE                           │
-│     (Embedding Vector Search + BGE Reranker + Analytical Thinking Engine)    │
-└──────────────────────────────────────┬──────────────────────────────────────┘
-                                       │
-            ┌──────────────────────────┴──────────────────────────┐
-            ▼                                                     ▼
-┌───────────────────────┐                             ┌───────────────────────┐
-│  CURRENT WEB RESEARCH │                             │  EPITEMIC SEPARATION  │
-│  (DDGS / Web Provider)│                             │  (Fact vs Claim vs    │
-│                       │                             │   Opinion/Speculation)│
-└───────────┬───────────┘                             └───────────┬───────────┘
-            └──────────────────────────┬──────────────────────────┘
-                                       │
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│            THE 9-STAGE REASONING & STORYTELLING ALGORITHM                   │
-│ (Observation → Question → Contradiction → Context → Why → Revelation → Loop)│
-└──────────────────────────────────────┬──────────────────────────────────────┘
-                                       │
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                RUNTIME OUTPUT: TALKING-HEAD SCRIPT / IDEAS                  │
-│                     (Conversational, Anti-AI Fluff)                         │
-└──────────────────────────────────────┬──────────────────────────────────────┘
-                                       │
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│            QUALITY GATE CHECKLIST & HEURISTIC INFLUENCE SCORING             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  40%  PROPERTY & HOUSING                               │
+│       Harga rumah, tanah, KPR, housing crisis, lokasi  │
+├────────────────────────────────────────────────────────┤
+│  25%  CITY, SPACE & ECONOMY                            │
+│       Urbanisasi, transportasi, kemacetan, tata ruang  │
+├────────────────────────────────────────────────────────┤
+│  20%  AI, TECHNOLOGY & WORK                            │
+│       Remote work & disrupsi kantor, geografi hunian   │
+├────────────────────────────────────────────────────────┤
+│  15%  HUMAN, HISTORY & FUTURE                          │
+│       Sejarah lahan, psikologi rasa aman, masa depan   │
+└────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📁 Struktur Direktori Repositori
+## ⚡ Local AI Infrastructure (LAN Deployment)
 
+Engine terintegrasi langsung dengan server model lokal pada jaringan LAN:
+
+```env
+# Local / LAN Embedding (LM Studio / OpenAI Compatible)
+EMBEDDING_URL=http://192.168.0.114:1234/v1/embeddings
+EMBEDDING_MODEL=Qwen3-Embedding-4B-Q4_K_M.gguf
+EMBEDDING_REQUIRED=true
+
+# Local / LAN Reranker (BGE-Reranker-v2-m3 / TEI Compatible)
+RERANKER_URL=http://192.168.0.114:8080/v1/rerank
+RERANKER_REQUIRED=true
+
+# Production Fail-Safe
+ALLOW_FALLBACK=false
+```
+
+### Retrieval Policy:
+1. **Stage 1 (Vector Retrieval):** 15 kandidat terbaik via cosine similarity.
+2. **Stage 2 (Precision Reranking):** Top 3–5 chunks paling relevan via BGE-Reranker.
+3. **Guardrails:** Deteksi otomatis ketidakcocokan dimensi/model (*dimension mismatch guard*), fail-fast saat produksi, dan fallback SHA-256 deterministik saat pengujian offline.
+
+---
+
+## 🩺 System Health Check (The Doctor Command)
+
+Jalankan satu perintah CLI untuk menguji integritas seluruh subsistem secara nyata:
+
+```powershell
+python -m engine.pipeline.engine_cli doctor
+```
+
+**Output Standar:**
 ```text
-nugi-konten-kreator/
-├── README.md                 # Dokumentasi arsitektur utama
-├── .env.example              # Template variabel lingkungan
-├── .gitignore                # Pengecualian secrets, cache, dan binary PDF
-│
-├── core/                     # Fondasi Identitas & Strategi
-│   ├── identity.md           # Persona, suara, dan batasan Nugi
-│   ├── positioning.md        # Diferensiasi 2x2 kategori unik
-│   ├── content-dna.md        # 6 pola persimpangan & 4 lapis WHY
-│   ├── audience.md           # Psikologi audiens, keresahan & VOC
-│   └── objectives.md         # Funnel pengaruh (Attention -> Trust)
-│
-├── knowledge/                # Pengetahuan Permanen (Diekstrak dari 3 Buku)
-│   ├── influence/            # Cialdini (Reciprocity, Social Proof, Authority, Scarcity, dll.)
-│   ├── shareability/         # Berger STEPPS (Social Currency, Triggers, Emotion/Arousal, dll.)
-│   ├── memorability/         # Heath SUCCESs (Simple, Unexpected, Concrete, Credible, Stories)
-│   ├── human-psychology/     # Status, fear of obsolescence, territoriality
-│   └── storytelling/         # Narrative transport & kurva ketegangan
-│
-├── research/                 # Protokol Riset Runtime
-│   ├── news-research.md      # 9 tahap investigasi mendalam melampaui headline
-│   ├── source-evaluation.md  # 7-tier hirarki kredibilitas sumber
-│   ├── fact-checking.md      # Checklist verifikasi fakta & klaim
-│   └── trend-detection.md    # Deteksi sinyal lemah (weak signals)
-│
-├── thinking/                 # Mesin Penalaran Analitis
-│   ├── why-engine.md         # Prosedur investigasi 5-lapis WHY
-│   ├── curiosity-engine.md   # Loewenstein information gap theory
-│   ├── contradiction-engine.md # 3 tipe kontradiksi kognitif
-│   ├── human-insight-engine.md # Kamus konversi teknis ke rasa manusia
-│   └── angle-engine.md       # 6 arketipe pembangkit sudut pandang
-│
-├── storytelling/             # Mesin Penceritaan & Naskah
-│   ├── story-engine.md       # Arsitektur narasi 8-tahap
-│   ├── hook-engine.md        # 4 arketipe hook 3-detik
-│   ├── revelation-engine.md  # Mekanisme penyampaian epifani / AHA-moment
-│   ├── open-loop-engine.md   # Retensi open loop & pertanyaan terbuka penutup
-│   └── script-engine.md      # Blueprint script talking-head 60-90 detik
-│
-├── retrieval/                # Spesifikasi Retrieval & Reranker
-│   ├── embedding.md          # Konfigurasi embedding lokal (LM Studio)
-│   ├── reranking.md          # Two-stage retrieval + BGE reranker
-│   └── retrieval-policy.md   # Lean context injection matrix
-│
-├── skills/                   # Spesifikasi Prompt & Kontrak Skill AI
-│   ├── generate-ideas.md     # Kontrak pembuatan ide berbasis riset
-│   ├── generate-script.md    # Kontrak pembuatan script conversational
-│   ├── generate-hooks.md     # Matriks variasi hook 3-detik
-│   ├── research-topic.md     # Riset topik & evaluasi sumber
-│   └── analyze-content.md    # Loop eksperimen & pembelajaran performa
-│
-├── evaluation/               # Gerbang Kualitas & Rubrik
-│   ├── content-quality.md    # 14 checklist pre-flight & katalog anti-patterns
-│   ├── influence-evaluation.md # 8 dimensi evaluasi pengaruh heuristik
-│   ├── storytelling-evaluation.md # Rubrik ritme napas & daya serap narasi
-│   └── learning-loop.md      # Metodologi eksperimen konten berkelanjutan
-│
-├── engine/                   # Engine Python Ringan & CLI
-│   ├── config.py             # Parser environment variables
-│   ├── providers/            # Abstraksi provider (Embedding, Reranker, Search, Media)
-│   ├── ingestion/            # Pipeline ekstraksi PDF lokal & vector indexer
-│   └── pipeline/             # Two-stage retriever, research runner, media pipeline, & CLI
-│
-├── assets/                   # Asset lokal (logo, media download results)
-│   ├── logo/
-│   ├── narasi_01/
-│   └── media/                # Destination folder untuk Media Retrieval Agent downloads
-│
-└── tests/                    # Test Suite Otomatis (100% Pass)
-    ├── test_providers.py     # Pengujian provider & offline fallback
-    ├── test_retrieval.py     # Pengujian query semantik & reranking
-    ├── test_research.py      # Pengujian klasifikasi tier sumber
-    ├── test_skills_and_contracts.py # Pengujian schema output
-    └── test_quality_gate.py  # Pengujian deteksi anti-pattern
+NUGI CONTENT ENGINE HEALTH
+
+Embedding
+[OK] http://192.168.0.114:1234/v1/embeddings
+
+Reranker
+[OK] http://192.168.0.114:8080/v1/rerank
+
+Knowledge Store
+[OK] 375 chunks
+
+Web Search
+[OK]
+
+Media
+[OK]
+
+Configuration
+[OK]
+
+Editorial Rules
+[OK]
 ```
 
 ---
 
-## ⚡ Quickstart & Penggunaan CLI
+## 🔬 4 Mode Riset (Research Engine v2)
 
-### 1. Prasyarat Lingkungan
-Pastikan server lokal berikut aktif (atau sistem otomatis menggunakan mode fallback):
-- **Embedding:** LM Studio pada `http://localhost:1234/v1/embeddings` (model: `text-embedding-nomic-embed-text-v1.5`).
-- **Reranker:** Reranker server pada `http://127.0.0.1:8080/v1/rerank` (model: `bge-reranker-v2-m3`).
-
-Salin konfigurasi:
-```powershell
-cp .env.example .env
-```
-
-### 2. Menjalankan 2-Stage Knowledge Retrieval
-Mencari pengetahuan permanen dari repositori (prinsip pengaruh, penceritaan, dan psikologi) yang paling relevan dengan topik:
-```powershell
-python -m engine.pipeline.engine_cli retrieve "kenapa orang ragu beli properti" --top-n 3
-```
-
-### 3. Menjalankan Runtime Web Research
-Melakukan investigasi intelijen dunia nyata terkini lengkap dengan klasifikasi tingkat sumber (Tier 1 - 7):
-```powershell
-python -m engine.pipeline.engine_cli research "tren perumahan anak muda 2026" --max-results 5
-```
-
-### 4. Membangun Ulang Vector Store (Re-indexing)
-Mengekstrak kembali buku PDF lokal di folder Downloads dan modul markdown:
-```powershell
-python -m engine.pipeline.engine_cli reindex --pages 30
-```
-
-### 5. 🎬 Media Retrieval Agent — Preview Hasil Pencarian
-Mencari media visual dari Wikimedia Commons + Internet Archive tanpa download (preview):
-```powershell
-# Preview hasil pencarian (tidak ada file yang didownload)
-python -m engine.pipeline.engine_cli media search "D-Day 1944 Normandy" --count 10 --type video
-
-# Preview foto bertema emosi
-python -m engine.pipeline.engine_cli media search "orang yang merasa sendirian di keramaian" --type image
-```
-
-### 6. 📥 Media Retrieval Agent — Download
-Cari dan download media langsung ke folder project:
-```powershell
-# Download 5 footage D-Day ke assets/media/ww2/d-day/
-python -m engine.pipeline.engine_cli media download "D-Day 1944 Normandy landing" \
-    --count 5 --folder ww2/d-day --type video
-
-# Download foto Albert Einstein
-python -m engine.pipeline.engine_cli media download "Albert Einstein portrait 1921" \
-    --count 3 --folder people/einstein --type image
-
-# Download dengan batas ukuran file
-python -m engine.pipeline.engine_cli media download "WWII archival footage" \
-    --count 5 --folder ww2/general --max-size-mb 200
-```
-
-### 7. 📄 Media Retrieval Agent — Script to Asset
-Ekstrak kebutuhan visual otomatis dari script narasi dan download per scene:
-```powershell
-python -m engine.pipeline.engine_cli media from-script "assets/narasi_01/narasi.md" \
-    --folder narasi-01 --count-per-scene 3
-```
-
-### 8. 🩺 Media Retrieval Agent — Health Check
-Cek ketersediaan semua layanan (Wikimedia, Internet Archive, Embedding, Reranker):
-```powershell
-python -m engine.pipeline.engine_cli media doctor
-```
-
-### 9. Menjalankan Test Suite
-Memverifikasi 103 pengujian unit otomatis:
-```powershell
-python -m pytest tests/ -v
-```
+Tidak lagi mengandalkan semata-mata pada berita terkini (*anti news-centric*):
+1. **MODE A — EVERGREEN:** Pertanyaan abadi tanpa batas waktu (*"Kenapa harga tanah selalu naik?"*).
+2. **MODE B — CURRENT:** Membedah kebijakan, regulasi, atau rilis baru untuk mencari dampak strukturalnya.
+3. **MODE C — HISTORICAL:** Melacak asal-usul tata kota, regulasi pertanahan, atau preseden masa lalu.
+4. **MODE D — DATA-DRIVEN:** Berangkat dari anomali data empiris (*"Gaji naik 4%, harga rumah naik 18%"*).
 
 ---
 
-## 🛡️ Anti-Patterns: Hal yang Dilarang Keras
-- ❌ **Headline Rewriting:** Berita → Ringkasan → Script tanpa ada pembongkaran *The Deeper WHY*.
-- ❌ **Fabricated Statistics / Quotes:** Mengarang kutipan tokoh atau angka statistik khayalan.
-- ❌ **Rage Bait & Sensationalism:** Memancing amarah buta demi komentar beracun.
-- ❌ **Forced CTA:** Memaksa audiens dengan kalimat "Jangan lupa follow", "Ketik MAU di komentar", atau "Klik link di bio".
-- ❌ **Generic AI Tone:** Menggunakan frasa robotik seperti *"Di era digital yang serba cepat ini..."* atau *"Menyelami samudera peluang..."*.
+## 🎯 100-Point Editorial Fit Score
+
+| Dimensi | Bobot | Deskripsi |
+| :--- | :---: | :--- |
+| **Human Relevance** | **25 Poin** | Relevansi langsung ke dompet, waktu, dan keputusan hidup manusia. |
+| **Property / Life Anchor** | **20 Poin** | Kekokohan rantai kausal ke hunian, tanah, atau kota (Min 10/20). |
+| **WHY Depth** | **20 Poin** | Kedalaman analisis menembus Level 3–5 WHY. |
+| **Evidence Potential** | **15 Poin** | Ketersediaan data empiris resmi / jurnal terverifikasi (Min 8/15). |
+| **Novelty** | **10 Poin** | Keunikan sudut pandang (*inversion* dari asumsi umum). |
+| **Story Potential** | **10 Poin** | Kekuatan kontradiksi dan daya pikat visual. |
+| **TOTAL** | **100 Poin** | **Ambang Lolos: Minimal 75 Poin** |
+
+---
+
+## 🚫 12 Hard Rejection Rules (Aturan Gugur Mutlak)
+1. Generic AI tools list (daftar "10 AI gratis")
+2. Property listing (unit spesifik, alamat komersial)
+3. Sales copy / promosi cicilan / DP
+4. Headline rewriting tanpa analisis WHY
+5. Fake statistics / angka rekaan
+6. Fabricated quotes / kutipan palsu
+7. Unsupported claims tanpa logika empiris
+8. Forced CTA (*"Follow akun ini"*, *"Ketik MAU"*, *"Klik bio"*)
+9. Forced property connection (jembatan kosmetik)
+10. AI topic tanpa human consequence
+11. Extreme abstraction tanpa contoh membumi
+12. No revelation / naskah tanpa epifani pencerah
+
+---
+
+## 🎬 Dual-Mode Script Production
+- **SHORT FORM (60–90 Detik):** `HOOK → TENSION → CONTEXT → REVELATION → OPEN QUESTION` (YouTube Shorts, TikTok, Reels).
+- **LONG FORM (6–12 Menit):** `COLD OPEN → QUESTION → WHY THIS MATTERS → CONTEXT → EVIDENCE → CONTRADICTION → DEEPER WHY → CASE STUDY → REVELATION → IMPLICATION → REFLECTIVE ENDING` (YouTube Master Story).
+
+---
+
+## 🧪 Menjalankan Pengujian (Testing)
+
+Jalankan test suite lengkap (132 unit test):
+```powershell
+pytest
+```
+Semua modul editorial, property bridge, research modes, embedding config, media pipeline, dan quality gate terlindungi oleh unit test otomatis.

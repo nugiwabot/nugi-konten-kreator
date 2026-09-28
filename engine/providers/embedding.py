@@ -1,3 +1,4 @@
+import hashlib
 import json
 import logging
 import math
@@ -6,7 +7,7 @@ import urllib.request
 import urllib.error
 from typing import List, Dict, Any, Optional
 
-from engine.config import EMBEDDING_URL, EMBEDDING_MODEL, EMBEDDING_TIMEOUT
+from engine.config import EMBEDDING_URL, EMBEDDING_MODEL, EMBEDDING_TIMEOUT, ALLOW_FALLBACK
 
 logger = logging.getLogger(__name__)
 
@@ -35,38 +36,41 @@ class EmbeddingProvider:
 
 class FallbackEmbeddingProvider(EmbeddingProvider):
     """
-    Lightweight deterministic fallback embedding provider.
-    Used when local embedding servers (e.g., LM Studio) are unavailable.
-    Generates a normalized 128-dimensional frequency-hash embedding.
+    Deterministic SHA-256 fallback embedding provider.
+    Used when local embedding servers (e.g., LM Studio) are unavailable during development/testing.
+    Generates a normalized, cross-platform deterministic embedding vector without Python hash randomization.
     """
     
     def __init__(self, dim: int = 128):
         self.dim = dim
 
-    def _hash_embed(self, text: str) -> List[float]:
+    def _sha256_embed(self, text: str) -> List[float]:
         tokens = re.findall(r"\w+", text.lower())
         vec = [0.0] * self.dim
         if not tokens:
             return vec
         for token in tokens:
-            idx = abs(hash(token)) % self.dim
-            vec[idx] += 1.0
+            digest = hashlib.sha256(token.encode("utf-8")).digest()
+            idx = int.from_bytes(digest[:4], "big") % self.dim
+            # Sign from next byte to prevent positive distribution bias
+            sign = 1.0 if digest[4] % 2 == 0 else -1.0
+            vec[idx] += sign
         norm = math.sqrt(sum(x * x for x in vec))
         if norm > 0.0:
             vec = [x / norm for x in vec]
         return vec
 
     def get_embedding(self, text: str) -> List[float]:
-        return self._hash_embed(text)
+        return self._sha256_embed(text)
 
     def get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        return [self._hash_embed(t) for t in texts]
+        return [self._sha256_embed(t) for t in texts]
 
 
 class LocalEmbeddingProvider(EmbeddingProvider):
     """
     Calls local OpenAI-compatible embedding API (e.g., LM Studio).
-    Automatically falls back to FallbackEmbeddingProvider if offline.
+    Enforces fail-fast policy in production when ALLOW_FALLBACK is False.
     """
     
     def __init__(
@@ -74,14 +78,27 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         endpoint_url: str = EMBEDDING_URL,
         model_name: str = EMBEDDING_MODEL,
         timeout: int = EMBEDDING_TIMEOUT,
-        enable_fallback: bool = True
+        enable_fallback: Optional[bool] = None
     ):
         self.endpoint_url = endpoint_url
         self.model_name = model_name
         self.timeout = timeout
-        self.enable_fallback = enable_fallback
+        self.enable_fallback = enable_fallback if enable_fallback is not None else ALLOW_FALLBACK
         self.fallback = FallbackEmbeddingProvider()
         self._is_available: Optional[bool] = None
+        self._detected_dimension: Optional[int] = None
+
+    def is_alive(self) -> bool:
+        """Pings embedding service with a lightweight test vector."""
+        try:
+            emb = self.get_embedding("ping")
+            self._is_available = bool(emb)
+            if emb:
+                self._detected_dimension = len(emb)
+            return self._is_available
+        except Exception:
+            self._is_available = False
+            return False
 
     def get_embedding(self, text: str) -> List[float]:
         embeddings = self.get_embeddings([text])
@@ -91,8 +108,12 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         if not texts:
             return []
         
-        if self._is_available is False and self.enable_fallback:
-            return self.fallback.get_embeddings(texts)
+        if self._is_available is False:
+            if self.enable_fallback:
+                return self.fallback.get_embeddings(texts)
+            raise ConnectionError(
+                f"Embedding server unreachable at {self.endpoint_url} and ALLOW_FALLBACK is False."
+            )
         
         payload = {
             "model": self.model_name,
@@ -110,7 +131,11 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                 result = json.loads(response.read().decode("utf-8"))
                 # OpenAI format: {"data": [{"embedding": [...], "index": 0}, ...]}
                 data_list = sorted(result.get("data", []), key=lambda x: x.get("index", 0))
-                return [item["embedding"] for item in data_list]
+                embs = [item["embedding"] for item in data_list]
+                self._is_available = True
+                if embs and not self._detected_dimension:
+                    self._detected_dimension = len(embs[0])
+                return embs
         except Exception as e:
             self._is_available = False
             logger.warning(
@@ -119,4 +144,6 @@ class LocalEmbeddingProvider(EmbeddingProvider):
             )
             if self.enable_fallback:
                 return self.fallback.get_embeddings(texts)
-            raise ConnectionError(f"Embedding server unreachable: {e}")
+            raise ConnectionError(
+                f"Embedding server unreachable at {self.endpoint_url}: {e} (ALLOW_FALLBACK=False)"
+            )

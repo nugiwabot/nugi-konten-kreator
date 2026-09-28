@@ -7,18 +7,23 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Embedding Configuration
-EMBEDDING_URL = os.getenv("EMBEDDING_URL", "http://localhost:1234/v1/embeddings")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-nomic-embed-text-v1.5")
-EMBEDDING_TIMEOUT = int(os.getenv("EMBEDDING_TIMEOUT", "10"))
+# Embedding Configuration v2 (LAN / Local)
+EMBEDDING_URL = os.getenv("EMBEDDING_URL", "http://192.168.0.114:1234/v1/embeddings")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "Qwen3-Embedding-4B-Q4_K_M.gguf")
+EMBEDDING_TIMEOUT = int(os.getenv("EMBEDDING_TIMEOUT", "30"))
+EMBEDDING_REQUIRED = os.getenv("EMBEDDING_REQUIRED", "true").lower() in ("true", "1", "yes")
 
-# Reranker Configuration
-RERANKER_URL = os.getenv("RERANKER_URL", "http://127.0.0.1:8080/v1/rerank")
-RERANKER_TIMEOUT = int(os.getenv("RERANKER_TIMEOUT", "10"))
+# Reranker Configuration v2 (LAN / Local)
+RERANKER_URL = os.getenv("RERANKER_URL", "http://192.168.0.114:8080/v1/rerank")
+RERANKER_TIMEOUT = int(os.getenv("RERANKER_TIMEOUT", "30"))
+RERANKER_REQUIRED = os.getenv("RERANKER_REQUIRED", "true").lower() in ("true", "1", "yes")
+
+# Fallback Safety Policy
+ALLOW_FALLBACK = os.getenv("ALLOW_FALLBACK", "false").lower() in ("true", "1", "yes")
 
 # Local Storage Configuration
 KNOWLEDGE_STORE_PATH = Path(os.getenv("KNOWLEDGE_STORE_PATH", str(BASE_DIR / "engine" / "data" / "knowledge_store.json")))
-DEFAULT_PDF_DIR = Path(os.getenv("PDF_DIR", r"C:\Users\Nugi\Downloads"))
+DEFAULT_PDF_DIR = Path(os.getenv("PDF_DIR", str(BASE_DIR / "data" / "books")))
 
 # Web Research Configuration
 WEB_SEARCH_MAX_RESULTS = int(os.getenv("WEB_SEARCH_MAX_RESULTS", "6"))

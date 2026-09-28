@@ -223,8 +223,97 @@ def cmd_media_doctor(args):
     rer_ok = status.get("reranker") == "OK"
     if not emb_ok or not rer_ok:
         print("  ⚠ Semantic AI services offline — keyword fallback ranking will be used.")
-    print()
+def cmd_doctor(args):
+    """System-wide health check for Nugi Content Engine v2."""
+    from engine.config import (
+        EMBEDDING_URL, RERANKER_URL, KNOWLEDGE_STORE_PATH
+    )
+    from engine.providers.embedding import LocalEmbeddingProvider
+    from engine.providers.reranker import LocalRerankerProvider
+    import json
 
+    print("\nNUGI CONTENT ENGINE HEALTH\n")
+
+    # 1. Embedding
+    print("Embedding")
+    try:
+        embedder = LocalEmbeddingProvider(endpoint_url=EMBEDDING_URL, enable_fallback=False)
+        if embedder.is_alive():
+            print(f"[OK] {EMBEDDING_URL}\n")
+        else:
+            print(f"[FAIL] {EMBEDDING_URL} - Service ping failed\n")
+    except Exception as e:
+        print(f"[FAIL] {EMBEDDING_URL} - {e}\n")
+
+    # 2. Reranker
+    print("Reranker")
+    try:
+        reranker = LocalRerankerProvider(endpoint_url=RERANKER_URL, enable_fallback=False)
+        if reranker.is_alive():
+            print(f"[OK] {RERANKER_URL}\n")
+        else:
+            print(f"[FAIL] {RERANKER_URL} - Service ping failed\n")
+    except Exception as e:
+        print(f"[FAIL] {RERANKER_URL} - {e}\n")
+
+    # 3. Knowledge Store
+    print("Knowledge Store")
+    try:
+        if KNOWLEDGE_STORE_PATH.exists():
+            with open(KNOWLEDGE_STORE_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                chunks_count = len(data.get("chunks", []))
+            print(f"[OK] {chunks_count} chunks\n")
+        else:
+            print(f"[WARN] File not found at {KNOWLEDGE_STORE_PATH}\n")
+    except Exception as e:
+        print(f"[FAIL] {e}\n")
+
+    # 4. Web Search
+    print("Web Search")
+    try:
+        from engine.pipeline.research_runner import ResearchRunner
+        runner = ResearchRunner()
+        print("[OK]\n")
+    except Exception as e:
+        print(f"[FAIL] {e}\n")
+
+    # 5. Media
+    print("Media")
+    try:
+        from engine.pipeline.media_pipeline import MediaPipeline
+        mp = MediaPipeline()
+        media_status = mp.doctor()
+        if media_status.get("wikimedia") == "OK" or media_status.get("internet_archive") == "OK":
+            print("[OK]\n")
+        else:
+            print("[WARN] Media providers unreachable\n")
+    except Exception as e:
+        print(f"[FAIL] {e}\n")
+
+    # 6. Configuration
+    print("Configuration")
+    try:
+        from engine.config import BASE_DIR, EMBEDDING_TIMEOUT, RERANKER_TIMEOUT
+        if BASE_DIR.exists() and EMBEDDING_TIMEOUT > 0 and RERANKER_TIMEOUT > 0:
+            print("[OK]\n")
+        else:
+            print("[FAIL] Invalid configuration values\n")
+    except Exception as e:
+        print(f"[FAIL] {e}\n")
+
+    # 7. Editorial Rules
+    print("Editorial Rules")
+    try:
+        from engine.editorial.quality_gate import FORBIDDEN_ANTI_PATTERNS
+        from engine.editorial.taxonomy import PRIMARY_DOMAINS
+        from engine.editorial.property_bridge import CANONICAL_BRIDGES
+        if FORBIDDEN_ANTI_PATTERNS and PRIMARY_DOMAINS and CANONICAL_BRIDGES:
+            print("[OK]\n")
+        else:
+            print("[FAIL] Missing editorial rule definitions\n")
+    except Exception as e:
+        print(f"[FAIL] {e}\n")
 
 
 def cmd_create_video(args):
@@ -283,6 +372,10 @@ def main():
         help="Generate timeline, subtitles, and Kdenlive projects without downloading media files",
     )
     p_cv.set_defaults(func=cmd_create_video)
+
+    # doctor command
+    p_doctor = subparsers.add_parser("doctor", help="Comprehensive health check: Embedding, Reranker, Store, Media, Config, Rules")
+    p_doctor.set_defaults(func=cmd_doctor)
 
     # retrieve command
     p_retrieve = subparsers.add_parser("retrieve", help="Query permanent knowledge using 2-stage retrieval")
