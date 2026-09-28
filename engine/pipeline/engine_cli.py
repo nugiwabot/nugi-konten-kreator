@@ -54,6 +54,115 @@ def cmd_reindex(args):
 
 
 # ==============================================================================
+# QUESTION MINING COMMAND
+# ==============================================================================
+
+def cmd_question_mine(args):
+    """Mine editorial story opportunities from a search results dataset."""
+    from pathlib import Path
+    from engine.editorial.question_mining import mine_questions
+
+    dataset_path = Path(args.dataset)
+    output_path = Path(args.output) if args.output else None
+    top_k = args.top_k
+    min_results = args.min_results
+    force_rebuild = getattr(args, "force_rebuild", False)
+    as_json = getattr(args, "json", False)
+
+    if not as_json:
+        print("\n" + "=" * 65)
+        print("  NUGI QUESTION MINING ENGINE — Human x Place x Change x WHY")
+        print("=" * 65)
+        print(f"  Dataset:      {dataset_path}")
+        print(f"  Output:       {output_path or '(console only)'}")
+        print(f"  Top-k:        {top_k}")
+        print(f"  Min cluster:  {min_results}")
+        print("=" * 65 + "\n")
+
+    # Validate dataset exists
+    if not dataset_path.exists():
+        if as_json:
+            print(json.dumps({
+                "error": f"Dataset not found: {dataset_path}",
+                "hint": "Use --dataset <PATH> to specify a valid dataset file."
+            }, ensure_ascii=False))
+        else:
+            print(f"[ERROR] Dataset not found: {dataset_path}")
+            print(f"        Use --dataset <PATH> to specify the dataset location.")
+            print(f"        Example: python -m engine.pipeline.engine_cli question-mine \\")
+            print(f"                   --dataset \"output/riset keyword.json\"")
+        sys.exit(1)
+
+    try:
+        result = mine_questions(
+            dataset_path=dataset_path,
+            output_path=output_path,
+            top_k=top_k,
+            min_cluster_size=min_results,
+            force_rebuild=force_rebuild
+        )
+    except FileNotFoundError as e:
+        if as_json:
+            print(json.dumps({"error": str(e)}, ensure_ascii=False))
+        else:
+            print(f"[ERROR] {e}")
+        sys.exit(1)
+    except ValueError as e:
+        if as_json:
+            print(json.dumps({"error": str(e)}, ensure_ascii=False))
+        else:
+            print(f"[ERROR] {e}")
+        sys.exit(1)
+
+    if as_json:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+
+    # Human-readable output
+    meta = result.get("metadata", {})
+    print(f"  Total records in dataset:  {meta.get('total_records', 0)}")
+    print(f"  Unique queries found:      {meta.get('total_queries', 0)}")
+    print(f"  Queries with HP anchor:    {meta.get('human_place_queries', 0)}")
+    print(f"  Clusters formed:           {meta.get('cluster_count', 0)}")
+    print(f"  Story opportunities:       {meta.get('opportunity_count', 0)}")
+    print(f"  Embedding available:       {'Yes' if meta.get('embedding_available') else 'No (fallback used)'}")
+
+    if output_path:
+        print(f"\n  Results saved to: {output_path}")
+
+    clusters = result.get("clusters", [])
+    if clusters:
+        print(f"\n{'─' * 65}")
+        print("  CLUSTERS DISCOVERED")
+        print(f"{'─' * 65}")
+        for cluster in clusters[:10]:
+            print(f"\n  [{cluster['cluster_id']}] {cluster['cluster_name']}")
+            print(f"  Queries: {cluster['member_count']} | Coherence: {cluster['cluster_coherence_score']:.3f}")
+            print(f"  Representative: {cluster['representative_query']}")
+            if cluster['member_queries'][1:3]:
+                for q in cluster['member_queries'][1:3]:
+                    print(f"    + {q}")
+
+    opportunities = result.get("story_opportunities", [])
+    if opportunities:
+        print(f"\n{'─' * 65}")
+        print("  STORY OPPORTUNITIES")
+        print(f"{'─' * 65}")
+        for i, opp in enumerate(opportunities[:top_k], 1):
+            print(f"\n  #{i} [{opp.get('type', '').upper()}] {opp.get('cluster_name', '')}")
+            print(f"  Angle: {opp.get('suggested_title_direction', '')}")
+            print(f"  Story Type: {opp.get('suggested_story_type', '')}")
+            if opp.get("human_place_bridge"):
+                bridge_str = " → ".join(opp["human_place_bridge"][:3])
+                print(f"  HP Bridge: {bridge_str}")
+            print(f"  Note: {opp.get('note', '')}")
+
+    print(f"\n{'=' * 65}")
+    print("  Done. Use results as research signals, not final titles.")
+    print(f"{'=' * 65}\n")
+
+
+# ==============================================================================
 # MEDIA RETRIEVAL AGENT COMMANDS
 # ==============================================================================
 
@@ -376,6 +485,47 @@ def main():
     # doctor command
     p_doctor = subparsers.add_parser("doctor", help="Comprehensive health check: Embedding, Reranker, Store, Media, Config, Rules")
     p_doctor.set_defaults(func=cmd_doctor)
+
+    # question-mine command
+    p_qm = subparsers.add_parser(
+        "question-mine",
+        help="Mine editorial story opportunities from a search results dataset (JSON/JSONL)"
+    )
+    p_qm.add_argument(
+        "--dataset",
+        type=str,
+        required=True,
+        help="Path to search results dataset file (JSON or JSONL)"
+    )
+    p_qm.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Path to save results JSON (optional, defaults to console output)"
+    )
+    p_qm.add_argument(
+        "--top-k",
+        type=int,
+        default=10,
+        help="Maximum number of story opportunities to return (default: 10)"
+    )
+    p_qm.add_argument(
+        "--min-results",
+        type=int,
+        default=1,
+        help="Minimum queries per cluster (default: 1)"
+    )
+    p_qm.add_argument(
+        "--force-rebuild",
+        action="store_true",
+        help="Force cluster rebuild even if cache is current"
+    )
+    p_qm.add_argument(
+        "--json",
+        action="store_true",
+        help="Output raw JSON instead of human-readable format"
+    )
+    p_qm.set_defaults(func=cmd_question_mine)
 
     # retrieve command
     p_retrieve = subparsers.add_parser("retrieve", help="Query permanent knowledge using 2-stage retrieval")

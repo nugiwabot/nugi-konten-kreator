@@ -1,81 +1,89 @@
-# Content DNA: Nugi
+# Content DNA: Nugi — Editorial Model v3
 
-## 1. Internal Formula & Editorial Hierarchy
+## 1. Primary Editorial Model
 
-Formula editorial internal Nugi adalah:
-> **`AI × PROPERTY × HUMAN × WHY`**
+Primary internal editorial formula Nugi:
+> **`HUMAN × PLACE × CHANGE × WHY`**
 
-Ini bukan formula matematis kaku yang harus dipaksakan ke setiap judul, melainkan kompas editorial agar seluruh konten berakar pada kehidupan manusia nyata dan berpijak pada anchor ruang fisik.
+Ini bukan sekadar template kata, melainkan model mental dan kompas kurasi kecerdasan konten (*Content Intelligence Engine*):
+
+### Definisi 4 Pilar:
+- **HUMAN:** Orang-orang, keluarga, pekerja, komunitas, perilaku (*behavior*), identitas, dan kebutuhan eksistensial manusia.
+- **PLACE:** Rumah, hunian (*shelter*), tanah, kota, lingkungan (*neighborhood*), tempat kerja, ruang publik, dan geografi fisik.
+- **CHANGE:** Sejarah, ekonomi, teknologi, AI, infrastruktur, migrasi, budaya, iklim, industri, dan kebijakan publik.
+- **WHY:** Penalaran kausal (*causal reasoning*), sistem tersembunyi (*hidden systems*), insentif ekonomi, psikologi mendalam, dan sebab-akibat historis.
+
+> [!IMPORTANT]
+> **PROPERTY SEBAGAI THREAD, BUKAN KEWAJIBAN MUTLAK:**  
+> Properti adalah benang merah (*thread/anchor*) penting di dalam ruang lingkup **PLACE**, namun **BUKAN** subjek wajib di setiap cerita. Cerita tentang geografi, tata ruang kota, psikologi tempat tinggal, sejarah kolonial pemukiman, atau masa depan ruang kerja sepenuhnya sah tanpa harus menyebut jual-beli rumah.
+
+---
+
+## 2. Editorial Hierarchy (Hierarki Editorial 5 Tingkat)
 
 ```text
-LEVEL 1 — Human Life    : Apa yang sedang berubah dalam hidup manusia?
-LEVEL 2 — Anchor        : Properti, rumah, tanah, kota, ruang, tempat tinggal, mobilitas, aset fisik.
-LEVEL 3 — Subjects      : Property, Housing, Land, Cities, Urbanization, Economy, Work, AI, History, Society.
-LEVEL 4 — Lens          : WHY (Akar struktural, psikologi motif, dan insentif tersembunyi).
-LEVEL 5 — Story         : Observation → Question → Contradiction → Evidence → Deeper Why → Revelation → Reflection.
+LEVEL 1 — Human Life    : Apa yang sedang berubah dalam hidup manusia sehari-hari?
+LEVEL 2 — Place Anchor  : Rumah, tanah, kota, lingkungan, ruang kerja, mobilitas, atau aset fisik.
+LEVEL 3 — Subjects      : Housing, Land, Cities, Urbanization, Architecture, Economy, Work, AI, Technology, History, Culture, Psychology, Future of Living.
+LEVEL 4 — Lens          : WHY (Penalaran kausal, mekanisme tersembunyi, dan motif psikologis).
+LEVEL 5 — Story         : Observation → Question → [Narrative Device] → Evidence → Context → Deeper Why → Revelation → Reflection.
 ```
 
 ---
 
-## 2. Portofolio Konten Editorial (Target Distribusi)
+## 3. Allowed Editorial Domains (Domain Editorial yang Diizinkan)
 
-Untuk menjaga konsistensi identitas dan mencegah channel berubah menjadi sekadar "akun AI acak yang sesekali membahas properti", engine menerapkan proporsi editorial internal:
-
-```text
-┌────────────────────────────────────────────────────────┐
-│  40%  PROPERTY & HOUSING                               │
-│       Harga rumah, tanah, KPR, pengembang, housing     │
-│       crisis, kepemilikan hunian, lokasi, aset fisik   │
-├────────────────────────────────────────────────────────┤
-│  25%  CITY, SPACE & ECONOMY                            │
-│       Urbanisasi, tata ruang kota, transportasi publik,│
-│       kemacetan, migrasi, supply-demand tanah          │
-├────────────────────────────────────────────────────────┤
-│  20%  AI, TECHNOLOGY & WORK                            │
-│       Remote work & disrupsi kantor, AI dan pergeseran │
-│       geografis tempat tinggal, privasi ruang privat   │
-├────────────────────────────────────────────────────────┤
-│  15%  HUMAN, HISTORY & FUTURE                          │
-│       Sejarah kepemilikan lahan, evolusi perumahan,    │
-│       psikologi rasa aman manusia, masa depan ruang    │
-└────────────────────────────────────────────────────────┘
-```
+Topik diperbolehkan hanya ketika berkontribusi untuk memahami kehidupan manusia dan/atau di mana/bagaimana manusia hidup:
+- Hunian & shelter (*homes, shelter, housing*)
+- Tanah & kepemilikan (*land, ownership, property rights*)
+- Kota, urbanisasi & tata ruang (*cities, urbanization, architecture, geography*)
+- Hubungan kerja & ruang (*relationship between work and place*)
+- Hubungan teknologi & tempat tinggal (*relationship between technology and place*)
+- Hubungan ekonomi & ruang hidup (*relationship between economy and living space*)
+- Sejarah, migrasi & infrastruktur (*history, migration, infrastructure, transportation*)
+- Masa depan ruang hidup (*future of living, AI-driven spatial reorganization*)
+- Budaya & psikologi manusia terkait ruang (*culture, human behavior, psychology of space*)
 
 ---
 
-## 3. Uji Wajib: Property / Life Anchor Test
+## 4. 10 Kriteria Uji Human–Place Anchor
 
-Setiap ide topik yang masuk ke dalam sistem **WAJIB** melewati 5 pertanyaan filter:
-
-1. **Tempat Hidup:** Apakah topik berhubungan dengan tempat manusia tinggal dan beristirahat?
-2. **Cara Bekerja:** Apakah topik berhubungan dengan bagaimana manusia mencari nafkah dan menata aktivitasnya?
-3. **Ruang & Kota:** Apakah topik berhubungan dengan kota, rumah, tanah, ruang, aset fisik, atau mobilitas?
-4. **Perubahan Hidup:** Apakah topik menjelaskan perubahan mendasar dalam cara manusia menjalani hidupnya?
-5. **Hubungan Struktural:** Apakah ada hubungan kausal dengan properti/ruang meskipun kata "properti" tidak tertulis di judul?
+Setiap ide yang diproses engine wajib memenuhi minimal **1 dari 10 kriteria Human–Place**:
+1. **A — where_humans_live:** Di mana manusia tinggal dan berlindung.
+2. **B — why_humans_live_there:** Mengapa manusia memilih tinggal di satu tempat vs tempat lain.
+3. **C — how_homes_are_shaped:** Bagaimana bentuk rumah dan hunian berevolusi.
+4. **D — how_cities_are_shaped:** Bagaimana kota terbentuk, tumbuh, dan ditata.
+5. **E — how_land_is_used:** Bagaimana tanah dimiliki, didistribusikan, dan dimanfaatkan.
+6. **F — home_work_movement:** Bagaimana mobilitas dan komuter menghubungkan rumah dan pekerjaan.
+7. **G — access_to_space:** Bagaimana akses ke ruang fisik dan keterjangkauan lahan berubah.
+8. **H — technology_changes_living_space:** Bagaimana AI/teknologi mereorganisasi geografi hidup manusia.
+9. **I — psychology_and_home:** Bagaimana kebutuhan rasa aman dan psikologi terikat pada rumah.
+10. **J — historical_systems_today:** Bagaimana sistem masa lalu membentuk lingkungan hidup hari ini.
 
 > **ATURAN MUTLAK:**  
 > Minimal **SATU** hubungan kausal yang jelas harus terbukti.  
 > Jika **TIDAK ADA HUBUNGAN SAMA SEKALI** → **REJECT / OUT OF BRAND**.
 
-### Contoh Penerapan Uji Anchor:
-- ❌ **REJECT:** *"5 AI Tools Gratis yang Wajib Kamu Coba Minggu Ini."*  
-  *(Tidak ada kaitan dengan ruang, kota, rumah, atau cara hidup manusia — hanya tutorial dangkal).*
-- ✅ **ACCEPT:** *"Kalau AI membuat pekerjaan bisa dilakukan dari mana saja, kenapa rumah di pusat kota tetap mahal?"*  
-  *(AI → remote work → geografi kota → perumahan → nilai tanah).*
-- ✅ **ACCEPT:** *"Kenapa manusia rela berutang 20 tahun untuk memiliki sepetak rumah?"*  
-  *(Rumah → psikologi rasa aman → keluarga → beban finansial → ekonomi).*
-- ✅ **ACCEPT:** *"Kenapa kota-kota besar di Indonesia selalu tumbuh melebar ke pinggiran, bukan ke atas?"*  
-  *(Kota → regulasi lahan → transportasi → perumahan tapak → sosial ekonomi).*
-
 ---
 
-## 4. Matriks Kombinasi (The 8 Bridges)
+## 5. Portofolio Distribusi Konten Seimbang
 
-1. **Matrix A (`PROPERTY × HUMAN`):** Psikologi rasa aman, kebutuhan ruang personal, dan simbol status hunian.
-2. **Matrix B (`PROPERTY × ECONOMY`):** Dinamika harga tanah, disparitas upah vs harga rumah, inflasi material, dan suku bunga.
-3. **Matrix C (`PROPERTY × CITY`):** Tata ruang, kemacetan, aglomerasi industri, dan desentralisasi pemukiman.
-4. **Matrix D (`AI × PROPERTY`):** Otomasi kantor, pergeseran minat hunian ke sub-urban, dan smart living vs privasi.
-5. **Matrix E (`AI × HUMAN`):** Nilai keahlian manusia, ketakutan akan disrupsi, dan otonomi berpikir.
-6. **Matrix F (`WORK × SPACE`):** Hubungan jarak rumah-kantor, komuter, dan barter waktu vs kenyamanan fisik.
-7. **Matrix G (`HISTORY × PROPERTY`):** Sejarah kolonial pusat kota, asal-usul sertifikat tanah, dan evolusi kampung kota.
-8. **Matrix H (`FUTURE × PROPERTY`):** Konsep hunian saat AI menangani pekerjaan rumah dan pekerjaan jarak jauh terwujud penuh.
+```text
+┌────────────────────────────────────────────────────────┐
+│  35%  HUMAN & HOUSING / SHELTER                        │
+│       Kepemilikan hunian, krisis perumahan, harga,     │
+│       psikologi rasa aman, evolusi rumah keluarga      │
+├────────────────────────────────────────────────────────┤
+│  25%  CITIES, SPACE & GEOGRAPHY                        │
+│       Urbanisasi, tata kota, transportasi, migrasi,    │
+│       ruang publik, sejarah pembentukan kawasan        │
+├────────────────────────────────────────────────────────┤
+│  25%  WORK, TECHNOLOGY, AI & LIVING SPACE              │
+│       Remote work, reorganisasi geografi kantor-rumah, │
+│       dampak AI pada nilai tempat & cara hidup         │
+├────────────────────────────────────────────────────────┤
+│  15%  HISTORY, ECONOMY & FUTURE OF LIVING              │
+│       Sistem agraria masa lalu, disparitas lahan,      │
+│       proyeksi masa depan cara manusia menetap         │
+└────────────────────────────────────────────────────────┘
+```

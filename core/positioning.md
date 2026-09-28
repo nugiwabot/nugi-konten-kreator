@@ -23,7 +23,7 @@ Ketika AI mengubah cara manusia bekerja, bagaimana hal itu mengubah tempat manus
                                 ▲
                                 │
                  Esai Filsafat  │   ★ NUGI
-                 Teknologi      │   (AI × Properti × Manusia × Why)
+                 Teknologi      │   (HUMAN × PLACE × CHANGE × WHY)
                  Akademis       │   [Membumi, Tajam, Evidence-Based]
                                 │
   Teori / Abstrak ──────────────┼────────────── Konkret / Kehidupan Nyata
@@ -40,7 +40,7 @@ Ketika AI mengubah cara manusia bekerja, bagaimana hal itu mengubah tempat manus
 
 ## 3. Matriks DNA Konten (The DNA Matrix)
 
-Content DNA internal `AI × PROPERTY × HUMAN × WHY` diimplementasikan sebagai **MATRIKS FLEKSIBEL**, bukan rumus yang dipaksakan:
+Editorial formula `HUMAN × PLACE × CHANGE × WHY` diimplementasikan sebagai **MATRIKS FLEKSIBEL**, bukan rumus yang dipaksakan (di mana properti/hunian adalah salah satu anchor penting di dalam PLACE):
 
 | Matriks | Persilangan | Pertanyaan Inti / Contoh Pembuka |
 | :--- | :--- | :--- |

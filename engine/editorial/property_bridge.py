@@ -1,11 +1,12 @@
 """
-Property Bridge Engine v2
-Discovers causal chains from general topics to space, property, housing, and cities.
-Enforces the mandatory Property/Life Anchor Test.
+Property Bridge Engine v2 (Compatibility Layer)
+Maintains backward compatibility with v2 tests and callers while linking
+to the v3 Human–Place Content Intelligence Engine.
 """
 import re
 from typing import Dict, Any, List, Optional
 
+# Canonical Bridges for Property Anchor v2
 CANONICAL_BRIDGES = [
     {
         "pattern": r"(ai agent|otomasi|automation|kecerdasan buatan|chatgpt|deepseek|model ai)",
@@ -196,3 +197,25 @@ def evaluate_property_anchor(topic: str, context: str = "") -> Dict[str, Any]:
         "bridge": bridge,
         "verdict": "PASS" if passed else "REJECT / OUT OF BRAND"
     }
+
+
+# Forward imports from human_place_engine for newer callers
+from engine.editorial.human_place_engine import (
+    find_human_place_bridge,
+    evaluate_human_place_anchor,
+    evaluate_human_place_criteria,
+    HUMAN_PLACE_CRITERIA,
+    CANONICAL_HUMAN_PLACE_BRIDGES
+)
+
+__all__ = [
+    "find_property_bridge",
+    "evaluate_property_anchor",
+    "CANONICAL_BRIDGES",
+    "COSMETIC_PATTERNS",
+    "find_human_place_bridge",
+    "evaluate_human_place_anchor",
+    "evaluate_human_place_criteria",
+    "HUMAN_PLACE_CRITERIA",
+    "CANONICAL_HUMAN_PLACE_BRIDGES"
+]
