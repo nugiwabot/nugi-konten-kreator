@@ -183,10 +183,11 @@ class MediaRanker:
 
     def _cached_embed(self, text: str) -> List[float]:
         """Embed text with in-memory cache."""
-        cache_key = text[:300]  # Key by first 300 chars
+        clean_text = text[:300]
+        cache_key = clean_text
         if cache_key in self._embedding_cache:
             return self._embedding_cache[cache_key]
-        embeddings = self.embedder.get_embeddings([text])
+        embeddings = self.embedder.get_embeddings([clean_text])
         emb = embeddings[0] if embeddings else []
         if emb:
             self._embedding_cache[cache_key] = emb
@@ -199,12 +200,13 @@ class MediaRanker:
         results: List[List[float]] = [[] for _ in texts]
 
         for i, text in enumerate(texts):
-            key = text[:300]
+            clean_text = text[:300]
+            key = clean_text
             if key in self._embedding_cache:
                 results[i] = self._embedding_cache[key]
             else:
                 to_embed_indices.append(i)
-                to_embed_texts.append(text)
+                to_embed_texts.append(clean_text)
 
         if to_embed_texts:
             new_embs = self.embedder.get_embeddings(to_embed_texts)
@@ -234,7 +236,7 @@ class MediaRanker:
             return candidates, True, ""
 
         try:
-            texts = [item.build_text_representation() for item in candidates]
+            texts = [item.build_text_representation()[:400] for item in candidates]
             rerank_results = self.reranker.rerank(
                 query=original_request,
                 documents=texts,

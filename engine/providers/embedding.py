@@ -115,27 +115,31 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                 f"Embedding server unreachable at {self.endpoint_url} and ALLOW_FALLBACK is False."
             )
         
-        payload = {
-            "model": self.model_name,
-            "input": texts
-        }
-        data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            self.endpoint_url,
-            data=data,
-            headers={"Content-Type": "application/json"}
-        )
-        
+        embs: List[List[float]] = []
+        batch_size = 2
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as response:
-                result = json.loads(response.read().decode("utf-8"))
-                # OpenAI format: {"data": [{"embedding": [...], "index": 0}, ...]}
-                data_list = sorted(result.get("data", []), key=lambda x: x.get("index", 0))
-                embs = [item["embedding"] for item in data_list]
-                self._is_available = True
-                if embs and not self._detected_dimension:
-                    self._detected_dimension = len(embs[0])
-                return embs
+            for i in range(0, len(texts), batch_size):
+                chunk = texts[i:i + batch_size]
+                payload = {
+                    "model": self.model_name,
+                    "input": chunk
+                }
+                data = json.dumps(payload).encode("utf-8")
+                req = urllib.request.Request(
+                    self.endpoint_url,
+                    data=data,
+                    headers={"Content-Type": "application/json"}
+                )
+                with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                    result = json.loads(response.read().decode("utf-8"))
+                    data_list = sorted(result.get("data", []), key=lambda x: x.get("index", 0))
+                    chunk_embs = [item["embedding"] for item in data_list]
+                    embs.extend(chunk_embs)
+
+            self._is_available = True
+            if embs and not self._detected_dimension:
+                self._detected_dimension = len(embs[0])
+            return embs
         except Exception as e:
             self._is_available = False
             logger.warning(

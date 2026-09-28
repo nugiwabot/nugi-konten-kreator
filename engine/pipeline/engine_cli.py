@@ -309,6 +309,49 @@ def cmd_media_from_script(args):
             print(f"  ❌ {ff.title[:50]} — {ff.reason}")
 
 
+def cmd_media_find(args):
+    """Find photos and videos using MediaFinder."""
+    import json
+    from pathlib import Path
+    from engine.pipeline.media_finder import MediaFinder
+
+    finder = MediaFinder()
+    query = getattr(args, "query", "") or ""
+    media = getattr(args, "media", "any")
+    era = getattr(args, "era", "auto")
+    style = getattr(args, "style", "auto")
+    count = getattr(args, "count", 8)
+    folder = getattr(args, "folder", None)
+    download = getattr(args, "download", False)
+
+    if download:
+        result = finder.find_and_download(
+            request=query,
+            media=media,
+            era=era,
+            style=style,
+            count=count,
+            folder=folder,
+        )
+    else:
+        result = finder.find(
+            request=query,
+            media=media,
+            era=era,
+            style=style,
+            count=count,
+        )
+
+    print(result.preview(max_items=count))
+
+    if getattr(args, "output", None):
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(result.to_dict(), f, indent=2, ensure_ascii=False)
+        print(f"Saved results to: {out_path}\n")
+
+
 def cmd_media_doctor(args):
     """Health check for all media retrieval services."""
     from engine.pipeline.media_pipeline import MediaPipeline
@@ -622,11 +665,55 @@ def main():
     p_mdoc = media_sub.add_parser("doctor", help="Health check: Wikimedia, Internet Archive, Embedding, Reranker")
     p_mdoc.set_defaults(func=cmd_media_doctor)
 
+    # media find (inside media group)
+    p_mfind = media_sub.add_parser("find", help="Find photos and videos with MediaFinder")
+    p_mfind.add_argument("pos_query", nargs="?", default="", help="Natural-language visual request")
+    p_mfind.add_argument("--query", "-q", dest="opt_query", type=str, default=None, help="Query option")
+    p_mfind.add_argument("--media", "-m", choices=["photo", "video", "any"], default="any", help="Media type (default: any)")
+    p_mfind.add_argument("--era", "-e", choices=["historical", "past", "present", "future", "timeless", "auto"], default="auto", help="Era hint (default: auto)")
+    p_mfind.add_argument("--style", "-s", choices=["formal", "neutral", "documentary", "archival", "cinematic", "conceptual", "auto"], default="auto", help="Visual style hint (default: auto)")
+    p_mfind.add_argument("--count", "-n", type=int, default=8, help="Number of results (default: 8)")
+    p_mfind.add_argument("--download", "-d", action="store_true", help="Download top results")
+    p_mfind.add_argument("--folder", type=str, default=None, help="Destination subfolder")
+    p_mfind.add_argument("--output", "-o", type=str, default=None, help="Path to save result JSON file")
+
+    def _mfind_wrapper(a):
+        a.query = a.opt_query or a.pos_query
+        return cmd_media_find(a)
+
+    p_mfind.set_defaults(func=_mfind_wrapper)
+
     def _media_help(args):
         p_media.print_help()
 
     p_media.set_defaults(func=_media_help)
     # ── end media command group ───────────────────────────────────────
+
+    # media-find top-level command (with 'find-media' alias)
+    p_mf = subparsers.add_parser(
+        "media-find",
+        aliases=["find-media"],
+        help="Find photos and videos using MediaFinder (photo/video, era, style, and optional download)"
+    )
+    p_mf.add_argument("--query", "-q", type=str, required=True,
+                      help="Natural-language visual request")
+    p_mf.add_argument("--media", "-m", choices=["photo", "video", "any"], default="any",
+                      help="Media type: photo | video | any (default: any)")
+    p_mf.add_argument("--era", "-e",
+                      choices=["historical", "past", "present", "future", "timeless", "auto"],
+                      default="auto", help="Era hint (default: auto)")
+    p_mf.add_argument("--style", "-s",
+                      choices=["formal", "neutral", "documentary", "archival", "cinematic", "conceptual", "auto"],
+                      default="auto", help="Visual style hint (default: auto)")
+    p_mf.add_argument("--count", "-n", type=int, default=8,
+                      help="Number of results to return (default: 8)")
+    p_mf.add_argument("--download", "-d", action="store_true",
+                      help="Download candidates to local filesystem")
+    p_mf.add_argument("--folder", type=str, default=None,
+                      help="Destination subfolder for downloads under assets/media/")
+    p_mf.add_argument("--output", "-o", type=str, default=None,
+                      help="Path to save result JSON file")
+    p_mf.set_defaults(func=cmd_media_find)
 
     args = parser.parse_args()
     if not hasattr(args, "func"):

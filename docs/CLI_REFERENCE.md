@@ -74,3 +74,45 @@ Menjalankan pipeline pra-produksi video (parsing naskah, alokasi micro-beats, pe
 ```powershell
 python -m engine.pipeline.engine_cli video --script "output/narasi-01/SCRIPT_AND_STORYBOARD.md" --out-dir "output/narasi-01/video"
 ```
+
+---
+
+## 7. Pencarian Aset Visual & Footage (`media-find`)
+
+Pencarian aset foto dan video berkualitas menggunakan modul terpadu `MediaFinder`. Mendukung penyaringan era, gaya visual (*visual style*), jenis media (*photo/video/any*), perutean penyedia otomatis (Pexafy, Wikimedia Commons, Internet Archive), dan pengunduhan batch dengan penyimpanan metadata lisensi/provenance:
+
+```powershell
+# Foto formal pekerja kantor modern (Pexafy / Stock photo)
+python -m engine.pipeline.engine_cli media-find \
+  --query "manusia bekerja di kantor modern" \
+  --media photo \
+  --era present \
+  --style formal \
+  --count 8
+
+# Footage sejarah manusia mulai menetap (Wikimedia Commons + Internet Archive)
+python -m engine.pipeline.engine_cli media-find \
+  --query "manusia mulai menetap pada zaman prasejarah" \
+  --media any \
+  --era historical \
+  --style documentary \
+  --count 8
+
+# Visual konseptual masa depan rumah dengan AI
+python -m engine.pipeline.engine_cli media-find \
+  --query "rumah masa depan dengan AI" \
+  --media photo \
+  --era future \
+  --style conceptual \
+  --count 8
+
+# Pencarian sekaligus mengunduh file ke assets/media/ dan mencatat provenance di sources.json
+python -m engine.pipeline.engine_cli media-find \
+  --query "arsip sejarah revolusi industri di pabrik" \
+  --media any \
+  --era historical \
+  --style archival \
+  --count 5 \
+  --download \
+  --folder "revolusi_industri"
+```

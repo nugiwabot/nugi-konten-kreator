@@ -82,38 +82,37 @@ class LocalRerankerProvider(RerankerProvider):
                 f"Reranker server unreachable at {self.endpoint_url} and ALLOW_FALLBACK is False."
             )
             
-        payload = {
-            "query": query,
-            "documents": documents
-        }
-        if top_n is not None:
-            payload["top_n"] = top_n
-            
-        data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            self.endpoint_url,
-            data=data,
-            headers={"Content-Type": "application/json"}
-        )
-        
+        batch_size = 5
+        formatted = []
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as response:
-                result = json.loads(response.read().decode("utf-8"))
-                # Format: {"results": [{"index": int, "relevance_score": float}, ...]}
-                results = result.get("results", [])
-                formatted = []
-                for item in results:
-                    idx = item["index"]
-                    formatted.append({
-                        "index": idx,
-                        "relevance_score": float(item.get("relevance_score", 0.0)),
-                        "document": documents[idx] if idx < len(documents) else ""
-                    })
-                formatted.sort(key=lambda x: x["relevance_score"], reverse=True)
-                if top_n is not None:
-                    formatted = formatted[:top_n]
-                self._is_available = True
-                return formatted
+            for b_idx in range(0, len(documents), batch_size):
+                chunk = documents[b_idx:b_idx + batch_size]
+                payload = {
+                    "query": query,
+                    "documents": chunk
+                }
+                data = json.dumps(payload).encode("utf-8")
+                req = urllib.request.Request(
+                    self.endpoint_url,
+                    data=data,
+                    headers={"Content-Type": "application/json"}
+                )
+                with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                    result = json.loads(response.read().decode("utf-8"))
+                    results = result.get("results", [])
+                    for item in results:
+                        orig_idx = b_idx + item["index"]
+                        formatted.append({
+                            "index": orig_idx,
+                            "relevance_score": float(item.get("relevance_score", 0.0)),
+                            "document": documents[orig_idx] if orig_idx < len(documents) else ""
+                        })
+
+            formatted.sort(key=lambda x: x["relevance_score"], reverse=True)
+            if top_n is not None:
+                formatted = formatted[:top_n]
+            self._is_available = True
+            return formatted
         except Exception as e:
             self._is_available = False
             logger.warning(
