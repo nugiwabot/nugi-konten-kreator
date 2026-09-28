@@ -40,8 +40,8 @@ STORY_TYPES = {
         "short_pipeline": [
             "HOOK — Present the thing that exists",
             "QUESTION — But nobody asks why it started",
-            "STORY — The beginning",
-            "TURN — The moment it took its form",
+            "HISTORICAL CONTEXT — The world before this existed",
+            "TURNING POINT — The moment it took its form",
             "REVELATION — What the origin tells us about now",
             "REFLECTION — Open question"
         ],
@@ -60,22 +60,21 @@ STORY_TYPES = {
         "description": "How did A become B? Documents a profound change from one state to another.",
         "narrative_device": "before_after",
         "pipeline": [
-            "COLD OPEN — State B: what exists now",
-            "QUESTION — But how was it different before?",
-            "STATE A — What existed before the transformation",
+            "OBSERVATION — What exists now in its transformed state",
+            "BEFORE STATE — What existed before the transformation",
             "FORCES OF CHANGE — What drove the transformation",
-            "CAUSAL CHAIN — The mechanics of transformation",
-            "HUMAN CONSEQUENCE — Who was affected and how",
-            "REVELATION — What the transformation reveals",
+            "TRANSFORMATION — The mechanics and turning point of change",
+            "HUMAN CONSEQUENCE — Who was affected and how daily life shifted",
+            "REVELATION — What the transformation reveals about broader systems",
             "REFLECTION — What stays the same through change?"
         ],
         "short_pipeline": [
             "HOOK — Show the 'after' state",
-            "QUESTION — But what came before?",
-            "STORY — The transformation",
-            "TURN — The pivot moment",
+            "BEFORE STATE — What existed before the change",
+            "FORCES OF CHANGE — What shifted",
+            "TRANSFORMATION — The pivot moment",
             "REVELATION — What it reveals",
-            "REFLECTION"
+            "REFLECTION — Open reflection"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -94,20 +93,20 @@ STORY_TYPES = {
         "pipeline": [
             "OBSERVATION — Ordinary phenomenon everyone experiences",
             "QUESTION — But what's actually happening underneath?",
-            "THE SURFACE — What people assume or see",
-            "THE SYSTEM — The hidden mechanism at work",
+            "SURFACE — What people assume or see on the surface",
+            "HIDDEN MECHANISM — The invisible system at work",
             "EVIDENCE — Data and facts supporting the hidden system",
-            "CONSEQUENCES — Who benefits, who doesn't",
+            "CONSEQUENCES — Who benefits, who bears the cost",
             "REVELATION — The hidden system changes your understanding",
-            "REFLECTION — Now that you see it, what will you do?"
+            "REFLECTION — Now that you see it, what does it mean for how we live?"
         ],
         "short_pipeline": [
-            "HOOK — Ordinary thing",
-            "QUESTION — But something's odd",
-            "STORY — The hidden system",
-            "TURN — The reveal",
-            "REVELATION",
-            "REFLECTION"
+            "HOOK — Ordinary thing everyone sees",
+            "QUESTION — But what's really happening?",
+            "HIDDEN MECHANISM — The unseen machine",
+            "CONSEQUENCES — Who it affects",
+            "REVELATION — The epiphany",
+            "REFLECTION — Closing question"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -120,22 +119,20 @@ STORY_TYPES = {
         "description": "Why is reality different from what people assume? The gap between expectation and truth.",
         "narrative_device": "contradiction",
         "pipeline": [
-            "COLD OPEN — The assumption everyone holds",
-            "QUESTION — But what if the opposite is true?",
-            "THE ASSUMPTION — What people believe",
-            "THE REALITY — What actually happens",
-            "WHY THE GAP EXISTS — Structural explanation",
-            "EVIDENCE — Data that confirms the gap",
-            "REVELATION — The gap reveals something important",
-            "REFLECTION — What should we believe instead?"
+            "ASSUMPTION — The common belief or expectation everyone holds",
+            "QUESTION — But what if reality contradicts the assumption?",
+            "REALITY — What actually happens in the data and field",
+            "WHY THE GAP EXISTS — Structural and psychological explanation",
+            "EVIDENCE — Rigorous facts and data confirming the contradiction",
+            "REVELATION — What this contradiction reveals about our world",
+            "REFLECTION — What should we understand instead?"
         ],
         "short_pipeline": [
             "HOOK — Common assumption",
-            "QUESTION — But wait",
-            "STORY — The contradiction",
-            "TURN — The real reason",
-            "REVELATION",
-            "REFLECTION"
+            "CONTRADICTION — Reality check and gap",
+            "WHY THE GAP EXISTS — The real structural reason",
+            "REVELATION — The perspective shift",
+            "REFLECTION — Closing thought"
         ],
         "contradiction_required": True,
         "detection_keywords": [
@@ -154,22 +151,21 @@ STORY_TYPES = {
         "description": "Why must a person trade one thing for another? Explores the real trade-offs of life.",
         "narrative_device": "trade_off",
         "pipeline": [
-            "OBSERVATION — The situation people face",
-            "QUESTION — Why must this choice be made?",
-            "OPTION A — First path and its costs",
-            "OPTION B — Second path and its costs",
-            "THE SYSTEM — Why this trade-off exists at all",
-            "HUMAN CONSEQUENCE — The emotional and physical reality",
-            "REVELATION — What the trade-off reveals about our world",
-            "REFLECTION — Is there a third path?"
+            "SITUATION — The real-world situation people face",
+            "CHOICE A — First path and its perceived benefits and costs",
+            "CHOICE B — Second path and its perceived benefits and costs",
+            "TRADE-OFF — The impossible compromise between the two",
+            "SYSTEMIC CAUSE — Why this dilemma exists at a structural level",
+            "HUMAN CONSEQUENCE — The emotional, physical, and financial toll",
+            "REVELATION — What the dilemma reveals about how society is organized",
+            "REFLECTION — Is there an unexamined third path?"
         ],
         "short_pipeline": [
             "HOOK — The impossible choice",
-            "QUESTION — Why must we choose?",
-            "STORY — The trade-off",
-            "TURN — The real reason it exists",
-            "REVELATION",
-            "REFLECTION"
+            "TRADE-OFF — Choice A vs Choice B",
+            "SYSTEMIC CAUSE — Why we must choose",
+            "REVELATION — What the trade-off means",
+            "REFLECTION — Closing thought"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -182,22 +178,20 @@ STORY_TYPES = {
         "description": "What unexpected consequence follows from an obvious change?",
         "narrative_device": "cascade_effect",
         "pipeline": [
-            "OBSERVATION — The obvious primary change",
-            "FIRST-ORDER EFFECT — What everyone expects",
-            "QUESTION — But what happens next?",
-            "SECOND-ORDER EFFECT — The unexpected consequence",
-            "THIRD-ORDER (optional) — How far it ripples",
-            "EVIDENCE — Examples and data",
-            "REVELATION — The full chain no one traced before",
-            "REFLECTION — What else might ripple from changes we're making today?"
+            "INITIAL CHANGE — The primary change or intervention",
+            "FIRST-ORDER EFFECT — The immediate and obvious consequence",
+            "QUESTION — But what unexpected ripples follow next?",
+            "SECOND-ORDER EFFECT — The unintended or hidden downstream consequence",
+            "EVIDENCE — Data and historical examples confirming the ripple effect",
+            "REVELATION — The full causal chain connecting the initial act to distant impact",
+            "REFLECTION — What second-order effects are being created by decisions today?"
         ],
         "short_pipeline": [
             "HOOK — Obvious change",
-            "QUESTION — But what happens next?",
-            "STORY — The cascade",
-            "TURN — The unexpected destination",
-            "REVELATION",
-            "REFLECTION"
+            "FIRST-ORDER EFFECT — What everyone expects",
+            "SECOND-ORDER EFFECT — The unexpected ripple",
+            "REVELATION — The full chain revealed",
+            "REFLECTION — Closing question"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -210,22 +204,21 @@ STORY_TYPES = {
         "description": "Why does this place look/work/live like this? A deep dive into a specific place.",
         "narrative_device": "spatial_mystery",
         "pipeline": [
-            "OBSERVATION — The place as it appears today",
-            "QUESTION — But why is it like this?",
-            "HISTORICAL FORCES — What shaped this place",
-            "ECONOMIC FORCES — Who had interest in forming it",
-            "HUMAN PATTERNS — Who lives/works here and why",
-            "THE PLACE TODAY — What the forces created",
-            "REVELATION — What this place reveals about broader systems",
-            "REFLECTION — What might change this place next?"
+            "OBSERVATION OF PLACE — The place as it appears and functions today",
+            "QUESTION — But why did this place take this specific form?",
+            "SPATIAL CONTEXT — How geography and spatial relationships define it",
+            "HISTORICAL/STRUCTURAL CAUSE — The forces, policies, and history that shaped it",
+            "EVIDENCE — Historical records, maps, and socioeconomic data",
+            "REVELATION — What this place reveals about human settlement and power",
+            "REFLECTION — What might reshape this place next?"
         ],
         "short_pipeline": [
-            "HOOK — The place",
-            "QUESTION — Why does it look like this?",
-            "STORY — The forces that shaped it",
-            "TURN — The hidden architect",
-            "REVELATION",
-            "REFLECTION"
+            "HOOK — The place as it stands today",
+            "QUESTION — Why did it form this way?",
+            "SPATIAL CONTEXT — Geography and history",
+            "STRUCTURAL CAUSE — The forces that shaped it",
+            "REVELATION — What this place reveals",
+            "REFLECTION — Closing thought"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -238,22 +231,21 @@ STORY_TYPES = {
         "description": "How did human living arrangements change over time?",
         "narrative_device": "timeline_progression",
         "pipeline": [
-            "OBSERVATION — The current form",
-            "QUESTION — How did it come to be this way?",
-            "EARLY FORM — The earliest known state",
-            "EVOLUTION STAGES — Key transitions through time",
-            "DRIVING FORCES — What drove each change",
-            "CURRENT STATE — Where we are now",
-            "REVELATION — The pattern across evolution",
-            "REFLECTION — Where might it evolve next?"
+            "PRESENT STATE — How human living arrangements look today",
+            "EARLIER STATE — The earliest known baseline and living pattern",
+            "TIMELINE — Key evolutionary stages across generations",
+            "FORCES OF CHANGE — Technology, ecology, and economy driving each transition",
+            "HUMAN CONSEQUENCE — How each evolutionary leap changed human behavior",
+            "REVELATION — The enduring pattern underlying all human adaptation",
+            "REFLECTION — What is the next evolutionary step in how we live?"
         ],
         "short_pipeline": [
-            "HOOK — Current form",
-            "QUESTION — But how did it start?",
-            "STORY — The evolution",
-            "TURN — The defining transformation",
-            "REVELATION",
-            "REFLECTION"
+            "HOOK — Current living form",
+            "EARLIER STATE — Where we started",
+            "TIMELINE — Key transition moments",
+            "FORCES OF CHANGE — What pushed the evolution",
+            "REVELATION — The enduring pattern",
+            "REFLECTION — Where it evolves next"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -266,22 +258,21 @@ STORY_TYPES = {
         "description": "If this trend continues, what happens to where/how humans live?",
         "narrative_device": "projection",
         "pipeline": [
-            "OBSERVATION — The current trend or force",
-            "QUESTION — If this continues, what happens?",
-            "CURRENT TRAJECTORY — Evidence of the trend",
-            "FIRST-ORDER PROJECTION — What happens directly",
-            "SECOND-ORDER PROJECTION — Unexpected consequences",
-            "HUMAN CONSEQUENCE — Who will be affected",
-            "REVELATION — The future that's already forming",
-            "REFLECTION — What could change this trajectory?"
+            "CURRENT CONDITION — The baseline state of where and how we live",
+            "EMERGING CHANGE — The signal, technology, or demographic shift emerging now",
+            "SCENARIO — The plausible trajectory if this force accelerates",
+            "SECOND-ORDER CONSEQUENCES — Unexpected impacts on communities, spaces, and work",
+            "EVIDENCE/ASSUMPTIONS — Empirical trends and critical assumptions behind the projection",
+            "REVELATION — The future living pattern that is already quietly taking root",
+            "REFLECTION — What agency do we have to shape this outcome?"
         ],
         "short_pipeline": [
-            "HOOK — The force shaping the future",
-            "QUESTION — Where does this lead?",
-            "STORY — The projection",
-            "TURN — The unexpected destination",
-            "REVELATION",
-            "REFLECTION"
+            "HOOK — Current condition and emerging signal",
+            "EMERGING CHANGE — The force gaining momentum",
+            "SCENARIO — Plausible projection",
+            "SECOND-ORDER CONSEQUENCES — Impact on human life",
+            "REVELATION — The emerging future",
+            "REFLECTION — What choice do we make today?"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -294,22 +285,21 @@ STORY_TYPES = {
         "description": "What common assumption should the audience reconsider?",
         "narrative_device": "assumption_challenge",
         "pipeline": [
-            "OBSERVATION — The widely held belief or frame",
-            "QUESTION — But what if we're thinking about it wrong?",
-            "THE FRAME — How people currently see it",
-            "THE ALTERNATIVE FRAME — A different way to see it",
-            "EVIDENCE — Why the new frame is more accurate",
-            "IMPLICATIONS — What changes if we accept the new frame",
-            "REVELATION — The reframe's broader meaning",
-            "REFLECTION — Now that you see it differently..."
+            "COMMON ASSUMPTION — The widespread mental model or conventional wisdom",
+            "QUESTION — But what if that framing blinds us to the real problem?",
+            "EVIDENCE — Empirical facts that cannot be explained by the common assumption",
+            "ALTERNATIVE INTERPRETATION — The new lens that makes sense of the anomalies",
+            "DEEPER WHY — Structural incentives and psychological roots of the old myth",
+            "REVELATION — How seeing through the new lens transforms understanding",
+            "REFLECTION — How does our everyday behavior change once the frame is broken?"
         ],
         "short_pipeline": [
-            "HOOK — Common belief",
-            "QUESTION — But what if we're wrong?",
-            "STORY — The alternative frame",
-            "TURN — Why the old frame was limiting",
-            "REVELATION",
-            "REFLECTION"
+            "HOOK — Common assumption",
+            "QUESTION — Why that assumption is flawed",
+            "ALTERNATIVE INTERPRETATION — The fresh lens",
+            "DEEPER WHY — Root reason for the old belief",
+            "REVELATION — The breakthrough insight",
+            "REFLECTION — Actionable reflection"
         ],
         "contradiction_required": False,
         "detection_keywords": [
@@ -432,6 +422,46 @@ def is_contradiction_required(story_type: str) -> bool:
     """Returns whether contradiction is required for a given story type."""
     definition = STORY_TYPES.get(story_type, {})
     return definition.get("contradiction_required", False)
+
+
+def get_script_structure(story_type: str, format_mode: str = "long") -> Dict[str, Any]:
+    """
+    Returns the dynamic script structure determined by Story Type and Narrative Device.
+    
+    Guarantees:
+    - Story Type is the source of truth.
+    - Contradiction stage is NOT forced for non-contradiction story types.
+    - Contradiction stage appears only when naturally selected (contradiction story type).
+    
+    Args:
+        story_type: Archetype key (origin, transformation, hidden_system, contradiction, etc.)
+        format_mode: 'long' (video essay, 6-12 min) or 'short' (reels/shorts, 60-90s)
+        
+    Returns:
+        dict containing story_type, narrative_device, stages, stage_names, contradiction_required,
+        has_contradiction_stage, and description.
+    """
+    st_lower = str(story_type or "hidden_system").lower().strip()
+    if st_lower not in STORY_TYPES:
+        st_lower = "hidden_system"
+
+    definition = STORY_TYPES[st_lower]
+    stages = definition["pipeline"] if format_mode == "long" else definition["short_pipeline"]
+    stage_names = [s.split(" — ")[0].strip() for s in stages]
+    has_contradiction = any("CONTRADICTION" in s.upper() for s in stage_names) or definition["contradiction_required"]
+
+    return {
+        "story_type": st_lower,
+        "story_type_name": definition["name"],
+        "narrative_device": definition["narrative_device"],
+        "narrative_device_description": NARRATIVE_DEVICES.get(definition["narrative_device"], ""),
+        "format_mode": format_mode,
+        "contradiction_required": definition["contradiction_required"],
+        "has_contradiction_stage": has_contradiction,
+        "stages": stages,
+        "stage_names": stage_names,
+        "description": definition["description"]
+    }
 
 
 def list_story_types() -> List[Dict[str, str]]:

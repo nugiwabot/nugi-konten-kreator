@@ -1,21 +1,16 @@
 """
 Editorial Fit Score Engine v3
-Implements the new 6-dimension scoring model (100 points total):
+Implements the 7-dimension scoring model (exactly 100 points total):
 
-  Human Relevance      25 pts  — Connection to human life, emotion, daily experience
-  Human–Place Anchor   20 pts  — Connection to where/how humans live (not just property)
-  WHY Depth            20 pts  — Structural/psychological root causes (Level 4–5)
-  Evidence Potential   15 pts  — Quality & credibility of available evidence
-  Story Type Fit       10 pts  — Appropriateness of story type for topic
-  Novelty               5 pts  — Original framing not found in mainstream media
+  Human Relevance       25 pts  — Connection to human life, emotion, daily experience
+  Human–Place Anchor    20 pts  — Connection to where/how humans live (not just property)
+  WHY Depth             20 pts  — Structural/psychological root causes (Level 4–5)
+  Evidence Potential    15 pts  — Quality & credibility of available evidence
+  Story Type Fit        10 pts  — Appropriateness of story type for topic
+  Novelty                5 pts  — Original framing not found in mainstream media
+  Editorial Coherence    5 pts  — Internal structural consistency across question, anchor, why, story type, and evidence
 
-Total: 95 pts + 5 pts = 100 pts
-
-CHANGES FROM v2:
-- "property_anchor" renamed to "human_place_anchor" (same max: 20 pts)
-- "story_potential" (old 10 pts) → split into "story_type_fit" (10 pts) + "novelty" trimmed (5 pts)
-- Now uses human_place_engine instead of property_bridge for anchor evaluation
-- story_type_fit requires intent classification to score accurately
+Total: 25 + 20 + 20 + 15 + 10 + 5 + 5 = 100 pts
 
 Passing thresholds:
 - human_place_anchor: minimum 10/20
@@ -32,12 +27,13 @@ DIMENSION_WEIGHTS = {
     "why_depth": 20,
     "evidence_potential": 15,
     "story_type_fit": 10,
-    "novelty": 5
+    "novelty": 5,
+    "editorial_coherence": 5
 }
 
-# Verify total sums to 100
-assert sum(DIMENSION_WEIGHTS.values()) == 95, (
-    "DIMENSION_WEIGHTS must sum to 95 (+ implicit 5 base = 100)"
+# Verify total sums to exactly 100
+assert sum(DIMENSION_WEIGHTS.values()) == 100, (
+    "DIMENSION_WEIGHTS must sum to exactly 100"
 )
 
 MIN_PASSING_SCORE = 75
@@ -183,9 +179,24 @@ def calculate_editorial_fit(idea: Dict[str, Any]) -> Dict[str, Any]:
     nov_score = min(5, nov_score)
 
     # ─────────────────────────────────────────────────────────────────────────
-    # Final Score & Gate
+    # 7. Editorial Coherence (Max 5)
+    #    Structural consistency across question, anchor, why, story type, and evidence
     # ─────────────────────────────────────────────────────────────────────────
-    total_score = hr_score + anchor_score + why_score + ev_score + st_score + nov_score
+    coherence_score = calculate_editorial_coherence(
+        idea=idea,
+        anchor_score=anchor_score,
+        why_score=why_score,
+        ev_score=ev_score,
+        st_score=st_score,
+        text_corpus=text_corpus
+    )
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Final Score & Gate (True 100 Points Model)
+    # ─────────────────────────────────────────────────────────────────────────
+    total_score = (
+        hr_score + anchor_score + why_score + ev_score + st_score + nov_score + coherence_score
+    )
 
     reasons = []
     passed = True
@@ -227,8 +238,71 @@ def calculate_editorial_fit(idea: Dict[str, Any]) -> Dict[str, Any]:
             "why_depth": {"score": why_score, "max": 20},
             "evidence_potential": {"score": ev_score, "max": 15},
             "story_type_fit": {"score": st_score, "max": 10},
-            "novelty": {"score": nov_score, "max": 5}
+            "novelty": {"score": nov_score, "max": 5},
+            "editorial_coherence": {"score": coherence_score, "max": 5}
         },
         "reasons": reasons,
         "anchor_details": anchor_eval
     }
+
+
+def calculate_editorial_coherence(
+    idea: Dict[str, Any],
+    anchor_score: int,
+    why_score: int,
+    ev_score: int,
+    st_score: int,
+    text_corpus: str = ""
+) -> int:
+    """
+    Measures structural and editorial coherence (Max 5 pts) across:
+    - human question
+    - Human–Place relationship
+    - WHY depth
+    - story type & narrative device consistency
+    - evidence & revelation
+    """
+    coherence = 0
+
+    # 1. Human Question / Premise Coherence (1 pt)
+    question = str(idea.get("human_question", idea.get("title", ""))).strip()
+    if len(question) >= 8:
+        coherence += 1
+
+    # 2. Human-Place Grounding (1 pt)
+    has_hp = (
+        anchor_score >= MIN_HUMAN_PLACE_ANCHOR or
+        bool(idea.get("anchor_concept")) or
+        bool(idea.get("place_connection")) or
+        bool(idea.get("property_connection"))
+    )
+    if has_hp:
+        coherence += 1
+
+    # 3. WHY & Revelation Alignment (1 pt)
+    has_why = bool(idea.get("deeper_why")) or why_score >= 14
+    has_rev = bool(idea.get("core_revelation", idea.get("core_insight", ""))) or (
+        any(k in text_corpus for k in ["revelasi", "epifani", "akar", "kesimpulan"])
+    )
+    if has_why and has_rev:
+        coherence += 1
+
+    # 4. Story Type & Narrative Device Consistency (1 pt)
+    story_type = str(idea.get("story_type", "")).lower().strip()
+    has_contradiction = bool(idea.get("contradiction", ""))
+    if story_type == "contradiction":
+        if has_contradiction:
+            coherence += 1
+    elif story_type:
+        coherence += 1
+    else:
+        if st_score >= 5:
+            coherence += 1
+
+    # 5. Evidence Grounding Coherence (1 pt)
+    sources = idea.get("sources", idea.get("source_candidates", idea.get("evidence_needed", [])))
+    if sources and len(str(sources).strip()) > 5 and ev_score >= MIN_EVIDENCE_POTENTIAL:
+        coherence += 1
+
+    return min(5, max(0, coherence))
+

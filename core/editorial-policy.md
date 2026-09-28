@@ -11,7 +11,7 @@ Setiap rancangan konten (ide, dossier riset, maupun script) wajib lolos dari 8 g
 ```text
 [1. BRAND FIT]          → Apakah selaras dengan worldview & identitas Nugi?
          ↓
-[2. ANCHOR TEST]        → Apakah ada hubungan kausal natural dengan ruang/properti/kota?
+[2. HUMAN–PLACE ANCHOR] → Apakah ada hubungan kausal natural dengan cara/tempat hidup manusia?
          ↓
 [3. HUMAN RELEVANCE]    → Apakah menyentuh emosi, keresahan, atau keputusan hidup nyata?
          ↓
@@ -29,8 +29,8 @@ Setiap rancangan konten (ide, dossier riset, maupun script) wajib lolos dari 8 g
 ### Rincian Gerbang Kualitas:
 1. **Brand Fit:**  
    Menolak mentalitas reposter berita. Setiap konten harus mencerminkan persona Nugi: tenang, tajam, reflektif, dan berbasis pengamatan inderawi.
-2. **Property/Life Anchor:**  
-   Wajib memiliki minimal satu jembatan kausal struktural ke rumah, tanah, kota, ruang kerja, atau mobilitas.
+2. **Human–Place Anchor:**  
+   Wajib memenuhi minimal satu dari 10 kriteria Human–Place (rumah, hunian, tanah, kota, ruang kerja, mobilitas, sejarah, atau psikologi ruang). Properti adalah thread penting di dalam Place, bukan kewajiban mutlak.
 3. **Human Relevance:**  
    Menghindari topik teknologi atau ekonomi yang semata-mata teoritis. Pertanyaan panduan: *"Apa dampaknya bagi hidup audiens besok pagi?"*
 4. **Evidence Check:**  

@@ -155,7 +155,7 @@ def _get_embeddings_batch(
     embedding_provider: Any,
     batch_size: int = 5
 ) -> List[List[float]]:
-    """Embed texts in small batches to avoid timeout."""
+    """Embed texts in batches to balance speed and stability."""
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i:i + batch_size]
@@ -168,18 +168,82 @@ def _get_embeddings_batch(
     return all_embeddings
 
 
+def calculate_adaptive_threshold(
+    embeddings: List[List[float]],
+    min_clamp: float = 0.12,
+    max_clamp: float = 0.65,
+    fallback: float = 0.30
+) -> float:
+    """
+    Derives an adaptive cosine distance clustering threshold from embedding distributions.
+    
+    Strategy:
+    - Analyzes pairwise cosine distances among valid vectors.
+    - Small datasets (< 3 items) or missing vectors fallback to safe baseline.
+    - Analyzes distance percentiles and variance: detects natural elbow/gap separating
+      dense intra-cluster pairs from sparse inter-cluster pairs.
+    - Clamps output within [min_clamp, max_clamp] to guarantee stable clustering.
+    """
+    valid = [e for e in embeddings if e and any(x != 0.0 for x in e)]
+    if len(valid) < 3:
+        return fallback
+
+    distances = []
+    for i in range(len(valid)):
+        for j in range(i + 1, len(valid)):
+            d = _cosine_distance(valid[i], valid[j])
+            distances.append(d)
+
+    if not distances:
+        return fallback
+
+    distances.sort()
+    n = len(distances)
+
+    # Statistical properties
+    mean_d = sum(distances) / n
+    variance = sum((d - mean_d) ** 2 for d in distances) / n
+    std_d = math.sqrt(variance)
+
+    # Look for elbow / gap in the lower-to-middle range (15th to 60th percentile)
+    start_idx = max(0, int(0.15 * n))
+    end_idx = min(n - 1, int(0.60 * n))
+
+    best_jump = 0.0
+    jump_threshold = None
+
+    for k in range(start_idx, end_idx):
+        jump = distances[k + 1] - distances[k]
+        if jump > best_jump and jump > 0.03:
+            best_jump = jump
+            jump_threshold = distances[k] + (jump / 2.0)
+
+    if jump_threshold is not None:
+        derived = jump_threshold
+    else:
+        # Statistical fallback: weighted average between 30th percentile and mean - 0.5 * std
+        p30 = distances[int(0.30 * n)]
+        stat_target = max(0.12, mean_d - 0.5 * std_d)
+        derived = (p30 + stat_target) / 2.0
+
+    derived_clamped = max(min_clamp, min(max_clamp, derived))
+    return round(derived_clamped, 4)
+
+
 def agglomerative_cluster(
     items: List[str],
     embeddings: List[List[float]],
-    threshold: float = 0.35
+    threshold: Optional[float] = None,
+    adaptive: bool = True
 ) -> List[List[int]]:
     """
-    Simple agglomerative (single-linkage) clustering by cosine distance.
+    Agglomerative (average-linkage) clustering by cosine distance.
     
     Args:
         items: Text items being clustered
         embeddings: Pre-computed embedding vectors
-        threshold: Distance threshold for cluster membership
+        threshold: Distance threshold for cluster membership (overrides adaptive when provided)
+        adaptive: If True and threshold is None, dynamically derives threshold from embeddings
         
     Returns:
         List of clusters, each cluster is a list of indices into items
@@ -187,12 +251,22 @@ def agglomerative_cluster(
     n = len(items)
     if n == 0:
         return []
+    if n == 1:
+        return [[0]]
+
+    # Determine effective threshold
+    if threshold is not None:
+        effective_threshold = float(threshold)
+    elif adaptive:
+        effective_threshold = calculate_adaptive_threshold(embeddings)
+    else:
+        effective_threshold = 0.30
 
     clusters: List[List[int]] = [[i] for i in range(n)]
 
     def cluster_representative(cluster_indices: List[int]) -> List[float]:
         """Average embedding of cluster members."""
-        vecs = [embeddings[i] for i in cluster_indices if embeddings[i]]
+        vecs = [embeddings[i] for i in cluster_indices if i < len(embeddings) and embeddings[i]]
         if not vecs:
             return []
         dim = len(vecs[0])
@@ -203,7 +277,7 @@ def agglomerative_cluster(
     while merged:
         merged = False
         best_pair = None
-        best_dist = threshold
+        best_dist = effective_threshold
 
         for i in range(len(clusters)):
             for j in range(i + 1, len(clusters)):
@@ -433,10 +507,13 @@ def mine_questions(
     min_cluster_size: int = 1,
     embedding_provider: Optional[Any] = None,
     reranker_provider: Optional[Any] = None,
-    force_rebuild: bool = False
+    force_rebuild: bool = False,
+    threshold: Optional[float] = None,
+    adaptive: bool = True,
+    max_queries: Optional[int] = None
 ) -> Dict[str, Any]:
     """
-    Full question mining pipeline.
+    Full question mining pipeline with adaptive and configurable clustering.
     
     Args:
         dataset_path: Path to search results dataset (JSON/JSONL)
@@ -446,6 +523,9 @@ def mine_questions(
         embedding_provider: Optional pre-instantiated embedding provider
         reranker_provider: Optional pre-instantiated reranker provider
         force_rebuild: Force cluster rebuild even if cache is current
+        threshold: Optional explicit cosine distance threshold (overrides adaptive)
+        adaptive: Whether to derive threshold automatically when threshold is None
+        max_queries: Optional cap on number of queries to cluster (useful for smoke tests)
         
     Returns:
         dict with: queries, clusters, story_opportunities, metadata
@@ -472,8 +552,12 @@ def mine_questions(
 
     cached = load_cache(cache_path) if not force_rebuild else None
     if cached and cached.get("fingerprint") == fingerprint:
-        logger.info(f"Using cached results (fingerprint: {fingerprint})")
-        return cached
+        # If user explicitly overrode threshold or max_queries, ensure cached settings match
+        cached_meta = cached.get("metadata", {})
+        cached_thresh = cached_meta.get("clustering_threshold")
+        if (threshold is None or cached_thresh == threshold) and (max_queries is None):
+            logger.info(f"Using cached results (fingerprint: {fingerprint})")
+            return cached
 
     # ── Step 3: Initialize providers ─────────────────────────────────────
     if embedding_provider is None:
@@ -513,6 +597,9 @@ def mine_questions(
         human_place_filtered = queries
         logger.warning("No queries passed Human–Place filter — using all queries for clustering")
 
+    if max_queries is not None and max_queries > 0:
+        human_place_filtered = human_place_filtered[:max_queries]
+
     try:
         embeddings = _get_embeddings_batch(human_place_filtered, embedding_provider)
         # Filter out empty embeddings
@@ -528,8 +615,23 @@ def mine_questions(
         valid_queries = human_place_filtered
         valid_embeddings = [[]] * len(human_place_filtered)
 
-    # ── Step 6: Cluster ───────────────────────────────────────────────────
-    raw_clusters = agglomerative_cluster(valid_queries, valid_embeddings, threshold=0.35)
+    # ── Step 6: Cluster (Adaptive or Configured) ───────────────────────────
+    if threshold is not None:
+        effective_threshold = float(threshold)
+        threshold_source = "manual_override"
+    elif adaptive:
+        effective_threshold = calculate_adaptive_threshold(valid_embeddings)
+        threshold_source = "adaptive"
+    else:
+        effective_threshold = 0.30
+        threshold_source = "default"
+
+    raw_clusters = agglomerative_cluster(
+        valid_queries,
+        valid_embeddings,
+        threshold=effective_threshold,
+        adaptive=False
+    )
 
     # Filter by minimum size
     raw_clusters = [c for c in raw_clusters if len(c) >= min_cluster_size]
@@ -570,7 +672,12 @@ def mine_questions(
             "cluster_count": len(enriched_clusters),
             "opportunity_count": len(top_opportunities),
             "embedding_available": bool(valid_embeddings and valid_embeddings[0]),
-            "clustering_threshold": 0.35
+            "clustering_method": "agglomerative_cosine",
+            "adaptive_threshold": effective_threshold,
+            "clustering_threshold": effective_threshold,
+            "threshold_source": threshold_source,
+            "query_count": len(queries),
+            "embedding_model": getattr(embedding_provider, "model", "local-embedding")
         }
     }
 

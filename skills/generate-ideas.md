@@ -62,7 +62,7 @@ story_type: optional string (origin | transformation | hidden_system | contradic
 11. FIT SCORE v3 & QUALITY GATE
     Hitung skor fit (skala 100, min 75) menggunakan model v3:
     Human Relevance (25) + Human-Place Anchor (20) + WHY Depth (20) +
-    Evidence (15) + Story Type Fit (10) + Novelty (5) = 100
+    Evidence (15) + Story Type Fit (10) + Novelty (5) + Editorial Coherence (5) = 100
     Validasi terhadap 12 Hard Rejection Rules.
 ```
 
@@ -113,6 +113,7 @@ story_type: optional string (origin | transformation | hidden_system | contradic
   - Evidence Potential: [X/15]
   - Story Type Fit: [X/10]
   - Novelty: [X/5]
+  - Editorial Coherence: [X/5]
 - **Quality Gate:** [APPROVED / REVISE / REJECTED]
 ```
 

@@ -152,29 +152,81 @@ def test_fit_score_dimensions_correct():
     result = calculate_editorial_fit(idea)
     breakdown = result["breakdown"]
 
-    # V3 dimension names
+    # V3 dimension names (7 dimensions totaling 100)
     assert "human_relevance" in breakdown
-    assert "human_place_anchor" in breakdown  # NEW (was property_anchor)
+    assert "human_place_anchor" in breakdown
     assert "why_depth" in breakdown
     assert "evidence_potential" in breakdown
-    assert "story_type_fit" in breakdown   # NEW (was story_potential)
+    assert "story_type_fit" in breakdown
     assert "novelty" in breakdown
+    assert "editorial_coherence" in breakdown
 
     # Old dimension names must NOT be present
     assert "property_anchor" not in breakdown
     assert "story_potential" not in breakdown
 
-    # Max values must match v3 model
+    # Max values must match v3 true 100 model
     assert breakdown["human_relevance"]["max"] == 25
     assert breakdown["human_place_anchor"]["max"] == 20
     assert breakdown["why_depth"]["max"] == 20
     assert breakdown["evidence_potential"]["max"] == 15
     assert breakdown["story_type_fit"]["max"] == 10
     assert breakdown["novelty"]["max"] == 5
+    assert breakdown["editorial_coherence"]["max"] == 5
 
-    # Total must be 100
+    # DIMENSION_WEIGHTS and breakdown maximums must sum to exactly 100
+    assert sum(DIMENSION_WEIGHTS.values()) == 100
     total_max = sum(d["max"] for d in breakdown.values())
-    assert total_max == 95  # 95 computed + 5 implicit base in design
+    assert total_max == 100
+
+
+def test_fit_score_maximum_possible_is_100():
+    """An ideal topic with full marks across all 7 dimensions must reach exactly 100."""
+    ideal_idea = {
+        "title": "Kenapa manusia rela berutang puluhan tahun demi memiliki sepetak rumah tapak?",
+        "human_question": "Kenapa keluarga muda rela mengorbankan gaji demi rasa aman tempat tinggal?",
+        "contradiction": "Menyewa jauh lebih murah di atas kertas, tapi masyarakat tetap berbondong-bondong KPR",
+        "story_type": "contradiction",
+        "core_revelation": "Rumah bukan instrumen finansial, melainkan benteng pertahanan psikologis teritorial",
+        "deeper_why": "Struktur hukum agraria, ketiadaan pensiun, dan psikologi purba memaksa tanah jadi pelindung",
+        "place_connection": "kebutuhan hunian → psikologi teritorial → hak milik tanah",
+        "anchor_concept": "kepemilikan tanah dan hunian",
+        "sources": ["BPS Survei Rumah Tangga 2026", "Bank Indonesia SHPR", "World Bank Urban Report"]
+    }
+    result = calculate_editorial_fit(ideal_idea)
+    assert result["total_score"] == 100
+    assert result["passed"] is True
+    assert result["verdict"] == "APPROVED"
+    assert result["breakdown"]["editorial_coherence"]["score"] == 5
+    assert sum(d["score"] for d in result["breakdown"].values()) == 100
+
+
+def test_editorial_coherence_contributes_max_5():
+    """Editorial coherence must contribute between 0 and 5 points."""
+    # Complete, coherent idea
+    coherent_idea = {
+        "title": "Kapan manusia mulai menetap di satu tempat?",
+        "human_question": "Apa yang membuat manusia nomaden memilih membangun rumah permanen?",
+        "core_revelation": "Menetap adalah tentang kontrol ruang dan pertahanan sosial",
+        "deeper_why": "Struktur penguasaan lahan adalah fondasi hukum pertama",
+        "story_type": "origin",
+        "anchor_concept": "pemukiman pertama manusia",
+        "sources": ["Jurnal Arkeologi Oxford", "Yuval Harari"]
+    }
+    res_coherent = calculate_editorial_fit(coherent_idea)
+    coherence = res_coherent["breakdown"]["editorial_coherence"]["score"]
+    assert 0 <= coherence <= 5
+    assert coherence == 5
+
+    # Bare minimal idea without deeper why, sources, or anchor
+    bare_idea = {
+        "title": "Ide Singkat",
+        "human_question": "Apa kabar?"
+    }
+    res_bare = calculate_editorial_fit(bare_idea)
+    coherence_bare = res_bare["breakdown"]["editorial_coherence"]["score"]
+    assert 0 <= coherence_bare <= 5
+    assert coherence_bare < 5
 
 
 def test_fit_score_minimum_constants():

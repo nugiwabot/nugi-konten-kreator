@@ -18,6 +18,9 @@ from engine.editorial.question_mining import (
     extract_queries,
     extract_documents,
     agglomerative_cluster,
+    calculate_adaptive_threshold,
+    validate_clusters_with_reranker,
+    mine_questions,
     _generate_cluster_name,
     _reformulate_as_why_question,
     load_cache,
@@ -279,3 +282,171 @@ def test_dataset_read_only(tmp_path):
 
     new_fingerprint = _compute_file_fingerprint(path)
     assert original_fingerprint == new_fingerprint, "Dataset file was modified!"
+
+
+# ===========================================================================
+# Adaptive & Configurable Clustering Tests (v3)
+# ===========================================================================
+
+def test_adaptive_threshold_empty_and_small_dataset():
+    """Empty or very small datasets should return the safe fallback threshold (0.30)."""
+    assert calculate_adaptive_threshold([]) == 0.30
+    assert calculate_adaptive_threshold([[1.0, 0.0]]) == 0.30
+    assert calculate_adaptive_threshold([[1.0, 0.0], [0.0, 1.0]]) == 0.30
+
+
+def test_adaptive_threshold_distribution_sensitivity():
+    """Different embedding distance distributions must produce different adaptive thresholds."""
+    # Distribution A: highly similar / tightly correlated vectors (very small distances)
+    tight_embeddings = [
+        [1.0, 0.01, 0.0, 0.0],
+        [0.99, 0.02, 0.0, 0.0],
+        [0.98, 0.03, 0.0, 0.0],
+        [0.99, 0.01, 0.0, 0.0],
+        [1.0, 0.02, 0.0, 0.0]
+    ]
+    thresh_tight = calculate_adaptive_threshold(tight_embeddings)
+
+    # Distribution B: widely dispersed / orthogonal vectors
+    dispersed_embeddings = [
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+    ]
+    thresh_dispersed = calculate_adaptive_threshold(dispersed_embeddings)
+
+    assert thresh_tight < thresh_dispersed
+    assert thresh_tight >= 0.12
+    assert thresh_dispersed <= 0.65
+
+
+def test_adaptive_clustering_clearly_separated_clusters():
+    """Adaptive clustering should naturally separate distinct semantic domains."""
+    items = [
+        "rumah murah Jakarta",
+        "beli rumah KPR",
+        "harga tanah permukiman",
+        "algoritma AI transformer",
+        "large language model agent",
+        "deep learning neural network"
+    ]
+    # Synthetic embeddings: 3 housing vectors near [1, 0], 3 AI vectors near [0, 1]
+    embeddings = [
+        [1.0, 0.05],
+        [0.98, 0.08],
+        [0.95, 0.10],
+        [0.05, 1.0],
+        [0.08, 0.97],
+        [0.10, 0.95]
+    ]
+    clusters = agglomerative_cluster(items, embeddings, threshold=None, adaptive=True)
+    # Must form 2 separate clusters
+    assert len(clusters) == 2
+
+    # Group 1 must contain indices 0, 1, 2; Group 2 must contain 3, 4, 5
+    cluster_0 = set(clusters[0])
+    cluster_1 = set(clusters[1])
+    housing_set = {0, 1, 2}
+    ai_set = {3, 4, 5}
+    assert (cluster_0 == housing_set and cluster_1 == ai_set) or (cluster_0 == ai_set and cluster_1 == housing_set)
+
+
+def test_clustering_manual_threshold_override():
+    """Manual threshold override must bypass adaptive derivation."""
+    items = ["item_a", "item_b", "item_c", "item_d"]
+    # Moderately separated embeddings (distances ~ 0.29)
+    embeddings = [
+        [1.0, 0.0],
+        [0.95, 0.3],
+        [0.90, 0.4],
+        [0.85, 0.5]
+    ]
+
+    # Extreme low threshold: nothing merges
+    strict_clusters = agglomerative_cluster(items, embeddings, threshold=0.001)
+    assert len(strict_clusters) == 4
+
+    # Extreme high threshold: everything merges into 1 cluster
+    loose_clusters = agglomerative_cluster(items, embeddings, threshold=0.999)
+    assert len(loose_clusters) == 1
+    assert len(loose_clusters[0]) == 4
+
+
+def test_clustering_deterministic_behavior():
+    """Clustering must be completely deterministic for identical inputs."""
+    items = [f"query_{i}" for i in range(10)]
+    embeddings = [[float(i % 3 == 0), float(i % 3 == 1), float(i % 3 == 2)] for i in range(10)]
+
+    run1 = agglomerative_cluster(items, embeddings, threshold=0.25)
+    run2 = agglomerative_cluster(items, embeddings, threshold=0.25)
+    assert run1 == run2
+
+    run_adaptive_1 = agglomerative_cluster(items, embeddings, threshold=None, adaptive=True)
+    run_adaptive_2 = agglomerative_cluster(items, embeddings, threshold=None, adaptive=True)
+    assert run_adaptive_1 == run_adaptive_2
+
+
+def test_validate_clusters_with_reranker_mock():
+    """Reranker validation enriches and sorts cluster items."""
+    class DummyReranker:
+        def rerank(self, query, documents, top_n=None):
+            return [{"document": doc, "relevance_score": 0.95 - (i * 0.1)} for i, doc in enumerate(documents)]
+
+    clusters = [[0, 1], [2]]
+    items = ["kenapa rumah mahal di Jakarta", "harga rumah pinggiran kota", "AI dalam arsitektur kota"]
+    validated = validate_clusters_with_reranker(clusters, items, DummyReranker())
+
+    assert len(validated) == 2
+    assert validated[0]["cluster_id"] == "cluster_00"
+    assert "cluster_coherence_score" in validated[0]
+    assert validated[0]["member_count"] == 2
+    assert validated[0]["representative_query"] in items
+
+
+def test_mine_questions_metadata_and_threshold_source(tmp_path):
+    """mine_questions must expose adaptive and override threshold metadata."""
+    class DummyEmbeddingProvider:
+        model = "test-mock-embedder"
+        def get_embeddings(self, texts):
+            return [[1.0, 0.0] if "rumah" in t else [0.0, 1.0] for t in texts]
+
+    class DummyRerankerProvider:
+        def rerank(self, query, documents, top_n=None):
+            return [{"document": doc, "relevance_score": 0.88} for doc in documents]
+
+    records = [
+        {"query": "kenapa harga rumah di kota mahal"},
+        {"query": "kapan manusia mulai tinggal di rumah"},
+        {"query": "bagaimana perkembangan kawasan kota modern"}
+    ]
+    path = _make_json_dataset(records, tmp_path)
+
+    # 1. Run adaptive
+    res_adaptive = mine_questions(
+        dataset_path=path,
+        embedding_provider=DummyEmbeddingProvider(),
+        reranker_provider=DummyRerankerProvider(),
+        force_rebuild=True,
+        threshold=None,
+        adaptive=True
+    )
+    meta_adaptive = res_adaptive["metadata"]
+    assert meta_adaptive["clustering_method"] == "agglomerative_cosine"
+    assert meta_adaptive["threshold_source"] == "adaptive"
+    assert isinstance(meta_adaptive["adaptive_threshold"], float)
+    assert meta_adaptive["query_count"] == 3
+    assert meta_adaptive["embedding_model"] == "test-mock-embedder"
+
+    # 2. Run manual override
+    res_override = mine_questions(
+        dataset_path=path,
+        embedding_provider=DummyEmbeddingProvider(),
+        reranker_provider=DummyRerankerProvider(),
+        force_rebuild=True,
+        threshold=0.45
+    )
+    meta_override = res_override["metadata"]
+    assert meta_override["threshold_source"] == "manual_override"
+    assert meta_override["clustering_threshold"] == 0.45
+

@@ -12,6 +12,7 @@ from engine.editorial.story_type import (
     classify_story_type,
     get_narrative_device,
     is_contradiction_required,
+    get_script_structure,
     list_story_types,
     STORY_TYPES,
     NARRATIVE_DEVICES
@@ -220,3 +221,65 @@ def test_classify_result_structure():
     ]
     for field in required:
         assert field in result, f"Missing field: {field}"
+
+
+# ===========================================================================
+# Dynamic script structure generation
+# ===========================================================================
+
+def test_get_script_structure_origin():
+    """Origin story must follow origin progression without contradiction."""
+    struct = get_script_structure("origin", "long")
+    assert struct["story_type"] == "origin"
+    assert struct["narrative_device"] == "mystery_reveal"
+    assert struct["contradiction_required"] is False
+    assert struct["has_contradiction_stage"] is False
+    assert "CONTRADICTION" not in struct["stage_names"]
+    expected_stages = [
+        "OBSERVATION", "QUESTION", "HISTORICAL CONTEXT",
+        "TURNING POINT", "CAUSAL CHAIN", "REVELATION", "REFLECTION"
+    ]
+    assert struct["stage_names"] == expected_stages
+
+
+def test_get_script_structure_all_non_contradiction_types():
+    """All 9 non-contradiction story types must NOT have a contradiction stage."""
+    non_contradiction_types = [
+        "origin", "transformation", "hidden_system", "human_dilemma",
+        "second_order", "place", "evolution", "future", "reframe"
+    ]
+    for st in non_contradiction_types:
+        long_struct = get_script_structure(st, "long")
+        assert long_struct["contradiction_required"] is False, f"{st} should not require contradiction"
+        assert long_struct["has_contradiction_stage"] is False, f"{st} should not have contradiction stage"
+        assert not any("contradiction" in s.lower() for s in long_struct["stages"]), (
+            f"Stage in {st} contains contradiction"
+        )
+
+        short_struct = get_script_structure(st, "short")
+        assert short_struct["contradiction_required"] is False
+        assert short_struct["has_contradiction_stage"] is False
+        assert not any("contradiction" in s.lower() for s in short_struct["stages"])
+
+
+def test_get_script_structure_contradiction_type():
+    """Contradiction story type MUST have contradiction stage and required=True."""
+    long_struct = get_script_structure("contradiction", "long")
+    assert long_struct["story_type"] == "contradiction"
+    assert long_struct["narrative_device"] == "contradiction"
+    assert long_struct["contradiction_required"] is True
+    assert long_struct["has_contradiction_stage"] is True
+    assert any("contradiction" in s.lower() for s in long_struct["stages"])
+
+    short_struct = get_script_structure("contradiction", "short")
+    assert short_struct["contradiction_required"] is True
+    assert short_struct["has_contradiction_stage"] is True
+
+
+def test_get_script_structure_fallback():
+    """Unknown story type falls back gracefully to hidden_system."""
+    struct = get_script_structure("non_existent_type")
+    assert struct["story_type"] == "hidden_system"
+    assert struct["contradiction_required"] is False
+    assert struct["has_contradiction_stage"] is False
+

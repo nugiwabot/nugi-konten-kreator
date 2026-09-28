@@ -40,7 +40,7 @@ graph TD
 - `human_place_engine.py`: Uji anchor 10 kriteria Human–Place dan deteksi rantai kausal kanonikal.
 - `story_type.py`: Klasifikasi ke dalam 10 arketipe narasi beserta seleksi *narrative device* yang alami (kontradiksi bukan syarat wajib).
 - `revelation_engine.py`: Penilai kualitas dan generator cetak biru momen epifani dengan penegakan rantai kausal dan penolakan kalimat klise AI.
-- `fit_score.py`: Penghitung skor editorial fit multi-dimensi.
+- `fit_score.py`: Penghitung skor editorial fit 7-dimensi tepat 100 poin (Human Relevance 25, Human–Place Anchor 20, WHY Depth 20, Evidence 15, Story Type Fit 10, Novelty 5, Editorial Coherence 5).
 - `quality_gate.py`: 8 gerbang kualitas wajib dan 12 aturan penolakan mutlak (*hard rejections*).
 
 ### B. Ingestion & Retrieval (`engine/ingestion/` & `engine/providers/`)
@@ -50,6 +50,6 @@ graph TD
 
 ### C. Pipeline Runner & CLI (`engine/pipeline/`)
 - `engine_cli.py`: Antarmuka baris perintah (*unified CLI*) untuk mengoperasikan seluruh engine.
-- `question_mining.py`: Ekstraksi pertanyaan dan klasterisasi semantik dari dataset eksternal opsional (`riset keyword.json`).
+- `question_mining.py`: Ekstraksi pertanyaan dan klasterisasi semantik adaptif (analisis distribusi jarak cosine + manual override + validasi reranker) dari dataset eksternal opsional (`riset keyword.json`).
 - `research_runner.py`: Eksekusi riset terstruktur dengan pemisahan epistemik tegas antara fakta terverifikasi (*evidence*) dan klaim/opini (*claims*).
 - `video_pipeline.py`: Perencanaan produksi video (parsing script, alokasi micro-beats, spesifikasi visual, SRT, dan export proyek Kdenlive).

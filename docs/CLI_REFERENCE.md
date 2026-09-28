@@ -20,16 +20,19 @@ python -m engine.pipeline.engine_cli doctor
 
 ---
 
-## 2. Perintah Ekstraksi Pertanyaan (`mine`)
+## 2. Perintah Ekstraksi Pertanyaan (`mine` / `question-mine`)
 
-Mengekstraksi dan mengelompokkan pertanyaan dari dataset eksternal opsional (`riset keyword.json`):
+Mengekstraksi dan mengelompokkan pertanyaan dari dataset eksternal opsional (`riset keyword.json`) menggunakan klasterisasi semantik adaptif (atau override manual) dan validasi reranker:
 
 ```powershell
-# Ekstraksi dengan jalur file default
+# Ekstraksi dengan jalur file default (menggunakan adaptive threshold otomatis)
 python -m engine.pipeline.engine_cli mine
 
-# Ekstraksi dari file spesifik dengan jumlah klaster tertentu
-python -m engine.pipeline.engine_cli mine --dataset "output/riset keyword.json" --clusters 10
+# Ekstraksi dari file spesifik dengan override threshold jarak cosine manual
+python -m engine.pipeline.engine_cli mine --dataset "output/riset keyword.json" --threshold 0.35 --top-k 10
+
+# Menonaktifkan kalkulasi adaptive threshold (menggunakan fallback default 0.30)
+python -m engine.pipeline.engine_cli mine --dataset "output/riset keyword.json" --no-adaptive --force-rebuild
 ```
 
 ---

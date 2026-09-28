@@ -93,13 +93,20 @@ def cmd_question_mine(args):
             print(f"                   --dataset \"output/riset keyword.json\"")
         sys.exit(1)
 
+    threshold = getattr(args, "threshold", None)
+    adaptive = not getattr(args, "no_adaptive", False)
+    max_queries = getattr(args, "max_queries", None)
+
     try:
         result = mine_questions(
             dataset_path=dataset_path,
             output_path=output_path,
             top_k=top_k,
             min_cluster_size=min_results,
-            force_rebuild=force_rebuild
+            force_rebuild=force_rebuild,
+            threshold=threshold,
+            adaptive=adaptive,
+            max_queries=max_queries
         )
     except FileNotFoundError as e:
         if as_json:
@@ -120,9 +127,15 @@ def cmd_question_mine(args):
 
     # Human-readable output
     meta = result.get("metadata", {})
+    thresh_val = meta.get("adaptive_threshold", meta.get("clustering_threshold", "N/A"))
+    thresh_src = meta.get("threshold_source", "adaptive")
+    method = meta.get("clustering_method", "agglomerative_cosine")
+
     print(f"  Total records in dataset:  {meta.get('total_records', 0)}")
     print(f"  Unique queries found:      {meta.get('total_queries', 0)}")
     print(f"  Queries with HP anchor:    {meta.get('human_place_queries', 0)}")
+    print(f"  Clustering method:         {method}")
+    print(f"  Clustering threshold:      {thresh_val} ({thresh_src})")
     print(f"  Clusters formed:           {meta.get('cluster_count', 0)}")
     print(f"  Story opportunities:       {meta.get('opportunity_count', 0)}")
     print(f"  Embedding available:       {'Yes' if meta.get('embedding_available') else 'No (fallback used)'}")
@@ -486,9 +499,10 @@ def main():
     p_doctor = subparsers.add_parser("doctor", help="Comprehensive health check: Embedding, Reranker, Store, Media, Config, Rules")
     p_doctor.set_defaults(func=cmd_doctor)
 
-    # question-mine command
+    # question-mine command (with 'mine' alias)
     p_qm = subparsers.add_parser(
         "question-mine",
+        aliases=["mine"],
         help="Mine editorial story opportunities from a search results dataset (JSON/JSONL)"
     )
     p_qm.add_argument(
@@ -519,6 +533,23 @@ def main():
         "--force-rebuild",
         action="store_true",
         help="Force cluster rebuild even if cache is current"
+    )
+    p_qm.add_argument(
+        "--threshold",
+        type=float,
+        default=None,
+        help="Cosine distance clustering threshold override (default: derived adaptively)"
+    )
+    p_qm.add_argument(
+        "--no-adaptive",
+        action="store_true",
+        help="Disable adaptive threshold calculation and use safe default (0.30)"
+    )
+    p_qm.add_argument(
+        "--max-queries",
+        type=int,
+        default=None,
+        help="Maximum queries to process (useful for fast smoke testing)"
     )
     p_qm.add_argument(
         "--json",
