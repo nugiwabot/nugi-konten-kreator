@@ -253,3 +253,225 @@ Ini bukan pertanyaan yang nyaman. Tapi justru pertanyaan yang tidak nyaman itula
   1. "Kenapa Tanah Indonesia Nggak Pernah Mau Turun Harganya?"
   2. "Sistem yang Bikin Pemilik Tanah Selalu Menang Tanpa Berbuat Apa-Apa"
   3. "Siapa yang Sebenarnya Menaikkan Harga Tanah di Kota Kita?"
+
+
+---
+
+## YOUTUBE PRODUCTION LAYER — PHASE 5 PILOT FOR SCRIPT #02
+
+> **Catatan:** Ini hanya lapisan produksi YouTube. Isi utama teleprompter, Story Type HIDDEN_SYSTEM, dan struktur existing script tidak dirombak.
+
+### COLD OPEN
+
+**Fungsi:** membuka video dengan anomali utama sebelum masuk ke penjelasan sistem.
+
+**Draft spoken cold open:**
+
+> "Ada orang yang kekayaannya bisa melonjak hanya karena dia sudah punya sebidang tanah di tempat yang tepat. Sementara orang lain bekerja puluhan tahun, tapi harga tanah tetap terasa makin jauh dari gajinya. Kenapa bisa begini?"
+
+**Visual awal:**
+- Close-up tanah kosong.
+- Potongan kawasan kota yang berkembang.
+- Perbandingan tanah kosong dengan pembangunan / gedung.
+- Visual singkat seseorang bekerja atau berangkat kerja.
+- Hindari pembukaan logo panjang.
+
+**Transition:**
+Masuk ke micro bumper, lalu langsung ke STAGE 1.
+
+### MICRO BUMPER
+
+**Durasi:** sangat singkat.
+
+**Visual:**
+- Nugi wordmark / logo sederhana.
+- Audio sting pendek.
+- Tidak ada dialog panjang.
+
+**Catatan:**
+Bumper hanya sebagai identitas transisi, bukan bagian utama hook.
+
+---
+
+### RE-HOOKS
+
+Gunakan titik yang memang sudah ada di naskah.
+
+**Re-hook 1 — sekitar akhir STAGE 2 → STAGE 3**
+
+> "Untuk mengerti itu, kita perlu masuk ke lapisan yang lebih dalam."
+
+Fungsi:
+- membawa penonton dari penjelasan permukaan menuju mekanisme tersembunyi.
+
+**Re-hook 2 — sekitar akhir STAGE 3 → STAGE 4**
+
+> "Mari kita kasih angka pada semua ini biar lebih konkret."
+
+Fungsi:
+- mengubah penjelasan mekanisme menjadi pembuktian berbasis angka.
+
+**Re-hook 3 — sekitar akhir STAGE 5 → STAGE 6**
+
+> "Apa dampaknya buat kehidupan nyata?"
+
+Fungsi:
+- memindahkan pembahasan dari sistem ke konsekuensi manusia.
+
+Tidak perlu menambah re-hook baru secara mekanis.
+
+---
+
+### CHAPTER CANDIDATES
+
+> Timestamp mengikuti arahan visual yang sudah ada dan tetap perlu disesuaikan setelah final edit.
+
+| Timestamp | Public Chapter Title |
+| :-: | :--- |
+| 00:00 | Kenapa Harga Tanah Terus Jadi Masalah? |
+| 02:30 | Penjelasan yang Selama Ini Kita Dengar |
+| 05:00 | Empat Mekanisme di Balik Harga Tanah |
+| 11:00 | Siapa yang Mendapat Nilai Tambahnya? |
+| 14:00 | Apa yang Hilang dari Kita? |
+| 17:00 | Sebenarnya Masalahnya Ada di Mana? |
+
+---
+
+### SOURCE / ON-SCREEN EVIDENCE CUES
+
+> **Catatan penting:** Cue ini diturunkan dari sumber yang sudah disebut di script. Ini bukan verifikasi sumber pada Phase 5.
+
+| Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
+| :-: | :--- | :--- | :--- |
+| 1 | Pergerakan harga properti dibanding inflasi / pendapatan | Chart harga properti vs inflasi / pendapatan | Bank Indonesia |
+| 2 | Ketimpangan kepemilikan tanah | Grafik / tabel distribusi kepemilikan | BPS / LPEM UI |
+| 3 | Kenaikan nilai properti yang berkaitan dengan investasi publik | Diagram infrastruktur → kenaikan nilai tanah | Lincoln Institute of Land Policy |
+| 4 | Mekanisme pajak, tanah idle, dan insentif penggunaan lahan | Diagram insentif | Data / kebijakan yang benar-benar diverifikasi sebelum final |
+| 5 | Dampak sistem terhadap akses generasi baru ke hunian / tanah | Grafik affordability atau ilustrasi konseptual | Sumber spesifik harus dipilih sebelum final |
+| 6 | Warisan historis kepemilikan tanah | Timeline / arsip agraria | Sumber sejarah primer/sekunder yang diverifikasi |
+
+**Production rule:**
+- Jangan menampilkan angka besar hanya karena angka tersebut muncul di narration.
+- Setiap angka, persentase, atau hubungan sebab-akibat yang ditampilkan sebagai fakta harus diverifikasi terhadap sumber sebelum final export.
+- Jika visual bersifat interpretatif, tampilkan sebagai diagram konseptual, bukan seolah-olah grafik resmi.
+
+---
+
+### EVIDENCE CLASSIFICATION — PILOT
+
+| Bagian | Level |
+|---|---|
+| Contoh seseorang yang menjadi kaya karena memiliki tanah di lokasi yang tepat | **ILLUSTRATIVE EXAMPLE** bila tidak merujuk pada individu terdokumentasi |
+| Perbandingan kenaikan harga tanah / properti dengan pendapatan | **FACT CLAIM** yang harus dicocokkan dengan sumber yang disebut |
+| "Negara bangun, pemilik tanah yang untung" | **INTERPRETATION / CAUSAL CLAIM** yang membutuhkan evidence spesifik untuk tingkat generalisasi yang digunakan |
+| Penjelasan mengenai tanah sebagai instrumen investasi | **INTERPRETATION + FACT CLAIMS**, tergantung bagian yang dibuktikan |
+| Hubungan sejarah kolonial dengan struktur kepemilikan tanah saat ini | **HISTORICAL CAUSAL CLAIM** yang perlu sumber sejarah spesifik |
+| Dampak terhadap keterjangkauan generasi muda | **FACT / INTERPRETATION**, tergantung data yang dipakai |
+| Kesimpulan bahwa insentif sistem dapat menguatkan perilaku pemilik tanah | **INTERPRETATION / SYSTEM SYNTHESIS** |
+
+Penanda ini bersifat internal dan tidak dibacakan oleh narator.
+
+---
+
+### CLOSING IDENTITY
+
+Letakkan setelah pertanyaan terbuka terakhir.
+
+**Draft:**
+
+> "Mungkin yang paling menarik dari harga tanah bukan cuma seberapa mahal tanah itu hari ini, tapi siapa dan apa yang membuat nilainya menjadi seperti itu."
+
+Jeda singkat.
+
+**Visual:**
+- Jalan kota menjelang malam.
+- Tanah / bangunan / aktivitas manusia.
+- Musik turun perlahan.
+
+Tidak perlu logo animation panjang.
+
+---
+
+### OPTIONAL SOFT CTA
+
+Jangan memasukkan CTA ke dalam argumen utama.
+
+Pilihan soft CTA:
+
+> "Kalau kamu suka melihat hal-hal yang kelihatannya biasa sampai ketemu sistem di baliknya, kamu bisa subscribe."
+
+Satu kalimat cukup.
+
+CTA dapat dihilangkan bila ending terasa lebih kuat tanpa CTA.
+
+---
+
+### END SCREEN
+
+Rekomendasi:
+- Arahkan ke video Nugi yang membahas **rumah, kota, atau bagaimana sistem ekonomi membentuk tempat manusia hidup**.
+- Tombol subscribe.
+
+Prioritaskan kesinambungan pertanyaan, bukan sekadar kesamaan kata "properti".
+
+---
+
+### DESCRIPTION PACKAGE
+
+**Synopsis:**
+Harga tanah sering terlihat seperti sesuatu yang terjadi secara alami: kota tumbuh, tanah terbatas, lalu harga naik. Video ini membedah beberapa mekanisme ekonomi, kebijakan, investasi, dan sejarah yang dapat membentuk cara nilai tanah berkembang dan bagaimana dampaknya kembali ke kehidupan manusia.
+
+**Key Topics:**
+- land value
+- land ownership
+- housing affordability
+- public infrastructure
+- property investment
+- urban economy
+- Human × Place
+
+**Primary Sources Mentioned in Script:**
+- Bank Indonesia
+- BPS
+- LPEM UI
+- Lincoln Institute of Land Policy
+
+**Related Video Direction:**
+Pilih video Nugi yang memperluas pertanyaan tentang rumah, kota, tanah, atau bagaimana nilai ruang terbentuk.
+
+---
+
+### THUMBNAIL CONCEPT — PHASE 5
+
+**Dominant Idea:**
+Tanah bisa naik nilainya sementara kehidupan manusia di sekitarnya ikut berubah.
+
+**Visual Tension:**
+Tanah kosong → kota berkembang → harga naik.
+
+**Text:**
+**"KENAPA TERUS NAIK?"**
+
+**Catatan:**
+Hindari thumbnail yang seolah menjanjikan kepastian bahwa harga tanah selalu naik di semua tempat dan setiap waktu.
+
+---
+
+## PHASE 5 CHECK — SCRIPT #02
+
+- [x] Story Type tetap HIDDEN_SYSTEM.
+- [x] Isi utama naskah tidak dirombak.
+- [x] Cold open ditambahkan sebagai production wrapper.
+- [x] Micro bumper ditambahkan.
+- [x] Re-hook memakai transisi yang sudah ada.
+- [x] Revelation dan reflection tetap berada di posisi asli.
+- [x] Closing identity dipisahkan dari editorial reflection.
+- [x] Soft CTA bersifat opsional.
+- [x] Chapter candidates tersedia.
+- [x] Source/on-screen evidence cues tersedia berdasarkan sumber yang sudah disebut script.
+- [x] Evidence classification ditambahkan sebagai panduan internal.
+- [x] Tidak ada Python yang diubah.
+- [x] Tidak ada engine yang diubah.
+- [x] Tidak ada folder baru.
+- [x] Tidak ada refactor repository.
+- [x] SCRIPT_03–05 belum disentuh.
