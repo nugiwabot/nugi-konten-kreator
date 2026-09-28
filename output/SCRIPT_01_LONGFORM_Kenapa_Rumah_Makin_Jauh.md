@@ -284,3 +284,225 @@ Nggak ada jawaban yang paling benar. Tapi pertanyaannya layak dijawab dengan juj
   1. "Berapa Harga Nyata dari Rumah Murah di Pinggiran Kota?"
   2. "Kenapa Jutaan Orang Masih Pilih Komuter 3 Jam Setiap Hari?"
   3. "Harga Tersembunyi yang Nggak Pernah Kita Hitung Waktu Beli Rumah"
+
+
+---
+
+## YOUTUBE PRODUCTION LAYER — PILOT PHASE 3
+
+> **Catatan:** Bagian ini adalah lapisan produksi YouTube yang ditambahkan tanpa mengubah isi utama naskah teleprompter. Story Type HUMAN_DILEMMA tetap menjadi struktur cerita utama.
+
+### COLD OPEN
+
+**Fungsi:** masuk langsung ke biaya tersembunyi dari pilihan rumah jauh sebelum penjelasan panjang dimulai.
+
+**Draft spoken cold open:**
+
+> "Bayangin kamu mengambil KPR 25 tahun. Rumahnya akhirnya lunas. Tapi kalau setiap hari kamu menghabiskan 3 jam di jalan, ada sesuatu yang mungkin kamu bayar jauh lebih mahal daripada cicilan."
+
+**Visual awal:**
+- Jam menunjukkan sekitar pukul 04.00.
+- Orang bersiap berangkat.
+- Jalan / stasiun / kendaraan dalam kondisi subuh.
+- Potongan singkat perjalanan.
+- Jangan mulai dengan logo atau perkenalan panjang.
+
+**Transition:**
+Masuk ke micro bumper, lalu langsung ke STAGE 1.
+
+### MICRO BUMPER
+
+**Durasi:** sangat singkat.
+
+**Visual:**
+- Nugi wordmark / logo sederhana.
+- Audio sting pendek.
+- Tidak ada dialog panjang.
+
+**Catatan:**
+Jangan membuat bumper sebagai opening terpisah yang memakan momentum cold open.
+
+---
+
+### RE-HOOKS
+
+Gunakan hanya pada transisi alami yang memang sudah ada di naskah.
+
+**Re-hook 1 — sekitar transisi STAGE 2 → STAGE 3**
+
+> "Tapi ada harga tersembunyi dari semua itu."
+
+Fungsi:
+- memindahkan perhatian dari manfaat rumah jauh ke biaya waktu.
+
+**Re-hook 2 — sekitar transisi STAGE 3 → STAGE 4**
+
+> "Tapi orang masih tetap memilih tinggal jauh. Kenapa?"
+
+Fungsi:
+- membuka investigasi tentang psikologi keputusan dan desain kota.
+
+**Re-hook 3 — sekitar transisi STAGE 5 → STAGE 6**
+
+> "Jadi apa yang ingin saya sampaikan dari semua ini?"
+
+Fungsi:
+- menandai perpindahan dari mekanisme ke revelation.
+
+Tidak perlu menambah re-hook lain hanya demi mempertahankan retensi secara mekanis.
+
+---
+
+### CHAPTER CANDIDATES
+
+> Timestamp di bawah mengikuti timecode produksi yang sudah ada di script dan dapat disesuaikan setelah final edit.
+
+| Timestamp | Public Chapter Title |
+| :-: | :--- |
+| 00:00 | Kenapa Kita Rela Tinggal Semakin Jauh? |
+| 02:30 | Kenapa Rumah di Pinggiran Terasa Lebih Masuk Akal |
+| 06:00 | Harga yang Kita Bayar dengan Waktu |
+| 10:00 | Kenapa Kita Tetap Memilih Rumah yang Jauh? |
+| 14:00 | Sistem yang Membentuk Pilihan Kita |
+| 17:00 | Sebenarnya Kita Sedang Memilih Apa? |
+
+---
+
+### SOURCE / ON-SCREEN EVIDENCE CUES
+
+> **Catatan penting:** Cue di bawah mengikuti sumber yang sudah disebut di naskah/Quality Check. Ini bukan verifikasi ulang sumber pada Phase 3.
+
+| Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
+| :-: | :--- | :--- | :--- |
+| 1 | Pola pergeseran perumahan Jabodetabek | Peta / diagram pertumbuhan Jabodetabek | BPS |
+| 2 | Dampak perjalanan/commuting terhadap well-being | Chart / kutipan temuan penelitian | Universitas McGill |
+| 3 | Perjalanan kerja panjang dan indikator kesehatan/kesejahteraan | Grafik durasi perjalanan vs indikator kesehatan | Royal Society for Public Health |
+| 4 | Cara manusia menimbang biaya yang langsung terlihat vs biaya tertunda | Diagram sederhana decision-making / loss framing | Tversky & Kahneman |
+| 5 | Hubungan bentuk kota, kepadatan, dan biaya transportasi | Diagram kepadatan kota vs mobilitas | Alain Bertaud |
+
+**Production rule:**
+- Jangan menampilkan angka statistik besar hanya karena ada di narration.
+- Setiap angka yang akhirnya ditampilkan harus dicek ulang terhadap sumber primer sebelum final export.
+- Bila sumber tidak menyediakan grafik yang siap pakai, buat visualisasi sendiri dari data sumber atau gunakan visual konseptual tanpa menyamarkan visual sebagai data resmi.
+
+---
+
+### EVIDENCE CLASSIFICATION — PILOT
+
+| Bagian | Level |
+|---|---|
+| Cerita komuter Cikarang / Jakarta Selatan | **SCENARIO / ILLUSTRATIVE EXAMPLE** kecuali identitas dan data orang tersebut benar-benar didokumentasikan |
+| Perhitungan waktu 3 jam × 5 hari × 48 minggu | **CALCULATION** dari asumsi yang diucapkan |
+| Temuan penelitian yang dikaitkan dengan McGill / RSPH / Tversky & Kahneman | **FACT CLAIM** yang harus dicocokkan ke sumber sebelum final |
+| Penjelasan tentang desain kota dan pilihan perumahan | **INTERPRETATION / CAUSAL SYNTHESIS** |
+| Dampak terhadap keluarga / anak | **INTERPRETATION** atau **FACT**, tergantung evidence spesifik yang digunakan |
+| Perubahan pascapandemi dan remote work | **FACT + INTERPRETATION**; pisahkan keduanya saat visualisasi |
+
+Penanda ini adalah panduan internal produksi dan **tidak perlu dibacakan oleh narator**.
+
+---
+
+### CLOSING IDENTITY
+
+Letakkan setelah pertanyaan terbuka terakhir.
+
+**Draft:**
+
+> "Mungkin pada akhirnya, kita memang bukan cuma sedang memilih rumah. Kita sedang memilih seperti apa hari-hari yang ingin kita jalani."
+
+Jeda singkat.
+
+**Visual:**
+- Rumah / lingkungan pada malam hari.
+- Lampu rumah atau jalan.
+- Musik turun perlahan.
+
+**Catatan:**
+Tidak perlu logo animation panjang.
+
+---
+
+### OPTIONAL SOFT CTA
+
+Jangan menambahkan CTA ke tubuh utama cerita.
+
+Pilihan soft CTA setelah closing:
+
+> "Kalau kamu suka video yang membongkar hal-hal biasa sampai ketemu alasan di baliknya, kamu bisa subscribe."
+
+Satu kalimat cukup.
+
+CTA dapat dihilangkan sepenuhnya bila closing terasa lebih kuat tanpa CTA.
+
+---
+
+### END SCREEN
+
+Rekomendasi:
+- Satu video Nugi yang masih berhubungan dengan **rumah / kota / cara manusia memilih tempat tinggal**.
+- Tombol subscribe.
+
+**Catatan:**
+Jangan memilih video yang hanya relevan karena sama-sama membahas properti. Prioritaskan kesinambungan pertanyaan.
+
+---
+
+### DESCRIPTION PACKAGE
+
+**Synopsis:**
+Kenapa orang rela tinggal semakin jauh dari pusat kota demi rumah yang terasa lebih besar atau lebih terjangkau? Video ini membedah pertukaran antara ruang, waktu, mobilitas, psikologi keputusan, dan bentuk kota yang membuat pilihan tersebut terasa masuk akal.
+
+**Key Topics:**
+- suburban housing
+- commuting
+- time cost
+- housing choice
+- urban form
+- psychology of decision-making
+- Human × Place
+
+**Primary Sources Mentioned in Script:**
+- Badan Pusat Statistik (BPS)
+- Universitas McGill
+- Royal Society for Public Health
+- Tversky & Kahneman
+- Alain Bertaud
+
+**Related Video Direction:**
+Pilih video Nugi lain yang memperluas pertanyaan tentang rumah, kota, tanah, atau bagaimana tempat memengaruhi kehidupan manusia.
+
+---
+
+### THUMBNAIL CONCEPT — PILOT
+
+**Dominant Idea:**
+Rumah lebih murah / lebih besar ternyata dibayar dengan waktu.
+
+**Visual Tension:**
+Rumah di pinggiran ↔ jam / kendaraan / jalan panjang menuju kota.
+
+**Text:**
+**"6 TAHUN DI JALAN?"**
+
+**Catatan:**
+Angka harus tetap sesuai dengan perhitungan yang dipakai di video.
+
+---
+
+## PHASE 3 PILOT CHECK
+
+- [x] Story Type tetap HUMAN_DILEMMA.
+- [x] Isi utama naskah tidak dirombak.
+- [x] Cold open ditambahkan sebagai wrapper.
+- [x] Micro bumper ditambahkan.
+- [x] Re-hook hanya menggunakan titik yang sudah alami di naskah.
+- [x] Revelation dan reflection tetap berada di tempat semula.
+- [x] Closing identity dipisahkan dari reflection.
+- [x] CTA bersifat opsional.
+- [x] Chapter candidates tersedia.
+- [x] Source/on-screen evidence cues tersedia.
+- [x] Fact / Interpretation / Scenario mulai dibedakan secara internal.
+- [x] Tidak ada perubahan pada Python engine.
+- [x] Tidak ada folder baru.
+- [x] Tidak ada refactor repository.
+- [x] Script asli sebelum section ini tetap dipertahankan.
