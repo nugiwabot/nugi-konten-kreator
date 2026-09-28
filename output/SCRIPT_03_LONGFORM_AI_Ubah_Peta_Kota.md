@@ -245,3 +245,231 @@ Pertanyaan ini nggak ada jawaban yang mudah. Tapi saya pikir inilah pertanyaan y
   1. "Kalau AI Bikin Kantor Kosong, Kota Kita Mau Jadi Apa?"
   2. "Kenapa Orang Pindah dari Jakarta ke Bali — dan Apa Konsekuensinya"
   3. "Dampak AI yang Paling Jarang Dibahas: Dia Mengubah Peta Kota"
+
+
+---
+
+## YOUTUBE PRODUCTION LAYER — PHASE 5 PILOT FOR SCRIPT #03
+
+> **Catatan:** Ini hanya lapisan produksi YouTube. Isi utama teleprompter, Story Type SECOND_ORDER, dan struktur existing script tidak dirombak.
+
+### COLD OPEN
+
+**Fungsi:** memperkenalkan efek domino AI dari dunia kerja ke lokasi hidup manusia.
+
+**Draft spoken cold open:**
+
+> "Kalau AI membuat kita nggak harus datang ke kantor setiap hari, pertanyaannya bukan cuma pekerjaan apa yang berubah. Pertanyaannya: manusia nanti akan tinggal di mana?"
+
+**Visual awal:**
+- Koridor kantor yang ramai.
+- Cut ke ruang kantor dengan banyak meja kosong.
+- Transition ke peta kota / kawasan hunian.
+- Potongan orang bekerja dari laptop di tempat yang berbeda.
+- Hindari pembukaan logo panjang.
+
+**Transition:**
+Masuk ke micro bumper, lalu langsung ke STAGE 1.
+
+### MICRO BUMPER
+
+**Durasi:** sangat singkat.
+
+**Visual:**
+- Nugi wordmark / logo sederhana.
+- Audio sting pendek.
+- Tidak ada dialog panjang.
+
+**Catatan:**
+Bumper hanya sebagai identitas transisi, bukan bagian utama hook.
+
+---
+
+### RE-HOOKS
+
+Gunakan titik transisi yang mengikuti alur efek domino dalam naskah.
+
+**Re-hook 1 — sekitar akhir STAGE 2 → STAGE 3**
+
+> "Tapi efek pertama itu baru permulaan."
+
+Fungsi:
+- menggeser perhatian dari kantor menuju pertanyaan tentang bentuk kota.
+
+**Re-hook 2 — sekitar akhir STAGE 3 → STAGE 4**
+
+> "Dan kalau pusat gravitasi itu benar-benar bergeser, dampaknya nggak berhenti di gedung perkantoran."
+
+Fungsi:
+- membawa penonton dari pertanyaan besar ke empat dampak lanjutan.
+
+**Re-hook 3 — sekitar akhir STAGE 5 → STAGE 6**
+
+> "Jadi, dari semua perubahan ini, apa sebenarnya yang sedang berubah?"
+
+Fungsi:
+- mengantar dari ketidakpastian menuju sintesis / epifani.
+
+Tidak perlu menambah re-hook dengan interval tetap.
+
+---
+
+### CHAPTER CANDIDATES
+
+> Timestamp mengikuti arahan visual yang sudah ada dan tetap perlu disesuaikan setelah final edit.
+
+| Timestamp | Public Chapter Title |
+| :-: | :--- |
+| 00:00 | AI dan Kantor yang Mulai Berubah |
+| 02:30 | Ketika Kebutuhan Ruang Kantor Menyusut |
+| 05:00 | Kalau Orang Tak Lagi Harus Datang ke Pusat Kota |
+| 07:00 | Empat Efek Domino yang Mungkin Terjadi |
+| 14:00 | Apa yang Sudah Terjadi, dan Apa yang Belum Pasti |
+| 17:00 | AI Sedang Mengubah Peta Kota |
+
+---
+
+### SOURCE / ON-SCREEN EVIDENCE CUES
+
+> **Catatan penting:** Cue ini diturunkan dari sumber yang sudah disebut di script. Ini bukan verifikasi sumber pada Phase 5.
+
+| Cue | Klaim / Fungsi | Visual On-Screen | Source yang disebut di script |
+| :-: | :--- | :--- | :--- |
+| 1 | Tingkat pemakaian gedung perkantoran kelas A Jakarta belum kembali ke level 2019 | Vacancy / occupancy chart 2019 vs 2024–2025 | Colliers Indonesia |
+| 2 | Proyeksi otomasi tugas rutin oleh AI | Grafik rentang proyeksi / teks kutipan angka dengan konteks metodologi | McKinsey Global Institute |
+| 3 | Pergerakan harga properti di beberapa kota tujuan | Perbandingan data kota yang disebut dalam script | HPPI Bank Indonesia |
+| 4 | Perubahan pola kerja dan perpindahan pekerja remote / digital nomad | Peta perpindahan + indikator pendukung | Sumber yang disebut / dipakai saat final research |
+| 5 | Perbedaan pekerjaan yang dapat dikerjakan remote vs pekerjaan yang membutuhkan kehadiran fisik | Split-screen kategori pekerjaan | Data / sumber spesifik harus dipilih sebelum final |
+| 6 | Infrastruktur kota dibangun berdasarkan pola mobilitas tertentu | Diagram pola lama → pola mobilitas baru | Sumber spesifik harus diverifikasi sebelum final |
+| 7 | Perubahan fungsi pusat kota | B-roll / footage kawasan perkantoran, retail, transit, ruang publik | Data dan sumber lokal yang diverifikasi sebelum final |
+
+**Production rule:**
+- Angka, persentase, dan proyeksi jangan ditampilkan tanpa konteks sumber dan periode.
+- Proyeksi AI harus diberi label sebagai proyeksi, bukan fakta masa depan.
+- Hubungan sebab-akibat seperti "pekerja remote pindah → harga properti naik" perlu evidence spesifik sebelum divisualkan sebagai hubungan kausal.
+- Untuk skenario masa depan, gunakan diagram / visual konseptual, bukan grafik seolah-olah hasil observasi.
+
+---
+
+### EVIDENCE CLASSIFICATION — PILOT
+
+| Bagian | Level |
+|---|---|
+| Kantor yang lebih sepi dibanding 2019 | **FACT CLAIM / SCENE ILLUSTRATION** tergantung footage dan data yang digunakan |
+| AI mengotomasi 30–40% tugas rutin pada periode yang disebut | **PROJECTION / FACT CLAIM FROM SOURCE** — harus dipertahankan sesuai konteks McKinsey |
+| Profesional fleksibel berpindah ke kota dengan biaya hidup lebih rendah | **FACT / INTERPRETATION**, tergantung bukti untuk populasi yang dimaksud |
+| Pendatang berpenghasilan lebih tinggi mendorong harga lokal | **CAUSAL CLAIM / INTERPRETATION** yang memerlukan evidence spesifik |
+| Kota besar kehilangan sebagian fungsi pusat pekerjaan | **INTERPRETATION / SYSTEM SYNTHESIS** |
+| Pekerja jasa lebih terikat pada lokasi fisik | **GENERALIZATION / INTERPRETATION**, perlu batasan populasi |
+| Infrastruktur menjadi kurang efisien karena pola mobilitas berubah | **INTERPRETATION / CAUSAL CLAIM** yang perlu data sebelum dipresentasikan sebagai fakta |
+| Dampak akhir AI terhadap peta kota | **PROJECTION / SCENARIO**, bukan fakta yang sudah selesai terjadi |
+
+Penanda ini bersifat internal dan tidak dibacakan oleh narator.
+
+---
+
+### CLOSING IDENTITY
+
+Letakkan setelah pertanyaan terbuka terakhir.
+
+**Draft:**
+
+> "Mungkin pertanyaan tentang AI pada akhirnya bukan cuma tentang pekerjaan apa yang berubah. Tapi tentang tempat seperti apa yang masih ingin kita sebut rumah."
+
+Jeda singkat.
+
+**Visual:**
+- Kota dari kejauhan.
+- Jalan dan transportasi malam.
+- Hunian / lingkungan tempat orang menjalani kehidupan sehari-hari.
+- Musik turun perlahan.
+
+Tidak perlu logo animation panjang.
+
+---
+
+### OPTIONAL SOFT CTA
+
+Jangan memasukkan CTA ke dalam argumen utama.
+
+Pilihan soft CTA:
+
+> "Kalau kamu suka melihat perubahan teknologi sampai dampaknya ke cara kita hidup, kamu bisa subscribe."
+
+Satu kalimat cukup.
+
+CTA dapat dihilangkan bila ending terasa lebih kuat tanpa CTA.
+
+---
+
+### END SCREEN
+
+Rekomendasi:
+- Arahkan ke video Nugi yang membahas **rumah, kota, mobilitas, atau perubahan cara manusia hidup**.
+- Tombol subscribe.
+
+Prioritaskan kesinambungan pertanyaan tentang bagaimana manusia memilih dan membentuk tempat hidup.
+
+---
+
+### DESCRIPTION PACKAGE
+
+**Synopsis:**
+Kita sering membayangkan dampak AI dalam bentuk robot, otomatisasi, atau pekerjaan yang hilang. Tapi perubahan cara bekerja juga bisa mengubah sesuatu yang jauh lebih fisik: di mana manusia tinggal, bagaimana kota tumbuh, dan bagaimana ruang yang kita huni beradaptasi.
+
+Video ini menelusuri efek domino dari perubahan kerja ke kantor, perpindahan manusia, harga hunian, pekerja jasa, dan infrastruktur kota — sambil membedakan apa yang sudah terlihat dari apa yang masih berupa proyeksi.
+
+**Key Topics:**
+- AI and work
+- remote work
+- cities
+- housing
+- mobility
+- urban change
+- Human × Place × Change
+
+**Primary Sources Mentioned in Script:**
+- Colliers Indonesia
+- McKinsey Global Institute
+- Bank Indonesia / HPPI
+
+**Related Video Direction:**
+Pilih video Nugi yang memperluas pertanyaan tentang rumah, kota, mobilitas, atau perubahan cara manusia hidup.
+
+---
+
+### THUMBNAIL CONCEPT — PHASE 5
+
+**Dominant Idea:**
+AI menggeser bukan hanya pekerjaan, tetapi juga lokasi manusia berkumpul dan tinggal.
+
+**Visual Tension:**
+Gedung kantor → panah perpindahan → peta kota / kawasan hunian.
+
+**Text:**
+**"AI UBAH PETA KOTA"**
+
+**Catatan:**
+Hindari thumbnail yang menyiratkan bahwa satu hasil geografis tertentu sudah pasti terjadi.
+
+---
+
+## PHASE 5 CHECK — SCRIPT #03
+
+- [x] Story Type tetap SECOND_ORDER.
+- [x] Isi utama naskah tidak dirombak.
+- [x] Cold open ditambahkan sebagai production wrapper.
+- [x] Micro bumper ditambahkan.
+- [x] Re-hook mengikuti alur efek domino script.
+- [x] Revelation dan reflection tetap berada di posisi asli.
+- [x] Closing identity dipisahkan dari editorial reflection.
+- [x] Soft CTA bersifat opsional.
+- [x] Chapter candidates tersedia.
+- [x] Source/on-screen evidence cues tersedia berdasarkan sumber yang sudah disebut script.
+- [x] Evidence classification ditambahkan sebagai panduan internal.
+- [x] Proyeksi masa depan dibedakan dari fakta yang sudah terjadi.
+- [x] Tidak ada Python yang diubah.
+- [x] Tidak ada engine yang diubah.
+- [x] Tidak ada folder baru.
+- [x] Tidak ada refactor repository.
+- [x] SCRIPT_01, SCRIPT_02, SCRIPT_04, dan SCRIPT_05 tidak disentuh pada tahap ini.
