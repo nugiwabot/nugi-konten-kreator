@@ -275,10 +275,19 @@ class MediaFinder:
         resolved_era = self._resolve_era(era, request)
         resolved_style = self._resolve_style(style, resolved_era, request)
 
-        queries = self._generate_query_intelligence(request, resolved_era, resolved_style)
+        logger.info(
+            f"MediaFinder.find: request='{request}', requested_media='{media}', "
+            f"resolved_media='{resolved_media}', era='{resolved_era}', style='{resolved_style}'"
+        )
+
+        queries = self._generate_query_intelligence(
+            request, resolved_era, resolved_style, media=resolved_media
+        )
         routed_providers = self._route_providers(resolved_era, resolved_media)
 
-        candidates = self._gather_candidates(queries, routed_providers, resolved_media, max_items=max(count * 3, 15))
+        candidates = self._gather_candidates(
+            queries, routed_providers, resolved_media, max_items=max(count * 3, 15)
+        )
 
         ranked_items, fallback_reason = self._rank_candidates(
             original_request=request,
@@ -435,6 +444,7 @@ class MediaFinder:
         request: str,
         era: str,
         style: str,
+        media: str = "any",
     ) -> List[str]:
         """
         Transform a natural language visual request into 4 distinct query variants:
@@ -446,27 +456,52 @@ class MediaFinder:
         core_english = self._translate_to_core_english(request)
 
         # 1. Primary descriptive query
-        if style == "formal":
-            primary = f"{core_english}, professional editorial photography, clean natural lighting"
-        elif style == "archival":
-            primary = f"{core_english}, archival historical photograph, authentic period reference"
-        elif style == "documentary":
-            primary = f"{core_english}, candid documentary photography, authentic real setting"
-        elif style == "cinematic":
-            primary = f"{core_english}, atmospheric cinematic composition, dramatic lighting"
-        elif style == "conceptual":
-            primary = f"{core_english}, conceptual speculative visualization, editorial perspective"
+        if media == "video":
+            if era in ("historical", "past"):
+                if style == "archival":
+                    primary = f"{core_english}, archival footage, historical film newsreel"
+                elif style == "cinematic":
+                    primary = f"{core_english}, cinematic archival footage, dramatic historical motion picture"
+                elif style == "documentary":
+                    primary = f"{core_english}, documentary footage, authentic recorded film"
+                else:
+                    primary = f"{core_english}, historical footage, authentic film recording"
+            else:
+                if style == "formal":
+                    primary = f"{core_english}, professional corporate video footage, clean natural lighting"
+                elif style == "cinematic":
+                    primary = f"{core_english}, atmospheric cinematic composition, motion picture footage"
+                elif style == "conceptual":
+                    primary = f"{core_english}, conceptual video footage, speculative futuristic motion"
+                elif style == "documentary":
+                    primary = f"{core_english}, candid documentary video footage, authentic real setting"
+                else:
+                    primary = f"{core_english}, documentary video footage, realistic natural lighting"
         else:
-            primary = f"{core_english}, neutral documentary photography, realistic natural lighting"
+            if style == "formal":
+                primary = f"{core_english}, professional editorial photography, clean natural lighting"
+            elif style == "archival":
+                if media == "any":
+                    primary = f"{core_english}, archival historical reference, authentic period visual"
+                else:
+                    primary = f"{core_english}, archival historical photograph, authentic period reference"
+            elif style == "documentary":
+                primary = f"{core_english}, candid documentary photography, authentic real setting"
+            elif style == "cinematic":
+                primary = f"{core_english}, atmospheric cinematic composition, dramatic lighting"
+            elif style == "conceptual":
+                primary = f"{core_english}, conceptual speculative visualization, editorial perspective"
+            else:
+                primary = f"{core_english}, neutral documentary photography, realistic natural lighting"
 
         # 2. Style-specific variant
-        style_variant = self._build_style_variant(core_english, style, era)
+        style_variant = self._build_style_variant(core_english, style, era, media=media)
 
         # 3. Contextual / environmental variant
-        contextual = self._build_contextual_variant(core_english, era)
+        contextual = self._build_contextual_variant(core_english, era, media=media)
 
         # 4. Fallback concise query
-        fallback = self._build_fallback_query(core_english)
+        fallback = self._build_fallback_query(core_english, media=media)
 
         queries = [primary, style_variant, contextual, fallback]
         # Deduplicate while preserving order
@@ -503,8 +538,24 @@ class MediaFinder:
         return " ".join(result_words)
 
     @staticmethod
-    def _build_style_variant(core: str, style: str, era: str) -> str:
+    def _build_style_variant(core: str, style: str, era: str, media: str = "any") -> str:
         """Build style-specific query adhering to visual style rules."""
+        if media == "video":
+            if style == "formal":
+                return f"{core}, corporate workplace professional video footage, realistic neutral composition"
+            if style == "archival":
+                if era in ("historical", "past"):
+                    return f"{core}, original film footage, wartime newsreel footage"
+                return f"{core}, archival film footage, authentic recorded footage"
+            if style == "documentary":
+                return f"{core}, observational video footage, real ordinary environment"
+            if style == "cinematic":
+                return f"{core}, cinematic wide shot footage, atmospheric film framing"
+            if style == "conceptual":
+                return f"{core}, human-centered technology conceptual video, modern architectural space"
+            # neutral
+            return f"{core}, ordinary everyday environment, observational video footage"
+
         if style == "formal":
             return f"{core}, corporate workplace professional setting, realistic neutral composition"
         if style == "archival":
@@ -521,8 +572,15 @@ class MediaFinder:
         return f"{core}, ordinary everyday environment, observational realistic photo"
 
     @staticmethod
-    def _build_contextual_variant(core: str, era: str) -> str:
+    def _build_contextual_variant(core: str, era: str, media: str = "any") -> str:
         """Add human-place spatial context to the query."""
+        if media == "video":
+            if era in ("historical", "past"):
+                return f"{core}, historical footage, city street and human dwelling"
+            if era == "future":
+                return f"{core}, modern architectural space, futuristic video footage"
+            return f"{core}, contemporary urban and interior video footage"
+
         if era in ("historical", "past"):
             return f"{core}, historical city street and human dwelling"
         if era == "future":
@@ -530,9 +588,12 @@ class MediaFinder:
         return f"{core}, contemporary urban and interior environment"
 
     @staticmethod
-    def _build_fallback_query(core: str) -> str:
+    def _build_fallback_query(core: str, media: str = "any") -> str:
         """Generate concise 3-5 keyword fallback for simple catalog indexing."""
         words = [w for w in core.split() if len(w) > 2]
+        if media == "video":
+            base = " ".join(words[:4])
+            return f"{base} footage" if "footage" not in base else base
         return " ".join(words[:5])
 
     # --------------------------------------------------------------------------
@@ -541,14 +602,14 @@ class MediaFinder:
 
     @staticmethod
     def _normalize_media_type(media: str, request: str) -> str:
-        m = (media or "any").lower().strip()
+        m = (media or "").lower().strip()
         if m in ("photo", "image", "foto", "gambar"):
             return "photo"
         if m in ("video", "footage", "film", "rekaman"):
             return "video"
         if m in ("any", "all", "semua"):
             return "any"
-        # If auto or unrecognized, detect from request
+        # If auto, empty, or unrecognized, detect from request
         lower_req = request.lower()
         if any(w in lower_req for w in ("video", "footage", "film", "rekaman", "klip")):
             return "video"
@@ -680,6 +741,12 @@ class MediaFinder:
                         media_type=provider_media_type,
                         max_results=max(max_items - len(candidates), 5),
                     )
+                    v_cnt = sum(1 for it in items if (it.media_type or "").lower() == "video")
+                    img_cnt = sum(1 for it in items if (it.media_type or "").lower() == "image")
+                    logger.info(
+                        f"MediaFinder: Provider {provider.PROVIDER_NAME} returned {len(items)} items "
+                        f"(video={v_cnt}, image={img_cnt}) for query='{q}' (requested_type='{provider_media_type}')"
+                    )
                     for item in items:
                         key = item.dedup_key()
                         if key not in seen_keys:
@@ -709,17 +776,36 @@ class MediaFinder:
         if not candidates:
             return [], "No candidates gathered from providers."
 
+        # Count candidate breakdown for observability
+        video_count = sum(1 for c in candidates if (c.media_type or "").lower() == "video")
+        image_count = sum(1 for c in candidates if (c.media_type or "").lower() == "image")
+
         # Filter strictly by requested media type
         filtered: List[MediaItem] = []
         for item in candidates:
-            mtype = item.media_type.lower()
-            if media_type == "photo" and mtype in ("video", "audio", "document"):
-                continue
-            if media_type == "video" and mtype != "video":
-                continue
+            mtype = (item.media_type or "").lower()
+            if media_type == "video":
+                if mtype != "video":
+                    continue
+                # For video, ensure download_url is valid and not a directory
+                if not item.download_url or item.download_url.endswith("/"):
+                    continue
+            elif media_type in ("photo", "image"):
+                if mtype != "image":
+                    continue
+            else:
+                # "any": keep visual media (exclude audio/document)
+                if mtype in ("audio", "document"):
+                    continue
             filtered.append(item)
 
-        # Fallback to candidates if filter was overly restrictive
+        removed_count = len(candidates) - len(filtered)
+        logger.info(
+            f"MediaFinder: requested_media='{media_type}', candidates={len(candidates)} "
+            f"(video={video_count}, image={image_count}), filtered_out={removed_count}, retained={len(filtered)}"
+        )
+
+        # Fallback to candidates if filter was overly restrictive in "any" mode
         if not filtered and media_type == "any":
             filtered = candidates
         elif not filtered:

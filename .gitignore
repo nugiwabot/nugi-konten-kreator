@@ -54,3 +54,41 @@ engine/data/*.json
 # AI Workspace Lock — machine-local state & ACL backups
 .ai-guard/backups/*/
 .ai-guard/lock.state
+
+# Temporary processing & scratch workspace (never push to GitHub)
+.temp_broll/
+.temp/
+output/.broll_query_cache.json
+output/.question_mining_cache.json
+output/*.jpg
+output/*.jpeg
+output/*.png
+output/*.mp4
+output/*.mov
+output/*.mkv
+output/*.webm
+output/*.webp
+output/*/*.jpg
+output/*/*.jpeg
+output/*/*.png
+output/*/*.mp4
+output/*/*.webp
+
+# Workspace media assets (keep .gitkeep, ignore all footage, broll, and renders)
+output/*-script/**/*.mp4
+output/*-script/**/*.mov
+output/*-script/**/*.mkv
+output/*-script/**/*.webm
+output/*-script/**/*.wav
+output/*-script/**/*.mp3
+output/*-script/**/*.jpg
+output/*-script/**/*.jpeg
+output/*-script/**/*.png
+output/*-script/**/*.webp
+!output/*-script/**/.gitkeep
+
+# Local sound effects assets
+assets/sound_effects/*.wav
+assets/sound_effects/*.mp3
+!assets/sound_effects/.gitkeep
+

@@ -89,6 +89,13 @@ class TestFilenameHelpers(unittest.TestCase):
             MediaDownloader._infer_extension("https://x.com/file", "image"), ".jpg"
         )
 
+    def test_infer_extension_video_never_jpg(self):
+        self.assertEqual(MediaDownloader._infer_extension("https://x.com/movie.mp4", "video"), ".mp4")
+        self.assertEqual(MediaDownloader._infer_extension("https://x.com/movie.ogv", "video"), ".ogv")
+        self.assertEqual(MediaDownloader._infer_extension("https://x.com/movie.webm", "video"), ".webm")
+        self.assertEqual(MediaDownloader._infer_extension("https://x.com/movie", "video"), ".mp4")
+        self.assertEqual(MediaDownloader._infer_extension("https://x.com/movie.jpg", "video"), ".mp4")
+
     def test_resolve_collision_no_conflict(self):
         path = Path(self.tmp) / "test-001.jpg"
         result = self.dl._resolve_collision(path)
@@ -275,6 +282,53 @@ class TestDownloadBatch(unittest.TestCase):
 
         # Both items should be in sources.json
         self.assertEqual(len(data["assets"]), 2)
+
+    def test_test_h_downloader_video_extension(self):
+        """TEST H: MediaItem(media_type='video') with .mp4 URL must produce .mp4 filename, never .jpg."""
+        item = _make_item(
+            title="Normandy Archival Footage",
+            download_url="https://archive.org/download/normandy/normandy.mp4",
+            media_type="video",
+            provider="internet_archive",
+        )
+        with patch("urllib.request.urlopen", return_value=self._mock_response(b"FAKE_MP4_BYTES")):
+            report = self.dl.download_batch([item], folder="video-test", count=1)
+
+        self.assertEqual(report.success_count, 1)
+        dl_file = report.successful[0]
+        self.assertTrue(dl_file.filename.endswith(".mp4"), f"Expected .mp4 extension but got: {dl_file.filename}")
+        self.assertFalse(dl_file.filename.endswith(".jpg"))
+        self.assertEqual(dl_file.media_type, "video")
+
+    def test_downloader_rejects_html_for_video(self):
+        """Downloader should not save HTML directory responses as .mp4 files."""
+        item = _make_item(
+            title="Directory Listing",
+            download_url="https://archive.org/download/item/",
+            media_type="video",
+            provider="internet_archive",
+        )
+        html_bytes = b"<!DOCTYPE html><html><body>Directory contents</body></html>"
+        with patch("urllib.request.urlopen", return_value=self._mock_response(html_bytes)):
+            report = self.dl.download_batch([item], folder="html-test", count=1)
+
+        self.assertEqual(report.success_count, 0)
+        self.assertEqual(report.fail_count, 1)
+
+    def test_downloader_rejects_html_content_for_video(self):
+        """Downloader should inspect content and reject HTML responses even if URL lacks trailing slash."""
+        item = _make_item(
+            title="Fake Video HTML Response",
+            download_url="https://archive.org/download/item/fake.mp4",
+            media_type="video",
+            provider="internet_archive",
+        )
+        html_bytes = b"<!DOCTYPE html><html><body>Error or index</body></html>"
+        with patch("urllib.request.urlopen", return_value=self._mock_response(html_bytes)):
+            report = self.dl.download_batch([item], folder="html-test-2", count=1)
+
+        self.assertEqual(report.success_count, 0)
+        self.assertEqual(report.fail_count, 1)
 
 
 if __name__ == "__main__":

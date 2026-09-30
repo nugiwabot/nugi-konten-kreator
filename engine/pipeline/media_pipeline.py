@@ -114,19 +114,78 @@ class MediaPipeline:
         Args:
             request: Natural-language visual request.
             count: How many ranked results to return.
-            media_type: "image" | "video" | "any" (auto-detected if None).
+            media_type: "image" | "video" | "any" | "photo" (auto-detected if None).
 
         Returns:
             MediaSearchResult with ranked candidates.
         """
-        eq = self.expander.expand(request, media_type_override=media_type)
-        candidates = self._gather_candidates(eq, max_per_query=max(count, 5))
+        # Normalize media_type if provided
+        resolved_media: Optional[str] = None
+        if media_type:
+            m = media_type.lower().strip()
+            if m in ("video", "footage", "film", "rekaman"):
+                resolved_media = "video"
+            elif m in ("photo", "image", "foto", "gambar"):
+                resolved_media = "image"
+            elif m in ("any", "all", "semua"):
+                resolved_media = "any"
+            else:
+                resolved_media = m
 
+        eq = self.expander.expand(request, media_type_override=resolved_media)
+        detected_media = eq.detected_media_type
+        logger.info(
+            f"MediaPipeline.search: request='{request}', requested_media='{media_type}', "
+            f"resolved_media='{detected_media}'"
+        )
+
+        candidates = self._gather_candidates(eq, max_per_query=max(count, 5))
         logger.info(f"MediaPipeline.search: {len(candidates)} raw candidates gathered")
+
+        # Strict candidate filtering before ranking
+        video_count = sum(1 for c in candidates if (c.media_type or "").lower() == "video")
+        image_count = sum(1 for c in candidates if (c.media_type or "").lower() == "image")
+
+        filtered: List[MediaItem] = []
+        for item in candidates:
+            mtype = (item.media_type or "").lower()
+            if detected_media == "video":
+                if mtype != "video":
+                    continue
+                # For video, ensure download_url is valid and not a directory
+                if not item.download_url or item.download_url.endswith("/"):
+                    continue
+            elif detected_media in ("image", "photo"):
+                if mtype != "image":
+                    continue
+            else:
+                # "any": allow both image and video
+                if mtype in ("audio", "document"):
+                    continue
+            filtered.append(item)
+
+        removed_count = len(candidates) - len(filtered)
+        logger.info(
+            f"MediaPipeline: media_type='{detected_media}', raw_candidates={len(candidates)} "
+            f"(video={video_count}, image={image_count}), filtered_out={removed_count}, retained={len(filtered)}"
+        )
+
+        if not filtered and detected_media == "any":
+            filtered = candidates
+        elif not filtered:
+            return MediaSearchResult(
+                request=request,
+                expanded_queries=eq.all_queries,
+                candidates=[],
+                total_candidates_found=len(candidates),
+                embedding_used=False,
+                reranker_used=False,
+                fallback_reason=f"No matching candidates found for media_type='{detected_media}'.",
+            )
 
         ranked, fallback_reason = self.ranker.rank(
             original_request=request,
-            candidates=candidates,
+            candidates=filtered,
             top_n=count,
         )
 
@@ -276,10 +335,24 @@ class MediaPipeline:
         seen_keys: set = set()
         all_candidates: List[MediaItem] = []
 
+        providers_to_use = list(self.providers)
+        if eq.detected_media_type == "video":
+            # Pexafy NEVER supports video
+            providers_to_use = [p for p in providers_to_use if getattr(p, "PROVIDER_NAME", "") != "pexafy"]
+            # Internet Archive is primary for video, Wikimedia is secondary/fallback
+            def _prov_order(p):
+                name = getattr(p, "PROVIDER_NAME", "")
+                if name == "internet_archive":
+                    return 0
+                if name == "wikimedia":
+                    return 1
+                return 2
+            providers_to_use.sort(key=_prov_order)
+
         for query in eq.all_queries:
             if len(all_candidates) >= max_per_query:
                 break
-            for provider in self.providers:
+            for provider in providers_to_use:
                 if len(all_candidates) >= max_per_query:
                     break
                 try:
@@ -287,6 +360,12 @@ class MediaPipeline:
                         query=query,
                         media_type=eq.detected_media_type,
                         max_results=max_per_query,
+                    )
+                    v_cnt = sum(1 for it in items if (it.media_type or "").lower() == "video")
+                    img_cnt = sum(1 for it in items if (it.media_type or "").lower() == "image")
+                    logger.info(
+                        f"MediaPipeline: Provider {provider.PROVIDER_NAME} returned {len(items)} items "
+                        f"(video={v_cnt}, image={img_cnt}) for query='{query}'"
                     )
                     for item in items:
                         key = item.dedup_key()

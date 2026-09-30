@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kdenlivetitle width="1920" height="1080" duration="111" out="110">
+  <item type="QGraphicsRectItem" z-value="0">
+    <position x="216" y="327">
+      <transform>1,0,0,0,1,0,0,0,1</transform>
+    </position>
+    <content brushcolor="0,0,0,195" pencolor="0,0,0,0" penwidth="0" rect="0,0,1488,210" round="12"/>
+  </item>
+  <item type="QGraphicsTextItem" z-value="1">
+    <position x="261" y="352">
+      <transform>1,0,0,0,1,0,0,0,1</transform>
+    </position>
+    <content font="Arial, Sans-Serif" font-size="64" font-weight="87" font-bold="1" font-italic="0" font-underline="0" font-color="255,212,0,255" outline="0,0,0,220" outline-width="2.5" shadow="0,0,0,200;2;2;5" alignment="4" boxwidth="1448" boxheight="190" letter-spacing="1" line-spacing="0">YAITU BAGI SEBAGIAN ORANG TERASA SANGAT
+BERBEDA DARI APARTEMEN.</content>
+  </item>
+  <startviewport rect="0,0,1920,1080"/>
+  <endviewport rect="0,0,1920,1080"/>
+</kdenlivetitle>

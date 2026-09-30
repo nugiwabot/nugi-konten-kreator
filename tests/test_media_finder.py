@@ -99,10 +99,11 @@ class FakeDownloader:
     def download_batch(self, items: List[MediaItem], folder: str, count: int = 5) -> DownloadReport:
         successful = []
         for idx, item in enumerate(items[:count], 1):
+            ext = ".mp4" if getattr(item, "media_type", "image") == "video" else ".jpg"
             successful.append(
                 DownloadedFile(
-                    filename=f"file_{idx:03d}.jpg",
-                    local_path=f"assets/media/{folder}/file_{idx:03d}.jpg",
+                    filename=f"file_{idx:03d}{ext}",
+                    local_path=f"assets/media/{folder}/file_{idx:03d}{ext}",
                     provider=item.provider,
                     source_url=item.source_url,
                     download_url=item.download_url,
@@ -111,6 +112,7 @@ class FakeDownloader:
                     date=item.date,
                     license=item.license,
                     retrieved_at="2026-09-28T00:00:00Z",
+                    media_type=item.media_type,
                 )
             )
         return DownloadReport(
@@ -250,8 +252,16 @@ class TestMediaFinder(unittest.TestCase):
         combined_queries = " ".join(res.queries).lower()
         self.assertTrue("conceptual" in combined_queries or "speculative" in combined_queries or "future" in combined_queries)
 
-    # 8. Video request
+    # 8. Video request (TEST A)
     def test_video_request(self):
+        """TEST A: Explicit video request.
+        assert:
+        - result.media_type == 'video'
+        - pexafy not called
+        - internet_archive called
+        - wikimedia can be called
+        - all result.media_type == 'video'
+        """
         res = self.finder.find(
             request="rekaman sejarah perang dunia",
             media="video",
@@ -265,8 +275,78 @@ class TestMediaFinder(unittest.TestCase):
         # Providers returning video
         self.assertIn("internet_archive", res.providers_contacted)
         self.assertIn("wikimedia", res.providers_contacted)
+        self.assertGreater(len(res.results), 0)
         for item in res.results:
             self.assertEqual(item.media_type, "video")
+
+    def test_test_b_microbeat_video(self):
+        """TEST B: Microbeat with preferred_media_type='video' preserves video media_type,
+        returns only video candidates, and generated queries contain video terminology cues."""
+        microbeat = {
+            "visual_concept": "Pendaratan pasukan di Normandia",
+            "search_query": "D-Day Normandy landing",
+            "preferred_media_type": "video",
+            "era": "historical",
+            "style": "archival",
+        }
+        res = self.finder.find_from_microbeat(microbeat)
+        self.assertEqual(res.media_type, "video")
+        self.assertGreater(len(res.results), 0)
+        for item in res.results:
+            self.assertEqual(item.media_type, "video")
+        # Check generated query cues
+        combined_queries = " ".join(res.queries).lower()
+        video_cues = ["footage", "film", "newsreel", "archival footage", "motion picture"]
+        self.assertTrue(
+            any(cue in combined_queries for cue in video_cues),
+            f"Expected video cue in queries, got: {res.queries}"
+        )
+
+    def test_test_c_video_query_generation(self):
+        """TEST C: Video query generation for video + archival must NOT generate
+        'historical photograph' as the only signal; it must include video intent cues."""
+        queries = self.finder._generate_query_intelligence(
+            request="rekaman sejarah perang dunia",
+            era="historical",
+            style="archival",
+            media="video",
+        )
+        combined = " ".join(queries).lower()
+        self.assertNotIn("historical photograph", combined)
+        self.assertNotIn("photograph", combined)
+        video_cues = ["footage", "film", "newsreel", "motion picture", "video"]
+        self.assertTrue(
+            any(cue in combined for cue in video_cues),
+            f"Expected video cue in query generation, got: {queries}"
+        )
+
+    def test_test_d_photo_regression(self):
+        """TEST D: Photo request must produce media_type == 'image' and not be broken by video fixes."""
+        res = self.finder.find(
+            request="foto tentara sekutu di normandia",
+            media="photo",
+            era="historical",
+            style="archival",
+            count=5,
+        )
+        self.assertEqual(res.media_type, "photo")
+        self.assertGreater(len(res.results), 0)
+        for item in res.results:
+            self.assertEqual(item.media_type, "image")
+
+    def test_test_e_any_behavior(self):
+        """TEST E: media='any' can accept both image and video candidates; do not force video-only."""
+        res = self.finder.find(
+            request="sejarah peradaban kuno",
+            media="any",
+            era="historical",
+            style="documentary",
+            count=10,
+        )
+        self.assertEqual(res.media_type, "any")
+        types_in_results = {item.media_type for item in res.results}
+        self.assertIn("video", types_in_results)
+        self.assertIn("image", types_in_results)
 
     # 9. Auto detection
     def test_auto_detection_historical(self):

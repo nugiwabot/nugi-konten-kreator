@@ -184,7 +184,7 @@ def cmd_media_search(args):
     from engine.pipeline.media_pipeline import MediaPipeline
     request = args.request
     count = args.count
-    media_type = args.type or None
+    media_type = getattr(args, "media", None) or getattr(args, "type", None) or None
 
     print(f"\n[Media Search] '{request}'")
     print(f"  Count: {count} | Type: {media_type or 'auto-detect'}\n")
@@ -216,7 +216,7 @@ def cmd_media_download(args):
     request = args.request
     count = args.count
     folder = args.folder
-    media_type = args.type or None
+    media_type = getattr(args, "media", None) or getattr(args, "type", None) or None
     max_size = args.max_size_mb
 
     print(f"\n[Media Download] '{request}'")
@@ -251,8 +251,9 @@ def cmd_media_download(args):
     if report.successful:
         print(f"\n✅ Downloaded files:")
         for df in report.successful:
+            mtype = getattr(df, "media_type", "") or ("video" if df.filename.endswith((".mp4", ".ogv", ".webm", ".avi", ".mov", ".mpg", ".mpeg")) else "image")
             print(f"  [{df.final_rank}] {df.filename}")
-            print(f"        Provider: {df.provider} | Type: N/A")
+            print(f"        Provider: {df.provider} | Type: {mtype}")
             print(f"        Title: {df.title[:60]}")
             print(f"        Size: {df.file_size_bytes / 1024:.1f} KB | "
                   f"Rerank: {df.reranker_score:.3f}")
@@ -317,7 +318,7 @@ def cmd_media_find(args):
 
     finder = MediaFinder()
     query = getattr(args, "query", "") or ""
-    media = getattr(args, "media", "any")
+    media = getattr(args, "media", None) or getattr(args, "type", None) or "any"
     era = getattr(args, "era", "auto")
     style = getattr(args, "style", "auto")
     count = getattr(args, "count", 8)
@@ -631,8 +632,10 @@ def main():
                       help="Natural-language visual request, e.g. 'D-Day 1944 Normandy'")
     p_ms.add_argument("--count", type=int, default=10,
                       help="Number of results to return (default: 10)")
-    p_ms.add_argument("--type", choices=["image", "video", "any"],
-                      default=None, help="Force media type (auto-detected if omitted)")
+    p_ms.add_argument("--type", choices=["image", "photo", "video", "any"],
+                      default=None, help="Force media type: image | video | any (auto-detected if omitted)")
+    p_ms.add_argument("--media", choices=["photo", "image", "video", "any"],
+                      default=None, help="Media type alias (default: auto)")
     p_ms.set_defaults(func=cmd_media_search)
 
     # media download
@@ -643,8 +646,10 @@ def main():
                       help="Number of files to download (default: 5)")
     p_md.add_argument("--folder", type=str, default="general",
                       help="Destination folder under assets/media/ (default: general)")
-    p_md.add_argument("--type", choices=["image", "video", "any"],
-                      default=None, help="Force media type (auto-detected if omitted)")
+    p_md.add_argument("--type", choices=["image", "photo", "video", "any"],
+                      default=None, help="Force media type: image | video | any (auto-detected if omitted)")
+    p_md.add_argument("--media", choices=["photo", "image", "video", "any"],
+                      default=None, help="Media type alias (default: auto)")
     p_md.add_argument("--max-size-mb", type=int, default=500,
                       help="Maximum file size in MB (default: 500)")
     p_md.set_defaults(func=cmd_media_download)
@@ -669,7 +674,8 @@ def main():
     p_mfind = media_sub.add_parser("find", help="Find photos and videos with MediaFinder")
     p_mfind.add_argument("pos_query", nargs="?", default="", help="Natural-language visual request")
     p_mfind.add_argument("--query", "-q", dest="opt_query", type=str, default=None, help="Query option")
-    p_mfind.add_argument("--media", "-m", choices=["photo", "video", "any"], default="any", help="Media type (default: any)")
+    p_mfind.add_argument("--media", "-m", choices=["photo", "image", "video", "any"], default="any", help="Media type: photo | video | any (default: any)")
+    p_mfind.add_argument("--type", "-t", choices=["photo", "image", "video", "any"], default=None, help="Media type alias")
     p_mfind.add_argument("--era", "-e", choices=["historical", "past", "present", "future", "timeless", "auto"], default="auto", help="Era hint (default: auto)")
     p_mfind.add_argument("--style", "-s", choices=["formal", "neutral", "documentary", "archival", "cinematic", "conceptual", "auto"], default="auto", help="Visual style hint (default: auto)")
     p_mfind.add_argument("--count", "-n", type=int, default=8, help="Number of results (default: 8)")
@@ -697,8 +703,10 @@ def main():
     )
     p_mf.add_argument("--query", "-q", type=str, required=True,
                       help="Natural-language visual request")
-    p_mf.add_argument("--media", "-m", choices=["photo", "video", "any"], default="any",
+    p_mf.add_argument("--media", "-m", choices=["photo", "image", "video", "any"], default="any",
                       help="Media type: photo | video | any (default: any)")
+    p_mf.add_argument("--type", "-t", choices=["photo", "image", "video", "any"], default=None,
+                      help="Media type alias")
     p_mf.add_argument("--era", "-e",
                       choices=["historical", "past", "present", "future", "timeless", "auto"],
                       default="auto", help="Era hint (default: auto)")

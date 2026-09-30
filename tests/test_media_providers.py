@@ -319,17 +319,58 @@ class TestInternetArchiveProvider(unittest.TestCase):
         self.assertEqual(filename, "small_video.mp4")
         self.assertEqual(size, 1000000)
 
-    def test_pick_best_file_returns_empty_when_no_media_files(self):
+    def test_test_f_internet_archive_file_selection(self):
+        """TEST F: Mock metadata with thumbnail.jpg, metadata.xml, sample.mp4, sample.ogv, source.zip.
+        Ensure provider selects the correct video file (.mp4 over .ogv and ignores images/zips)."""
         from engine.providers.internet_archive_provider import InternetArchiveProvider
 
         provider = InternetArchiveProvider()
         files = [
-            {"name": "metadata.xml", "size": "100"},
-            {"name": "torrent.torrent", "size": "200"},
+            {"name": "thumbnail.jpg", "size": "15000", "format": "JPEG"},
+            {"name": "metadata.xml", "size": "1000", "format": "Metadata"},
+            {"name": "sample.ogv", "size": "15000000", "format": "Ogg Video"},
+            {"name": "sample.mp4", "size": "10000000", "format": "MPEG4"},
+            {"name": "source.zip", "size": "50000000", "format": "ZIP"},
         ]
+        filename, size = provider._pick_best_file(files, "video")
+        self.assertEqual(filename, "sample.mp4")
+        self.assertEqual(size, 10000000)
+
+    def test_test_g_no_valid_video_file(self):
+        """TEST G: If an Internet Archive item of type movies has no suitable video file,
+        do NOT generate a fake .mp4 from directory URL. Candidate must be skipped/None."""
+        from engine.providers.internet_archive_provider import InternetArchiveProvider
+
+        provider = InternetArchiveProvider()
+        files = [
+            {"name": "thumbnail.jpg", "size": "15000"},
+            {"name": "metadata.xml", "size": "1000"},
+            {"name": "source.zip", "size": "50000000"},
+            {"name": "item.torrent", "size": "5000"},
+        ]
+        # _pick_best_file should return empty
         filename, size = provider._pick_best_file(files, "video")
         self.assertEqual(filename, "")
         self.assertEqual(size, 0)
+
+        # _doc_to_media_item should return None (not a fake directory URL or fake .mp4)
+        mock_meta = {
+            "metadata": {
+                "identifier": "item-without-video",
+                "title": "Movie without video files",
+                "mediatype": "movies",
+            },
+            "files": files,
+        }
+        with patch("engine.providers.internet_archive_provider._ia_get", return_value=mock_meta):
+            item = provider._doc_to_media_item(
+                {"identifier": "item-without-video", "title": "Movie without video files", "mediatype": "movies"},
+                mediatype_hint="movies",
+            )
+            self.assertIsNone(item, "Candidate without downloadable video files must be skipped (return None)")
+
+            item_meta = provider._fetch_item_metadata("item-without-video")
+            self.assertIsNone(item_meta, "Metadata fetch for video item without video files must return None")
 
 
 if __name__ == "__main__":

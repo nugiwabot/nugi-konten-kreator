@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mlt LC_NUMERIC="C" version="7.41.0" title="AutoEdit_02-script" producer="main_bin">
+  <profile description="Custom 1920x1080 30.00fps" width="1920" height="1080" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="16" display_aspect_den="9" frame_rate_num="30000" frame_rate_den="1000" colorspace="709"/>
+  <playlist id="main_bin">
+    <entry producer="producer_main"/>
+    <entry producer="producer_broll_01"/>
+    <entry producer="producer_broll_02"/>
+    <entry producer="producer_broll_03"/>
+    <entry producer="producer_broll_04"/>
+    <entry producer="producer_broll_05"/>
+    <entry producer="producer_broll_06"/>
+    <entry producer="producer_broll_07"/>
+    <entry producer="producer_broll_08"/>
+    <entry producer="producer_broll_09"/>
+    <entry producer="producer_broll_10"/>
+    <entry producer="producer_broll_11"/>
+    <entry producer="producer_broll_12"/>
+    <entry producer="producer_broll_13"/>
+    <entry producer="producer_broll_14"/>
+    <entry producer="producer_broll_15"/>
+    <entry producer="producer_broll_16"/>
+    <entry producer="producer_broll_17"/>
+    <entry producer="producer_broll_18"/>
+    <entry producer="producer_broll_19"/>
+    <entry producer="producer_broll_20"/>
+    <entry producer="producer_broll_21"/>
+    <entry producer="producer_broll_22"/>
+    <entry producer="producer_broll_23"/>
+    <entry producer="producer_broll_24"/>
+    <entry producer="producer_broll_25"/>
+    <entry producer="producer_broll_26"/>
+    <entry producer="producer_broll_27"/>
+    <entry producer="producer_broll_28"/>
+    <entry producer="producer_broll_29"/>
+    <entry producer="producer_broll_30"/>
+    <entry producer="producer_broll_31"/>
+    <entry producer="producer_broll_32"/>
+    <entry producer="producer_broll_33"/>
+    <entry producer="producer_broll_34"/>
+    <entry producer="producer_broll_35"/>
+    <entry producer="producer_broll_36"/>
+    <entry producer="producer_broll_37"/>
+    <entry producer="producer_broll_38"/>
+    <entry producer="producer_broll_39"/>
+    <entry producer="producer_broll_40"/>
+    <entry producer="producer_broll_41"/>
+    <entry producer="producer_broll_42"/>
+    <entry producer="producer_broll_43"/>
+    <entry producer="producer_broll_44"/>
+    <entry producer="producer_broll_45"/>
+    <entry producer="producer_broll_46"/>
+    <entry producer="producer_broll_47"/>
+    <entry producer="producer_broll_48"/>
+    <entry producer="producer_broll_49"/>
+    <entry producer="producer_broll_50"/>
+    <entry producer="producer_broll_51"/>
+    <entry producer="producer_broll_52"/>
+    <entry producer="producer_broll_53"/>
+    <entry producer="producer_broll_54"/>
+    <entry producer="producer_broll_55"/>
+    <entry producer="producer_broll_56"/>
+    <entry producer="producer_broll_57"/>
+    <entry producer="producer_broll_58"/>
+    <entry producer="producer_broll_59"/>
+    <entry producer="producer_broll_60"/>
+    <entry producer="producer_broll_61"/>
+    <entry producer="producer_broll_62"/>
+    <entry producer="producer_broll_63"/>
+    <entry producer="producer_broll_64"/>
+    <entry producer="producer_broll_65"/>
+    <entry producer="producer_broll_66"/>
+    <entry producer="producer_broll_67"/>
+    <entry producer="producer_broll_68"/>
+    <entry producer="producer_broll_69"/>
+    <entry producer="producer_broll_70"/>
+    <entry producer="producer_broll_71"/>
+    <entry producer="producer_broll_72"/>
+    <entry producer="producer_broll_73"/>
+    <entry producer="producer_broll_74"/>
+    <entry producer="producer_broll_75"/>
+    <entry producer="producer_broll_76"/>
+    <entry producer="producer_broll_77"/>
+    <entry producer="producer_broll_78"/>
+    <entry producer="producer_broll_79"/>
+    <entry producer="producer_broll_80"/>
+    <entry producer="producer_broll_81"/>
+    <entry producer="producer_broll_82"/>
+    <entry producer="producer_broll_83"/>
+    <entry producer="producer_broll_84"/>
+    <entry producer="producer_broll_85"/>
+    <entry producer="producer_broll_86"/>
+    <entry producer="producer_broll_87"/>
+    <entry producer="producer_broll_88"/>
+    <entry producer="producer_broll_89"/>
+    <entry producer="producer_broll_90"/>
+    <entry producer="producer_broll_91"/>
+    <entry producer="producer_broll_92"/>
+    <entry producer="producer_broll_93"/>
+    <entry producer="producer_broll_94"/>
+    <entry producer="producer_broll_95"/>
+    <entry producer="producer_broll_96"/>
+    <entry producer="producer_broll_97"/>
+    <entry producer="producer_broll_98"/>
+    <entry producer="producer_broll_99"/>
+    <entry producer="producer_broll_100"/>
+    <entry producer="producer_broll_101"/>
+    <entry producer="producer_broll_102"/>
+    <entry producer="producer_broll_103"/>
+  </playlist>
+  <producer id="producer_main" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../footage/video 2 - inshot.mp4</property>
+    <property name="kdenlive:clipname">video 2 - inshot.mp4</property>
+  </producer>
+  <producer id="producer_broll_01" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/048_Cara kerja ketiga Tanah bukan lagi cuma tempat tinggal - dia.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">048_Cara kerja ketiga Tanah bukan lagi cuma tempat tinggal - dia.jpg</property>
+  </producer>
+  <producer id="producer_broll_02" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/010_Gaji rata-rata pekerja formal naik sekitar 5–7% per tahun - itu.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">010_Gaji rata-rata pekerja formal naik sekitar 5–7% per tahun - itu.jpg</property>
+  </producer>
+  <producer id="producer_broll_03" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/074_Yang paling langsung terasa anak muda semakin susah beli rumah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">074_Yang paling langsung terasa anak muda semakin susah beli rumah.jpg</property>
+  </producer>
+  <producer id="producer_broll_04" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/001_Saya mau mulai dengan pertanyaan yang mungkin kedengarannya.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">001_Saya mau mulai dengan pertanyaan yang mungkin kedengarannya.jpg</property>
+  </producer>
+  <producer id="producer_broll_05" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/100_Tapi ada satu pertanyaan yang saya pikir layak kita bawa pulang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">100_Tapi ada satu pertanyaan yang saya pikir layak kita bawa pulang.jpg</property>
+  </producer>
+  <producer id="producer_broll_06" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/002_Pernahkah kamu ketemu orang yang kaya bukan karena kerja keras,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">002_Pernahkah kamu ketemu orang yang kaya bukan karena kerja keras,.jpg</property>
+  </producer>
+  <producer id="producer_broll_07" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/032_Ketika pemerintah bangun infrastruktur - jalan tol baru, stasiun.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">032_Ketika pemerintah bangun infrastruktur - jalan tol baru, stasiun.jpg</property>
+  </producer>
+  <producer id="producer_broll_08" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/051_Keluarga punya rumah untuk berlindung..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">051_Keluarga punya rumah untuk berlindung..jpg</property>
+  </producer>
+  <producer id="producer_broll_09" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/009_Data dari Bank Indonesia menunjukkan bahwa kenaikan harga.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">009_Data dari Bank Indonesia menunjukkan bahwa kenaikan harga.jpg</property>
+  </producer>
+  <producer id="producer_broll_10" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/004_Mungkin tetangga tua yang tiba-tiba tanahnya dibeli.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">004_Mungkin tetangga tua yang tiba-tiba tanahnya dibeli.jpg</property>
+  </producer>
+  <producer id="producer_broll_11" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/027_Mereka tidak menjawab kenapa tanah naik jauh lebih cepat.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">027_Mereka tidak menjawab kenapa tanah naik jauh lebih cepat.jpg</property>
+  </producer>
+  <producer id="producer_broll_12" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/038_Ini cara sistem bekerja yang sudah lama terjadi..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">038_Ini cara sistem bekerja yang sudah lama terjadi..jpg</property>
+  </producer>
+  <producer id="producer_broll_13" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/086_Kesadaran pertama harga tanah yang terus naik bukan hukum alam..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">086_Kesadaran pertama harga tanah yang terus naik bukan hukum alam..jpg</property>
+  </producer>
+  <producer id="producer_broll_14" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/006_Orang yang produktif, berkontribusi nyata, tapi harga tanah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">006_Orang yang produktif, berkontribusi nyata, tapi harga tanah.jpg</property>
+  </producer>
+  <producer id="producer_broll_15" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/008_Ini terjadi dengan konsisten dan terukur..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">008_Ini terjadi dengan konsisten dan terukur..jpg</property>
+  </producer>
+  <producer id="producer_broll_16" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/046_Tanah itu bisa jadi perumahan, bisa jadi ruang usaha, bisa jadi.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">046_Tanah itu bisa jadi perumahan, bisa jadi ruang usaha, bisa jadi.jpg</property>
+  </producer>
+  <producer id="producer_broll_17" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/097_Dan selama sistemnya nggak berubah, perilakunya tidak akan.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">097_Dan selama sistemnya nggak berubah, perilakunya tidak akan.jpg</property>
+  </producer>
+  <producer id="producer_broll_18" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/090_Kesadaran kedua nilai tanah sebagian besar adalah nilai.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">090_Kesadaran kedua nilai tanah sebagian besar adalah nilai.jpg</property>
+  </producer>
+  <producer id="producer_broll_19" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/017_Penjelasan pertama yang paling umum tanah itu terbatas,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">017_Penjelasan pertama yang paling umum tanah itu terbatas,.jpg</property>
+  </producer>
+  <producer id="producer_broll_20" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/018_Sementara manusia terus bertambah, luas daratan tetap sama..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">018_Sementara manusia terus bertambah, luas daratan tetap sama..jpg</property>
+  </producer>
+  <producer id="producer_broll_21" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/021_Penjelasan kedua kota tumbuh, infrastruktur dibangun..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">021_Penjelasan kedua kota tumbuh, infrastruktur dibangun..jpg</property>
+  </producer>
+  <producer id="producer_broll_22" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/035_Tanah di sekitar stasiun itu tiba-tiba naik 300%..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">035_Tanah di sekitar stasiun itu tiba-tiba naik 300%..jpg</property>
+  </producer>
+  <producer id="producer_broll_23" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/022_Tanah yang dulu ada di pinggiran tiba-tiba jadi strategis karena.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">022_Tanah yang dulu ada di pinggiran tiba-tiba jadi strategis karena.jpg</property>
+  </producer>
+  <producer id="producer_broll_24" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/024_Penjelasan ketiga inflasi..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">024_Penjelasan ketiga inflasi..jpg</property>
+  </producer>
+  <producer id="producer_broll_25" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/025_Ketika nilai uang turun dari waktu ke waktu, aset nyata seperti.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">025_Ketika nilai uang turun dari waktu ke waktu, aset nyata seperti.jpg</property>
+  </producer>
+  <producer id="producer_broll_26" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/072_Yang artinya orang yang belum punya tanah merasa semakin.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">072_Yang artinya orang yang belum punya tanah merasa semakin.jpg</property>
+  </producer>
+  <producer id="producer_broll_27" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/029_Dan mereka tidak menjawab kenapa di hampir semua kota besar di.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">029_Dan mereka tidak menjawab kenapa di hampir semua kota besar di.jpg</property>
+  </producer>
+  <producer id="producer_broll_28" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/052_Tapi dalam beberapa dekade terakhir - sejak arus modal keuangan.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">052_Tapi dalam beberapa dekade terakhir - sejak arus modal keuangan.jpg</property>
+  </producer>
+  <producer id="producer_broll_29" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/030_Ada empat cara kerja sistem yang, kalau kita lihat secara.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">030_Ada empat cara kerja sistem yang, kalau kita lihat secara.jpg</property>
+  </producer>
+  <producer id="producer_broll_30" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/031_Cara kerja pertama Negara bangun, pemilik tanah yang untung..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">031_Cara kerja pertama Negara bangun, pemilik tanah yang untung..jpg</property>
+  </producer>
+  <producer id="producer_broll_31" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/020_Dan ini memang jadi fondasi mengapa tanah punya nilai..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">020_Dan ini memang jadi fondasi mengapa tanah punya nilai..jpg</property>
+  </producer>
+  <producer id="producer_broll_32" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/041_Di banyak negara maju, tanah dikenakan pajak tahunan berdasarkan.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">041_Di banyak negara maju, tanah dikenakan pajak tahunan berdasarkan.jpg</property>
+  </producer>
+  <producer id="producer_broll_33" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/034_Bayangkan situasi ini Pemerintah bangun stasiun KRL baru pakai.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">034_Bayangkan situasi ini Pemerintah bangun stasiun KRL baru pakai.jpg</property>
+  </producer>
+  <producer id="producer_broll_34" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/037_Pemilik tanah yang sudah ada di sana sebelumnya - atau yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">037_Pemilik tanah yang sudah ada di sana sebelumnya - atau yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_35" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/044_Akibatnya, sangat murah dan gampang untuk simpan tanah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">044_Akibatnya, sangat murah dan gampang untuk simpan tanah.jpg</property>
+  </producer>
+  <producer id="producer_broll_36" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/061_Di kota-kota besar, polanya sama lahan-lahan luas di lokasi.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">061_Di kota-kota besar, polanya sama lahan-lahan luas di lokasi.jpg</property>
+  </producer>
+  <producer id="producer_broll_37" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/095_Pemilik tanah yang tahan tanahnya untuk untung.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">095_Pemilik tanah yang tahan tanahnya untuk untung.jpg</property>
+  </producer>
+  <producer id="producer_broll_38" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/049_Ini pergeseran yang signifikan dan relatif baru dalam sejarah..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">049_Ini pergeseran yang signifikan dan relatif baru dalam sejarah..jpg</property>
+  </producer>
+  <producer id="producer_broll_39" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/063_Penelitian dari LPEM UI - Lembaga Penyelidikan Ekonomi dan.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">063_Penelitian dari LPEM UI - Lembaga Penyelidikan Ekonomi dan.jpg</property>
+  </producer>
+  <producer id="producer_broll_40" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/039_Dan yang memperparah sering ada ketimpangan informasi yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">039_Dan yang memperparah sering ada ketimpangan informasi yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_41" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/064_Artinya, distribusi tanah lebih nggak merata dibanding.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">064_Artinya, distribusi tanah lebih nggak merata dibanding.jpg</property>
+  </producer>
+  <producer id="producer_broll_42" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/050_Petani punya tanah untuk bercocok tanam..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">050_Petani punya tanah untuk bercocok tanam..jpg</property>
+  </producer>
+  <producer id="producer_broll_43" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/078_Negara yang terlalu banyak uangnya parkir di tanah yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">078_Negara yang terlalu banyak uangnya parkir di tanah yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_44" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/036_Siapa yang dapat untungnya.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">036_Siapa yang dapat untungnya.jpg</property>
+  </producer>
+  <producer id="producer_broll_45" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/099_Saya nggak naif untuk berpikir ada solusi gampang untuk.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">099_Saya nggak naif untuk berpikir ada solusi gampang untuk.jpg</property>
+  </producer>
+  <producer id="producer_broll_46" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/005_Mungkin keluarga yang mewarisi sebidang lahan yang nilainya naik.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">005_Mungkin keluarga yang mewarisi sebidang lahan yang nilainya naik.jpg</property>
+  </producer>
+  <producer id="producer_broll_47" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/088_Ada pilihan yang dibuat - dalam sistem perpajakan, dalam.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">088_Ada pilihan yang dibuat - dalam sistem perpajakan, dalam.jpg</property>
+  </producer>
+  <producer id="producer_broll_48" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/093_Dalam arti yang sangat nyata, nilai tanah adalah milik.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">093_Dalam arti yang sangat nyata, nilai tanah adalah milik.jpg</property>
+  </producer>
+  <producer id="producer_broll_49" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/062_Mari kita kasih angka pada semua ini biar lebih konkret..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">062_Mari kita kasih angka pada semua ini biar lebih konkret..jpg</property>
+  </producer>
+  <producer id="producer_broll_50" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/047_Tapi dibiarkan kosong - karena pemiliknya nggak ada.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">047_Tapi dibiarkan kosong - karena pemiliknya nggak ada.jpg</property>
+  </producer>
+  <producer id="producer_broll_51" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/066_Di level yang lebih personal seseorang yang beli tanah di.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">066_Di level yang lebih personal seseorang yang beli tanah di.jpg</property>
+  </producer>
+  <producer id="producer_broll_52" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/053_Bukan hanya oleh individu, tapi oleh perusahaan besar, dana.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">053_Bukan hanya oleh individu, tapi oleh perusahaan besar, dana.jpg</property>
+  </producer>
+  <producer id="producer_broll_53" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/071_Dan yang paling ironis satu-satunya cara menang dalam sistem ini.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">071_Dan yang paling ironis satu-satunya cara menang dalam sistem ini.jpg</property>
+  </producer>
+  <producer id="producer_broll_54" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/040_Cara kerja kedua Pajaknya terlalu murah buat bikin orang.png</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">040_Cara kerja kedua Pajaknya terlalu murah buat bikin orang.png</property>
+  </producer>
+  <producer id="producer_broll_55" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/055_Permintaan berlapis-lapis ini mendorong harga terus naik -.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">055_Permintaan berlapis-lapis ini mendorong harga terus naik -.jpg</property>
+  </producer>
+  <producer id="producer_broll_56" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/104_Ini bukan pertanyaan yang nyaman..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">104_Ini bukan pertanyaan yang nyaman..jpg</property>
+  </producer>
+  <producer id="producer_broll_57" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/079_Dampak ketiga, yang paling dalam keberuntungan lahir jadi.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">079_Dampak ketiga, yang paling dalam keberuntungan lahir jadi.jpg</property>
+  </producer>
+  <producer id="producer_broll_58" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/056_Cara kerja keempat Warisan sejarah yang panjang..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">056_Cara kerja keempat Warisan sejarah yang panjang..jpg</property>
+  </producer>
+  <producer id="producer_broll_59" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/012_Tapi pertanyaan yang jarang dijawab secara jujur kenapa ini.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">012_Tapi pertanyaan yang jarang dijawab secara jujur kenapa ini.jpg</property>
+  </producer>
+  <producer id="producer_broll_60" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/058_Ia adalah hasil dari sistem agraria kolonial Belanda yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">058_Ia adalah hasil dari sistem agraria kolonial Belanda yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_61" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/014_Atau ada sistem tertentu - yang sengaja dibentuk atau tidak.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">014_Atau ada sistem tertentu - yang sengaja dibentuk atau tidak.jpg</property>
+  </producer>
+  <producer id="producer_broll_62" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/059_Reforma agraria yang dijanjikan sejak merdeka tidak pernah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">059_Reforma agraria yang dijanjikan sejak merdeka tidak pernah.jpg</property>
+  </producer>
+  <producer id="producer_broll_63" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/080_Dalam sistem ini, apakah kamu lahir dari keluarga yang sudah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">080_Dalam sistem ini, apakah kamu lahir dari keluarga yang sudah.jpg</property>
+  </producer>
+  <producer id="producer_broll_64" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/045_Ini masalah besar..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">045_Ini masalah besar..jpg</property>
+  </producer>
+  <producer id="producer_broll_65" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/028_Mereka tidak menjawab kenapa seseorang yang tidak berbuat.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">028_Mereka tidak menjawab kenapa seseorang yang tidak berbuat.jpg</property>
+  </producer>
+  <producer id="producer_broll_66" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/092_Ia bernilai tinggi karena jutaan orang lain membangun kota,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">092_Ia bernilai tinggi karena jutaan orang lain membangun kota,.jpg</property>
+  </producer>
+  <producer id="producer_broll_67" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/091_Tanah kamu bernilai tinggi bukan karena kamu melakukan.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">091_Tanah kamu bernilai tinggi bukan karena kamu melakukan.jpg</property>
+  </producer>
+  <producer id="producer_broll_68" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/060_Data pertanian BPS secara konsisten menunjukkan bahwa.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">060_Data pertanian BPS secara konsisten menunjukkan bahwa.jpg</property>
+  </producer>
+  <producer id="producer_broll_69" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/042_Kamu terdorong untuk pakai tanahnya - bangun sesuatu,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">042_Kamu terdorong untuk pakai tanahnya - bangun sesuatu,.jpg</property>
+  </producer>
+  <producer id="producer_broll_70" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/013_Apakah ini hukum alam.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">013_Apakah ini hukum alam.jpg</property>
+  </producer>
+  <producer id="producer_broll_71" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/011_Matematikanya sederhana dan cukup pahit kalau gaji naik 5% tapi.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">011_Matematikanya sederhana dan cukup pahit kalau gaji naik 5% tapi.jpg</property>
+  </producer>
+  <producer id="producer_broll_72" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/077_Dampak kedua modal yang seharusnya bisa buat sesuatu yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">077_Dampak kedua modal yang seharusnya bisa buat sesuatu yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_73" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/070_Ini observasi tentang betapa tidak seimbangnya sistem hadiah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">070_Ini observasi tentang betapa tidak seimbangnya sistem hadiah.jpg</property>
+  </producer>
+  <producer id="producer_broll_74" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/075_Ketika tanah dan properti sudah berperilaku seperti instrumen.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">075_Ketika tanah dan properti sudah berperilaku seperti instrumen.jpg</property>
+  </producer>
+  <producer id="producer_broll_75" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/101_Ketika kita bilang seseorang sukses karena tanahnya naik.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">101_Ketika kita bilang seseorang sukses karena tanahnya naik.jpg</property>
+  </producer>
+  <producer id="producer_broll_76" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/003_Saya yakin banyak dari kita bisa langsung kepikiran.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">003_Saya yakin banyak dari kita bisa langsung kepikiran.jpg</property>
+  </producer>
+  <producer id="producer_broll_77" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/098_Saya tidak sedang mengadvokasi sistem tertentu di sini..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">098_Saya tidak sedang mengadvokasi sistem tertentu di sini..jpg</property>
+  </producer>
+  <producer id="producer_broll_78" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/076_Mereka yang lahir tanpa warisan tanah atau properti dari.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">076_Mereka yang lahir tanpa warisan tanah atau properti dari.jpg</property>
+  </producer>
+  <producer id="producer_broll_79" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/007_Ini bukan cerita yang kebetulan..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">007_Ini bukan cerita yang kebetulan..jpg</property>
+  </producer>
+  <producer id="producer_broll_80" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/033_Ini hal yang normal dan sudah bisa diprediksi..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">033_Ini hal yang normal dan sudah bisa diprediksi..jpg</property>
+  </producer>
+  <producer id="producer_broll_81" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/043_Di Indonesia, Pajak Bumi dan Bangunan yang ada sering kali nggak.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">043_Di Indonesia, Pajak Bumi dan Bangunan yang ada sering kali nggak.jpg</property>
+  </producer>
+  <producer id="producer_broll_82" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/085_Ini warisan kekayaan yang terus diperkuat oleh sistem yang ada..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">085_Ini warisan kekayaan yang terus diperkuat oleh sistem yang ada..jpg</property>
+  </producer>
+  <producer id="producer_broll_83" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/065_Ada juga riset dari Lincoln Institute of Land Policy - lembaga.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">065_Ada juga riset dari Lincoln Institute of Land Policy - lembaga.jpg</property>
+  </producer>
+  <producer id="producer_broll_84" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/015_Jawabannya lebih mengusik dari yang kebanyakan orang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">015_Jawabannya lebih mengusik dari yang kebanyakan orang.jpg</property>
+  </producer>
+  <producer id="producer_broll_85" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/103_Atau kegagalan sistem yang tidak pernah kita rancang ulang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">103_Atau kegagalan sistem yang tidak pernah kita rancang ulang.jpg</property>
+  </producer>
+  <producer id="producer_broll_86" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/026_Tapi ketiga penjelasan tadi hanya menjawab sebagian kecil.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">026_Tapi ketiga penjelasan tadi hanya menjawab sebagian kecil.jpg</property>
+  </producer>
+  <producer id="producer_broll_87" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/057_Ini yang paling jarang dibahas tapi paling menentukan..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">057_Ini yang paling jarang dibahas tapi paling menentukan..jpg</property>
+  </producer>
+  <producer id="producer_broll_88" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/081_Bukan kerja keras..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">081_Bukan kerja keras..jpg</property>
+  </producer>
+  <producer id="producer_broll_89" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/073_Lingkaran yang tertutup rapat dan sangat menguntungkan bagi yang.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">073_Lingkaran yang tertutup rapat dan sangat menguntungkan bagi yang.jpg</property>
+  </producer>
+  <producer id="producer_broll_90" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/019_Ini benar..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">019_Ini benar..jpg</property>
+  </producer>
+  <producer id="producer_broll_91" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/087_Ia adalah hasil pilihan kebijakan..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">087_Ia adalah hasil pilihan kebijakan..jpg</property>
+  </producer>
+  <producer id="producer_broll_92" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/023_Ini juga benar..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">023_Ini juga benar..jpg</property>
+  </producer>
+  <producer id="producer_broll_93" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/082_Bukan kontribusi..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">082_Bukan kontribusi..jpg</property>
+  </producer>
+  <producer id="producer_broll_94" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/016_Untuk sampai ke jawaban yang lebih dalam, kita perlu lewat.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">016_Untuk sampai ke jawaban yang lebih dalam, kita perlu lewat.jpg</property>
+  </producer>
+  <producer id="producer_broll_95" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/105_Tapi justru pertanyaan yang tidak nyaman itulah yang paling.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">105_Tapi justru pertanyaan yang tidak nyaman itulah yang paling.jpg</property>
+  </producer>
+  <producer id="producer_broll_96" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/069_Tanpa stres penilaian performa..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">069_Tanpa stres penilaian performa..jpg</property>
+  </producer>
+  <producer id="producer_broll_97" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/096_Masalahnya bukan moralitas orangnya - masalahnya adalah.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">096_Masalahnya bukan moralitas orangnya - masalahnya adalah.jpg</property>
+  </producer>
+  <producer id="producer_broll_98" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/094_Ini soal sistem yang memberi insentif yang keliru..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">094_Ini soal sistem yang memberi insentif yang keliru..jpg</property>
+  </producer>
+  <producer id="producer_broll_99" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/054_Permintaan datang dari investor yang mau diversifikasi,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">054_Permintaan datang dari investor yang mau diversifikasi,.jpg</property>
+  </producer>
+  <producer id="producer_broll_100" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/068_Tanpa tekanan kerja..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">068_Tanpa tekanan kerja..jpg</property>
+  </producer>
+  <producer id="producer_broll_101" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/102_Dan sebaliknya - ketika seorang pekerja keras, berpendidikan,.jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">102_Dan sebaliknya - ketika seorang pekerja keras, berpendidikan,.jpg</property>
+  </producer>
+  <producer id="producer_broll_102" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/067_Tanpa risiko di-PHK..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">067_Tanpa risiko di-PHK..jpg</property>
+  </producer>
+  <producer id="producer_broll_103" in="0" out="32972">
+    <property name="length">32973</property>
+    <property name="resource">../broll/083_Tapi keberuntungan lahir..jpg</property>
+    <property name="eof">pause</property>
+    <property name="aspect_ratio">1</property>
+    <property name="kdenlive:clipname">083_Tapi keberuntungan lahir..jpg</property>
+  </producer>
+  <playlist id="playlist_a1">
+    <property name="kdenlive:track_name">Audio Utama</property>
+    <entry producer="producer_main" in="0" out="32972"/>
+  </playlist>
+  <playlist id="playlist_v1">
+    <property name="kdenlive:track_name">Video Utama</property>
+    <entry producer="producer_main" in="0" out="32972"/>
+  </playlist>
+  <playlist id="playlist_v2">
+    <property name="kdenlive:track_name">B-roll</property>
+    <entry producer="producer_broll_01" in="0" out="208"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_02" in="0" out="165"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_03" in="0" out="192"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_04" in="0" out="69"/>
+    <blank length="1"/>
+    <blank length="175"/>
+    <entry producer="producer_broll_05" in="0" out="135"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_06" in="0" out="205"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_07" in="0" out="187"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_08" in="0" out="291"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_09" in="0" out="319"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_10" in="0" out="244"/>
+    <blank length="24"/>
+    <entry producer="producer_broll_11" in="0" out="266"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_12" in="0" out="282"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_01" in="0" out="359"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_13" in="0" out="407"/>
+    <entry producer="producer_broll_14" in="0" out="358"/>
+    <blank length="1"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_15" in="0" out="114"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_16" in="0" out="262"/>
+    <entry producer="producer_broll_17" in="0" out="204"/>
+    <blank length="19"/>
+    <entry producer="producer_broll_11" in="0" out="207"/>
+    <blank length="20"/>
+    <entry producer="producer_broll_18" in="0" out="369"/>
+    <entry producer="producer_broll_19" in="0" out="184"/>
+    <blank length="10"/>
+    <entry producer="producer_broll_04" in="0" out="187"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_19" in="0" out="287"/>
+    <entry producer="producer_broll_20" in="0" out="79"/>
+    <blank length="1"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_21" in="0" out="349"/>
+    <blank length="1"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_22" in="0" out="339"/>
+    <entry producer="producer_broll_23" in="0" out="327"/>
+    <blank length="23"/>
+    <entry producer="producer_broll_24" in="0" out="116"/>
+    <blank length="22"/>
+    <entry producer="producer_broll_25" in="0" out="231"/>
+    <blank length="24"/>
+    <entry producer="producer_broll_11" in="0" out="362"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_26" in="0" out="185"/>
+    <entry producer="producer_broll_27" in="0" out="235"/>
+    <blank length="1"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_28" in="0" out="177"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_29" in="0" out="201"/>
+    <entry producer="producer_broll_30" in="0" out="162"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_07" in="0" out="233"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_18" in="0" out="181"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_31" in="0" out="240"/>
+    <entry producer="producer_broll_32" in="0" out="131"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_33" in="0" out="91"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_14" in="0" out="117"/>
+    <blank length="1"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_34" in="0" out="225"/>
+    <blank length="19"/>
+    <entry producer="producer_broll_35" in="0" out="138"/>
+    <entry producer="producer_broll_36" in="0" out="153"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_37" in="0" out="196"/>
+    <blank length="16"/>
+    <entry producer="producer_broll_38" in="0" out="45"/>
+    <blank length="1"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_39" in="0" out="269"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_40" in="0" out="46"/>
+    <entry producer="producer_broll_41" in="0" out="180"/>
+    <blank length="10"/>
+    <entry producer="producer_broll_42" in="0" out="288"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_13" in="0" out="197"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_43" in="0" out="132"/>
+    <entry producer="producer_broll_31" in="0" out="133"/>
+    <blank length="4"/>
+    <entry producer="producer_broll_13" in="0" out="187"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_44" in="0" out="59"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_45" in="0" out="40"/>
+    <blank length="1"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_46" in="0" out="87"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_02" in="0" out="128"/>
+    <entry producer="producer_broll_46" in="0" out="52"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_47" in="0" out="175"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_48" in="0" out="205"/>
+    <blank length="10"/>
+    <entry producer="producer_broll_41" in="0" out="131"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_16" in="0" out="142"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_49" in="0" out="37"/>
+    <entry producer="producer_broll_50" in="0" out="210"/>
+    <blank length="16"/>
+    <entry producer="producer_broll_08" in="0" out="87"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_16" in="0" out="164"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_30" in="0" out="213"/>
+    <entry producer="producer_broll_51" in="0" out="149"/>
+    <blank length="33"/>
+    <entry producer="producer_broll_52" in="0" out="396"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_53" in="0" out="200"/>
+    <entry producer="producer_broll_54" in="0" out="101"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_55" in="0" out="104"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_56" in="0" out="283"/>
+    <blank length="1"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_57" in="0" out="85"/>
+    <entry producer="producer_broll_55" in="0" out="216"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_03" in="0" out="208"/>
+    <blank length="1"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_58" in="0" out="85"/>
+    <blank length="20"/>
+    <entry producer="producer_broll_59" in="0" out="77"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_23" in="0" out="118"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_58" in="0" out="93"/>
+    <entry producer="producer_broll_60" in="0" out="108"/>
+    <blank length="21"/>
+    <entry producer="producer_broll_25" in="0" out="226"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_61" in="0" out="68"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_62" in="0" out="141"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_37" in="0" out="181"/>
+    <entry producer="producer_broll_38" in="0" out="103"/>
+    <blank length="18"/>
+    <entry producer="producer_broll_63" in="0" out="177"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_64" in="0" out="59"/>
+    <blank length="20"/>
+    <entry producer="producer_broll_33" in="0" out="174"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_65" in="0" out="22"/>
+    <blank length="1"/>
+    <blank length="20"/>
+    <entry producer="producer_broll_42" in="0" out="119"/>
+    <entry producer="producer_broll_66" in="0" out="158"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_49" in="0" out="131"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_41" in="0" out="218"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_67" in="0" out="191"/>
+    <entry producer="producer_broll_27" in="0" out="166"/>
+    <blank length="2"/>
+    <entry producer="producer_broll_36" in="0" out="181"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_68" in="0" out="192"/>
+    <blank length="19"/>
+    <entry producer="producer_broll_22" in="0" out="184"/>
+    <entry producer="producer_broll_69" in="0" out="196"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_70" in="0" out="157"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_71" in="0" out="255"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_72" in="0" out="206"/>
+    <entry producer="producer_broll_32" in="0" out="131"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_73" in="0" out="127"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_74" in="0" out="85"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_02" in="0" out="130"/>
+    <blank length="16"/>
+    <entry producer="producer_broll_75" in="0" out="103"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_09" in="0" out="102"/>
+    <entry producer="producer_broll_12" in="0" out="198"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_48" in="0" out="103"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_76" in="0" out="70"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_26" in="0" out="213"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_26" in="0" out="141"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_77" in="0" out="81"/>
+    <entry producer="producer_broll_78" in="0" out="134"/>
+    <blank length="4"/>
+    <entry producer="producer_broll_79" in="0" out="71"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_20" in="0" out="183"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_80" in="0" out="147"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_03" in="0" out="94"/>
+    <blank length="1"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_81" in="0" out="102"/>
+    <entry producer="producer_broll_27" in="0" out="131"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_74" in="0" out="160"/>
+    <blank length="16"/>
+    <entry producer="producer_broll_03" in="0" out="121"/>
+    <blank length="1"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_08" in="0" out="158"/>
+    <blank length="11"/>
+    <entry producer="producer_broll_82" in="0" out="110"/>
+    <entry producer="producer_broll_78" in="0" out="154"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_09" in="0" out="140"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_35" in="0" out="169"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_77" in="0" out="218"/>
+    <blank length="22"/>
+    <entry producer="producer_broll_83" in="0" out="105"/>
+    <entry producer="producer_broll_84" in="0" out="60"/>
+    <blank length="2"/>
+    <entry producer="producer_broll_85" in="0" out="81"/>
+    <entry producer="producer_broll_43" in="0" out="124"/>
+    <blank length="1"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_54" in="0" out="134"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_25" in="0" out="220"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_86" in="0" out="74"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_87" in="0" out="174"/>
+    <blank length="22"/>
+    <entry producer="producer_broll_63" in="0" out="108"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_04" in="0" out="98"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_28" in="0" out="240"/>
+    <entry producer="producer_broll_88" in="0" out="179"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_89" in="0" out="107"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_90" in="0" out="116"/>
+    <blank length="20"/>
+    <entry producer="producer_broll_80" in="0" out="93"/>
+    <blank length="21"/>
+    <entry producer="producer_broll_13" in="0" out="91"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_91" in="0" out="113"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_21" in="0" out="183"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_44" in="0" out="163"/>
+    <blank length="17"/>
+    <entry producer="producer_broll_92" in="0" out="214"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_18" in="0" out="138"/>
+    <entry producer="producer_broll_14" in="0" out="160"/>
+    <blank length="18"/>
+    <entry producer="producer_broll_34" in="0" out="56"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_17" in="0" out="102"/>
+    <blank length="5"/>
+    <entry producer="producer_broll_93" in="0" out="153"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_66" in="0" out="88"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_39" in="0" out="145"/>
+    <entry producer="producer_broll_94" in="0" out="121"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_18" in="0" out="241"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_95" in="0" out="133"/>
+    <blank length="21"/>
+    <entry producer="producer_broll_36" in="0" out="107"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_96" in="0" out="89"/>
+    <entry producer="producer_broll_97" in="0" out="209"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_37" in="0" out="106"/>
+    <blank length="4"/>
+    <entry producer="producer_broll_55" in="0" out="140"/>
+    <blank length="18"/>
+    <entry producer="producer_broll_98" in="0" out="160"/>
+    <blank length="1"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_97" in="0" out="154"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_99" in="0" out="137"/>
+    <blank length="9"/>
+    <entry producer="producer_broll_77" in="0" out="125"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_53" in="0" out="131"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_05" in="0" out="124"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_75" in="0" out="222"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_100" in="0" out="110"/>
+    <blank length="23"/>
+    <entry producer="producer_broll_79" in="0" out="129"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_101" in="0" out="82"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_14" in="0" out="148"/>
+    <blank length="1"/>
+    <blank length="14"/>
+    <entry producer="producer_broll_01" in="0" out="173"/>
+    <entry producer="producer_broll_31" in="0" out="181"/>
+    <blank length="18"/>
+    <entry producer="producer_broll_56" in="0" out="59"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_95" in="0" out="121"/>
+    <blank length="29"/>
+    <entry producer="producer_broll_10" in="0" out="152"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_51" in="0" out="113"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_66" in="0" out="84"/>
+    <blank length="1"/>
+    <entry producer="producer_broll_72" in="0" out="113"/>
+    <blank length="13"/>
+    <entry producer="producer_broll_30" in="0" out="59"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_29" in="0" out="69"/>
+    <blank length="10"/>
+    <entry producer="producer_broll_81" in="0" out="60"/>
+    <blank length="4"/>
+    <entry producer="producer_broll_71" in="0" out="140"/>
+    <blank length="7"/>
+    <entry producer="producer_broll_67" in="0" out="147"/>
+    <blank length="3"/>
+    <entry producer="producer_broll_32" in="0" out="79"/>
+    <blank length="12"/>
+    <entry producer="producer_broll_44" in="0" out="121"/>
+    <entry producer="producer_broll_102" in="0" out="99"/>
+    <blank length="15"/>
+    <entry producer="producer_broll_61" in="0" out="113"/>
+    <blank length="8"/>
+    <entry producer="producer_broll_103" in="0" out="139"/>
+    <blank length="6"/>
+    <entry producer="producer_broll_94" in="0" out="44"/>
+    <blank length="10"/>
+  </playlist>
+  <tractor id="maintractor" in="0" out="32972">
+    <property name="kdenlive:docproperties.version">1.1</property>
+    <property name="kdenlive:docproperties.subtitlesList">../subtitle/subtitle.srt</property>
+    <property name="kdenlive:track:0">Audio Utama</property>
+    <property name="kdenlive:track:1">Video Utama</property>
+    <property name="kdenlive:track:2">B-roll</property>
+    <multitrack>
+      <track producer="playlist_a1" hide="video"/>
+      <track producer="playlist_v1"/>
+      <track producer="playlist_v2"/>
+    </multitrack>
+    <transition id="transition_broll">
+      <property name="a_track">1</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">qtblend</property>
+      <property name="always_active">1</property>
+    </transition>
+    <filter id="filter_subtitles">
+      <property name="mlt_service">avfilter.subtitles</property>
+      <property name="av.filename">../subtitle/subtitle.srt</property>
+    </filter>
+  </tractor>
+</mlt>

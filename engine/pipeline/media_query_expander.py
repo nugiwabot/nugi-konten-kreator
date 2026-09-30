@@ -176,8 +176,19 @@ class MediaQueryExpander:
 
         text = user_request.strip()
 
-        # 1. Detect media type
-        media_type = media_type_override or self._detect_media_type(text)
+        # 1. Detect and normalize media type
+        if media_type_override:
+            m_override = media_type_override.lower().strip()
+            if m_override in ("video", "footage", "film", "rekaman"):
+                media_type = "video"
+            elif m_override in ("image", "photo", "foto", "gambar"):
+                media_type = "image"
+            elif m_override in ("any", "all", "semua"):
+                media_type = "any"
+            else:
+                media_type = m_override
+        else:
+            media_type = self._detect_media_type(text)
 
         # 2. Detect historical context
         is_historical, year_hint = self._detect_historical(text)
@@ -187,7 +198,7 @@ class MediaQueryExpander:
 
         # 4. Build primary queries
         primary_queries = self._build_primary_queries(
-            core_concept, year_hint, is_historical
+            core_concept, year_hint, is_historical, media_type=media_type
         )
 
         # 5. Build expanded/alternative queries
@@ -308,20 +319,32 @@ class MediaQueryExpander:
         core_concept: str,
         year_hint: Optional[str],
         is_historical: bool,
+        media_type: str = "any",
     ) -> List[str]:
         """Build 1–3 most specific queries."""
         queries: List[str] = []
 
         # Most specific: concept + year if available
         if year_hint and year_hint not in core_concept:
-            queries.append(f"{core_concept} {year_hint}")
+            if media_type == "video":
+                queries.append(f"{core_concept} {year_hint} footage")
+            else:
+                queries.append(f"{core_concept} {year_hint}")
 
         # Concept itself
         queries.append(core_concept)
 
-        # Historical qualifier
-        if is_historical:
-            queries.append(f"{core_concept} archival historical")
+        # Media and historical qualifier
+        if media_type == "video":
+            if is_historical:
+                queries.append(f"{core_concept} archival footage")
+                queries.append(f"{core_concept} historical footage")
+            else:
+                queries.append(f"{core_concept} footage")
+                queries.append(f"{core_concept} film footage")
+        else:
+            if is_historical:
+                queries.append(f"{core_concept} archival historical")
 
         return self._dedup(queries)
 
@@ -335,18 +358,37 @@ class MediaQueryExpander:
         """Build additional alternative queries for broader coverage."""
         queries: List[str] = []
 
-        # Media type qualifier
+        # Media type qualifier & archival variants
         if media_type == "video":
-            queries.append(f"{core_concept} footage film")
-        elif media_type == "image":
+            if is_historical:
+                queries.append(f"{core_concept} historical footage")
+                queries.append(f"{core_concept} archival footage")
+                queries.append(f"{core_concept} wartime footage")
+                queries.append(f"{core_concept} newsreel")
+                queries.append(f"{core_concept} film footage")
+                queries.append(f"{core_concept} documentary footage")
+                if year_hint:
+                    queries.append(f"{core_concept} {year_hint} archival")
+            else:
+                queries.append(f"{core_concept} footage")
+                queries.append(f"{core_concept} archival footage")
+                queries.append(f"{core_concept} newsreel")
+                queries.append(f"{core_concept} film footage")
+        elif media_type in ("image", "photo"):
             queries.append(f"{core_concept} photograph")
-
-        # Archival variants for historical content
-        if is_historical:
-            queries.append(f"{core_concept} archive")
-            queries.append(f"{core_concept} documentary")
-            if year_hint:
-                queries.append(f"{core_concept} {year_hint} archival")
+            if is_historical:
+                queries.append(f"{core_concept} archival photograph")
+                queries.append(f"{core_concept} archive")
+                queries.append(f"{core_concept} documentary")
+                if year_hint:
+                    queries.append(f"{core_concept} {year_hint} archival")
+        else:
+            # any
+            if is_historical:
+                queries.append(f"{core_concept} archive")
+                queries.append(f"{core_concept} documentary")
+                if year_hint:
+                    queries.append(f"{core_concept} {year_hint} archival")
 
         # Split multi-word concepts → broader individual term search
         concept_words = core_concept.split()

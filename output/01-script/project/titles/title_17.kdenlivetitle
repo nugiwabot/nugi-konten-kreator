@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kdenlivetitle width="1920" height="1080" duration="98" out="97">
+  <item type="QGraphicsRectItem" z-value="0">
+    <position x="224" y="680">
+      <transform>1,0,0,0,1,0,0,0,1</transform>
+    </position>
+    <content brushcolor="0,0,0,195" pencolor="0,0,0,0" penwidth="0" rect="0,0,1471,108" round="12"/>
+  </item>
+  <item type="QGraphicsTextItem" z-value="1">
+    <position x="264" y="700">
+      <transform>1,0,0,0,1,0,0,0,1</transform>
+    </position>
+    <content font="Arial, Sans-Serif" font-size="54" font-weight="87" font-bold="1" font-italic="0" font-underline="0" font-color="255,212,0,255" outline="0,0,0,220" outline-width="2.5" shadow="0,0,0,200;2;2;5" alignment="4" boxwidth="1431" boxheight="88" letter-spacing="1" line-spacing="0">TAPI BUKAN BERARTI SEMUANYA PALSU, MASALAHNYA,</content>
+  </item>
+  <startviewport rect="0,0,1920,1080"/>
+  <endviewport rect="0,0,1920,1080"/>
+</kdenlivetitle>

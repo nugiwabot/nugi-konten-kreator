@@ -68,6 +68,7 @@ class DownloadedFile:
     embedding_similarity: float = 0.0
     reranker_score: float = 0.0
     final_rank: int = 0
+    media_type: str = ""
 
 
 @dataclass
@@ -203,6 +204,15 @@ class MediaDownloader:
             logger.warning(f"Skipping '{item.title}': no download_url or thumbnail_url")
             return None
 
+        # For video, ensure we have a concrete download URL (not a directory or thumbnail)
+        if item.media_type == "video":
+            if not item.download_url or item.download_url.rstrip("/").endswith(("/download", "/details")):
+                logger.warning(f"Skipping video '{item.title}': download_url is missing or a directory: {item.download_url}")
+                return None
+            if item.download_url.endswith("/"):
+                logger.warning(f"Skipping video '{item.title}': download_url ends with slash (directory): {item.download_url}")
+                return None
+
         # For Wikimedia images, prefer cached 1280px thumbnail_url to avoid 429 CDN rate limits
         target_url = item.download_url
         if item.provider == "wikimedia" and item.media_type == "image" and item.thumbnail_url:
@@ -214,13 +224,14 @@ class MediaDownloader:
         dest_path = self._resolve_collision(folder_path / filename)
 
         # Perform the download
-        success, size, reason = self._fetch_file(target_url, dest_path)
-        # If thumbnail failed or was not used and original exists, or vice versa, fallback
+        success, size, reason = self._fetch_file(target_url, dest_path, expected_media_type=item.media_type)
+        # If thumbnail failed or was not used and original exists, or vice versa, fallback (IMAGES ONLY)
         if not success:
-            fallback_url = item.thumbnail_url if target_url != item.thumbnail_url else item.download_url
-            if fallback_url and fallback_url != target_url:
-                logger.info(f"Retrying download with alternate URL for '{item.title}'")
-                success, size, reason = self._fetch_file(fallback_url, dest_path)
+            if item.media_type != "video":
+                fallback_url = item.thumbnail_url if target_url != item.thumbnail_url else item.download_url
+                if fallback_url and fallback_url != target_url:
+                    logger.info(f"Retrying download with alternate URL for '{item.title}'")
+                    success, size, reason = self._fetch_file(fallback_url, dest_path, expected_media_type=item.media_type)
 
         if not success:
             logger.warning(f"Failed to download '{item.title}': {reason}")
@@ -241,10 +252,11 @@ class MediaDownloader:
             embedding_similarity=item.embedding_similarity,
             reranker_score=item.reranker_score,
             final_rank=item.final_rank,
+            media_type=item.media_type,
         )
 
     def _fetch_file(
-        self, url: str, dest: Path
+        self, url: str, dest: Path, expected_media_type: str = ""
     ) -> tuple[bool, int, str]:
         """
         Stream-download `url` to `dest`.
@@ -257,6 +269,12 @@ class MediaDownloader:
         req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                # Validate Content-Type if expected_media_type is video
+                if expected_media_type == "video":
+                    ctype = (resp.headers.get("Content-Type") or "").lower()
+                    if ctype and any(t in ctype for t in ["text/html", "text/plain", "application/json", "application/xml"]):
+                        return False, 0, f"Expected video stream, got Content-Type '{ctype}'"
+
                 # Check Content-Length before streaming if available
                 content_length = resp.headers.get("Content-Length")
                 if content_length:
@@ -273,11 +291,21 @@ class MediaDownloader:
                 # Stream in chunks
                 downloaded = 0
                 chunk_size = 65536  # 64 KB
+                first_chunk = True
                 with open(dest, "wb") as f:
                     while True:
                         chunk = resp.read(chunk_size)
                         if not chunk:
                             break
+                        if first_chunk and expected_media_type == "video":
+                            first_chunk = False
+                            # Check if the body starts with HTML/XML markup
+                            chunk_head = chunk[:100].strip().lower()
+                            if chunk_head.startswith((b"<!doctype", b"<html", b"<?xml", b"<head")):
+                                f.close()
+                                dest.unlink(missing_ok=True)
+                                return False, 0, "Response content is HTML/XML text, not a valid video file"
+                        first_chunk = False
                         downloaded += len(chunk)
                         if downloaded > self.max_size_bytes:
                             f.close()
@@ -351,6 +379,13 @@ class MediaDownloader:
         """Infer file extension from URL path; fall back to media_type defaults."""
         from urllib.parse import urlparse
         path = urlparse(url).path.lower()
+        if media_type == "video":
+            video_exts = [".mp4", ".ogv", ".webm", ".avi", ".mov", ".mpg", ".mpeg"]
+            for ext in video_exts:
+                if path.endswith(ext):
+                    return ext
+            return ".mp4"
+
         for ext in [".mp4", ".ogv", ".webm", ".avi", ".mov",
                     ".jpg", ".jpeg", ".png", ".gif", ".tif", ".tiff",
                     ".pdf", ".mp3", ".ogg"]:
@@ -447,6 +482,7 @@ class MediaDownloader:
             asset_map[df.filename] = {
                 "filename": df.filename,
                 "provider": df.provider,
+                "media_type": df.media_type,
                 "source_url": df.source_url,
                 "download_url": df.download_url,
                 "title": df.title,

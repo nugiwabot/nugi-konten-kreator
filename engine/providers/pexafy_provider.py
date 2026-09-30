@@ -177,6 +177,14 @@ class PexafyProvider(MediaProvider):
                 },
             }
 
+            # Enforce rate limit (max 50 req/min => 1.2s delay between requests)
+            now = time.time()
+            if hasattr(self, "_last_request_time"):
+                elapsed = now - self._last_request_time
+                if elapsed < 1.2:
+                    time.sleep(1.2 - elapsed)
+            self._last_request_time = time.time()
+
             req = urllib.request.Request(
                 self.mcp_url,
                 data=json.dumps(call_payload).encode("utf-8"),
@@ -190,9 +198,22 @@ class PexafyProvider(MediaProvider):
                 for line in content.splitlines():
                     if line.startswith("data: "):
                         res = json.loads(line[6:])
-                        text_content = res.get("result", {}).get("content", [{}])[0].get("text", "{}")
-                        parsed = json.loads(text_content)
-                        raw_items = parsed.get("data", [])
+                        result_obj = res.get("result", {})
+                        if result_obj.get("isError"):
+                            err_msg = result_obj.get("content", [{}])[0].get("text", "")
+                            if "faster than your plan allows" in err_msg:
+                                logger.warning("Pexafy rate limit reached. Waiting 60s for quota reset...")
+                                time.sleep(60.0)
+                                return self.search_media(query, media_type, max_results)
+                            logger.warning(f"Pexafy returned error: {err_msg}")
+                            return []
+
+                        text_content = result_obj.get("content", [{}])[0].get("text", "{}")
+                        try:
+                            parsed = json.loads(text_content)
+                            raw_items = parsed.get("data", [])
+                        except Exception:
+                            raw_items = []
                         break
 
             items: List[MediaItem] = []

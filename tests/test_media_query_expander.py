@@ -110,6 +110,25 @@ class TestMediaQueryExpander(unittest.TestCase):
         eq = self.expander.expand("Albert Einstein", media_type_override="video")
         self.assertEqual(eq.detected_media_type, "video")
 
+    def test_video_query_expansion_contains_video_terms(self):
+        eq = self.expander.expand("D-Day Normandy 1944", media_type_override="video")
+        self.assertEqual(eq.detected_media_type, "video")
+        all_q = " ".join(eq.all_queries).lower()
+        self.assertTrue(
+            any(cue in all_q for cue in ["footage", "newsreel", "film", "motion picture"]),
+            f"Expected video cues in queries, got: {eq.all_queries}"
+        )
+        self.assertNotIn("historical photograph", all_q)
+
+    def test_image_query_expansion_contains_image_terms(self):
+        eq = self.expander.expand("D-Day Normandy 1944", media_type_override="image")
+        self.assertEqual(eq.detected_media_type, "image")
+        all_q = " ".join(eq.all_queries).lower()
+        self.assertTrue(
+            any(cue in all_q for cue in ["photo", "photograph", "picture", "image"]),
+            f"Expected image cues in queries, got: {eq.all_queries}"
+        )
+
     # ------------------------------------------------------------------
     # Abstract / conceptual queries
     # ------------------------------------------------------------------

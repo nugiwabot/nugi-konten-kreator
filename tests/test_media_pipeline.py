@@ -125,10 +125,25 @@ class TestMediaPipelineSearch(unittest.TestCase):
 
     def test_search_with_media_type_filter_image(self):
         result = self.pipeline.search("D-Day", media_type="image", count=10)
-        # All results should be images (mock provider returns both image and video)
-        # Note: filter is applied at expander level, provider may return mix
-        # The expander signals image preference; providers honour it
         self.assertIsInstance(result, MediaSearchResult)
+        self.assertGreater(len(result.candidates), 0)
+        for c in result.candidates:
+            self.assertEqual(c.media_type, "image")
+
+    def test_search_with_media_type_filter_video(self):
+        result = self.pipeline.search("D-Day", media_type="video", count=10)
+        self.assertIsInstance(result, MediaSearchResult)
+        self.assertGreater(len(result.candidates), 0)
+        for c in result.candidates:
+            self.assertEqual(c.media_type, "video")
+
+    def test_search_with_media_type_filter_any(self):
+        result = self.pipeline.search("D-Day", media_type="any", count=10)
+        self.assertIsInstance(result, MediaSearchResult)
+        self.assertGreater(len(result.candidates), 0)
+        types = {c.media_type for c in result.candidates}
+        self.assertIn("image", types)
+        self.assertIn("video", types)
 
     def test_search_provider_failure_returns_empty_candidates(self):
         failing_pipeline = _make_pipeline(self.tmp, fail=True)

@@ -232,7 +232,10 @@ class InternetArchiveProvider(MediaProvider):
             identifier, media_type
         )
         if not download_url:
-            # No downloadable file found — still include as searchable result
+            if media_type == "video":
+                # For video, do NOT return a candidate without a concrete video file
+                logger.info(f"InternetArchive: skipping video item '{identifier}' because no downloadable video file was found")
+                return None
             download_url = f"{self.base_url}/download/{identifier}/"
 
         return MediaItem(
@@ -283,11 +286,15 @@ class InternetArchiveProvider(MediaProvider):
         else:
             media_type = "document"
 
-        download_url, file_size = self._pick_best_file(files, media_type)
+        filename, file_size = self._pick_best_file(files, media_type)
         source_url = f"{self.base_url}/details/{identifier}"
         thumb_url = f"{self.base_url}/services/img/{identifier}"
 
-        if not download_url:
+        if filename:
+            download_url = f"{self.base_url}/download/{identifier}/{urllib.parse.quote(filename)}"
+        else:
+            if media_type == "video":
+                return None
             download_url = f"{self.base_url}/download/{identifier}/"
 
         return MediaItem(
@@ -306,20 +313,6 @@ class InternetArchiveProvider(MediaProvider):
             metadata={"ia_mediatype": ia_mediatype},
         )
 
-    def _resolve_download_file(
-        self, identifier: str, media_type: str
-    ) -> Tuple[str, int]:
-        """
-        Fetch /metadata/{identifier} and pick best downloadable file.
-        Returns (download_url, file_size_bytes) — ("", 0) on failure.
-        """
-        url = f"{self.base_url}/metadata/{identifier}"
-        data = _ia_get(url)
-        if not data:
-            return "", 0
-        files = data.get("files", [])
-        return self._pick_best_file(files, media_type)
-
     def _pick_best_file(
         self, files: List[Dict], media_type: str
     ) -> Tuple[str, int]:
@@ -328,18 +321,22 @@ class InternetArchiveProvider(MediaProvider):
 
         Selection strategy:
         - Prefer the appropriate format based on media_type.
-        - For video: prefer mp4 > ogv > webm > others.
+        - For video: prefer mp4 > ogv > webm > avi > mov > mpg > mpeg.
         - For image: prefer jpg > png > others.
-        - Among equal-format matches, prefer SMALLER file (avoid huge raw files).
-        - Excludes metadata/index files (xml, sqlite, etc.).
+        - Exclude non-media, metadata, and index files (.xml, .sqlite, .torrent, .zip, etc.).
+        - If media_type == 'video', never pick image files (thumbnails, covers, etc.).
+        - Prioritize files under 500 MB to comply with download size limit.
+        - Among equal-format matches, prefer smaller files (avoid massive multi-GB raw scans).
         """
         preferred_exts = (
             _PREFERRED_VIDEO_EXTS if media_type == "video"
             else _PREFERRED_IMAGE_EXTS
         )
 
-        candidates: List[Tuple[int, int, str, int]] = []
-        # (priority_rank, size, name, size_bytes)
+        candidates: List[Tuple[int, int, int, str, int]] = []
+        # (size_penalty, rank, effective_size, name, size_bytes)
+
+        max_limit_bytes = 500 * 1024 * 1024  # 500 MB
 
         for f in files:
             name = f.get("name", "")
@@ -350,32 +347,39 @@ class InternetArchiveProvider(MediaProvider):
                 size_bytes = 0
 
             lower = name.lower()
-            # Skip metadata/text/derivative files
+
+            # Skip metadata/text/derivative/archive files
             if any(lower.endswith(ext) for ext in [
-                ".xml", ".sqlite", ".torrent", ".gz", ".zip",
-                "_meta.txt", "_files.xml", "_reviews.xml",
+                ".xml", ".sqlite", ".torrent", ".gz", ".zip", ".tar",
+                "_meta.txt", "_files.xml", "_reviews.xml", "_thumb.jpg",
             ]):
                 continue
 
+            # When looking for video, explicitly skip any image files
+            if media_type == "video":
+                if any(lower.endswith(img_ext) for img_ext in _PREFERRED_IMAGE_EXTS):
+                    continue
+
             for rank, ext in enumerate(preferred_exts):
                 if lower.endswith(ext):
-                    candidates.append((rank, size_bytes, name, size_bytes))
+                    # Penalize files that exceed the 500 MB limit
+                    size_penalty = 1 if size_bytes > max_limit_bytes else 0
+                    effective_size = size_bytes if size_bytes > 0 else 999_999_999_999
+                    candidates.append((size_penalty, rank, effective_size, name, size_bytes))
                     break
 
         if not candidates:
             return "", 0
 
-        # Sort by priority rank ASC, then size ASC (prefer smaller files)
-        candidates.sort(key=lambda x: (x[0], x[1]))
+        # Sort: files <= 500MB first, then format rank ASC (.mp4=0), then smaller size ASC
+        candidates.sort(key=lambda x: (x[0], x[1], x[2]))
         best = candidates[0]
-        best_name = best[2]
+        best_name = best[3]
+        best_size = best[4]
 
-        # The identifier is embedded in self via the caller context, but since
-        # this is a static helper, we need the caller to build the URL.
-        # We return only the filename; the caller builds the full URL.
-        return best_name, best[3]
+        return best_name, best_size
 
-    def _resolve_download_file(  # noqa: F811 — intentional override
+    def _resolve_download_file(
         self, identifier: str, media_type: str
     ) -> Tuple[str, int]:
         """
