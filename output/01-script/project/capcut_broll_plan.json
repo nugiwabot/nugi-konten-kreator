@@ -1,0 +1,2281 @@
+{
+  "workspace": "01-script",
+  "main_video": "footage/video 1 - inshot.mp4",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.54,
+      "text": "Yes, coba bayangin kalau kita ambil KPR selama 25 tahun.",
+      "asset": "broll/021_Otak kita - yang berkembang selama ratusan ribu tahun di.jpg",
+      "type": "image"
+    },
+    {
+      "start": 5.16,
+      "end": 13.6,
+      "text": "Afirnya mungkin rumah itu rulunas, tapi setelah 25 tahun itu setiap hari, kamu harus menghabiskan 3 jam di jalanan.",
+      "asset": "broll/038_Itu 720 jam per tahun yang habis di jalan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 13.82,
+      "end": 20.96,
+      "text": "Kalau begitu, sebenarnya itu ada sesuatu yang mungkin kamu bayar jauh lebih mahal dari pada cijilan rumah itu sendiri.",
+      "asset": "broll/032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 21.44,
+      "end": 22.42,
+      "text": "Namanya itu waktu.",
+      "asset": "broll/035_Harga itu namanya waktu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 28.68,
+      "end": 32.22,
+      "text": "Ada sesuatu orang yang setiap hari itu bangun jam 4 bagi.",
+      "asset": "broll/001_Ada seseorang yang setiap hari bangun jam 4 pagi..jpg",
+      "type": "image"
+    },
+    {
+      "start": 32.5,
+      "end": 40.38,
+      "text": "Bukan karena dia manusia yang luar biasa rajin, bukan juga karena dia sedang ikut tren, bangun subuh yang sering lewat di media sosial.",
+      "asset": "broll/002_Bukan karena dia orang yang luar biasa rajin..jpg",
+      "type": "image"
+    },
+    {
+      "start": 40.66,
+      "end": 48.64,
+      "text": "Dia bangun jam 4 bagi karena kalau bangunya kesihangan, dia gak akan sampai ke kantornya di Jakarta selatan sebelum jam 8 bagi.",
+      "asset": "broll/003_Dia bangun jam 4 pagi karena kalau tidak, dia nggak akan sampai.jpg",
+      "type": "image"
+    },
+    {
+      "start": 48.64,
+      "end": 53.06,
+      "text": "Rumahnya itu ada di jikaran, jaraknya itu sekitar 60 km.",
+      "asset": "broll/004_Jaraknya sekitar 60 kilometer..jpg",
+      "type": "image"
+    },
+    {
+      "start": 53.4,
+      "end": 61.12,
+      "text": "Kalau di beberapa negara-eropa jarak seperti ini mungkin bisa ditemput dalam waktu sekitar 35 menit dengan kreta yang tepat waktu.",
+      "asset": "broll/005_Di negara-negara Eropa, jarak segitu ditempuh dalam 35 menit.jpg",
+      "type": "image"
+    },
+    {
+      "start": 61.64,
+      "end": 66.98,
+      "text": "Tapi di sini 60 km itu bisa makan waktu sekitar 2.5 jam.",
+      "asset": "broll/006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+      "type": "image"
+    },
+    {
+      "start": 67.42,
+      "end": 76.42,
+      "text": "Itu pun kalau lagi beruntung, jadi kalau pulang pergi, dia bisa menghabiskan sekitar 5 jam hidupnya setiap hari cuma di satu perjalanan.",
+      "asset": "broll/006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+      "type": "image"
+    },
+    {
+      "start": 76.42,
+      "end": 80.76,
+      "text": "Kalau di kali 20 hari kerja, dalam sebulan itu sekitar 100 jam.",
+      "asset": "broll/007_Kalau dikalikan 20 hari kerja sebulan, itu 100 jam..jpg",
+      "type": "image"
+    },
+    {
+      "start": 81.06,
+      "end": 84.3,
+      "text": "Dan dalam setahun, hampir sekitar 1200 jam.",
+      "asset": "broll/008_Kalau dihitung setahun, hampir 1.200 jam - atau setara dengan 50.jpg",
+      "type": "image"
+    },
+    {
+      "start": 84.48,
+      "end": 91.24,
+      "text": "Atau kalau mau dibayangkan dengan cara yang lebih extreme, sekitar 50 hari penuh itu dalam setahun habis di cuma di jalan.",
+      "asset": "broll/038_Itu 720 jam per tahun yang habis di jalan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 91.7,
+      "end": 93.46,
+      "text": "Tapi dia tetap gak pindah.",
+      "asset": "broll/011_Nggak mungkin pindah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 93.7,
+      "end": 99.34,
+      "text": "Bukan karena dia gak mau, dan bukan juga karena dia gak sadar, betapa melalahkannya perjalanan itu.",
+      "asset": "broll/047_Karena macet nggak cuma mencuri waktu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 99.7,
+      "end": 105.4,
+      "text": "waktu saya tanya langsung jawabannya itu sederhana, jadi rumah ini kan sudah KPR, gak mungkin pindah.",
+      "asset": "broll/010_Waktu saya tanya langsung, jawabannya sederhana Rumah ini sudah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 106.04,
+      "end": 109.74,
+      "text": "Kalau mau pindah lebih dekat ke kantor juga cici lainnya bisa 3 kali 4.",
+      "asset": "broll/096_Bukan selalu pindah lebih dekat ke kantor - karena kantor.jpg",
+      "type": "image"
+    },
+    {
+      "start": 110.14,
+      "end": 112.94,
+      "text": "Dan justru ini jadi cerita yang ulain dari.",
+      "asset": "broll/012_Dan di sinilah cerita yang sesungguhnya dimulai..jpg",
+      "type": "image"
+    },
+    {
+      "start": 113.34,
+      "end": 116.74,
+      "text": "Karena sebenarnya ini bukan cuma cerita tentang satu orang.",
+      "asset": "broll/019_Dan ini bukan cuma perasaan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 117.12,
+      "end": 121.1,
+      "text": "Ini adalah cerita tentang jutaan orang yang ada di Indonesia ini.",
+      "asset": "broll/013_Ini tentang jutaan orang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 121.32,
+      "end": 127.3,
+      "text": "Dan selama bertahun tahun, pola perumahan di jabilitabek terus bergeser semakin jauh dari pusat kotak.",
+      "asset": "broll/051_Ini bukan klaim asal - ini hasil penelitian bertahun-tahun.jpg",
+      "type": "image"
+    },
+    {
+      "start": 127.58,
+      "end": 132.38,
+      "text": "Orang-orang yang bekerja di Jakarta perlahan pindah ke Bogor, bekasih, tenggerang,",
+      "asset": "broll/016_Atau ada sesuatu yang bekerja di balik layar yang mendorong.jpg",
+      "type": "image"
+    },
+    {
+      "start": 132.38,
+      "end": 134.98,
+      "text": "bahkan sampai ke Karawang Lodan perwakarta.",
+      "asset": "broll/059_Cicilan KPR 4 juta per bulan terasa sangat nyata..jpg",
+      "type": "image"
+    },
+    {
+      "start": 135.34,
+      "end": 137.82,
+      "text": "Lalu pertanyaannya itu apa sih?",
+      "asset": "broll/015_Pertanyaan yang jarang dijawab dengan jujur kenapa manusia,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 138.02,
+      "end": 141.76,
+      "text": "Kenapa begitu banyak orang yang membeli hidup dengan kondisi seperti ini?",
+      "asset": "broll/098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+      "type": "image"
+    },
+    {
+      "start": 142.54,
+      "end": 145.52,
+      "text": "Apakah ini benar-benar pilihan yang sepenuhnya bebas?",
+      "asset": "broll/097_Tapi mereka mulai berpikir ulang tentang apa yang benar-benar.jpg",
+      "type": "image"
+    },
+    {
+      "start": 145.88,
+      "end": 150.54,
+      "text": "Atau sebenarnya ada sesuatu yang lebih besar yang ikut mendorong pilihan itu.",
+      "asset": "broll/016_Atau ada sesuatu yang bekerja di balik layar yang mendorong.jpg",
+      "type": "image"
+    },
+    {
+      "start": 150.8,
+      "end": 152.54,
+      "text": "Cuma kita lihat dari sisi pertama.",
+      "asset": "broll/017_Oke, coba kita bedah dulu sisi pertamanya..jpg",
+      "type": "image"
+    },
+    {
+      "start": 153.3,
+      "end": 154.78,
+      "text": "Kalau di lihat di atas kertas,",
+      "asset": "broll/054_Semua itu ditambah ke atas cicilan KPR kamu - tapi hampir tidak.jpg",
+      "type": "image"
+    },
+    {
+      "start": 155.24,
+      "end": 158.34,
+      "text": "beli rumah jauh dari pusat kotak memang masuk akal banget.",
+      "asset": "broll/032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 158.62,
+      "end": 159.78,
+      "text": "Hitungannya itu sederhana.",
+      "asset": "broll/018_Hitungannya gampang dengan uang yang sama, kamu bisa dapat rumah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 160.34,
+      "end": 163.52,
+      "text": "Dengan uangnya sama, kamu bisa dapat rumah yang lebih besar.",
+      "asset": "broll/066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+      "type": "image"
+    },
+    {
+      "start": 163.8,
+      "end": 169.26,
+      "text": "Ada halamannya, ada teman kecil, bahkan mungkin ada kolamernang di kompleks.",
+      "asset": "broll/023_Ada satu hal lagi yang rumah tapak bisa kasih tapi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 169.44,
+      "end": 175.18,
+      "text": "Bandingkan dengan apartement Studio yang sekitar 25 meter bersegi di tengah kotak,",
+      "asset": "broll/050_Dan otak manusia merespons perasaan nggak bisa berbuat apa-apa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 175.38,
+      "end": 177.96,
+      "text": "yang harganya bisa sama bahkan lebih mahal.",
+      "asset": "broll/075_Itu harga yang paling mahal - tapi paling susah diukur..jpg",
+      "type": "image"
+    },
+    {
+      "start": 178.18,
+      "end": 180.76,
+      "text": "Jadi dari sisi luas bangunan dan facilitas,",
+      "asset": "broll/022_Jadi ketika seseorang memilih rumah tapak di Serpong atau Depok.jpg",
+      "type": "image"
+    },
+    {
+      "start": 181.06,
+      "end": 184.42,
+      "text": "rumah di pinggiran itu kelihatannya seperti pilihan yang jauh.",
+      "asset": "broll/061_Itulah kenapa banyak keputusan soal rumah yang kelihatannya aneh.jpg",
+      "type": "image"
+    },
+    {
+      "start": 184.56,
+      "end": 186.54,
+      "text": "Dan ini juga bukan sual angka.",
+      "asset": "broll/041_Waktu itu bukan angka abstrak..jpg",
+      "type": "image"
+    },
+    {
+      "start": 186.54,
+      "end": 190.74,
+      "text": "Ada kebutuhan manusia yang memang nyata di balik kebutusan itu.",
+      "asset": "broll/044_Atau sekadar jadi manusia yang nggak selalu terburu-buru..jpg",
+      "type": "image"
+    },
+    {
+      "start": 191.0,
+      "end": 193.74,
+      "text": "Dan berbagai penelitian di dalam psikologi lingkungan,",
+      "asset": "broll/020_Ada penelitian dari psikolog lingkungan yang menunjukkan bahwa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 193.86,
+      "end": 198.08,
+      "text": "meninjukan bahwa manusia itu punya kebutuhan terhadap ruang terbuka.",
+      "asset": "broll/058_Sebaliknya, kita sangat peka terhadap biaya yang angkanya jelas,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 198.64,
+      "end": 202.92,
+      "text": "Cahayanya alami dan juga access terhadap lingkungannya yang lebih alami.",
+      "asset": "broll/024_Tanah di bawah kaki kamu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 203.42,
+      "end": 206.94,
+      "text": "Jadi otak manusia itu berkembang selama ratusari butaun",
+      "asset": "broll/021_Otak kita - yang berkembang selama ratusan ribu tahun di.jpg",
+      "type": "image"
+    },
+    {
+      "start": 206.94,
+      "end": 211.22,
+      "text": "dalam lingkungan yang jauh lebih terbuka dibanding kehidupan kotak moderang.",
+      "asset": "broll/088_Hidup manusia jauh terlalu rumit untuk diringkas dalam satu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 211.46,
+      "end": 215.26,
+      "text": "Jadi ketika sesuatu orang tinggal terlalu lama di lingkungan yang padat,",
+      "asset": "broll/082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 215.26,
+      "end": 219.78,
+      "text": "sempit dan minum ruang terbuka, tubuhnya itu bisa merespon lingkungan",
+      "asset": "broll/020_Ada penelitian dari psikolog lingkungan yang menunjukkan bahwa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 219.78,
+      "end": 222.2,
+      "text": "itu sebagai sesuatu yang lebih menakan.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 223.06,
+      "end": 226.52,
+      "text": "Mangkanya ketika sesuatu orang memilih rumah tapak di sepong",
+      "asset": "broll/022_Jadi ketika seseorang memilih rumah tapak di Serpong atau Depok.jpg",
+      "type": "image"
+    },
+    {
+      "start": 226.52,
+      "end": 229.64,
+      "text": "ataupun di depok dibanding apartament kecil di kuningan,",
+      "asset": "broll/086_Jadi apa yang ingin saya sampaikan dari semua ini.jpg",
+      "type": "image"
+    },
+    {
+      "start": 230.04,
+      "end": 232.42,
+      "text": "kebutusan itu sebenarnya bukan cuma sual harga,",
+      "asset": "broll/074_Waktu kita pilih lokasi cuma berdasarkan harga per meter dan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 232.68,
+      "end": 236.2,
+      "text": "tapi ada kebutuhan yang lebih mendalam yang sedang dipenuhi.",
+      "asset": "broll/104_Kalau kamu sekarang sedang di titik mempertimbangkan keputusan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 236.74,
+      "end": 240.1,
+      "text": "Dan ada satu hal lagi yang rumah tapak itu gak bisa kasih.",
+      "asset": "broll/023_Ada satu hal lagi yang rumah tapak bisa kasih tapi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 240.4,
+      "end": 244.1,
+      "text": "Yaitu bagi sebagian orang terasa sangat berbeda dari apartemen.",
+      "asset": "broll/027_Kita butuh tempat yang terasa milik kita sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 244.1,
+      "end": 249.1,
+      "text": "Yaitu rasa memiliki tanah di bawah kaki kamu, halaman yang bisa kamu rubah sendiri,",
+      "asset": "broll/024_Tanah di bawah kaki kamu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 249.68,
+      "end": 253.22,
+      "text": "dinding yang bisa kamu cakap tanpa harus minta jijin siapa-siapa,",
+      "asset": "broll/025_Dinding yang bisa kamu cat tanpa minta izin siapa pun..jpg",
+      "type": "image"
+    },
+    {
+      "start": 253.86,
+      "end": 256.54,
+      "text": "ada perasaan ini adalah rumah saya.",
+      "asset": "broll/030_Tapi karena dalam ingatan kolektif generasi mereka, rumah adalah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 256.94,
+      "end": 261.4,
+      "text": "Dan rasa memiliki ini sepertinya berkaitan rat dengan salah satu kebutuhan",
+      "asset": "broll/026_Kita butuh rasa aman..jpg",
+      "type": "image"
+    },
+    {
+      "start": 261.4,
+      "end": 263.26,
+      "text": "dasar manusia itu rasa aman.",
+      "asset": "broll/026_Kita butuh rasa aman..jpg",
+      "type": "image"
+    },
+    {
+      "start": 263.92,
+      "end": 267.12,
+      "text": "Dan kita juga punya tempat yang terasa berbeda.",
+      "asset": "broll/100_Setiap orang punya kondisi yang berbeda - kondisi keluarga,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 267.36,
+      "end": 269.18,
+      "text": "Kita ingin punya tempat untuk pulang.",
+      "asset": "broll/103_Hari ketika anak sakit dan kamu harus pilih antara pulang lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 269.76,
+      "end": 272.48,
+      "text": "Dan konsep punya rumah sendiri itu memberikan rasa",
+      "asset": "broll/082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 272.48,
+      "end": 275.04,
+      "text": "itu dengan sangat kuat.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 275.34,
+      "end": 278.54,
+      "text": "Tapi ada satu faktor lain yang sering gak kita sederi.",
+      "asset": "broll/028_Dan ada satu faktor lagi yang sering diabaikan tekanan dari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 279.04,
+      "end": 281.86,
+      "text": "Itu tekanan dari keluarga dan juga lingkungan.",
+      "asset": "broll/100_Setiap orang punya kondisi yang berbeda - kondisi keluarga,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 282.34,
+      "end": 287.72,
+      "text": "Di banyak keluarga Indonesia terutama generasi yang lahir sebelum 1990an,",
+      "asset": "broll/036_Sebelum lanjut, saya mau ajak kamu ngitung sebentar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 288.08,
+      "end": 292.98,
+      "text": "belum punya rumah sendiri sering dianggap sebagai sesuatu yang cukup berat sesara sosial.",
+      "asset": "broll/089_Kita sering pikir kita lagi milih rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 293.54,
+      "end": 296.7,
+      "text": "Bukan berarti keluarga atau lingkungan jahat kepada kita,",
+      "asset": "broll/029_Bukan karena orang-orang di sekitar kamu jahat..jpg",
+      "type": "image"
+    },
+    {
+      "start": 296.88,
+      "end": 299.74,
+      "text": "tetapi masalahnya itu lebih sederhana dari itu.",
+      "asset": "broll/087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 299.74,
+      "end": 303.62,
+      "text": "Itu generasi sebelumnya tumbuh dalam kondisi yang berbeda.",
+      "asset": "broll/072_Ini soal di mana anak kamu tumbuh besar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 304.0,
+      "end": 306.88,
+      "text": "Jadi dulu memang penghasilannya itu sesuatu yang karyauan",
+      "asset": "broll/065_Ini hasil dari kebijakan yang bertahun-tahun secara tidak.jpg",
+      "type": "image"
+    },
+    {
+      "start": 306.88,
+      "end": 310.86,
+      "text": "bisa membeli rumah di pinggiran kota dan masih terasa jauh lebih mungkin.",
+      "asset": "broll/032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 311.6,
+      "end": 315.32,
+      "text": "Dan ekspektasi itu akhirnya diwariskan ke generasi berikutnya.",
+      "asset": "broll/031_Ekspektasi itu diturunkan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 315.7,
+      "end": 319.48,
+      "text": "Masalahnya harga rumah itu berubah sangat jauh,",
+      "asset": "broll/067_Biaya itu nggak masuk ke harga jual rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 319.62,
+      "end": 322.34,
+      "text": "tapi ekspektasinya itu gak selalu ikut berubah.",
+      "asset": "broll/044_Atau sekadar jadi manusia yang nggak selalu terburu-buru..jpg",
+      "type": "image"
+    },
+    {
+      "start": 322.68,
+      "end": 325.78,
+      "text": "Jadi ketika seorang membeli rumah jauh dari pusat kota,",
+      "asset": "broll/032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 326.18,
+      "end": 328.74,
+      "text": "sebenarnya dia bukan cuma membeli bangunan.",
+      "asset": "broll/071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 328.74,
+      "end": 331.78,
+      "text": "Dia juga sedang membeli rasa tenang,",
+      "asset": "broll/033_Mereka beli ketenangan batin..jpg",
+      "type": "image"
+    },
+    {
+      "start": 332.08,
+      "end": 333.06,
+      "text": "dia membeli rasa aman,",
+      "asset": "broll/073_Ada nggak taman di dekat rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 333.62,
+      "end": 336.84,
+      "text": "dia membeli symbol bahwa dirinya sudah berhasil.",
+      "asset": "broll/034_Mereka beli bukti - buat diri sendiri dan orang-orang di sekitar.jpg",
+      "type": "image"
+    },
+    {
+      "start": 337.02,
+      "end": 339.86,
+      "text": "Bukan cuma orang lain, tapi juga untuk diri sendiri.",
+      "asset": "broll/034_Mereka beli bukti - buat diri sendiri dan orang-orang di sekitar.jpg",
+      "type": "image"
+    },
+    {
+      "start": 340.36,
+      "end": 344.16,
+      "text": "Dan mesalahnya semua itu punya harga tersebutnya.",
+      "asset": "broll/095_Dan mereka kaget sendiri betapa berharganya waktu itu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 344.22,
+      "end": 346.9,
+      "text": "Waktu yang sudah lewat, gak bisa dikembalikan.",
+      "asset": "broll/049_Tapi waktu nyangkut macet, kamu nggak bisa ngapa-ngapain..jpg",
+      "type": "image"
+    },
+    {
+      "start": 347.34,
+      "end": 348.34,
+      "text": "Cuma kita hitung sebentar.",
+      "asset": "broll/052_Dan ada satu biaya tersembunyi lagi yang paling jarang dihitung.jpg",
+      "type": "image"
+    },
+    {
+      "start": 348.76,
+      "end": 354.12,
+      "text": "Jadi saya cuma ingin menunjukkan angka supaya kita bisa benar-benar melihat konsekwencinya.",
+      "asset": "broll/086_Jadi apa yang ingin saya sampaikan dari semua ini.jpg",
+      "type": "image"
+    },
+    {
+      "start": 354.48,
+      "end": 358.02,
+      "text": "Bayangin kamu menghabiskan 3 jam sehari untuk perjalanan.",
+      "asset": "broll/045_Hasilnya menarik dari semua kegiatan sehari-hari yang diteliti,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 358.02,
+      "end": 359.62,
+      "text": "Jadi 5 hari dalam seminggu.",
+      "asset": "broll/060_Tapi biaya 3 jam bolak-balik tiap hari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 359.9,
+      "end": 362.42,
+      "text": "48 minggu kerja dalam setahun.",
+      "asset": "broll/039_Atau kalau dibikin lebih gampang dicerna setara 6 tahun lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 362.66,
+      "end": 366.24,
+      "text": "Itu berarti sekitar 720 jam per tahun habis di jalan.",
+      "asset": "broll/038_Itu 720 jam per tahun yang habis di jalan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 366.66,
+      "end": 369.46,
+      "text": "Kalau pola itu terus berjalan selama 25 tahun,",
+      "asset": "broll/040_Enam tahun..jpg",
+      "type": "image"
+    },
+    {
+      "start": 369.76,
+      "end": 370.96,
+      "text": "sampai KPR Lunas,",
+      "asset": "broll/077_Bank yang dapat pendapatan bunga dari KPR 20-30 tahun..jpg",
+      "type": "image"
+    },
+    {
+      "start": 371.36,
+      "end": 374.28,
+      "text": "kamu akan menghabiskan sekitar 18.000 jam.",
+      "asset": "broll/046_Lembur 2 jam di kantor ternyata secara psikologis masih lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 374.8,
+      "end": 377.98,
+      "text": "Kalau angka itu diubah kebentuk yang lebih jampang dibayangin,",
+      "asset": "broll/092_Kita bayangin suasana halaman di pagi hari yang cerah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 378.18,
+      "end": 381.04,
+      "text": "itu setara dengan lebih dari 6 tahun kerja penuh.",
+      "asset": "broll/039_Atau kalau dibikin lebih gampang dicerna setara 6 tahun lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 381.32,
+      "end": 382.42,
+      "text": "8 jam sehari.",
+      "asset": "broll/102_Tapi hari Senin pagi musim hujan ketika alarm bunyi jam 4..jpg",
+      "type": "image"
+    },
+    {
+      "start": 382.72,
+      "end": 383.92,
+      "text": "Hanya untuk perjalanan.",
+      "asset": "broll/053_Biaya servis kendaraan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 384.26,
+      "end": 386.94,
+      "text": "Dan waktu sebesar itu, sebetulnya bukan cuma angka.",
+      "asset": "broll/041_Waktu itu bukan angka abstrak..jpg",
+      "type": "image"
+    },
+    {
+      "start": 386.94,
+      "end": 391.58,
+      "text": "Itu adalah waktu yang seharusnya bisa kamu gunakan untuk hal yang lain.",
+      "asset": "broll/093_Dan apa yang harusnya bisa saya lakukan dengan waktu itu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 392.12,
+      "end": 395.94,
+      "text": "Seperti bermain dengan anak yang setiap tahunnya terus bertumbuh,",
+      "asset": "broll/078_Industri kendaraan yang terus tumbuh karena orang terpaksa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 396.16,
+      "end": 398.24,
+      "text": "ataupun belajar sesuatu yang baru,",
+      "asset": "broll/042_Untuk belajar hal baru..jpg",
+      "type": "image"
+    },
+    {
+      "start": 398.88,
+      "end": 401.88,
+      "text": "masak makan malam, dan tidur lebih cukup,",
+      "asset": "broll/043_Untuk masak makan malam..jpg",
+      "type": "image"
+    },
+    {
+      "start": 402.2,
+      "end": 404.22,
+      "text": "olahrega, ngobrol dengan pasangan,",
+      "asset": "broll/063_Tapi keputusan orang itu dibuat dalam situasi di mana pilihan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 404.38,
+      "end": 408.4,
+      "text": "atau bahkan cuma punya waktu untuk hidup tanpa perlu merasa terburu-buru.",
+      "asset": "broll/048_Waktu lembur di kantor, kamu masih ngerasa punya pilihan - kamu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 408.74,
+      "end": 413.06,
+      "text": "Dan ini ada penelitian yang menunjukkan bahwa perjalanan jauh ke tempat kerja",
+      "asset": "broll/020_Ada penelitian dari psikolog lingkungan yang menunjukkan bahwa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 413.06,
+      "end": 417.08,
+      "text": "dan kemecatan termasuk aktivitas yang sangat berkaitan dengan rendahnya",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 417.08,
+      "end": 418.26,
+      "text": "kebahagian sehari-hari.",
+      "asset": "broll/045_Hasilnya menarik dari semua kegiatan sehari-hari yang diteliti,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 418.62,
+      "end": 420.94,
+      "text": "Dan nari-nya perjalanan yang lama,",
+      "asset": "broll/082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 421.18,
+      "end": 423.74,
+      "text": "kadang terasa lebih berat daripada pekerjaan itu sendiri.",
+      "asset": "broll/027_Kita butuh tempat yang terasa milik kita sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 424.4,
+      "end": 424.76,
+      "text": "Kenapa?",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 425.2,
+      "end": 427.28,
+      "text": "Karena masalahnya itu bukan cuma salah waktu.",
+      "asset": "broll/047_Karena macet nggak cuma mencuri waktu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 427.56,
+      "end": 430.5,
+      "text": "Masalahnya adalah hilangnya rasa punya kendali.",
+      "asset": "broll/079_Semua pihak ini punya kepentingan untuk mempertahankan pola yang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 430.82,
+      "end": 432.6,
+      "text": "Kalau kamu lember dua jam di kantor,",
+      "asset": "broll/046_Lembur 2 jam di kantor ternyata secara psikologis masih lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 432.82,
+      "end": 435.74,
+      "text": "setidaknya masih ada perasaan bahwa kamu sedang memilih",
+      "asset": "broll/055_Tapi orang masih tetap memilih tinggal jauh..jpg",
+      "type": "image"
+    },
+    {
+      "start": 435.74,
+      "end": 437.32,
+      "text": "untuk menyelasai kan sesuatu.",
+      "asset": "broll/014_Data dari Badan Pusat Statistik (BPS) menunjukkan pola yang sama.jpg",
+      "type": "image"
+    },
+    {
+      "start": 438.04,
+      "end": 441.34,
+      "text": "Tapi ketika kamu terjebak macet selama satu jam,",
+      "asset": "broll/081_Iya, macet, tapi udara di sini lebih segar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 441.34,
+      "end": 443.2,
+      "text": "kamu gak bisa berbuat banyak.",
+      "asset": "broll/050_Dan otak manusia merespons perasaan nggak bisa berbuat apa-apa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 443.88,
+      "end": 446.32,
+      "text": "Kamu cuma duduk, nunggu, gak tahu,",
+      "asset": "broll/070_Kita bayar dengan peluang yang nggak pernah kita sadari hilang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 446.46,
+      "end": 447.26,
+      "text": "kapan bisa sampe.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 448.14,
+      "end": 450.64,
+      "text": "Perasaan saya gak bisa ngalakuin apa-apa itu",
+      "asset": "broll/050_Dan otak manusia merespons perasaan nggak bisa berbuat apa-apa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 450.64,
+      "end": 453.34,
+      "text": "bisa bikin pengalaman perjalanan terasa lebih jauh,",
+      "asset": "broll/101_Pilihan ini akan jauh lebih bijak kalau kita buat dengan mata.jpg",
+      "type": "image"
+    },
+    {
+      "start": 454.02,
+      "end": 454.72,
+      "text": "mengurus mental.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 455.26,
+      "end": 458.38,
+      "text": "Dan ada biaya lain yang juga sering gak kita hitung.",
+      "asset": "broll/057_Ternyata, otak kita sangat buruk dalam menghitung biaya yang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 458.68,
+      "end": 460.42,
+      "text": "Ya itu biaya perjalanan itu sendiri.",
+      "asset": "broll/068_Biaya itu ditanggung bareng-bareng lewat pajak, lewat subsidi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 461.08,
+      "end": 464.34,
+      "text": "Kayak bensin, tol, servis kendaraan, transportasi,",
+      "asset": "broll/053_Biaya servis kendaraan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 465.62,
+      "end": 468.3,
+      "text": "makan di luar, karena terlalu lama di perjalanan",
+      "asset": "broll/043_Untuk masak makan malam..jpg",
+      "type": "image"
+    },
+    {
+      "start": 468.3,
+      "end": 470.56,
+      "text": "dan berbagai pengeluaran kecil lainnya.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 471.56,
+      "end": 473.8,
+      "text": "Semuanya itu terus berjalan di atas cici lain rumah.",
+      "asset": "broll/054_Semua itu ditambah ke atas cicilan KPR kamu - tapi hampir tidak.jpg",
+      "type": "image"
+    },
+    {
+      "start": 474.22,
+      "end": 477.14,
+      "text": "Tapi ketika orang menghitung kemampuan membeli rumah,",
+      "asset": "broll/087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 477.64,
+      "end": 480.32,
+      "text": "biaya-biaya tersebut sering di hitung secara terkisah.",
+      "asset": "broll/069_Dan biaya transportasi yang mahal itu, dalam jangka.jpg",
+      "type": "image"
+    },
+    {
+      "start": 480.5,
+      "end": 483.5,
+      "text": "Padahal sebenarnya semua bagian dari biaya hidup itu",
+      "asset": "broll/052_Dan ada satu biaya tersembunyi lagi yang paling jarang dihitung.jpg",
+      "type": "image"
+    },
+    {
+      "start": 483.5,
+      "end": 484.48,
+      "text": "di lokasi tersebut.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 484.86,
+      "end": 488.12,
+      "text": "Jadi, kalau kita mitung total biaya sebenarnya,",
+      "asset": "broll/057_Ternyata, otak kita sangat buruk dalam menghitung biaya yang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 488.44,
+      "end": 490.94,
+      "text": "bukan cuma cici lain, tapi juga ongkos,",
+      "asset": "broll/062_Selain soal cara otak bekerja, ada faktor yang lebih besar lagi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 491.1,
+      "end": 493.92,
+      "text": "perjalanan, berbagai dampak jangkatan jangk.",
+      "asset": "broll/069_Dan biaya transportasi yang mahal itu, dalam jangka.jpg",
+      "type": "image"
+    },
+    {
+      "start": 494.16,
+      "end": 496.4,
+      "text": "Selisa hanya itu antara rumah yang jauh",
+      "asset": "broll/010_Waktu saya tanya langsung, jawabannya sederhana Rumah ini sudah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 496.4,
+      "end": 498.1,
+      "text": "dan hunian yang lebih dekat.",
+      "asset": "broll/073_Ada nggak taman di dekat rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 498.1,
+      "end": 501.96,
+      "text": "Sebenarnya bisa jadi jauh lebih kecil daripada yang kita bayangkan.",
+      "asset": "broll/094_Ada pergeseran menarik yang mulai terjadi setelah pandemi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 502.22,
+      "end": 505.38,
+      "text": "Tapi tetep saja, orang masih memang melihat rumah yang jauh.",
+      "asset": "broll/055_Tapi orang masih tetap memilih tinggal jauh..jpg",
+      "type": "image"
+    },
+    {
+      "start": 505.56,
+      "end": 509.14,
+      "text": "Kenapa untuk memahami itu, kita perlu melihat sedikit",
+      "asset": "broll/056_Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 509.14,
+      "end": 510.86,
+      "text": "cara kerja otak manusia.",
+      "asset": "broll/083_Tapi semua itu juga adalah cara otak kita menghibur diri dari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 511.18,
+      "end": 512.92,
+      "text": "Ada penelitian dualsikolog,",
+      "asset": "broll/084_Yang menarik kalau peneliti tanya langsung ke orang-orang,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 513.38,
+      "end": 515.76,
+      "text": "almost jerski dan juga Daniel kehanaman",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 515.76,
+      "end": 519.84,
+      "text": "yang banyak membahas bagaimana manusia mengambil keputusan.",
+      "asset": "broll/080_Ketika kita sudah ambil keputusan besar yang susah dibatalkan,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 520.24,
+      "end": 524.58,
+      "text": "Salah satu hal yang menerik adalah manusia itu candurung kesulitan",
+      "asset": "broll/056_Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 524.58,
+      "end": 527.36,
+      "text": "melihat biaya yang tidak langsung terasa.",
+      "asset": "broll/009_Bukan karena tidak mau..jpg",
+      "type": "image"
+    },
+    {
+      "start": 527.36,
+      "end": 530.9,
+      "text": "Apalagi, kalau biaya itu tersebar dalam jangkau waktu",
+      "asset": "broll/093_Dan apa yang harusnya bisa saya lakukan dengan waktu itu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 530.9,
+      "end": 534.32,
+      "text": "yang sangat panjang, waktu yang contohnya itu bagus,",
+      "asset": "broll/035_Harga itu namanya waktu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 534.9,
+      "end": 538.1,
+      "text": "seterus juga, dan paknya juga ke sehatan jangkat panjang.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 538.36,
+      "end": 542.56,
+      "text": "Sebaliknya, kita sangat sensitif terhadap angka yang langsung terihat.",
+      "asset": "broll/058_Sebaliknya, kita sangat peka terhadap biaya yang angkanya jelas,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 543.24,
+      "end": 545.7,
+      "text": "Cicilan pejuta, perbulan, terasanya tak.",
+      "asset": "broll/059_Cicilan KPR 4 juta per bulan terasa sangat nyata..jpg",
+      "type": "image"
+    },
+    {
+      "start": 546.24,
+      "end": 547.14,
+      "text": "Angkanya mungkin jelas.",
+      "asset": "broll/037_Bukan buat nakut-nakutin, tapi biar gambarannya jelas..jpg",
+      "type": "image"
+    },
+    {
+      "start": 547.7,
+      "end": 550.3,
+      "text": "Kita bisa melihat uang berkurang dari terkening.",
+      "asset": "broll/018_Hitungannya gampang dengan uang yang sama, kamu bisa dapat rumah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 551.18,
+      "end": 553.32,
+      "text": "Tapi, tiga jang perjalanan setiap hari,",
+      "asset": "broll/001_Ada seseorang yang setiap hari bangun jam 4 pagi..jpg",
+      "type": "image"
+    },
+    {
+      "start": 554.02,
+      "end": 557.12,
+      "text": "kita jarang melihat sebagai sesuatu yang punya harga.",
+      "asset": "broll/099_Dan saya yakin nggak ada yang punya..jpg",
+      "type": "image"
+    },
+    {
+      "start": 557.12,
+      "end": 560.1,
+      "text": "Biasanya cuma dianggap sebagai konsekvensi.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 560.66,
+      "end": 565.74,
+      "text": "Memang jauh, memang maca dan juga memang harus begitu.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 565.98,
+      "end": 570.16,
+      "text": "Padahal sebenarnya, itu juga harga yang kita bayar.",
+      "asset": "broll/067_Biaya itu nggak masuk ke harga jual rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 570.62,
+      "end": 574.38,
+      "text": "Itu lah kenapa keputusan membeli rumah yang dari luar keliatannya aneh",
+      "asset": "broll/061_Itulah kenapa banyak keputusan soal rumah yang kelihatannya aneh.jpg",
+      "type": "image"
+    },
+    {
+      "start": 574.38,
+      "end": 576.76,
+      "text": "dari dalam justru bisa terasa masuk akal.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 577.14,
+      "end": 579.88,
+      "text": "Dan di sini ada satu hal lagi yang jauh lebih besar.",
+      "asset": "broll/088_Hidup manusia jauh terlalu rumit untuk diringkas dalam satu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 580.32,
+      "end": 581.92,
+      "text": "Bukan cuma soal otak kita.",
+      "asset": "broll/062_Selain soal cara otak bekerja, ada faktor yang lebih besar lagi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 582.4,
+      "end": 585.2,
+      "text": "Tapi juga soal kotak tempat tinggal kita.",
+      "asset": "broll/071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 585.2,
+      "end": 589.22,
+      "text": "Ketika kita bertanya, kenapa sih orang tinggal semakin jauh?",
+      "asset": "broll/055_Tapi orang masih tetap memilih tinggal jauh..jpg",
+      "type": "image"
+    },
+    {
+      "start": 589.38,
+      "end": 591.82,
+      "text": "Kita sering langsung nyalahin keputusan individu.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 592.08,
+      "end": 595.42,
+      "text": "Padahal pilihan individu itu dibuat di dalam sebuah sistem.",
+      "asset": "broll/063_Tapi keputusan orang itu dibuat dalam situasi di mana pilihan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 595.84,
+      "end": 597.06,
+      "text": "Kayak contohnya di Jakarta.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 597.5,
+      "end": 601.32,
+      "text": "Banyak kota besar di Indonesia berkembang dengan pola di mana",
+      "asset": "broll/072_Ini soal di mana anak kamu tumbuh besar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 601.32,
+      "end": 605.02,
+      "text": "pusat pekerjaan itu terkonsentrasi di area terlentuk.",
+      "asset": "broll/007_Kalau dikalikan 20 hari kerja sebulan, itu 100 jam..jpg",
+      "type": "image"
+    },
+    {
+      "start": 605.44,
+      "end": 610.42,
+      "text": "Sementara, rumah yang lebih terjangkau justru banyak dibangun semakin jauh",
+      "asset": "broll/030_Tapi karena dalam ingatan kolektif generasi mereka, rumah adalah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 610.42,
+      "end": 611.66,
+      "text": "dari pusat aktivitas.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 611.66,
+      "end": 615.76,
+      "text": "Dan transportasi umum juga belum selalu cukup kuat",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 615.76,
+      "end": 618.6,
+      "text": "untuk menghubungkan semuanya secara efisien.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 618.94,
+      "end": 623.22,
+      "text": "Akhirnya muncul lingkaran seperti tanah di pinggiran itu jauh lebih murah.",
+      "asset": "broll/091_Kita ngitung cicilan per bulan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 623.5,
+      "end": 625.72,
+      "text": "Pengembang bisa membangun lebih luas.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 626.1,
+      "end": 628.84,
+      "text": "Pembeli juga bisa mendapatkan rumah yang lebih besar.",
+      "asset": "broll/066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+      "type": "image"
+    },
+    {
+      "start": 629.32,
+      "end": 632.74,
+      "text": "Ulayah yang berkembang, tapi konsekwencinya itu",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 632.74,
+      "end": 635.8,
+      "text": "orang harus melakukan perjalanan jauh setiap hari.",
+      "asset": "broll/103_Hari ketika anak sakit dan kamu harus pilih antara pulang lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 636.38,
+      "end": 639.58,
+      "text": "Dan masalahnya itu biaya perjalanan tersebut",
+      "asset": "broll/060_Tapi biaya 3 jam bolak-balik tiap hari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 639.58,
+      "end": 640.86,
+      "text": "jarang masuk ke harga rumah.",
+      "asset": "broll/067_Biaya itu nggak masuk ke harga jual rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 641.24,
+      "end": 643.32,
+      "text": "Jadi biaya itu muncul di tempat lain.",
+      "asset": "broll/068_Biaya itu ditanggung bareng-bareng lewat pajak, lewat subsidi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 643.76,
+      "end": 648.46,
+      "text": "Di bensin, di jalan to, di kendaraan, di kemacetan,",
+      "asset": "broll/078_Industri kendaraan yang terus tumbuh karena orang terpaksa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 648.82,
+      "end": 650.56,
+      "text": "di produktivitas yang hilang.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 650.64,
+      "end": 653.66,
+      "text": "Peneliti perkotaan, Alain Birdfield juga",
+      "asset": "broll/091_Kita ngitung cicilan per bulan..jpg",
+      "type": "image"
+    },
+    {
+      "start": 653.66,
+      "end": 657.24,
+      "text": "banyak membahas bagaimana bentuk kota yang menyebar",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 657.24,
+      "end": 660.7,
+      "text": "terlalu jauh dapat meningkatkan biaya transportasi",
+      "asset": "broll/077_Bank yang dapat pendapatan bunga dari KPR 20-30 tahun..jpg",
+      "type": "image"
+    },
+    {
+      "start": 660.7,
+      "end": 663.5,
+      "text": "dan membuat access mesyarakat terhadap luang ekonomi",
+      "asset": "broll/090_Dan banyak dari kita membuat pilihan itu tanpa pernah.jpg",
+      "type": "image"
+    },
+    {
+      "start": 663.5,
+      "end": 664.94,
+      "text": "menjadi semakin tidak merata.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 665.3,
+      "end": 668.18,
+      "text": "Artinya sebenarnya kita bukan cuma membayar rumah,",
+      "asset": "broll/071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 668.18,
+      "end": 671.52,
+      "text": "tapi kita juga membayar struktur potat tempat rumah",
+      "asset": "broll/089_Kita sering pikir kita lagi milih rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 671.52,
+      "end": 672.24,
+      "text": "itu berada.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 672.54,
+      "end": 675.72,
+      "text": "Dan ada biaya yang lebih sulit lagi untuk dihitung.",
+      "asset": "broll/052_Dan ada satu biaya tersembunyi lagi yang paling jarang dihitung.jpg",
+      "type": "image"
+    },
+    {
+      "start": 676.16,
+      "end": 677.46,
+      "text": "Itu peluang yang hilang.",
+      "asset": "broll/070_Kita bayar dengan peluang yang nggak pernah kita sadari hilang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 678.42,
+      "end": 681.76,
+      "text": "Pilihan rumah juga bukan hanya sual hidup kita sekarang.",
+      "asset": "broll/071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+      "type": "image"
+    },
+    {
+      "start": 682.16,
+      "end": 684.7,
+      "text": "Itu tentang bagaimana anak-anak kita tumbuh.",
+      "asset": "broll/072_Ini soal di mana anak kamu tumbuh besar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 684.88,
+      "end": 686.68,
+      "text": "Mungkin kaya banyak pertimbangan gitu ya.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 686.96,
+      "end": 690.22,
+      "text": "Kaya contohnya sekolah mereka dimana, bisa jalan kaki",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 690.22,
+      "end": 692.44,
+      "text": "atau harus negendaraan.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 693.02,
+      "end": 696.56,
+      "text": "Ada teman atau enggak, ada ruang bermain atau enggak",
+      "asset": "broll/105_Nggak ada jawaban yang paling benar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 696.56,
+      "end": 698.3,
+      "text": "ada komunitas yang bagus atau enggak,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 698.84,
+      "end": 702.04,
+      "text": "anak juga bisa bertemu tetangga atau membangun hubungan",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 702.04,
+      "end": 703.1,
+      "text": "sosial atau enggak gitu.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 703.52,
+      "end": 706.56,
+      "text": "Semua itu ikut membantu pengalaman hidup.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 707.06,
+      "end": 709.74,
+      "text": "Ketika kita memilih rumah, hanya berdasarkan harga",
+      "asset": "broll/074_Waktu kita pilih lokasi cuma berdasarkan harga per meter dan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 709.74,
+      "end": 711.68,
+      "text": "per meter dan luas bangunan.",
+      "asset": "broll/017_Oke, coba kita bedah dulu sisi pertamanya..jpg",
+      "type": "image"
+    },
+    {
+      "start": 711.84,
+      "end": 714.6,
+      "text": "Kita kadang lupa bahwa lingkungan di sekitar rumah juga",
+      "asset": "broll/087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 714.6,
+      "end": 717.2,
+      "text": "merupakan bagian dari rumah itu sendiri.",
+      "asset": "broll/082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+      "type": "image"
+    },
+    {
+      "start": 717.72,
+      "end": 721.3,
+      "text": "Dan mungkin ini adalah salah satu harga yang paling mahal.",
+      "asset": "broll/075_Itu harga yang paling mahal - tapi paling susah diukur..jpg",
+      "type": "image"
+    },
+    {
+      "start": 721.74,
+      "end": 723.94,
+      "text": "Karena dampaknya itu terasa bertahun tahun.",
+      "asset": "broll/051_Ini bukan klaim asal - ini hasil penelitian bertahun-tahun.jpg",
+      "type": "image"
+    },
+    {
+      "start": 723.94,
+      "end": 726.02,
+      "text": "Tapi paling sulit dimasukan ke-spirit.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 726.44,
+      "end": 729.72,
+      "text": "Lalu pertanyaannya kalau ada begitu banyak konsekwensi,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 729.94,
+      "end": 732.08,
+      "text": "kenapa pola seperti ini terus terjadi.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 732.86,
+      "end": 736.14,
+      "text": "Karena tentu saja ada banyak pihak yang mendapatkan",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 736.14,
+      "end": 737.8,
+      "text": "manfaat dari kondisi tersebut.",
+      "asset": "broll/076_Karena ada yang diuntungkan dari kondisi ini..jpg",
+      "type": "image"
+    },
+    {
+      "start": 738.12,
+      "end": 741.28,
+      "text": "Kaya developer dapat access ketanah yang lebih murah,",
+      "asset": "broll/077_Bank yang dapat pendapatan bunga dari KPR 20-30 tahun..jpg",
+      "type": "image"
+    },
+    {
+      "start": 741.68,
+      "end": 745.48,
+      "text": "bang, dapatin pendapatan dari kredit yang kapan-jang,",
+      "asset": "broll/098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+      "type": "image"
+    },
+    {
+      "start": 745.94,
+      "end": 748.68,
+      "text": "industri kendaraan tumbuh karena semakin banyak orang",
+      "asset": "broll/078_Industri kendaraan yang terus tumbuh karena orang terpaksa.jpg",
+      "type": "image"
+    },
+    {
+      "start": 748.68,
+      "end": 751.14,
+      "text": "membutuhkan kendaraan untuk mobilitas.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 751.14,
+      "end": 754.68,
+      "text": "Jalantul juga digunakan terus menurus oleh jutaan komputer.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 755.2,
+      "end": 757.44,
+      "text": "Semua bagian dari sistem itu saling terhubung",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 757.44,
+      "end": 760.5,
+      "text": "dan ada satu hal yang menarik lagi untuk terjadi",
+      "asset": "broll/094_Ada pergeseran menarik yang mulai terjadi setelah pandemi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 760.5,
+      "end": 762.52,
+      "text": "pada kita sebagai manusia.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 763.24,
+      "end": 767.1,
+      "text": "Ketika kita sudah mengambil keputusan yang sulit dibatalkan,",
+      "asset": "broll/080_Ketika kita sudah ambil keputusan besar yang susah dibatalkan,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 767.54,
+      "end": 770.7,
+      "text": "otak kita itu cenderung mencari alasan untuk membuat",
+      "asset": "broll/083_Tapi semua itu juga adalah cara otak kita menghibur diri dari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 770.7,
+      "end": 773.12,
+      "text": "keputusan tersebut terasa bener.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 773.54,
+      "end": 775.72,
+      "text": "Misalnya, ia sih emang maca,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 775.98,
+      "end": 779.78,
+      "text": "tapi udara-nya kan lebih enak, ia sih memang jauh,",
+      "asset": "broll/048_Waktu lembur di kantor, kamu masih ngerasa punya pilihan - kamu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 779.78,
+      "end": 782.34,
+      "text": "tapi kan anak-anak bisa main di halaman,",
+      "asset": "broll/092_Kita bayangin suasana halaman di pagi hari yang cerah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 782.86,
+      "end": 784.48,
+      "text": "ia sih perjalanan lama,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 784.6,
+      "end": 786.3,
+      "text": "tapi sedidaknya rumah melik sendiri,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 786.56,
+      "end": 788.44,
+      "text": "dan semua alasan itu bisa jadi bener.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 788.66,
+      "end": 791.92,
+      "text": "Tapi bukan berarti semuanya palsu, masalahnya,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 792.16,
+      "end": 794.04,
+      "text": "manusia itu memang punya kecendurungan",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 794.04,
+      "end": 797.28,
+      "text": "untuk membenarkan keputusan yang sudah terlanjut di ambil,",
+      "asset": "broll/080_Ketika kita sudah ambil keputusan besar yang susah dibatalkan,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 797.5,
+      "end": 800.46,
+      "text": "supaya kita tidak terus menerus diantui rasamnya salah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 800.94,
+      "end": 804.32,
+      "text": "Dan itu juga bukan berarti yang beli rumah jauh itu bodoh,",
+      "asset": "broll/066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+      "type": "image"
+    },
+    {
+      "start": 804.5,
+      "end": 807.78,
+      "text": "tapi sama sekali bukan, itu cuma menunjukkan bahwa manusia itu",
+      "asset": "broll/014_Data dari Badan Pusat Statistik (BPS) menunjukkan pola yang sama.jpg",
+      "type": "image"
+    },
+    {
+      "start": 807.78,
+      "end": 810.64,
+      "text": "mengambil keputusan berdasarkan banyak hal sekaligus.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 811.18,
+      "end": 814.5,
+      "text": "Kayak ukuran rumah harga rasa aman,",
+      "asset": "broll/026_Kita butuh rasa aman..jpg",
+      "type": "image"
+    },
+    {
+      "start": 814.92,
+      "end": 818.44,
+      "text": "status keluarga, kebibasan, dan kenyamanan, itu saja waktu.",
+      "asset": "broll/049_Tapi waktu nyangkut macet, kamu nggak bisa ngapa-ngapain..jpg",
+      "type": "image"
+    },
+    {
+      "start": 819.0,
+      "end": 822.74,
+      "text": "Misalnya, waktu biasanya kalau dalam proses negosiasi,",
+      "asset": "broll/095_Dan mereka kaget sendiri betapa berharganya waktu itu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 823.1,
+      "end": 825.86,
+      "text": "itu karena harganya itu tidak muncul di awal.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 826.38,
+      "end": 829.66,
+      "text": "Jadi sebenarnya apa yang ingin saya sampaikan dari semua ini,",
+      "asset": "broll/086_Jadi apa yang ingin saya sampaikan dari semua ini.jpg",
+      "type": "image"
+    },
+    {
+      "start": 830.0,
+      "end": 832.8,
+      "text": "bukan berarti membi rumah di pinggiran itu salah,",
+      "asset": "broll/087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 833.04,
+      "end": 835.16,
+      "text": "tapi bukan juga kamu harus ngesel,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 835.16,
+      "end": 837.66,
+      "text": "kalau sekarang sudah terlanjut, tinggal, jauh,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 837.78,
+      "end": 840.84,
+      "text": "hidup manusia itu terlalu kompleks untuk disediharakan menjadi",
+      "asset": "broll/088_Hidup manusia jauh terlalu rumit untuk diringkas dalam satu.jpg",
+      "type": "image"
+    },
+    {
+      "start": 840.84,
+      "end": 842.7,
+      "text": "satu jawaban benar atau salah.",
+      "asset": "broll/105_Nggak ada jawaban yang paling benar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 843.06,
+      "end": 845.64,
+      "text": "Yang ini saya ajak kita lihat adalah satu hal.",
+      "asset": "broll/023_Ada satu hal lagi yang rumah tapak bisa kasih tapi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 846.16,
+      "end": 847.94,
+      "text": "Kita sering merasa sedang memilir rumah.",
+      "asset": "broll/089_Kita sering pikir kita lagi milih rumah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 848.14,
+      "end": 850.68,
+      "text": "Padahal sebenarnya, kita sedang memilih bagaimana,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 851.02,
+      "end": 853.76,
+      "text": "kita akan menghabiskan sebagian besar waktu di hidup kita.",
+      "asset": "broll/006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+      "type": "image"
+    },
+    {
+      "start": 854.28,
+      "end": 857.64,
+      "text": "Dan sering kali kita membuat keputusan itu tanpa benar-benar",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 857.64,
+      "end": 860.32,
+      "text": "membayangkan hidupan sehari-hari yang akan datang",
+      "asset": "broll/045_Hasilnya menarik dari semua kegiatan sehari-hari yang diteliti,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 860.32,
+      "end": 862.12,
+      "text": "setelah rumah itu di beli.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 862.12,
+      "end": 864.6,
+      "text": "Kita menghitung cichilan, kita lihat den,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 865.04,
+      "end": 868.06,
+      "text": "kita lihat luastan, kita bayangin halaman rumah,",
+      "asset": "broll/092_Kita bayangin suasana halaman di pagi hari yang cerah..jpg",
+      "type": "image"
+    },
+    {
+      "start": 868.74,
+      "end": 870.32,
+      "text": "kita bayangkan pagi yang tenang.",
+      "asset": "broll/003_Dia bangun jam 4 pagi karena kalau tidak, dia nggak akan sampai.jpg",
+      "type": "image"
+    },
+    {
+      "start": 870.62,
+      "end": 873.28,
+      "text": "Tapi kita jarang benar-benar duduk untuk bertanya.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 873.76,
+      "end": 876.08,
+      "text": "Jadi selama 25 tahun terdepan,",
+      "asset": "broll/065_Ini hasil dari kebijakan yang bertahun-tahun secara tidak.jpg",
+      "type": "image"
+    },
+    {
+      "start": 876.48,
+      "end": 879.12,
+      "text": "berabar jam hidup saya akan habis di perjalanan.",
+      "asset": "broll/008_Kalau dihitung setahun, hampir 1.200 jam - atau setara dengan 50.jpg",
+      "type": "image"
+    },
+    {
+      "start": 879.88,
+      "end": 885.12,
+      "text": "Dan ada sesuatu yang menarik yang terjadi setelah pandemi 2020-20-2022.",
+      "asset": "broll/094_Ada pergeseran menarik yang mulai terjadi setelah pandemi.jpg",
+      "type": "image"
+    },
+    {
+      "start": 886.08,
+      "end": 889.06,
+      "text": "Jutaan orang tiba-tiba dipaksa bekerja dari rumah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 889.06,
+      "end": 892.24,
+      "text": "Dan bahkan banyak dari mereka baru saya ada satu hal.",
+      "asset": "broll/042_Untuk belajar hal baru..jpg",
+      "type": "image"
+    },
+    {
+      "start": 892.72,
+      "end": 895.7,
+      "text": "Tepnya, mereka selama ini menghabiskan banyak sekali waktu",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 895.7,
+      "end": 897.38,
+      "text": "untuk pergi pulang kerja.",
+      "asset": "broll/006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+      "type": "image"
+    },
+    {
+      "start": 897.72,
+      "end": 899.66,
+      "text": "Begitu perjalanannya itu hilang,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 900.08,
+      "end": 901.4,
+      "text": "waktu mereka kembali.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 901.82,
+      "end": 904.06,
+      "text": "Dan banyak orang baru menyadari,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 904.74,
+      "end": 906.5,
+      "text": "betapa mahalnya waktu tersebut.",
+      "asset": "broll/095_Dan mereka kaget sendiri betapa berharganya waktu itu..jpg",
+      "type": "image"
+    },
+    {
+      "start": 906.74,
+      "end": 909.2,
+      "text": "Bukan selalu beratipin deh, lebih dekat ke kantor.",
+      "asset": "broll/096_Bukan selalu pindah lebih dekat ke kantor - karena kantor.jpg",
+      "type": "image"
+    },
+    {
+      "start": 909.64,
+      "end": 912.96,
+      "text": "Karena setelah pandemi, kantor juga bukan lagi satu-satunya",
+      "asset": "broll/028_Dan ada satu faktor lagi yang sering diabaikan tekanan dari.jpg",
+      "type": "image"
+    },
+    {
+      "start": 912.96,
+      "end": 915.24,
+      "text": "pusat kehidupan bagi sebagian orang.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 915.7,
+      "end": 918.88,
+      "text": "Tapi cara orang mengandang rumah mulai berubah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 918.88,
+      "end": 922.12,
+      "text": "Rumah bukan lagi cuma tempat tidur setelah pulang kerja.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 922.48,
+      "end": 925.96,
+      "text": "Dan rumah mulai dipandang sebagai bagian dari gaya hidup.",
+      "asset": "broll/098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+      "type": "image"
+    },
+    {
+      "start": 926.3,
+      "end": 929.98,
+      "text": "Mungkin itu pertanyaan yang lebih penting sebelum kita",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 929.98,
+      "end": 931.26,
+      "text": "tanda tangan KPR.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 931.66,
+      "end": 933.98,
+      "text": "Bukan rumah sebesar apa yang bisa di beli,",
+      "asset": "broll/066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+      "type": "image"
+    },
+    {
+      "start": 934.16,
+      "end": 936.88,
+      "text": "tapi gaya hidup seperti apa yang ingin saya jalani.",
+      "asset": "broll/098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+      "type": "image"
+    },
+    {
+      "start": 937.82,
+      "end": 940.98,
+      "text": "Dan dimana hidup itu paling mungkin saya bangun.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 941.34,
+      "end": 943.42,
+      "text": "Saya tidak punya satu jawaban untuk semua orang.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 943.68,
+      "end": 946.1,
+      "text": "Dan memang tidak ada kondisi setiap orang itu,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 946.1,
+      "end": 947.82,
+      "text": "bukan beda. Kondisi keluarga juga,",
+      "asset": "broll/100_Setiap orang punya kondisi yang berbeda - kondisi keluarga,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 947.98,
+      "end": 950.24,
+      "text": "kemampuan finansial, orang juga beda.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 950.6,
+      "end": 954.2,
+      "text": "Akses transportasi, orang juga beda, dan juga perkejahan juga beda.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 954.96,
+      "end": 955.76,
+      "text": "Semuanya juga beda.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 955.94,
+      "end": 961.2,
+      "text": "Jadi rumah yang tepat untuk satu orang belum tentu tepat untuk orang lain.",
+      "asset": "broll/022_Jadi ketika seseorang memilih rumah tapak di Serpong atau Depok.jpg",
+      "type": "image"
+    },
+    {
+      "start": 961.64,
+      "end": 964.14,
+      "text": "Tapi menurut saya, ada satu hal yang penting.",
+      "asset": "broll/056_Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang.jpg",
+      "type": "image"
+    },
+    {
+      "start": 964.64,
+      "end": 967.0,
+      "text": "Kaputusan seperti ini akan jauh lebih matang",
+      "asset": "broll/101_Pilihan ini akan jauh lebih bijak kalau kita buat dengan mata.jpg",
+      "type": "image"
+    },
+    {
+      "start": 967.0,
+      "end": 969.84,
+      "text": "kalau kita ambil dengan mata yang benar-benar terbuka.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 970.12,
+      "end": 972.4,
+      "text": "Bukan cuma melihat harga dan dengah.",
+      "asset": "broll/074_Waktu kita pilih lokasi cuma berdasarkan harga per meter dan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 972.68,
+      "end": 975.02,
+      "text": "Tapi juga mempayangkan kehidupan sehari-hari",
+      "asset": "broll/102_Tapi hari Senin pagi musim hujan ketika alarm bunyi jam 4..jpg",
+      "type": "image"
+    },
+    {
+      "start": 975.02,
+      "end": 978.24,
+      "text": "dan akan muncul setelah keputusan itu di ambil.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 978.42,
+      "end": 980.02,
+      "text": "Bukan hari ketika jalan lancar,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 980.8,
+      "end": 981.96,
+      "text": "bukan pagi yang cara,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 982.5,
+      "end": 985.16,
+      "text": "tapi hari senin, pagi satu jan.",
+      "asset": "broll/102_Tapi hari Senin pagi musim hujan ketika alarm bunyi jam 4..jpg",
+      "type": "image"
+    },
+    {
+      "start": 985.38,
+      "end": 987.96,
+      "text": "Alah rembunin 4 jam, anak sedang sakit.",
+      "asset": "broll/103_Hari ketika anak sakit dan kamu harus pilih antara pulang lebih.jpg",
+      "type": "image"
+    },
+    {
+      "start": 988.2,
+      "end": 989.3,
+      "text": "Kamu harus berangkat kerja.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 989.8,
+      "end": 992.14,
+      "text": "Ada rapat, kamu pulang dalam kondisi capek",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 992.14,
+      "end": 994.16,
+      "text": "dan besok semua terulang lagi.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 994.44,
+      "end": 996.48,
+      "text": "Karena justru hari-hari biasa seperti itu",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 996.48,
+      "end": 999.2,
+      "text": "lah yang akhirnya membentuk sebagian besar hidup kita.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 999.42,
+      "end": 1003.02,
+      "text": "Jadi sekarang kalau kamu sedang berada di titik itu",
+      "asset": "broll/104_Kalau kamu sekarang sedang di titik mempertimbangkan keputusan.jpg",
+      "type": "image"
+    },
+    {
+      "start": 1003.02,
+      "end": 1004.22,
+      "text": "untuk memilit tempat tinggal,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1004.22,
+      "end": 1006.62,
+      "text": "coba pikirkan satu pertanyaan ini.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1006.98,
+      "end": 1008.62,
+      "text": "Setelah semua hidungan itu selesai,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1008.86,
+      "end": 1010.16,
+      "text": "bukan cuma hidungan uang,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1010.36,
+      "end": 1013.62,
+      "text": "tapi juga hidungan waktu, energi, kenyamanan",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1013.62,
+      "end": 1014.84,
+      "text": "dan juga kualitas hidup.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1015.38,
+      "end": 1018.4,
+      "text": "Dimana sebenarnya tempat yang paling masuk akal",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1018.4,
+      "end": 1019.66,
+      "text": "untuk kamu memberumah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1019.98,
+      "end": 1021.42,
+      "text": "Gak ada jawaban yang benar,",
+      "asset": "broll/105_Nggak ada jawaban yang paling benar..jpg",
+      "type": "image"
+    },
+    {
+      "start": 1021.58,
+      "end": 1024.68,
+      "text": "tapi pertanyaan itu mungkin memang layak di jawab dengan jujur.",
+      "asset": "broll/015_Pertanyaan yang jarang dijawab dengan jujur kenapa manusia,.jpg",
+      "type": "image"
+    },
+    {
+      "start": 1024.88,
+      "end": 1028.72,
+      "text": "Mungkin pada akhirnya kita memang bukan cuma sedang memilir rumah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1029.12,
+      "end": 1030.66,
+      "text": "Kita sedang memilik seperti apa,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1030.88,
+      "end": 1032.58,
+      "text": "hari-hari yang ingin kita jalan ini.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1032.58,
+      "end": 1035.16,
+      "text": "Kalau kamu suka video yang membongkar hal-hal biasa",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1035.16,
+      "end": 1037.66,
+      "text": "sampai menemukan alasan di balik itu,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1037.76,
+      "end": 1040.02,
+      "text": "kamu bisa subscribe video ini.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1040.22,
+      "end": 1042.12,
+      "text": "Dan juga komen di kolom-kolom di bawah.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1042.42,
+      "end": 1045.16,
+      "text": "Sehingga saya bisa terus hilang itu rahmi dengan",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1045.16,
+      "end": 1046.7,
+      "text": "teman-teman semuanya.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1047.06,
+      "end": 1049.78,
+      "text": "Dan hal yang selama ini kita angka biasa,",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1050.02,
+      "end": 1052.3,
+      "text": "sebenarnya punya cerita yang jauh lebih jalan.",
+      "asset": null,
+      "type": "none"
+    },
+    {
+      "start": 1052.92,
+      "end": 1053.48,
+      "text": "See you.",
+      "asset": null,
+      "type": "none"
+    }
+  ]
+}

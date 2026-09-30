@@ -1,0 +1,2792 @@
+{
+  "cloud_draft_cover": false,
+  "cloud_draft_sync": false,
+  "cloud_package_completed_time": "",
+  "draft_cloud_capcut_purchase_info": "",
+  "draft_cloud_last_action_download": false,
+  "draft_cloud_package_type": "",
+  "draft_cloud_purchase_info": "",
+  "draft_cloud_template_id": "",
+  "draft_cloud_tutorial_info": "",
+  "draft_cloud_videocut_purchase_info": "",
+  "draft_cover": "draft_cover.jpg",
+  "draft_deeplink_url": "",
+  "draft_enterprise_info": {
+    "draft_enterprise_extra": "",
+    "draft_enterprise_id": "",
+    "draft_enterprise_name": "",
+    "enterprise_material": []
+  },
+  "draft_fold_path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/project/capcut",
+  "draft_id": "C1A994BB-DCF8-49D0-98D5-20C743936135",
+  "draft_is_ae_produce": false,
+  "draft_is_ai_packaging_used": false,
+  "draft_is_ai_shorts": false,
+  "draft_is_ai_translate": false,
+  "draft_is_article_video_draft": false,
+  "draft_is_cloud_temp_draft": false,
+  "draft_is_from_deeplink": false,
+  "draft_is_infinite_canvas_draft": false,
+  "draft_is_invisible": false,
+  "draft_is_pippit_draft": false,
+  "draft_is_web_article_video": false,
+  "draft_materials": [
+    {
+      "type": 0,
+      "value": [
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 1053655011,
+          "enter_from": 0,
+          "extra_info": "video 1 - inshot.mp4",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/footage/video 1 - inshot.mp4",
+          "height": 1080,
+          "id": "889c7abd-d1c8-45ca-8b9d-d2f8b574624e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "video",
+          "roughcut_time_range": {
+            "duration": 1053655011,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1920
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "021_Otak kita - yang berkembang selama ratusan ribu tahun di.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/021_Otak kita - yang berkembang selama ratusan ribu tahun di.jpg",
+          "height": 1280,
+          "id": "62dab183-b8fa-41a8-a544-7f22c963bac9",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "038_Itu 720 jam per tahun yang habis di jalan..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/038_Itu 720 jam per tahun yang habis di jalan..jpg",
+          "height": 1350,
+          "id": "ed285600-b969-4732-ae07-ea189b1635bb",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/032_Jadi kalau ada yang beli rumah jauh di pinggiran, mereka bukan.jpg",
+          "height": 658,
+          "id": "cf25d0f2-3107-4e18-9fdf-a56199040bff",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "035_Harga itu namanya waktu..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/035_Harga itu namanya waktu..jpg",
+          "height": 850,
+          "id": "ad87659e-e178-4bda-8433-1c33e05d4970",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "001_Ada seseorang yang setiap hari bangun jam 4 pagi..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/001_Ada seseorang yang setiap hari bangun jam 4 pagi..jpg",
+          "height": 857,
+          "id": "6da5b9bf-5eb7-4e23-a82c-597052cda8b6",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "002_Bukan karena dia orang yang luar biasa rajin..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/002_Bukan karena dia orang yang luar biasa rajin..jpg",
+          "height": 608,
+          "id": "1a4afee2-d8be-414c-b09b-e6b35ab0d9db",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "003_Dia bangun jam 4 pagi karena kalau tidak, dia nggak akan sampai.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/003_Dia bangun jam 4 pagi karena kalau tidak, dia nggak akan sampai.jpg",
+          "height": 960,
+          "id": "452c07c2-b087-42d6-8743-362f70b10ccf",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "004_Jaraknya sekitar 60 kilometer..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/004_Jaraknya sekitar 60 kilometer..jpg",
+          "height": 720,
+          "id": "0bee4e8d-bed9-4c36-bac3-ac4211a740a1",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "005_Di negara-negara Eropa, jarak segitu ditempuh dalam 35 menit.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/005_Di negara-negara Eropa, jarak segitu ditempuh dalam 35 menit.jpg",
+          "height": 1440,
+          "id": "c8f117ec-df03-4270-8063-6e9c937a8035",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/006_Artinya, pulang-pergi, dia menghabiskan 5 jam hidupnya.jpg",
+          "height": 608,
+          "id": "62ac573e-38c8-4eef-8cb8-2b3e47a5dfeb",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "007_Kalau dikalikan 20 hari kerja sebulan, itu 100 jam..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/007_Kalau dikalikan 20 hari kerja sebulan, itu 100 jam..jpg",
+          "height": 810,
+          "id": "db6450fe-0c3b-482f-a273-64b64c3e1faf",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "008_Kalau dihitung setahun, hampir 1.200 jam - atau setara dengan 50.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/008_Kalau dihitung setahun, hampir 1.200 jam - atau setara dengan 50.jpg",
+          "height": 720,
+          "id": "5a4fddb6-d15d-4d38-a62c-10309b9ac43f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "011_Nggak mungkin pindah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/011_Nggak mungkin pindah..jpg",
+          "height": 1620,
+          "id": "21ea824b-10a1-4c46-98e2-a969e2a01fd8",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "047_Karena macet nggak cuma mencuri waktu..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/047_Karena macet nggak cuma mencuri waktu..jpg",
+          "height": 723,
+          "id": "93a036c7-04d9-4e89-91c8-d9daa1bf225e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "010_Waktu saya tanya langsung, jawabannya sederhana Rumah ini sudah.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/010_Waktu saya tanya langsung, jawabannya sederhana Rumah ini sudah.jpg",
+          "height": 724,
+          "id": "08b355c3-14ef-4395-8f20-1e55e47439e8",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "096_Bukan selalu pindah lebih dekat ke kantor - karena kantor.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/096_Bukan selalu pindah lebih dekat ke kantor - karena kantor.jpg",
+          "height": 776,
+          "id": "d1d01f83-2701-45b6-a166-8add54e4286e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "012_Dan di sinilah cerita yang sesungguhnya dimulai..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/012_Dan di sinilah cerita yang sesungguhnya dimulai..jpg",
+          "height": 720,
+          "id": "58a77130-5e17-4265-a751-ca8411fcbc72",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "019_Dan ini bukan cuma perasaan..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/019_Dan ini bukan cuma perasaan..jpg",
+          "height": 1619,
+          "id": "ad00921b-c6bf-4035-91cd-7c279f343c6b",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "013_Ini tentang jutaan orang..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/013_Ini tentang jutaan orang..jpg",
+          "height": 810,
+          "id": "8261baab-b3da-4e40-84ba-ee338c4cbfd4",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "051_Ini bukan klaim asal - ini hasil penelitian bertahun-tahun.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/051_Ini bukan klaim asal - ini hasil penelitian bertahun-tahun.jpg",
+          "height": 720,
+          "id": "6f4558ff-8e6b-48f1-bae6-93ae8ecc8e5f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "016_Atau ada sesuatu yang bekerja di balik layar yang mendorong.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/016_Atau ada sesuatu yang bekerja di balik layar yang mendorong.jpg",
+          "height": 853,
+          "id": "50cc569a-9a43-463b-bdae-a6137ac16924",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "059_Cicilan KPR 4 juta per bulan terasa sangat nyata..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/059_Cicilan KPR 4 juta per bulan terasa sangat nyata..jpg",
+          "height": 720,
+          "id": "b0445684-6dab-48b2-8ef6-3dea852476e1",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "015_Pertanyaan yang jarang dijawab dengan jujur kenapa manusia,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/015_Pertanyaan yang jarang dijawab dengan jujur kenapa manusia,.jpg",
+          "height": 853,
+          "id": "d7aa440e-d9c6-4581-9c4c-1b97c648f387",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/098_Tapi Gaya hidup seperti apa yang ingin saya bangun - dan di mana.jpg",
+          "height": 716,
+          "id": "cbd47c39-5907-42c2-a18a-24fc94851f11",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "097_Tapi mereka mulai berpikir ulang tentang apa yang benar-benar.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/097_Tapi mereka mulai berpikir ulang tentang apa yang benar-benar.jpg",
+          "height": 720,
+          "id": "5bfdb0c0-e6d2-4148-aac1-a5465758e01e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "017_Oke, coba kita bedah dulu sisi pertamanya..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/017_Oke, coba kita bedah dulu sisi pertamanya..jpg",
+          "height": 721,
+          "id": "e4f80e28-3010-4204-8cb2-56343c5f95eb",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "054_Semua itu ditambah ke atas cicilan KPR kamu - tapi hampir tidak.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/054_Semua itu ditambah ke atas cicilan KPR kamu - tapi hampir tidak.jpg",
+          "height": 807,
+          "id": "4355bfd3-2fb2-4f5c-8d29-8b2250cffc4b",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "018_Hitungannya gampang dengan uang yang sama, kamu bisa dapat rumah.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/018_Hitungannya gampang dengan uang yang sama, kamu bisa dapat rumah.jpg",
+          "height": 853,
+          "id": "8c717587-f7e9-46e0-8fbf-b770dd255a3f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/066_Pembeli dapat rumah yang kelihatannya lebih besar dengan.png",
+          "height": 1620,
+          "id": "b2215206-2cb5-43e6-8e88-b8107cb1a188",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "023_Ada satu hal lagi yang rumah tapak bisa kasih tapi.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/023_Ada satu hal lagi yang rumah tapak bisa kasih tapi.jpg",
+          "height": 853,
+          "id": "b550c687-c31c-4191-9a09-008c42fc554b",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "050_Dan otak manusia merespons perasaan nggak bisa berbuat apa-apa.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/050_Dan otak manusia merespons perasaan nggak bisa berbuat apa-apa.jpg",
+          "height": 608,
+          "id": "d7433b58-9a63-480a-9903-86910f8e8bc1",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "075_Itu harga yang paling mahal - tapi paling susah diukur..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/075_Itu harga yang paling mahal - tapi paling susah diukur..jpg",
+          "height": 1623,
+          "id": "dfa97930-5bb8-4d71-99d0-2bc0aa535354",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "022_Jadi ketika seseorang memilih rumah tapak di Serpong atau Depok.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/022_Jadi ketika seseorang memilih rumah tapak di Serpong atau Depok.jpg",
+          "height": 720,
+          "id": "7f6def00-78ea-465b-84f3-19691d2776e0",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "061_Itulah kenapa banyak keputusan soal rumah yang kelihatannya aneh.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/061_Itulah kenapa banyak keputusan soal rumah yang kelihatannya aneh.jpg",
+          "height": 720,
+          "id": "aa3731a6-5c5e-48b5-9f53-24730555096c",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "041_Waktu itu bukan angka abstrak..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/041_Waktu itu bukan angka abstrak..jpg",
+          "height": 1280,
+          "id": "54b78fd6-5dc6-448d-8e47-cdbc0afe71e3",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 853
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "044_Atau sekadar jadi manusia yang nggak selalu terburu-buru..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/044_Atau sekadar jadi manusia yang nggak selalu terburu-buru..jpg",
+          "height": 720,
+          "id": "96153b9e-b77d-4a28-95e4-248bcf0ab82f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "020_Ada penelitian dari psikolog lingkungan yang menunjukkan bahwa.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/020_Ada penelitian dari psikolog lingkungan yang menunjukkan bahwa.jpg",
+          "height": 612,
+          "id": "1ad2da30-5559-4532-8e4c-d8322fd2132f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 960
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "058_Sebaliknya, kita sangat peka terhadap biaya yang angkanya jelas,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/058_Sebaliknya, kita sangat peka terhadap biaya yang angkanya jelas,.jpg",
+          "height": 1919,
+          "id": "2b27a468-b8e6-47f9-bdc7-5b029c61dcc9",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "024_Tanah di bawah kaki kamu..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/024_Tanah di bawah kaki kamu..jpg",
+          "height": 810,
+          "id": "90c2fab8-3f53-4252-b62b-cc21f9fe15c7",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "088_Hidup manusia jauh terlalu rumit untuk diringkas dalam satu.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/088_Hidup manusia jauh terlalu rumit untuk diringkas dalam satu.jpg",
+          "height": 810,
+          "id": "fda789a6-7270-4d24-b96c-1bc401adc76f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/082_Iya, lama di jalan, tapi setidaknya kita punya rumah sendiri..jpg",
+          "height": 608,
+          "id": "0e184784-30ea-4e6e-a6d7-a7198d6a94f7",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "086_Jadi apa yang ingin saya sampaikan dari semua ini.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/086_Jadi apa yang ingin saya sampaikan dari semua ini.jpg",
+          "height": 720,
+          "id": "b5391ad3-2486-497e-9a1c-bda5f375c454",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "074_Waktu kita pilih lokasi cuma berdasarkan harga per meter dan.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/074_Waktu kita pilih lokasi cuma berdasarkan harga per meter dan.jpg",
+          "height": 720,
+          "id": "8849f62f-9ac0-419d-90d3-e8ec4d469975",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "104_Kalau kamu sekarang sedang di titik mempertimbangkan keputusan.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/104_Kalau kamu sekarang sedang di titik mempertimbangkan keputusan.jpg",
+          "height": 611,
+          "id": "cf1b4361-439e-4b57-a4ca-d0b7201a3aeb",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "027_Kita butuh tempat yang terasa milik kita sendiri..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/027_Kita butuh tempat yang terasa milik kita sendiri..jpg",
+          "height": 810,
+          "id": "9648ac36-43db-4749-b3ea-452c6f8419de",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "025_Dinding yang bisa kamu cat tanpa minta izin siapa pun..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/025_Dinding yang bisa kamu cat tanpa minta izin siapa pun..jpg",
+          "height": 1620,
+          "id": "68cce4ef-3b94-4604-ad62-8be82ad1305e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "030_Tapi karena dalam ingatan kolektif generasi mereka, rumah adalah.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/030_Tapi karena dalam ingatan kolektif generasi mereka, rumah adalah.jpg",
+          "height": 720,
+          "id": "1a9c588a-edfc-438e-a54f-0fd01db03bd8",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "026_Kita butuh rasa aman..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/026_Kita butuh rasa aman..jpg",
+          "height": 720,
+          "id": "d9981b38-24be-4aa2-9461-5a33ad85fc68",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "100_Setiap orang punya kondisi yang berbeda - kondisi keluarga,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/100_Setiap orang punya kondisi yang berbeda - kondisi keluarga,.jpg",
+          "height": 1620,
+          "id": "7cf055af-5a40-44a8-b368-7e5c1a018c59",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "103_Hari ketika anak sakit dan kamu harus pilih antara pulang lebih.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/103_Hari ketika anak sakit dan kamu harus pilih antara pulang lebih.jpg",
+          "height": 720,
+          "id": "1d344690-c5e9-42be-aa7c-265333d6dd46",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "028_Dan ada satu faktor lagi yang sering diabaikan tekanan dari.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/028_Dan ada satu faktor lagi yang sering diabaikan tekanan dari.jpg",
+          "height": 717,
+          "id": "0176a34e-8d9b-468b-84e9-ad16b2163833",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "036_Sebelum lanjut, saya mau ajak kamu ngitung sebentar..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/036_Sebelum lanjut, saya mau ajak kamu ngitung sebentar..jpg",
+          "height": 1438,
+          "id": "e0210c3d-bee0-4e12-9700-c186163f2dd6",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "089_Kita sering pikir kita lagi milih rumah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/089_Kita sering pikir kita lagi milih rumah..jpg",
+          "height": 720,
+          "id": "820ee819-858b-4997-8f34-8e1e1ea8ee2e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "029_Bukan karena orang-orang di sekitar kamu jahat..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/029_Bukan karena orang-orang di sekitar kamu jahat..jpg",
+          "height": 607,
+          "id": "26049bc0-78f8-499d-8a9e-aee17e4d9a51",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/087_Bukan bahwa beli rumah di pinggiran itu salah..jpg",
+          "height": 1620,
+          "id": "73535e66-e85c-4cbe-93fd-fdbdd540f08e",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "072_Ini soal di mana anak kamu tumbuh besar..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/072_Ini soal di mana anak kamu tumbuh besar..jpg",
+          "height": 960,
+          "id": "9f1d5946-f949-4a41-b0a8-902f374d1616",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "065_Ini hasil dari kebijakan yang bertahun-tahun secara tidak.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/065_Ini hasil dari kebijakan yang bertahun-tahun secara tidak.jpg",
+          "height": 723,
+          "id": "54e4cce7-457a-4aec-af47-c1c7e51591a8",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "031_Ekspektasi itu diturunkan..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/031_Ekspektasi itu diturunkan..jpg",
+          "height": 1620,
+          "id": "116b007e-b7ee-409f-b2ef-8bc4ae913b75",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "067_Biaya itu nggak masuk ke harga jual rumah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/067_Biaya itu nggak masuk ke harga jual rumah..jpg",
+          "height": 1440,
+          "id": "b12572d0-328e-40a0-81ad-18215228e0a7",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/071_Pilihan rumah bukan cuma soal hidup kamu sekarang..jpg",
+          "height": 1918,
+          "id": "c3622ded-116d-4dad-98d6-b98196160dd2",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "033_Mereka beli ketenangan batin..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/033_Mereka beli ketenangan batin..jpg",
+          "height": 1620,
+          "id": "39e45d24-64b8-4410-b10d-ab07a22a0310",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "073_Ada nggak taman di dekat rumah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/073_Ada nggak taman di dekat rumah..jpg",
+          "height": 721,
+          "id": "4eed48d9-55f4-4d3f-b8d2-513bc095c331",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "034_Mereka beli bukti - buat diri sendiri dan orang-orang di sekitar.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/034_Mereka beli bukti - buat diri sendiri dan orang-orang di sekitar.jpg",
+          "height": 709,
+          "id": "14038346-0bd0-4351-af3a-e888deaf342f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "095_Dan mereka kaget sendiri betapa berharganya waktu itu..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/095_Dan mereka kaget sendiri betapa berharganya waktu itu..jpg",
+          "height": 810,
+          "id": "ed731023-35fa-4fae-9b87-40ef24e747a8",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "049_Tapi waktu nyangkut macet, kamu nggak bisa ngapa-ngapain..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/049_Tapi waktu nyangkut macet, kamu nggak bisa ngapa-ngapain..jpg",
+          "height": 857,
+          "id": "3781d548-404d-4586-8320-5c0261a874af",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "052_Dan ada satu biaya tersembunyi lagi yang paling jarang dihitung.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/052_Dan ada satu biaya tersembunyi lagi yang paling jarang dihitung.jpg",
+          "height": 785,
+          "id": "6aa9128d-6166-4ef6-a23f-b9652e517ec4",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "045_Hasilnya menarik dari semua kegiatan sehari-hari yang diteliti,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/045_Hasilnya menarik dari semua kegiatan sehari-hari yang diteliti,.jpg",
+          "height": 720,
+          "id": "642f86bc-5666-4451-91cb-8d940992d918",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "060_Tapi biaya 3 jam bolak-balik tiap hari.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/060_Tapi biaya 3 jam bolak-balik tiap hari.jpg",
+          "height": 1620,
+          "id": "e677ed0a-0e34-4174-9f4f-7ce76492fb7b",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "039_Atau kalau dibikin lebih gampang dicerna setara 6 tahun lebih.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/039_Atau kalau dibikin lebih gampang dicerna setara 6 tahun lebih.jpg",
+          "height": 720,
+          "id": "4720e97a-5c56-467c-aed6-afb380084620",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "040_Enam tahun..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/040_Enam tahun..jpg",
+          "height": 1620,
+          "id": "e9b48843-0f43-425d-b8ce-b1ee917c302b",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "077_Bank yang dapat pendapatan bunga dari KPR 20-30 tahun..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/077_Bank yang dapat pendapatan bunga dari KPR 20-30 tahun..jpg",
+          "height": 720,
+          "id": "65a66e42-1ac4-48b1-8270-cb1fa08f6042",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "046_Lembur 2 jam di kantor ternyata secara psikologis masih lebih.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/046_Lembur 2 jam di kantor ternyata secara psikologis masih lebih.jpg",
+          "height": 720,
+          "id": "1ef265de-76af-4b54-8e65-d3b2905868df",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "092_Kita bayangin suasana halaman di pagi hari yang cerah..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/092_Kita bayangin suasana halaman di pagi hari yang cerah..jpg",
+          "height": 810,
+          "id": "3955374d-ac9a-4acb-b13a-bb29e3a9c1ec",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "102_Tapi hari Senin pagi musim hujan ketika alarm bunyi jam 4..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/102_Tapi hari Senin pagi musim hujan ketika alarm bunyi jam 4..jpg",
+          "height": 1620,
+          "id": "ef0da114-68e0-47c8-88e7-20606c4a04f6",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "053_Biaya servis kendaraan..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/053_Biaya servis kendaraan..jpg",
+          "height": 718,
+          "id": "b0178af6-684c-45e5-9816-9e1b4ced7ca0",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "093_Dan apa yang harusnya bisa saya lakukan dengan waktu itu.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/093_Dan apa yang harusnya bisa saya lakukan dengan waktu itu.jpg",
+          "height": 1080,
+          "id": "d8fb9e7c-9af5-4d50-bc94-bb51a7ebbbea",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "078_Industri kendaraan yang terus tumbuh karena orang terpaksa.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/078_Industri kendaraan yang terus tumbuh karena orang terpaksa.jpg",
+          "height": 1620,
+          "id": "cbdf3132-8157-4bdd-849c-c3cdd5a69ace",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "042_Untuk belajar hal baru..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/042_Untuk belajar hal baru..jpg",
+          "height": 853,
+          "id": "28dd0ee3-ddab-4948-bc26-e28f812fcb1a",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "043_Untuk masak makan malam..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/043_Untuk masak makan malam..jpg",
+          "height": 720,
+          "id": "76e58b14-4aa3-4534-a6d6-e97b066c1d08",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "063_Tapi keputusan orang itu dibuat dalam situasi di mana pilihan.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/063_Tapi keputusan orang itu dibuat dalam situasi di mana pilihan.jpg",
+          "height": 720,
+          "id": "0f75bd5e-cf13-44b8-94e6-c739b9693da7",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "048_Waktu lembur di kantor, kamu masih ngerasa punya pilihan - kamu.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/048_Waktu lembur di kantor, kamu masih ngerasa punya pilihan - kamu.jpg",
+          "height": 720,
+          "id": "d358a76a-16bd-4300-a13a-6a8e088a18ba",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "079_Semua pihak ini punya kepentingan untuk mempertahankan pola yang.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/079_Semua pihak ini punya kepentingan untuk mempertahankan pola yang.jpg",
+          "height": 1624,
+          "id": "dc151463-1ea8-413d-b79a-f1fe8099127a",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "055_Tapi orang masih tetap memilih tinggal jauh..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/055_Tapi orang masih tetap memilih tinggal jauh..jpg",
+          "height": 607,
+          "id": "9291595a-dc53-4099-9d51-edc51a36ede1",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "014_Data dari Badan Pusat Statistik (BPS) menunjukkan pola yang sama.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/014_Data dari Badan Pusat Statistik (BPS) menunjukkan pola yang sama.jpg",
+          "height": 1620,
+          "id": "c84ca054-a12a-4f29-a83f-1a1eb16067b5",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "081_Iya, macet, tapi udara di sini lebih segar..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/081_Iya, macet, tapi udara di sini lebih segar..jpg",
+          "height": 720,
+          "id": "7b1793cd-ca3f-4ed3-b39c-e1c2b7ed27e6",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "070_Kita bayar dengan peluang yang nggak pernah kita sadari hilang..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/070_Kita bayar dengan peluang yang nggak pernah kita sadari hilang..jpg",
+          "height": 1887,
+          "id": "10633a4a-b032-4820-ac3b-5cf14ade5d19",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "101_Pilihan ini akan jauh lebih bijak kalau kita buat dengan mata.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/101_Pilihan ini akan jauh lebih bijak kalau kita buat dengan mata.jpg",
+          "height": 853,
+          "id": "63894379-edc3-4001-a93c-54cd373eed82",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "057_Ternyata, otak kita sangat buruk dalam menghitung biaya yang.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/057_Ternyata, otak kita sangat buruk dalam menghitung biaya yang.jpg",
+          "height": 853,
+          "id": "838789c7-6c92-48a8-b43f-39081aa48f4f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "068_Biaya itu ditanggung bareng-bareng lewat pajak, lewat subsidi.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/068_Biaya itu ditanggung bareng-bareng lewat pajak, lewat subsidi.jpg",
+          "height": 854,
+          "id": "d6f0fe77-7209-427d-a400-bbc2d73e84fb",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1280
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "069_Dan biaya transportasi yang mahal itu, dalam jangka.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/069_Dan biaya transportasi yang mahal itu, dalam jangka.jpg",
+          "height": 846,
+          "id": "d111f427-fa01-45b5-a476-e9eebc4a1c07",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "062_Selain soal cara otak bekerja, ada faktor yang lebih besar lagi.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/062_Selain soal cara otak bekerja, ada faktor yang lebih besar lagi.jpg",
+          "height": 1080,
+          "id": "69f69397-f55d-48c1-8bb8-4c60c5b17c7f",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "094_Ada pergeseran menarik yang mulai terjadi setelah pandemi.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/094_Ada pergeseran menarik yang mulai terjadi setelah pandemi.jpg",
+          "height": 720,
+          "id": "7ab64958-019a-4010-9a89-eac7888354ca",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "056_Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/056_Untuk jawab pertanyaan itu, kita perlu ngerti satu hal tentang.jpg",
+          "height": 615,
+          "id": "3d7403f8-e5a3-4660-9df4-2a6d283a8874",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "083_Tapi semua itu juga adalah cara otak kita menghibur diri dari.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/083_Tapi semua itu juga adalah cara otak kita menghibur diri dari.jpg",
+          "height": 1280,
+          "id": "b261de9b-abbe-451b-b2ae-75983ad65092",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 985
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "084_Yang menarik kalau peneliti tanya langsung ke orang-orang,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/084_Yang menarik kalau peneliti tanya langsung ke orang-orang,.jpg",
+          "height": 720,
+          "id": "265c6f93-d01c-4f9c-8a6d-8d95ff39c9fa",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "080_Ketika kita sudah ambil keputusan besar yang susah dibatalkan,.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/080_Ketika kita sudah ambil keputusan besar yang susah dibatalkan,.jpg",
+          "height": 608,
+          "id": "c8ce6060-a41a-458b-ab65-9d76f38d69e7",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "009_Bukan karena tidak mau..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/009_Bukan karena tidak mau..jpg",
+          "height": 720,
+          "id": "80ef97aa-5e24-45d5-9ede-3f03bbdc5757",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "037_Bukan buat nakut-nakutin, tapi biar gambarannya jelas..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/037_Bukan buat nakut-nakutin, tapi biar gambarannya jelas..jpg",
+          "height": 1620,
+          "id": "f9d79046-d353-4ffa-8363-e705674b05aa",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "099_Dan saya yakin nggak ada yang punya..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/099_Dan saya yakin nggak ada yang punya..jpg",
+          "height": 1581,
+          "id": "2f3ef845-32f4-4585-9ca8-e0b0243bbb3d",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "091_Kita ngitung cicilan per bulan..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/091_Kita ngitung cicilan per bulan..jpg",
+          "height": 1620,
+          "id": "41495fb3-9eda-47a8-9307-de1b848fa22c",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "090_Dan banyak dari kita membuat pilihan itu tanpa pernah.jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/090_Dan banyak dari kita membuat pilihan itu tanpa pernah.jpg",
+          "height": 720,
+          "id": "9ea0ec37-6ca5-4694-a75a-d0fa7dd5f995",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "105_Nggak ada jawaban yang paling benar..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/105_Nggak ada jawaban yang paling benar..jpg",
+          "height": 716,
+          "id": "3d141966-0d65-46c4-852c-5aefd025f8ea",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        },
+        {
+          "ai_group_type": "",
+          "create_time": 1790759903,
+          "duration": 10800000000,
+          "enter_from": 0,
+          "extra_info": "076_Karena ada yang diuntungkan dari kondisi ini..jpg",
+          "file_Path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/broll/076_Karena ada yang diuntungkan dari kondisi ini..jpg",
+          "height": 609,
+          "id": "c5586690-eb3a-4323-82da-1569a77a4654",
+          "import_time": 1790759903,
+          "import_time_ms": 1790759903917752,
+          "item_source": 1,
+          "material_color_tag": "",
+          "md5": "",
+          "metetype": "photo",
+          "roughcut_time_range": {
+            "duration": 10800000000,
+            "start": 0
+          },
+          "sub_time_range": {
+            "duration": -1,
+            "start": -1
+          },
+          "type": 0,
+          "width": 1080
+        }
+      ]
+    },
+    {
+      "type": 1,
+      "value": []
+    },
+    {
+      "type": 2,
+      "value": []
+    },
+    {
+      "type": 3,
+      "value": []
+    },
+    {
+      "type": 6,
+      "value": []
+    },
+    {
+      "type": 7,
+      "value": []
+    },
+    {
+      "type": 8,
+      "value": []
+    }
+  ],
+  "draft_materials_copied_info": [],
+  "draft_name": "video_auto_capcut_01_script",
+  "draft_need_rename_folder": false,
+  "draft_new_version": "",
+  "draft_removable_storage_device": "",
+  "draft_root_path": "C:/Users/Nugi/Documents/nugi-konten-kreator/output/01-script/project",
+  "draft_segment_extra_info": [],
+  "draft_timeline_materials_size_": 1878942162,
+  "draft_type": "",
+  "draft_web_article_video_enter_from": "",
+  "pippit_avatar_url": "",
+  "pippit_extra_info": "",
+  "pippit_id": "",
+  "pippit_user_name": "",
+  "tm_draft_cloud_completed": "",
+  "tm_draft_cloud_entry_id": -1,
+  "tm_draft_cloud_modified": 0,
+  "tm_draft_cloud_parent_entry_id": -1,
+  "tm_draft_cloud_space_id": -1,
+  "tm_draft_cloud_user_id": -1,
+  "tm_draft_create": 1790759903917752,
+  "tm_draft_modified": 1790759903917752,
+  "tm_draft_removed": 0,
+  "tm_duration": 1053655011
+}
