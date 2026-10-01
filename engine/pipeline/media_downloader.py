@@ -69,6 +69,11 @@ class DownloadedFile:
     reranker_score: float = 0.0
     final_rank: int = 0
     media_type: str = ""
+    visual_requirement: str = ""
+    source_role: str = ""
+    authenticity_score: float = 0.0
+    entity_match_score: float = 0.0
+    matched_entities: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -204,6 +209,13 @@ class MediaDownloader:
             logger.warning(f"Skipping '{item.title}': no download_url or thumbnail_url")
             return None
 
+        # Gate: Skip candidate if REAL_REQUIRED candidate failed authenticity gate
+        if getattr(item, "visual_requirement", "") == "REAL_REQUIRED" and getattr(item, "rejection_reason", ""):
+            logger.warning(
+                f"Skipping '{item.title}': REAL_REQUIRED candidate failed authenticity gate ({item.rejection_reason})"
+            )
+            return None
+
         # For video, ensure we have a concrete download URL (not a directory or thumbnail)
         if item.media_type == "video":
             if not item.download_url or item.download_url.rstrip("/").endswith(("/download", "/details")):
@@ -220,7 +232,10 @@ class MediaDownloader:
 
         # Determine file extension from URL or media_type
         ext = self._infer_extension(target_url, item.media_type)
-        filename = self._safe_filename(item.title or item.id, ext, index)
+        filename = self._safe_filename(
+            item.title or item.id, ext, index,
+            visual_requirement=getattr(item, "visual_requirement", "")
+        )
         dest_path = self._resolve_collision(folder_path / filename)
 
         # Perform the download
@@ -253,6 +268,11 @@ class MediaDownloader:
             reranker_score=item.reranker_score,
             final_rank=item.final_rank,
             media_type=item.media_type,
+            visual_requirement=getattr(item, "visual_requirement", ""),
+            source_role=getattr(item, "source_role", ""),
+            authenticity_score=getattr(item, "authenticity_score", 0.0),
+            entity_match_score=getattr(item, "entity_match_score", 0.0),
+            matched_entities=getattr(item, "matched_entities", []),
         )
 
     def _fetch_file(
@@ -350,12 +370,18 @@ class MediaDownloader:
     # Filename helpers
     # ------------------------------------------------------------------
 
-    def _safe_filename(self, title: str, ext: str, index: int) -> str:
+    def _safe_filename(
+        self,
+        title: str,
+        ext: str,
+        index: int,
+        visual_requirement: str = "",
+    ) -> str:
         """
         Convert a media title to a filesystem-safe filename.
 
         Examples:
-          "D-Day Landing at Omaha Beach" + ".jpg" + 1 → "d-day-landing-at-omaha-beach-001.jpg"
+          "D-Day Landing at Omaha Beach" + ".jpg" + 1 + "REAL_REQUIRED" → "001_REAL_REQUIRED_d-day-landing-at-omaha-beach.jpg"
           "Albert Einstein 1921 portrait" + ".jpg" + 2 → "albert-einstein-1921-portrait-002.jpg"
         """
         # Lowercase
@@ -367,10 +393,16 @@ class MediaDownloader:
         name = _MULTI_DASH.sub("-", name)
         # Strip leading/trailing dashes
         name = name.strip("-")
-        # Truncate to max length
-        name = name[:_MAX_FILENAME_LEN]
-        name = name.rstrip("-")
-        # Append zero-padded index
+
+        if visual_requirement:
+            vr_clean = re.sub(r"[^A-Za-z0-9_]+", "", visual_requirement.upper())
+            prefix = f"{index:03d}_{vr_clean}_"
+            max_title_len = max(_MAX_FILENAME_LEN - len(prefix), 20)
+            name = name[:max_title_len].rstrip("-")
+            return f"{prefix}{name}{ext}"
+
+        # Standard legacy format if no visual_requirement provided
+        name = name[:_MAX_FILENAME_LEN].rstrip("-")
         name = f"{name}-{index:03d}"
         return f"{name}{ext}"
 
@@ -479,7 +511,7 @@ class MediaDownloader:
         asset_map: Dict[str, Dict] = {a["filename"]: a for a in existing_assets}
 
         for df in downloaded:
-            asset_map[df.filename] = {
+            asset_entry = {
                 "filename": df.filename,
                 "provider": df.provider,
                 "media_type": df.media_type,
@@ -497,6 +529,15 @@ class MediaDownloader:
                     "final_rank": df.final_rank,
                 },
             }
+            if df.visual_requirement or df.source_role:
+                asset_entry["evidence"] = {
+                    "visual_requirement": df.visual_requirement,
+                    "source_role": df.source_role,
+                    "authenticity_score": df.authenticity_score,
+                    "entity_match_score": df.entity_match_score,
+                    "matched_entities": df.matched_entities,
+                }
+            asset_map[df.filename] = asset_entry
 
         payload = {
             "generated_at": datetime.now(timezone.utc).isoformat(),

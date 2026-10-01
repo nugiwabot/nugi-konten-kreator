@@ -23,8 +23,21 @@ IMPORTANT:
 from __future__ import annotations
 
 import logging
+import re
 from typing import Dict, List, Optional, Tuple
 
+from engine.pipeline.visual_requirements import (
+    REAL_REQUIRED,
+    REAL_PREFERRED,
+    GENERIC_ALLOWED,
+    PRIMARY_EVIDENCE,
+    DIRECT_CONTEXT,
+    GENERIC_ATMOSPHERE,
+    ARCHIVAL_REFERENCE,
+    DOCUMENT,
+    classify_visual_requirement,
+    extract_entities,
+)
 from engine.providers.embedding import (
     EmbeddingProvider,
     FallbackEmbeddingProvider,
@@ -43,7 +56,8 @@ logger = logging.getLogger(__name__)
 
 class MediaRanker:
     """
-    Multi-stage semantic ranker for MediaItem candidates.
+    Multi-stage semantic ranker for MediaItem candidates with Evidence-Based
+    authenticity scoring and hard gating.
 
     Reuses existing EmbeddingProvider + RerankerProvider without modification.
     Maintains a simple in-memory embedding cache to avoid re-embedding the
@@ -70,9 +84,12 @@ class MediaRanker:
         original_request: str,
         candidates: List[MediaItem],
         top_n: int = 10,
+        entities: Optional[List[Dict[str, str]]] = None,
+        visual_requirement: str = "auto",
+        era: str = "auto",
     ) -> Tuple[List[MediaItem], str]:
         """
-        Rank candidates against the original user request.
+        Rank candidates against the original user request with evidence and authenticity scoring.
 
         Returns:
             (ranked_items, fallback_reason)
@@ -82,6 +99,15 @@ class MediaRanker:
         """
         if not candidates:
             return [], ""
+
+        # Auto-infer visual requirement & entities if not provided
+        if not visual_requirement or visual_requirement == "auto":
+            inferred_vr, _, inferred_ents, _, _ = classify_visual_requirement(original_request)
+            effective_vr = inferred_vr
+            effective_entities = entities if entities is not None else inferred_ents
+        else:
+            effective_vr = visual_requirement
+            effective_entities = entities if entities is not None else extract_entities(original_request)
 
         # Stage 1: Deduplicate
         candidates = self._deduplicate(candidates)
@@ -97,8 +123,31 @@ class MediaRanker:
             original_request, candidates
         )
 
-        # Stage 4: Combine scores into final_rank
-        candidates = self._compute_final_rank(candidates, emb_ok, rer_ok)
+        # Stage 4: Evidence & Authenticity Scoring (Sections 9, 10, 11)
+        candidates = self._apply_authenticity_scoring(
+            original_request=original_request,
+            candidates=candidates,
+            entities=effective_entities,
+            visual_requirement=effective_vr,
+            era=era,
+        )
+
+        # Stage 5: Combine scores into final_rank (Section 20)
+        candidates = self._compute_final_rank(
+            candidates, emb_ok, rer_ok, visual_requirement=effective_vr
+        )
+
+        # Stage 6: Hard Gate for REAL_REQUIRED (Section 10)
+        if effective_vr == REAL_REQUIRED:
+            valid_candidates = [c for c in candidates if not c.rejection_reason]
+            if not valid_candidates:
+                logger.warning(
+                    f"MediaRanker: All {len(candidates)} candidates failed authenticity hard gate for REAL_REQUIRED"
+                )
+                return [], f"No authentic evidence found matching required entities for: {original_request}"
+            candidates = valid_candidates
+            for idx, c in enumerate(candidates, 1):
+                c.final_rank = idx
 
         fallback_reason = ""
         if not emb_ok and not rer_ok:
@@ -257,7 +306,195 @@ class MediaRanker:
             return candidates, False, str(e)
 
     # ------------------------------------------------------------------
-    # Stage 4: Final rank computation
+    # Stage 4: Evidence & Authenticity Scoring (Sections 9, 10, 11)
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _apply_authenticity_scoring(
+        original_request: str,
+        candidates: List[MediaItem],
+        entities: List[Dict[str, str]],
+        visual_requirement: str,
+        era: str = "auto",
+    ) -> List[MediaItem]:
+        """
+        Evaluate authenticity, entity matching, and source specificity (Sections 9, 10, 11).
+        """
+        req_lower = original_request.lower()
+        years_req = re.findall(r"\b(1[0-9]{3}|200[0-9]|201[0-9]|202[0-9])\b", original_request)
+
+        normalized_entities: List[Dict[str, str]] = []
+        if entities:
+            for e in entities:
+                if isinstance(e, dict):
+                    normalized_entities.append(e)
+                elif isinstance(e, str) and e.strip():
+                    name_str = e.strip()
+                    if re.match(r"^(1[0-9]{3}|200[0-9]|201[0-9]|202[0-9])$", name_str):
+                        etype = "DATE"
+                    elif any(ev in name_str.lower() for ev in ["d-day", "landing", "keynote", "war", "apollo"]):
+                        etype = "EVENT"
+                    else:
+                        etype = "ENTITY"
+                    normalized_entities.append({"name": name_str, "type": etype})
+
+        entities = normalized_entities
+
+        key_entities = [e for e in entities if e.get("type") in (
+            "PERSON", "EVENT", "LANDMARK", "BUILDING", "PRODUCT", "DOCUMENT",
+            "ORGANIZATION", "CITY", "PLACE", "COUNTRY", "ENTITY"
+        )]
+
+        generic_title_patterns = [
+            "soldiers on beach", "soldier on beach", "businessman", "office worker",
+            "city traffic", "people walking", "technology presentation", "military soldiers",
+            "beach war", "busy corporate office", "young person apartment", "tired worker"
+        ]
+
+        for item in candidates:
+            item.visual_requirement = visual_requirement
+            text_pool = f"{item.title} {item.description} {item.creator} {item.date} {' '.join(str(v) for v in item.metadata.values())}".lower()
+            title_lower = (item.title or "").lower()
+
+            # 1. Entity Match Score
+            matched_names: List[str] = []
+            if key_entities:
+                match_weights = []
+                for ke in key_entities:
+                    name_l = ke["name"].lower()
+                    tokens = [t for t in re.findall(r"\b\w+\b", name_l) if len(t) > 2]
+                    name_matched = False
+                    if name_l in text_pool:
+                        name_matched = True
+                        weight = 1.0 if name_l in title_lower else 0.8
+                    elif len(tokens) >= 2 and all(t in text_pool for t in tokens):
+                        name_matched = True
+                        weight = 0.9 if all(t in title_lower for t in tokens) else 0.7
+                    elif len(tokens) == 1 and tokens[0] in text_pool:
+                        name_matched = True
+                        weight = 0.8 if tokens[0] in title_lower else 0.5
+                    else:
+                        weight = 0.0
+
+                    if name_matched:
+                        matched_names.append(ke["name"])
+                    match_weights.append(weight)
+
+                entity_match_score = sum(match_weights) / max(1, len(key_entities))
+                if len(matched_names) == len(key_entities) and all(ke["name"].lower() in title_lower for ke in key_entities):
+                    entity_match_score = max(entity_match_score, 0.95)
+            else:
+                entity_match_score = 0.5 if visual_requirement == REAL_REQUIRED else 1.0
+
+            # 2. Temporal Match Score
+            if years_req:
+                target_year = years_req[0]
+                if target_year in text_pool or target_year in (item.date or ""):
+                    temporal_match_score = 1.0
+                elif any(dec in text_pool for dec in [f"{target_year[:3]}0s", f"{target_year[:3]}0-an"]):
+                    temporal_match_score = 0.85
+                elif any(h in text_pool for h in ["historical", "archival", "vintage", "history", "sejarah"]):
+                    temporal_match_score = 0.7
+                else:
+                    temporal_match_score = 0.2
+            elif era in ("historical", "past"):
+                if any(h in text_pool for h in ["historical", "archival", "vintage", "kuno", "sejarah", "19", "18"]):
+                    temporal_match_score = 0.9
+                else:
+                    temporal_match_score = 0.4
+            else:
+                temporal_match_score = 0.85
+
+            # 3. Location Match Score
+            loc_entities = [e for e in entities if e.get("type") in ("PLACE", "CITY", "COUNTRY")]
+            if loc_entities:
+                loc_matched = sum(1 for le in loc_entities if le["name"].lower() in text_pool)
+                location_match_score = loc_matched / max(1, len(loc_entities))
+                if loc_matched > 0:
+                    location_match_score = max(location_match_score, 0.9)
+                else:
+                    location_match_score = 0.2
+            else:
+                location_match_score = 1.0
+
+            # 4. Event Match Score
+            event_entities = [e for e in entities if e.get("type") == "EVENT"]
+            if event_entities:
+                event_matched = sum(1 for ee in event_entities if ee["name"].lower() in text_pool)
+                if event_matched > 0:
+                    event_match_score = 1.0
+                else:
+                    if any(c in text_pool for c in ["keynote", "landing", "battle", "proklamasi", "treaty"]):
+                        event_match_score = 0.8
+                    else:
+                        event_match_score = 0.2
+            else:
+                event_match_score = 1.0
+
+            # 5. Source Specificity Score
+            is_generic = any(gp in title_lower for gp in generic_title_patterns)
+            if is_generic and not matched_names:
+                source_specificity_score = 0.15
+                item.is_generic = True
+            elif item.provider in ("internet_archive", "wikimedia"):
+                source_specificity_score = 0.95 if matched_names else 0.8
+                item.is_archival = True
+            else:
+                source_specificity_score = 0.6 if matched_names else 0.4
+
+            # 6. Authenticity Score calculation (Section 9)
+            if visual_requirement == REAL_REQUIRED:
+                authenticity_score = (
+                    0.40 * entity_match_score
+                    + 0.20 * temporal_match_score
+                    + 0.20 * event_match_score
+                    + 0.10 * location_match_score
+                    + 0.10 * source_specificity_score
+                )
+            elif visual_requirement == REAL_PREFERRED:
+                authenticity_score = (
+                    0.35 * entity_match_score
+                    + 0.25 * location_match_score
+                    + 0.20 * temporal_match_score
+                    + 0.20 * source_specificity_score
+                )
+            else:
+                authenticity_score = 0.50 * entity_match_score + 0.50 * source_specificity_score
+
+            # Hard gate criteria check (Section 10)
+            if visual_requirement == REAL_REQUIRED:
+                if key_entities and entity_match_score < 0.35:
+                    item.rejection_reason = "Failed authenticity hard gate: missing required entity match"
+                elif authenticity_score < 0.35:
+                    item.rejection_reason = "Failed authenticity hard gate: low authenticity score"
+                elif is_generic and not matched_names:
+                    item.rejection_reason = "Failed authenticity hard gate: generic stock candidate not acceptable for REAL_REQUIRED"
+
+            # Assign scores and roles (Sections 12, 13)
+            item.authenticity_score = round(authenticity_score, 4)
+            item.entity_match_score = round(entity_match_score, 4)
+            item.temporal_match_score = round(temporal_match_score, 4)
+            item.location_match_score = round(location_match_score, 4)
+            item.event_match_score = round(event_match_score, 4)
+            item.source_specificity_score = round(source_specificity_score, 4)
+            item.matched_entities = matched_names
+
+            if visual_requirement == REAL_REQUIRED:
+                if any(e.get("type") == "DOCUMENT" for e in entities):
+                    item.source_role = DOCUMENT
+                elif authenticity_score >= 0.70:
+                    item.source_role = PRIMARY_EVIDENCE
+                else:
+                    item.source_role = ARCHIVAL_REFERENCE
+            elif visual_requirement == REAL_PREFERRED:
+                item.source_role = DIRECT_CONTEXT
+            else:
+                item.source_role = GENERIC_ATMOSPHERE
+
+        return candidates
+
+    # ------------------------------------------------------------------
+    # Stage 5: Final rank computation (Section 20)
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -265,27 +502,43 @@ class MediaRanker:
         candidates: List[MediaItem],
         emb_ok: bool,
         rer_ok: bool,
+        visual_requirement: str = GENERIC_ALLOWED,
     ) -> List[MediaItem]:
         """
-        Combine available scores into a sortable composite.
-
-        Priority logic:
-          Both available   → 0.4 * embedding + 0.6 * reranker
-          Only embedding   → embedding_similarity (as final score)
-          Only reranker    → reranker_score (as final score)
-          Neither          → keyword_score (set by fallback) or 0
+        Combine available scores into a sortable composite adhering to Section 20.
         """
         for item in candidates:
             if emb_ok and rer_ok:
-                composite = 0.4 * item.embedding_similarity + 0.6 * item.reranker_score
+                semantic_score = 0.4 * item.embedding_similarity + 0.6 * item.reranker_score
             elif emb_ok:
-                composite = item.embedding_similarity
+                semantic_score = item.embedding_similarity
             elif rer_ok:
-                composite = item.reranker_score
+                semantic_score = item.reranker_score
             else:
-                composite = item.keyword_score
+                semantic_score = item.keyword_score
 
-            # Store composite back in reranker_score for transparency in output
+            if visual_requirement == REAL_REQUIRED:
+                # Authenticity, entity match, and temporal/event match dominate heavily (Section 20)
+                composite = (
+                    0.45 * item.authenticity_score
+                    + 0.25 * item.entity_match_score
+                    + 0.15 * semantic_score
+                    + 0.15 * item.embedding_similarity
+                )
+            elif visual_requirement == REAL_PREFERRED:
+                composite = (
+                    0.30 * item.authenticity_score
+                    + 0.20 * item.entity_match_score
+                    + 0.30 * semantic_score
+                    + 0.20 * item.embedding_similarity
+                )
+            else:
+                composite = semantic_score
+
+            # Penalize rejected candidates to 0 so they never outrank authentic candidates
+            if item.rejection_reason:
+                composite = 0.0
+
             item.reranker_score = round(composite, 4)
 
         # Sort descending by composite score

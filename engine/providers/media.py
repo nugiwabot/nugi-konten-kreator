@@ -63,6 +63,20 @@ class MediaItem:
     reranker_score: float = 0.0
     final_rank: int = 0
 
+    # Evidence & Authenticity metadata (Section 13)
+    visual_requirement: str = "GENERIC_ALLOWED"
+    source_role: str = "GENERIC_ATMOSPHERE"
+    authenticity_score: float = 0.0
+    entity_match_score: float = 0.0
+    temporal_match_score: float = 0.0
+    location_match_score: float = 0.0
+    event_match_score: float = 0.0
+    source_specificity_score: float = 0.0
+    is_archival: bool = False
+    is_generic: bool = False
+    matched_entities: List[str] = field(default_factory=list)
+    rejection_reason: str = ""
+
     def to_dict(self) -> Dict[str, Any]:
         """Return plain dict representation (embedding excluded)."""
         return asdict(self)

@@ -35,7 +35,24 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from engine.config import MEDIA_ASSETS_DIR
 from engine.pipeline.media_downloader import DownloadReport, MediaDownloader
+from engine.pipeline.media_query_expander import MediaQueryExpander
 from engine.pipeline.media_ranker import MediaRanker
+from engine.pipeline.visual_requirements import (
+    GENERIC_ALLOWED,
+    NO_BROLL,
+    REAL_PREFERRED,
+    REAL_REQUIRED,
+    REMOTION_REQUIRED,
+    ARCHIVAL_REFERENCE,
+    DIRECT_CONTEXT,
+    DOCUMENT,
+    GENERIC_ATMOSPHERE,
+    MOTION_GRAPHICS,
+    NO_VISUAL,
+    PRIMARY_EVIDENCE,
+    classify_visual_requirement,
+    extract_entities,
+)
 from engine.providers.internet_archive_provider import InternetArchiveProvider
 from engine.providers.media import MediaItem, MediaProvider
 from engine.providers.pexafy_provider import PexafyProvider
@@ -150,6 +167,18 @@ class MediaFinderItem:
     width: int = 0
     height: int = 0
     metadata: Dict[str, Any] = field(default_factory=dict)
+    visual_requirement: str = ""
+    source_role: str = ""
+    authenticity_score: float = 0.0
+    entity_match_score: float = 0.0
+    temporal_match_score: float = 0.0
+    location_match_score: float = 0.0
+    event_match_score: float = 0.0
+    source_specificity_score: float = 0.0
+    matched_entities: List[str] = field(default_factory=list)
+    rejection_reason: str = ""
+    is_archival: bool = False
+    is_generic: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -171,6 +200,15 @@ class MediaFinderResult:
     retrieved_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
+    visual_requirement: str = ""
+    visual_type: str = ""
+    entities: List[str] = field(default_factory=list)
+    motion_spec: Optional[Dict[str, Any]] = None
+    source_role: str = ""
+    status: str = "OK"  # "OK", "INSUFFICIENT_EVIDENCE", "NO_BROLL", "REMOTION_REQUIRED"
+    search_completed: bool = True
+    usable_results: int = 0
+    fallback_allowed: bool = True
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -181,15 +219,36 @@ class MediaFinderResult:
         """Return a clean human-readable preview."""
         lines = [
             "=" * 64,
-            f"  NUGI MEDIA FINDER — RESULT PREVIEW",
+            "  NUGI MEDIA FINDER — RESULT PREVIEW",
             "=" * 64,
-            f"  Request:    {self.request}",
-            f"  Media Type: {self.media_type} | Era: {self.era} | Style: {self.style}",
-            f"  Providers:  {', '.join(self.providers_contacted)}",
-            f"  Found:      {self.total_candidates_found} candidates | Returned: {len(self.results)}",
-            "-" * 64,
-            "  SEARCH QUERIES USED:",
+            f"  Request:            {self.request}",
+            f"  Visual Requirement: {self.visual_requirement or 'auto'} | Status: {self.status} (Usable: {self.usable_results})",
+            f"  Media Type:         {self.media_type} | Era: {self.era} | Style: {self.style}",
         ]
+        if self.entities:
+            lines.append(f"  Entities:           {', '.join(self.entities)}")
+        if self.motion_spec:
+            lines.append(f"  Motion Spec:        {self.motion_spec.get('type', '')} ({self.motion_spec})")
+        lines.append(f"  Providers:          {', '.join(self.providers_contacted) if self.providers_contacted else 'None'}")
+        lines.append(f"  Found:              {self.total_candidates_found} candidates | Returned: {len(self.results)}")
+        lines.append("-" * 64)
+
+        if self.status == "NO_BROLL":
+            lines.append("  [NO_BROLL] Narrative pause — no visual search needed.")
+            lines.append("=" * 64)
+            return "\n".join(lines)
+
+        if self.status == "REMOTION_REQUIRED":
+            lines.append("  [REMOTION_REQUIRED] Motion graphics required — no stock footage search.")
+            lines.append("=" * 64)
+            return "\n".join(lines)
+
+        if self.status == "INSUFFICIENT_EVIDENCE":
+            lines.append("  ⚠ REAL EVIDENCE NOT FOUND")
+            lines.append("  (Exact authentic evidence was required but no candidate met authenticity threshold)")
+            lines.append("-" * 64)
+
+        lines.append("  SEARCH QUERIES USED:")
         for idx, q in enumerate(self.queries, 1):
             lines.append(f"    [{idx}] {q}")
         lines.append("-" * 64)
@@ -197,15 +256,25 @@ class MediaFinderResult:
         if not self.results:
             lines.append("    (No candidates matched the criteria)")
         for item in self.results[:max_items]:
-            lines.append(
-                f"  #{item.rank} [{item.provider.upper()}] [{item.media_type}] {item.title[:65]}"
-            )
+            vr_tag = item.visual_requirement or self.visual_requirement or "MEDIA"
+            s_role = item.source_role or "CONTEXT"
+            lines.append(f"  #{item.rank} [{vr_tag}] [{s_role}]")
+            lines.append(f"      Provider: {item.provider} | Type: {item.media_type}")
+            if item.event_match_score > 0:
+                lines.append(f"      Event Match: {item.event_match_score:.2f}")
+            if item.entity_match_score > 0:
+                lines.append(f"      Entity Match: {item.entity_match_score:.2f}")
+            if item.authenticity_score > 0:
+                lines.append(f"      Authenticity: {item.authenticity_score:.2f}")
+            lines.append(f"      Title: {item.title[:65]}")
             lines.append(
                 f"      Score: {item.score:.3f} | Creator: {item.creator or 'N/A'} | License: {item.license}"
             )
             lines.append(f"      Source: {item.source_url}")
             if item.local_path:
                 lines.append(f"      Downloaded to: {item.local_path}")
+            if item.rejection_reason:
+                lines.append(f"      [REJECTED]: {item.rejection_reason}")
             lines.append("")
         lines.append("=" * 64)
         return "\n".join(lines)
@@ -245,9 +314,11 @@ class MediaFinder:
         era: str = "auto",
         style: str = "auto",
         count: int = 8,
+        visual_requirement: str = "auto",
     ) -> MediaFinderResult:
         """
         Search for photos or videos matching the natural-language request.
+        Applies documentary evidence classification, entity preservation, and authenticity filtering.
 
         Args:
             request: Natural language visual description (Indonesian or English).
@@ -255,6 +326,7 @@ class MediaFinder:
             era: "historical" | "past" | "present" | "future" | "timeless" | "auto"
             style: "formal" | "neutral" | "documentary" | "archival" | "cinematic" | "conceptual" | "auto"
             count: Number of ranked results to return (default 8).
+            visual_requirement: "REAL_REQUIRED" | "REAL_PREFERRED" | "GENERIC_ALLOWED" | "NO_BROLL" | "REMOTION_REQUIRED" | "auto"
 
         Returns:
             MediaFinderResult
@@ -269,6 +341,77 @@ class MediaFinder:
                 providers_contacted=[],
                 results=[],
                 total_candidates_found=0,
+                usable_results=0,
+            )
+
+        # 1. Evidence Classification & Entity Extraction
+        if visual_requirement == "auto":
+            req_class, v_type, entity_objs, motion_spec, s_role = classify_visual_requirement(request)
+            entities = [e["name"] for e in entity_objs]
+        else:
+            req_class = visual_requirement.upper().strip()
+            entity_objs = extract_entities(request)
+            entities = [e["name"] for e in entity_objs]
+            _, v_type, _, motion_spec, s_role = classify_visual_requirement(request)
+            if req_class == REAL_REQUIRED:
+                s_role = PRIMARY_EVIDENCE
+            elif req_class == REAL_PREFERRED:
+                s_role = DIRECT_CONTEXT
+            elif req_class == GENERIC_ALLOWED:
+                s_role = GENERIC_ATMOSPHERE
+            elif req_class == NO_BROLL:
+                s_role = NO_VISUAL
+            elif req_class == REMOTION_REQUIRED:
+                s_role = MOTION_GRAPHICS
+
+        # Short-circuit NO_BROLL (Section 19: narrative pause)
+        if req_class == NO_BROLL:
+            logger.info(f"MediaFinder: '{request}' classified as NO_BROLL. No media search conducted.")
+            return MediaFinderResult(
+                request=request,
+                media_type=media,
+                era=era,
+                style=style,
+                queries=[],
+                providers_contacted=[],
+                results=[],
+                total_candidates_found=0,
+                downloaded_count=0,
+                fallback_reason="NO_BROLL: Narrative pause — no visual search required",
+                visual_requirement=NO_BROLL,
+                visual_type=v_type or "narrative_pause",
+                entities=entities,
+                motion_spec=None,
+                source_role=NO_VISUAL,
+                status="NO_BROLL",
+                search_completed=True,
+                usable_results=0,
+                fallback_allowed=False,
+            )
+
+        # Short-circuit REMOTION_REQUIRED (Section 18: motion graphics)
+        if req_class == REMOTION_REQUIRED:
+            logger.info(f"MediaFinder: '{request}' classified as REMOTION_REQUIRED. Motion graphics spec generated.")
+            return MediaFinderResult(
+                request=request,
+                media_type=media,
+                era=era,
+                style=style,
+                queries=[],
+                providers_contacted=[],
+                results=[],
+                total_candidates_found=0,
+                downloaded_count=0,
+                fallback_reason="REMOTION_REQUIRED: Motion graphics required — no stock search",
+                visual_requirement=REMOTION_REQUIRED,
+                visual_type=v_type or "STATISTIC",
+                entities=entities,
+                motion_spec=motion_spec or {"type": "bar_chart", "data_needed": True},
+                source_role=MOTION_GRAPHICS,
+                status="REMOTION_REQUIRED",
+                search_completed=True,
+                usable_results=0,
+                fallback_allowed=False,
             )
 
         resolved_media = self._normalize_media_type(media, request)
@@ -277,13 +420,17 @@ class MediaFinder:
 
         logger.info(
             f"MediaFinder.find: request='{request}', requested_media='{media}', "
-            f"resolved_media='{resolved_media}', era='{resolved_era}', style='{resolved_style}'"
+            f"resolved_media='{resolved_media}', era='{resolved_era}', style='{resolved_style}', "
+            f"visual_requirement='{req_class}', entities={entities}"
         )
 
         queries = self._generate_query_intelligence(
-            request, resolved_era, resolved_style, media=resolved_media
+            request, resolved_era, resolved_style, media=resolved_media,
+            entities=entities, visual_requirement=req_class
         )
-        routed_providers = self._route_providers(resolved_era, resolved_media)
+        routed_providers = self._route_providers(
+            resolved_era, resolved_media, visual_requirement=req_class
+        )
 
         candidates = self._gather_candidates(
             queries, routed_providers, resolved_media, max_items=max(count * 3, 15)
@@ -296,9 +443,28 @@ class MediaFinder:
             era=resolved_era,
             style=resolved_style,
             count=count,
+            entities=entities,
+            visual_requirement=req_class,
         )
 
         providers_contacted = [p.PROVIDER_NAME for p in routed_providers]
+
+        # Evaluate usable results and authenticity gate (Section 10, 22)
+        usable_items = [item for item in ranked_items if not item.rejection_reason]
+        status = "OK"
+        fallback_allowed = True
+
+        if req_class == REAL_REQUIRED:
+            if not usable_items:
+                status = "INSUFFICIENT_EVIDENCE"
+                fallback_allowed = False
+                fallback_reason = "REAL_REQUIRED: Inadequate authentic evidence found. Generic stock rejected."
+                logger.warning(
+                    f"MediaFinder: REAL_REQUIRED hard gate failed for '{request}'. Usable results: 0"
+                )
+            results_to_return = usable_items
+        else:
+            results_to_return = ranked_items
 
         return MediaFinderResult(
             request=request,
@@ -307,10 +473,19 @@ class MediaFinder:
             style=resolved_style,
             queries=queries,
             providers_contacted=providers_contacted,
-            results=ranked_items,
+            results=results_to_return,
             total_candidates_found=len(candidates),
             downloaded_count=0,
             fallback_reason=fallback_reason,
+            visual_requirement=req_class,
+            visual_type=v_type or ("EVENT" if req_class == REAL_REQUIRED else "SCENE"),
+            entities=entities,
+            motion_spec=None,
+            source_role=s_role,
+            status=status,
+            search_completed=True,
+            usable_results=len(usable_items),
+            fallback_allowed=fallback_allowed,
         )
 
     # --------------------------------------------------------------------------
@@ -325,13 +500,21 @@ class MediaFinder:
         style: str = "auto",
         count: int = 8,
         folder: Optional[str] = None,
+        visual_requirement: str = "auto",
     ) -> MediaFinderResult:
         """
         Search for media and download the top ranked candidates to the local filesystem.
         Provenance metadata is preserved in sources.json.
         """
-        result = self.find(request=request, media=media, era=era, style=style, count=count)
-        if not result.results:
+        result = self.find(
+            request=request,
+            media=media,
+            era=era,
+            style=style,
+            count=count,
+            visual_requirement=visual_requirement,
+        )
+        if not result.results or result.status in ("NO_BROLL", "REMOTION_REQUIRED", "INSUFFICIENT_EVIDENCE"):
             return result
 
         # Convert MediaFinderItem back to MediaItem for MediaDownloader
@@ -356,6 +539,18 @@ class MediaFinder:
                     metadata=r.metadata,
                     reranker_score=r.score,
                     final_rank=r.rank,
+                    visual_requirement=r.visual_requirement,
+                    source_role=r.source_role,
+                    authenticity_score=r.authenticity_score,
+                    entity_match_score=r.entity_match_score,
+                    temporal_match_score=r.temporal_match_score,
+                    location_match_score=r.location_match_score,
+                    event_match_score=r.event_match_score,
+                    source_specificity_score=r.source_specificity_score,
+                    matched_entities=r.matched_entities,
+                    rejection_reason=r.rejection_reason,
+                    is_archival=r.is_archival,
+                    is_generic=r.is_generic,
                 )
             )
 
@@ -397,7 +592,11 @@ class MediaFinder:
                 "search_query": "...",
                 "preferred_media_type": "photo|video|any",
                 "era": "historical|present|...",
-                "style": "formal|documentary|..."
+                "style": "formal|documentary|...",
+                "visual_requirement": "REAL_REQUIRED|REAL_PREFERRED|...",
+                "visual_type": "...",
+                "entities": [...],
+                "source_role": "..."
             }
         """
         search_query = microbeat.get("search_query")
@@ -417,6 +616,7 @@ class MediaFinder:
         )
         era = microbeat.get("era", "auto")
         style = microbeat.get("style", "auto")
+        visual_requirement = microbeat.get("visual_requirement", "auto")
 
         if download:
             return self.find_and_download(
@@ -426,6 +626,7 @@ class MediaFinder:
                 style=style,
                 count=count,
                 folder=folder,
+                visual_requirement=visual_requirement,
             )
         return self.find(
             request=effective_request,
@@ -433,6 +634,7 @@ class MediaFinder:
             era=era,
             style=style,
             count=count,
+            visual_requirement=visual_requirement,
         )
 
     # --------------------------------------------------------------------------
@@ -445,14 +647,35 @@ class MediaFinder:
         era: str,
         style: str,
         media: str = "any",
+        entities: Optional[List[str]] = None,
+        visual_requirement: str = "auto",
     ) -> List[str]:
         """
-        Transform a natural language visual request into 4 distinct query variants:
-          1. primary descriptive query (well-formed scene sentence)
-          2. style-specific variant (formal, documentary, archival, etc.)
-          3. contextual variant (spatial / environmental context)
-          4. fallback query (concise direct keywords)
+        Transform a natural language visual request into distinct query variants.
+        For REAL_REQUIRED & REAL_PREFERRED: strictly preserve entities and build evidence queries.
+        For GENERIC_ALLOWED: build descriptive scene and atmospheric queries.
         """
+        vr = (visual_requirement or "auto").upper().strip()
+
+        # If entities exist and requirement is REAL_REQUIRED or REAL_PREFERRED:
+        # Use entity-first queries (Section 6, 7 & 14)
+        if entities and vr in (REAL_REQUIRED, REAL_PREFERRED):
+            expander = MediaQueryExpander()
+            eq = expander.expand(request, media_type_override=media, visual_requirement=vr)
+            candidate_queries = list(eq.all_queries)
+            if era in ("historical", "past") or any(y in request for y in ("1944", "1945", "1921", "2007", "abad")):
+                for ent in entities:
+                    arch_q = f"{ent} archival documentation"
+                    if arch_q not in candidate_queries:
+                        candidate_queries.append(arch_q)
+            unique: List[str] = []
+            for q in candidate_queries:
+                q_clean = " ".join(q.split())
+                if q_clean and q_clean not in unique:
+                    unique.append(q_clean)
+            if unique:
+                return unique
+
         core_english = self._translate_to_core_english(request)
 
         # 1. Primary descriptive query
@@ -664,21 +887,68 @@ class MediaFinder:
     # Internal: Provider Routing
     # --------------------------------------------------------------------------
 
-    def _route_providers(self, era: str, media: str) -> List[MediaProvider]:
+    def _route_providers(
+        self,
+        era: str,
+        media: str,
+        visual_requirement: str = "GENERIC_ALLOWED",
+    ) -> List[MediaProvider]:
         """
-        Route to providers based on era and media type:
-        - PRESENT + PHOTO: Pexafy first, then Wikimedia
-        - PAST/HISTORICAL: Wikimedia Commons + Internet Archive
-        - HISTORICAL + VIDEO: Internet Archive first, then Wikimedia
-        - FUTURE + PHOTO: Pexafy (conceptual) + Wikimedia
-        - VIDEO: Wikimedia Commons + Internet Archive (Pexafy NEVER routed for video)
+        Route to providers based on visual requirement, era, and media type (Section 8):
+        - REAL_REQUIRED + HISTORICAL + VIDEO: 1. Internet Archive, 2. Wikimedia Commons. Pexafy: DISABLED.
+        - REAL_REQUIRED + HISTORICAL + IMAGE: 1. Wikimedia Commons, 2. Internet Archive. Pexafy: DISABLED.
+        - REAL_REQUIRED + PRESENT + IMAGE: 1. Wikimedia Commons, 2. Internet Archive. Pexafy: DISABLED.
+        - REAL_PREFERRED: Wikimedia, Internet Archive, Pexafy (specific real -> archival -> stock fallback).
+        - GENERIC_ALLOWED: Pexafy, Wikimedia, Internet Archive.
         """
         by_name: Dict[str, MediaProvider] = {p.PROVIDER_NAME: p for p in self.providers}
-
         selected: List[MediaProvider] = []
+        vr = (visual_requirement or "GENERIC_ALLOWED").upper().strip()
 
+        # ── REAL_REQUIRED: Pexafy is DISABLED ──
+        if vr == REAL_REQUIRED:
+            if media == "video":
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+            elif era in ("historical", "past"):
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+            else:
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+            return selected
+
+        # ── REAL_PREFERRED: Real/archival first, semantic stock allowed ──
+        if vr == REAL_PREFERRED:
+            if media == "video":
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+            elif era in ("historical", "past"):
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+                if "pexafy" in by_name:
+                    selected.append(by_name["pexafy"])
+            else:
+                if "wikimedia" in by_name:
+                    selected.append(by_name["wikimedia"])
+                if "pexafy" in by_name:
+                    selected.append(by_name["pexafy"])
+                if "internet_archive" in by_name:
+                    selected.append(by_name["internet_archive"])
+            return selected
+
+        # ── GENERIC_ALLOWED or others ──
         if media == "video":
-            # Pexafy NEVER supports video
             if "internet_archive" in by_name:
                 selected.append(by_name["internet_archive"])
             if "wikimedia" in by_name:
@@ -687,7 +957,6 @@ class MediaFinder:
 
         # Photo or Any
         if era in ("historical", "past"):
-            # Prefer Wikimedia Commons and Internet Archive for archival depth
             if "wikimedia" in by_name:
                 selected.append(by_name["wikimedia"])
             if "internet_archive" in by_name:
@@ -695,13 +964,11 @@ class MediaFinder:
             if media != "video" and "pexafy" in by_name:
                 selected.append(by_name["pexafy"])
         elif era == "future":
-            # Prefer Pexafy for modern conceptual photography, supplemented by Wikimedia
             if "pexafy" in by_name:
                 selected.append(by_name["pexafy"])
             if "wikimedia" in by_name:
                 selected.append(by_name["wikimedia"])
         else:
-            # Present or Timeless
             if "pexafy" in by_name:
                 selected.append(by_name["pexafy"])
             if "wikimedia" in by_name:
@@ -771,6 +1038,8 @@ class MediaFinder:
         era: str,
         style: str,
         count: int,
+        entities: Optional[List[str]] = None,
+        visual_requirement: str = "auto",
     ) -> Tuple[List[MediaFinderItem], str]:
         """Filter by media type affinity, run MediaRanker, and format as MediaFinderItems."""
         if not candidates:
@@ -812,11 +1081,21 @@ class MediaFinder:
             # If user wanted video but none found, or wanted photo and none found
             return [], f"No matching candidates found for media_type='{media_type}'."
 
-        ranked, fallback_reason = self.ranker.rank(
-            original_request=original_request,
-            candidates=filtered,
-            top_n=count * 2,
-        )
+        try:
+            ranked, fallback_reason = self.ranker.rank(
+                original_request=original_request,
+                candidates=filtered,
+                top_n=count * 2,
+                entities=entities,
+                visual_requirement=visual_requirement,
+                era=era,
+            )
+        except TypeError:
+            ranked, fallback_reason = self.ranker.rank(
+                original_request=original_request,
+                candidates=filtered,
+                top_n=count * 2,
+            )
 
         results: List[MediaFinderItem] = []
         for rank_idx, item in enumerate(ranked[:count], 1):
@@ -838,6 +1117,18 @@ class MediaFinder:
                     width=item.width,
                     height=item.height,
                     metadata=item.metadata,
+                    visual_requirement=item.visual_requirement or visual_requirement,
+                    source_role=item.source_role or ("PRIMARY_EVIDENCE" if visual_requirement == REAL_REQUIRED else "DIRECT_CONTEXT"),
+                    authenticity_score=item.authenticity_score,
+                    entity_match_score=item.entity_match_score,
+                    temporal_match_score=item.temporal_match_score,
+                    location_match_score=item.location_match_score,
+                    event_match_score=item.event_match_score,
+                    source_specificity_score=item.source_specificity_score,
+                    matched_entities=item.matched_entities,
+                    rejection_reason=item.rejection_reason,
+                    is_archival=item.is_archival,
+                    is_generic=item.is_generic,
                 )
             )
 

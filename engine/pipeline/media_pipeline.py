@@ -136,8 +136,30 @@ class MediaPipeline:
         detected_media = eq.detected_media_type
         logger.info(
             f"MediaPipeline.search: request='{request}', requested_media='{media_type}', "
-            f"resolved_media='{detected_media}'"
+            f"resolved_media='{detected_media}', visual_requirement='{eq.visual_requirement}'"
         )
+
+        if eq.visual_requirement == "NO_BROLL":
+            return MediaSearchResult(
+                request=request,
+                expanded_queries=[],
+                candidates=[],
+                total_candidates_found=0,
+                embedding_used=False,
+                reranker_used=False,
+                fallback_reason="NO_BROLL: Narrative pause — no media retrieval needed.",
+            )
+
+        if eq.visual_requirement == "REMOTION_REQUIRED":
+            return MediaSearchResult(
+                request=request,
+                expanded_queries=[],
+                candidates=[],
+                total_candidates_found=0,
+                embedding_used=False,
+                reranker_used=False,
+                fallback_reason=f"REMOTION_REQUIRED: Motion graphics required ({eq.visual_type}) — no stock retrieval.",
+            )
 
         candidates = self._gather_candidates(eq, max_per_query=max(count, 5))
         logger.info(f"MediaPipeline.search: {len(candidates)} raw candidates gathered")
@@ -183,11 +205,21 @@ class MediaPipeline:
                 fallback_reason=f"No matching candidates found for media_type='{detected_media}'.",
             )
 
-        ranked, fallback_reason = self.ranker.rank(
-            original_request=request,
-            candidates=filtered,
-            top_n=count,
-        )
+        try:
+            ranked, fallback_reason = self.ranker.rank(
+                original_request=request,
+                candidates=filtered,
+                top_n=count,
+                entities=eq.entities,
+                visual_requirement=eq.visual_requirement,
+                era="historical" if eq.is_historical else "auto",
+            )
+        except TypeError:
+            ranked, fallback_reason = self.ranker.rank(
+                original_request=request,
+                candidates=filtered,
+                top_n=count,
+            )
 
         emb_used = all(c.embedding_similarity != 0.0 for c in ranked[:3]) if ranked else False
         rer_used = all(c.reranker_score != 0.0 for c in ranked[:3]) if ranked else False
@@ -336,8 +368,8 @@ class MediaPipeline:
         all_candidates: List[MediaItem] = []
 
         providers_to_use = list(self.providers)
-        if eq.detected_media_type == "video":
-            # Pexafy NEVER supports video
+        if eq.detected_media_type == "video" or eq.visual_requirement == "REAL_REQUIRED":
+            # Pexafy NEVER supports video and is disabled for REAL_REQUIRED
             providers_to_use = [p for p in providers_to_use if getattr(p, "PROVIDER_NAME", "") != "pexafy"]
             # Internet Archive is primary for video, Wikimedia is secondary/fallback
             def _prov_order(p):

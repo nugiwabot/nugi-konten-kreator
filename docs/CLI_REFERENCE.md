@@ -115,4 +115,14 @@ python -m engine.pipeline.engine_cli media-find \
   --count 5 \
   --download \
   --folder "revolusi_industri"
+
+# Pencarian bukti sejarah otentik dengan hard gate (REAL_REQUIRED)
+python -m engine.pipeline.engine_cli media-find \
+  --query "D-Day pendaratan Normandia 6 Juni 1944" \
+  --vr REAL_REQUIRED \
+  --era historical \
+  --media video
+
+# Untuk dokumentasi lengkap Evidence-Based B-Roll & Visual Retrieval System, lihat docs/EVIDENCE_BASED_BROLL.md
 ```
+

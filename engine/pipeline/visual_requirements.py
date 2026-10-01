@@ -16,9 +16,25 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from engine.pipeline.script_parser import NarasiScript, ScriptSection
+
+# ── 5 Visual Requirement Classes (Section 4) ─────────────────────────────────
+REAL_REQUIRED = "REAL_REQUIRED"
+REAL_PREFERRED = "REAL_PREFERRED"
+GENERIC_ALLOWED = "GENERIC_ALLOWED"
+NO_BROLL = "NO_BROLL"
+REMOTION_REQUIRED = "REMOTION_REQUIRED"
+
+# ── Source Roles (Section 12) ────────────────────────────────────────────────
+PRIMARY_EVIDENCE = "PRIMARY_EVIDENCE"
+DIRECT_CONTEXT = "DIRECT_CONTEXT"
+GENERIC_ATMOSPHERE = "GENERIC_ATMOSPHERE"
+ARCHIVAL_REFERENCE = "ARCHIVAL_REFERENCE"
+DOCUMENT = "DOCUMENT"
+MOTION_GRAPHICS = "MOTION_GRAPHICS"
+NO_VISUAL = "NO_VISUAL"
 
 
 @dataclass
@@ -37,6 +53,16 @@ class VisualShotRequirement:
     text_overlay: str = ""
     preferred_media_type: str = "any"  # "video", "image", or "any"
     visual_metaphor: str = ""
+
+    # Evidence-Based Retrieval fields (Sections 17-19)
+    visual_requirement: str = GENERIC_ALLOWED
+    visual_type: str = "METAPHOR"
+    entity_type: str = ""
+    entities: List[str] = field(default_factory=list)
+    era: str = "auto"
+    source_role: str = GENERIC_ATMOSPHERE
+    motion_spec: Optional[Dict[str, Any]] = None
+    search_required: bool = True
 
     @property
     def start_frame(self) -> int:
@@ -450,6 +476,198 @@ _CURATED_NARRATIVE_SHOTS: Dict[int, List[Dict]] = {
     ],
 }
 
+# ── Known Entity Gazetteers & Rules (Section 5) ──────────────────────────────
+
+_KNOWN_ENTITIES = [
+    # PERSONS
+    ("PERSON", r"\b(steve jobs|albert einstein|napoleon bonaparte|abraham lincoln|henry ford|thomas edison|nikola tesla|alan turing|soekarno|mohammad hatta|bung karno|bung hatta|isaac newton|bill gates|alexander graham bell|wright brothers)\b"),
+    # EVENTS
+    ("EVENT", r"\b(d-day|pendaratan normandia|mendarat di normandia|normandy landing[s]?|landing in normandy|perang dunia (?:i{1,3}|ke-[12]|kedua|pertama)|world war (?:i{1,3}|[12])|ww[12]|apollo 11|bom hiroshima|hiroshima|proklamasi kemerdekaan|proklamasi 1945|revolusi industri|industrial revolution|keynote 2007|macworld 2007)\b"),
+    # LANDMARKS & BUILDINGS
+    ("LANDMARK", r"\b(berlin wall|tembok berlin|candi prambanan|prambanan temple|prambanan|monas|gedung sate|highland park factory|pabrik highland park|eiffel tower|colosseum|white house)\b"),
+    # PRODUCTS & OBJECTS
+    ("PRODUCT", r"\b(iphone|ibm pc|model t|assembly line|steam engine|macintosh)\b"),
+    # COMPANIES & ORGANIZATIONS
+    ("ORGANIZATION", r"\b(pasukan sekutu|allied forces|sekutu|apple|ibm|ford|nasa|pbb|voc|united nations)\b"),
+    # DOCUMENTS
+    ("DOCUMENT", r"\b(surat abraham lincoln|lincoln'?s letter|naskah proklamasi|teks proklamasi|treaty of versailles|perjanjian linggarjati|dokumen asli)\b"),
+    # CITIES
+    ("CITY", r"\b(tokyo|jakarta|batavia|berlin|normandia|normandy|princeton|highland park|new york|london|paris|bandung|surabaya|yogyakarta|rome|hiroshima)\b"),
+    # COUNTRIES
+    ("COUNTRY", r"\b(indonesia|jepang|japan|amerika|united states|jerman|germany|inggris|britain|prancis|france|belanda|netherlands)\b"),
+    # HISTORICAL PERIODS
+    ("HISTORICAL_PERIOD", r"\b(abad ke-20|abad ke-19|abad ke-21|20th century|19th century|21st century|zaman prasejarah|prehistoric(?: era)?|era kolonial|colonial era|tempo dulu|zaman kuno|ancient times)\b"),
+]
+
+_DATE_PATTERNS = [
+    re.compile(r"\b(\d{1,2}\s+(?:januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember|january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{4})\b", re.IGNORECASE),
+    re.compile(r"\b((?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2},?\s+\d{4})\b", re.IGNORECASE),
+    re.compile(r"\b(1[0-9]{3}|200[0-9]|201[0-9]|202[0-9])\b"),
+]
+
+_NO_BROLL_PHRASES = [
+    "tapi di sinilah masalah sebenarnya dimulai",
+    "di sinilah masalah sebenarnya dimulai",
+    "pertanyaannya kemudian berubah",
+    "yang berubah ternyata bukan rumahnya",
+    "mungkin kita selama ini melihat masalah ini dari arah yang salah",
+    "tapi di sinilah semuanya berubah",
+    "di sinilah semuanya berubah",
+    "tapi di sinilah masalahnya",
+    "pertanyaannya kemudian",
+    "pertanyaan besarnya adalah",
+    "namun pertanyaannya",
+    "mungkin kita salah melihat",
+    "lalu apa yang sebenarnya terjadi",
+    "tapi di sinilah",
+]
+
+_STAT_PATTERNS = [
+    re.compile(r"meningkat\s+dari\s+(.+?)\s+menjadi\s+(.+)", re.IGNORECASE),
+    re.compile(r"meningkat\s+(?:dua|tiga|empat|lima|\d+)\s+kali\s+lipat", re.IGNORECASE),
+    re.compile(r"(?:dua|tiga|empat|lima|\d+)\s+kali\s+lipat\s+dalam\s+\d+\s+(?:tahun|bulan|dekade)", re.IGNORECASE),
+    re.compile(r"\b\d+[\.,]?\d*\s*%", re.IGNORECASE),
+    re.compile(r"\b(populasi|harga rumah|biaya hidup|data statistik|angka kemiskinan|pertumbuhan ekonomi)\b.*\b(meningkat|melonjak|naik|turun|berlipat)\b", re.IGNORECASE),
+    re.compile(r"\b(meningkat|melonjak)\s+dua\s+kali\s+lipat\b", re.IGNORECASE),
+]
+
+
+def extract_entities(text: str) -> List[Dict[str, str]]:
+    """
+    Extract structured entities from natural language text.
+    Works fully offline and deterministic.
+    """
+    if not text:
+        return []
+
+    entities: List[Dict[str, str]] = []
+    seen: set = set()
+    lower = text.lower()
+
+    # 1. Match regex gazetteer
+    for ent_type, pattern in _KNOWN_ENTITIES:
+        for match in re.finditer(pattern, lower):
+            val = match.group(0).strip()
+            # Normalize casing from original text
+            orig_val = text[match.start():match.end()]
+            key = (ent_type, val.lower())
+            if key not in seen:
+                seen.add(key)
+                entities.append({"type": ent_type, "name": orig_val})
+
+    # 2. Match dates and years
+    for pat in _DATE_PATTERNS:
+        for match in pat.finditer(text):
+            val = match.group(0).strip()
+            key = ("DATE", val.lower())
+            if key not in seen:
+                seen.add(key)
+                entities.append({"type": "DATE", "name": val})
+
+    # 3. Detect capitalized Proper Nouns (fallback for named entities)
+    proper_nouns = re.findall(r"\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b", text)
+    stopwords_pn = {"Perhatikan Ini", "Ada Yang", "Fakta Di", "Penyebab Sebenarnya", "Menurut Anda"}
+    for pn in proper_nouns:
+        if pn in stopwords_pn:
+            continue
+        key = ("PERSON_OR_ORG", pn.lower())
+        if not any(pn.lower() in k[1] for k in seen):
+            seen.add(key)
+            entities.append({"type": "PERSON", "name": pn})
+
+    # 4. Special recognition for D-Day Normandy landings (Section 1)
+    if ("normandia" in lower or "normandy" in lower) and any(w in lower for w in ("1944", "sekutu", "allied", "mendarat", "landing")):
+        if not any(e["name"] == "D-Day" for e in entities):
+            entities.insert(0, {"type": "EVENT", "name": "D-Day"})
+        if not any(e["type"] == "PLACE" and e["name"] in ("Normandia", "Normandy") for e in entities):
+            entities.append({"type": "PLACE", "name": "Normandy"})
+
+    return entities
+
+
+def classify_visual_requirement(
+    text: str,
+) -> Tuple[str, str, List[Dict[str, str]], Optional[Dict[str, Any]], str]:
+    """
+    Classify a natural language text / sentence into one of the 5 visual requirement classes:
+    (REAL_REQUIRED, REAL_PREFERRED, GENERIC_ALLOWED, NO_BROLL, REMOTION_REQUIRED)
+
+    Returns:
+        (visual_requirement, visual_type, entities, motion_spec, source_role)
+    """
+    if not text or not text.strip():
+        return (GENERIC_ALLOWED, "METAPHOR", [], None, GENERIC_ATMOSPHERE)
+
+    lower = text.lower().strip()
+
+    # 1. Check NO_BROLL (narrative pause / rhetorical shift)
+    for phrase in _NO_BROLL_PHRASES:
+        if phrase in lower:
+            return (NO_BROLL, "narrative_pause", [], None, NO_VISUAL)
+
+    # 2. Check REMOTION_REQUIRED (statistics / growth / data visualization)
+    for spat in _STAT_PATTERNS:
+        m = spat.search(lower)
+        if m:
+            headline = text.strip()
+            if len(headline) > 60:
+                headline = headline[:57] + "..."
+            motion_spec = {
+                "type": "bar_chart" if "meningkat dari" in lower else "statistic",
+                "data_needed": True,
+                "headline": headline,
+                "animation": "progressive_growth",
+            }
+            if "populasi tokyo" in lower:
+                motion_spec["headline"] = "Populasi Tokyo"
+            elif "harga rumah" in lower:
+                motion_spec["headline"] = "Kenaikan Harga Rumah"
+
+            return (REMOTION_REQUIRED, "STATISTIC", [], motion_spec, MOTION_GRAPHICS)
+
+    # 3. Extract entities
+    entities = extract_entities(text)
+    ent_types = {e["type"] for e in entities}
+
+    # Metaphor check: e.g. "Manusia diperlakukan seperti mesin"
+    if "seperti mesin" in lower or "bagaikan mesin" in lower:
+        return (GENERIC_ALLOWED, "METAPHOR", entities, None, GENERIC_ATMOSPHERE)
+
+    # 4. Check REAL_REQUIRED
+    # Triggered by specific named persons, singular historical events, landmarks, specific products/docs
+    has_person = "PERSON" in ent_types
+    has_event = "EVENT" in ent_types or any(
+        w in lower for w in [
+            "d-day", "pendaratan normandia", "mendarat di normandia", "normandy landing",
+            "hiroshima", "apollo 11", "berlin wall", "6 juni 1944", "june 6 1944"
+        ]
+    )
+    has_landmark = "LANDMARK" in ent_types
+    has_product = "PRODUCT" in ent_types and any(e["name"].lower() in ["iphone", "ibm pc", "model t"] for e in entities)
+    has_document = "DOCUMENT" in ent_types
+
+    if has_person or has_event or has_landmark or has_product or has_document:
+        visual_type = "EVENT" if has_event else ("PERSON" if has_person else ("LANDMARK" if has_landmark else "OBJECT"))
+        source_role = DOCUMENT if has_document else PRIMARY_EVIDENCE
+        return (REAL_REQUIRED, visual_type, entities, None, source_role)
+
+    # 5. Check REAL_PREFERRED
+    # Real cities, countries, or historical periods where authentic contextual footage is preferred
+    has_city = "CITY" in ent_types
+    has_country = "COUNTRY" in ent_types
+    has_hist_period = "HISTORICAL_PERIOD" in ent_types or any(
+        w in lower for w in ["abad ke-20", "awal abad", "tempo dulu", "zaman prasejarah", "kolonial"]
+    )
+    # E.g. "Kota membuat manusia tinggal semakin padat" -> authentic city/urban footage
+    has_urban_theme = any(w in lower for w in ["kota membuat manusia", "tinggal semakin padat", "kawasan apartemen"])
+
+    if has_city or has_hist_period or has_urban_theme or (has_country and "sejarah" in lower):
+        visual_type = "HISTORICAL_CONTEXT" if has_hist_period else "LOCATION"
+        return (REAL_PREFERRED, visual_type, entities, None, DIRECT_CONTEXT)
+
+    # 6. Default: GENERIC_ALLOWED
+    return (GENERIC_ALLOWED, "ATMOSPHERE", entities, None, GENERIC_ATMOSPHERE)
+
 
 class VisualRequirementsGenerator:
     """Generates visual shot sequences for parsed narratives."""
@@ -497,6 +715,12 @@ class VisualRequirementsGenerator:
                     end_t = sec.end_seconds  # Ensure exact fit
 
                 shot_id = f"shot_{narrative.index:02d}_{shot_counter:02d}"
+                desc_text = sd["desc"]
+                query_text = sd["query"]
+                v_req, v_type, ents, m_spec, s_role = classify_visual_requirement(f"{desc_text} {query_text}")
+                ent_names = [e["name"] for e in ents]
+                primary_ent_type = ents[0]["type"] if ents else ""
+
                 shots.append(
                     VisualShotRequirement(
                         shot_id=shot_id,
@@ -512,6 +736,13 @@ class VisualRequirementsGenerator:
                         text_overlay=sd.get("overlay", ""),
                         preferred_media_type="any",
                         visual_metaphor=sd.get("metaphor", ""),
+                        visual_requirement=sd.get("visual_requirement", v_req),
+                        visual_type=sd.get("visual_type", v_type),
+                        entity_type=primary_ent_type,
+                        entities=ent_names,
+                        source_role=sd.get("source_role", s_role),
+                        motion_spec=m_spec,
+                        search_required=(v_req not in (NO_BROLL, REMOTION_REQUIRED)),
                     )
                 )
                 running_time = end_t
@@ -551,6 +782,10 @@ class VisualRequirementsGenerator:
         keywords = self._extract_keywords(sec.text)
         dna_theme = narrative.dna.lower()
 
+        v_req, v_type, ents, m_spec, s_role = classify_visual_requirement(sec.text)
+        ent_names = [e["name"] for e in ents]
+        primary_ent_type = ents[0]["type"] if ents else ""
+
         for i in range(num_shots):
             st = sec.start_seconds + i * shot_dur
             et = sec.end_seconds if i == num_shots - 1 else sec.start_seconds + (i + 1) * shot_dur
@@ -588,6 +823,13 @@ class VisualRequirementsGenerator:
                     text_overlay=overlay,
                     preferred_media_type="any",
                     visual_metaphor=sec.section_type,
+                    visual_requirement=v_req,
+                    visual_type=v_type,
+                    entity_type=primary_ent_type,
+                    entities=ent_names,
+                    source_role=s_role,
+                    motion_spec=m_spec,
+                    search_required=(v_req not in (NO_BROLL, REMOTION_REQUIRED)),
                 )
             )
 

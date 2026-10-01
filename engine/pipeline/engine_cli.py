@@ -324,6 +324,7 @@ def cmd_media_find(args):
     count = getattr(args, "count", 8)
     folder = getattr(args, "folder", None)
     download = getattr(args, "download", False)
+    visual_requirement = getattr(args, "visual_requirement", None) or getattr(args, "vr", "auto")
 
     if download:
         result = finder.find_and_download(
@@ -333,6 +334,7 @@ def cmd_media_find(args):
             style=style,
             count=count,
             folder=folder,
+            visual_requirement=visual_requirement,
         )
     else:
         result = finder.find(
@@ -341,6 +343,7 @@ def cmd_media_find(args):
             era=era,
             style=style,
             count=count,
+            visual_requirement=visual_requirement,
         )
 
     print(result.preview(max_items=count))
@@ -679,6 +682,7 @@ def main():
     p_mfind.add_argument("--era", "-e", choices=["historical", "past", "present", "future", "timeless", "auto"], default="auto", help="Era hint (default: auto)")
     p_mfind.add_argument("--style", "-s", choices=["formal", "neutral", "documentary", "archival", "cinematic", "conceptual", "auto"], default="auto", help="Visual style hint (default: auto)")
     p_mfind.add_argument("--count", "-n", type=int, default=8, help="Number of results (default: 8)")
+    p_mfind.add_argument("--visual-requirement", "--vr", choices=["REAL_REQUIRED", "REAL_PREFERRED", "GENERIC_ALLOWED", "NO_BROLL", "REMOTION_REQUIRED", "auto"], default="auto", help="Visual evidence requirement (default: auto)")
     p_mfind.add_argument("--download", "-d", action="store_true", help="Download top results")
     p_mfind.add_argument("--folder", type=str, default=None, help="Destination subfolder")
     p_mfind.add_argument("--output", "-o", type=str, default=None, help="Path to save result JSON file")
@@ -713,6 +717,9 @@ def main():
     p_mf.add_argument("--style", "-s",
                       choices=["formal", "neutral", "documentary", "archival", "cinematic", "conceptual", "auto"],
                       default="auto", help="Visual style hint (default: auto)")
+    p_mf.add_argument("--visual-requirement", "--vr",
+                      choices=["REAL_REQUIRED", "REAL_PREFERRED", "GENERIC_ALLOWED", "NO_BROLL", "REMOTION_REQUIRED", "auto"],
+                      default="auto", help="Visual evidence requirement (default: auto)")
     p_mf.add_argument("--count", "-n", type=int, default=8,
                       help="Number of results to return (default: 8)")
     p_mf.add_argument("--download", "-d", action="store_true",
