@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "workspace": "02-script",
+  "timing_status": "transcribed_from_raw_video",
+  "coverage_basis": "subtitle_cues_with_verified_asset_matches_and_editorial_a_roll_gaps",
+  "target_broll_share": {
+    "minimum": 0.0,
+    "maximum": 0.2,
+    "aim": 0.12
+  },
+  "skip_segment_ids": [],
+  "skip_time_ranges": [
+    {
+      "start": 0.0,
+      "end": 24.0,
+      "reason": "Pembuka dan pertanyaan retoris; beri ruang A-roll."
+    },
+    {
+      "start": 37.0,
+      "end": 58.0,
+      "reason": "Kontras personal pada hook; aset aktif tidak menampilkan tokoh yang dibicarakan."
+    },
+    {
+      "start": 154.0,
+      "end": 180.0,
+      "reason": "Pertanyaan utama dan jeda menuju penjelasan; pertahankan A-roll."
+    },
+    {
+      "start": 373.0,
+      "end": 468.0,
+      "reason": "Pembahasan PBB dan tanah kosong tanpa foto dokumen/petak yang cocok; hindari ilustrasi generik."
+    },
+    {
+      "start": 945.0,
+      "end": 1099.0,
+      "reason": "Bagian refleksi dan penutup; biarkan pembicara tetap terlihat."
+    }
+  ],
+  "skip_anchors": [
+    {
+      "phrase": "Apakah ini cuma akibat jumlah tanah yang tertarbatas",
+      "reason": "Pertanyaan utama; A-roll."
+    },
+    {
+      "phrase": "Data dari Bank Indonesia menunjukkan",
+      "reason": "Klaim data tanpa visual dokumen/data yang lisensinya terverifikasi; jangan tampilkan foto sebagai bukti angka."
+    },
+    {
+      "phrase": "Penelitian dari LPEM UI",
+      "reason": "Materi riset primer belum memiliki izin visual yang terverifikasi; A-roll."
+    },
+    {
+      "phrase": "Lincoln Institute of Land Policy",
+      "reason": "Klaim angka belum cocok dengan sumber primer yang ditemukan; jangan buat visual pendukung."
+    }
+  ],
+  "asset_anchors": [],
+  "policy": "Gunakan hanya foto berlisensi yang menggambarkan konteks yang disebut. Foto lokasi tidak menjadi bukti angka; bagian tanpa aset yang tepat tetap A-roll.",
+  "notes": [
+    "Aset terverifikasi yang tersedia adalah foto distrik bisnis Jakarta, KRL, satu peta Batavia, dan gedung kantor.",
+    "Klaim BI, BPS, LPEM, dan Lincoln tidak diberi grafik atau dokumen pendukung sampai ada visual sumber dan izin reproduksi yang sesuai.",
+    "Target coverage dibuat konservatif sesuai aset yang benar-benar tersedia; rencana tidak mengisi setiap cue dengan gambar."
+  ]
+}

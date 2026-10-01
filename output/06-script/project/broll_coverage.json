@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "workspace": "06-script",
+  "timing_status": "awaiting_main_footage",
+  "target_broll_share": {
+    "minimum": 0.4,
+    "maximum": 0.5,
+    "aim": 0.45
+  },
+  "coverage_basis": "script_text_anchors_until_main_footage_is_available",
+  "skip_segment_ids": [],
+  "skip_time_ranges": [],
+  "skip_anchors": [
+    {
+      "phrase": "Ada sebuah pertanyaan yang jarang sekali diajukan",
+      "reason": "Pembuka reflektif; A-roll."
+    },
+    {
+      "phrase": "Sejak kapan manusia punya rumah",
+      "reason": "Pertanyaan utama; A-roll sampai pengungkapan Göbekli Tepe."
+    },
+    {
+      "phrase": "Peneliti James Woodburn (1968), Marshall Sahlins (1972)",
+      "reason": "Foto peneliti dan dokumen berlisensi belum ditemukan; A-roll, jangan pakai foto orang yang salah."
+    },
+    {
+      "phrase": "Dan jawabannya jauh lebih kompleks dari yang biasa kita diajarkan",
+      "reason": "Transisi bab; A-roll."
+    },
+    {
+      "phrase": "Sampai tahun 1994, ketika seorang arkeolog bernama Klaus Schmidt",
+      "reason": "Foto asli Klaus Schmidt belum ditemukan; A-roll pada penyebutan nama, lalu cut ke foto situs asli."
+    },
+    {
+      "phrase": "Implikasi dari temuan ini sangat besar",
+      "reason": "Jeda reflektif setelah bukti arkeologi; A-roll."
+    },
+    {
+      "phrase": "Faktor kedua: tekanan demografis",
+      "reason": "Tidak ada visual populasi situs spesifik yang sumber dan lisensinya jelas; A-roll."
+    },
+    {
+      "phrase": "Dan inilah yang mungkin paling sering diremehkan",
+      "reason": "Jeda argumentasi; A-roll."
+    },
+    {
+      "phrase": "Ini mungkin yang paling jarang dibahas",
+      "reason": "Penekanan naratif; A-roll."
+    },
+    {
+      "phrase": "Saya ingin tutup dengan satu pertanyaan",
+      "reason": "Penutup; A-roll."
+    }
+  ],
+  "policy": "Do not place B-roll over a marked anchor when a subtitle/timeline is generated. Unverified research, legal documents, or locations remain A-roll.",
+  "notes": [
+    "Foto Hadza adalah masyarakat kontemporer dan tidak menggambarkan manusia prasejarah.",
+    "Alat batu berasal dari koleksi Museum Benešov, bukan dari Göbekli Tepe.",
+    "Foto situs Göbekli Tepe nomor 003 dibuat German Archaeological Institute oleh E. Kücük dan berlisensi CC BY 4.0.",
+    "Jangan membuat infografis perbandingan umur atau jam kerja tanpa sumber spesifik yang cocok."
+  ]
+}

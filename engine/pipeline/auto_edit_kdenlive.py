@@ -42,6 +42,7 @@ import shutil
 import struct
 import subprocess
 import sys
+import unicodedata
 import uuid
 import wave
 import xml.etree.ElementTree as ET
@@ -555,6 +556,35 @@ def find_broll_assets(workspace_dir: Path) -> List[BRollAsset]:
         return []
 
     assets: List[BRollAsset] = []
+    source_metadata: Dict[str, Dict[str, Any]] = {}
+    source_manifest = workspace_dir / "project" / "broll_sources.json"
+    if source_manifest.is_file():
+        try:
+            source_data = json.loads(source_manifest.read_text(encoding="utf-8-sig"))
+            source_entries = source_data if isinstance(source_data, list) else source_data.get("assets", [])
+            if isinstance(source_entries, list):
+                source_metadata = {
+                    str(item.get("filename", "")): item
+                    for item in source_entries
+                    if isinstance(item, dict) and item.get("filename")
+                }
+        except (OSError, json.JSONDecodeError, AttributeError) as exc:
+            logger.warning("Could not read B-roll source metadata %s: %s", source_manifest, exc)
+
+    def media_keywords(path: Path) -> Set[str]:
+        metadata = source_metadata.get(path.name)
+        if metadata:
+            descriptive_text = str(metadata.get("match_keywords") or metadata.get("title") or "")
+            keywords = extract_keywords_from_string(descriptive_text)
+            keywords = {
+                word for word in keywords
+                if not re.fullmatch(r"(?:18|19|20)\d{2}", word)
+            }
+            if keywords:
+                return keywords
+        # Older projects have no provenance manifest, so retain filename search.
+        return extract_keywords_from_string(path.stem)
+
     raw_files = sorted(
         [f for f in broll_dir.iterdir() if f.is_file() and not f.name.startswith(".")],
         key=lambda x: x.name.lower()
@@ -564,7 +594,7 @@ def find_broll_assets(workspace_dir: Path) -> List[BRollAsset]:
         ext = f.suffix.lower()
         if ext in SUPPORTED_VIDEO_EXTENSIONS:
             meta = probe_video(f)
-            keywords = extract_keywords_from_string(f.stem)
+            keywords = media_keywords(f)
             assets.append(BRollAsset(
                 path=f,
                 filename=f.name,
@@ -573,7 +603,7 @@ def find_broll_assets(workspace_dir: Path) -> List[BRollAsset]:
                 keywords=keywords,
             ))
         elif ext in SUPPORTED_IMAGE_EXTENSIONS:
-            keywords = extract_keywords_from_string(f.stem)
+            keywords = media_keywords(f)
             assets.append(BRollAsset(
                 path=f,
                 filename=f.name,
@@ -803,7 +833,7 @@ def calculate_match_score(
     # 3. Semantic / Concept clusters
     for cluster_name, words in SYNONYM_CLUSTERS.items():
         seg_has = any(w in segment.tokens for w in words) or any(w in segment.text.lower() for w in words)
-        asset_has = any(w in asset.keywords for w in words) or any(w in asset.filename.lower() for w in words)
+        asset_has = any(w in asset.keywords for w in words)
         if seg_has and asset_has:
             score += 7.0
             reasons.append(f"cluster:{cluster_name}(+7)")
@@ -816,6 +846,196 @@ def calculate_match_score(
 
     reason_str = " | ".join(reasons) if reasons else "no_direct_match"
     return score, reason_str
+
+
+def load_broll_coverage(coverage_path: Path) -> Dict[str, Any]:
+    """Load editorial A-roll gaps that must survive an automatic rebuild."""
+    if not coverage_path.is_file():
+        return {}
+    try:
+        data = json.loads(coverage_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning("Could not read B-roll coverage %s: %s", coverage_path, exc)
+        return {}
+    if not isinstance(data, dict):
+        logger.warning("Ignoring malformed B-roll coverage file: %s", coverage_path)
+        return {}
+    return data
+
+
+def _coverage_normalize_text(text: str) -> str:
+    """Normalize script and transcript text for resilient anchor matching."""
+    ascii_text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    return " ".join(re.findall(r"[a-z0-9]+", ascii_text.lower()))
+
+
+def resolve_broll_coverage_skips(
+    segments: List[TranscriptSegment],
+    coverage: Dict[str, Any],
+) -> Dict[int, str]:
+    """Resolve segment IDs, time ranges, and text anchors into forced A-roll gaps.
+
+    Text anchors are matched against adjacent subtitle text, so a phrase remains
+    usable when Whisper changes cue boundaries or regenerates cue numbering.
+    """
+    skipped: Dict[int, str] = {}
+    default_reason = "Editorial A-roll gap from project/broll_coverage.json"
+
+    for raw_id in coverage.get("skip_segment_ids", []):
+        try:
+            skipped[int(raw_id)] = default_reason
+        except (TypeError, ValueError):
+            continue
+
+    ranges = coverage.get("skip_time_ranges", [])
+    for item in ranges if isinstance(ranges, list) else []:
+        if not isinstance(item, dict):
+            continue
+        try:
+            start = float(item["start"])
+            end = float(item["end"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        reason = str(item.get("reason") or default_reason)
+        for seg in segments:
+            if seg.start < end and seg.end > start:
+                skipped[seg.segment_id] = reason
+
+    normalized_parts: List[str] = []
+    char_spans: List[Tuple[int, int, int]] = []
+    char_pos = 0
+    for seg in segments:
+        normalized = _coverage_normalize_text(seg.text)
+        if not normalized:
+            continue
+        if normalized_parts:
+            char_pos += 1
+        start_pos = char_pos
+        normalized_parts.append(normalized)
+        char_pos += len(normalized)
+        char_spans.append((start_pos, char_pos, seg.segment_id))
+    transcript_text = " ".join(normalized_parts)
+
+    anchors = coverage.get("skip_anchors", [])
+    for anchor in anchors if isinstance(anchors, list) else []:
+        if isinstance(anchor, str):
+            phrase, reason = anchor, default_reason
+        elif isinstance(anchor, dict):
+            phrase = str(anchor.get("phrase", ""))
+            reason = str(anchor.get("reason") or default_reason)
+        else:
+            continue
+        normalized_phrase = _coverage_normalize_text(phrase)
+        if len(normalized_phrase) < 8:
+            continue
+        # Exact phrase match after normalization. Matching across the joined
+        # subtitle stream handles cue boundaries that split the phrase.
+        search_from = 0
+        matched = False
+        while True:
+            phrase_start = transcript_text.find(normalized_phrase, search_from)
+            if phrase_start < 0:
+                break
+            phrase_end = phrase_start + len(normalized_phrase)
+            for span_start, span_end, segment_id in char_spans:
+                if span_start < phrase_end and span_end > phrase_start:
+                    skipped[segment_id] = reason
+            matched = True
+            search_from = phrase_end
+        if matched:
+            continue
+
+        # Whisper may omit a filler or alter a word. Search short adjoining cue
+        # windows and accept only a strong ordered word match, avoiding broad
+        # semantic matching that could blank an unrelated passage.
+        phrase_words = normalized_phrase.split()
+        if len(phrase_words) < 4:
+            continue
+        best_ratio = 0.0
+        best_ids: List[int] = []
+        from difflib import SequenceMatcher
+        for left in range(len(segments)):
+            window_ids: List[int] = []
+            window_words: List[str] = []
+            for right in range(left, min(len(segments), left + 8)):
+                window_ids.append(segments[right].segment_id)
+                window_words.extend(_coverage_normalize_text(segments[right].text).split())
+                if not window_words:
+                    continue
+                if len(window_words) > len(phrase_words) * 1.6:
+                    break
+                ratio = SequenceMatcher(None, phrase_words, window_words, autojunk=False).ratio()
+                if ratio > best_ratio:
+                    best_ratio = ratio
+                    best_ids = list(window_ids)
+        if best_ratio >= 0.84:
+            for segment_id in best_ids:
+                skipped[segment_id] = reason
+        else:
+            logger.info("B-roll A-roll anchor not found in transcript: %s", phrase[:80])
+
+    return skipped
+
+
+def resolve_broll_coverage_asset_anchors(
+    segments: List[TranscriptSegment],
+    coverage: Dict[str, Any],
+) -> Dict[int, Dict[str, str]]:
+    """Resolve text or cue-ID anchors to an explicitly approved B-roll asset."""
+    overrides: Dict[int, Dict[str, str]] = {}
+    normalized_parts: List[str] = []
+    char_spans: List[Tuple[int, int, int]] = []
+    char_pos = 0
+    for seg in segments:
+        normalized = _coverage_normalize_text(seg.text)
+        if not normalized:
+            continue
+        if normalized_parts:
+            char_pos += 1
+        start_pos = char_pos
+        normalized_parts.append(normalized)
+        char_pos += len(normalized)
+        char_spans.append((start_pos, char_pos, seg.segment_id))
+    transcript_text = " ".join(normalized_parts)
+
+    anchors = coverage.get("asset_anchors", [])
+    for anchor in anchors if isinstance(anchors, list) else []:
+        if not isinstance(anchor, dict):
+            continue
+        asset_name = str(anchor.get("filename") or anchor.get("asset") or "")
+        asset_name = Path(asset_name.replace("\\", "/")).name
+        if not asset_name:
+            continue
+        reason = str(anchor.get("reason") or "Approved B-roll asset anchor")
+        anchor_ids: set[int] = set()
+        raw_ids = anchor.get("segment_ids", [])
+        for raw_id in raw_ids if isinstance(raw_ids, list) else []:
+            try:
+                anchor_ids.add(int(raw_id))
+            except (TypeError, ValueError):
+                continue
+
+        phrase = _coverage_normalize_text(str(anchor.get("phrase") or ""))
+        search_from = 0
+        while phrase:
+            phrase_start = transcript_text.find(phrase, search_from)
+            if phrase_start < 0:
+                break
+            phrase_end = phrase_start + len(phrase)
+            anchor_ids.update(
+                segment_id
+                for span_start, span_end, segment_id in char_spans
+                if span_start < phrase_end and span_end > phrase_start
+            )
+            search_from = phrase_end
+
+        if not anchor_ids:
+            logger.info("Approved B-roll asset anchor not found in transcript: %s", str(anchor.get("phrase") or asset_name)[:80])
+            continue
+        for segment_id in anchor_ids:
+            overrides[segment_id] = {"filename": asset_name, "reason": reason}
+
+    return overrides
 
 
 # ==============================================================================
@@ -928,7 +1148,8 @@ def calculate_quick_zoom_keyframes(
 
 def match_broll(
     segments: List[TranscriptSegment],
-    assets: List[BRollAsset]
+    assets: List[BRollAsset],
+    coverage: Optional[Dict[str, Any]] = None,
 ) -> List[BRollPlacement]:
     """
     Assign B-roll assets to each transcript segment.
@@ -938,6 +1159,8 @@ def match_broll(
     - Image assets dynamically adapt to slot duration.
     - Calculates fill_frame_info for aspect-ratio preservation.
     """
+    editorial_skips = resolve_broll_coverage_skips(segments, coverage or {})
+    editorial_asset_anchors = resolve_broll_coverage_asset_anchors(segments, coverage or {})
     if not assets:
         logger.warning("Tidak ada B-roll yang ditemukan di workspace. Semua slot dibiarkan kosong.")
         return [
@@ -952,39 +1175,82 @@ def match_broll(
                 asset_duration=None,
                 trim_in=0.0,
                 trim_out=0.0,
-                status="NO_BROLL_AVAILABLE",
+                status="EDITORIAL_A_ROLL" if seg.segment_id in editorial_skips else "NO_BROLL_AVAILABLE",
                 match_score=0.0,
-                match_reason="Folder broll kosong",
+                match_reason=editorial_skips.get(seg.segment_id, "Folder broll kosong"),
             )
             for seg in segments
         ]
 
     placements: List[BRollPlacement] = []
     asset_usage: Dict[str, int] = {a.filename: 0 for a in assets}
+    assets_by_filename = {a.filename.casefold(): a for a in assets}
 
     for seg in segments:
+        if seg.segment_id in editorial_skips:
+            placements.append(BRollPlacement(
+                segment_id=seg.segment_id,
+                start=seg.start,
+                end=seg.end,
+                duration=seg.duration,
+                text=seg.text,
+                asset_path=None,
+                asset_type="none",
+                asset_duration=None,
+                trim_in=0.0,
+                trim_out=0.0,
+                status="EDITORIAL_A_ROLL",
+                match_score=0.0,
+                match_reason=editorial_skips[seg.segment_id],
+            ))
+            continue
+
         best_asset: Optional[BRollAsset] = None
         best_score = -999.0
         best_reason = ""
+        forced_anchor = editorial_asset_anchors.get(seg.segment_id)
+        forced_asset = assets_by_filename.get(forced_anchor["filename"].casefold()) if forced_anchor else None
 
-        # Score against all assets
-        for asset in assets:
-            score, reason = calculate_match_score(
-                segment=seg,
-                asset=asset,
-                used_count=asset_usage.get(asset.filename, 0)
-            )
-            if score > best_score:
-                best_score = score
-                best_asset = asset
-                best_reason = reason
+        if forced_asset:
+            best_asset = forced_asset
+            best_score = 100.0
+            best_reason = f"editorial_asset_anchor:{forced_anchor['filename']} | {forced_anchor['reason']}"
+        else:
+            # Score against all assets unless the editor supplied an explicit anchor.
+            for asset in assets:
+                score, reason = calculate_match_score(
+                    segment=seg,
+                    asset=asset,
+                    used_count=asset_usage.get(asset.filename, 0)
+                )
+                if score > best_score:
+                    best_score = score
+                    best_asset = asset
+                    best_reason = reason
 
-        # Fallback if no positive match: pick the least used asset
-        if best_score <= 0.0 or best_asset is None:
-            least_used = min(assets, key=lambda a: asset_usage.get(a.filename, 0))
-            best_asset = least_used
-            best_score = 0.1
-            best_reason = "fallback_least_used"
+        if forced_anchor and not forced_asset:
+            logger.warning("Approved B-roll asset not present in %s: %s", "folder broll", forced_anchor["filename"])
+
+        # Do not put unrelated imagery over narration just because an asset
+        # exists. Keep the source on A-roll unless there is at least one direct
+        # keyword match to a verified asset filename.
+        if best_score < 10.0 or best_asset is None:
+            placements.append(BRollPlacement(
+                segment_id=seg.segment_id,
+                start=seg.start,
+                end=seg.end,
+                duration=seg.duration,
+                text=seg.text,
+                asset_path=None,
+                asset_type="none",
+                asset_duration=None,
+                trim_in=0.0,
+                trim_out=0.0,
+                status="NO_RELEVANT_BROLL",
+                match_score=max(0.0, best_score),
+                match_reason="Tidak ada aset terverifikasi yang cocok; gunakan A-roll",
+            ))
+            continue
 
         asset_usage[best_asset.filename] = asset_usage.get(best_asset.filename, 0) + 1
 
@@ -1084,15 +1350,57 @@ def build_broll_plan(
     """
     output_plan_path.parent.mkdir(parents=True, exist_ok=True)
 
+    provenance_by_filename: Dict[str, Dict[str, Any]] = {}
+    sources_path = workspace_dir / "project" / "broll_sources.json"
+    if sources_path.is_file():
+        try:
+            source_data = json.loads(sources_path.read_text(encoding="utf-8-sig"))
+            source_entries = source_data if isinstance(source_data, list) else source_data.get("assets", [])
+            if isinstance(source_entries, list):
+                provenance_by_filename = {
+                    str(item.get("filename", "")): item
+                    for item in source_entries
+                    if isinstance(item, dict) and item.get("filename")
+                }
+        except (OSError, json.JSONDecodeError, AttributeError) as exc:
+            logger.warning("Could not read B-roll sources %s: %s", sources_path, exc)
+
+    segment_rows = []
+    for placement in placements:
+        row = placement.to_dict()
+        if placement.asset_path:
+            source = provenance_by_filename.get(Path(placement.asset_path).name)
+            if source:
+                row["source_url"] = source.get("source_url")
+                row["source_title"] = source.get("title")
+                row["creator"] = source.get("creator")
+                row["license"] = source.get("license")
+                row["license_url"] = source.get("license_url")
+                row["use_context"] = source.get("use_context")
+        segment_rows.append(row)
+
+    speech_duration = sum(max(0.0, placement.duration) for placement in placements)
+    broll_duration = sum(
+        max(0.0, placement.duration)
+        for placement in placements
+        if placement.asset_path
+    )
+    coverage = load_broll_coverage(workspace_dir / "project" / "broll_coverage.json")
     summary_stats = {
         "workspace": workspace_dir.name,
         "main_video": main_video_meta.filename,
         "main_video_duration_seconds": round(main_video_meta.duration_seconds, 3),
+        "speech_duration_seconds": round(speech_duration, 3),
+        "broll_duration_seconds": round(broll_duration, 3),
+        "measured_broll_share": round(broll_duration / speech_duration, 4) if speech_duration else 0.0,
+        "target_broll_share": coverage.get("target_broll_share"),
         "total_segments": len(placements),
         "matched_ok": sum(1 for p in placements if p.status == "MATCHED_OK"),
         "insufficient_duration": sum(1 for p in placements if p.status == "INSUFFICIENT_BROLL_DURATION"),
         "no_broll_available": sum(1 for p in placements if p.status == "NO_BROLL_AVAILABLE"),
-        "segments": [p.to_dict() for p in placements],
+        "no_relevant_broll": sum(1 for p in placements if p.status == "NO_RELEVANT_BROLL"),
+        "editorial_a_roll": sum(1 for p in placements if p.status == "EDITORIAL_A_ROLL"),
+        "segments": segment_rows,
     }
 
     output_plan_path.write_text(
@@ -1686,6 +1994,7 @@ def merge_timeline_preservations(
     auto_sfx_events: List[SFXEvent],
     fps: float = 30.0,
     mode: str = "all",
+    previous_broll_plan: Optional[Dict[str, Any]] = None,
 ) -> Tuple[List[BRollPlacement], List[TextItem], List[SFXEvent], Dict[str, Any]]:
     """
     Enforces the core rule:
@@ -1708,11 +2017,25 @@ def merge_timeline_preservations(
         return auto_placements, auto_text_items, auto_sfx_events, mod_stats
 
     existing_v2 = existing_data.get("v2_clips", [])
+    previous_assets: Dict[int, str] = {}
+    if isinstance(previous_broll_plan, dict):
+        for item in previous_broll_plan.get("segments", []):
+            if not isinstance(item, dict) or not item.get("asset"):
+                continue
+            try:
+                previous_assets[int(item.get("segment_id"))] = str(item["asset"])
+            except (TypeError, ValueError):
+                continue
     merged_placements: List[BRollPlacement] = []
 
     # Map existing clips by timeline start time
     # Check each auto_placement against existing timeline
     for p in auto_placements:
+        if p.status == "EDITORIAL_A_ROLL":
+            # Coverage markers are intentional editorial decisions and must
+            # continue to produce a V2 blank on every automated rebuild.
+            merged_placements.append(p)
+            continue
         p_start_f = int(round(p.start * fps))
         p_end_f = int(round(p.end * fps))
 
@@ -1724,21 +2047,27 @@ def merge_timeline_preservations(
 
         if matching_clip is not None:
             c_res = matching_clip["resource"]
-            # Did the user change the asset?
             clean_res = c_res.replace("\\", "/").split("/")[-1]
             auto_res = Path(p.asset_path).name if p.asset_path else ""
+            prior_path = previous_assets.get(p.segment_id, "")
+            prior_res = Path(prior_path.replace("\\", "/")).name if prior_path else ""
 
-            if auto_res and clean_res != auto_res:
-                # USER REPLACED B-ROLL: preserve user's file
+            is_prior_automatic = bool(prior_res and clean_res == prior_res)
+            is_manual_selection = not is_prior_automatic
+
+            if is_manual_selection:
+                # A clip differing from the previous generated plan is a user
+                # choice, including a clip in a slot the new matcher leaves empty.
                 mod_stats["manual_edits_detected"] = True
                 mod_stats["preserved_broll_count"] += 1
                 p.asset_path = f"broll/{clean_res}"
+                p.asset_type = "video" if Path(clean_res).suffix.lower() in SUPPORTED_VIDEO_EXTENSIONS else "image"
                 p.match_reason = f"USER_MANUAL_SELECTION: {clean_res}"
                 p.status = "USER_PRESERVED"
                 p.trim_in = matching_clip["in"] / fps
                 p.trim_out = matching_clip["out"] / fps
             elif auto_res and clean_res == auto_res:
-                # Same asset, check if user adjusted trim or duration
+                # The generated asset is unchanged; keep a user-adjusted trim.
                 if abs((matching_clip["out"] / fps) - p.trim_out) > 0.1:
                     mod_stats["manual_edits_detected"] = True
                     mod_stats["preserved_broll_count"] += 1
@@ -1748,8 +2077,9 @@ def merge_timeline_preservations(
 
             merged_placements.append(p)
         else:
-            # Segment had B-roll originally, but user left it blank on timeline
-            if p.asset_path and existing_v2:
+            # A blank where the previous plan had B-roll is a user deletion.
+            # Newly selected assets in previously empty slots should be added.
+            if p.asset_path and existing_v2 and (previous_broll_plan is None or previous_assets.get(p.segment_id)):
                 # User intentionally deleted this B-roll!
                 mod_stats["manual_edits_detected"] = True
                 mod_stats["preserved_deleted_count"] += 1
@@ -2771,6 +3101,46 @@ def validate_output(
     if broll_timing_issues:
         report["errors"].extend(broll_timing_issues)
 
+    # 9b. Editorial A-roll coverage markers and measured B-roll share.
+    coverage_data = load_broll_coverage(workspace_dir / "project" / "broll_coverage.json")
+    expected_skips = resolve_broll_coverage_skips(segments, coverage_data)
+    planned_by_id = {int(p.get("segment_id", -1)): p for p in plan_segs}
+    marker_issues = [
+        f"Editorial A-roll marker not preserved for segment {segment_id}"
+        for segment_id in sorted(expected_skips)
+        if segment_id not in planned_by_id or planned_by_id[segment_id].get("asset")
+    ]
+    speech_duration = sum(max(0.0, s.duration) for s in segments)
+    broll_duration = sum(
+        max(0.0, float(p.get("duration", 0.0)))
+        for p in plan_segs
+        if p.get("asset")
+    )
+    broll_share = broll_duration / speech_duration if speech_duration else 0.0
+    target = coverage_data.get("target_broll_share", {})
+    minimum = target.get("minimum") if isinstance(target, dict) else None
+    maximum = target.get("maximum") if isinstance(target, dict) else None
+    share_issue = None
+    if minimum is not None and maximum is not None and segments:
+        if not (float(minimum) <= broll_share <= float(maximum)):
+            share_issue = (
+                f"B-roll share {broll_share:.1%} outside target "
+                f"{float(minimum):.0%}–{float(maximum):.0%}"
+            )
+    coverage_issues = marker_issues + ([share_issue] if share_issue else [])
+    report["checks"]["9b_editorial_coverage"] = {
+        "status": "PASS" if not coverage_issues else "FAIL",
+        "target_broll_share": {"minimum": minimum, "maximum": maximum},
+        "measured_broll_share": round(broll_share, 4),
+        "speech_duration_seconds": round(speech_duration, 3),
+        "broll_duration_seconds": round(broll_duration, 3),
+        "editorial_a_roll_segments": len(expected_skips),
+        "markers_preserved": len(expected_skips) - len(marker_issues),
+        "issues": coverage_issues,
+    }
+    if coverage_issues:
+        report["errors"].extend(coverage_issues)
+
     # 10. Title Files Verification
     titles_dir = workspace_dir / "project" / "titles"
     title_issues = []
@@ -2950,6 +3320,7 @@ def run_auto_edit_pipeline(
     # File paths
     srt_path = ws_dir / "subtitle" / "subtitle.srt"
     broll_plan_path = ws_dir / "project" / "broll_plan.json"
+    broll_coverage_path = ws_dir / "project" / "broll_coverage.json"
     manifest_path = ws_dir / "project" / "edit_manifest.json"
     target_kdenlive = ws_dir / "project" / "video_auto.kdenlive"
 
@@ -3026,9 +3397,19 @@ def run_auto_edit_pipeline(
         mode = "create"
 
     # 6. Automatic Decisions Generation
-    auto_placements = match_broll(segments, broll_assets)
+    broll_coverage = load_broll_coverage(broll_coverage_path)
+    auto_placements = match_broll(segments, broll_assets, coverage=broll_coverage)
     auto_text_items = detect_text_moments(segments, main_meta.duration_seconds, main_meta.width, main_meta.height)
     auto_sfx_events = detect_sfx_events(auto_placements, auto_text_items, sfx_assets)
+
+    previous_broll_plan: Dict[str, Any] = {}
+    if broll_plan_path.is_file():
+        try:
+            loaded_plan = json.loads(broll_plan_path.read_text(encoding="utf-8-sig"))
+            if isinstance(loaded_plan, dict):
+                previous_broll_plan = loaded_plan
+        except (OSError, json.JSONDecodeError) as exc:
+            logger.warning("Could not read prior B-roll plan %s: %s", broll_plan_path, exc)
 
     # 7. Incremental Merge & Manual Edit Preservation
     final_placements, final_text_items, final_sfx_events, mod_stats = merge_timeline_preservations(
@@ -3038,6 +3419,7 @@ def run_auto_edit_pipeline(
         auto_sfx_events=auto_sfx_events,
         fps=main_meta.fps,
         mode=mode,
+        previous_broll_plan=previous_broll_plan,
     )
 
     if mod_stats.get("manual_edits_detected"):

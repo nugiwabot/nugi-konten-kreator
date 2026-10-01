@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "workspace": "03-script",
+  "timing_status": "transcribed_from_raw_video",
+  "coverage_basis": "subtitle_cues_with_verified_location_assets_and_editorial_a_roll_gaps",
+  "target_broll_share": {
+    "minimum": 0.0,
+    "maximum": 0.2,
+    "aim": 0.12
+  },
+  "skip_segment_ids": [],
+  "skip_time_ranges": [
+    {
+      "start": 0.0,
+      "end": 25.0,
+      "reason": "Pertanyaan/pembuka; A-roll."
+    },
+    {
+      "start": 27.8,
+      "end": 85.0,
+      "reason": "Narasi lantai kantor internal; tidak tersedia foto interior kantor yang sesuai."
+    },
+    {
+      "start": 101.5,
+      "end": 135.9,
+      "reason": "Pertanyaan dan transisi reflektif; pertahankan A-roll."
+    },
+    {
+      "start": 156.9,
+      "end": 172.9,
+      "reason": "Data Colliers tanpa grafik atau dokumen yang boleh direproduksi; A-roll."
+    },
+    {
+      "start": 195.4,
+      "end": 216.8,
+      "reason": "Klaim McKinsey tanpa visual sumber yang izinnya terverifikasi; A-roll."
+    },
+    {
+      "start": 229.5,
+      "end": 260.5,
+      "reason": "Pertanyaan besar tentang kota dan tenaga kerja; A-roll."
+    },
+    {
+      "start": 260.5,
+      "end": 350.0,
+      "reason": "Bagian konseptual tentang efek berkumpul dan transisi; tidak ada lokasi spesifik yang disebut."
+    },
+    {
+      "start": 397.4,
+      "end": 422.5,
+      "reason": "Klaim dampak harga/sewa tanpa data pasar terverifikasi; A-roll."
+    },
+    {
+      "start": 428.9,
+      "end": 473.2,
+      "reason": "Pertanyaan tentang identitas kota dan budaya; A-roll."
+    },
+    {
+      "start": 480.2,
+      "end": 505.0,
+      "reason": "Waterfront, mixed-use, dan pertanyaan retoris tanpa foto proyek spesifik; A-roll."
+    },
+    {
+      "start": 509.5,
+      "end": 581.2,
+      "reason": "Dampak pada pekerja jasa tidak memiliki subjek/foto spesifik terverifikasi; A-roll."
+    },
+    {
+      "start": 669.6,
+      "end": 690.0,
+      "reason": "Data okupansi dan harga properti tanpa grafik/data sumber; A-roll."
+    },
+    {
+      "start": 705.6,
+      "end": 916.8,
+      "reason": "Bagian ketidakpastian, refleksi, dan penutup; biarkan pembicara tetap terlihat."
+    },
+    {
+      "start": 136.1,
+      "end": 139.4,
+      "reason": "Kalimat transisi ?kita mulai?; foto Rasuna Said tidak menggambarkan pernyataan ini, pertahankan A-roll."
+    },
+    {
+      "start": 360.4,
+      "end": 364.8,
+      "reason": "Transisi umum tentang kota yang lebih kecil; foto Museum Kota Tua tidak relevan, A-roll."
+    },
+    {
+      "start": 391.7,
+      "end": 396.7,
+      "reason": "Penyebutan kota-kota Amerika; foto Jakarta/Kota Tua tidak sesuai, A-roll."
+    },
+    {
+      "start": 186.3,
+      "end": 192.0,
+      "reason": "Transisi dari okupansi kantor ke cara kerja; tidak ada visual kerja jarak jauh yang spesifik."
+    }
+  ],
+  "skip_anchors": [
+    {
+      "phrase": "Data dari Colin East Indonesia menunjukkan",
+      "reason": "Klaim Colliers tanpa visual sumber dan lisensi yang cocok; A-roll."
+    },
+    {
+      "phrase": "Lapuran dari Makensi Global Institut",
+      "reason": "Klaim McKinsey tanpa grafik/data yang boleh direproduksi; A-roll."
+    },
+    {
+      "phrase": "Harga proparti di beberapa kota seperti Bali",
+      "reason": "Pernyataan harga tanpa visual data pasar; foto tempat tidak boleh memberi kesan sebagai bukti angka."
+    }
+  ],
+  "asset_anchors": [
+    {
+      "phrase": "Baya hidup yang leberendah, lingkungan yang lebih nyaman",
+      "filename": "046_Mereka cari kualitas hidup dengan biaya lebih rendah Bali,.jpg",
+      "reason": "Foto Ubud, Bali; lokasi tujuan yang disebut, dipakai sebagai establishing shot saja."
+    },
+    {
+      "phrase": "Misalnya di Bali, di Ogyakarta, malang",
+      "filename": "107_Yogyakarta_Tugu_Railway_Station.jpg",
+      "reason": "Foto Stasiun Tugu Yogyakarta; salah satu lokasi tujuan yang disebut."
+    },
+    {
+      "phrase": "yang sebelumnya tidak terlalu diperhitungkan sebagai pusat karir",
+      "filename": "108_Malang_Celaket_street.jpg",
+      "reason": "Foto Jalan Celaket, Malang; lanjutan visual daftar kota tujuan."
+    },
+    {
+      "phrase": "revitalisasi kawasan seperti kotak tua",
+      "filename": "110_Jakarta_Kota_Tua_Museum_Sejarah.jpg",
+      "reason": "Foto Museum Sejarah Jakarta di Kota Tua; visual lokasi yang disebut, bukan bukti proyek waterfront."
+    },
+    {
+      "phrase": "Dampak kempad itu infrastruktur yang dibangun untuk dunia yang lama",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai untuk bagian infrastruktur komuter."
+    },
+    {
+      "phrase": "Sebagian besar infrastruktur kota",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai; ilustrasi moda angkutan kota."
+    },
+    {
+      "phrase": "Orang tinggal di pinggiran",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai; konteks perjalanan komuter."
+    },
+    {
+      "phrase": "kerja di pusat kota berangkat pagi pulang fore",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai; konteks rutinitas perjalanan komuter."
+    },
+    {
+      "phrase": "naik transportasi dalam arah yang hampir sama setiap hari",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai; konteks rutinitas perjalanan komuter."
+    },
+    {
+      "phrase": "Perubahan seperti ini mulai terlihat di banyak gedung per kantoran kelas A",
+      "filename": "057_Di Jakarta, ini sudah mulai terlihat dalam diskusi tentang.jpg",
+      "reason": "Foto koridor bisnis Rasuna Said/Kuningan untuk penyebutan pasar kantor di Jakarta."
+    },
+    {
+      "phrase": "Kebutuhan terhadap peruangkan tor yang sedang berubah",
+      "filename": "002_Lantai 15..jpg",
+      "reason": "Gedung kantor DBS di Jakarta sebagai establishing shot; bukan visual data okupansi."
+    }
+  ],
+  "policy": "Nama kota mendapat foto lokasi sebenarnya. Data pasar, riset, dan proyeksi tetap A-roll tanpa visual sumber yang berizin.",
+  "notes": [
+    "Foto Ubud, Stasiun Tugu Yogyakarta, Jalan Celaket Malang, dan Museum Sejarah Jakarta menggambarkan lokasi yang disebut; tidak mendukung klaim harga.",
+    "Tidak ditemukan footage video berlisensi dan sesuai topik saat kurasi. Foto saja digunakan untuk adegan yang perlu visual."
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "workspace": "07-script",
+  "generated_at": "2026-10-01T03:03:42.029013+00:00",
+  "provider": "Wikimedia Commons through engine.providers.wikimedia_provider + engine.pipeline.media_downloader.MediaDownloader",
+  "active_asset_count": 5,
+  "legacy_unverified_assets_archived": 0,
+  "assets": [
+    {
+      "filename": "001_Jean_Jacques_Rousseau_portrait.jpg",
+      "title": "Jean-Jacques Rousseau (painted portrait).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File%3AJean-Jacques%20Rousseau%20%28painted%20portrait%29.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Maurice Quentin de La Tour",
+      "date": "third quarter of 18<sup>th</sup> century<div style",
+      "license": "pd",
+      "license_url": "https://commons.wikimedia.org/wiki/File%3AJean-Jacques%20Rousseau%20%28painted%20portrait%29.jpg",
+      "media_type": "image",
+      "provider": "wikimedia",
+      "width": 1448,
+      "height": 2016,
+      "file_size_bytes": 687780,
+      "use_context": "Lukisan potret Jean-Jacques Rousseau oleh Maurice Quentin de La Tour.",
+      "retrieved_at": "2026-10-01T03:03:41.374932+00:00",
+      "attribution": "Jean-Jacques Rousseau (painted portrait).jpg — Maurice Quentin de La Tour, pd; https://commons.wikimedia.org/wiki/File%3AJean-Jacques%20Rousseau%20%28painted%20portrait%29.jpg",
+      "verification": "Wikimedia Commons page title, creator and license returned by the existing WikimediaProvider; actual subject confirmed from descriptive page title and content review."
+    },
+    {
+      "filename": "002_Batavia_map_1629.jpg",
+      "title": "AMH-4598-NA Map of Batavia and environs.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File%3AAMH-4598-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/AMH-4598-NA_Map_of_Batavia_and_environs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Jacob Cornelisz van Cuyck (land surveyor / mapmaker)",
+      "date": "1629<div style=\"display: none;\">date QS:P571,+1629",
+      "license": "pd",
+      "license_url": "https://commons.wikimedia.org/wiki/File%3AAMH-4598-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "media_type": "image",
+      "provider": "wikimedia",
+      "width": 2400,
+      "height": 1775,
+      "file_size_bytes": 545389,
+      "use_context": "Peta Batavia tahun 1629 untuk bagian sejarah kolonial Indonesia.",
+      "retrieved_at": "2026-10-01T03:03:41.376212+00:00",
+      "attribution": "AMH-4598-NA Map of Batavia and environs.jpg — Jacob Cornelisz van Cuyck (land surveyor / mapmaker), pd; https://commons.wikimedia.org/wiki/File%3AAMH-4598-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "verification": "Wikimedia Commons page title, creator and license returned by the existing WikimediaProvider; actual subject confirmed from descriptive page title and content review."
+    },
+    {
+      "filename": "003_Batavia_map_around_1628.jpg",
+      "title": "AMH-4599-NA Map of Batavia and environs.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File%3AAMH-4599-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/AMH-4599-NA_Map_of_Batavia_and_environs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Frans Florisz van Berckenrode (land surveyor / mapmaker)",
+      "date": "circa 1628<div style=\"display: none;\">date QS:P571",
+      "license": "pd",
+      "license_url": "https://commons.wikimedia.org/wiki/File%3AAMH-4599-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "media_type": "image",
+      "provider": "wikimedia",
+      "width": 2400,
+      "height": 2067,
+      "file_size_bytes": 501378,
+      "use_context": "Peta Batavia sekitar 1628 dari arsip; peta sejarah, bukan batas tanah modern.",
+      "retrieved_at": "2026-10-01T03:03:41.377211+00:00",
+      "attribution": "AMH-4599-NA Map of Batavia and environs.jpg — Frans Florisz van Berckenrode (land surveyor / mapmaker), pd; https://commons.wikimedia.org/wiki/File%3AAMH-4599-NA%20Map%20of%20Batavia%20and%20environs.jpg",
+      "verification": "Wikimedia Commons page title, creator and license returned by the existing WikimediaProvider; actual subject confirmed from descriptive page title and content review."
+    },
+    {
+      "filename": "004_Escompto_Bank_Batavia_1904.jpg",
+      "title": "Escompto Bank Batavia First Building (built 1904) Kota Tua (2025) - img 04.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File%3AEscompto%20Bank%20Batavia%20First%20Building%20%28built%201904%29%20Kota%20Tua%20%282025%29%20-%20img%2004.jpg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Escompto_Bank_Batavia_First_Building_%28built_1904%29_Kota_Tua_%282025%29_-_img_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Chainwit.",
+      "date": "2025-05-06 10:18:59",
+      "license": "cc-by-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "media_type": "image",
+      "provider": "wikimedia",
+      "width": 4032,
+      "height": 3024,
+      "file_size_bytes": 318015,
+      "use_context": "Bangunan Bank Escompto Batavia yang dibangun pada 1904 di Kota Tua; bukan Balai Kota Batavia.",
+      "retrieved_at": "2026-10-01T03:03:41.377211+00:00",
+      "attribution": "Escompto Bank Batavia First Building (built 1904) Kota Tua (2025) - img 04.jpg — Chainwit., cc-by-4.0; https://commons.wikimedia.org/wiki/File%3AEscompto%20Bank%20Batavia%20First%20Building%20%28built%201904%29%20Kota%20Tua%20%282025%29%20-%20img%2004.jpg",
+      "verification": "Wikimedia Commons page title, creator and license returned by the existing WikimediaProvider; actual subject confirmed from descriptive page title and content review."
+    },
+    {
+      "filename": "005_Deli_Company_plantation_Polonia_1905.jpg",
+      "title": "KITLV - 88281b - Kleingrothe, C.J. - Medan - Administrator's houses on the plantation Polonia of the Deli Company in Deli - 1905.tif",
+      "source_url": "https://commons.wikimedia.org/wiki/File%3AKITLV%20-%2088281b%20-%20Kleingrothe%2C%20C.J.%20-%20Medan%20-%20Administrator%27s%20houses%20on%20the%20plantation%20Polonia%20of%20the%20Deli%20Company%20in%20Deli%20-%201905.tif",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/3/34/KITLV_-_88281b_-_Kleingrothe%2C_C.J._-_Medan_-_Administrator%27s_houses_on_the_plantation_Polonia_of_the_Deli_Company_in_Deli_-_1905.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Kleingrothe, C.J. (Kleingrothe, Carl Josef, 1864-1925) / Medan",
+      "date": "1905<div style=\"display: none;\">date QS:P571,+1905",
+      "license": "pd",
+      "license_url": "https://commons.wikimedia.org/wiki/File%3AKITLV%20-%2088281b%20-%20Kleingrothe%2C%20C.J.%20-%20Medan%20-%20Administrator%27s%20houses%20on%20the%20plantation%20Polonia%20of%20the%20Deli%20Company%20in%20Deli%20-%201905.tif",
+      "media_type": "image",
+      "provider": "wikimedia",
+      "width": 6783,
+      "height": 4054,
+      "file_size_bytes": 324529,
+      "use_context": "Foto arsip rumah administrator perkebunan Deli Company di Polonia, Deli/Medan (1905); tidak dilabeli sebagai perkebunan di Jawa.",
+      "retrieved_at": "2026-10-01T03:03:41.378211+00:00",
+      "attribution": "KITLV - 88281b - Kleingrothe, C.J. - Medan - Administrator's houses on the plantation Polonia of the Deli Company in Deli - 1905.tif — Kleingrothe, C.J. (Kleingrothe, Carl Josef, 1864-1925) / Medan, pd; https://commons.wikimedia.org/wiki/File%3AKITLV%20-%2088281b%20-%20Kleingrothe%2C%20C.J.%20-%20Medan%20-%20Administrator%27s%20houses%20on%20the%20plantation%20Polonia%20of%20the%20Deli%20Company%20in%20Deli%20-%201905.tif",
+      "verification": "Wikimedia Commons page title, creator and license returned by the existing WikimediaProvider; actual subject confirmed from descriptive page title and content review."
+    }
+  ],
+  "video_search": {
+    "attempted": true,
+    "providers": [
+      "WikimediaProvider",
+      "InternetArchiveProvider"
+    ],
+    "used": false,
+    "reason": "Pencarian B-roll video spesifik tidak menghasilkan klip yang dapat diverifikasi lisensi dan durasinya; hanya foto berlisensi tercatat yang dipakai."
+  },
+  "source_needs": [
+    {
+      "subject": "Foto/artefak spesifik dari situs Uruk dan tablet administratif awal yang sumbernya terverifikasi.",
+      "status": "not_found_under_verified_license",
+      "decision": "A-roll; tidak mengganti Uruk dengan artefak kota lain."
+    },
+    {
+      "subject": "Dokumen primer Agrarische Wet 1870, Domein Verklaring, dan UUPA 1960 dengan hak reproduksi gambar yang jelas.",
+      "status": "rights_unverified",
+      "decision": "A-roll; sumber hukum dapat dicantumkan sebagai rujukan, tanpa memalsukan dokumen visual."
+    },
+    {
+      "subject": "Foto halaman manuskrip Eropa feodal dengan lisensi dan konteks yang terverifikasi.",
+      "status": "not_found_under_verified_license",
+      "decision": "A-roll; tidak membuat diagram seolah sumber sejarah."
+    }
+  ],
+  "audit_notes": {
+    "legacy_images_audited": 0,
+    "legacy_assets_removed_from_active_folder": 0,
+    "legacy_backup": ".temp_broll/legacy_backup/07-script/broll",
+    "criteria": "Hanya aset dengan subjek yang cocok dan pencatatan sumber/pembuat/lisensi yang dipertahankan aktif; aset lama yang generik atau tidak memiliki provenance dipindah dari folder broll."
+  }
+}

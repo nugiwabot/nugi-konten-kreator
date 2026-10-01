@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "workspace": "04-script",
+  "timing_status": "awaiting_main_footage",
+  "target_broll_share": {
+    "minimum": 0.4,
+    "maximum": 0.5,
+    "aim": 0.45
+  },
+  "coverage_basis": "script_text_anchors_until_main_footage_is_available",
+  "skip_segment_ids": [],
+  "skip_time_ranges": [],
+  "skip_anchors": [
+    {
+      "phrase": "Kalau kamu pernah melakukan perjalanan dari kawasan Kota Tua ke Jakarta Selatan",
+      "reason": "Pembuka perjalanan dan pengenalan peta cerita; pertahankan A-roll."
+    },
+    {
+      "phrase": "Pertanyaan yang sering lewat begitu saja tanpa pernah dijawab",
+      "reason": "Pertanyaan retoris untuk A-roll."
+    },
+    {
+      "phrase": "Sebelum masuk ke jawabannya, saya ingin ajukan pertanyaan",
+      "reason": "Jeda transisi sebelum bagian sejarah; A-roll."
+    },
+    {
+      "phrase": "apakah keputusan itu benar-benar murni pilihanmu sendiri",
+      "reason": "Pertanyaan utama; biarkan wajah pembicara menjadi fokus."
+    },
+    {
+      "phrase": "Atau ada kekuatan yang jauh lebih tua dan jauh lebih besar",
+      "reason": "Jeda retoris; A-roll."
+    },
+    {
+      "phrase": "Tapi geografi fisik hanya separuh cerita",
+      "reason": "Transisi reflektif antarbab; A-roll."
+    },
+    {
+      "phrase": "Ada beberapa alasan",
+      "reason": "Jeda sebelum penjelasan Orde Baru; A-roll."
+    },
+    {
+      "phrase": "Ini bukan nasib alami",
+      "reason": "Pernyataan penekanan; A-roll."
+    },
+    {
+      "phrase": "Beberapa angka yang menunjukkan pola ini nyata",
+      "reason": "Klaim data NJOP belum punya visual data bersumber dan berlisensi; A-roll."
+    },
+    {
+      "phrase": "Berdasarkan data NJOP yang dipublikasikan Pemprov DKI Jakarta",
+      "reason": "Tampilkan A-roll sampai ada aset dokumen/data primer yang boleh direproduksi."
+    },
+    {
+      "phrase": "Respons terhadap kondisi ini membentuk pola yang bertahan",
+      "reason": "Transisi naratif; peta Batavia ketiga dikeluarkan sebagai visual duplikat, biarkan A-roll."
+    },
+    {
+      "phrase": "dirancang Belanda di awal abad ke-20 sebagai tempat tinggal",
+      "reason": "Foto Metropole tidak menunjukkan rumah atau rancangan hunian kolonial Menteng; A-roll."
+    }
+  ],
+  "policy": "Do not place B-roll over a marked anchor when a subtitle/timeline is generated. Unverified research, legal documents, or locations remain A-roll.",
+  "notes": [
+    "Foto Metropole menunjukkan gedung Metropole di Menteng, bukan tata letak proyek pemisahan kelas.",
+    "Foto Kebayoran berasal dari arsip 1950-an dan harus diberi konteks sebagai foto historis.",
+    "Jeda data NJOP dipertahankan sebagai A-roll; jangan menambahkan grafik dari angka tanpa sumber visual yang tepat.",
+    "Aset aktif dikurangi; cue tanpa visual spesifik tetap A-roll."
+  ]
+}

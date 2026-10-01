@@ -58,6 +58,10 @@ engine/data/*.json
 # Temporary processing & scratch workspace (never push to GitHub)
 .temp_broll/
 .temp/
+.cache/
+.remotion/
+*.bak
+output/*-script/project/capcut/
 output/.broll_query_cache.json
 output/.question_mining_cache.json
 output/*.jpg

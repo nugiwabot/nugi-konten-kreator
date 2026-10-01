@@ -1023,6 +1023,7 @@ def generate_capcut_draft(
 
     # B-roll materials
     broll_mat_map: Dict[str, str] = {}
+    broll_dims_map: Dict[str, Tuple[int, int]] = {}
     for p in placements:
         if not p.asset_path:
             continue
@@ -1045,6 +1046,7 @@ def generate_capcut_draft(
                     bw, bh = img.width, img.height
             except Exception:
                 pass
+        broll_dims_map[p_str] = (bw, bh)
 
         materials_videos.append({
             "id": b_mat_id,
@@ -1249,6 +1251,12 @@ def generate_capcut_draft(
 
         trim_in_us = int(p.trim_in * 1_000_000)
 
+        bw, bh = broll_dims_map.get(p_str, (vid_w, vid_h))
+        ar_canvas = vid_w / vid_h if vid_h > 0 else 16 / 9
+        ar_media = bw / bh if bh > 0 else ar_canvas
+        # Automatically fit/fill canvas with no black bars and no distortion
+        scale_val = round(max(ar_canvas / ar_media, ar_media / ar_canvas), 4)
+
         track_1_segments.append({
             "id": str(uuid.uuid4()).upper(),
             "source_timerange": {"start": trim_in_us, "duration": dur_us},
@@ -1264,7 +1272,7 @@ def generate_capcut_draft(
             "cartoon": False,
             "volume": 0.0 if p.asset_type == "video" else 1.0,
             "last_nonzero_volume": 1.0,
-            "clip": {"scale": {"x": 1.0, "y": 1.0}, "rotation": 0.0, "transform": {"x": 0.0, "y": 0.0}, "flip": {"vertical": False, "horizontal": False}, "alpha": 1.0},
+            "clip": {"scale": {"x": scale_val, "y": scale_val}, "rotation": 0.0, "transform": {"x": 0.0, "y": 0.0}, "flip": {"vertical": False, "horizontal": False}, "alpha": 1.0},
             "uniform_scale": {"on": True, "value": 1.0},
             "material_id": mat_id,
             "extra_material_refs": make_aux_refs(),

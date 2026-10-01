@@ -1,0 +1,900 @@
+1
+00:00:00,000 --> 00:00:08,940
+Kalau ya, saya membuat kita nggak lagi harus datang ke kantor setiap hari, sebenarnya pertanyaannya itu bukan cuma pekerjaan apa yang akan berubah.
+
+2
+00:00:09,480 --> 00:00:18,140
+Pertanyaannya yang lebih menarik adalah, kalau manusia nggak perlu lagi bekerja dari satu tempat tertentu, lalu manusia nanti, akan tinggal di mana sih gitu.
+
+3
+00:00:18,600 --> 00:00:21,860
+Nah, kalau kamu penasaran, yuk, liat video selanjutnya.
+
+4
+00:00:27,840 --> 00:00:35,320
+Bayangkan, kamu berjalan di koridor sebuah gedung per kantoran besar di pusat Jakarta pada tahun 2019.
+
+5
+00:00:35,980 --> 00:00:50,600
+Lantanya itu ada 15 ramai, meja-meja juga rapat, suara, keyboard, dari berbagai sudut, aroma kopi, dan juga dari penteri, dari semuanya juga terndengar suara-suara dari bilik-belikacah gitu.
+
+6
+00:00:50,600 --> 00:01:08,760
+Sekarang kamu bayangkan kembali ke lantai yang sama di tahun 2016, bukan setelah perang, bukan setelah pencana, cuma 7 tahun kondian, mungkin setelah meja sudah kosong, mungkin ada bagian tertentu yang hampir seluruh pekerjaannya itu sudah dibantu sistem otomatis.
+
+7
+00:01:08,760 --> 00:01:14,500
+Atau mungkin perusahaan itu sekarang cuma menyewa setengah dari lantai yang dulu mereka gunakan.
+
+8
+00:01:14,980 --> 00:01:24,780
+Alasanya sederhana, kita akan cuma kerja hybrid, 3 hari di kantor, 2 hari dari mana aja, dan ini juga bukan lagi sekedar ceritafik sih.
+
+9
+00:01:24,980 --> 00:01:35,080
+Perubahan seperti ini mulai terlihat di banyak gedung per kantoran kelas A, di Jakarta, Surabaya, Bandung, dan juga berbagai kota besar di dunia.
+
+10
+00:01:35,080 --> 00:01:40,920
+Perubahan pertama yang di doaron oleh AI dan teknologi kerja jarak jauh sudah mulai kelihatan.
+
+11
+00:01:41,480 --> 00:01:50,440
+Cara manusia bekerja sedang berubah, dan perubahannya itu cukup cepat, tapi disini lah saya ingin ngajak teman-teman untuk berfikir lebih jauh.
+
+12
+00:01:50,800 --> 00:02:02,640
+Karena perubahan jaraknya sebenarnya baru efekt tertama yang paling mudah kita lihat, yang jauh lebih menarik dan mungkin jauh lebih jarang di bahas adalah apa yang terjadi setelah perubahan itu menjabar,
+
+13
+00:02:02,640 --> 00:02:05,600
+ke bagian-bagian lain dari hidup kita.
+
+14
+00:02:05,880 --> 00:02:08,320
+Apa yang terjadi pada tempat tinggal manusia?
+
+15
+00:02:08,680 --> 00:02:14,100
+Bayangkan kota-kota akan berkembang, dan siapa yang akhirnya diuntungkan atau justru dirugikan?
+
+16
+00:02:14,440 --> 00:02:15,860
+Itu lah yang akan kita bahas.
+
+17
+00:02:16,100 --> 00:02:19,260
+Kita mulai dari sesuatu yang sudah bisa diamati sekarang.
+
+18
+00:02:19,960 --> 00:02:26,700
+Kebutuhan terhadap peruangkan tor yang sedang berubah, dan ini bukan cuma perubahan sementara karena ekonomi naik turun.
+
+19
+00:02:26,920 --> 00:02:30,120
+Kurang lebih seperti internet yang dulu mengubah industri musik,
+
+20
+00:02:30,120 --> 00:02:36,760
+bukan hanya untuk beberapa tahun, tapi mengubah cara industri itu bekerja secara permainan.
+
+21
+00:02:36,920 --> 00:02:45,300
+Data dari Colin East Indonesia menunjukkan bahwa tingkat penggunaan gendung per kantoran kelas A di Jakarta pada tahun 2004 dan 2005,
+
+22
+00:02:46,000 --> 00:02:52,900
+masih belum kembali ke level sebelum pandemi pada tahun 2019, meskipun ekonomi sudah kembali tumpu.
+
+23
+00:02:53,540 --> 00:02:56,100
+Ini bukan berarti semua perusahaan tiba-tiba bangkrut.
+
+24
+00:02:56,100 --> 00:03:06,060
+Jusru salah satu alasannya adalah perusahaan mulai saat dari bahwa mereka bisa bekerja lebih efisian dengan ruang fisik yang lebih sedikit untuk setiap karyawan.
+
+25
+00:03:06,340 --> 00:03:11,980
+Dan perubahan itu bukan cuma sual kantor, tapi cara kerja dilakukan juga mulai berubah.
+
+26
+00:03:12,240 --> 00:03:15,420
+Tapi cara pekerjaan dilakukan juga mulai berubah.
+
+27
+00:03:15,420 --> 00:03:28,380
+Lapuran dari Makensi Global Institut memperikirakan bahwa antara 2005-2030 sekitar 30-40% juga serutin yang saat ini dikerjakan pekerjaan kantoran seperti mengolah data,
+
+28
+00:03:28,900 --> 00:03:36,920
+membalas email sampai sebagian pekerjaan coding dan disen berpotensi mengalami otomatisasi yang signifikan karena AI.
+
+29
+00:03:36,920 --> 00:03:49,100
+Itu bukan berarti semua profesi akan hilang, tapi ada beberapa kemungkinan bahwa untuk menghasilkan pekerjaan yang sama, perusahaan itu tidak membutuhkan jumlah orang sebanyak sebelumnya.
+
+30
+00:03:49,540 --> 00:04:02,360
+Dan orang-orang yang tetap bekerja kemungkinan juga tidak perlu hadir secara fisik setiap hari, jadi efek pertamanya cukup sederhana, lebih sedikit orang di sedikit kantor dan dalam lebih sedikit hari.
+
+31
+00:04:02,360 --> 00:04:11,320
+Tapi sebenarnya itu baru awal, karena ketika pola kerja berubah ada sesuatu yang jauh lebih besar untuk ikut terdor orang berubah.
+
+32
+00:04:11,440 --> 00:04:19,980
+Kalau jutaan orang nanti tidak perlu datang ke kantor pusat kotas di hari, atau bahkan sebagian pekerjaan mereka sudah tidak membutuhkan kehadiran manusia,
+
+33
+00:04:20,500 --> 00:04:29,140
+lalu apa yang terjadi pada kotak-kota besar yang selama 10 tahun dibangun dengan asumsi bahwa pusat kotah adalah tempat berkumpulnya tenaga kerja?
+
+34
+00:04:29,140 --> 00:04:37,820
+Kotak besar menggakan muncul secara kebetulan, ada keuntungan ketika banyak manusia, bisnis dan institusi berkumpul di satu tempat.
+
+35
+00:04:38,500 --> 00:04:46,700
+Produktivitasnya juga bisa meningkat, informasi lebih cepat menyebar, relasi sosial juga dan provisional lebih mudah terbentuk.
+
+36
+00:04:47,340 --> 00:04:56,460
+Peluang juga lebih mudah di temukan, tapi ada satu hal yang sangat penting, semua keuntungan itu selama ini sangat bergantung pada kehadiran fisik manusia.
+
+37
+00:04:56,460 --> 00:05:05,500
+Kalau kehadiran fisik itu mulai berkurang, karena AI mengambil sebagian pekerjaan dan teknologi membuat kerja-jara kejauh semakin mudah,
+
+38
+00:05:05,900 --> 00:05:11,140
+apakah daya tarik kotak juga besar untuk ikut berubah?
+
+39
+00:05:11,360 --> 00:05:13,760
+Kalau ia, siapa yang akan pergi lebih dulu?
+
+40
+00:05:14,040 --> 00:05:15,080
+Mereka akan tindak ke mana?
+
+41
+00:05:15,640 --> 00:05:18,640
+Atau siapa yang pada akhirnya tetap tinggal?
+
+42
+00:05:19,020 --> 00:05:22,700
+Menurut saya, di sini lah bagian yang paling menerik.
+
+43
+00:05:22,700 --> 00:05:29,180
+Karena dan pekerjaan terhadap tempat tinggal manusia kemungkinan tidak berhenti di kantor yang menjadi lebih kosong.
+
+44
+00:05:29,440 --> 00:05:32,800
+Ada beberapa perubahan lanjutan yang mungkin terjadi.
+
+45
+00:05:33,400 --> 00:05:37,180
+Dan pepertama orang-orang yang paling flexible mulai bergerak.
+
+46
+00:05:37,580 --> 00:05:43,720
+Kelompok yang paling mungkin berpindah adalah mereka yang punya ikatan paling sedikit terhadap satu kotak-tak tentu.
+
+47
+00:05:44,020 --> 00:05:49,080
+Misalnya, provisional mudah yang belum punya anak pekerjaan remot berpenghasilan tinggi,
+
+48
+00:05:49,080 --> 00:05:53,500
+freelancel digital atau pendiri startup di tahap awal.
+
+49
+00:05:53,880 --> 00:06:00,400
+Kelompok seperti ini sebenarnya sudah mulai bergerak sejak tahun 2021-2002.
+
+50
+00:06:00,400 --> 00:06:04,840
+Bahkan mereka tidak selalu pindah ke kotak-kota lain yang sama besarnya.
+
+51
+00:06:05,080 --> 00:06:07,860
+Sebagian justru mencari sesuatu yang berbeda.
+
+52
+00:06:08,280 --> 00:06:13,240
+Baya hidup yang leberendah, lingkungan yang lebih nyaman dan kualitas hidup yang lebih baik.
+
+53
+00:06:13,580 --> 00:06:18,080
+Misalnya, di Bali, di Ogyakarta, malang lompok atau bahkan kotak-kota kecil
+
+54
+00:06:18,080 --> 00:06:21,320
+yang sebelumnya tidak terlalu diperhitungkan sebagai pusat karir.
+
+55
+00:06:21,640 --> 00:06:26,260
+Poles seperti ini juga pernah terlihat di Amerika Sirikat setelah pandemi.
+
+56
+00:06:26,620 --> 00:06:31,680
+Sebagian orang meninggalkan kotak seperti San Francisco, New York atau Punsial
+
+57
+00:06:31,680 --> 00:06:36,740
+untuk pindah ke kotak-kota lain seperti Austin, Denver, atau Punnesfile.
+
+58
+00:06:37,420 --> 00:06:42,780
+Tapi ada efek sampingnya, ketika orang dengan penghasilan tinggi datang ke sebuah kotak,
+
+59
+00:06:43,060 --> 00:06:46,380
+mereka kebawah kemampuan membayar yang juga lebih tinggi.
+
+60
+00:06:46,380 --> 00:06:50,780
+Akibatnya, permintaan terhadap rumah dan tempat tinggal ikut naik.
+
+61
+00:06:51,080 --> 00:06:56,040
+Dan warga lokal bisa saja tiba-tiba menghadapi harga sewa yang jauh lebih mahal.
+
+62
+00:06:56,360 --> 00:06:58,220
+Bukan selalu karena ekonomi lokal.
+
+63
+00:06:58,600 --> 00:07:02,500
+Tapi karena ada kelompok baru yang sanggup membayar lebih tinggi.
+
+64
+00:07:02,800 --> 00:07:08,120
+Dan paka-dua, kotak-kota besar harus mencari alasan baru untuk tetap relevant.
+
+65
+00:07:08,880 --> 00:07:14,460
+Selama ini, salah satu fungsi utama kotak besar adalah menjadi tempat berkumpulnya terkadujain.
+
+66
+00:07:14,460 --> 00:07:16,900
+Kalau fungsi itu perlahan berkurang,
+
+67
+00:07:17,060 --> 00:07:20,160
+lalu apalasannya orang masih datang ke sana.
+
+68
+00:07:20,460 --> 00:07:26,260
+Kota yang nampu beradaptasi mungkin akan semakin menunjolkan hal-hal yang nggak mungkin digantikan
+
+69
+00:07:26,260 --> 00:07:32,720
+sama AI-tupun secara digital, seperti budaya, hiburan, pendidikan, kesehatan, pengalaman.
+
+70
+00:07:33,100 --> 00:07:35,440
+Jadi manusia tetap ingin datang ke konser.
+
+71
+00:07:35,980 --> 00:07:38,420
+Tetap ingin melihat musium secara langsung.
+
+72
+00:07:38,760 --> 00:07:42,220
+Tetap ingin makan di restoran dengan suasana tertentu.
+
+73
+00:07:42,220 --> 00:07:45,420
+Ada banyak hal yang nggak bisa sepenuhnya digantikan oleh laptop.
+
+74
+00:07:45,760 --> 00:07:49,960
+Tapi kotak yang terlalu tergantung pada gedung kantor dan kawasan bisnis
+
+75
+00:07:49,960 --> 00:07:53,080
+bisa menghadapi persalan yang jauh lebih berat.
+
+76
+00:07:53,260 --> 00:07:59,840
+Di Jakarta aja misalnya mulai muncul berbagai tembicaraan tentang revitalisasi kawasan seperti kotak tua,
+
+77
+00:08:00,220 --> 00:08:01,900
+pengambalkan kawasan tepi air,
+
+78
+00:08:02,440 --> 00:08:07,160
+sampai kawasan yang menggabungkan hunyan, perdagangan, dan ruang publik.
+
+79
+00:08:07,420 --> 00:08:10,440
+Salah satu pertanyaan di balik semua itu sebenarnya sederhana.
+
+80
+00:08:10,440 --> 00:08:14,780
+Kalau kantor bukan lagi alasan utama orang datang ke pusat kotak,
+
+81
+00:08:14,980 --> 00:08:17,880
+lalu apa yang akan membuat mereka tetap mau datang?
+
+82
+00:08:18,180 --> 00:08:22,500
+Dan pake tiga muncul, tembelaan baru di antara apara pekerja.
+
+83
+00:08:22,780 --> 00:08:24,340
+Dan ini mungkin paling menarik.
+
+84
+00:08:24,660 --> 00:08:29,220
+Karena ternyata nggak semua orang punya pilihan untuk bekerja dari manas aja.
+
+85
+00:08:29,480 --> 00:08:35,020
+Driver-Oject Online nggak bisa bekerja dari balik, hanya dengan boleptop itu contohnya.
+
+86
+00:08:35,340 --> 00:08:38,100
+Atau pekerjaan retail tetap harus berada di tokoh.
+
+87
+00:08:38,100 --> 00:08:40,840
+Pekerjaan konstruksi harus datang ke proyek,
+
+88
+00:08:41,180 --> 00:08:43,920
+ternyata ke sehatan juga tetap harus ada di rumah sakit.
+
+89
+00:08:44,120 --> 00:08:47,120
+Petugas keamanan tetap harus menjaga lokasi fisik.
+
+90
+00:08:47,540 --> 00:08:52,440
+Arinya ketika mereka profesional punya kebibasan untuk berpindah kota,
+
+91
+00:08:52,820 --> 00:08:55,720
+banyak pekerja lain tetap terikart pada tempat terdentu.
+
+92
+00:08:56,020 --> 00:08:59,420
+Masalahnya muncul ketika para profesional berfahas lantangi itu,
+
+93
+00:08:59,640 --> 00:09:00,820
+pindah ke kota-kota menengah.
+
+94
+00:09:01,220 --> 00:09:03,520
+Mereka bisa mendorong harga peroperti naik,
+
+95
+00:09:03,520 --> 00:09:05,020
+sementara di kota besar,
+
+96
+00:09:05,640 --> 00:09:08,600
+kepergian mereka justru meninggalkan dampak lain,
+
+97
+00:09:08,940 --> 00:09:11,220
+warumakan di sekitar kantor kehilangan pelanggan,
+
+98
+00:09:11,640 --> 00:09:14,940
+kuril kehilangan sebagian pengiriman rutin,
+
+99
+00:09:15,340 --> 00:09:17,540
+transportasi lokal kehilangan penumpang,
+
+100
+00:09:17,740 --> 00:09:20,800
+dan sebagian bisnis kecil yang selama ini hidup dari keramayan,
+
+101
+00:09:21,140 --> 00:09:23,860
+kawasan per kantoran itu ikut berdampak juga.
+
+102
+00:09:24,180 --> 00:09:27,560
+Dan berbagai bisnis kecil yang selama ini hidup dari keramayan,
+
+103
+00:09:27,860 --> 00:09:30,160
+kawasan per kantoran ikut terdampak.
+
+104
+00:09:30,160 --> 00:09:34,000
+Jadi kita tidak bisa melihat dua perfahalan sekaligus.
+
+105
+00:09:34,420 --> 00:09:35,160
+Di kota besar,
+
+106
+00:09:35,480 --> 00:09:36,720
+contohnya seperti profesional,
+
+107
+00:09:37,260 --> 00:09:40,800
+pergi ekosistem jasa di sekitar mereka itu kehilangan pelanggan.
+
+108
+00:09:41,180 --> 00:09:41,980
+Di kota menengah,
+
+109
+00:09:42,260 --> 00:09:43,340
+profesional datang,
+
+110
+00:09:43,540 --> 00:09:44,840
+permintaan itu bisa meningkat,
+
+111
+00:09:45,140 --> 00:09:47,580
+dan harga tempat tinggal bisa ikut naik.
+
+112
+00:09:47,800 --> 00:09:52,180
+Dampak kempad itu infrastruktur yang dibangun untuk dunia yang lama.
+
+113
+00:09:52,580 --> 00:09:54,200
+Sebagian besar infrastruktur kota,
+
+114
+00:09:54,380 --> 00:09:57,760
+dirancang berdasarkan pola mobilitas yang relativ muda di tempat.
+
+115
+00:09:57,760 --> 00:09:59,680
+Orang tinggal di pinggiran,
+
+116
+00:10:00,000 --> 00:10:03,000
+kerja di pusat kota, berangkat pagi pulang fore,
+
+117
+00:10:03,340 --> 00:10:07,560
+naik transportasi dalam arah yang hampir sama setiap hari.
+
+118
+00:10:07,880 --> 00:10:09,580
+Tapi bagaimana pola itu berubah,
+
+119
+00:10:09,980 --> 00:10:12,960
+pergerakannya sebenarnya menjadi lebih tersebar,
+
+120
+00:10:13,500 --> 00:10:14,420
+lebih vexibel,
+
+121
+00:10:14,880 --> 00:10:16,940
+lebih seluruh untuk di prediksi.
+
+122
+00:10:17,340 --> 00:10:19,120
+Kita mungkin tetap punya jalan,
+
+123
+00:10:19,480 --> 00:10:21,400
+punya MRT, kawasan komersial,
+
+124
+00:10:21,400 --> 00:10:25,100
+dan berbagai facilitas yang dibangun berdasarkan pola hidup lama.
+
+125
+00:10:25,100 --> 00:10:28,880
+Tapi masalahnya, pola hidup manusia itu bisa berubah lebih cepat
+
+126
+00:10:28,880 --> 00:10:30,560
+daripada infrastrukturnya,
+
+127
+00:10:30,880 --> 00:10:33,220
+dan infrastruktur yang sudah dibangun,
+
+128
+00:10:33,440 --> 00:10:35,780
+tentu nggak bisa di begitu aja dipindahkan.
+
+129
+00:10:36,060 --> 00:10:39,620
+Akhirnya kita bisa memiliki aset yang pembangunannya sangat mahal,
+
+130
+00:10:39,780 --> 00:10:40,620
+tapi manfaatnya,
+
+131
+00:10:40,800 --> 00:10:43,500
+nggak lagi sebesar ketika pertama kali dirancang.
+
+132
+00:10:43,800 --> 00:10:46,720
+Dan pada akhirnya, biaya investasi seperti itu
+
+133
+00:10:46,720 --> 00:10:51,520
+harus tetap dibayar melalui anggaran publik, utang,
+
+134
+00:10:51,660 --> 00:10:52,180
+ataupun paja.
+
+135
+00:10:52,500 --> 00:10:53,700
+Tapi saya juga mau jujur,
+
+136
+00:10:53,700 --> 00:10:55,740
+nggak semua yang saya ceritakan tadi,
+
+137
+00:10:55,900 --> 00:10:57,440
+itu sudah benar-benar terjadi,
+
+138
+00:10:57,780 --> 00:11:01,460
+sebagian adalah projeksi berdasarkan trend yang sudah terlihat sekarang.
+
+139
+00:11:01,660 --> 00:11:05,360
+Sebagiannya lagi adalah pola yang pernah terjadi di negara lain,
+
+140
+00:11:05,520 --> 00:11:08,940
+dan mungkin saja muncul dalam bentuk berbeda di Indonesia,
+
+141
+00:11:09,580 --> 00:11:11,880
+yang sudah bisa kita lihat datanya misalnya.
+
+142
+00:11:12,420 --> 00:11:14,680
+Tinkat penggunaan gedung perkontoran Jakarta,
+
+143
+00:11:15,120 --> 00:11:20,820
+masih belum sepenuhnya kebali kelapal 2019 menurut data colliers Indonesia.
+
+144
+00:11:20,820 --> 00:11:23,560
+Harga proparti di beberapa kota seperti Bali,
+
+145
+00:11:24,000 --> 00:11:28,940
+Yogyakarta, Malang, juga mengalami kenai kan dalam beberapa tahun terakhir.
+
+146
+00:11:29,340 --> 00:11:32,180
+Dan jumlah pekerjaan mode seperti digital nomad,
+
+147
+00:11:32,480 --> 00:11:35,260
+atau nomad dan juga menunjukkan perkembangan.
+
+148
+00:11:35,560 --> 00:11:38,720
+Terlihat dari meningkatnya penggunaan networking space
+
+149
+00:11:38,720 --> 00:11:40,600
+dan berbagai indikator lainnya.
+
+150
+00:11:40,920 --> 00:11:45,280
+Tapi ada pertanyaan besar yang sampai sekarang belum punya jawaban pasti.
+
+151
+00:11:45,560 --> 00:11:49,860
+Seberapa cepat AI benar-benar akan menggantikan pekerjaan kantor di Indonesia?
+
+152
+00:11:49,860 --> 00:11:52,400
+Seberapa besar, kota-kota menemah,
+
+153
+00:11:52,660 --> 00:11:56,000
+mampu menerima perpindahan profesional dalam jumlah besar.
+
+154
+00:11:56,460 --> 00:11:59,600
+Dan bagaimana, pemerintah daerah akan berespon
+
+155
+00:11:59,600 --> 00:12:03,280
+kalau distribusi penduduk dan aktivitas ekonomi itu berubah?
+
+156
+00:12:03,500 --> 00:12:05,800
+Semua itu masih belum pasti dan menurut saya
+
+157
+00:12:05,800 --> 00:12:09,180
+ketidak pastian itu sendiri penting untuk kita sedari.
+
+158
+00:12:09,420 --> 00:12:12,680
+Karena kita sedang berada di tengah sebuah perubahan besar,
+
+159
+00:12:13,040 --> 00:12:14,280
+perubahan yang cukup cepat,
+
+160
+00:12:14,480 --> 00:12:16,960
+dan nggak ada satu orang pun yang benar-benar tahu
+
+161
+00:12:16,960 --> 00:12:18,980
+seperti apa bentuk akhirnya nanti.
+
+162
+00:12:18,980 --> 00:12:22,360
+Jadi sebenarnya apa yang ingin saya sampaikan dari semua ini
+
+163
+00:12:22,360 --> 00:12:25,000
+adalah kita sering membicarakan AI
+
+164
+00:12:25,000 --> 00:12:28,220
+dengan cara yang terasa jauh dari kehidupan sehari-hari.
+
+165
+00:12:28,420 --> 00:12:31,340
+Probot menggantikan manusia, super intelligent,
+
+166
+00:12:32,020 --> 00:12:36,080
+singularitas teknologi, masa depan dengan solit yang dibayangkan.
+
+167
+00:12:36,260 --> 00:12:38,300
+Padahal dan pop AI yang paling nyata
+
+168
+00:12:38,300 --> 00:12:41,560
+dan paling dekat mungkin justru bukan berada di dunia digital.
+
+169
+00:12:41,980 --> 00:12:44,280
+Tapi di dunia paling fisik.
+
+170
+00:12:44,500 --> 00:12:46,420
+Dimana kamu tinggal di kotama,
+
+171
+00:12:46,420 --> 00:12:47,900
+karena kamu membangun hidup.
+
+172
+00:12:48,180 --> 00:12:51,380
+Dan seperti apa? Kota itu 10 tahun lagi dari sekarang.
+
+173
+00:12:51,820 --> 00:12:53,720
+AI sedang membangun sebuah peta.
+
+174
+00:12:53,900 --> 00:12:55,180
+Bukan cuma peta digital,
+
+175
+00:12:55,740 --> 00:12:56,960
+bukan cuma peta ekonomi,
+
+176
+00:12:57,140 --> 00:12:59,480
+tapi juga peta fisik tempat manusia hidup.
+
+177
+00:12:59,840 --> 00:13:01,040
+Dimana orang berkumpul,
+
+178
+00:13:01,280 --> 00:13:02,640
+dimana kota berkembang,
+
+179
+00:13:02,940 --> 00:13:04,280
+dimana harga tanah naik
+
+180
+00:13:04,280 --> 00:13:06,960
+dan mungkin dimana orang-orang yang nggak punya
+
+181
+00:13:06,960 --> 00:13:09,760
+banyak pelihang akhirnya tetap tinggal di lingkungan
+
+182
+00:13:09,760 --> 00:13:12,900
+di bangun untuk dunia yang sebenarnya sudah berubah.
+
+183
+00:13:13,120 --> 00:13:15,600
+Menurut saya, ini bukan alasan untuk panik.
+
+184
+00:13:15,600 --> 00:13:18,020
+Ini alasan untuk mulai memperhatikan,
+
+185
+00:13:18,500 --> 00:13:22,180
+karena keputusan yang kamu buat hari ini tentang tempat tinggalmu,
+
+186
+00:13:22,580 --> 00:13:24,340
+kota yang kamu pilih,
+
+187
+00:13:24,540 --> 00:13:26,360
+uang yang kamu investasikan,
+
+188
+00:13:26,840 --> 00:13:28,500
+waktu yang kamu habiskan,
+
+189
+00:13:28,640 --> 00:13:31,580
+dan komunitas tempat kamu membangun kehidupan,
+
+190
+00:13:31,860 --> 00:13:33,540
+itu semuanya akan berinteraksi
+
+191
+00:13:33,540 --> 00:13:36,200
+dengan perubahan besar yang sedang berjalan ini.
+
+192
+00:13:36,440 --> 00:13:39,500
+Ada satu pertanyaan yang ingin saya tinggalkan untuk kamu.
+
+193
+00:13:39,880 --> 00:13:42,540
+Jadi selama ini, kita biasanya memilik tempat tinggal
+
+194
+00:13:42,540 --> 00:13:44,600
+berdasarkan tempat kita bakar ja.
+
+195
+00:13:44,600 --> 00:13:46,240
+Lugikannya sederhana.
+
+196
+00:13:46,740 --> 00:13:47,880
+Rumah deketkan tor,
+
+197
+00:13:48,140 --> 00:13:51,140
+atau sederinya masih bisa dijangkau dari kantor.
+
+198
+00:13:51,480 --> 00:13:53,920
+Tapi bagaimana kalau AI perlahan itu mengubah
+
+199
+00:13:53,920 --> 00:13:55,780
+pusat gerakitasi pekerjaan?
+
+200
+00:13:55,980 --> 00:13:57,740
+Bagaimana kalau kantor itu nggak lagi,
+
+201
+00:13:57,940 --> 00:14:01,360
+jadi alasan utama kenapa kita harus berada di satu tempat?
+
+202
+00:14:01,900 --> 00:14:05,560
+Lalu apa yang akan menjadi dasar kita ketika memilik rumah,
+
+203
+00:14:05,880 --> 00:14:08,220
+deket dengan keluarga, deket dengan alam,
+
+204
+00:14:08,360 --> 00:14:12,480
+atau tinggal di kota yang biaya hidupnya lebih masuk akal.
+
+205
+00:14:12,480 --> 00:14:16,500
+Atau justru, tinggal di tempat yang komunitasnya
+
+206
+00:14:16,500 --> 00:14:18,680
+punya nilai yang sama dengan kita.
+
+207
+00:14:19,000 --> 00:14:21,080
+Dan ada satu pertanyaan yang lebih besar lagi.
+
+208
+00:14:21,520 --> 00:14:24,640
+Kalau ribuan orang lain juga mulai berfigur seperti itu
+
+209
+00:14:24,640 --> 00:14:28,480
+dan memilih arah yang sama pada waktu yang hamper bersamaan,
+
+210
+00:14:29,080 --> 00:14:31,980
+bagaimana hal itu akan mengubah kota yang mereka tujuk?
+
+211
+00:14:32,200 --> 00:14:34,280
+Mungkin belum ada jawabannya yang sederhana,
+
+212
+00:14:34,520 --> 00:14:38,280
+tapi saya rasa ini bisa menjadi salah satu pertanyaan penting
+
+213
+00:14:38,280 --> 00:14:40,180
+dalam satu deket ke depan.
+
+214
+00:14:40,180 --> 00:14:43,800
+Bukan lagi, saya harus tinggal di kantor di mana gitu.
+
+215
+00:14:44,060 --> 00:14:46,600
+Tapi kalau saya bebas memilih sebenarnya,
+
+216
+00:14:46,820 --> 00:14:49,120
+saya ingin menjalani hidup di tempat seperti apa?
+
+217
+00:14:49,740 --> 00:14:52,360
+Mungkin pada akhirnya pertanyaan tentang AI
+
+218
+00:14:52,360 --> 00:14:55,760
+bukan cuma soal pekerjaan apa yang akan berubah,
+
+219
+00:14:55,900 --> 00:15:00,120
+tapi tentang tempat seperti apa yang masih ingin kita sebut rumah.
+
+220
+00:15:00,720 --> 00:15:02,680
+Kalau kamu suka melihat perubahan teknologi
+
+221
+00:15:02,680 --> 00:15:05,180
+sampai ke dampaknya terhadap secara kita hidup,
+
+222
+00:15:05,420 --> 00:15:06,400
+kamu bisa subscribe,
+
+223
+00:15:06,400 --> 00:15:11,440
+like, comment, share, dan juga bisa comment di bawah ini tentang
+
+224
+00:15:11,440 --> 00:15:13,980
+masukkan ataupun info lainnya.
+
+225
+00:15:14,760 --> 00:15:16,720
+Selamat berjumpa lagi, see you!
+
