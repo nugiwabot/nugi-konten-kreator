@@ -257,9 +257,7 @@ class MediaQueryExpander:
         is_historical, year_hint = self._detect_historical(text)
         if v_req == REAL_REQUIRED:
             # If historical entities or dates are present, ensure is_historical is True
-            if any(e["type"] in ("HISTORICAL_PERIOD", "DATE") for e in entities) or any(
-                w in text.lower() for w in ["1944", "1945", "d-day", "normandy", "normandia", "world war", "perang dunia"]
-            ):
+            if any(e["type"] in ("HISTORICAL_PERIOD", "DATE") for e in entities):
                 is_historical = True
 
         # 4. Extract core concept (strip action words and media type words)
@@ -316,6 +314,7 @@ class MediaQueryExpander:
         Build entity-preserved queries adhering to Sections 6, 7, 14, 15:
         [EXACT ENTITY] + [EVENT / OBJECT / ACTION] + [DATE / ERA] + [LOCATION] + [ARCHIVAL qualifier]
         Never drop proper nouns or aggressively broaden.
+        Completely content-agnostic without hardcoded subjects.
         """
         lower = raw_text.lower()
         ent_names = [e["name"] for e in entities]
@@ -326,53 +325,98 @@ class MediaQueryExpander:
         primary: List[str] = []
         expanded: List[str] = []
 
-        # Specialized handling for iconic cases
-        if "steve jobs" in lower and "iphone" in lower:
-            yr = "2007" if "2007" in lower else ""
-            primary.extend([
-                f"Steve Jobs iPhone {yr} keynote".strip(),
-                f"Steve Jobs January {yr} iPhone introduction".strip(),
-                f"Apple iPhone {yr} Macworld keynote".strip(),
-                f"Steve Jobs iPhone {yr}".strip(),
-            ])
-            expanded.extend([
-                f"Steve Jobs iPhone introduction {yr}".strip(),
-                f"Steve Jobs {yr} keynote".strip(),
-                "Steve Jobs Macworld keynote",
-                f"Apple iPhone {yr} announcement".strip(),
-                "Steve Jobs original iPhone presentation",
-            ])
-            return self._dedup(primary), self._dedup(expanded)
+        # General entity composition (Content-Agnostic)
+        core_ents = " ".join(ent_names)
+        if not core_ents:
+            core_ents = self._extract_core_concept(raw_text)
 
-        if any(w in lower for w in ["d-day", "normandia", "normandy"]):
-            date_str = "6 June 1944" if ("6" in lower and "1944" in lower) else "1944"
-            if media_type == "video":
-                primary.extend([
-                    f"D-Day Normandy {date_str} archival footage",
-                    f"Normandy landings {date_str} Allied forces",
-                    f"Allied landing Normandy {date_str} archival footage",
-                    "D-Day Normandy original footage",
-                ])
-                expanded.extend([
-                    "Normandy landings archival",
-                    f"Normandy {date_str} newsreel",
-                    "Allied landing Normandy 1944 archival",
-                    "D-Day original footage",
-                ])
+        date_hint = " ".join(ent_by_type.get("DATE", []))
+        loc_hint = " ".join(ent_by_type.get("PLACE", []) + ent_by_type.get("CITY", []) + ent_by_type.get("COUNTRY", []))
+        event_hint = " ".join(ent_by_type.get("EVENT", []))
+        person_hint = " ".join(ent_by_type.get("PERSON", []))
+        prod_hint = " ".join(ent_by_type.get("PRODUCT", []))
+
+        # Detect action keywords in text (e.g. keynote, introduction, landing, proklamasi, dll)
+        actions = []
+        for kw in ["keynote", "introduction", "memperkenalkan", "landing", "pendaratan", "meeting", "speech", "interview", "announcement"]:
+            if kw in lower:
+                action_word = "keynote" if kw in ("keynote", "memperkenalkan") else ("landing" if kw in ("landing", "pendaratan") else kw)
+                if action_word not in actions:
+                    actions.append(action_word)
+        action_hint = " ".join(actions)
+
+        # Primary queries combining entity with context
+        if media_type == "video":
+            if is_historical:
+                primary.append(f"{core_ents} archival footage".strip())
+                if action_hint:
+                    primary.append(f"{core_ents} {action_hint}".strip())
+                primary.append(f"{core_ents} historical footage".strip())
+                primary.append(f"{core_ents} original recording".strip())
+                primary.append(f"{core_ents} original footage".strip())
             else:
-                primary.extend([
-                    f"D-Day Normandy {date_str}",
-                    f"Normandy landings {date_str}",
-                    f"Allied landing Normandy {date_str} archival",
-                    "Normandy landing historical photograph",
-                ])
-                expanded.extend([
-                    "Normandy landings archival photograph",
-                    f"Normandy {date_str} archival",
-                    "D-Day Normandy original photo",
-                    "Normandy beach landing 1944 historical",
-                ])
-            return self._dedup(primary), self._dedup(expanded)
+                primary.append(f"{core_ents} footage".strip())
+                if action_hint:
+                    primary.append(f"{core_ents} {action_hint}".strip())
+                primary.append(f"{core_ents} documentary footage".strip())
+        elif media_type in ("image", "photo"):
+            if is_historical:
+                primary.append(f"{core_ents} historical photograph".strip())
+                primary.append(f"{core_ents} archival photo".strip())
+                if action_hint:
+                    primary.append(f"{core_ents} {action_hint}".strip())
+                primary.append(f"{core_ents} archive".strip())
+            else:
+                primary.append(f"{core_ents} photograph".strip())
+                primary.append(f"{core_ents} photo".strip())
+        else:
+            if is_historical:
+                primary.append(f"{core_ents} archival".strip())
+                if action_hint:
+                    primary.append(f"{core_ents} {action_hint}".strip())
+                primary.append(f"{core_ents} historical document".strip())
+            else:
+                primary.append(core_ents.strip())
+
+        # If person and product, also add targeted entity pair query
+        if person_hint and prod_hint:
+            if date_hint:
+                primary.insert(0, f"{person_hint} {prod_hint} {date_hint} {action_hint or 'keynote'}".strip())
+                primary.insert(1, f"{person_hint} {prod_hint} {date_hint}".strip())
+            else:
+                primary.insert(0, f"{person_hint} {prod_hint} {action_hint}".strip())
+
+        # If event and location, add targeted event-location query
+        if event_hint and loc_hint:
+            if date_hint:
+                primary.insert(0, f"{event_hint} {loc_hint} {date_hint}".strip())
+            else:
+                primary.insert(0, f"{event_hint} {loc_hint}".strip())
+
+        # Expanded queries strictly retaining main entity
+        main_entity = ent_names[0] if ent_names else core_ents
+        if is_historical:
+            expanded.append(f"{main_entity} archival")
+            expanded.append(f"{main_entity} historical")
+            if loc_hint and loc_hint not in main_entity:
+                expanded.append(f"{main_entity} {loc_hint}".strip())
+            if date_hint and date_hint not in main_entity:
+                expanded.append(f"{main_entity} {date_hint}".strip())
+            if action_hint:
+                expanded.append(f"{main_entity} {action_hint}".strip())
+            if media_type == "video":
+                expanded.append(f"{main_entity} newsreel")
+                expanded.append(f"{main_entity} documentary film")
+            else:
+                expanded.append(f"{main_entity} vintage photograph")
+        else:
+            expanded.append(f"{main_entity} documentary")
+            if loc_hint and loc_hint not in main_entity:
+                expanded.append(f"{main_entity} {loc_hint}".strip())
+            if action_hint:
+                expanded.append(f"{main_entity} {action_hint}".strip())
+
+        return self._dedup(primary), self._dedup(expanded)
 
         # General entity composition
         core_ents = " ".join(ent_names)

@@ -424,8 +424,12 @@ class MediaRanker:
                 if event_matched > 0:
                     event_match_score = 1.0
                 else:
-                    if any(c in text_pool for c in ["keynote", "landing", "battle", "proklamasi", "treaty"]):
-                        event_match_score = 0.8
+                    event_tokens = set()
+                    for ee in event_entities:
+                        event_tokens.update(ee["name"].lower().split())
+                    matched_tokens = sum(1 for tok in event_tokens if len(tok) > 3 and tok in text_pool)
+                    if matched_tokens > 0:
+                        event_match_score = 0.85
                     else:
                         event_match_score = 0.2
             else:

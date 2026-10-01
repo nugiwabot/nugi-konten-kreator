@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "nugi-konten-kreator": {
+      "command": "C:\\Users\\Nugi\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\Nugi\\Tools\\nugi-konten-kreator-mcp\\server.py",
+        "--repo-root",
+        "c:\\Users\\Nugi\\Documents\\nugi-konten-kreator"
+      ],
+      "cwd": "C:\\Users\\Nugi\\Tools\\nugi-konten-kreator-mcp",
+      "description": "Nugi Konten Kreator MCP"
+    }
+  }
+}
