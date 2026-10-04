@@ -1,7 +1,7 @@
-# Skill: GENERATE-CONTENT-IDEAS v3 (HUMAN × PLACE × CHANGE × WHY)
+# Skill: GENERATE-CONTENT-IDEAS v3 (HUMAN × PLACE × CHANGE × WHY × RELATABILITY)
 
 ## 1. Deskripsi & Tujuan
-Menghasilkan ide konten editorial yang bernas, orisinal, dan mendalam untuk media personal Nugi. Skill ini menerapkan **Topic Taxonomy v3**, **Human–Place Anchor Test** (10 kriteria), **4 Mode Riset**, **10 Story Types**, dan **Editorial Fit Score v3**.
+Menghasilkan ide konten editorial yang bernas, orisinal, dan mendalam untuk media personal Nugi, dengan **relatability manusia sebagai quality gate sebelum ide masuk ke story engine**. Skill ini menerapkan **Topic Taxonomy v3**, **Human–Place Anchor Test** (10 kriteria), **4 Mode Riset**, **10 Story Types**, dan **Editorial Fit Score v3**.
 
 ⚠️ **PRINSIP DASAR v3:**
 - Properti adalah thread penting, BUKAN syarat wajib di setiap cerita.
@@ -67,6 +67,73 @@ story_type: optional string (origin | transformation | hidden_system | contradic
 ```
 
 ---
+
+## 3.1 HUMAN RELATABILITY GATE — WAJIB
+
+Sebelum memilih Story Type atau merumuskan WHY, AI wajib memetakan:
+
+```text
+HUMAN BASIC NEED
+        ↓
+HEALTH / WEALTH / RELATIONSHIP
+        ↓
+KEHIDUPAN SEHARI-HARI
+        ↓
+EMOSI / KONFLIK
+        ↓
+WHY
+        ↓
+REVELATION
+```
+
+### Cara menjalankan gate
+
+**1. HUMAN BASIC NEED**
+Pilih 1 kebutuhan manusia utama yang benar-benar dipertaruhkan:
+Safety, Shelter, Health, Wealth/Resources, Belonging, Status, Autonomy, Family Formation, Meaning, atau Curiosity.
+
+**2. HEALTH / WEALTH / RELATIONSHIP**
+Tentukan lensa hidup yang paling nyata:
+- HEALTH: tubuh, tidur, energi, kenyamanan, stres, recovery.
+- WEALTH: uang, waktu, biaya tersembunyi, aset, opportunity cost.
+- RELATIONSHIP: pasangan, anak, keluarga, tetangga, komunitas, privasi/kedekatan.
+
+Jangan memaksakan ketiganya.
+
+**3. KEHIDUPAN SEHARI-HARI**
+Tuliskan minimal satu adegan yang target audiens mungkin alami.
+
+Contoh lulus:
+> "Pekerja yang setiap pagi berangkat sebelum matahari terbit karena rumah yang mampu dibeli berada jauh dari kantor."
+
+Contoh belum lulus:
+> "Topik ini relevan karena menyentuh autonomy dan resources."
+
+**4. EMOSI / KONFLIK**
+Tentukan apa yang benar-benar terasa atau dipertaruhkan:
+murah vs waktu, aman vs privasi, dekat vs ruang pribadi, nyaman vs biaya, efisien vs kualitas hidup.
+
+**5. WHY**
+Setelah pengalaman manusianya jelas, telusuri penyebab:
+sejarah, desain, ekonomi, insentif, kebijakan, teknologi, geografi, atau perilaku manusia.
+
+**6. REVELATION**
+Rumuskan perubahan cara pandang yang kembali ke kehidupan audiens.
+
+### PASS / REVISE
+
+- **PASS:** semua enam lapisan dapat dijelaskan secara konkret.
+- **REVISE:** ada Human Basic Need tetapi Everyday Life belum jelas.
+- **REJECT / GANTI ANGLE:** topik hanya menarik karena tren/kontroversi tetapi tidak punya konsekuensi hidup yang nyata.
+
+**Aturan kunci:**
+
+> Human Basic Need = akar.  
+> Health / Wealth / Relationship = lensa.  
+> Everyday Life = bukti relatability.  
+> Emotion / Conflict = gesekan manusia.  
+> WHY = investigasi.  
+> Revelation = perubahan cara pandang.
 
 ## 4. Format Output Kontrak v3 (Standard Output Contract)
 
