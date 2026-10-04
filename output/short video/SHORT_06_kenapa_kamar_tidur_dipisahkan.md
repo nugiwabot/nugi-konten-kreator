@@ -1,32 +1,36 @@
-# SHORT 06 — Kenapa Kamar Tidur Dipisahkan?
+# NASKAH KONTEN NUGI
 
-## Headline
+## SHORT 06 — Kenapa Kamar Tidur Dipisahkan?
+
+**Headline:**
 **Kenapa Kamar Tidur Dipisahkan dari Ruang Lain?**
 
-## Format
-YouTube Shorts / Reels / TikTok
-
-## Target Durasi
-±75–90 detik
-
-## Story Type
-PLACE
-
-## Narrative Device
-Historical Mystery
-
-## Human–Place Anchor
-Bagaimana kebutuhan manusia terhadap tidur, privasi, keamanan, dan kehidupan sosial membentuk pembagian ruang di dalam rumah.
+**Format:** YouTube Shorts / Reels / TikTok  
+**Target durasi:** ±75–90 detik  
+**Story Type:** PLACE  
+**Narrative Device:** Historical Mystery  
+**Human–Place Anchor:** Bagaimana kebutuhan manusia terhadap tidur, privasi, keamanan, dan kehidupan sosial membentuk pembagian ruang di dalam rumah.
 
 ---
 
-## Teleprompter Script
+## 🎯 STRUKTUR RETENTION
 
-Coba bayangin...
+**HOOK** → bayangkan rumah tanpa kamar tidur  
+**OPEN LOOP** → semua aktivitas terjadi di ruang yang sama  
+**ISI** → tidur sebagai kondisi rentan dan kebutuhan privasi  
+**PERUBAHAN** → rumah semakin membagi aktivitas ke ruang khusus  
+**PAYOFF** → kamar tidur mencerminkan batas antara kehidupan pribadi dan sosial  
+**CTA** → ajak penonton melihat kembali denah rumah mereka
 
-kalau di rumah kita...
+---
 
-nggak ada kamar tidur.
+## 🎙️ NASKAH TELEPROMPTER
+
+### 🪝 HOOK
+
+Bayangin kalau rumah kita...
+
+nggak punya kamar tidur.
 
 Semua orang tidur...
 
@@ -40,7 +44,9 @@ menerima tamu...
 
 dan melakukan aktivitas sehari-hari.
 
-Kedengarannya aneh ya?
+Aneh, kan?
+
+### 🔓 OPEN LOOP
 
 Tapi sebenarnya...
 
@@ -48,29 +54,19 @@ cara manusia membagi ruang tidur...
 
 nggak selalu seperti rumah modern sekarang.
 
-Dalam sejarah...
+Jadi...
 
-rumah di berbagai tempat dan zaman...
+kenapa kamar tidur akhirnya menjadi ruang yang begitu penting?
 
-punya pembagian ruang yang sangat berbeda.
-
-Ada rumah yang ruangnya sangat terbuka.
-
-Ada juga yang punya ruang khusus...
-
-untuk aktivitas tertentu.
-
-Lalu...
-
-kenapa kamar tidur akhirnya menjadi bagian penting dari rumah?
+### 📖 ISI
 
 Salah satu jawabannya...
 
 adalah privasi.
 
-Tidur membuat kita berada dalam kondisi...
+Saat kita tidur...
 
-yang sangat rentan.
+kita berada dalam kondisi yang sangat rentan.
 
 Kita nggak sedang bekerja.
 
@@ -80,15 +76,15 @@ Dan nggak sedang mengawasi lingkungan.
 
 Karena itu...
 
-manusia membutuhkan tempat yang lebih terlindungi...
+kita membutuhkan tempat yang lebih terlindungi...
 
 untuk beristirahat.
 
-Tapi kamar tidur juga berkaitan dengan perubahan cara hidup.
+Tapi ada hal lain.
 
-Ketika rumah semakin mampu membagi aktivitas...
+Ketika kehidupan di dalam rumah semakin beragam...
 
-ruang di dalamnya juga ikut menjadi lebih spesifik.
+aktivitas juga mulai membutuhkan ruangnya masing-masing.
 
 Ada ruang untuk menerima tamu.
 
@@ -98,43 +94,119 @@ Ada ruang untuk bekerja.
 
 Dan ada ruang untuk tidur.
 
-Jadi...
+### 🔄 PERUBAHAN
 
-pembagian kamar di rumah...
+Artinya...
 
-bukan cuma soal desain interior.
+rumah bukan cuma semakin besar.
 
-Dia mencerminkan...
+Aktivitas di dalamnya juga semakin terbagi.
 
-bagaimana manusia membedakan kehidupan pribadi...
+Dan ketika aktivitas dibagi...
 
-dengan kehidupan sosial.
+ruang pun ikut menjadi lebih spesifik.
 
-Menariknya...
+Tentu...
 
-rumah modern mungkin terasa sangat normal bagi kita.
+proses ini tidak terjadi dengan cara yang sama di semua tempat.
 
-Tapi sebenarnya...
+Budaya, zaman, kelas sosial, teknologi, dan kondisi rumah...
 
-setiap ruangan di dalamnya...
+ikut menentukan bagaimana ruang tidur dibuat.
 
-adalah hasil dari keputusan manusia...
+### 💡 PAYOFF
 
-tentang bagaimana kita ingin hidup.
+Jadi kamar tidur sebenarnya bukan cuma...
+
+tempat kita menaruh kasur.
+
+Dia adalah salah satu cara manusia mengatakan:
+
+“Di sini...
+
+saya bisa menjadi pribadi.”
+
+Jauh dari ruang menerima tamu.
+
+Jauh dari aktivitas sosial.
+
+Dan lebih terlindungi saat kita sedang tidak sadar terhadap lingkungan.
+
+Makanya...
+
+denah rumah sebenarnya bisa dibaca seperti...
+
+gambaran tentang bagaimana manusia membagi kehidupan pribadi dan kehidupan sosial.
+
+### 📣 CTA
+
+Coba lihat rumah kamu.
+
+Ruang mana yang paling privat?
+
+Kamar tidur?
+
+Atau justru ada ruang lain?
+
+Menurut kamu...
+
+kenapa ruang itu dibuat paling privat?
 
 ---
 
-## Arahan Intonasi
+## 🎬 ARAHAN INTONASI
 
-- Opening dibuat seperti eksperimen imajinasi. Santai, tetapi sedikit misterius.
-- **“Semua orang tidur...”** beri jeda sebelum masuk ke aktivitas lain.
-- Bagian tentang tidur sebagai kondisi rentan disampaikan lebih tenang.
-- Saat menyebut pembagian ruang, tempo bisa sedikit naik.
-- Ending dibuat reflektif: rumah modern terasa normal karena kita sudah terbiasa dengan pembagian ruang tersebut.
+**HOOK — 0–7 detik**
+
+Buat seperti eksperimen imajinasi.
+
+> “Bayangin kalau rumah kita... nggak punya kamar tidur.”
+
+Jeda.
+
+> “Semua orang tidur... di ruang yang sama.”
+
+Bagian ini jangan terlalu cepat.
+
+**OPEN LOOP**
+
+Tekankan pertanyaan:
+
+> “Kenapa kamar tidur akhirnya menjadi ruang yang begitu penting?”
+
+**ISI**
+
+Bagian tentang tidur sebagai kondisi rentan dibaca lebih tenang.
+
+Tekankan:
+
+> “kita membutuhkan tempat yang lebih terlindungi... untuk beristirahat.”
+
+Saat masuk pembagian ruang, tempo sedikit dinaikkan.
+
+**PERUBAHAN**
+
+Sampaikan seperti menemukan pola:
+
+> “Ketika aktivitas dibagi... ruang pun ikut menjadi lebih spesifik.”
+
+**PAYOFF**
+
+Perlambat.
+
+> “Di sini... saya bisa menjadi pribadi.”
+
+Jangan terdengar dramatis berlebihan. Lebih seperti refleksi sederhana.
+
+**CTA**
+
+Nada observasional dan personal.
+
+Ajak penonton benar-benar melihat denah rumahnya sendiri.
 
 ---
 
-## Caption
+## 📚 CAPTION
 
 Kenapa rumah modern punya kamar tidur yang terpisah dari ruang lain?
 
@@ -150,13 +222,13 @@ Yang menarik justru prosesnya:
 
 ketika aktivitas manusia semakin dibedakan, ruang di dalam rumah juga dapat menjadi semakin terspesialisasi.
 
-Ruang tidur kemudian bukan sekadar tempat untuk meletakkan tempat tidur.
+Ruang tidur kemudian bukan sekadar tempat meletakkan tempat tidur.
 
 Ia menjadi salah satu bentuk ruang privat.
 
 Jadi...
 
-denah rumah sebenarnya bisa dibaca sebagai gambaran tentang bagaimana sebuah masyarakat membagi kehidupan pribadi dan kehidupan sosial.
+denah rumah sebenarnya bisa dibaca sebagai gambaran tentang bagaimana manusia membagi kehidupan pribadi dan kehidupan sosial.
 
 **Sumber:**
 
@@ -164,4 +236,19 @@ denah rumah sebenarnya bisa dibaca sebagai gambaran tentang bagaimana sebuah mas
 - Ariès, P. (1962). *Centuries of Childhood: A Social History of Family Life*. Knopf.
 - Lawrence, R. J. (1987). *Housing, Dwellings and the Domestic Environment*. Cambridge University Press.
 
-#Arsitektur #Rumah #KamarTidur #SejarahRumah #Properti #Architecture #HomeHistory #UrbanDesign #HumanBehavior #Privasi #Nugi #NugiKonten
+---
+
+## #️⃣ HASHTAG
+
+#Arsitektur  
+#Rumah  
+#KamarTidur  
+#SejarahRumah  
+#Properti  
+#Architecture  
+#HomeHistory  
+#UrbanDesign  
+#HumanBehavior  
+#Privasi  
+#Nugi  
+#NugiKonten
