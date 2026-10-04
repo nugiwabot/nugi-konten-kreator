@@ -64,6 +64,15 @@ class VisualShotRequirement:
     motion_spec: Optional[Dict[str, Any]] = None
     search_required: bool = True
 
+    # Human relatability alignment for visual retrieval.
+    primary_human_basic_need: str = ""
+    life_lens: str = ""
+    human_basic_need_score: float = 0.0
+    life_lens_score: float = 0.0
+    everyday_relevance_score: float = 0.0
+    human_place_relevance_score: float = 0.0
+    human_alignment_score: float = 0.0
+
     @property
     def start_frame(self) -> int:
         return int(round(self.start_seconds * 30))
@@ -429,6 +438,7 @@ class VisualRequirementsGenerator:
 
         keywords = self._extract_keywords(sec.text)
         v_req, v_type, ents, m_spec, s_role = classify_visual_requirement(sec.text)
+        human_map = analyze_human_relatability(sec.text)
         ent_names = [e["name"] for e in ents]
         primary_ent_type = ents[0]["type"] if ents else ""
 
@@ -444,6 +454,9 @@ class VisualRequirementsGenerator:
             elif v_req == REAL_PREFERRED and ent_names:
                 q = f"{' '.join(ent_names)} documentary"
                 overlay = ent_names[0]
+            elif v_req == REAL_PREFERRED and v_type in ("HUMAN_LIFE", "HUMAN_LIFE_IN_PLACE"):
+                q = f"{' '.join(keywords[:4])} real people real place documentary"
+                overlay = " ".join(w.capitalize() for w in keywords[:2])
             elif keywords:
                 q = f"{' '.join(keywords[:3])} cinematic documentary"
                 overlay = " ".join(w.capitalize() for w in keywords[:2])
@@ -478,6 +491,13 @@ class VisualRequirementsGenerator:
                     source_role=s_role,
                     motion_spec=m_spec,
                     search_required=(v_req not in (NO_BROLL, REMOTION_REQUIRED)),
+                    primary_human_basic_need=human_map["human_basic_need"],
+                    life_lens=human_map["life_lens"],
+                    human_basic_need_score=human_map["human_basic_need_score"],
+                    life_lens_score=human_map["life_lens_score"],
+                    everyday_relevance_score=human_map["everyday_relevance_score"],
+                    human_place_relevance_score=human_map["human_place_relevance_score"],
+                    human_alignment_score=human_map["human_alignment_score"],
                 )
             )
 
