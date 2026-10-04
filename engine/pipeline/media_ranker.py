@@ -27,6 +27,7 @@ import re
 from typing import Dict, List, Optional, Tuple
 
 from engine.pipeline.visual_requirements import (
+    analyze_human_relatability,
     REAL_REQUIRED,
     REAL_PREFERRED,
     GENERIC_ALLOWED,
@@ -87,6 +88,7 @@ class MediaRanker:
         entities: Optional[List[Dict[str, str]]] = None,
         visual_requirement: str = "auto",
         era: str = "auto",
+        human_context: Optional[Dict[str, object]] = None,
     ) -> Tuple[List[MediaItem], str]:
         """
         Rank candidates against the original user request with evidence and authenticity scoring.
@@ -130,6 +132,7 @@ class MediaRanker:
             entities=effective_entities,
             visual_requirement=effective_vr,
             era=era,
+            human_context=human_context,
         )
 
         # Stage 5: Combine scores into final_rank (Section 20)
@@ -316,6 +319,7 @@ class MediaRanker:
         entities: List[Dict[str, str]],
         visual_requirement: str,
         era: str = "auto",
+        human_context: Optional[Dict[str, object]] = None,
     ) -> List[MediaItem]:
         """
         Evaluate authenticity, entity matching, and source specificity (Sections 9, 10, 11).
@@ -350,6 +354,8 @@ class MediaRanker:
             "city traffic", "people walking", "technology presentation", "military soldiers",
             "beach war", "busy corporate office", "young person apartment", "tired worker"
         ]
+
+        relatability = human_context or analyze_human_relatability(original_request)
 
         for item in candidates:
             item.visual_requirement = visual_requirement
@@ -446,7 +452,67 @@ class MediaRanker:
             else:
                 source_specificity_score = 0.6 if matched_names else 0.4
 
-            # 6. Authenticity Score calculation (Section 9)
+            # 6. Human Relatability Alignment
+            # Scores whether the candidate metadata points toward the same human/lived-life
+            # context as the shot. This is semantic metadata scoring, not pixel-level analysis.
+            candidate_lower = text_pool
+            need_terms = {
+                "safety": ["safe", "safety", "security", "secure", "aman", "keamanan"],
+                "shelter": ["home", "house", "shelter", "housing", "rumah", "hunian", "bedroom", "kamar"],
+                "health": ["health", "sleep", "rest", "tired", "heat", "air quality", "noise", "wellbeing", "kesehatan", "tidur", "lelah", "istirahat", "panas", "bising"],
+                "wealth": ["money", "salary", "cost", "price", "commute", "transport", "time", "rent", "mortgage", "uang", "gaji", "biaya", "harga", "transportasi", "waktu", "cicilan"],
+                "belonging": ["family", "neighbor", "community", "together", "family", "keluarga", "tetangga", "komunitas", "bersama"],
+                "status": ["luxury", "status", "prestige", "mewah", "gengsi", "prestise"],
+                "autonomy": ["privacy", "control", "choice", "independent", "privasi", "kontrol", "pilihan"],
+                "family": ["couple", "child", "parent", "family", "pasangan", "anak", "orang tua", "keluarga"],
+                "meaning": ["identity", "memory", "homeplace", "identitas", "kenangan", "makna"],
+                "curiosity": ["history", "origin", "why", "sejarah", "asal", "kenapa", "mengapa"]
+            }
+            requested_need = str(relatability.get("human_basic_need", "")).lower()
+            requested_lens = str(relatability.get("life_lens", "")).lower()
+
+            if requested_need in need_terms:
+                human_basic_need_score = 1.0 if any(t in candidate_lower for t in need_terms[requested_need]) else 0.20
+            else:
+                human_basic_need_score = 0.30
+
+            lens_terms = {
+                "health": ["health", "sleep", "rest", "noise", "heat", "air", "kesehatan", "tidur", "istirahat", "bising", "panas", "udara"],
+                "wealth": ["money", "salary", "cost", "price", "commute", "transport", "time", "rent", "mortgage", "uang", "gaji", "biaya", "harga", "transportasi", "waktu", "cicilan"],
+                "relationship": ["family", "neighbor", "community", "couple", "child", "keluarga", "tetangga", "komunitas", "pasangan", "anak"]
+            }
+            if requested_lens in lens_terms:
+                lens_score = 1.0 if any(t in candidate_lower for t in lens_terms[requested_lens]) else 0.25
+            else:
+                lens_score = 0.30
+
+            human_scene_terms = ["person", "people", "family", "worker", "neighbor", "couple", "child", "man", "woman", "orang", "manusia", "keluarga", "pekerja", "tetangga", "pasangan", "anak"]
+            place_scene_terms = ["home", "house", "apartment", "neighborhood", "street", "city", "room", "office", "park", "housing", "rumah", "apartemen", "lingkungan", "jalan", "kota", "kamar", "kantor", "taman", "hunian"]
+            human_scene_score = 1.0 if any(t in candidate_lower for t in human_scene_terms) else 0.20
+            place_scene_score = 1.0 if any(t in candidate_lower for t in place_scene_terms) else 0.20
+
+            requested_everyday = bool(relatability.get("has_human_life_scene"))
+            requested_place = bool(relatability.get("has_place_scene"))
+            everyday_relevance_score = human_scene_score if requested_everyday else 0.40
+            human_place_relevance_score = (0.5 * place_scene_score + 0.5 * human_scene_score) if requested_place and requested_everyday else (place_scene_score if requested_place else 0.40)
+
+            human_alignment_score = round(
+                0.35 * human_basic_need_score
+                + 0.20 * lens_score
+                + 0.25 * everyday_relevance_score
+                + 0.20 * human_place_relevance_score,
+                4,
+            )
+
+            item.human_basic_need_score = round(human_basic_need_score, 4)
+            item.life_lens_score = round(lens_score, 4)
+            item.everyday_relevance_score = round(everyday_relevance_score, 4)
+            item.human_place_relevance_score = round(human_place_relevance_score, 4)
+            item.human_alignment_score = human_alignment_score
+            item.human_basic_need = requested_need
+            item.life_lens = requested_lens
+
+            # 7. Authenticity Score calculation (Section 9)
             if visual_requirement == REAL_REQUIRED:
                 authenticity_score = (
                     0.40 * entity_match_score
@@ -531,13 +597,17 @@ class MediaRanker:
                 )
             elif visual_requirement == REAL_PREFERRED:
                 composite = (
-                    0.30 * item.authenticity_score
-                    + 0.20 * item.entity_match_score
-                    + 0.30 * semantic_score
-                    + 0.20 * item.embedding_similarity
+                    0.25 * item.authenticity_score
+                    + 0.15 * item.entity_match_score
+                    + 0.25 * semantic_score
+                    + 0.15 * item.embedding_similarity
+                    + 0.20 * item.human_alignment_score
                 )
             else:
-                composite = semantic_score
+                composite = (
+                    0.85 * semantic_score
+                    + 0.15 * item.human_alignment_score
+                )
 
             # Penalize rejected candidates to 0 so they never outrank authentic candidates
             if item.rejection_reason:
