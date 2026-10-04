@@ -418,6 +418,10 @@ Tetap gunakan sistem visual yang sudah ada; jangan membuat pipeline media baru.
 ## 8. QUALITY CHECK PRE-FLIGHT
 
 - [x] Lolos Human–Place Anchor Test (terbukti memiliki hubungan ke cara/tempat hidup manusia; properti adalah thread opsional).
+- [x] **Relatability Gate PASS:** Human Basic Need → Health/Wealth/Relationship → Everyday Life Scene → Emotion/Conflict → WHY → Revelation.
+- [x] **Everyday Life Scene konkret:** ada minimal satu momen yang dapat dikenali target audiens; bukan hanya istilah psikologi.
+- [x] **Life consequence jelas:** penonton dapat melihat dampaknya terhadap Health, Wealth, Relationship, waktu, uang, energi, privasi, atau kualitas hubungan.
+- [x] **Emosi berasal dari situasi:** tidak ada penambahan fear/rage/bahasa emosional hanya untuk retention.
 - [x] Alur naskah taat pada Story Type & Narrative Device yang dipilih (kontradiksi HANYA hadir bila tipe cerita adalah Contradiction).
 - [x] Bahasa 100% percakapan manusiawi (tidak kaku, tidak ada kata klise AI, tidak bernada sales/promosi).
 - [x] Tidak ada forced CTA; soft CTA hanya bila relevan dan opsional.
