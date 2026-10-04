@@ -519,6 +519,11 @@ def test_human_life_scene_prefers_real_people_and_place():
     assert v_type == "HUMAN_LIFE_IN_PLACE"
     assert source_role == DIRECT_CONTEXT
 
+    eq = MediaQueryExpander().expand(text, media_type_override="image")
+    assert eq.visual_requirement == REAL_PREFERRED
+    assert any("real people" in q for q in eq.all_queries)
+    assert any("real place" in q or "neighborhood" in q for q in eq.all_queries)
+
 
 def test_human_relatability_analyzer_returns_basic_need_and_life_lens():
     """Relatability mapping should expose human need, life lens, and usable scores."""
