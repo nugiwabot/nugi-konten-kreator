@@ -41,6 +41,7 @@ from engine.pipeline.media_query_expander import ExpandedQuery, MediaQueryExpand
 from engine.pipeline.media_ranker import MediaRanker
 from engine.providers.internet_archive_provider import InternetArchiveProvider
 from engine.providers.media import MediaItem, MediaProvider
+from engine.providers.pexafy_provider import PexafyProvider
 from engine.providers.wikimedia_provider import WikimediaProvider
 
 logger = logging.getLogger(__name__)
@@ -91,6 +92,7 @@ class MediaPipeline:
         expander: Optional[MediaQueryExpander] = None,
     ):
         self.providers: List[MediaProvider] = providers or [
+            PexafyProvider(),
             WikimediaProvider(),
             InternetArchiveProvider(),
         ]
