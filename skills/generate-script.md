@@ -126,34 +126,67 @@ Sebelum menulis teleprompter, AI **WAJIB** menjalankan audit psikologi audiens b
 
 Lapisan ini **tidak menggantikan Story Type, Narrative Device, atau 8-step Story Architecture**. Fungsinya adalah memastikan cerita memiliki alasan psikologis yang kuat untuk diperhatikan dan diingat.
 
-### A. Psychological Mapping
+### A. Human Relatability Mapping — MANDATORY
 
-Identifikasi secara eksplisit:
+Identifikasi rantai berikut **sebelum menulis naskah**:
 
-1. **Primary Human Driver** — pilih 1 driver utama yang benar-benar relevan.
-2. **Secondary Driver** — maksimal 1–2 bila ada hubungan nyata.
-3. **Human Consequence** — jelaskan dampak konkretnya terhadap minimal satu dari:
-   - **HEALTH**
-   - **WEALTH**
-   - **RELATIONSHIP**
-   Tidak perlu memaksakan ketiganya.
-4. **Psychological Tension** — apa kebutuhan/keinginan yang saling tarik-menarik?
-5. **Everyday Trigger** — benda, tempat, kebiasaan, atau momen yang sering dialami audiens.
-6. **Emotional Target** — prioritas: curiosity, awe, constructive anxiety, atau amusement.
-7. **Shareability Reason** — mengapa audiens secara natural ingin mengirim video ini kepada orang lain?
-8. **Revelation** — apa perubahan cara pandang yang membuat penonton berpikir, \"Oh, ternyata bukan cuma soal X, tapi soal Y.\"
+```text
+HUMAN BASIC NEED
+        ↓
+HEALTH / WEALTH / RELATIONSHIP
+        ↓
+KEHIDUPAN SEHARI-HARI
+        ↓
+EMOSI / KONFLIK
+        ↓
+WHY
+        ↓
+REVELATION
+```
 
-### B. Angle Gate
+Uraikan secara eksplisit:
 
-Jika topik:
-- menarik tetapi **tidak menyentuh kebutuhan manusia**;
-- punya data tetapi **tidak punya konsekuensi hidup**;
-- terasa viral hanya karena kontroversi;
-- atau tidak memiliki revelation yang berarti;
+1. **Primary Human Basic Need** — pilih 1 kebutuhan utama yang benar-benar dipertaruhkan.
+2. **Secondary Driver** — maksimal 1–2 hanya bila hubungan kausalnya nyata.
+3. **Life Lens** — tentukan **HEALTH, WEALTH, atau RELATIONSHIP** yang paling relevan. Gunakan lebih dari satu hanya bila konsekuensinya benar-benar berbeda dan terbukti.
+4. **Everyday Life Scene** — sebutkan minimal 1 situasi konkret yang mungkin dialami target audiens. Hindari jawaban teoritis seperti "ini menyentuh autonomy".
+5. **Emotional / Conflict Tension** — jelaskan perasaan atau trade-off yang muncul dari situasi nyata tersebut.
+6. **Deeper WHY** — telusuri mengapa situasi itu terbentuk, setelah pengalaman manusianya jelas.
+7. **Revelation** — rumuskan perubahan cara pandang yang spesifik dan kembali ke kehidupan audiens.
+8. **Shareability Reason** — jelaskan alasan natural seseorang mengirimkan cerita ini ke orang lain.
 
-**JANGAN langsung menulis script.**
+**Aturan inti:**
+> **Human Basic Need adalah akar. Health / Wealth / Relationship adalah lensa. Everyday Life adalah bukti relatability. WHY adalah investigasi. Revelation adalah perubahan cara pandang.**
 
-Perbaiki **angle** terlebih dahulu. Topik boleh tetap sama selama sudut pandangnya dibuat lebih manusiawi.
+AI **tidak boleh** mengklaim script relatable hanya karena sudah memiliki Human Driver. Harus ada **Everyday Life Scene** yang spesifik.
+
+### B. Relatability & Angle Gate
+
+Sebelum draft, uji dengan kalimat:
+
+> **"Siapa target audiensnya, pada momen apa mereka mengalami ini, kebutuhan apa yang sedang dipertaruhkan, dan apa konsekuensinya pada Health, Wealth, atau Relationship?"**
+
+Jika jawaban belum konkret, **JANGAN langsung menulis script**.
+
+Perbaiki angle sampai rantai ini lengkap:
+
+```text
+HUMAN BASIC NEED
+→ HEALTH / WEALTH / RELATIONSHIP
+→ KEHIDUPAN SEHARI-HARI
+→ EMOSI / KONFLIK
+→ WHY
+→ REVELATION
+```
+
+Topik boleh tetap sama; yang harus berubah adalah **sudut pandangnya**.
+
+Red flags:
+- Human Driver ada, tetapi tidak ada scene kehidupan nyata.
+- Data kuat, tetapi audiens tidak tahu "ini berpengaruh ke hidup saya bagaimana?"
+- Hook kuat, tetapi tidak ada konsekuensi manusia.
+- Konten hanya terasa viral karena kontroversi.
+- Revelation hanya mengulang fakta tanpa mengubah cara pandang.
 
 ### C. Ethical Virality Rules
 
@@ -200,10 +233,10 @@ Nilai draft **0–10** untuk masing-masing:
 | Dimensi | Pertanyaan |
 | :--- | :--- |
 | **1. Curiosity & Hook** | Apakah ada alasan kuat untuk berhenti dan terus menonton? |
-| **2. Human Driver** | Apakah kebutuhan/insting manusia terasa nyata, bukan tempelan? |
-| **3. Human Consequence** | Apakah ada dampak konkret pada HEALTH / WEALTH / RELATIONSHIP? |
-| **4. Emotional Arousal** | Apakah cerita menggerakkan pikiran tanpa manipulasi? |
-| **5. Revelation & Shareability** | Apakah penonton memperoleh cara pandang baru yang layak diceritakan ulang? |
+| **2. Human Need & Relatability** | Apakah kebutuhan manusia diterjemahkan menjadi pengalaman yang bisa dikenali audiens? |
+| **3. Life Consequence** | Apakah ada dampak konkret pada HEALTH / WEALTH / RELATIONSHIP yang terasa dalam kehidupan sehari-hari? |
+| **4. Emotional Tension** | Apakah ada emosi/trade-off yang tumbuh secara natural dari situasi manusia? |
+| **5. WHY, Revelation & Shareability** | Apakah penjelasan WHY mengubah cara pandang dan membuat insight layak diceritakan ulang? |
 
 ### Ambang
 
@@ -216,9 +249,11 @@ Nilai draft **0–10** untuk masing-masing:
 
 Setelah penilaian:
 1. Sebutkan **3 kelemahan terbesar**.
-2. Revisi **bagian yang lemah**, bukan menulis ulang seluruh script secara otomatis.
-3. Nilai ulang dengan rubric yang sama.
-4. Hanya setelah ambang terpenuhi, tandai **FINAL SCRIPT**.
+2. Prioritaskan perbaikan **relatability** bila Human Need, Life Consequence, atau Everyday Life Scene lemah.
+3. Revisi **bagian yang lemah**, bukan menulis ulang seluruh script secara otomatis.
+4. Pastikan revisi membuat penonton mengenali **situasi hidupnya**, bukan sekadar menambah kata-kata emosional.
+5. Nilai ulang dengan rubric yang sama.
+6. Hanya setelah ambang terpenuhi, evidence/brand/language gates lolos, dan Relatability Gate = PASS, tandai **FINAL SCRIPT**.
 
 **Jangan memalsukan skor.** Bila script memang belum kuat, statusnya tetap REVISE.
 
@@ -236,9 +271,11 @@ Setelah penilaian:
 
 ### METADATA EDITORIAL & EVIDENCE
 - **Primary Domain:** [property | city | ai | work | human | history | ...]
+- **Human Psychology Map:** [Human Basic Need → Health/Wealth/Relationship → Everyday Life Scene → Emotion/Conflict → WHY → Revelation]
+- **Relatability Sentence:** [Siapa audiens + situasi nyata + kebutuhan yang dipertaruhkan + konsekuensi hidup]
 - **Human–Place Anchor:** [Koneksi ke tempat/cara hidup manusia; benang merah properti jika relevan]
 - **Rujukan Sumber (Evidence Base):** [Nama institusi & rujukan resmi Tier 1–5]
-- **Target Emosi Audiens:** [Rasa ingin tahu mendalam, validasi keresahan, ketenangan reflektif]
+- **Target Emosi Audiens:** [Curiosity / awe / constructive anxiety / amusement — pilih sesuai cerita, bukan dipaksakan]
 
 ---
 
