@@ -1,130 +1,212 @@
-# SHORT 10 — Kenapa Rumah Punya Pintu Belakang?
+# NASKAH KONTEN NUGI
 
-## Headline
+## SHORT 10 — Kenapa Rumah Punya Pintu Belakang?
+
+**Headline:**
 **Kenapa Rumah Punya Pintu Belakang?**
 
-## Format
-YouTube Shorts / Reels / TikTok
-
-## Target Durasi
-±75–90 detik
-
-## Story Type
-PLACE
-
-## Narrative Device
-Everyday Mystery
-
-## Human–Place Anchor
-Bagaimana rumah membentuk jalur berbeda untuk kehidupan sosial, pekerjaan rumah tangga, servis, dan privasi.
+**Format:** YouTube Shorts / Reels / TikTok  
+**Target durasi:** ±75–90 detik  
+**Story Type:** PLACE  
+**Narrative Device:** Everyday Mystery  
+**Human–Place Anchor:** Bagaimana rumah membentuk jalur berbeda untuk kehidupan sosial, pekerjaan rumah tangga, servis, dan privasi.
 
 ---
 
-## Teleprompter Script
+## 🎯 STRUKTUR RETENTION
 
-Coba perhatiin...
+**HOOK** → kalau satu pintu sudah cukup, kenapa ada pintu belakang?  
+**OPEN LOOP** → dua pintu bisa berarti dua fungsi kehidupan  
+**ISI** → pintu depan dan pintu belakang melayani aktivitas berbeda  
+**KONFLIK** → rumah perlu menerima orang tanpa mengganggu aktivitas sehari-hari  
+**PAYOFF** → pintu adalah bagian dari sistem jalur kehidupan di dalam rumah  
+**CTA** → ajak penonton mengamati dua pintu di rumah sekitar
 
-banyak rumah punya lebih dari satu pintu.
+---
 
-Ada pintu depan.
+## 🎙️ NASKAH TELEPROMPTER
 
-Tapi...
+### 🪝 HOOK
 
-kadang ada juga pintu belakang.
+Kalau satu pintu sudah cukup untuk masuk rumah...
 
-Pernah kepikiran nggak...
+kenapa banyak rumah punya...
 
-kalau kita sudah punya satu pintu untuk masuk...
+pintu belakang?
 
-kenapa perlu pintu lain?
+Bukannya...
+
+satu pintu saja sudah cukup?
+
+### 🔓 OPEN LOOP
 
 Ternyata...
 
-pintu belakang sering punya hubungan dengan aktivitas yang berbeda.
+dua pintu bisa berarti...
 
-Pintu depan...
+dua jalur kehidupan yang berbeda.
 
-biasanya menjadi akses yang lebih formal.
+### 📖 ISI
 
-Untuk menerima tamu.
+Coba perhatikan pintu depan.
 
-Untuk menyambut orang.
+Biasanya...
 
-Atau sekadar menjadi wajah utama rumah.
+ini adalah wajah utama rumah.
 
-Sementara...
+Orang datang lewat sini.
 
-pintu belakang bisa terhubung dengan aktivitas sehari-hari.
+Tamu masuk lewat sini.
 
-Ke dapur.
+Dan aksesnya lebih dekat dengan jalan atau ruang yang lebih publik.
 
-Ke halaman belakang.
+Sekarang lihat pintu belakang.
 
-Ke area servis.
+Posisinya sering lebih dekat...
 
-Atau ke bagian rumah yang lebih privat.
+dengan dapur.
 
-Jadi...
+Halaman belakang.
 
-dua pintu bisa menciptakan dua jalur kehidupan yang berbeda.
+Area servis.
 
-Satu jalur...
+Atau bagian rumah yang lebih privat.
 
-lebih dekat dengan kehidupan sosial.
+Artinya...
 
-Satu lagi...
+nggak semua aktivitas harus melewati jalur yang sama.
 
-lebih dekat dengan pekerjaan dan kehidupan sehari-hari di dalam rumah.
+### ⚖️ KONFLIK
 
-Tapi tentu...
+Bayangkan kalau semua hal...
 
-nggak semua rumah punya pembagian seperti ini.
+harus lewat pintu depan.
 
-Bentuk rumah sangat dipengaruhi budaya, iklim, ukuran lahan, dan kebutuhan penghuninya.
+Tamu masuk dari sana.
 
-Yang menarik adalah...
+Barang belanja masuk dari sana.
 
-ketika sebuah rumah punya lebih dari satu akses...
+Aktivitas dapur juga dari sana.
 
-kita sebenarnya sedang melihat bagaimana aktivitas manusia dibagi.
+Keluar masuk penghuni...
+
+semuanya lewat satu jalur.
+
+Bisa saja.
+
+Tapi rumah jadi kurang fleksibel.
+
+Dengan akses yang berbeda...
+
+aktivitas bisa dipisahkan.
 
 Tamu punya jalurnya.
 
 Penghuni punya jalurnya.
 
-Barang bisa punya jalurnya.
+Barang juga bisa punya jalurnya.
 
-Aktivitas rumah tangga juga punya jalurnya.
+### 💡 PAYOFF
 
-Jadi...
+Jadi pintu belakang sebenarnya...
 
-pintu bukan cuma lubang untuk keluar masuk.
+bukan sekadar “pintu tambahan”.
 
-Letak pintu...
+Dia bisa menjadi bagian dari...
 
-bisa memberi petunjuk tentang bagaimana sebuah rumah digunakan.
+cara rumah mengatur kehidupan di dalamnya.
 
-Dan kalau kamu melihat rumah dengan dua pintu...
+Satu pintu lebih dekat dengan dunia sosial.
 
-coba perhatiin.
+Satu lagi lebih dekat dengan kehidupan sehari-hari.
 
-Apakah kedua pintu itu...
+Dan dari posisi pintunya...
 
-sebenarnya punya kehidupan yang berbeda?
+kita kadang bisa membaca...
+
+bagaimana sebuah rumah sebenarnya digunakan.
+
+Rumah ternyata bukan cuma kumpulan ruangan.
+
+Rumah juga...
+
+adalah sistem jalur.
+
+### 📣 CTA
+
+Coba perhatikan rumah di sekitar kamu.
+
+Kalau ada pintu depan dan pintu belakang...
+
+coba lihat:
+
+siapa yang biasanya memakai masing-masing pintu?
+
+Dan aktivitas apa yang terjadi di baliknya?
 
 ---
 
-## Arahan Intonasi
+## 🎬 ARAHAN INTONASI
 
-- Opening dibuat observasional, seperti mengajak penonton melihat rumah di sekitar.
-- **“Kenapa perlu pintu lain?”** beri nada penasaran.
-- Saat membandingkan pintu depan dan belakang, gunakan kontras intonasi yang jelas.
-- Bagian **“dua jalur kehidupan yang berbeda”** diperlambat.
-- Ending benar-benar seperti pertanyaan kepada penonton, bukan CTA generik.
+**HOOK — 0–5 detik**
+
+Langsung ke pertanyaan.
+
+Tekankan:
+
+> “Kenapa banyak rumah punya... pintu belakang?”
+
+Setelah itu beri jeda:
+
+> “Bukannya... satu pintu saja sudah cukup?”
+
+**OPEN LOOP**
+
+Ucapkan perlahan:
+
+> “Dua pintu bisa berarti... dua jalur kehidupan yang berbeda.”
+
+Ini menjadi janji utama video.
+
+**ISI**
+
+Gunakan kontras visual jika memungkinkan:
+
+**Pintu depan → jalan → tamu**
+
+**Pintu belakang → dapur → halaman → aktivitas sehari-hari**
+
+Tempo sedikit lebih cepat saat memberi contoh.
+
+**KONFLIK**
+
+Bagian:
+
+> “Tamu masuk dari sana. Barang belanja masuk dari sana. Aktivitas dapur juga dari sana.”
+
+Buat seperti membayangkan rumah yang semuanya menggunakan satu jalur.
+
+**PAYOFF**
+
+Perlambat:
+
+> “Pintu belakang sebenarnya... bukan sekadar pintu tambahan.”
+
+Tekankan:
+
+> “Rumah juga... adalah sistem jalur.”
+
+**CTA**
+
+Nada observasional.
+
+Jangan terdengar seperti meminta engagement.
+
+Ajak penonton benar-benar memperhatikan rumah di sekitar mereka.
 
 ---
 
-## Caption
+## 📚 CAPTION
 
 Kenapa sebagian rumah punya pintu depan dan pintu belakang?
 
@@ -162,4 +244,19 @@ di mana pintu diletakkan.
 - Ching, F. D. K. (2014). *Architecture: Form, Space, and Order* (4th ed.). Wiley.
 - Dovey, K. & Wood, S. (2018). *Public/Private Interfaces*. Routledge.
 
-#Arsitektur #Rumah #Pintu #SejarahRumah #Properti #Architecture #HomeHistory #UrbanDesign #HumanBehavior #RumahModern #Nugi #NugiKonten
+---
+
+## #️⃣ HASHTAG
+
+#Arsitektur  
+#Rumah  
+#Pintu  
+#SejarahRumah  
+#Properti  
+#Architecture  
+#HomeHistory  
+#UrbanDesign  
+#HumanBehavior  
+#RumahModern  
+#Nugi  
+#NugiKonten
