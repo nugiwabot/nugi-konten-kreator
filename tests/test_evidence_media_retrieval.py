@@ -26,6 +26,7 @@ from engine.pipeline.visual_requirements import (
     GENERIC_ATMOSPHERE,
     MOTION_GRAPHICS,
     NO_VISUAL,
+    analyze_human_relatability,
     classify_visual_requirement,
     extract_entities,
 )
@@ -504,3 +505,100 @@ class TestEvidenceMediaRetrieval(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ------------------------------------------------------------------------------
+# Human relatability visual alignment tests
+# ------------------------------------------------------------------------------
+
+def test_human_life_scene_prefers_real_people_and_place():
+    """Everyday human/place scenes should be REAL_PREFERRED, not generic atmosphere."""
+    text = "Pekerja pulang kerja ke rumah setelah menempuh perjalanan jauh."
+    req, v_type, entities, motion_spec, source_role = classify_visual_requirement(text)
+    assert req == REAL_PREFERRED
+    assert v_type == "HUMAN_LIFE_IN_PLACE"
+    assert source_role == DIRECT_CONTEXT
+
+
+def test_human_relatability_analyzer_returns_basic_need_and_life_lens():
+    """Relatability mapping should expose human need, life lens, and usable scores."""
+    result = analyze_human_relatability(
+        "Keluarga muda pulang ke rumah yang tenang agar bisa tidur dan beristirahat."
+    )
+    assert result["human_basic_need"] in {"shelter", "health", "family"}
+    assert result["life_lens"] in {"health", "relationship"}
+    assert 0.0 <= result["human_alignment_score"] <= 1.0
+    assert result["has_human_life_scene"] is True
+    assert result["has_place_scene"] is True
+
+
+def test_media_ranker_records_human_alignment():
+    """Human-life context should be measurable on returned media candidates."""
+    ranker = MediaRanker(
+        embedding_provider=FallbackEmbeddingProvider(),
+        reranker_provider=FallbackRerankerProvider(),
+    )
+    human_item = make_item(
+        provider="pexafy",
+        title="Young family relaxing at home",
+        description="Family in a real home neighborhood, resting together",
+        media_type="image",
+    )
+    generic_item = make_item(
+        provider="pexafy",
+        title="Abstract blue shapes",
+        description="Abstract conceptual graphic",
+        media_type="image",
+        url="https://example.com/abstract.jpg",
+    )
+
+    ranked, _ = ranker.rank(
+        original_request="Keluarga pulang ke rumah untuk beristirahat",
+        candidates=[generic_item, human_item],
+        top_n=2,
+        visual_requirement=REAL_PREFERRED,
+        human_context={
+            "human_basic_need": "shelter",
+            "life_lens": "health",
+            "has_human_life_scene": True,
+            "has_place_scene": True,
+        },
+    )
+
+    assert human_item.human_alignment_score > generic_item.human_alignment_score
+    assert ranked[0].title == human_item.title
+
+
+def test_human_fit_preview_is_visible():
+    """MediaFinder preview should expose the human alignment score when available."""
+    item = MediaFinderItem(
+        rank=1,
+        title="Family in real home",
+        provider="pexafy",
+        media_type="image",
+        score=0.9,
+        source_url="https://example.com/family",
+        download_url="https://example.com/family.jpg",
+        human_basic_need="shelter",
+        life_lens="health",
+        human_basic_need_score=0.9,
+        life_lens_score=0.8,
+        everyday_relevance_score=0.9,
+        human_place_relevance_score=0.9,
+        human_alignment_score=0.88,
+    )
+    result = MediaFinderResult(
+        request="keluarga beristirahat di rumah",
+        media_type="image",
+        era="present",
+        style="documentary",
+        queries=["family real home documentary"],
+        providers_contacted=["pexafy"],
+        results=[item],
+        total_candidates_found=1,
+        visual_requirement=REAL_PREFERRED,
+        usable_results=1,
+    )
+    preview = result.preview()
+    assert "Human Fit:" in preview
+    assert "Alignment=0.88" in preview
