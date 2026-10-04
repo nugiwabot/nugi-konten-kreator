@@ -35,6 +35,103 @@ Untuk visual type HUMAN_LIFE / HUMAN_LIFE_IN_PLACE:
 - gunakan foto/video orang, keluarga, pekerja, tetangga, rumah, jalan, lingkungan, kantor, taman, dan tempat nyata lain yang memang sesuai narasi;
 - jangan mengganti scene manusia dengan ilustrasi abstrak, render AI, atau visual metafora ketika visual nyata tersedia;
 - visual tetap harus relevan dengan kalimat yang sedang dibicarakan, bukan sekadar 'ada orang'.
+## 0.2 REAL-WORLD B-ROLL TAXONOMY — VISUALIZE THE NARRATIVE, NOT JUST PEOPLE
+
+Prinsip utama:
+> B-roll harus menjawab: Apa yang secara nyata bisa dilihat di dunia jika kalimat narasi ini terjadi?
+
+Real B-roll bukan berarti selalu harus menampilkan orang. Kandidat visual dapat berupa orang, tempat, benda, aktivitas, lingkungan, proses, infrastruktur, dokumen/data fisik, atau detail sensorik — selama objek tersebut merupakan representasi nyata dan relevan dari narasi.
+
+### 8 kategori visual utama
+
+1. PEOPLE — manusia
+   - orang bekerja, pulang, tidur, makan, berjalan, berbicara, keluarga, pasangan, tetangga, konsumen, pekerja, warga.
+   - dipilih ketika narasi berbicara tentang perilaku, pengalaman, keputusan, emosi, atau konsekuensi manusia.
+
+2. PLACE — tempat
+   - rumah, kamar, apartemen, kampung, perumahan, jalan, trotoar, kantor, sekolah, pusat kota, pinggiran kota, taman.
+   - dipilih ketika narasi menjelaskan tempat manusia hidup atau lingkungan yang membentuk perilaku.
+
+3. OBJECT — benda
+   - pintu, jendela, pagar, kasur, meja, AC, kendaraan, ponsel, meteran listrik, kabel, kulkas, furnitur, alat kerja.
+   - dipilih ketika benda tersebut adalah mekanisme nyata yang sedang dibahas.
+
+4. ACTIVITY — aktivitas
+   - memasak, perjalanan pulang, membuka pintu, bekerja, berbelanja, tidur, berkumpul, mengantar anak, berjalan kaki.
+   - dipilih ketika WHY narasi terlihat melalui tindakan manusia.
+
+5. ENVIRONMENT — kondisi lingkungan
+   - panas, cahaya matahari, hujan, kemacetan, kebisingan, kepadatan, ruang sempit, jalan kosong, polusi, lingkungan hijau.
+   - dipilih ketika kondisi ruang/lingkungan merupakan penyebab atau konsekuensi.
+
+6. SYSTEM / INFRASTRUCTURE — sistem fisik yang terlihat
+   - jalan, rel, jaringan listrik, gardu, kabel internet, tower, data center, saluran air, drainase, konstruksi, tata kota.
+   - dipilih ketika narasi menjelaskan sistem yang memengaruhi kehidupan manusia.
+
+7. PROCESS — proses yang bisa diamati
+   - pembangunan rumah, lalu lintas kendaraan, transaksi, konstruksi, distribusi barang, produksi energi, perjalanan komuter.
+   - dipilih ketika perubahan atau mekanisme adalah inti cerita.
+
+8. EVIDENCE / ARTIFACT — bukti nyata
+   - arsip, foto sejarah, peta, dokumen, papan harga, rambu, meteran, grafik yang bersumber, koran, artefak.
+   - dipilih ketika narasi membuat klaim faktual yang membutuhkan bukti visual.
+   - untuk klaim sejarah/entitas spesifik, tetap tunduk pada REAL_REQUIRED dan authenticity gate.
+
+### Cara memilih kategori
+
+Jangan menggunakan aturan sederhana: Narasi tentang manusia berarti cari manusia.
+
+Gunakan urutan berpikir:
+1. Apa yang sedang dikatakan: pengalaman manusia, tempat, benda, perubahan, sistem, sebab-akibat, atau fakta sejarah?
+2. Apa yang paling konkret untuk mewakili kalimat itu?
+3. Apa yang membuat penonton langsung melihat narasi tersebut?
+4. Apakah visual itu memperkuat human basic need / Health–Wealth–Relationship yang sedang dibahas?
+5. Apakah visual tersebut benar-benar ada di dunia nyata dan dapat dicari sebagai foto/video?
+
+### Contoh
+
+NARASI: Rumah yang lebih murah sering berada semakin jauh dari pusat kota.
+B-roll: PRICE/OBJECT → papan harga atau listing nyata → PLACE → rumah di pinggiran → PEOPLE → keluarga melihat rumah → ENVIRONMENT → perjalanan panjang → ACTIVITY → orang commuting → SYSTEM → jalan dan transportasi.
+
+NARASI: Rumah yang panas membuat tubuh lebih sulit beristirahat.
+B-roll: ENVIRONMENT → ruangan panas/matahari masuk → OBJECT → kipas atau AC → PEOPLE → orang beristirahat → PLACE → kamar tidur nyata.
+
+NARASI: Sebuah jalan yang diperlebar belum tentu menyelesaikan kemacetan.
+B-roll: SYSTEM → jalan lebar → PROCESS → kendaraan bertambah → PEOPLE → komuter → ENVIRONMENT → traffic jam.
+
+### Aturan prioritas
+
+Untuk setiap shot, engine harus memilih primary visual category dan boleh memilih secondary category.
+
+Metadata:
+- primary_visual_category
+- secondary_visual_category
+- visual_reason
+- narrative_visual_relation
+- human_basic_need
+- life_lens
+- human_alignment_score
+
+visual_reason harus menjelaskan mengapa visual tersebut mewakili kalimat, bukan hanya mendeskripsikan gambarnya.
+
+Contoh: primary_visual_category = PEOPLE; visual_reason = Menunjukkan keluarga yang mengalami konsekuensi perjalanan rumah-kantor yang panjang.
+
+### Prinsip penting
+
+Human Basic Need menentukan mengapa penonton peduli.
+Health / Wealth / Relationship menentukan dampaknya terhadap kehidupan.
+Visual taxonomy menentukan apa yang harus ditampilkan di layar.
+
+Jadi keduanya tidak boleh dicampur.
+
+WEALTH bukan selalu visual uang. Dapat divisualisasikan melalui harga rumah, waktu commuting, kendaraan, biaya listrik, cicilan, lokasi kerja, dan infrastruktur.
+
+HEALTH bukan selalu dokter atau rumah sakit. Dapat divisualisasikan melalui tidur, kamar panas, cahaya, kebisingan, aktivitas fisik, udara, dan ruang istirahat.
+
+RELATIONSHIP bukan selalu pasangan. Dapat divisualisasikan melalui keluarga, tetangga, ruang makan, ruang keluarga, privasi, jarak antar-ruang, dan interaksi di lingkungan.
+
+Dengan demikian basic need/life lens menjadi alasan editorial, sedangkan visual category menjadi keputusan sinematografi.
+
 ## 1. Lima Kelas Kebutuhan Visual (Visual Requirement Classes)
 
 Setiap kalimat atau segmen naskah diklasifikasikan ke dalam tepat satu dari lima status berikut:
