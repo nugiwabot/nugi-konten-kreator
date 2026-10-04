@@ -26,6 +26,8 @@
 
 ## 🎙️ NASKAH TELEPROMPTER
 
+### 🪝 HOOK
+
 Kenapa dulu dapur justru sering dijauhkan dari rumah?
 
 Padahal...
@@ -40,6 +42,8 @@ Tapi pada masa dan tempat tertentu...
 
 dapur bisa berada di bagian yang terpisah dari ruang utama.
 
+### 🔓 OPEN LOOP
+
 Kenapa?
 
 Jawabannya ternyata sederhana.
@@ -51,6 +55,8 @@ Asap.
 Panas.
 
 Dan risiko kebakaran.
+
+### 📖 ISI
 
 Bayangin...
 
@@ -102,6 +108,8 @@ Dapur pun...
 
 pelan-pelan bisa kembali lebih dekat ke kehidupan keluarga.
 
+### 🔄 PERUBAHAN
+
 Makanya...
 
 dapur modern yang menyatu dengan rumah...
@@ -118,6 +126,8 @@ Dan ketika kita lebih mampu mengendalikan api...
 
 kita juga bisa mengubah cara kita membangun rumah.
 
+### 💡 PAYOFF
+
 Coba lihat dapur kamu sekarang.
 
 Dia paling dekat dengan ruang makan?
@@ -127,6 +137,8 @@ Ruang keluarga?
 Atau justru dipisahkan?
 
 Menarik nggak kalau posisi dapur kita...
+
+### 📣 CTA
 
 ternyata punya cerita sepanjang itu?
 
