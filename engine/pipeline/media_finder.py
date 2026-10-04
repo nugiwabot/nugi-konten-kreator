@@ -179,6 +179,13 @@ class MediaFinderItem:
     rejection_reason: str = ""
     is_archival: bool = False
     is_generic: bool = False
+    human_basic_need_score: float = 0.0
+    life_lens_score: float = 0.0
+    everyday_relevance_score: float = 0.0
+    human_place_relevance_score: float = 0.0
+    human_alignment_score: float = 0.0
+    human_basic_need: str = ""
+    life_lens: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -664,9 +671,9 @@ class MediaFinder:
         """
         vr = (visual_requirement or "auto").upper().strip()
 
-        # If entities exist and requirement is REAL_REQUIRED or REAL_PREFERRED:
-        # Use entity-first queries (Section 6, 7 & 14)
-        if entities and vr in (REAL_REQUIRED, REAL_PREFERRED):
+        # REAL_REQUIRED and REAL_PREFERRED use evidence/context-aware expansion.
+        # This also applies to human-life scenes without named entities.
+        if vr in (REAL_REQUIRED, REAL_PREFERRED):
             expander = MediaQueryExpander()
             eq = expander.expand(request, media_type_override=media, visual_requirement=vr)
             candidate_queries = list(eq.all_queries)
@@ -1136,6 +1143,13 @@ class MediaFinder:
                     rejection_reason=item.rejection_reason,
                     is_archival=item.is_archival,
                     is_generic=item.is_generic,
+                    human_basic_need_score=item.human_basic_need_score,
+                    life_lens_score=item.life_lens_score,
+                    everyday_relevance_score=item.everyday_relevance_score,
+                    human_place_relevance_score=item.human_place_relevance_score,
+                    human_alignment_score=item.human_alignment_score,
+                    human_basic_need=item.human_basic_need,
+                    life_lens=item.life_lens,
                 )
             )
 
