@@ -415,6 +415,34 @@ Tetap gunakan sistem visual yang sudah ada; jangan membuat pipeline media baru.
 
 ---
 
+## 7.1 HUMAN-RELATABILITY B-ROLL CONTRACT
+
+Untuk setiap scene yang dipakai sebagai B-roll, AI wajib mempertimbangkan konteks psikologi dan kehidupan yang sudah dipetakan pada script:
+
+    HUMAN BASIC NEED
+    → HEALTH / WEALTH / RELATIONSHIP
+    → KEHIDUPAN SEHARI-HARI
+    → HUMAN / PLACE VISUAL
+
+Bila scene menggambarkan kehidupan manusia sehari-hari:
+- Prioritaskan **orang nyata, tempat nyata, dan situasi nyata**.
+- Hindari visual abstrak, ilustrasi, 3D render, atau AI-generated concept art bila footage/foto manusia atau tempat yang relevan tersedia.
+- Visual boleh berupa stock photography/video yang benar-benar menampilkan manusia dan tempat nyata; "real" di sini berarti **fotografi/rekaman manusia nyata**, bukan harus arsip sejarah.
+- Setiap shot harus membawa hubungan semantik dengan narasi dan, bila relevan, memiliki skor:
+  - Human Basic Need
+  - Health / Wealth / Relationship
+  - Everyday Relevance
+  - Human–Place Relevance
+  - Human Alignment
+- **Skor tidak harus tinggi.** Kandidat dengan skor sedang tetap boleh dipakai bila secara visual paling tepat dan tidak menyalahi kebutuhan evidence.
+- Untuk klaim sejarah/peristiwa/tokoh, aturan **REAL_REQUIRED + authenticity hard gate** tetap lebih tinggi daripada human alignment.
+
+Jangan mencari B-roll dengan logika:
+> "Ada orang = sudah relate."
+
+Cari dengan logika:
+> "Orang ini sedang melakukan apa, di tempat seperti apa, dan mengapa adegan ini mewakili pengalaman manusia yang sedang dibahas?"
+
 ## 8. QUALITY CHECK PRE-FLIGHT
 
 - [x] Lolos Human–Place Anchor Test (terbukti memiliki hubungan ke cara/tempat hidup manusia; properti adalah thread opsional).
