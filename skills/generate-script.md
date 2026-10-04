@@ -119,6 +119,111 @@ Dirancang untuk retensi tinggi dan memantik perenungan cepat tanpa forced CTA:
 
 ---
 
+## 4.1 Audience Psychology Layer (MANDATORY PRE-SCRIPT AUDIT)
+
+Sebelum menulis teleprompter, AI **WAJIB** menjalankan audit psikologi audiens berdasarkan:
+`knowledge/human-psychology/audience-drivers.md`.
+
+Lapisan ini **tidak menggantikan Story Type, Narrative Device, atau 8-step Story Architecture**. Fungsinya adalah memastikan cerita memiliki alasan psikologis yang kuat untuk diperhatikan dan diingat.
+
+### A. Psychological Mapping
+
+Identifikasi secara eksplisit:
+
+1. **Primary Human Driver** — pilih 1 driver utama yang benar-benar relevan.
+2. **Secondary Driver** — maksimal 1–2 bila ada hubungan nyata.
+3. **Human Consequence** — jelaskan dampak konkretnya terhadap minimal satu dari:
+   - **HEALTH**
+   - **WEALTH**
+   - **RELATIONSHIP**
+   Tidak perlu memaksakan ketiganya.
+4. **Psychological Tension** — apa kebutuhan/keinginan yang saling tarik-menarik?
+5. **Everyday Trigger** — benda, tempat, kebiasaan, atau momen yang sering dialami audiens.
+6. **Emotional Target** — prioritas: curiosity, awe, constructive anxiety, atau amusement.
+7. **Shareability Reason** — mengapa audiens secara natural ingin mengirim video ini kepada orang lain?
+8. **Revelation** — apa perubahan cara pandang yang membuat penonton berpikir, \"Oh, ternyata bukan cuma soal X, tapi soal Y.\"
+
+### B. Angle Gate
+
+Jika topik:
+- menarik tetapi **tidak menyentuh kebutuhan manusia**;
+- punya data tetapi **tidak punya konsekuensi hidup**;
+- terasa viral hanya karena kontroversi;
+- atau tidak memiliki revelation yang berarti;
+
+**JANGAN langsung menulis script.**
+
+Perbaiki **angle** terlebih dahulu. Topik boleh tetap sama selama sudut pandangnya dibuat lebih manusiawi.
+
+### C. Ethical Virality Rules
+
+Gunakan konflik dan ketegangan secara bertanggung jawab:
+- boleh membongkar asumsi, trade-off, insentif, desain sistem, atau konsekuensi tersembunyi;
+- **jangan** menjadikan kelompok manusia tertentu sebagai enemy untuk memicu kemarahan;
+- jangan mengarang motif;
+- jangan memakai fear/rage sebagai substitusi untuk evidence;
+- jangan membuat judul lebih ekstrem daripada isi.
+
+Target Nugi:
+> **membuat orang berpikir lebih dalam, bukan membuat orang marah secara buta.**
+
+---
+
+## 4.2 Mandatory Draft → Audit → Revision → Re-Audit Loop
+
+Naskah **tidak boleh disebut FINAL pada draft pertama**.
+
+Workflow wajib:
+
+```text
+IDE / RESEARCH
+↓
+PSYCHOLOGICAL AUDIT
+↓
+STORY TYPE + ANGLE
+↓
+DRAFT SCRIPT
+↓
+SELF-AUDIT
+↓
+TARGETED REVISION
+↓
+RE-AUDIT
+↓
+FINAL SCRIPT
+```
+
+### Self-Audit Score — 50 Poin
+
+Nilai draft **0–10** untuk masing-masing:
+
+| Dimensi | Pertanyaan |
+| :--- | :--- |
+| **1. Curiosity & Hook** | Apakah ada alasan kuat untuk berhenti dan terus menonton? |
+| **2. Human Driver** | Apakah kebutuhan/insting manusia terasa nyata, bukan tempelan? |
+| **3. Human Consequence** | Apakah ada dampak konkret pada HEALTH / WEALTH / RELATIONSHIP? |
+| **4. Emotional Arousal** | Apakah cerita menggerakkan pikiran tanpa manipulasi? |
+| **5. Revelation & Shareability** | Apakah penonton memperoleh cara pandang baru yang layak diceritakan ulang? |
+
+### Ambang
+
+- **40–50:** dapat menuju FINAL setelah evidence, brand, dan language gates lolos.
+- **35–39:** WAJIB REVISE lalu audit ulang.
+- **<35:** jangan dipoles kosmetik; **perbaiki angle atau struktur** terlebih dahulu.
+- **Tidak boleh ada dimensi <7** pada versi FINAL.
+
+### Aturan Revisi
+
+Setelah penilaian:
+1. Sebutkan **3 kelemahan terbesar**.
+2. Revisi **bagian yang lemah**, bukan menulis ulang seluruh script secara otomatis.
+3. Nilai ulang dengan rubric yang sama.
+4. Hanya setelah ambang terpenuhi, tandai **FINAL SCRIPT**.
+
+**Jangan memalsukan skor.** Bila script memang belum kuat, statusnya tetap REVISE.
+
+---
+
 ## 5. Format Output Script Standar
 
 ### 5.1 Metadata + Story
