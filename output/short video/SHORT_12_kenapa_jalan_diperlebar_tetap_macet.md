@@ -13,37 +13,23 @@
 
 ### 🪝 HOOK
 
-Pernah kepikiran nggak...
-
-**kenapa kota-kota besar terus memperlebar jalan,**
-
-tapi beberapa waktu kemudian...
-
-**macet lagi?**
+Pernah kepikiran nggak... **kenapa kota-kota besar terus memperlebar jalan,** tapi beberapa waktu kemudian... **macet lagi?**
 
 [**JEDA 0,5 DETIK**]
 
-Bukannya kalau jalannya lebih lebar,
-
-harusnya kendaraan lebih lancar?
+Bukannya kalau jalannya lebih lebar, harusnya kendaraan lebih lancar?
 
 [**JEDA 0,5 DETIK — MASUK KE PENJELASAN**]
 
 ### 🔓 OPEN LOOP
 
-Nah...
-
-di sinilah ada satu hal yang sering kita lewatkan.
+Nah... di sinilah ada satu hal yang sering kita lewatkan.
 
 **Jalan yang lebih lega bisa membuat lebih banyak orang memilih untuk berkendara.**
 
 [**JEDA PENDEK**]
 
-Dan ketika itu terjadi,
-
-ruang baru tadi...
-
-**perlahan kembali terisi.**
+Dan ketika itu terjadi, ruang baru tadi... **perlahan kembali terisi.**
 
 [**JEDA 0,5 DETIK**]
 
@@ -51,79 +37,39 @@ ruang baru tadi...
 
 Bayangkan begini.
 
-Sebelum jalan diperlebar,
-
-orang mungkin berpikir,
-
-**“Waduh, perjalanan ini terlalu lama.”**
+Sebelum jalan diperlebar, orang mungkin berpikir, **“Waduh, perjalanan ini terlalu lama.”**
 
 [**JEDA PENDEK**]
 
-Akhirnya sebagian memilih berangkat lebih pagi,
-
-naik transportasi lain,
-
-memilih rute berbeda,
-
-atau bahkan mengurangi perjalanan.
+Akhirnya sebagian memilih berangkat lebih pagi, naik transportasi lain, memilih rute berbeda, atau bahkan mengurangi perjalanan.
 
 [**BACA TERUS MENGALIR — JANGAN JEDA DI SETIAP BARIS**]
 
-Tapi ketika jalan menjadi lebih cepat dan lebih nyaman,
-
-perjalanan dengan mobil bisa terasa lebih menarik.
+Tapi ketika jalan menjadi lebih cepat dan lebih nyaman, perjalanan dengan mobil bisa terasa lebih menarik.
 
 [**JEDA PENDEK**]
 
-Orang yang sebelumnya menunda perjalanan
-
-bisa mulai bepergian.
-
-Orang dari rute lain
-
-bisa pindah ke jalan itu.
+Orang yang sebelumnya menunda perjalanan bisa mulai bepergian. Orang dari rute lain bisa pindah ke jalan itu.
 
 [**JEDA PENDEK**]
 
-Bahkan dalam jangka lebih panjang,
-
-pola tempat tinggal,
-
-pekerjaan,
-
-dan aktivitas
-
-bisa ikut menyesuaikan.
+Bahkan dalam jangka lebih panjang, pola tempat tinggal, pekerjaan, dan aktivitas bisa ikut menyesuaikan.
 
 [**JEDA 0,5 DETIK**]
 
-Konsep ini dikenal sebagai **induced demand**,
-
-yaitu ketika tambahan kapasitas jalan
-
-ikut mendorong tambahan perjalanan.
+Konsep ini dikenal sebagai **induced demand**, yaitu ketika tambahan kapasitas jalan ikut mendorong tambahan perjalanan.
 
 [**JEDA 0,5 DETIK**]
 
-Sederhananya...
-
-ketika kita membuat perjalanan terasa lebih mudah,
-
-**orang bisa merespons dengan melakukan lebih banyak perjalanan.**
+Sederhananya... ketika kita membuat perjalanan terasa lebih mudah, **orang bisa merespons dengan melakukan lebih banyak perjalanan.**
 
 ### 💡 REVELATION
 
-Jadi...
-
-**bukan berarti setiap pelebaran jalan pasti gagal.**
+Jadi... **bukan berarti setiap pelebaran jalan pasti gagal.**
 
 [**JEDA PENDEK**]
 
-Pada kondisi tertentu,
-
-penambahan kapasitas memang bisa mengurangi kemacetan,
-
-terutama dalam jangka pendek.
+Pada kondisi tertentu, penambahan kapasitas memang bisa mengurangi kemacetan, terutama dalam jangka pendek.
 
 [**BACA MENGALIR**]
 
@@ -135,31 +81,17 @@ Tapi masalahnya...
 
 [**JEDA 0,7 DETIK**]
 
-Kita menambah ruang untuk kendaraan,
-
-perjalanan bisa ikut bertambah.
-
-Dan akhirnya,
-
-sebagian manfaat pelebaran jalan tadi
-
-bisa hilang.
+Kita menambah ruang untuk kendaraan, perjalanan bisa ikut bertambah. Dan akhirnya, sebagian manfaat pelebaran jalan tadi bisa hilang.
 
 [**JEDA 0,5 DETIK**]
 
 ### 🧠 PAYOFF
 
-Makanya...
-
-kemacetan kota ternyata bukan sekadar pertanyaan,
-
-**“Jalannya kurang lebar berapa meter?”**
+Makanya... kemacetan kota ternyata bukan sekadar pertanyaan, **“Jalannya kurang lebar berapa meter?”**
 
 [**JEDA 0,5 DETIK**]
 
-Tapi juga,
-
-**“Kenapa begitu banyak orang harus bergerak ke tempat yang sama, pada waktu yang sama?”**
+Tapi juga, **“Kenapa begitu banyak orang harus bergerak ke tempat yang sama, pada waktu yang sama?”**
 
 [**JEDA 0,7 DETIK**]
 
@@ -177,17 +109,7 @@ Coba perhatikan jalan yang paling sering kamu lewati.
 
 [**BACA SANTAI, MENGALIR**]
 
-Pernah nggak...
-
-[**JEDA 0,3 DETIK**]
-
-dilebarkan,
-
-tapi beberapa waktu kemudian...
-
-[**JEDA 0,4 DETIK**]
-
-**macet lagi?**
+Pernah nggak... **dilebarkan, tapi beberapa waktu kemudian... macet lagi?**
 
 [**SELESAI — JANGAN LANGSUNG TERSENYUM / JANGAN TAMBAH KALIMAT**]
 
