@@ -1,0 +1,37 @@
+name: Build Nugi 10 Short Scripts ZIP
+
+on:
+  push:
+    branches:
+      - 'tmp/nugi-10-short-scripts-1791098937863'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create ZIP
+        shell: bash
+        run: |
+          set -e
+          mkdir -p dist/Nugi_10_Short_Scripts
+          cp "output/short video/SHORT_01_kenapa_pintu_rumah_menghadap_jalan.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_02_kenapa_dulu_dapur_dipisahkan.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_03_kenapa_rumah_punya_jendela.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_04_kenapa_rumah_punya_teras.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_05_kenapa_rumah_punya_pagar.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_06_kenapa_kamar_tidur_dipisahkan.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_07_kenapa_rumah_punya_ruang_tamu.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_08_kenapa_rumah_dibangun_bertingkat.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_09_kenapa_rumah_punya_plafon.md" dist/Nugi_10_Short_Scripts/
+          cp "output/short video/SHORT_10_kenapa_rumah_punya_pintu_belakang.md" dist/Nugi_10_Short_Scripts/
+          cd dist
+          zip -qr Nugi_10_Short_Scripts.zip Nugi_10_Short_Scripts
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nugi_10_Short_Scripts
+          path: dist/Nugi_10_Short_Scripts.zip
