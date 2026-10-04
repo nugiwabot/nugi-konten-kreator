@@ -12,7 +12,7 @@ Skor ini adalah **penjaga integritas editorial (editorial quality gate)** untuk 
 
 | Dimensi Penilaian | Bobot Maksimal | Deskripsi Evaluasi |
 | :--- | :---: | :--- |
-| **1. Human Relevance** | **25 Poin** | Seberapa kuat topik menyentuh kehidupan nyata, emosi, kecemasan, atau keputusan besar manusia sehari-hari? Bukan wacana mengawang-awang. |
+| **1. Human Relevance** | **25 Poin** | Seberapa kuat topik menyentuh kebutuhan manusia dan dapat diturunkan menjadi pengalaman kehidupan sehari-hari yang dikenali audiens? Nilai tinggi harus dibuktikan melalui Human Basic Need → Health/Wealth/Relationship → Everyday Life → Emotion/Conflict. Bukan wacana mengawang-awang. |
 | **2. Property / Life Anchor** | **20 Poin** | Seberapa kokoh dan alami hubungan kausal topik ke rumah, tanah, kota, ruang kerja, mobilitas, atau aset fisik? |
 | **3. WHY Depth** | **20 Poin** | Seberapa jauh analisis menembus lapisan permukaan? Apakah membedah hingga Level 3 (reaksi manusia), Level 4 (sistem struktural), atau Level 5 (psikologi purba)? |
 | **4. Evidence Potential** | **15 Poin** | Seberapa siap dan solid ketersediaan data empiris, rujukan institusi resmi (BPS/BI/jurnal), atau catatan sejarah untuk membuktikannya? |
@@ -40,3 +40,30 @@ Skor Total < 60 Poin  ──► [STATUS: REJECTED / DISKUALIFIKASI]
      → **HOLD FOR RESEARCH**. Dilarang menulis naskah/script. Jalankan riset sumber primer terlebih dahulu untuk memperkuat bukti data.
 3. **Pelanggaran 12 Hard Rejection Rules:**
    - Pelanggaran terhadap salah satu dari 12 aturan penolakan mutlak (misal: AI tools list generik, promo sales rumah, data palsu, forced CTA) akan **langsung membatalkan ide (DISQUALIFIED)** tanpa melihat perolehan angka.
+
+
+---
+
+## 3. Human Relatability Standard
+
+Human Relevance tidak dinilai hanya dari seberapa penting sebuah topik terdengar.
+
+Untuk nilai Human Relevance yang tinggi, evaluator harus dapat melihat:
+
+```
+HUMAN BASIC NEED
+→ HEALTH / WEALTH / RELATIONSHIP
+→ KEHIDUPAN SEHARI-HARI
+→ EMOSI / KONFLIK
+```
+
+Panduan nilai Human Relevance:
+- 21–25: kebutuhan manusia kuat, situasi sehari-hari sangat konkret, konsekuensi hidup jelas, dan tension natural.
+- 16–20: relevansi manusia kuat, tetapi scene atau tension masih perlu dipertajam.
+- 10–15: topik menarik, tetapi hubungan dengan pengalaman audiens masih abstrak.
+- 0–9: hubungan dengan kebutuhan atau kehidupan manusia sangat lemah.
+
+Relatability Gate:
+Jika Everyday Life Scene belum dapat dituliskan sebagai satu adegan konkret, ide BELUM BOLEH APPROVED meskipun total skor melewati 75.
+
+Perbaiki angle terlebih dahulu. Jangan mengakali gate dengan bahasa emosional atau jargon psikologi.
