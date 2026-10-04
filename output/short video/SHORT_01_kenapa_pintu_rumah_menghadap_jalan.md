@@ -25,6 +25,8 @@
 
 ## 🎙️ NASKAH TELEPROMPTER
 
+### 🪝 HOOK
+
 Kenapa pintu rumah sering menghadap ke jalan?
 
 Padahal...
@@ -39,6 +41,8 @@ kenapa nggak dari samping?
 
 Atau dari belakang saja?
 
+### 🔓 OPEN LOOP
+
 Karena ternyata...
 
 posisi pintu bukan cuma soal keluar masuk.
@@ -46,6 +50,8 @@ posisi pintu bukan cuma soal keluar masuk.
 Pintu juga menentukan...
 
 bagaimana rumah kita bertemu dengan dunia di luar.
+
+### 📖 ISI
 
 Coba lihat.
 
@@ -93,6 +99,8 @@ memberi hubungan yang berbeda...
 
 dibanding pintu yang tersembunyi di belakang pagar.
 
+### 💡 PAYOFF
+
 Jadi...
 
 pintu depan sebenarnya bukan cuma tempat kita masuk rumah.
@@ -100,6 +108,8 @@ pintu depan sebenarnya bukan cuma tempat kita masuk rumah.
 Dia juga seperti...
 
 cara rumah kita berkomunikasi dengan dunia luar.
+
+### 📣 CTA
 
 Coba cek rumah kamu.
 
