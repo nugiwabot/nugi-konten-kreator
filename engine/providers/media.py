@@ -77,6 +77,16 @@ class MediaItem:
     matched_entities: List[str] = field(default_factory=list)
     rejection_reason: str = ""
 
+    # Human relatability alignment — populated by MediaRanker.
+    # These are editorial relevance scores, not claims about the people depicted.
+    human_basic_need_score: float = 0.0
+    life_lens_score: float = 0.0
+    everyday_relevance_score: float = 0.0
+    human_place_relevance_score: float = 0.0
+    human_alignment_score: float = 0.0
+    human_basic_need: str = ""
+    life_lens: str = ""
+
     def to_dict(self) -> Dict[str, Any]:
         """Return plain dict representation (embedding excluded)."""
         return asdict(self)
