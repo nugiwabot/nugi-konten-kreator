@@ -81,6 +81,15 @@ story_type: optional string (origin | transformation | hidden_system | contradic
 - **Story Type:** [origin | transformation | hidden_system | contradiction | human_dilemma | second_order | place | evolution | future | reframe]
 - **Narrative Device:** [mystery_reveal | before_after | expose_mechanism | contradiction | trade_off | cascade_effect | spatial_mystery | timeline_progression | projection | assumption_challenge]
 
+#### Human Psychology & Relatability
+- **Primary Human Basic Need:** [Safety | Shelter | Health | Wealth/Resources | Belonging | Status | Autonomy | Family Formation | Meaning | Curiosity]
+- **Secondary Driver:** [Opsional, maksimal 1–2]
+- **Life Lens:** [HEALTH | WEALTH | RELATIONSHIP]
+- **Everyday Life Scene:** [Adegan/momen nyata yang kemungkinan besar dikenali audiens]
+- **Emotional / Conflict Tension:** [Apa yang dirasakan atau dipertaruhkan]
+- **Relatability Sentence:** [Siapa audiensnya + momen hidupnya + apa yang dipertaruhkan]
+- **Relatability Gate:** [PASS / REVISE]
+
 #### Human–Place Connection
 - **Human Question:** [Pertanyaan eksistensial/keseharian yang menggugah nalar]
 - **HP Anchor Criteria:** [ID dari 10 kriteria yang terpenuhi: A,B,C,D,E,F,G,H,I,J]
@@ -107,7 +116,7 @@ story_type: optional string (origin | transformation | hidden_system | contradic
 
 #### Scoring & Gate (v3)
 - **Editorial Fit Score:** [Total/100]
-  - Human Relevance: [X/25]
+  - Human Relevance: [X/25 — jangan tinggi bila everyday-life connection tidak konkret]
   - Human–Place Anchor: [X/20]
   - WHY Depth: [X/20]
   - Evidence Potential: [X/15]
