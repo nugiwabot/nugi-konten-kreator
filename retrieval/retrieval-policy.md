@@ -15,6 +15,7 @@ Retrieval WAJIB dilakukan secara presisi berbasis topik yang sedang dibahas (*ju
 | **Tren Hunian, Tanah & Lokasi** | `human-psychology/shelter-territoriality.md`, `human-psychology/status-belonging.md`, `influence/scarcity.md` | 3 - 4 chunks |
 | **Viralitas & Mengapa Orang Berbagi** | `shareability/social-currency.md`, `shareability/emotion-arousal.md`, `shareability/triggers.md` | 4 - 5 chunks |
 | **Penyusunan Script & Retensi** | `storytelling/story-engine.md`, `storytelling/hook-engine.md`, `memorability/unexpected-curiosity.md` | 3 - 4 chunks |
+| **Psikologi Audiens & Evergreen Content** | `human-psychology/audience-drivers.md`, `human-psychology/shelter-territoriality.md`, `human-psychology/status-belonging.md`, `shareability/emotion-arousal.md`, `shareability/social-currency.md`, `shareability/triggers.md` | 4 - 5 chunks |
 | **Kredibilitas Data & Sanggahan** | `influence/authority.md`, `memorability/credible-grounded.md`, `research/fact-checking.md` | 3 - 4 chunks |
 
 ---
