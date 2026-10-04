@@ -2,7 +2,7 @@
 
 ## SHORT 11 — Kenapa Minimarket Bisa Ada di Mana-mana?
 
-**Headline:**
+**Headline:**  
 **Kenapa Minimarket Bisa Ada di Mana-mana?**
 
 **Format:** YouTube Shorts / Reels / TikTok  
@@ -42,85 +42,41 @@
 
 Pernah sadar nggak...
 
-kenapa minimarket...
+kenapa minimarket bisa ada di mana-mana?
 
-bisa ada di mana-mana?
+Kadang, baru jalan beberapa menit, kita sudah ketemu minimarket lagi.
 
-Kadang...
-
-baru jalan beberapa menit...
-
-kita sudah ketemu minimarket lagi.
-
-Padahal...
-
-bukannya satu toko saja sudah cukup?
+Padahal, bukannya satu toko saja sudah cukup?
 
 ### 🔓 OPEN LOOP
 
 Ternyata...
 
-mereka bukan sekadar mencari tempat...
-
-yang banyak orangnya.
+mereka bukan sekadar mencari tempat yang banyak orangnya.
 
 Mereka mencari sesuatu yang jauh lebih penting:
 
-**orang yang lewat...**
-
-dan orang yang butuh sesuatu...
-
-sekarang juga.
+**orang yang lewat... dan orang yang butuh sesuatu sekarang juga.**
 
 ### 📖 ISI
 
-Coba bayangkan...
+Coba bayangkan saat kita pulang kerja.
 
-kita pulang kerja.
-
-Haus.
-
-Butuh air minum.
-
-Mau beli sabun.
-
-Atau cuma butuh sesuatu...
-
-yang lupa dibeli di rumah.
+Haus. Butuh air minum. Mau beli sabun. Atau cuma butuh sesuatu yang lupa dibeli di rumah.
 
 Kita punya dua pilihan.
 
 Pergi lebih jauh...
 
-atau berhenti di toko...
+atau berhenti di toko yang kebetulan ada di depan kita.
 
-yang kebetulan ada di depan kita.
+Dan di sinilah lokasi menjadi sangat berharga.
 
-Dan di sinilah...
+Penelitian tentang lokasi minimarket di Bandung menunjukkan, aksesibilitas, visibilitas, kepadatan penduduk, dan arus lalu lintas menjadi faktor penting dalam pemilihan lokasi.
 
-**lokasi menjadi sangat berharga.**
+Artinya, tanah di lokasi strategis bukan cuma mahal karena tanahnya.
 
-Penelitian tentang lokasi minimarket di Bandung menunjukkan...
-
-aksesibilitas,
-
-visibilitas,
-
-kepadatan penduduk,
-
-dan arus lalu lintas...
-
-menjadi faktor penting dalam pemilihan lokasi.
-
-Artinya...
-
-tanah di lokasi strategis...
-
-bukan cuma mahal karena tanahnya.
-
-Tapi karena...
-
-**ada manusia yang terus bergerak melewatinya.**
+Tapi karena **ada manusia yang terus bergerak melewatinya.**
 
 ### ⚖️ KONFLIK
 
@@ -128,21 +84,9 @@ Masalahnya...
 
 lokasi yang bagus biasanya mahal.
 
-Jadi bisnis harus menghitung:
+Jadi bisnis harus menghitung: berapa banyak orang yang lewat, seberapa mudah toko terlihat, seberapa gampang kendaraan berhenti, dan seberapa besar kemungkinan orang masuk.
 
-berapa banyak orang yang lewat,
-
-seberapa mudah toko terlihat,
-
-seberapa gampang kendaraan berhenti,
-
-dan...
-
-seberapa besar kemungkinan orang masuk.
-
-Karena toko yang murah sewanya...
-
-belum tentu murah...
+Karena toko yang murah sewanya belum tentu murah...
 
 kalau hampir nggak ada yang datang.
 
@@ -150,39 +94,19 @@ kalau hampir nggak ada yang datang.
 
 Jadi sebenarnya...
 
-minimarket bukan cuma menjual makanan,
+minimarket bukan cuma menjual makanan, minuman, atau kebutuhan sehari-hari.
 
-minuman,
-
-atau kebutuhan sehari-hari.
-
-Mereka juga menjual...
-
-**kemudahan.**
+Mereka juga menjual **kemudahan.**
 
 Dan secara tidak langsung...
 
-mereka menjual...
+mereka menjual **waktu kita.**
 
-**waktu kita.**
+Kita membayar sedikit lebih banyak untuk menghemat perjalanan, tenaga, dan beberapa menit kehidupan.
 
-Kita membayar sedikit lebih banyak...
+Jadi lain kali, saat melihat minimarket di pinggir jalan, coba lihat lagi.
 
-untuk menghemat perjalanan,
-
-tenaga,
-
-dan beberapa menit kehidupan.
-
-Jadi lain kali...
-
-saat melihat minimarket di pinggir jalan...
-
-coba lihat lagi.
-
-Mungkin yang sebenarnya sedang kita lihat...
-
-bukan cuma sebuah toko.
+Mungkin yang sebenarnya sedang kita lihat bukan cuma sebuah toko.
 
 Tapi...
 
@@ -190,81 +114,116 @@ Tapi...
 
 ### 📣 CTA
 
-Sekarang coba lihat...
+Sekarang coba lihat di sekitar rumah kamu.
 
-di sekitar rumah kamu.
-
-Kenapa minimarket itu...
-
-dibangun tepat di situ?
+Kenapa minimarket itu dibangun tepat di situ?
 
 ---
 
 ## 🎬 ARAHAN INTONASI
 
-**HOOK — 0–8 detik**
+**Aturan baca teleprompter:**
 
-Nada penasaran, seperti baru menyadari sesuatu.
+- **Baris baru** = unit napas/intonasi, bukan berarti harus berhenti lama.
+- **Koma (,)** = jeda sangat pendek, lalu lanjut.
+- **Tiga titik (...)** = jeda pendek untuk membangun rasa penasaran, sekitar 0,3–0,6 detik.
+- **Paragraf baru** = jeda lebih jelas, sekitar 0,5–1 detik.
+- **Kalimat tebal** = beri penekanan suara; tidak perlu berhenti setelah setiap kata.
+- Jangan membaca seperti puisi. Beberapa kalimat harus mengalir dalam satu napas.
 
-Tekankan:
+### HOOK — 0–8 detik
 
-> “Kenapa minimarket... bisa ada di mana-mana?”
+Mulai santai dan observasional.
 
-Lalu beri jeda sebelum:
+“Pernah sadar nggak...” → jeda sebentar.
 
-> “Padahal... bukannya satu toko saja sudah cukup?”
+“kenapa minimarket bisa ada di mana-mana?” → naikkan sedikit rasa penasaran.
 
-**OPEN LOOP**
+“Kadang, baru jalan beberapa menit, kita sudah ketemu minimarket lagi.” → baca mengalir.
 
-Turunkan suara sedikit saat:
+“Padahal, bukannya satu toko saja sudah cukup?” → turunkan tempo dan beri jeda setelahnya.
 
-> “Mereka mencari sesuatu yang jauh lebih penting.”
+### OPEN LOOP
 
-Lalu tekankan:
+“Ternyata...” → jeda.
 
-> “orang yang lewat...”
+“mereka bukan sekadar mencari tempat yang banyak orangnya.” → baca mengalir.
 
-dan:
+“Mereka mencari sesuatu yang jauh lebih penting:” → tahan sedikit sebelum kalimat berikutnya.
 
-> “orang yang butuh sesuatu... sekarang juga.”
+“orang yang lewat... dan orang yang butuh sesuatu sekarang juga.” → tekankan **orang yang lewat** dan **sekarang juga**.
 
-**ISI**
+### ISI
 
-Gunakan visual sehari-hari:
+Bagian ini jangan terlalu dramatis.
 
-**jalan → orang lewat → minimarket → orang masuk → barang kebutuhan**
+“Coba bayangkan saat kita pulang kerja.” → natural.
 
-Saat menyebut air minum, sabun, dan kebutuhan rumah, tempo sedikit lebih cepat agar terasa familiar.
+“Haus. Butuh air minum. Mau beli sabun.” → tiga kalimat pendek ini boleh diberi jeda kecil agar terasa seperti daftar kebutuhan yang muncul di kepala.
 
-**KONFLIK**
+“Atau cuma butuh sesuatu yang lupa dibeli di rumah.” → kembali mengalir.
 
-Perlambat saat:
+“Kita punya dua pilihan.” → jeda.
 
-> “Lokasi yang bagus biasanya mahal.”
+“Pergi lebih jauh...” → jeda.
 
-Lalu buat jeda sebelum menjelaskan bahwa yang dinilai bukan hanya tanah, tetapi arus manusia.
+“atau berhenti di toko yang kebetulan ada di depan kita.” → lanjut mengalir.
 
-**PAYOFF**
+“Dan di sinilah lokasi menjadi sangat berharga.” → perlambat sedikit.
 
-Turunkan tempo.
+Saat masuk ke penelitian, ubah menjadi nada lebih informatif dan percaya diri. Jangan terlalu cepat.
 
-Tekankan kuat:
+“Artinya, tanah di lokasi strategis bukan cuma mahal karena tanahnya.” → mengalir.
 
-> “Mereka juga menjual... kemudahan.”
+“Tapi karena...” → jeda.
 
-Beri jeda.
+“ada manusia yang terus bergerak melewatinya.” → tekankan bagian ini.
 
-Lalu:
+### KONFLIK
 
-> “Dan secara tidak langsung... mereka menjual... waktu kita.”
+“Masalahnya...” → jeda pendek.
 
-Kalimat terakhir harus terasa seperti revelation, bukan iklan.
+“lokasi yang bagus biasanya mahal.” → tegas.
 
-**CTA**
+Bagian daftar faktor:
 
-Nada ringan.
+“berapa banyak orang yang lewat, seberapa mudah toko terlihat, seberapa gampang kendaraan berhenti, dan seberapa besar kemungkinan orang masuk.”
 
-Ajak penonton benar-benar mengamati minimarket di sekitar mereka.
+Baca sebagai **satu rangkaian**, bukan empat potongan terpisah.
+
+“Karena toko yang murah sewanya belum tentu murah...” → perlambat.
+
+“kalau hampir nggak ada yang datang.” → tekankan akhir kalimat.
+
+### PAYOFF
+
+Mulai turunkan tempo.
+
+“Jadi sebenarnya...” → jeda.
+
+“minimarket bukan cuma menjual makanan, minuman, atau kebutuhan sehari-hari.” → mengalir.
+
+“Mereka juga menjual **kemudahan.**” → tekankan kata “kemudahan”.
+
+“Dan secara tidak langsung...” → jeda.
+
+“mereka menjual **waktu kita.**” → ini revelation utama. Beri jeda setelahnya.
+
+“Kita membayar sedikit lebih banyak untuk menghemat perjalanan, tenaga, dan beberapa menit kehidupan.” → baca lebih dalam dan reflektif.
+
+“Jadi lain kali, saat melihat minimarket di pinggir jalan, coba lihat lagi.” → natural.
+
+“Mungkin yang sebenarnya sedang kita lihat bukan cuma sebuah toko.” → perlambat.
+
+“Tapi...” → jeda paling panjang di bagian ini.
+
+“**sebuah bisnis yang dibangun di atas pergerakan manusia.**” → tekankan seluruh gagasan, jangan dipotong-potong.
+
+### CTA
+
+“Sekarang coba lihat di sekitar rumah kamu.” → ringan.
+
+“Kenapa minimarket itu dibangun tepat di situ?” → naikkan sedikit rasa penasaran, lalu selesai.
 
 ---
 
@@ -290,7 +249,7 @@ Jangan membuat semua B-roll berupa orang.
 
 Gunakan kombinasi:
 
-**orang + toko + jalan + kendaraan + bangunan + arus lalu lintas + aktivitas belanja.**
+**orang + toko + jalan + kendaraan + lokasi + arus lalu lintas + aktivitas belanja.**
 
 Visual harus membuat penonton bisa **melihat mekanisme yang sedang dijelaskan**, bukan sekadar menghias narasi.
 
