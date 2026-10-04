@@ -1,5 +1,7 @@
 # 💻 Engine CLI Reference Guide
 
+> **Human-life B-roll:** Untuk scene manusia sehari-hari, engine akan mengutamakan visual orang nyata + tempat nyata dan menampilkan Human Fit scores pada preview.
+
 Antarmuka baris perintah terpadu (*Unified CLI*) menyediakan akses ke seluruh subsistem Nugi Content Creator melalui modul `engine.pipeline.engine_cli`.
 
 Jalankan perintah dari direktori root repositori:
@@ -126,3 +128,16 @@ python -m engine.pipeline.engine_cli media-find \
 # Untuk dokumentasi lengkap Evidence-Based B-Roll & Visual Retrieval System, lihat docs/EVIDENCE_BASED_BROLL.md
 ```
 
+
+
+### Human Fit pada preview
+
+Untuk scene dengan konteks manusia, preview MediaFinder dapat menampilkan:
+
+    Need = human basic need
+    Lens = HEALTH / WEALTH / RELATIONSHIP
+    Everyday = relevansi pengalaman sehari-hari
+    Place = relevansi tempat manusia hidup
+    Alignment = skor gabungan
+
+Gunakan skor sebagai **sinyal relevansi editorial**, bukan sebagai skor emosi orang yang tampil di foto/video.
