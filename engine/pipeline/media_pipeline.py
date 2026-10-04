@@ -213,6 +213,7 @@ class MediaPipeline:
                 entities=eq.entities,
                 visual_requirement=eq.visual_requirement,
                 era="historical" if eq.is_historical else "auto",
+                human_context=human_context,
             )
         except TypeError:
             ranked, fallback_reason = self.ranker.rank(
