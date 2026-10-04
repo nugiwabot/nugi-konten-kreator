@@ -294,6 +294,12 @@ class VideoPipeline:
                     request=shot.search_query,
                     count=5,
                     media_type=shot.preferred_media_type,
+                    human_context={
+                        "human_basic_need": shot.primary_human_basic_need,
+                        "life_lens": shot.life_lens,
+                        "has_human_life_scene": shot.everyday_relevance_score >= 0.35,
+                        "has_place_scene": shot.human_place_relevance_score >= 0.35,
+                    },
                 )
                 # Only accept actual visual media (image or video), exclude PDFs/documents
                 valid_candidates = []
@@ -363,6 +369,13 @@ class VideoPipeline:
                     "embedding_similarity": downloaded_file.embedding_similarity,
                     "reranker_score": downloaded_file.reranker_score,
                     "final_rank": downloaded_file.final_rank,
+                    "human_basic_need": chosen_candidate.human_basic_need,
+                    "life_lens": chosen_candidate.life_lens,
+                    "human_basic_need_score": chosen_candidate.human_basic_need_score,
+                    "life_lens_score": chosen_candidate.life_lens_score,
+                    "everyday_relevance_score": chosen_candidate.everyday_relevance_score,
+                    "human_place_relevance_score": chosen_candidate.human_place_relevance_score,
+                    "human_alignment_score": chosen_candidate.human_alignment_score,
                 },
             })
 
