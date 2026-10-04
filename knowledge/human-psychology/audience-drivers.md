@@ -256,3 +256,152 @@ Lapisan ini menyintesis dan mengoperasionalkan pengetahuan yang sudah ada di rep
 - `knowledge/influence/instant-influence.md`
 
 Dokumen ini adalah **lapisan operasional tambahan**, bukan pengganti dokumen-dokumen tersebut.
+
+
+---
+
+## 12. Relatability Architecture: Dari Kebutuhan ke Kehidupan Nyata
+
+**Human Basic Need adalah akar psikologis. HEALTH / WEALTH / RELATIONSHIP adalah lensa kehidupan. Everyday Life adalah tempat audiens benar-benar mengalami masalahnya.**
+
+Karena itu, jangan menganggap sebuah script sudah relatable hanya karena sudah menyebut satu human driver.
+
+Gunakan rantai wajib berikut:
+
+```text
+HUMAN BASIC NEED
+        ↓
+HEALTH / WEALTH / RELATIONSHIP
+        ↓
+KEHIDUPAN SEHARI-HARI
+        ↓
+EMOSI / KONFLIK
+        ↓
+WHY
+        ↓
+REVELATION
+```
+
+### Fungsi setiap lapisan
+
+1. **HUMAN BASIC NEED**
+   Mengapa manusia secara alami peduli?
+   Contoh: aman, shelter, sumber daya, belonging, autonomy, status, family, health, meaning, curiosity.
+
+2. **HEALTH / WEALTH / RELATIONSHIP**
+   Di bagian hidup mana kebutuhan itu terasa?
+   - **HEALTH:** tubuh, tidur, energi, kenyamanan, stres, recovery.
+   - **WEALTH:** uang, waktu, biaya tersembunyi, aset, opportunity cost, produktivitas.
+   - **RELATIONSHIP:** pasangan, anak, keluarga, tetangga, komunitas, privasi dan kedekatan.
+   
+   Gunakan **hanya lensa yang benar-benar relevan**. Jangan memaksakan ketiganya.
+
+3. **KEHIDUPAN SEHARI-HARI**
+   Turunkan ke adegan atau pengalaman yang bisa dibayangkan audiens tanpa penjelasan teoritis.
+   
+   Contoh:
+   - bangun lebih pagi karena perjalanan jauh;
+   - menutup jendela karena suara kendaraan;
+   - pulang kerja masih harus menghadapi rumah yang panas;
+   - menghitung cicilan sambil membandingkan biaya transportasi;
+   - ingin dekat dengan keluarga tetapi juga butuh ruang sendiri.
+   
+   Bila sebuah ide tidak bisa diterjemahkan menjadi pengalaman konkret seperti ini, **relatability belum terbentuk**.
+
+4. **EMOSI / KONFLIK**
+   Tunjukkan apa yang dirasakan atau dipertaruhkan.
+   
+   Contoh:
+   - aman tetapi terasa terisolasi;
+   - rumah lebih murah tetapi waktu lebih mahal;
+   - dekat dengan keluarga tetapi kehilangan privasi;
+   - teknologi lebih praktis tetapi kontrol terasa berkurang.
+   
+   Emosi harus muncul dari situasi, bukan disuntikkan secara artifisial.
+
+5. **WHY**
+   Baru setelah audiens mengenali hidupnya, bongkar mengapa kondisi tersebut terbentuk.
+   
+   WHY dapat bergerak ke:
+   - sejarah;
+   - desain ruang;
+   - ekonomi;
+   - insentif;
+   - kebijakan;
+   - teknologi;
+   - psikologi;
+   - keterbatasan fisik/geografis.
+
+6. **REVELATION**
+   Kembalikan penjelasan kepada manusia dengan perubahan cara pandang yang spesifik.
+   
+   Pola yang kuat:
+   > "Ternyata ini bukan cuma soal **X**. Ini soal **Y** yang ikut menentukan bagaimana kita hidup."
+
+### Prinsip penting
+
+> **Relatability dimulai dari kehidupan manusia, bukan dari istilah psikologi.**
+
+Human Basic Need adalah akar.
+HEALTH / WEALTH / RELATIONSHIP adalah penerjemah.
+Everyday Life adalah bukti bahwa penonton mengenali dirinya.
+WHY adalah investigasi.
+REVELATION adalah perubahan cara pandang.
+
+---
+
+## 13. Relatability Gate
+
+Sebelum ide atau script dilanjutkan, AI wajib dapat mengisi kalimat berikut secara spesifik:
+
+> **"Orang seperti apa yang akan melihat pengalaman hidupnya sendiri di sini, dan pada momen apa?"**
+
+Jawaban harus menyebut:
+- tipe audiens;
+- situasi/momen;
+- kebutuhan yang sedang dipertaruhkan;
+- konsekuensi pada Health, Wealth, atau Relationship.
+
+### Lulus
+
+> "Profesional muda yang setiap pagi menempuh perjalanan panjang, sehingga harga rumah yang lebih murah terasa dibayar dengan waktu dan energi."
+
+### Belum lulus
+
+> "Ini relevan karena menyentuh autonomy dan resource allocation."
+
+Jawaban kedua masih teoritis. Kembali ke **KEHIDUPAN SEHARI-HARI**.
+
+---
+
+## 14. Relatability vs Virality
+
+Relatability **bukan** sinonim dengan kontroversi.
+
+Konten dapat:
+- sangat relatable tetapi tidak kontroversial;
+- sangat kontroversial tetapi tidak relatable;
+- relatable sekaligus memicu perbedaan pendapat.
+
+Target Nugi adalah:
+
+> **relate dulu, friction bila natural.**
+
+Komentar/debat boleh menjadi efek samping dari pengalaman atau nilai yang berbeda, tetapi bukan tujuan utama sistem.
+
+Jangan mengorbankan kebenaran, empati, atau trust demi meningkatkan emosi.
+
+---
+
+## 15. Relatability Pre-Script Checklist
+
+Sebelum menulis teleprompter, pastikan:
+
+- [ ] **Human Basic Need:** kebutuhan manusia utamanya jelas.
+- [ ] **Life Lens:** Health, Wealth, atau Relationship yang paling relevan jelas.
+- [ ] **Everyday Scene:** ada minimal satu momen kehidupan yang konkret.
+- [ ] **Human Tension:** ada sesuatu yang dipertaruhkan / trade-off / konflik.
+- [ ] **WHY:** ada pertanyaan sebab yang lebih dalam.
+- [ ] **Revelation:** penonton akan melihat pengalaman awalnya dengan cara berbeda.
+
+Jika **Everyday Scene** atau **Human Tension** kosong, jangan menyatakan ide/script sudah relatable. Perbaiki angle terlebih dahulu.
