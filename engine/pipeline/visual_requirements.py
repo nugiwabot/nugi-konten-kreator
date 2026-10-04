@@ -224,6 +224,89 @@ def extract_entities(text: str) -> List[Dict[str, str]]:
     return entities
 
 
+_HUMAN_BASIC_NEED_CUES = {
+    "safety": ["aman", "keamanan", "terlindungi", "bahaya", "risiko", "safety", "security"],
+    "shelter": ["rumah", "hunian", "tempat tinggal", "berlindung", "kamar", "ruang pribadi", "shelter", "home"],
+    "health": ["tidur", "sehat", "kesehatan", "capek", "lelah", "panas", "udara", "cahaya", "bising", "stres", "recovery"],
+    "wealth": ["uang", "gaji", "biaya", "mahal", "murah", "harga", "cicilan", "waktu", "transportasi", "aset", "wealth", "cost"],
+    "belonging": ["tetangga", "komunitas", "teman", "bersama", "kesepian", "belonging", "keluarga"],
+    "status": ["status", "gengsi", "prestise", "alamat", "mewah", "status sosial"],
+    "autonomy": ["privasi", "kendali", "kontrol", "bebas", "otonomi", "pilihan", "autonomy"],
+    "family": ["pasangan", "anak", "keluarga", "suami", "istri", "keluarga muda"],
+    "meaning": ["identitas", "kenangan", "berarti", "makna", "rumah masa kecil"],
+    "curiosity": ["kenapa", "mengapa", "ternyata", "asal", "sejarah", "mengapa bisa", "curiosity"],
+}
+
+_LIFE_LENS_CUES = {
+    "health": ["tidur", "sehat", "kesehatan", "capek", "lelah", "panas", "udara", "cahaya", "bising", "stres", "recovery", "berjalan kaki"],
+    "wealth": ["uang", "gaji", "biaya", "mahal", "murah", "harga", "cicilan", "waktu", "transportasi", "aset", "produktif"],
+    "relationship": ["tetangga", "pasangan", "anak", "keluarga", "komunitas", "teman", "privasi", "bersama", "kesepian"],
+}
+
+_HUMAN_LIFE_CUES = {
+    "orang", "manusia", "pekerja", "karyawan", "keluarga", "pasangan", "anak",
+    "tetangga", "orang tua", "profesional", "ibu", "ayah", "warga",
+    "pulang", "berangkat", "bekerja", "tidur", "makan", "berjalan",
+    "bermain", "istirahat", "komuter", "commute", "people", "person", "family",
+    "worker", "neighbor", "couple", "child", "walking", "sleeping"
+}
+
+_PLACE_LIFE_CUES = {
+    "rumah", "hunian", "kamar", "lingkungan", "perumahan", "kampung", "tetangga",
+    "jalan", "trotoar", "taman", "kota", "kantor", "apartemen", "kos", "neighborhood",
+    "home", "house", "apartment", "street", "sidewalk", "park", "city", "neighborhood"
+}
+
+def analyze_human_relatability(text: str) -> Dict[str, Any]:
+    """Deterministic editorial mapping for human-related B-roll alignment."""
+    lower = (text or "").lower()
+
+    need_scores = {
+        need: sum(1 for k in cues if k in lower)
+        for need, cues in _HUMAN_BASIC_NEED_CUES.items()
+    }
+    top_need = max(need_scores, key=need_scores.get) if need_scores else ""
+    need_hits = need_scores.get(top_need, 0)
+
+    lens_scores = {
+        lens: sum(1 for k in cues if k in lower)
+        for lens, cues in _LIFE_LENS_CUES.items()
+    }
+    top_lens = max(lens_scores, key=lens_scores.get) if lens_scores else ""
+    lens_hits = lens_scores.get(top_lens, 0)
+
+    human_hits = sum(1 for cue in _HUMAN_LIFE_CUES if cue in lower)
+    place_hits = sum(1 for cue in _PLACE_LIFE_CUES if cue in lower)
+
+    human_basic_need_score = min(1.0, 0.35 + 0.16 * need_hits) if need_hits else 0.20
+    life_lens_score = min(1.0, 0.35 + 0.16 * lens_hits) if lens_hits else 0.20
+    everyday_relevance_score = min(1.0, 0.25 + 0.10 * min(human_hits, 7)) if human_hits else 0.15
+    human_place_relevance_score = min(1.0, 0.25 + 0.10 * min(place_hits, 7)) if place_hits else 0.15
+
+    if human_hits and place_hits:
+        everyday_relevance_score = min(1.0, everyday_relevance_score + 0.10)
+        human_place_relevance_score = min(1.0, human_place_relevance_score + 0.10)
+
+    alignment = round(
+        0.35 * human_basic_need_score
+        + 0.20 * life_lens_score
+        + 0.25 * everyday_relevance_score
+        + 0.20 * human_place_relevance_score,
+        4,
+    )
+
+    return {
+        "human_basic_need": top_need,
+        "life_lens": top_lens,
+        "human_basic_need_score": round(human_basic_need_score, 4),
+        "life_lens_score": round(life_lens_score, 4),
+        "everyday_relevance_score": round(everyday_relevance_score, 4),
+        "human_place_relevance_score": round(human_place_relevance_score, 4),
+        "human_alignment_score": alignment,
+        "has_human_life_scene": human_hits > 0,
+        "has_place_scene": place_hits > 0,
+    }
+
 def classify_visual_requirement(
     text: str,
 ) -> Tuple[str, str, List[Dict[str, str]], Optional[Dict[str, Any]], str]:
@@ -290,8 +373,18 @@ def classify_visual_requirement(
 
     # 5. Check REAL_PREFERRED
     has_hist_period = "HISTORICAL_PERIOD" in ent_types
-    if has_place or has_hist_period:
-        visual_type = "HISTORICAL_CONTEXT" if has_hist_period else "LOCATION"
+    lower_words = set(re.findall(r"\b\w+\b", lower))
+    has_human_life = bool(lower_words & _HUMAN_LIFE_CUES)
+    has_place_life = bool(lower_words & _PLACE_LIFE_CUES)
+    if has_place or has_hist_period or has_human_life or has_place_life:
+        if has_human_life and has_place_life:
+            visual_type = "HUMAN_LIFE_IN_PLACE"
+        elif has_human_life:
+            visual_type = "HUMAN_LIFE"
+        elif has_hist_period:
+            visual_type = "HISTORICAL_CONTEXT"
+        else:
+            visual_type = "LOCATION"
         return (REAL_PREFERRED, visual_type, entities, None, DIRECT_CONTEXT)
 
     # 6. Default: GENERIC_ALLOWED
