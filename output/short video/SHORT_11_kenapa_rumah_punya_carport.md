@@ -1,26 +1,38 @@
 # NASKAH KONTEN NUGI
 
-## SHORT 11 — Kenapa Rumah Punya Carport?
+## SHORT 11 — Kenapa Minimarket Bisa Ada di Mana-mana?
 
 **Headline:**
-**Kenapa Rumah Punya Carport?**
+**Kenapa Minimarket Bisa Ada di Mana-mana?**
 
 **Format:** YouTube Shorts / Reels / TikTok  
 **Target durasi:** ±75–90 detik  
 **Story Type:** HIDDEN_SYSTEM  
 **Narrative Device:** Expose Mechanism  
-**Human–Place Anchor:** Bagaimana rumah mengatur pertemuan antara tempat tinggal, kendaraan, akses jalan, keamanan, dan keterbatasan lahan.
+**Human–Place Anchor:** Bagaimana lokasi, kepadatan manusia, akses jalan, dan nilai tanah membentuk kebiasaan belanja sehari-hari.
 
 ---
 
 ## 🎯 STRUKTUR RETENTION
 
-**HOOK** → kalau mobil cuma perlu tempat parkir, kenapa area parkir ikut menjadi bagian dari desain rumah?  
-**OPEN LOOP** → carport ternyata bukan sekadar tempat menaruh mobil  
-**ISI** → carport menjadi titik transisi antara jalan dan rumah  
-**KONFLIK** → kendaraan membutuhkan ruang, tetapi lahan rumah juga terbatas  
-**PAYOFF** → carport adalah bagian dari cara rumah mengatur mobilitas penghuninya  
-**CTA** → ajak penonton melihat hubungan carport dengan jalan dan rumah mereka
+**HOOK** → kenapa minimarket sering muncul sangat dekat satu sama lain?  
+**OPEN LOOP** → ternyata yang mereka kejar bukan cuma jumlah penduduk  
+**ISI** → lokasi = akses + visibilitas + arus manusia + kebutuhan harian  
+**KONFLIK** → tanah strategis mahal, tetapi lokasi yang salah juga mahal bagi bisnis  
+**PAYOFF** → minimarket sebenarnya menjual sesuatu yang lebih mahal daripada barang: waktu dan kemudahan  
+**REFLECTION** → lokasi mengubah perilaku manusia, dan perilaku manusia membuat lokasi bernilai
+
+---
+
+## 🧠 AUDIENCE PSYCHOLOGY
+
+**Primary Human Driver:** Wealth / Resources  
+**Secondary Human Driver:** Autonomy / Control  
+**Life Lens:** WEALTH  
+**Everyday Trigger:** minimarket yang sering kita lewati dan kunjungi  
+**Psychological Tension:** murah/efisien vs waktu/tenaga  
+**Emotional Target:** curiosity + recognition  
+**Shareability:** membuat penonton sadar bahwa lokasi minimarket di sekitar mereka bukan kebetulan.
 
 ---
 
@@ -28,263 +40,286 @@
 
 ### 🪝 HOOK
 
-Coba perhatikan...
+Pernah sadar nggak...
 
-kenapa banyak rumah sekarang...
+kenapa minimarket...
 
-punya carport?
+bisa ada di mana-mana?
 
-Kalau mobil cuma butuh tempat parkir...
+Kadang...
 
-kenapa area parkir...
+baru jalan beberapa menit...
 
-justru ikut dirancang...
+kita sudah ketemu minimarket lagi.
 
-sebagai bagian dari rumah?
+Padahal...
+
+bukannya satu toko saja sudah cukup?
 
 ### 🔓 OPEN LOOP
 
 Ternyata...
 
-carport bukan cuma tempat...
+mereka bukan sekadar mencari tempat...
 
-buat naruh mobil.
+yang banyak orangnya.
 
-Dia adalah...
+Mereka mencari sesuatu yang jauh lebih penting:
 
-titik pertemuan antara...
+**orang yang lewat...**
 
-jalan...
+dan orang yang butuh sesuatu...
 
-kendaraan...
-
-dan kehidupan di dalam rumah.
+sekarang juga.
 
 ### 📖 ISI
 
-Bayangkan saat kita pulang.
+Coba bayangkan...
 
-Mobil datang dari jalan...
+kita pulang kerja.
 
-masuk ke halaman...
+Haus.
 
-lalu berhenti di depan rumah.
+Butuh air minum.
 
-Dari sini...
+Mau beli sabun.
 
-kita turun.
+Atau cuma butuh sesuatu...
 
-Bawa belanjaan.
+yang lupa dibeli di rumah.
 
-Mengajak anak masuk.
+Kita punya dua pilihan.
 
-Atau sekadar...
+Pergi lebih jauh...
 
-masuk ke rumah setelah seharian beraktivitas.
+atau berhenti di toko...
+
+yang kebetulan ada di depan kita.
+
+Dan di sinilah...
+
+**lokasi menjadi sangat berharga.**
+
+Penelitian tentang lokasi minimarket di Bandung menunjukkan...
+
+aksesibilitas,
+
+visibilitas,
+
+kepadatan penduduk,
+
+dan arus lalu lintas...
+
+menjadi faktor penting dalam pemilihan lokasi.
 
 Artinya...
 
-carport sebenarnya ikut mengatur...
+tanah di lokasi strategis...
 
-bagaimana kita berpindah...
+bukan cuma mahal karena tanahnya.
 
-dari ruang publik...
+Tapi karena...
 
-ke ruang pribadi.
-
-Dan secara praktis...
-
-area ini juga bisa melindungi kendaraan...
-
-dari panas dan hujan.
+**ada manusia yang terus bergerak melewatinya.**
 
 ### ⚖️ KONFLIK
 
-Tapi ada masalahnya.
+Masalahnya...
 
-Mobil itu besar.
+lokasi yang bagus biasanya mahal.
 
-Rumah membutuhkan ruang.
+Jadi bisnis harus menghitung:
 
-Taman membutuhkan ruang.
+berapa banyak orang yang lewat,
 
-Jalur masuk juga membutuhkan ruang.
+seberapa mudah toko terlihat,
 
-Sementara...
+seberapa gampang kendaraan berhenti,
 
-luas tanah terbatas.
+dan...
 
-Jadi ketika sebuah rumah menyediakan tempat khusus untuk kendaraan...
+seberapa besar kemungkinan orang masuk.
 
-sebagian lahannya memang sengaja...
+Karena toko yang murah sewanya...
 
-dialokasikan untuk mobilitas.
+belum tentu murah...
+
+kalau hampir nggak ada yang datang.
 
 ### 💡 PAYOFF
 
-Jadi carport sebenarnya...
+Jadi sebenarnya...
 
-bukan ruang kosong di depan rumah.
+minimarket bukan cuma menjual makanan,
 
-Dia adalah bagian dari...
+minuman,
 
-sistem rumah.
+atau kebutuhan sehari-hari.
 
-Tempat kendaraan datang dan pergi.
+Mereka juga menjual...
 
-Tempat barang masuk.
+**kemudahan.**
 
-Tempat penghuni berpindah...
+Dan secara tidak langsung...
 
-dari jalan...
+mereka menjual...
 
-ke rumah.
+**waktu kita.**
 
-Dan dari situ kita bisa melihat...
+Kita membayar sedikit lebih banyak...
 
-satu hal menarik:
+untuk menghemat perjalanan,
 
-rumah bukan cuma dirancang...
+tenaga,
 
-untuk tempat kita tinggal.
+dan beberapa menit kehidupan.
 
-Rumah juga dirancang...
+Jadi lain kali...
 
-untuk cara kita bergerak.
+saat melihat minimarket di pinggir jalan...
+
+coba lihat lagi.
+
+Mungkin yang sebenarnya sedang kita lihat...
+
+bukan cuma sebuah toko.
+
+Tapi...
+
+**sebuah bisnis yang dibangun di atas pergerakan manusia.**
 
 ### 📣 CTA
 
-Coba lihat carport rumah kamu.
+Sekarang coba lihat...
 
-Posisinya langsung menghadap jalan?
+di sekitar rumah kamu.
 
-Ada pagar?
+Kenapa minimarket itu...
 
-Ada taman?
-
-Atau justru...
-
-hampir seluruh bagian depan rumah...
-
-dipakai untuk kendaraan?
+dibangun tepat di situ?
 
 ---
 
 ## 🎬 ARAHAN INTONASI
 
-**HOOK — 0–6 detik**
+**HOOK — 0–8 detik**
 
-Nada observasional.
+Nada penasaran, seperti baru menyadari sesuatu.
 
 Tekankan:
 
-> “Kenapa area parkir... justru ikut dirancang... sebagai bagian dari rumah?”
+> “Kenapa minimarket... bisa ada di mana-mana?”
 
-Beri jeda sebelum masuk ke open loop.
+Lalu beri jeda sebelum:
+
+> “Padahal... bukannya satu toko saja sudah cukup?”
 
 **OPEN LOOP**
 
-Perlahan:
+Turunkan suara sedikit saat:
 
-> “Carport bukan cuma tempat... buat naruh mobil.”
+> “Mereka mencari sesuatu yang jauh lebih penting.”
 
 Lalu tekankan:
 
-> “titik pertemuan antara jalan, kendaraan, dan kehidupan di dalam rumah.”
+> “orang yang lewat...”
+
+dan:
+
+> “orang yang butuh sesuatu... sekarang juga.”
 
 **ISI**
 
-Gunakan alur seperti sedang mengikuti perjalanan pulang:
+Gunakan visual sehari-hari:
 
-**jalan → carport → turun → bawa barang → masuk rumah**
+**jalan → orang lewat → minimarket → orang masuk → barang kebutuhan**
 
-Tempo sedikit lebih cepat saat memberi contoh aktivitas.
+Saat menyebut air minum, sabun, dan kebutuhan rumah, tempo sedikit lebih cepat agar terasa familiar.
 
 **KONFLIK**
 
-Tekankan kalimat pendek:
+Perlambat saat:
 
-> “Mobil itu besar.”
+> “Lokasi yang bagus biasanya mahal.”
 
-Lalu berikan jeda.
-
-Saat menyebut:
-
-> “Taman membutuhkan ruang. Jalur masuk juga membutuhkan ruang.”
-
-buat seperti memperlihatkan bahwa setiap meter lahan harus dipilih untuk fungsi tertentu.
+Lalu buat jeda sebelum menjelaskan bahwa yang dinilai bukan hanya tanah, tetapi arus manusia.
 
 **PAYOFF**
 
 Turunkan tempo.
 
-Tekankan:
+Tekankan kuat:
 
-> “Rumah juga dirancang... untuk cara kita bergerak.”
+> “Mereka juga menjual... kemudahan.”
 
-Ini adalah kalimat penutup utama.
+Beri jeda.
+
+Lalu:
+
+> “Dan secara tidak langsung... mereka menjual... waktu kita.”
+
+Kalimat terakhir harus terasa seperti revelation, bukan iklan.
 
 **CTA**
 
-Nada ringan dan mengajak mengamati.
+Nada ringan.
 
-Jangan terdengar seperti sedang menjual rumah.
+Ajak penonton benar-benar mengamati minimarket di sekitar mereka.
 
 ---
 
-## 📚 CAPTION
+## 🎬 ARAHAN B-ROLL
 
-Kenapa banyak rumah punya carport?
+| Beat Narasi | Primary Visual Category | Visual Intent | Human Basic Need | Life Lens |
+|---|---|---|---|---|
+| “Kenapa minimarket bisa ada di mana-mana?” | PLACE | Menunjukkan minimarket sebagai bagian dari lingkungan kota | Resources | WEALTH |
+| “baru jalan beberapa menit...” | ACTIVITY | Orang berjalan/berkendara melewati beberapa toko | Resources | WEALTH |
+| “orang yang lewat” | PEOPLE | Arus manusia nyata di depan toko | Resources | WEALTH |
+| “haus / butuh air minum” | ACTIVITY + OBJECT | Orang membeli kebutuhan sederhana | Health / Resources | HEALTH / WEALTH |
+| “lokasi menjadi sangat berharga” | PLACE | Persimpangan/jalan ramai dengan toko | Resources | WEALTH |
+| “tanah di lokasi strategis” | PLACE | Lahan komersial di jalan ramai | Resources | WEALTH |
+| “berapa banyak orang yang lewat” | PEOPLE + SYSTEM | Arus kendaraan dan pedestrian | Resources | WEALTH |
+| “seberapa mudah toko terlihat” | PLACE | Fasad toko terlihat jelas dari jalan | Resources | WEALTH |
+| “minimarket menjual kemudahan” | PEOPLE + PLACE | Orang berhenti sebentar lalu masuk toko | Autonomy / Resources | WEALTH |
+| “menjual waktu kita” | ACTIVITY | Orang membeli cepat lalu kembali beraktivitas | Autonomy / Resources | WEALTH |
+| “bisnis yang dibangun di atas pergerakan manusia” | SYSTEM / INFRASTRUCTURE | Jalan, arus kendaraan, toko, dan kawasan | Resources | WEALTH |
 
-Karena tempat parkir sebenarnya bukan elemen yang berdiri sendiri.
+**Prinsip visual:**
 
-Dalam perancangan rumah, area masuk, kendaraan, jalur pejalan kaki, dan ruang privat saling berhubungan.
+Jangan membuat semua B-roll berupa orang.
 
-Carport menjadi salah satu ruang peralihan antara jalan dan rumah.
+Gunakan kombinasi:
 
-Di situ kendaraan berhenti, penghuni turun, barang dibawa masuk, dan aktivitas dari luar berpindah ke dalam rumah.
+**orang + toko + jalan + kendaraan + bangunan + arus lalu lintas + aktivitas belanja.**
 
-Carport juga bisa membantu memberi perlindungan dari panas dan hujan, tergantung desain dan orientasinya.
+Visual harus membuat penonton bisa **melihat mekanisme yang sedang dijelaskan**, bukan sekadar menghias narasi.
 
-Namun ada konsekuensi penting:
+---
 
-kendaraan membutuhkan ruang.
+## 📚 DASAR EVIDENCE
 
-Artinya, ketika sebuah rumah menyediakan area yang cukup besar untuk mobil, sebagian lahan harus dialokasikan untuk fungsi tersebut.
+Studi tahun 2026 tentang strategi lokasi minimarket di Kota Bandung menemukan bahwa pemilihan lokasi berkaitan dengan karakteristik area perdagangan, kepadatan penduduk, aksesibilitas, arus lalu lintas, visibilitas, dan fasilitas parkir.
 
-Jadi...
+Studi lain mengenai minimarket di kawasan Tembalang menemukan bahwa kedekatan/proximity menjadi motivasi utama konsumen untuk berbelanja di minimarket, serta menunjukkan adanya tumpang tindih area pelayanan ketika minimarket berada sangat berdekatan.
 
-carport bukan sekadar tempat parkir.
+Konsep **foot traffic** juga umum digunakan dalam analisis lokasi ritel: arus manusia di suatu tempat dapat menjadi indikator penting dalam menentukan lokasi operasi ritel.
 
-Letaknya juga bisa menunjukkan bagaimana sebuah rumah beradaptasi dengan...
+**Sumber utama:**
 
-cara hidup penghuninya.
-
-Karena rumah bukan cuma tempat kita tinggal.
-
-Rumah juga...
-
-adalah tempat kita datang dan pergi setiap hari.
-
-**Sumber:**
-
-- Ching, F. D. K. (2014). *Architecture: Form, Space, and Order* (4th ed.). Wiley.
-- Neufert, E. & Neufert, P. (2012). *Architects' Data* (4th ed.). Wiley-Blackwell.
-- Rybczynski, W. (1986). *Home: A Short History of an Idea*. Viking.
+- Arifianti, R., Fordian, D., & Pamungkas, M. R. (2026). *Proximity, Accessibility, and Visibility: An Analysis of Minimarket Location Strategies in Bandung City*. Asian Business Research Journal, 11(2), 1–6. DOI: 10.55220/2576-6759.v11i2.878.
+- Marina. (2012). *Kajian Perkembangan dan Lokasi Minimarket di Kawasan Tembalang*. Jurnal Pembangunan Wilayah dan Kota, 8(2), 191–203. DOI: 10.14710/pwk.v8i2.17623.
+- Urban Informatics. (2022). *Data science for pedestrian and high street retailing as a framework for advancing urban informatics to individual scales*.
 
 ---
 
 ## #️⃣ HASHTAG
 
-#Arsitektur  
-#Rumah  
-#Carport  
-#Garasi  
+#Minimarket  
 #Properti  
-#Architecture  
-#HomeDesign  
-#SejarahRumah  
+#Kota  
 #UrbanDesign  
+#Ekonomi  
+#Retail  
 #HumanBehavior  
 #Nugi  
 #NugiKonten
