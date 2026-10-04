@@ -1,4 +1,4 @@
-# Evaluation: Editorial Fit Score v2
+# Evaluation: Editorial Fit Score v3
 
 Dokumen ini mendefinisikan sistem penilaian kesesuaian editorial internal (*Internal Editorial Fit Score*) untuk Nugi Editorial Intelligence Engine.
 
@@ -12,15 +12,14 @@ Skor ini adalah **penjaga integritas editorial (editorial quality gate)** untuk 
 
 | Dimensi Penilaian | Bobot Maksimal | Deskripsi Evaluasi |
 | :--- | :---: | :--- |
-| **1. Human Relevance** | **25 Poin** | Seberapa kuat topik menyentuh kebutuhan manusia dan dapat diturunkan menjadi pengalaman kehidupan sehari-hari yang dikenali audiens? Nilai tinggi harus dibuktikan melalui Human Basic Need → Health/Wealth/Relationship → Everyday Life → Emotion/Conflict. Bukan wacana mengawang-awang. |
-| **2. Property / Life Anchor** | **20 Poin** | Seberapa kokoh dan alami hubungan kausal topik ke rumah, tanah, kota, ruang kerja, mobilitas, atau aset fisik? |
-| **3. WHY Depth** | **20 Poin** | Seberapa jauh analisis menembus lapisan permukaan? Apakah membedah hingga Level 3 (reaksi manusia), Level 4 (sistem struktural), atau Level 5 (psikologi purba)? |
-| **4. Evidence Potential** | **15 Poin** | Seberapa siap dan solid ketersediaan data empiris, rujukan institusi resmi (BPS/BI/jurnal), atau catatan sejarah untuk membuktikannya? |
-| **5. Novelty / Uniqueness** | **10 Poin** | Apakah sudut pandang yang ditawarkan segar, membalik asumsi umum (*inversion*), dan belum diobral oleh kreator lain? |
-| **6. Story Potential** | **10 Poin** | Seberapa dinamis struktur narasi yang dapat dibangun (kejelasan kontradiksi, daya pikat scene visual, dan kekuatan momen epifani)? |
+| **1. Human Relevance** | **25 Poin** | Seberapa kuat topik menyentuh kebutuhan manusia **dan** dapat diturunkan menjadi pengalaman kehidupan sehari-hari yang dikenali audiens? Nilai tinggi harus dibuktikan melalui Human Basic Need → Health/Wealth/Relationship → Everyday Life → Emotion/Conflict. |
+| **2. Human–Place Anchor** | **20 Poin** | Seberapa kokoh dan alami hubungan kausal topik ke rumah, tanah, kota, ruang kerja, mobilitas, atau aset/ruang fisik tempat manusia hidup? |
+| **3. WHY Depth** | **20 Poin** | Seberapa jauh analisis menembus lapisan permukaan menuju penyebab struktural dan/atau psikologis? |
+| **4. Evidence Potential** | **15 Poin** | Seberapa siap dan solid ketersediaan data empiris, rujukan institusi resmi, jurnal, atau catatan sejarah untuk membuktikannya? |
+| **5. Story Type Fit** | **10 Poin** | Seberapa natural Story Type yang dipilih terhadap fenomena dan causal chain topik? |
+| **6. Novelty** | **5 Poin** | Apakah framing/sudut pandangnya segar dan tidak sekadar mengulang penjelasan umum? |
+| **7. Editorial Coherence** | **5 Poin** | Apakah human question, anchor, WHY, story type, evidence, dan revelation saling konsisten? |
 | **TOTAL SKOR MAKSIMAL** | **100 Poin** | **Standar Ambang Kelayakan Editorial** |
-
----
 
 ## 2. Ambang Batas Kelayakan (Thresholds & Action Gates)
 
