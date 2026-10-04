@@ -288,6 +288,14 @@ class MediaQueryExpander:
                 core_concept, year_hint, is_historical, media_type
             )
 
+        # For relatable present-day scenes, explicitly prefer real people and real places.
+        # This supplements semantic search and prevents drift into abstract concept art.
+        if v_req == REAL_PREFERRED and v_type in ("HUMAN_LIFE", "HUMAN_LIFE_IN_PLACE"):
+            human_query = f"{core_concept} real people real place documentary"
+            place_query = f"{core_concept} everyday life home neighborhood documentary"
+            primary_queries = self._dedup([human_query] + primary_queries)
+            expanded_queries = self._dedup([place_query] + expanded_queries)
+
         return ExpandedQuery(
             original_request=user_request,
             detected_media_type=media_type,
