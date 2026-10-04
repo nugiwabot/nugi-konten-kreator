@@ -52,6 +52,11 @@ def calculate_editorial_fit(idea: Dict[str, Any]) -> Dict[str, Any]:
     - sources / evidence_needed / source_candidates
     - property_connection / place_connection / anchor (backward compat)
     - story_type (optional, from story_type engine)
+    - primary_human_basic_need / human_driver (optional)
+    - life_lens (optional: health | wealth | relationship)
+    - everyday_life_scene (optional but recommended for new v3 ideas)
+    - emotional_conflict_tension / psychological_tension (optional)
+    - relatability_sentence (optional but recommended)
     - intents (optional, from intent classifier)
     """
     title = str(idea.get("title", ""))
@@ -67,23 +72,40 @@ def calculate_editorial_fit(idea: Dict[str, Any]) -> Dict[str, Any]:
 
     # ─────────────────────────────────────────────────────────────────────────
     # 1. Human Relevance (Max 25)
-    #    Direct connection to human life, emotions, family, work, financial reality
+    #    Human Basic Need → Life Lens → Everyday Life → Emotion/Conflict
+    #    Structured fields are preferred; heuristic fallback preserves compatibility.
     # ─────────────────────────────────────────────────────────────────────────
-    hr_score = 15  # baseline (every editorial topic has some human relevance)
+    human_need = str(idea.get("primary_human_basic_need", idea.get("human_driver", ""))).strip()
+    life_lens = str(idea.get("life_lens", "")).strip().lower()
+    everyday_scene = str(idea.get("everyday_life_scene", "")).strip()
+    emotion_tension = str(idea.get("emotional_conflict_tension", idea.get("psychological_tension", ""))).strip()
+    relatability_sentence = str(idea.get("relatability_sentence", "")).strip()
 
-    # Strong human signals
-    if any(k in text_corpus for k in [
-        "hidup", "manusia", "gaji", "keluarga", "kerja", "tidur",
-        "cemas", "rasa aman", "rumah tangga", "anak", "kebutuhan"
-    ]):
-        hr_score += 6
-
-    # Specific demographic/group reference
-    if any(k in text_corpus for k in [
-        "anak muda", "generasi", "pekerja", "pasangan", "orang tua",
-        "pendatang", "buruh", "profesional", "masyarakat"
-    ]):
-        hr_score += 4
+    if human_need or life_lens or everyday_scene or emotion_tension or relatability_sentence:
+        hr_score = 8
+        if human_need:
+            hr_score += 5
+        if life_lens in {"health", "wealth", "relationship"}:
+            hr_score += 3
+        if everyday_scene:
+            hr_score += 6
+        if emotion_tension:
+            hr_score += 2
+        if relatability_sentence:
+            hr_score += 1
+    else:
+        # Backward-compatible heuristic for older idea objects.
+        hr_score = 15
+        if any(k in text_corpus for k in [
+            "hidup", "manusia", "gaji", "keluarga", "kerja", "tidur",
+            "cemas", "rasa aman", "rumah tangga", "anak", "kebutuhan"
+        ]):
+            hr_score += 6
+        if any(k in text_corpus for k in [
+            "anak muda", "generasi", "pekerja", "pasangan", "orang tua",
+            "pendatang", "buruh", "profesional", "masyarakat"
+        ]):
+            hr_score += 4
 
     hr_score = min(25, hr_score)
 
@@ -242,7 +264,14 @@ def calculate_editorial_fit(idea: Dict[str, Any]) -> Dict[str, Any]:
             "editorial_coherence": {"score": coherence_score, "max": 5}
         },
         "reasons": reasons,
-        "anchor_details": anchor_eval
+        "anchor_details": anchor_eval,
+        "relatability_details": {
+            "human_basic_need": bool(human_need),
+            "life_lens": life_lens if life_lens in {"health", "wealth", "relationship"} else "",
+            "everyday_life_scene": bool(everyday_scene),
+            "emotion_conflict": bool(emotion_tension),
+            "relatability_sentence": bool(relatability_sentence)
+        }
     }
 
 
