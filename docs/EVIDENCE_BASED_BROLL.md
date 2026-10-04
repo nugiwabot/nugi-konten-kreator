@@ -10,6 +10,31 @@ Visual yang sedikit kurang sinematik tetapi benar-benar menunjukkan objek, orang
 
 ---
 
+## 0.1 Human Relatability Visual Layer — WAJIB UNTUK SCENE MANUSIA
+
+Untuk scene yang membawa pengalaman manusia sehari-hari, sistem memprioritaskan **visual orang nyata + tempat nyata** yang sesuai dengan konteks narasi.
+
+Visual retrieval harus mempertimbangkan:
+
+    HUMAN BASIC NEED
+    → HEALTH / WEALTH / RELATIONSHIP
+    → EVERYDAY LIFE
+    → HUMAN / PLACE B-ROLL
+
+Setiap kandidat menerima metadata:
+- human_basic_need_score
+- life_lens_score
+- everyday_relevance_score
+- human_place_relevance_score
+- human_alignment_score
+
+Skor tersebut adalah **editorial/metadata alignment**, bukan penilaian emosi seseorang dan bukan computer-vision pixel score.
+
+Untuk visual type HUMAN_LIFE / HUMAN_LIFE_IN_PLACE:
+- query cenderung menyebut real people / real place / everyday life;
+- gunakan foto/video orang, keluarga, pekerja, tetangga, rumah, jalan, lingkungan, kantor, taman, dan tempat nyata lain yang memang sesuai narasi;
+- jangan mengganti scene manusia dengan ilustrasi abstrak, render AI, atau visual metafora ketika visual nyata tersedia;
+- visual tetap harus relevan dengan kalimat yang sedang dibicarakan, bukan sekadar 'ada orang'.
 ## 1. Lima Kelas Kebutuhan Visual (Visual Requirement Classes)
 
 Setiap kalimat atau segmen naskah diklasifikasikan ke dalam tepat satu dari lima status berikut:
@@ -183,3 +208,25 @@ python -m engine.pipeline.engine_cli media-find \
   --query "Steve Jobs meluncurkan iPhone tahun 2007" \
   --vr auto
 ```
+
+---
+
+## 8. Human Alignment Scoring
+
+Untuk scene yang tidak memerlukan bukti entitas historis tetapi membutuhkan konteks kehidupan manusia, Human Alignment Score ikut memengaruhi ranking kandidat.
+
+Komponen:
+
+    Human Alignment
+    = 35% Human Basic Need
+    + 20% Life Lens
+    + 25% Everyday Relevance
+    + 20% Human–Place Relevance
+
+Interpretasi:
+- 0.80–1.00: sangat selaras dengan pengalaman manusia dan konteks tempat.
+- 0.60–0.79: cukup kuat.
+- 0.40–0.59: relevansi parsial; masih dapat dipakai bila visualnya paling tepat.
+- <0.40: lemah untuk scene yang memang membutuhkan human-life context.
+
+Authenticity/evidence tetap menjadi gate utama untuk REAL_REQUIRED. Human alignment tidak boleh menggantikan bukti.
