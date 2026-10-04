@@ -1,9 +1,9 @@
 # NASKAH KONTEN NUGI
 
-## SHORT 01 — Kenapa Pintu Rumah Hampir Selalu Menghadap ke Jalan?
+## SHORT 01 — Kenapa Pintu Rumah Sering Menghadap ke Jalan?
 
 **Headline:**
-**Kenapa Pintu Rumah Hampir Selalu Menghadap ke Jalan?**
+**Kenapa Pintu Rumah Sering Menghadap ke Jalan?**
 
 **Format:** YouTube Shorts / Reels / TikTok  
 **Target durasi:** ±75–90 detik  
@@ -13,165 +13,187 @@
 
 ---
 
+## 🎯 STRUKTUR RETENTION
+
+**HOOK** → pertanyaan langsung + kontradiksi  
+**OPEN LOOP** → pintu ternyata bukan cuma akses  
+**ISI** → rumah, jalan, dan ruang transisi  
+**PAYOFF** → pintu menjadi cara rumah berhubungan dengan dunia luar  
+**CTA** → ajak penonton mengamati rumahnya sendiri
+
+---
+
 ## 🎙️ NASKAH TELEPROMPTER
 
-Coba perhatiin rumah-rumah di sekitar kita.
+Kenapa pintu rumah sering menghadap ke jalan?
 
-Ada satu hal yang kelihatannya biasa banget.
+Padahal...
 
-Tapi sebenarnya menarik.
+pintu cuma butuh satu hal.
 
-Sering kali...
+Jalan masuk.
 
-sisi depan rumah kita menghadap ke jalan.
+Kalau begitu...
 
-Dan di sisi itu juga...
+kenapa nggak dari samping?
 
-ada pintu masuknya.
+Atau dari belakang saja?
 
-Tapi pernah kepikiran nggak...
+Karena ternyata...
 
-kenapa pintu rumah sering dihubungkan dengan jalan?
+posisi pintu bukan cuma soal keluar masuk.
 
-Padahal secara fungsi...
+Pintu juga menentukan...
 
-kita cuma butuh jalan masuk ke dalam rumah.
+bagaimana rumah kita bertemu dengan dunia di luar.
 
-Kenapa nggak dari belakang saja?
+Coba lihat.
 
-Ternyata...
+Di luar rumah ada jalan.
 
-pintu rumah bukan cuma soal keluar masuk.
+Lebih publik.
 
-Dalam arsitektur dan urban design...
+Lalu ada pagar...
 
-hubungan antara rumah dan jalan memang sering dibahas sebagai hubungan antara ruang privat dan ruang publik.
-
-Pintu...
+halaman...
 
 teras...
 
-halaman depan...
+dan akhirnya pintu.
 
-bahkan pagar...
+Jadi sebelum masuk ke ruang yang paling privat...
 
-bisa menjadi batas di antara dua dunia itu.
+kita melewati beberapa lapisan dulu.
 
-Di dalam...
+Nah...
 
-ruang kita sendiri.
+pintu berada tepat di titik pertemuan itu.
 
-Di luar...
+Kita bisa masuk ke rumah...
 
-ada jalan dan kehidupan orang lain.
+tanpa berarti dunia luar langsung masuk ke kehidupan pribadi kita.
 
 Makanya...
 
-pintu depan sebenarnya punya fungsi sosial juga.
+dalam arsitektur dan urban design...
 
-Dia menjadi titik pertemuan...
+hubungan antara pintu masuk, bangunan, dan jalan...
 
-antara kehidupan pribadi kita...
-
-dengan dunia di luar rumah.
+sering dibahas sebagai hubungan antara ruang publik dan ruang privat.
 
 Dan menariknya...
 
-cara sebuah rumah berhubungan dengan jalan...
+cara sebuah rumah bertemu dengan jalan...
 
-bisa memengaruhi bagaimana sebuah lingkungan terasa.
+bisa ikut membentuk karakter sebuah lingkungan.
 
-Apakah terasa terbuka...
+Pintu yang terbuka ke jalan...
 
-tertutup...
+memberi hubungan yang berbeda...
 
-ramai...
+dibanding pintu yang tersembunyi di belakang pagar.
 
-atau justru sepi.
+Jadi...
 
-Jadi ternyata...
+pintu depan sebenarnya bukan cuma tempat kita masuk rumah.
 
-rumah itu nggak pernah benar-benar berdiri sendirian.
+Dia juga seperti...
 
-Bentuk rumah kita...
+cara rumah kita berkomunikasi dengan dunia luar.
 
-ikut menunjukkan bagaimana kita berhubungan dengan lingkungan di sekitar kita.
+Coba cek rumah kamu.
 
-Coba lihat rumah kamu sendiri setelah ini.
+Pintu masuknya menghadap jalan...
 
-Pintunya menghadap ke mana?
+gang...
 
-Dan...
+halaman...
 
-kenapa?
+atau malah harus belok dulu?
+
+Menurut kamu...
+
+kenapa dibuat seperti itu?
 
 ---
 
 ## 🎬 ARAHAN INTONASI
 
-**Awal**
+**HOOK — 0–5 detik**
 
-Baca seperti sedang mengajak orang memperhatikan sesuatu.
+Langsung, penasaran, jangan diawali basa-basi.
 
-> “Coba perhatiin rumah-rumah di sekitar kita.”
+> “Kenapa pintu rumah sering menghadap ke jalan?”
 
-Jangan terlalu cepat.
+Berikan jeda pendek.
 
-**Bagian pertanyaan**
+> “Padahal... pintu cuma butuh satu hal.”
 
-Naikkan sedikit intonasi.
+Tekankan **“satu hal”**.
 
-> “Tapi pernah kepikiran nggak...”
+**OPEN LOOP**
+
+Naikkan sedikit rasa penasaran:
+
+> “Kalau begitu... kenapa nggak dari samping? Atau dari belakang saja?”
+
+**ISI**
+
+Baca seperti sedang menjelaskan sesuatu yang baru disadari.
+
+Bagian:
+
+> “Pagar... halaman... teras... dan akhirnya pintu.”
+
+Beri jeda visual di tiap elemen.
+
+**PAYOFF**
+
+Perlambat:
+
+> “Pintu depan sebenarnya bukan cuma tempat kita masuk rumah.”
+
+Lalu tekankan:
+
+> “Dia juga seperti... cara rumah kita berkomunikasi dengan dunia luar.”
+
+**CTA**
+
+Baca seperti benar-benar mengajak penonton mengecek rumahnya sendiri.
+
+> “Pintu masuknya menghadap jalan... gang... halaman... atau malah harus belok dulu?”
 
 Jeda.
 
-> “kenapa pintu rumah sering dihubungkan dengan jalan?”
-
-**Bagian penjelasan**
-
-Lebih tenang.
-
-Jangan terdengar seperti sedang membacakan teori arsitektur.
-
-Anggap saja sedang menjelaskan sesuatu yang baru kamu temukan.
-
-**Revelation**
-
-Perlambat sedikit.
-
-> “Jadi ternyata...”
-
-Jeda.
-
-> “rumah itu nggak pernah benar-benar berdiri sendirian.”
-
-**Ending**
-
-Baca seperti benar-benar sedang mengajak penonton melihat rumahnya sendiri.
-
-> “Pintunya menghadap ke mana?”
-
-Jeda.
-
-> “Dan... kenapa?”
+> “Menurut kamu... kenapa dibuat seperti itu?”
 
 ---
 
 ## 📚 CAPTION
 
-Pernah kepikiran kenapa pintu rumah sering berada di sisi yang menghadap jalan?
+Kenapa pintu rumah sering berada di sisi yang menghadap jalan?
 
-Ternyata hubungan rumah dengan jalan bukan cuma masalah desain.
+Jawabannya ternyata tidak sesederhana soal akses masuk.
 
-Dalam kajian arsitektur dan urban design, area seperti pintu masuk, halaman depan, teras, dan fasad bangunan sering dipahami sebagai **interface antara ruang privat dan ruang publik**.
+Dalam arsitektur dan urban design, hubungan antara bangunan dan jalan sering dipahami sebagai hubungan antara **ruang publik dan ruang privat**.
 
-Penelitian tentang hubungan bangunan dan jalan juga melihat bagaimana posisi serta kepadatan entrance dapat memengaruhi hubungan antara bangunan dengan kehidupan jalan.
+Pintu masuk, halaman depan, teras, pagar, dan fasad dapat menjadi bagian dari ruang peralihan antara kehidupan di dalam rumah dan lingkungan di luar.
+
+Karena itu, posisi dan bentuk akses masuk tidak hanya berkaitan dengan fungsi.
+
+Ia juga dapat memengaruhi bagaimana sebuah rumah berhubungan secara visual dan sosial dengan jalan.
+
+Tentu, tidak semua rumah mengikuti pola yang sama.
+
+Budaya, iklim, ukuran lahan, keamanan, dan kebutuhan penghuni ikut memengaruhi letak pintu.
 
 Jadi...
 
-pintu depan ternyata bukan cuma tempat kita keluar masuk rumah.
+pintu depan bukan sekadar tempat keluar masuk.
 
-Dia juga menjadi salah satu titik yang menghubungkan kehidupan pribadi kita dengan lingkungan di luar.
+Ia juga menjadi salah satu titik...
+
+di mana ruang pribadi bertemu dengan dunia luar.
 
 **Sumber:**
 
