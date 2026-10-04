@@ -1,60 +1,72 @@
-# SHORT 07 — Kenapa Rumah Punya Ruang Tamu?
+# NASKAH KONTEN NUGI
 
-## Headline
+## SHORT 07 — Kenapa Rumah Punya Ruang Tamu?
+
+**Headline:**
 **Kenapa Rumah Punya Ruang Tamu?**
 
-## Format
-YouTube Shorts / Reels / TikTok
-
-## Target Durasi
-±75–90 detik
-
-## Story Type
-PLACE
-
-## Narrative Device
-Social Mystery
-
-## Human–Place Anchor
-Bagaimana rumah membedakan ruang untuk menerima orang lain dari ruang yang benar-benar pribadi.
+**Format:** YouTube Shorts / Reels / TikTok  
+**Target durasi:** ±75–90 detik  
+**Story Type:** PLACE  
+**Narrative Device:** Social Mystery  
+**Human–Place Anchor:** Bagaimana rumah membedakan ruang untuk menerima orang lain dari ruang yang benar-benar pribadi.
 
 ---
 
-## Teleprompter Script
+## 🎯 STRUKTUR RETENTION
 
-Coba bayangin...
+**HOOK** → bayangkan setiap tamu langsung masuk kamar  
+**OPEN LOOP** → kenapa kita butuh ruang khusus untuk menerima orang?  
+**ISI** → privasi dan tingkatan ruang  
+**KONFLIK** → tamu boleh masuk rumah, tetapi tidak seluruh kehidupan pribadi  
+**PAYOFF** → ruang tamu adalah zona sosial di antara luar dan dalam  
+**CTA** → ajak penonton mengamati posisi ruang tamu di rumah
+
+---
+
+## 🎙️ NASKAH TELEPROMPTER
+
+### 🪝 HOOK
+
+Bayangin...
 
 setiap kali ada tamu datang ke rumah...
 
 kita langsung mengajak mereka masuk ke kamar.
 
-Aneh banget kan?
-
-Biasanya...
-
-kita justru mengajak mereka duduk di ruang tamu.
-
-Tapi pernah kepikiran nggak...
-
-kenapa ruang untuk menerima tamu...
-
-perlu dibuat khusus?
+Aneh banget, kan?
 
 Padahal...
 
-kita sebenarnya bisa ngobrol di mana saja.
+kita bisa ngobrol di mana saja.
 
-Ternyata...
+Tapi hampir setiap rumah...
 
-ruang tamu punya hubungan dengan satu hal penting.
+punya satu ruang khusus untuk menerima orang.
+
+Ruang tamu.
+
+### 🔓 OPEN LOOP
+
+Kenapa?
+
+Kenapa kita perlu ruangan khusus...
+
+untuk orang yang sebenarnya bukan penghuni rumah?
+
+Jawabannya...
+
+berhubungan dengan satu hal penting.
 
 Privasi.
 
-Rumah bukan cuma tempat untuk tinggal.
+### 📖 ISI
 
-Rumah juga tempat kita melakukan banyak hal...
+Rumah bukan cuma tempat kita tinggal.
 
-yang nggak ingin selalu dilihat orang lain.
+Di dalam rumah...
+
+kita melakukan banyak hal yang nggak selalu ingin dilihat orang lain.
 
 Tidur.
 
@@ -64,79 +76,143 @@ Bekerja.
 
 Bersantai.
 
-Karena itu...
+Jadi ketika orang dari luar datang...
 
-ketika ada orang dari luar datang...
+kita membutuhkan ruang yang bisa menjadi perantara.
 
-kita membutuhkan ruang yang berada di antara...
-
-dunia luar...
-
-dan kehidupan pribadi kita.
-
-Ruang tamu menjadi salah satu ruang perantara itu.
+Dan ruang tamu melakukan fungsi itu.
 
 Tamu bisa masuk ke rumah...
 
-tapi belum tentu masuk ke seluruh kehidupan pribadi kita.
+tanpa harus masuk ke seluruh kehidupan pribadi kita.
 
-Dan ini menarik...
+### ⚖️ KONFLIK
 
-karena semakin dalam seseorang masuk ke sebuah rumah...
+Coba bayangkan rumah sebagai beberapa lapisan.
 
-biasanya semakin privat juga ruang yang dia masuki.
+Dekat pintu masuk...
 
-Ruang tamu...
+ruangnya relatif lebih terbuka.
 
-berada lebih dekat dengan bagian publik.
+Masuk lebih dalam...
 
-Kamar tidur...
+ruangnya semakin privat.
 
-lebih privat.
+Ruang tamu berada di salah satu bagian awal dari perjalanan itu.
 
-Jadi tanpa kita sadari...
+Sedangkan kamar tidur...
 
-denah rumah sebenarnya punya semacam...
+biasanya jauh lebih pribadi.
 
-tingkatan privasi.
+Jadi ada perbedaan besar antara...
 
-Bahkan...
+“boleh masuk rumah”
 
-cara kita menerima tamu...
+dan...
 
-ikut menentukan bagaimana rumah itu dirancang.
+“boleh masuk ke kehidupan pribadi saya.”
 
-Makanya...
+### 💡 PAYOFF
 
-ruang tamu bukan sekadar tempat menaruh sofa.
+Itulah kenapa...
+
+ruang tamu sebenarnya bukan sekadar tempat menaruh sofa.
 
 Dia adalah...
 
-ruang sosial yang menghubungkan kehidupan pribadi kita...
+zona sosial.
 
-dengan orang dari luar.
+Tempat kita bisa menerima orang lain...
 
-Dan mungkin...
+tanpa harus membuka seluruh kehidupan pribadi kita.
 
-itulah alasan kenapa banyak rumah punya satu ruang...
+Dan tanpa sadar...
 
-yang memang disiapkan...
+denah rumah kita sebenarnya sedang memberi tahu:
 
-untuk orang lain.
+siapa yang boleh berada di mana...
+
+dan seberapa jauh mereka boleh masuk.
+
+### 📣 CTA
+
+Coba lihat rumah kamu.
+
+Dari pintu masuk...
+
+ruang tamu berada di mana?
+
+Paling depan?
+
+Di tengah?
+
+Atau malah sudah nggak ada?
+
+Menurut kamu...
+
+kenapa posisi ruang tamu dibuat seperti itu?
 
 ---
 
-## Arahan Intonasi
+## 🎬 ARAHAN INTONASI
 
-- Opening dibuat seperti eksperimen sosial yang sedikit lucu, tetapi tetap natural.
-- **“Privasi.”** beri jeda dan penekanan.
-- Saat menjelaskan tingkatan privasi, tempo dibuat lebih tenang.
-- **“Tingkatan privasi.”** beri penekanan karena ini inti insight.
-- Ending dibuat reflektif, bukan seperti kesimpulan kuliah.
+**HOOK — 0–7 detik**
+
+Buat seperti eksperimen sosial yang sedikit lucu.
+
+> “Bayangin... setiap kali ada tamu datang ke rumah... kita langsung mengajak mereka masuk ke kamar.”
+
+Tekankan:
+
+> “Aneh banget, kan?”
+
+**OPEN LOOP**
+
+Beri rasa penasaran:
+
+> “Kenapa kita perlu ruangan khusus untuk orang yang sebenarnya bukan penghuni rumah?”
+
+Lalu jeda sebelum:
+
+> “Privasi.”
+
+**ISI**
+
+Bagian daftar aktivitas dibuat cepat tetapi jelas:
+
+> “Tidur. Makan. Bekerja. Bersantai.”
+
+Saat menjelaskan fungsi ruang tamu, turunkan tempo.
+
+**KONFLIK**
+
+Tekankan kontras:
+
+> “Boleh masuk rumah...”
+
+jeda.
+
+> “Tapi belum tentu boleh masuk ke seluruh kehidupan pribadi kita.”
+
+**PAYOFF**
+
+Perlambat:
+
+> “Ruang tamu sebenarnya bukan sekadar tempat menaruh sofa.”
+
+Lalu tekankan:
+
+> “Dia adalah... zona sosial.”
+
+**CTA**
+
+Nada ringan dan observasional.
+
+Ajak penonton memperhatikan posisi ruang tamu mereka sendiri.
 
 ---
 
-## Caption
+## 📚 CAPTION
 
 Kenapa rumah punya ruang tamu?
 
@@ -144,11 +220,11 @@ Salah satu cara melihatnya adalah melalui konsep **privasi dan ruang perantara**
 
 Rumah memiliki beberapa tingkat keterbukaan.
 
-Area dekat pintu masuk dan jalan cenderung lebih mudah diakses, sedangkan ruang seperti kamar tidur biasanya memiliki tingkat privasi yang lebih tinggi.
+Area dekat pintu masuk cenderung lebih mudah diakses, sedangkan ruang seperti kamar tidur biasanya memiliki tingkat privasi yang lebih tinggi.
 
 Ruang tamu dapat berfungsi sebagai tempat menerima orang dari luar tanpa harus membuka seluruh bagian rumah.
 
-Namun, pola ini tidak universal.
+Namun pola ini tidak universal.
 
 Bentuk ruang tamu dan cara menerima tamu berbeda menurut budaya, periode sejarah, ukuran rumah, kelas sosial, dan kebiasaan keluarga.
 
@@ -162,4 +238,19 @@ Denahnya juga mencerminkan bagaimana manusia mengatur **hubungan sosial dan bata
 - Dovey, K. & Wood, S. (2018). *Public/Private Interfaces*. Routledge.
 - van Nes, A. & Yamu, C. (2021). *Private and Public Space: Analysing Spatial Relationships Between Buildings and Streets*. Springer.
 
-#Arsitektur #Rumah #RuangTamu #SejarahRumah #Properti #Architecture #HomeHistory #Privasi #UrbanDesign #HumanBehavior #Nugi #NugiKonten
+---
+
+## #️⃣ HASHTAG
+
+#Arsitektur  
+#Rumah  
+#RuangTamu  
+#SejarahRumah  
+#Properti  
+#Architecture  
+#HomeHistory  
+#Privasi  
+#UrbanDesign  
+#HumanBehavior  
+#Nugi  
+#NugiKonten
