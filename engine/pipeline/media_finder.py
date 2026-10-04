@@ -270,6 +270,13 @@ class MediaFinderResult:
             lines.append(
                 f"      Score: {item.score:.3f} | Creator: {item.creator or 'N/A'} | License: {item.license}"
             )
+            if item.human_alignment_score > 0:
+                lines.append(
+                    f"      Human Fit: Need={item.human_basic_need or '-'} "
+                    f"{item.human_basic_need_score:.2f} | Lens={item.life_lens or '-'} "
+                    f"{item.life_lens_score:.2f} | Everyday={item.everyday_relevance_score:.2f} | "
+                    f"Place={item.human_place_relevance_score:.2f} | Alignment={item.human_alignment_score:.2f}"
+                )
             lines.append(f"      Source: {item.source_url}")
             if item.local_path:
                 lines.append(f"      Downloaded to: {item.local_path}")
