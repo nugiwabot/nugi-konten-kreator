@@ -48,3 +48,50 @@ Karena itu, evaluator tidak boleh memberi nilai tinggi hanya karena sebuah topik
 Jika hook kuat tetapi **Human Driver**, **Human Consequence**, atau **Revelation** lemah, evaluator harus meminta revisi angle/struktur sebelum script dinyatakan final.
 
 Evaluator tidak boleh menyarankan penambahan emosi secara artifisial hanya demi retention.
+
+
+---
+
+## 3. Relatability Evaluation Gate
+
+Storytelling yang kuat bukan hanya membuat audiens penasaran. Audiens harus dapat mengenali **dirinya sendiri atau pengalaman manusia yang familiar** di dalam cerita.
+
+Gunakan rantai evaluasi:
+
+```text
+HUMAN BASIC NEED
+→ HEALTH / WEALTH / RELATIONSHIP
+→ KEHIDUPAN SEHARI-HARI
+→ EMOSI / KONFLIK
+→ WHY
+→ REVELATION
+```
+
+### Pertanyaan evaluator
+
+| Lapisan | Pertanyaan |
+| :--- | :--- |
+| **Human Basic Need** | Kebutuhan manusia apa yang benar-benar dipertaruhkan? |
+| **Life Lens** | Apakah Health, Wealth, atau Relationship yang paling relevan sudah jelas? |
+| **Everyday Life** | Apakah ada adegan/momen nyata yang bisa langsung dikenali audiens? |
+| **Emotion / Conflict** | Apa yang dirasakan atau dipertaruhkan dalam situasi tersebut? |
+| **WHY** | Apakah cerita membongkar penyebab yang membuat pengalaman itu terjadi? |
+| **Revelation** | Setelah menonton, apakah audiens melihat pengalaman awalnya dengan cara baru? |
+
+### Relatability PASS
+
+Script dianggap **relatable** hanya bila evaluator dapat menjawab:
+
+> **"Siapa orangnya, kapan mereka mengalami ini, dan bagaimana ini memengaruhi hidup mereka?"**
+
+dengan contoh yang konkret, bukan istilah psikologi abstrak.
+
+### Revision Rule
+
+Jika Human Basic Need jelas tetapi **Everyday Life** tidak konkret, status tetap **REVISE**.
+
+Jika Everyday Life konkret tetapi tidak ada **Emotion / Conflict**, cari tension yang benar-benar berasal dari situasi, bukan tambahkan rage-bait.
+
+Jika WHY bagus tetapi **Revelation tidak mengembalikan insight ke kehidupan manusia**, revisi penutup.
+
+Jangan menaikkan skor relatability hanya dengan menambah kata "kita", "cemas", "takut", atau bahasa emosional lainnya.
