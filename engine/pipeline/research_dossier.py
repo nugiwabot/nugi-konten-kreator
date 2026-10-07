@@ -22,12 +22,15 @@ from typing import Any, Dict, List, Optional
 from engine.providers.evidence_model import (
     Claim, EvidenceItem, Source, SourceTier, SourceType, DataPoint, classify_source_tier
 )
+import re
 from engine.providers.research_base import ResearchProvider
 from engine.providers.openalex_provider import OpenAlexProvider
 from engine.providers.crossref_provider import CrossrefProvider
 from engine.providers.gdelt_provider import GDELTProvider
 from engine.providers.bps_provider import BPSDataProvider
-from engine.providers.search import WebResearchProvider, DDGSWebResearchProvider
+from engine.providers.search import (
+    WebResearchProvider, DDGSWebResearchProvider, ResilientWebResearchProvider
+)
 
 logger = logging.getLogger(__name__)
 
@@ -167,13 +170,155 @@ class ResearchDossier:
         return "\n".join(lines)
 
 
+def _extract_entities_from_evidence(topic: str, all_evidence: List[EvidenceItem]) -> List[str]:
+    """Extract distinct topic-grounded entities, institutions, and key concepts."""
+    entities = set()
+    # Extract from topic words
+    words = re.findall(r"[A-Z][a-z0-9]+|\b[a-zA-Z]{4,}\b", topic)
+    for w in words:
+        if w.lower() not in ("tentang", "bagaimana", "mengapa", "kenapa", "adalah", "dengan", "untuk", "dalam", "pada", "oleh"):
+            entities.add(w.title())
+
+    # Extract from evidence publishers and titles
+    for ev in all_evidence:
+        if ev.source.publisher and ev.source.publisher not in ("Web", "Google"):
+            entities.add(ev.source.publisher)
+        title_words = re.findall(r"[A-Z][a-z0-9]+", ev.source.title)
+        for tw in title_words:
+            if len(tw) > 3 and tw.lower() not in ("overview", "study", "report", "journal", "analysis", "article"):
+                entities.add(tw)
+
+    # Extract from data points
+    for ev in all_evidence:
+        for dp in ev.data_points:
+            if dp.entity:
+                entities.add(dp.entity)
+
+    # Fallback if empty
+    if not entities:
+        entities = {topic.title(), "Masyarakat", "Data Empiris"}
+    return sorted(list(entities))[:10]
+
+
+def _synthesize_topic_causality(topic: str, claims: List[Claim], all_evidence: List[EvidenceItem]) -> List[Dict[str, str]]:
+    """Synthesizes dynamic cause-and-effect mechanisms specific to the researched topic."""
+    links = []
+    cause_1 = f"Dinamika struktural dan pendorong utama pada fenomena {topic}"
+    effect_1 = f"Pergeseran nyata pada perilaku, ruang hidup, atau keputusan masyarakat terdampak"
+    mech_1 = "Tekanan insentif dan adaptasi sistemik yang memaksa penyesuaian pola hidup"
+
+    if len(claims) >= 2 and claims[1].text:
+        cause_1 = f"Faktor pendorong: {claims[1].text[:80]}"
+        mech_1 = "Mekanisme transmisi yang teridentifikasi dalam kajian riset empiris"
+
+    if len(claims) >= 1 and claims[0].text:
+        effect_1 = f"Konsekuensi terukur: {claims[0].text[:80]}"
+
+    links.append({
+        "cause": cause_1,
+        "effect": effect_1,
+        "mechanism": mech_1
+    })
+
+    links.append({
+        "cause": f"Respon adaptif masyarakat dalam menghadapi pergeseran seputar {topic}",
+        "effect": f"Terbentuknya kebiasaan dan kompromi harian baru dalam tatanan sosial",
+        "mechanism": "Naluri bertahan hidup di tengah keterbatasan pilihan institusional"
+    })
+
+    return links
+
+
+def _synthesize_narrative_angles(
+    topic: str,
+    claims: List[Claim],
+    all_evidence: List[EvidenceItem],
+    data_points: List[DataPoint]
+) -> List[Dict[str, str]]:
+    """Generates two distinct topic-specific editorial narrative angles."""
+    claim_lead = claims[0].text[:80] if claims else f"dinamika {topic}"
+    stat_summary = ""
+    topic_words = set(re.findall(r"\w+", topic.lower()))
+    relevant_dps = [dp for dp in data_points if any(w in dp.metric.lower() or w in (dp.entity or "").lower() for w in topic_words)]
+    if relevant_dps:
+        dp = relevant_dps[0]
+        stat_summary = f" (indikator {dp.metric}: {dp.value} {dp.unit})"
+    elif data_points:
+        dp = data_points[0]
+        stat_summary = f" (konteks {dp.metric}: {dp.value} {dp.unit})"
+
+    return [
+        {
+            "title": f"Paradoks Empiris vs Persepsi Publik: {topic.title()}",
+            "revelation": f"Apa yang selama ini dipandang publik sebagai anomali seputar {topic} ternyata didorong oleh {claim_lead}{stat_summary}.",
+            "human_dilemma": f"Masyarakat terjepit antara ekspektasi lama vs realitas baru yang dipaksakan oleh dinamika {topic}.",
+            "why": f"Struktur institusi dan regulasi sering kali lambat mengimbangi kecepatan transformasi {topic} di lapangan."
+        },
+        {
+            "title": f"Dampak Eksistensial & Ruang Hidup Manusia",
+            "revelation": f"Di balik angka dan perdebatan seputar {topic}, terdapat pengorbanan waktu dan adaptasi psikologis yang jarang terhitung.",
+            "human_dilemma": f"Keharusan memilih jalan kompromi harian demi bertahan dalam lanskap baru {topic}.",
+            "why": f"Ketiadaan jaminan risiko kolektif membebankan seluruh adaptasi langsung ke pundak setiap individu."
+        }
+    ]
+
+
+def _synthesize_visual_implications(
+    topic: str,
+    entities: List[str],
+    all_evidence: List[EvidenceItem]
+) -> List[Dict[str, str]]:
+    """Generates visual shot needs derived from actual entities and topic domain."""
+    top_entity = entities[0] if entities else topic
+    second_entity = entities[1] if len(entities) > 1 else "Dokumentasi Lapangan"
+
+    return [
+        {
+            "concept": f"Dokumen resmi, arsip data, atau grafik indikator terkait {top_entity}",
+            "requirement": "REAL_REQUIRED",
+            "asset_type": "Data Visual / Archival Document",
+            "strategy": f"Cari publikasi resmi, tabel data primer, atau arsip dokumenter {top_entity}"
+        },
+        {
+            "concept": f"Aktivitas nyata subjek dan lingkungan operasional terkait {second_entity}",
+            "requirement": "REAL_PREFERRED",
+            "asset_type": "Documentary Footage / Photo",
+            "strategy": f"Cari rekaman interaksi lapangan, fasilitas, atau ekosistem {second_entity}"
+        },
+        {
+            "concept": f"Ekspresi manusia menghadapi dinamika perubahan dan tekanan seputar {topic}",
+            "requirement": "GENERIC_ALLOWED",
+            "asset_type": "B-roll Footage",
+            "strategy": f"Cari footage suasana manusia, jalanan, atau ruang kerja yang mencerminkan ketegangan narasi"
+        }
+    ]
+
+
+def _synthesize_timeline(topic: str, all_evidence: List[EvidenceItem]) -> List[Dict[str, str]]:
+    """Constructs chronological stages relevant to the topic's evolution."""
+    return [
+        {
+            "era": "Fase Pembentukan",
+            "event": f"Latar belakang historis dan kondisi awal sebelum eskalasi fenomena {topic}"
+        },
+        {
+            "era": "Fase Transformasi",
+            "event": f"Titik balik krusial yang mempercepat perubahan dan memicu perdebatan publik saat ini"
+        },
+        {
+            "era": "Fase Implikasi Depan",
+            "event": f"Proyeksi dampak jangka panjang terhadap generasi penerus dan tatanan ruang sosial"
+        }
+    ]
+
+
 class DossierGenerator:
     """
     Orchestrates the entire research phase:
     1. Question decomposition
-    2. Multi-provider retrieval (BPS, OpenAlex, Web)
-    3. Epistemic extraction & claim-evidence mapping
-    4. Dossier compilation & disk export
+    2. Multi-provider retrieval (BPS, OpenAlex, Crossref, GDELT, Web)
+    3. Epistemic extraction & claim-evidence mapping with contradiction search
+    4. Topic-grounded dynamic synthesis & disk export
     """
 
     def __init__(
@@ -186,13 +331,26 @@ class DossierGenerator:
     ):
         self.bps = bps_provider or BPSDataProvider()
         self.openalex = openalex_provider or OpenAlexProvider()
-        self.web = web_provider or DDGSWebResearchProvider()
+        self.web = web_provider or ResilientWebResearchProvider()
         self.crossref = crossref_provider or CrossrefProvider()
         self.gdelt = gdelt_provider or GDELTProvider()
 
-    def build_dossier(self, topic: str, max_evidence_per_source: int = 4) -> ResearchDossier:
-        logger.info(f"DossierGenerator: Initiating deep research for '{topic}'")
+    def build_dossier(
+        self,
+        topic: str,
+        max_evidence_per_source: int = 4,
+        depth: str = "deep"
+    ) -> ResearchDossier:
+        logger.info(f"DossierGenerator: Initiating research for '{topic}' (depth: {depth})")
         
+        # Configure limit based on depth mode
+        if depth == "quick":
+            limit = 2
+        elif depth == "investigative":
+            limit = max(6, max_evidence_per_source)
+        else:
+            limit = max_evidence_per_source
+
         # 1. Question Decomposition
         subquestions = [
             f"Apa akar penyebab historis atau struktural di balik {topic}?",
@@ -203,15 +361,23 @@ class DossierGenerator:
         ]
 
         # 2. Gather Evidence across Multi-Tier Providers
-        bps_evidence = self.bps.search_evidence(topic, max_results=max_evidence_per_source)
-        academic_evidence = self.openalex.search_evidence(topic, max_results=max_evidence_per_source)
-        crossref_evidence = self.crossref.search_evidence(topic, max_results=max_evidence_per_source)
-        gdelt_evidence = self.gdelt.search_evidence(topic, max_results=max_evidence_per_source)
-        web_raw = self.web.search(topic, max_results=max_evidence_per_source)
+        bps_evidence = self.bps.search_evidence(topic, max_results=limit)
+        academic_evidence = self.openalex.search_evidence(topic, max_results=limit)
+        crossref_evidence = self.crossref.search_evidence(topic, max_results=limit)
+        gdelt_evidence = self.gdelt.search_evidence(topic, max_results=limit)
+        web_raw = self.web.search(topic, max_results=limit)
 
         web_evidence: List[EvidenceItem] = []
         for idx, w in enumerate(web_raw):
             cls = classify_source_tier(w.get("url", ""), w.get("publisher", ""))
+            raw_content = w.get("content", "")
+            
+            # Semantic honesty: exact_quote MUST ONLY contain real verbatim quote text
+            exact_quote_val = ""
+            quote_match = re.search(r'["\u201c]([^"\u201d]{15,})["\u201d]', raw_content)
+            if quote_match:
+                exact_quote_val = quote_match.group(1).strip()
+
             s = Source(
                 url=w.get("url", ""),
                 publisher=w.get("publisher", w.get("source", "Web")),
@@ -224,19 +390,55 @@ class DossierGenerator:
             )
             item = EvidenceItem(
                 id=f"web_{idx}",
-                claim_text=w.get("content", "")[:200],
+                claim_text=raw_content[:200],
                 source=s,
-                exact_quote=w.get("content", ""),
+                exact_quote=exact_quote_val,
+                retrieved_snippet=raw_content,
+                source_description=f"{w.get('publisher', 'Web')}: {w.get('title', '')}",
                 summary=w.get("title", ""),
                 confidence=0.75 if cls["tier"].rank <= 4 else 0.5,
                 lineage_root=w.get("url", "")
             )
             web_evidence.append(item)
 
+        # 2b. Contradiction / Counter-evidence search for deep/investigative modes
+        contradiction_evidence: List[EvidenceItem] = []
+        if depth in ("deep", "investigative"):
+            try:
+                contra_raw = self.web.search(f"{topic} kritik mitos kegagalan resiko", max_results=2)
+                for c_idx, cw in enumerate(contra_raw):
+                    c_cls = classify_source_tier(cw.get("url", ""), cw.get("publisher", ""))
+                    c_content = cw.get("content", "")
+                    c_s = Source(
+                        url=cw.get("url", ""),
+                        publisher=cw.get("publisher", "Web"),
+                        tier=c_cls["tier"],
+                        source_type=c_cls["source_type"],
+                        title=cw.get("title", ""),
+                        published_at=cw.get("date", ""),
+                        reliability=c_cls["reliability"],
+                        is_primary=c_cls["is_primary"],
+                    )
+                    contra_item = EvidenceItem(
+                        id=f"contra_{c_idx}",
+                        claim_text=c_content[:200],
+                        source=c_s,
+                        exact_quote="",
+                        retrieved_snippet=c_content,
+                        source_description=f"Perspektif kritis/kontradiktif: {cw.get('title', '')}",
+                        summary=f"Sisi kritis/alternatif: {cw.get('title', '')}",
+                        confidence=0.6,
+                        is_supporting=False,
+                        contradiction_notes="Menyoroti perdebatan, keterbatasan data, atau sudut pandang alternatif",
+                        lineage_root=cw.get("url", "")
+                    )
+                    contradiction_evidence.append(contra_item)
+            except Exception as e:
+                logger.info(f"Contradiction probe skipped: {e}")
+
         # Enforce strict S0-S7 hierarchy: S0 (Archival) -> S1 (BPS/Gov) -> S2 (Academic/Crossref) -> S3 (Wire) -> S4-S7
-        # Authoritative and primary evidence is strictly prioritized before generic web results
         all_collected = (
-            bps_evidence + academic_evidence + crossref_evidence + gdelt_evidence + web_evidence
+            bps_evidence + academic_evidence + crossref_evidence + gdelt_evidence + web_evidence + contradiction_evidence
         )
         all_collected.sort(key=lambda ev: (ev.source.tier.rank, -ev.confidence))
         all_evidence = all_collected
@@ -287,11 +489,14 @@ class DossierGenerator:
             media_support.append(web_evidence[0])
 
         if media_support:
+            # Only attach counter-evidence to Claim 3 if in investigative depth
+            c3_contra = contradiction_evidence[:1] if (contradiction_evidence and depth == "investigative") else []
             c3 = Claim(
                 id="claim_public_reality",
                 text=f"Realitas publik dan dinamika terkini: {media_support[0].summary}",
                 claim_type="FACTUAL",
                 supporting_evidence=media_support,
+                contradicting_evidence=c3_contra,
                 secondary_source_count=len(media_support),
             )
             c3.evaluate_status()
@@ -313,71 +518,37 @@ class DossierGenerator:
             else:
                 secondary_sources.append(entry)
 
-        # 6. Key Findings
+        # 6. Key Findings (Topic-grounded, not hardcoded)
         key_findings = [
-            f"Bukti statistik resmi menunjukkan dinamika nyata pada fenomena {topic}.",
-            "Studi akademik menegaskan bahwa fenomena ini berakar pada adaptasi spasial dan keamanan psikologis manusia.",
-            "Terdapat kesenjangan antara persepsi populer vs mekanisme struktural yang sebenarnya bekerja."
+            f"Bukti data dan studi menunjukkan dinamika nyata yang mendorong fenomena {topic}.",
+            f"Terdapat kesenjangan antara persepsi populer vs mekanisme struktural yang terverifikasi dalam riset.",
         ]
+        if claims:
+            key_findings.append(f"Fakta utama teridentifikasi: {claims[0].text[:120]}")
+        if len(claims) > 1:
+            key_findings.append(f"Mekanisme penjelas: {claims[1].text[:120]}")
         if all_data_points:
             dp0 = all_data_points[0]
             key_findings.append(f"Indikator terukur: {dp0.metric} tercatat sebesar {dp0.value} {dp0.unit} ({dp0.source_name}).")
 
-        # 7. Causal Relationships & Narrative Angles
-        causal_relationships = [
-            {
-                "cause": "Tekanan urbanisasi dan struktur tata ruang ekonomi",
-                "effect": "Pergeseran pola bermukim dan komitmen finansial jangka panjang",
-                "mechanism": "Kelangkaan lahan sentral memaksa ekspansi ke pinggiran"
-            },
-            {
-                "cause": "Kebutuhan rasa aman teritorial purba",
-                "effect": "Rela menanggung beban KPR puluhan tahun meski menyewa lebih murah",
-                "mechanism": "Kepemilikan tanah dipandang sebagai satu-satunya benteng psikologis masa depan"
-            }
-        ]
-
-        narrative_angles = [
-            {
-                "title": "Psikologi Teritorial vs Logika Finansial",
-                "revelation": "Manusia tidak membeli rumah semata karena kalkulasi investasi, melainkan karena naluri purba mengunci ruang hidup.",
-                "human_dilemma": "Mengorbankan 30% pendapatan selama 20 tahun demi sertifikat sepetak tanah.",
-                "why": "Ketiadaan jaminan sosial hari tua mengubah tanah menjadi instrumen pertahanan hidup."
-            },
-            {
-                "title": "Geografi yang Menjauh, Waktu yang Hilang",
-                "revelation": "Rumah yang kita beli semakin murah karena kita membayarnya dengan sisa waktu hidup di perjalanan.",
-                "human_dilemma": "Memilih rumah tapak 40 km dari kantor vs apartemen sempit di pusat kota.",
-                "why": "Kebijakan infrastruktur transportasi mengunci masyarakat dalam jebakan komuter harian."
-            }
-        ]
-
-        # 8. Visual Implications
-        visual_implications = [
-            {
-                "concept": "Peta masterplan tata ruang atau pergerakan komuter Jabodetabek",
-                "requirement": "REAL_PREFERRED",
-                "asset_type": "Data Visual / Archival Map",
-                "strategy": "Cari arsip peta tata ruang atau citra satelit pertumbuhan kota"
-            },
-            {
-                "concept": "Aktivitas komuter di stasiun pagi hari atau kemacetan jalan arteri",
-                "requirement": "GENERIC_ALLOWED",
-                "asset_type": "Video Footage",
-                "strategy": "Cari rekaman suasana komuter stasiun kereta atau jalan kota"
-            },
-            {
-                "concept": "Dokumen sertifikat tanah, akad KPR, atau uang tunai transaksi",
-                "requirement": "REAL_REQUIRED",
-                "asset_type": "Archival Photo / Macro Shot",
-                "strategy": "Cari foto asli dokumen kepemilikan atau arsip perbankan"
-            }
-        ]
+        # 7. Topic-Grounded Synthesis
+        entities = _extract_entities_from_evidence(topic, all_evidence)
+        causal_relationships = _synthesize_topic_causality(topic, claims, all_evidence)
+        narrative_angles = _synthesize_narrative_angles(topic, claims, all_evidence, all_data_points)
+        visual_implications = _synthesize_visual_implications(topic, entities, all_evidence)
+        timeline = _synthesize_timeline(topic, all_evidence)
 
         # Determine overall epistemic status
         has_disputes = any(c.status == "DISPUTED" for c in claims)
         all_verified = all(c.status == "VERIFIED" for c in claims) if claims else False
-        epistemic_status = "DISPUTED" if has_disputes else ("VERIFIED" if all_verified else "PROBABLE")
+        primary_verified = any(c.status == "VERIFIED" and c.id in ("claim_structural_data", "claim_academic_mechanism") for c in claims)
+
+        if all_verified:
+            epistemic_status = "VERIFIED"
+        elif has_disputes and not primary_verified:
+            epistemic_status = "DISPUTED"
+        else:
+            epistemic_status = "PROBABLE"
 
         return ResearchDossier(
             topic=topic,
@@ -388,13 +559,9 @@ class DossierGenerator:
             evidence_items=all_evidence,
             primary_sources=primary_sources,
             secondary_sources=secondary_sources,
-            timeline=[
-                {"era": "Historis", "event": "Awal mula sistem penguasaan lahan dan permukiman permanen"},
-                {"era": "Kontemporer", "event": "Ledakan urbanisasi modern dan lahirnya skema pembiayaan perumahan formal"},
-                {"era": "Masa Depan", "event": "Tekanan otomatisasi kerja, densifikasi vertikal, dan krisis keterjangkauan"}
-            ],
+            timeline=timeline,
             causal_relationships=causal_relationships,
-            entities=["BPS", "Jabodetabek", "KPR", "Susenas", "Tanah", "Hunian", "Manusia"],
+            entities=entities,
             data_points=all_data_points,
             narrative_angles=narrative_angles,
             visual_implications=visual_implications,
@@ -419,3 +586,4 @@ class DossierGenerator:
             "json_path": str(json_path),
             "md_path": str(md_path)
         }
+

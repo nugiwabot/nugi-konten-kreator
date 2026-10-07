@@ -178,3 +178,35 @@ class SearXNGWebResearchProvider(WebResearchProvider):
         except Exception as e:
             logger.warning(f"SearXNG query failed: {e}. Returning empty list.")
         return results
+
+
+class ResilientWebResearchProvider(WebResearchProvider):
+    """
+    Hybrid resilient web search provider:
+    Attempts SearXNG first if SEARXNG_URL is configured in environment,
+    and seamlessly falls back to DuckDuckGo (DDGS) if SearXNG is unavailable or not configured.
+    """
+    def __init__(self, searxng_url: Optional[str] = None):
+        import os
+        self.searxng_url = searxng_url or os.getenv("SEARXNG_URL")
+        self.searxng = SearXNGWebResearchProvider(self.searxng_url) if self.searxng_url else None
+        self.ddgs = DDGSWebResearchProvider()
+
+    def search(
+        self,
+        query: str,
+        recency: Optional[str] = None,
+        domains: Optional[List[str]] = None,
+        language: str = "id-id",
+        max_results: int = 5
+    ) -> List[Dict[str, Any]]:
+        if self.searxng:
+            try:
+                results = self.searxng.search(query, recency=recency, domains=domains, language=language, max_results=max_results)
+                if results:
+                    return results
+            except Exception as e:
+                logger.info(f"SearXNG search unavailable ({e}), falling back to DDGS.")
+
+        return self.ddgs.search(query, recency=recency, domains=domains, language=language, max_results=max_results)
+

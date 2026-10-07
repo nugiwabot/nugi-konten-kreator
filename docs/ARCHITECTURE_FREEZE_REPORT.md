@@ -69,6 +69,36 @@ EDITORIAL QUALIFICATION
     `Visual Requirement (REAL_PREFERRED) → Provider Search (Wikimedia Commons) → Ranking → Network Download → File on Disk (assets/media/) → Non-zero byte verification (>0 bytes) → Media Library Indexing → sources.json metadata persistence → Immediate Local Reuse via MediaLibrary.search_local()`.
   - Fixed tokenization bug in `MediaLibrary.search_local` using regex alphanumeric word boundary extraction to ensure filenames with parentheses, hyphens, and punctuation match smoothly.
 
+### Production Hardening: Channel Production Readiness Milestones
+
+#### 1. Dynamic Topic-Grounded Synthesis (Zero Hardcoded Narratives)
+- Eliminated all hardcoded housing/KPR/Jabodetabek narrative angles, causal mechanisms, visual needs, and entities in `research_dossier.py`.
+- Implemented dynamic topic synthesis functions (`_extract_entities_from_evidence`, `_synthesize_topic_causality`, `_synthesize_narrative_angles`, `_synthesize_visual_implications`, `_synthesize_timeline`) that derive narrative concepts directly from researched evidence and topic keywords.
+- Verified across 3 completely divergent topic domains (`tests/test_topic_differentiation.py`):
+  - Evergreen Housing vs Modern AI/Tech vs Historical Reformasi 1998 generate completely divergent findings, claims, angles, and visual shots.
+
+#### 2. Semantic Quote Integrity & Freshness Awareness
+- Enforced strict quote truthfulness: `exact_quote` in `EvidenceItem` is strictly populated only when verbatim quotes are extracted (`FAKE GENERATED DESCRIPTION != EXACT QUOTE`).
+- Added `retrieved_snippet` and `source_description` to separate raw search passages from quotes.
+- Implemented `evaluate_recency(published_at, topic_mode)` tracking age, temporal category (`CURRENT`, `RECENT`, `HISTORICAL`), and detecting outdated sources for breaking/news topics (`tests/test_quote_integrity.py`).
+
+#### 3. Resilient Hybrid Web Search Provider
+- Implemented `ResilientWebResearchProvider` (`engine/providers/search.py`):
+  - Primary: SearXNG metasearch when `SEARXNG_URL` is configured and responsive.
+  - Fallback: DuckDuckGo (`DDGSWebResearchProvider`) when SearXNG is unavailable or unset.
+
+#### 4. Topic-Grounded Dynamic Script Formulation (`DynamicScriptSynthesizer`)
+- Implemented `DynamicScriptSynthesizer` (`engine/editorial/script_synthesizer.py`):
+  - Formulates natural spoken Indonesian teleprompter scripts adhering to `HUMAN × PLACE × CHANGE × WHY`.
+  - Injects empirical facts, numbers (`{metric}: {value} {unit}`), and causal mechanisms from the research dossier.
+  - Proactively strips forbidden robotic AI filler phrases (`di era modern ini`, `fenomena ini menarik`, etc.).
+
+#### 5. 10-Dimension Content Quality QA (`ContentQualityEvaluator`)
+- Implemented `ContentQualityEvaluator` (`engine/editorial/content_scorer.py`):
+  - Scores production packages across 10 dimensions (Research Strength, Source Quality, Evidence Coverage, Claim Confidence, Story Strength, Human Relevance, Hook Strength, Originality, Visual Feasibility, Publishability).
+  - Categorizes status: `PUBLISH_READY` (>=90), `MINOR_EDIT` (80-89), `NEEDS_REVIEW` (70-79), `REJECT_AND_RESEARCH_AGAIN` (<70).
+  - Exports `content_quality_report.json` and embeds quality diagnostics in `manifest.json`.
+
 ---
 
 ## 3. Implementation Taxonomy

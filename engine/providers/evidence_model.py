@@ -10,6 +10,7 @@ corroboration, contradiction detection, and uncertainty modeling.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from enum import Enum
@@ -205,7 +206,9 @@ class EvidenceItem:
     id: str
     claim_text: str
     source: Source
-    exact_quote: str = ""
+    exact_quote: str = ""  # MUST strictly contain real verbatim quote text only.
+    retrieved_snippet: str = ""  # Raw passage or snippet retrieved from search/API.
+    source_description: str = ""  # Narrative or metadata description of the evidence.
     summary: str = ""
     data_points: List[DataPoint] = field(default_factory=list)
     confidence: float = 1.0  # 0.0 to 1.0
@@ -222,6 +225,55 @@ class EvidenceItem:
         d["source"] = self.source.to_dict()
         d["data_points"] = [dp.to_dict() for dp in self.data_points]
         return d
+
+
+def evaluate_recency(published_at: str, topic_mode: str = "general") -> Dict[str, Any]:
+    """
+    Evaluates source freshness and recency alignment.
+    Distinguishes historical vs current vs outdated sources.
+    """
+    if not published_at:
+        return {
+            "publication_year": None,
+            "temporal_category": "UNKNOWN",
+            "is_outdated": False,
+            "notes": "No publication date available."
+        }
+
+    # Extract 4-digit year
+    m = re.search(r"\b(19\d{2}|20\d{2})\b", str(published_at))
+    if not m:
+        return {
+            "publication_year": None,
+            "temporal_category": "UNKNOWN",
+            "is_outdated": False,
+            "notes": f"Could not parse year from: '{published_at}'"
+        }
+
+    year = int(m.group(1))
+    current_year = datetime.now(timezone.utc).year
+    age = current_year - year
+
+    if age <= 1:
+        category = "CURRENT"
+    elif age <= 3:
+        category = "RECENT"
+    elif age <= 10:
+        category = "MODERATE"
+    else:
+        category = "HISTORICAL"
+
+    is_outdated = False
+    if topic_mode.lower() in ("current", "news", "breaking") and age > 3:
+        is_outdated = True
+
+    return {
+        "publication_year": year,
+        "age_years": age,
+        "temporal_category": category,
+        "is_outdated": is_outdated,
+        "notes": f"Source is {age} years old ({category})."
+    }
 
 
 @dataclass

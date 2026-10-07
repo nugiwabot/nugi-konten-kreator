@@ -82,6 +82,7 @@ def content_create(
     dry_run: bool = False,
     stage_limit: Optional[str] = None,
     max_broll_shots: Optional[int] = None,
+    depth: str = "deep",
 ) -> Dict[str, Any]:
     """
     Master Autonomous Content Intelligence Workflow for Nugi.
@@ -92,7 +93,9 @@ def content_create(
     import re
     from engine.editorial.quality_gate import check_quality_gates
     from engine.pipeline.research_dossier import DossierGenerator
+    from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
     from engine.editorial.script_auditor import audit_script_with_dossier
+    from engine.editorial.content_scorer import ContentQualityEvaluator
     from engine.pipeline.script_parser import ScriptParser
     from engine.pipeline.visual_requirements import VisualRequirementsGenerator
     from engine.pipeline.media_finder import MediaFinder
@@ -115,7 +118,7 @@ def content_create(
 
     # Step 2: Deep Research & Dossier Generation
     dossier_gen = DossierGenerator()
-    dossier = dossier_gen.build_dossier(topic)
+    dossier = dossier_gen.build_dossier(topic, depth=depth)
     dossier_files = dossier_gen.save_dossier_to_workspace(dossier, work_dir)
 
     if stage_limit == "research":
@@ -130,37 +133,9 @@ def content_create(
             "data_points": [dp.to_dict() for dp in dossier.data_points],
         }
 
-    # Step 3: Script Formulation (Canonical Nugi Production Format)
-    hook = dossier.narrative_angles[0]["revelation"] if dossier.narrative_angles else f"Pernahkah kamu menyadari fakta di balik {topic}?"
-    why = dossier.narrative_angles[0]["why"] if dossier.narrative_angles else "Struktur sistemik yang sering luput dari perhatian kita."
-    c1_text = dossier.claims[0].text if dossier.claims else "Ada kesenjangan besar antara persepsi publik vs realitas empiris."
-    c2_text = dossier.claims[1].text if len(dossier.claims) > 1 else "Riset struktural membuktikan dampak langsung pada ruang hidup manusia."
-
-    script_lines = [
-        f"# NASKAH KONTEN NUGI — {topic.upper()}",
-        "## 📽️ NARASI 1: HUMAN × PLACE",
-        f"### *{topic}*",
-        "- **Pilar DNA:** `HUMAN × PLACE × CHANGE × WHY`",
-        "",
-        "#### NASKAH TALKING-HEAD (Durasi ~60 Detik | 150 Kata)",
-        "",
-        "```text",
-        "[00:00 - 00:08] HOOK",
-        f"{hook}",
-        "",
-        "[00:08 - 00:25] TENSION & PARADOX",
-        f"Banyak dari kita menganggap fenomena ini biasa. Namun data resmi BPS mengungkap cerita yang jauh berbeda.",
-        f"{c1_text}",
-        "",
-        "[00:25 - 00:45] CONTEXT & THE REAL DATA",
-        f"{c2_text}",
-        f"{why}",
-        "",
-        "[00:45 - 00:60] THE REVELATION (THE WHY)",
-        "Pada akhirnya, ruang bukan sekadar dinding dan atap, melainkan benteng pertahanan psikologis dan masa depan kita.",
-        "```",
-    ]
-    script_content = "\n".join(script_lines)
+    # Step 3: Script Formulation (Topic-Grounded Dynamic Nugi Production Format)
+    script_synth = DynamicScriptSynthesizer()
+    script_content = script_synth.synthesize_script(dossier)
     script_path = work_dir / "script.md"
     script_path.write_text(script_content, encoding="utf-8")
 
@@ -234,6 +209,21 @@ def content_create(
         srt_gen = SRTGenerator()
         srt_gen.write_srt_file(srt_path, narratives[0].sections)
 
+    # Step 8: Comprehensive Content Quality QA (10 Dimensions)
+    quality_evaluator = ContentQualityEvaluator()
+    quality_report = quality_evaluator.evaluate(
+        topic=topic,
+        dossier_data=dossier.to_dict(),
+        script_text=script_content,
+        fact_check_result=fact_check_result,
+        shots_data=shots_data,
+        downloaded_assets=downloaded_assets,
+    )
+    quality_report_path = work_dir / "content_quality_report.json"
+    quality_report_path.write_text(
+        json.dumps(quality_report.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
     manifest = {
         "topic": topic,
         "folder": folder_name,
@@ -241,6 +231,7 @@ def content_create(
         "editorial_fit": gate_check.get("fit_score", 85),
         "epistemic_status": dossier.epistemic_status,
         "fact_check_verdict": fact_check_result["overall_verdict"],
+        "content_quality": quality_report.to_dict(),
         "shots_planned": len(shots_data),
         "assets_downloaded": len(downloaded_assets),
         "dry_run": dry_run,
@@ -249,20 +240,30 @@ def content_create(
             "dossier_md": str(dossier_files["md_path"]),
             "script_md": str(script_path),
             "fact_check_json": str(work_dir / "fact_check_report.json"),
+            "content_quality_json": str(quality_report_path),
             "broll_plan_json": str(work_dir / "broll_plan.json"),
             "subtitles_srt": str(srt_path),
         }
     }
     (work_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    out_status = "ok"
+    if quality_report.overall_score < 70 or quality_report.blockers:
+        out_status = "NEEDS_REVIEW"
+
     return {
-        "status": "ok",
+        "status": out_status,
         "topic": topic,
         "workspace_folder": f"output/{folder_name}",
         "editorial_fit_score": gate_check.get("fit_score", 85),
         "epistemic_status": dossier.epistemic_status,
         "fact_check_verdict": fact_check_result["overall_verdict"],
         "fact_check_pass": fact_check_result["pass_gate"],
+        "content_quality_score": quality_report.overall_score,
+        "content_quality_status": quality_report.status,
+        "dimension_scores": quality_report.dimension_scores,
+        "quality_blockers": quality_report.blockers,
+        "quality_warnings": quality_report.warnings,
         "total_shots_planned": len(shots_data),
         "total_assets_ready": len(downloaded_assets),
         "manifest": manifest,
@@ -274,6 +275,7 @@ def research_deep(
     topic: str,
     recency: Optional[str] = "m",
     max_evidence: int = 5,
+    depth: str = "deep",
     output_dir: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
@@ -287,7 +289,7 @@ def research_deep(
     out_path = resolve_safe_path(REPO_ROOT, target_folder)
     
     gen = DossierGenerator()
-    dossier = gen.build_dossier(topic, max_evidence_per_source=max_evidence)
+    dossier = gen.build_dossier(topic, max_evidence_per_source=max_evidence, depth=depth)
     files = gen.save_dossier_to_workspace(dossier, out_path)
 
     return {

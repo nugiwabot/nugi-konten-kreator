@@ -1266,12 +1266,17 @@ def audit_script_with_dossier(
         confidence = 0.5
         flags = []
 
-        # 1. Check for Causal Overclaims (e.g. 'satu-satunya penyebab', 'pasti karena', '100% akibat')
-        if any(w in s_lower for w in ["satu-satunya penyebab", "pasti karena", "hanya disebabkan", "mutlak"]):
+        # 1. Check for Causal Overclaims and False Certainty
+        if any(w in s_lower for w in ["satu-satunya penyebab", "pasti karena", "hanya disebabkan", "mutlak", "100% akibat", "tidak mungkin karena yang lain"]):
             verdict = "DISPUTED"
-            reason = "Causal Overclaim: Mengklaim sebab tunggal mutlak untuk fenomena multi-faktor."
+            reason = "Causal Overclaim: Mengklaim sebab tunggal mutlak untuk fenomena multi-faktor (Korelasi vs Kausalitas)."
             flags.append("CAUSAL_OVERCLAIM")
             confidence = 0.3
+        elif any(w in s_lower for w in ["pasti benar", "tanpa ragu", "100% terbukti", "pasti untung", "dijamin 100%"]):
+            verdict = "DISPUTED"
+            reason = "False Certainty: Menggunakan klaim kepastian mutlak tanpa pembatasan epistemik yang wajar."
+            flags.append("FALSE_CERTAINTY")
+            confidence = 0.35
 
         # 2. Check for Numerical claims against known DataPoints
         has_numbers = bool(re.search(r"\b\d+(?:[.,]\d+)?%?\b", sentence))
