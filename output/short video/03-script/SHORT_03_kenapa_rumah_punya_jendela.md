@@ -206,6 +206,8 @@ Baca seperti mengajak penonton benar-benar memperhatikan rumahnya sendiri.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Jendela?**
+
 Kenapa rumah punya jendela?
 
 Fungsinya ternyata jauh lebih kompleks daripada sekadar membuat rumah terlihat bagus.

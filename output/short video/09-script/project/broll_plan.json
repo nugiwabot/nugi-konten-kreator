@@ -1,0 +1,93 @@
+{
+  "project": "09-script",
+  "headline": "Kenapa Rumah Punya Plafon?",
+  "audio_duration": 101.47,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 41.4,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_clean_modern_ceiling.jpg",
+      "filename": "001_clean_modern_ceiling.jpg",
+      "concept": "Plafon rumah modern yang rapi dan elegan",
+      "start": 6.34,
+      "end": 12.34,
+      "start_tc": "00:00:06,340",
+      "end_tc": "00:00:12,340",
+      "duration": 6.0,
+      "dialog_cue": "kenapa kita masih butuh satu lapisan lagi di bawahnya?"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_exposed_roof_truss.jpg",
+      "filename": "002_exposed_roof_truss.jpg",
+      "concept": "Rangka atap dan kuda-kuda kayu tanpa plafon",
+      "start": 19.03,
+      "end": 25.03,
+      "start_tc": "00:00:19,030",
+      "end_tc": "00:00:25,030",
+      "duration": 6.0,
+      "dialog_cue": "Pertama plafon itu membantu membentuk bata suang yang kita tinggal di daerah panas,"
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_thermal_insulation_attic.jpg",
+      "filename": "003_thermal_insulation_attic.jpg",
+      "concept": "Plafon penahan panas terik matahari dari genteng",
+      "start": 31.71,
+      "end": 37.71,
+      "start_tc": "00:00:31,710",
+      "end_tc": "00:00:37,710",
+      "duration": 6.0,
+      "dialog_cue": "Kedua di balik plafon, kita bisa menyembunyikan berbagai instalasi seperti kabel, pipa, saluran udara,"
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_hidden_wires_plumbing.jpg",
+      "filename": "004_hidden_wires_plumbing.jpg",
+      "concept": "Menyembunyikan kabel listrik dan pipa di atas plafon",
+      "start": 44.39,
+      "end": 50.39,
+      "start_tc": "00:00:44,390",
+      "end_tc": "00:00:50,390",
+      "duration": 6.0,
+      "dialog_cue": "Ketiga plafon itu membantu membentuk suasa ruang, tinggirandahnya plafon,"
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_rain_noise_dampening.jpg",
+      "filename": "005_rain_noise_dampening.jpg",
+      "concept": "Meredam kebisingan air hujan pada atap seng",
+      "start": 57.08,
+      "end": 63.08,
+      "start_tc": "00:00:57,080",
+      "end_tc": "00:01:03,080",
+      "duration": 6.0,
+      "dialog_cue": "Yaitu ada rangka, ada kabel, ada saluran, ada panas, kadang-kadang ada bu."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_decorative_wooden_ceiling.jpg",
+      "filename": "006_decorative_wooden_ceiling.jpg",
+      "concept": "Estetika dan tata proporsi tinggi ruang yang nyaman",
+      "start": 69.76,
+      "end": 75.76,
+      "start_tc": "00:01:09,760",
+      "end_tc": "00:01:15,760",
+      "duration": 6.0,
+      "dialog_cue": "Jadi sebenarnya plafon itu bukan sekedar penutup atas."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_cool_ambient_interior.jpg",
+      "filename": "007_cool_ambient_interior.jpg",
+      "concept": "Menjaga suhu ruangan tetap sejuk dan stabil",
+      "start": 82.44,
+      "end": 88.44,
+      "start_tc": "00:01:22,440",
+      "end_tc": "00:01:28,440",
+      "duration": 6.0,
+      "dialog_cue": "Dan mungkin itu lah kenapa sebuah bayangunan mulai terasa seperti rumah."
+    }
+  ]
+}

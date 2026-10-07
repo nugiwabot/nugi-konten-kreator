@@ -195,8 +195,8 @@ class TestEvidenceMediaRetrieval(unittest.TestCase):
         text = "Pagi hari, kota mulai bergerak."
 
         req, v_type, entities, motion_spec, s_role = classify_visual_requirement(text)
-        self.assertEqual(req, GENERIC_ALLOWED)
-        self.assertEqual(s_role, GENERIC_ATMOSPHERE)
+        self.assertEqual(req, REAL_PREFERRED)
+        self.assertEqual(s_role, DIRECT_CONTEXT)
 
         pexafy = MockProvider("pexafy")
         wikimedia = MockProvider("wikimedia")

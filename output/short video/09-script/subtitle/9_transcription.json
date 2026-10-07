@@ -1,0 +1,1482 @@
+{
+  "project": "09-script",
+  "footage": "\\\\tsclient\\C\\Users\\Nugi\\Documents\\nugi-konten-kreator\\output\\short video\\09-script\\footage\\9.mp4",
+  "duration": 101.47,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 3.04,
+      "start_tc": "00:00:00,000",
+      "end_tc": "00:00:03,040",
+      "text": "Coba lihat ke atas, di dalam rumah ada plafon,",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 0.0,
+          "end": 0.26
+        },
+        {
+          "word": " lihat",
+          "start": 0.26,
+          "end": 0.46
+        },
+        {
+          "word": " ke",
+          "start": 0.46,
+          "end": 0.64
+        },
+        {
+          "word": " atas,",
+          "start": 0.64,
+          "end": 1.1
+        },
+        {
+          "word": " di",
+          "start": 1.36,
+          "end": 1.44
+        },
+        {
+          "word": " dalam",
+          "start": 1.44,
+          "end": 1.66
+        },
+        {
+          "word": " rumah",
+          "start": 1.66,
+          "end": 1.92
+        },
+        {
+          "word": " ada",
+          "start": 1.92,
+          "end": 2.54
+        },
+        {
+          "word": " plafon,",
+          "start": 2.54,
+          "end": 3.04
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 3.28,
+      "end": 5.2,
+      "start_tc": "00:00:03,280",
+      "end_tc": "00:00:05,200",
+      "text": "tapi kalau rumah itu sudah punya atap,",
+      "words": [
+        {
+          "word": " tapi",
+          "start": 3.28,
+          "end": 3.54
+        },
+        {
+          "word": " kalau",
+          "start": 3.54,
+          "end": 3.84
+        },
+        {
+          "word": " rumah",
+          "start": 3.84,
+          "end": 4.1
+        },
+        {
+          "word": " itu",
+          "start": 4.1,
+          "end": 4.32
+        },
+        {
+          "word": " sudah",
+          "start": 4.32,
+          "end": 4.54
+        },
+        {
+          "word": " punya",
+          "start": 4.54,
+          "end": 4.8
+        },
+        {
+          "word": " atap,",
+          "start": 4.8,
+          "end": 5.2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 5.36,
+      "end": 8.16,
+      "start_tc": "00:00:05,360",
+      "end_tc": "00:00:08,160",
+      "text": "kenapa kita masih butuh satu lapisan lagi di bawahnya?",
+      "words": [
+        {
+          "word": " kenapa",
+          "start": 5.36,
+          "end": 5.58
+        },
+        {
+          "word": " kita",
+          "start": 5.58,
+          "end": 5.86
+        },
+        {
+          "word": " masih",
+          "start": 5.86,
+          "end": 6.18
+        },
+        {
+          "word": " butuh",
+          "start": 6.18,
+          "end": 6.66
+        },
+        {
+          "word": " satu",
+          "start": 6.66,
+          "end": 6.92
+        },
+        {
+          "word": " lapisan",
+          "start": 6.92,
+          "end": 7.28
+        },
+        {
+          "word": " lagi",
+          "start": 7.28,
+          "end": 7.58
+        },
+        {
+          "word": " di",
+          "start": 7.58,
+          "end": 7.7
+        },
+        {
+          "word": " bawahnya?",
+          "start": 7.7,
+          "end": 8.16
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 8.38,
+      "end": 12.64,
+      "start_tc": "00:00:08,380",
+      "end_tc": "00:00:12,640",
+      "text": "Ternyata plafon itu bukan cuma untuk membuat rumah terlihat rapi,",
+      "words": [
+        {
+          "word": " Ternyata",
+          "start": 8.38,
+          "end": 8.86
+        },
+        {
+          "word": " plafon",
+          "start": 8.86,
+          "end": 9.6
+        },
+        {
+          "word": " itu",
+          "start": 9.6,
+          "end": 9.86
+        },
+        {
+          "word": " bukan",
+          "start": 9.86,
+          "end": 10.1
+        },
+        {
+          "word": " cuma",
+          "start": 10.1,
+          "end": 10.44
+        },
+        {
+          "word": " untuk",
+          "start": 10.44,
+          "end": 10.84
+        },
+        {
+          "word": " membuat",
+          "start": 10.84,
+          "end": 11.4
+        },
+        {
+          "word": " rumah",
+          "start": 11.4,
+          "end": 11.7
+        },
+        {
+          "word": " terlihat",
+          "start": 11.7,
+          "end": 12.14
+        },
+        {
+          "word": " rapi,",
+          "start": 12.14,
+          "end": 12.64
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 12.82,
+      "end": 15.72,
+      "start_tc": "00:00:12,820",
+      "end_tc": "00:00:15,720",
+      "text": "dia juga punya pekerjaan yang lebih penting.",
+      "words": [
+        {
+          "word": " dia",
+          "start": 12.82,
+          "end": 12.9
+        },
+        {
+          "word": " juga",
+          "start": 12.9,
+          "end": 13.2
+        },
+        {
+          "word": " punya",
+          "start": 13.2,
+          "end": 13.6
+        },
+        {
+          "word": " pekerjaan",
+          "start": 13.6,
+          "end": 14.44
+        },
+        {
+          "word": " yang",
+          "start": 14.44,
+          "end": 14.92
+        },
+        {
+          "word": " lebih",
+          "start": 14.92,
+          "end": 15.22
+        },
+        {
+          "word": " penting.",
+          "start": 15.22,
+          "end": 15.72
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 15.92,
+      "end": 21.3,
+      "start_tc": "00:00:15,920",
+      "end_tc": "00:00:21,300",
+      "text": "Pertama plafon itu membantu membentuk bata suang yang kita tinggal di daerah panas,",
+      "words": [
+        {
+          "word": " Pertama",
+          "start": 15.92,
+          "end": 16.34
+        },
+        {
+          "word": " plafon",
+          "start": 16.34,
+          "end": 16.96
+        },
+        {
+          "word": " itu",
+          "start": 16.96,
+          "end": 17.18
+        },
+        {
+          "word": " membantu",
+          "start": 17.18,
+          "end": 17.66
+        },
+        {
+          "word": " membentuk",
+          "start": 17.66,
+          "end": 18.22
+        },
+        {
+          "word": " bata",
+          "start": 18.22,
+          "end": 18.56
+        },
+        {
+          "word": " suang",
+          "start": 18.56,
+          "end": 18.96
+        },
+        {
+          "word": " yang",
+          "start": 18.96,
+          "end": 19.16
+        },
+        {
+          "word": " kita",
+          "start": 19.16,
+          "end": 19.48
+        },
+        {
+          "word": " tinggal",
+          "start": 19.48,
+          "end": 19.82
+        },
+        {
+          "word": " di",
+          "start": 19.82,
+          "end": 20.28
+        },
+        {
+          "word": " daerah",
+          "start": 20.28,
+          "end": 20.7
+        },
+        {
+          "word": " panas,",
+          "start": 20.7,
+          "end": 21.3
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 21.44,
+      "end": 27.02,
+      "start_tc": "00:00:21,440",
+      "end_tc": "00:00:27,020",
+      "text": "ruang antara atap dan plafon bisa membantu memisahkan ruang hidup dari panas yang di terima atap.",
+      "words": [
+        {
+          "word": " ruang",
+          "start": 21.44,
+          "end": 21.68
+        },
+        {
+          "word": " antara",
+          "start": 21.68,
+          "end": 22.02
+        },
+        {
+          "word": " atap",
+          "start": 22.02,
+          "end": 22.38
+        },
+        {
+          "word": " dan",
+          "start": 22.38,
+          "end": 22.6
+        },
+        {
+          "word": " plafon",
+          "start": 22.6,
+          "end": 23.2
+        },
+        {
+          "word": " bisa",
+          "start": 23.2,
+          "end": 23.46
+        },
+        {
+          "word": " membantu",
+          "start": 23.46,
+          "end": 23.9
+        },
+        {
+          "word": " memisahkan",
+          "start": 23.9,
+          "end": 24.64
+        },
+        {
+          "word": " ruang",
+          "start": 24.64,
+          "end": 25.0
+        },
+        {
+          "word": " hidup",
+          "start": 25.0,
+          "end": 25.3
+        },
+        {
+          "word": " dari",
+          "start": 25.3,
+          "end": 25.52
+        },
+        {
+          "word": " panas",
+          "start": 25.52,
+          "end": 26.0
+        },
+        {
+          "word": " yang",
+          "start": 26.0,
+          "end": 26.14
+        },
+        {
+          "word": " di",
+          "start": 26.14,
+          "end": 26.3
+        },
+        {
+          "word": " terima",
+          "start": 26.3,
+          "end": 26.6
+        },
+        {
+          "word": " atap.",
+          "start": 26.6,
+          "end": 27.02
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 27.7,
+      "end": 34.58,
+      "start_tc": "00:00:27,700",
+      "end_tc": "00:00:34,580",
+      "text": "Kedua di balik plafon, kita bisa menyembunyikan berbagai instalasi seperti kabel, pipa, saluran udara,",
+      "words": [
+        {
+          "word": " Kedua",
+          "start": 27.7,
+          "end": 28.1
+        },
+        {
+          "word": " di",
+          "start": 28.1,
+          "end": 28.46
+        },
+        {
+          "word": " balik",
+          "start": 28.46,
+          "end": 28.8
+        },
+        {
+          "word": " plafon,",
+          "start": 28.8,
+          "end": 29.36
+        },
+        {
+          "word": " kita",
+          "start": 29.6,
+          "end": 29.82
+        },
+        {
+          "word": " bisa",
+          "start": 29.82,
+          "end": 30.1
+        },
+        {
+          "word": " menyembunyikan",
+          "start": 30.1,
+          "end": 30.82
+        },
+        {
+          "word": " berbagai",
+          "start": 30.82,
+          "end": 31.42
+        },
+        {
+          "word": " instalasi",
+          "start": 31.42,
+          "end": 32.08
+        },
+        {
+          "word": " seperti",
+          "start": 32.08,
+          "end": 32.46
+        },
+        {
+          "word": " kabel,",
+          "start": 32.46,
+          "end": 32.92
+        },
+        {
+          "word": " pipa,",
+          "start": 33.32,
+          "end": 33.64
+        },
+        {
+          "word": " saluran",
+          "start": 33.9,
+          "end": 34.1
+        },
+        {
+          "word": " udara,",
+          "start": 34.1,
+          "end": 34.58
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 34.84,
+      "end": 39.24,
+      "start_tc": "00:00:34,840",
+      "end_tc": "00:00:39,240",
+      "text": "jadi semuanya itu tetap bekerja, tanpa harus memunuhi pandangan kita.",
+      "words": [
+        {
+          "word": " jadi",
+          "start": 34.84,
+          "end": 35.28
+        },
+        {
+          "word": " semuanya",
+          "start": 35.28,
+          "end": 35.68
+        },
+        {
+          "word": " itu",
+          "start": 35.68,
+          "end": 36.0
+        },
+        {
+          "word": " tetap",
+          "start": 36.0,
+          "end": 36.46
+        },
+        {
+          "word": " bekerja,",
+          "start": 36.46,
+          "end": 36.92
+        },
+        {
+          "word": " tanpa",
+          "start": 37.26,
+          "end": 37.52
+        },
+        {
+          "word": " harus",
+          "start": 37.52,
+          "end": 37.76
+        },
+        {
+          "word": " memunuhi",
+          "start": 37.76,
+          "end": 38.42
+        },
+        {
+          "word": " pandangan",
+          "start": 38.42,
+          "end": 38.84
+        },
+        {
+          "word": " kita.",
+          "start": 38.84,
+          "end": 39.24
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 39.54,
+      "end": 44.52,
+      "start_tc": "00:00:39,540",
+      "end_tc": "00:00:44,520",
+      "text": "Ketiga plafon itu membantu membentuk suasa ruang, tinggirandahnya plafon,",
+      "words": [
+        {
+          "word": " Ketiga",
+          "start": 39.54,
+          "end": 39.9
+        },
+        {
+          "word": " plafon",
+          "start": 39.9,
+          "end": 40.42
+        },
+        {
+          "word": " itu",
+          "start": 40.42,
+          "end": 40.64
+        },
+        {
+          "word": " membantu",
+          "start": 40.64,
+          "end": 41.28
+        },
+        {
+          "word": " membentuk",
+          "start": 41.28,
+          "end": 41.88
+        },
+        {
+          "word": " suasa",
+          "start": 41.88,
+          "end": 42.18
+        },
+        {
+          "word": " ruang,",
+          "start": 42.18,
+          "end": 42.74
+        },
+        {
+          "word": " tinggirandahnya",
+          "start": 43.2,
+          "end": 43.98
+        },
+        {
+          "word": " plafon,",
+          "start": 43.98,
+          "end": 44.52
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 44.94,
+      "end": 50.2,
+      "start_tc": "00:00:44,940",
+      "end_tc": "00:00:50,200",
+      "text": "materialnya bahkan bentuknya itu bisa mempengaruhi bagaimana sebuah ruangan itu terasa.",
+      "words": [
+        {
+          "word": " materialnya",
+          "start": 44.94,
+          "end": 45.66
+        },
+        {
+          "word": " bahkan",
+          "start": 45.66,
+          "end": 46.02
+        },
+        {
+          "word": " bentuknya",
+          "start": 46.02,
+          "end": 46.52
+        },
+        {
+          "word": " itu",
+          "start": 46.52,
+          "end": 46.7
+        },
+        {
+          "word": " bisa",
+          "start": 46.7,
+          "end": 46.96
+        },
+        {
+          "word": " mempengaruhi",
+          "start": 46.96,
+          "end": 47.6
+        },
+        {
+          "word": " bagaimana",
+          "start": 47.6,
+          "end": 48.16
+        },
+        {
+          "word": " sebuah",
+          "start": 48.16,
+          "end": 49.18
+        },
+        {
+          "word": " ruangan",
+          "start": 49.18,
+          "end": 49.48
+        },
+        {
+          "word": " itu",
+          "start": 49.48,
+          "end": 49.78
+        },
+        {
+          "word": " terasa.",
+          "start": 49.78,
+          "end": 50.2
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 50.62,
+      "end": 55.2,
+      "start_tc": "00:00:50,620",
+      "end_tc": "00:00:55,200",
+      "text": "Dan sebenarnya di atas plafon itu ada dunia kecil yang nggak bisa kita lihat.",
+      "words": [
+        {
+          "word": " Dan",
+          "start": 50.62,
+          "end": 50.76
+        },
+        {
+          "word": " sebenarnya",
+          "start": 50.76,
+          "end": 51.52
+        },
+        {
+          "word": " di",
+          "start": 51.52,
+          "end": 51.82
+        },
+        {
+          "word": " atas",
+          "start": 51.82,
+          "end": 52.04
+        },
+        {
+          "word": " plafon",
+          "start": 52.04,
+          "end": 52.42
+        },
+        {
+          "word": " itu",
+          "start": 52.42,
+          "end": 52.66
+        },
+        {
+          "word": " ada",
+          "start": 52.66,
+          "end": 52.96
+        },
+        {
+          "word": " dunia",
+          "start": 52.96,
+          "end": 53.4
+        },
+        {
+          "word": " kecil",
+          "start": 53.4,
+          "end": 53.72
+        },
+        {
+          "word": " yang",
+          "start": 53.72,
+          "end": 54.02
+        },
+        {
+          "word": " nggak",
+          "start": 54.02,
+          "end": 54.3
+        },
+        {
+          "word": " bisa",
+          "start": 54.3,
+          "end": 54.62
+        },
+        {
+          "word": " kita",
+          "start": 54.62,
+          "end": 54.94
+        },
+        {
+          "word": " lihat.",
+          "start": 54.94,
+          "end": 55.2
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 55.2,
+      "end": 59.34,
+      "start_tc": "00:00:55,200",
+      "end_tc": "00:00:59,340",
+      "text": "Yaitu ada rangka, ada kabel, ada saluran, ada panas, kadang-kadang ada bu.",
+      "words": [
+        {
+          "word": " Yaitu",
+          "start": 55.2,
+          "end": 55.68
+        },
+        {
+          "word": " ada",
+          "start": 55.68,
+          "end": 55.9
+        },
+        {
+          "word": " rangka,",
+          "start": 55.9,
+          "end": 56.36
+        },
+        {
+          "word": " ada",
+          "start": 56.56,
+          "end": 56.68
+        },
+        {
+          "word": " kabel,",
+          "start": 56.68,
+          "end": 57.0
+        },
+        {
+          "word": " ada",
+          "start": 57.28,
+          "end": 57.42
+        },
+        {
+          "word": " saluran,",
+          "start": 57.42,
+          "end": 57.8
+        },
+        {
+          "word": " ada",
+          "start": 57.98,
+          "end": 58.1
+        },
+        {
+          "word": " panas,",
+          "start": 58.1,
+          "end": 58.54
+        },
+        {
+          "word": " kadang",
+          "start": 58.6,
+          "end": 58.84
+        },
+        {
+          "word": "-kadang",
+          "start": 58.84,
+          "end": 59.02
+        },
+        {
+          "word": " ada",
+          "start": 59.02,
+          "end": 59.14
+        },
+        {
+          "word": " bu.",
+          "start": 59.14,
+          "end": 59.34
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 59.76,
+      "end": 64.54,
+      "start_tc": "00:00:59,760",
+      "end_tc": "00:01:04,540",
+      "text": "Tapi ketika kita duduk di ruang keluarga, kita nggak perlu memikirkan sumo itu.",
+      "words": [
+        {
+          "word": " Tapi",
+          "start": 59.76,
+          "end": 59.96
+        },
+        {
+          "word": " ketika",
+          "start": 59.96,
+          "end": 60.5
+        },
+        {
+          "word": " kita",
+          "start": 60.5,
+          "end": 60.98
+        },
+        {
+          "word": " duduk",
+          "start": 60.98,
+          "end": 61.42
+        },
+        {
+          "word": " di",
+          "start": 61.42,
+          "end": 61.52
+        },
+        {
+          "word": " ruang",
+          "start": 61.52,
+          "end": 61.76
+        },
+        {
+          "word": " keluarga,",
+          "start": 61.76,
+          "end": 62.26
+        },
+        {
+          "word": " kita",
+          "start": 62.58,
+          "end": 62.76
+        },
+        {
+          "word": " nggak",
+          "start": 62.76,
+          "end": 62.96
+        },
+        {
+          "word": " perlu",
+          "start": 62.96,
+          "end": 63.18
+        },
+        {
+          "word": " memikirkan",
+          "start": 63.18,
+          "end": 63.9
+        },
+        {
+          "word": " sumo",
+          "start": 63.9,
+          "end": 64.22
+        },
+        {
+          "word": " itu.",
+          "start": 64.22,
+          "end": 64.54
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 64.74,
+      "end": 67.98,
+      "start_tc": "00:01:04,740",
+      "end_tc": "00:01:07,980",
+      "text": "Kita cukup melihat permukaan plafon yang tenang di atas kepala.",
+      "words": [
+        {
+          "word": " Kita",
+          "start": 64.74,
+          "end": 64.86
+        },
+        {
+          "word": " cukup",
+          "start": 64.86,
+          "end": 65.16
+        },
+        {
+          "word": " melihat",
+          "start": 65.16,
+          "end": 65.54
+        },
+        {
+          "word": " permukaan",
+          "start": 65.54,
+          "end": 66.36
+        },
+        {
+          "word": " plafon",
+          "start": 66.36,
+          "end": 66.68
+        },
+        {
+          "word": " yang",
+          "start": 66.68,
+          "end": 66.86
+        },
+        {
+          "word": " tenang",
+          "start": 66.86,
+          "end": 67.24
+        },
+        {
+          "word": " di",
+          "start": 67.24,
+          "end": 67.44
+        },
+        {
+          "word": " atas",
+          "start": 67.44,
+          "end": 67.66
+        },
+        {
+          "word": " kepala.",
+          "start": 67.66,
+          "end": 67.98
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 68.38,
+      "end": 72.14,
+      "start_tc": "00:01:08,380",
+      "end_tc": "00:01:12,140",
+      "text": "Jadi sebenarnya plafon itu bukan sekedar penutup atas.",
+      "words": [
+        {
+          "word": " Jadi",
+          "start": 68.38,
+          "end": 68.7
+        },
+        {
+          "word": " sebenarnya",
+          "start": 68.7,
+          "end": 69.4
+        },
+        {
+          "word": " plafon",
+          "start": 69.4,
+          "end": 69.86
+        },
+        {
+          "word": " itu",
+          "start": 69.86,
+          "end": 70.18
+        },
+        {
+          "word": " bukan",
+          "start": 70.18,
+          "end": 70.7
+        },
+        {
+          "word": " sekedar",
+          "start": 70.7,
+          "end": 71.14
+        },
+        {
+          "word": " penutup",
+          "start": 71.14,
+          "end": 71.62
+        },
+        {
+          "word": " atas.",
+          "start": 71.62,
+          "end": 72.14
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 72.42,
+      "end": 75.9,
+      "start_tc": "00:01:12,420",
+      "end_tc": "00:01:15,900",
+      "text": "Dia adalah salah satu lafisan yang memisahkan kehidupan kita.",
+      "words": [
+        {
+          "word": " Dia",
+          "start": 72.42,
+          "end": 72.64
+        },
+        {
+          "word": " adalah",
+          "start": 72.64,
+          "end": 72.88
+        },
+        {
+          "word": " salah",
+          "start": 72.88,
+          "end": 73.12
+        },
+        {
+          "word": " satu",
+          "start": 73.12,
+          "end": 73.44
+        },
+        {
+          "word": " lafisan",
+          "start": 73.44,
+          "end": 73.92
+        },
+        {
+          "word": " yang",
+          "start": 73.92,
+          "end": 74.36
+        },
+        {
+          "word": " memisahkan",
+          "start": 74.36,
+          "end": 75.12
+        },
+        {
+          "word": " kehidupan",
+          "start": 75.12,
+          "end": 75.54
+        },
+        {
+          "word": " kita.",
+          "start": 75.54,
+          "end": 75.9
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 76.38,
+      "end": 80.26,
+      "start_tc": "00:01:16,380",
+      "end_tc": "00:01:20,260",
+      "text": "Dari bagian bayangunan yang terus bekerja di belakang layar.",
+      "words": [
+        {
+          "word": " Dari",
+          "start": 76.38,
+          "end": 76.68
+        },
+        {
+          "word": " bagian",
+          "start": 76.68,
+          "end": 77.36
+        },
+        {
+          "word": " bayangunan",
+          "start": 77.36,
+          "end": 78.12
+        },
+        {
+          "word": " yang",
+          "start": 78.12,
+          "end": 78.32
+        },
+        {
+          "word": " terus",
+          "start": 78.32,
+          "end": 78.68
+        },
+        {
+          "word": " bekerja",
+          "start": 78.68,
+          "end": 79.1
+        },
+        {
+          "word": " di",
+          "start": 79.1,
+          "end": 79.46
+        },
+        {
+          "word": " belakang",
+          "start": 79.46,
+          "end": 79.86
+        },
+        {
+          "word": " layar.",
+          "start": 79.86,
+          "end": 80.26
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 80.48,
+      "end": 84.18,
+      "start_tc": "00:01:20,480",
+      "end_tc": "00:01:24,180",
+      "text": "Dan mungkin itu lah kenapa sebuah bayangunan mulai terasa seperti rumah.",
+      "words": [
+        {
+          "word": " Dan",
+          "start": 80.48,
+          "end": 80.54
+        },
+        {
+          "word": " mungkin",
+          "start": 80.54,
+          "end": 80.9
+        },
+        {
+          "word": " itu",
+          "start": 80.9,
+          "end": 81.32
+        },
+        {
+          "word": " lah",
+          "start": 81.32,
+          "end": 81.5
+        },
+        {
+          "word": " kenapa",
+          "start": 81.5,
+          "end": 81.94
+        },
+        {
+          "word": " sebuah",
+          "start": 81.94,
+          "end": 82.36
+        },
+        {
+          "word": " bayangunan",
+          "start": 82.36,
+          "end": 82.8
+        },
+        {
+          "word": " mulai",
+          "start": 82.8,
+          "end": 83.1
+        },
+        {
+          "word": " terasa",
+          "start": 83.1,
+          "end": 83.44
+        },
+        {
+          "word": " seperti",
+          "start": 83.44,
+          "end": 83.74
+        },
+        {
+          "word": " rumah.",
+          "start": 83.74,
+          "end": 84.18
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "start": 84.18,
+      "end": 86.6,
+      "start_tc": "00:01:24,180",
+      "end_tc": "00:01:26,600",
+      "text": "Bukan ketika semua strukturnya terlihat,",
+      "words": [
+        {
+          "word": " Bukan",
+          "start": 84.18,
+          "end": 84.78
+        },
+        {
+          "word": " ketika",
+          "start": 84.78,
+          "end": 85.12
+        },
+        {
+          "word": " semua",
+          "start": 85.12,
+          "end": 85.4
+        },
+        {
+          "word": " strukturnya",
+          "start": 85.4,
+          "end": 86.1
+        },
+        {
+          "word": " terlihat,",
+          "start": 86.1,
+          "end": 86.6
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "start": 86.84,
+      "end": 91.22,
+      "start_tc": "00:01:26,840",
+      "end_tc": "00:01:31,220",
+      "text": "tapi ketika sistem yang rumit di belakangnya berhasil dibuat nyaman untuk manusia.",
+      "words": [
+        {
+          "word": " tapi",
+          "start": 86.84,
+          "end": 87.02
+        },
+        {
+          "word": " ketika",
+          "start": 87.02,
+          "end": 87.34
+        },
+        {
+          "word": " sistem",
+          "start": 87.34,
+          "end": 87.66
+        },
+        {
+          "word": " yang",
+          "start": 87.66,
+          "end": 87.92
+        },
+        {
+          "word": " rumit",
+          "start": 87.92,
+          "end": 88.3
+        },
+        {
+          "word": " di",
+          "start": 88.3,
+          "end": 88.42
+        },
+        {
+          "word": " belakangnya",
+          "start": 88.42,
+          "end": 88.94
+        },
+        {
+          "word": " berhasil",
+          "start": 88.94,
+          "end": 89.46
+        },
+        {
+          "word": " dibuat",
+          "start": 89.46,
+          "end": 89.84
+        },
+        {
+          "word": " nyaman",
+          "start": 89.84,
+          "end": 90.14
+        },
+        {
+          "word": " untuk",
+          "start": 90.14,
+          "end": 90.64
+        },
+        {
+          "word": " manusia.",
+          "start": 90.64,
+          "end": 91.22
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "start": 91.54,
+      "end": 92.82,
+      "start_tc": "00:01:31,540",
+      "end_tc": "00:01:32,820",
+      "text": "Coba lihat plafon rumah kamu.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 91.54,
+          "end": 91.68
+        },
+        {
+          "word": " lihat",
+          "start": 91.68,
+          "end": 91.88
+        },
+        {
+          "word": " plafon",
+          "start": 91.88,
+          "end": 92.28
+        },
+        {
+          "word": " rumah",
+          "start": 92.28,
+          "end": 92.44
+        },
+        {
+          "word": " kamu.",
+          "start": 92.44,
+          "end": 92.82
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "start": 93.1,
+      "end": 98.22,
+      "start_tc": "00:01:33,100",
+      "end_tc": "00:01:38,220",
+      "text": "Ada yang polos, ada yang bertingkat, atau justru, ada yang bagiannya itu seengaja dibuat terbuka.",
+      "words": [
+        {
+          "word": " Ada",
+          "start": 93.1,
+          "end": 93.24
+        },
+        {
+          "word": " yang",
+          "start": 93.24,
+          "end": 93.34
+        },
+        {
+          "word": " polos,",
+          "start": 93.34,
+          "end": 93.78
+        },
+        {
+          "word": " ada",
+          "start": 93.96,
+          "end": 94.14
+        },
+        {
+          "word": " yang",
+          "start": 94.14,
+          "end": 94.26
+        },
+        {
+          "word": " bertingkat,",
+          "start": 94.26,
+          "end": 94.74
+        },
+        {
+          "word": " atau",
+          "start": 94.9,
+          "end": 95.14
+        },
+        {
+          "word": " justru,",
+          "start": 95.14,
+          "end": 95.6
+        },
+        {
+          "word": " ada",
+          "start": 95.8,
+          "end": 96.0
+        },
+        {
+          "word": " yang",
+          "start": 96.0,
+          "end": 96.28
+        },
+        {
+          "word": " bagiannya",
+          "start": 96.28,
+          "end": 96.88
+        },
+        {
+          "word": " itu",
+          "start": 96.88,
+          "end": 97.04
+        },
+        {
+          "word": " seengaja",
+          "start": 97.04,
+          "end": 97.42
+        },
+        {
+          "word": " dibuat",
+          "start": 97.42,
+          "end": 97.78
+        },
+        {
+          "word": " terbuka.",
+          "start": 97.78,
+          "end": 98.22
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "start": 98.54,
+      "end": 101.22,
+      "start_tc": "00:01:38,540",
+      "end_tc": "00:01:41,220",
+      "text": "Menurut kamu, kenapa desainnya itu dibuat seperti itu?",
+      "words": [
+        {
+          "word": " Menurut",
+          "start": 98.54,
+          "end": 98.82
+        },
+        {
+          "word": " kamu,",
+          "start": 98.82,
+          "end": 99.12
+        },
+        {
+          "word": " kenapa",
+          "start": 99.26,
+          "end": 99.56
+        },
+        {
+          "word": " desainnya",
+          "start": 99.56,
+          "end": 100.04
+        },
+        {
+          "word": " itu",
+          "start": 100.04,
+          "end": 100.22
+        },
+        {
+          "word": " dibuat",
+          "start": 100.22,
+          "end": 100.62
+        },
+        {
+          "word": " seperti",
+          "start": 100.62,
+          "end": 100.82
+        },
+        {
+          "word": " itu?",
+          "start": 100.82,
+          "end": 101.22
+        }
+      ]
+    }
+  ]
+}

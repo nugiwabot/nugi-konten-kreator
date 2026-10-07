@@ -1,0 +1,91 @@
+{
+  "project": "05-script",
+  "headline": "Kenapa Rumah Punya Pagar?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_perimeter_fence_gate.jpg",
+      "path": "broll/001_perimeter_fence_gate.jpg",
+      "concept": "Pagar pembatas teritorial hunian",
+      "query": "house fence gate boundary perimeter residential lawn property",
+      "title": "Unsplash by Alvin Engler",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/open-grey-chain-link-grace-dGhWrj6YhQE",
+      "download_url": "https://images.unsplash.com/photo-1465961482777-c1070dfd906b?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_low_friendly_picket_fence.jpg",
+      "path": "broll/002_low_friendly_picket_fence.jpg",
+      "concept": "Pagar rendah yang ramah dan terbuka secara sosial",
+      "query": "low wooden picket fence flowers friendly open neighborhood suburban",
+      "title": "Serene suburban scene features wooden fence with blooming pink flowers in lush green surroundings",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/roses-growing-behind-a-wooden-fence-in-a-garden-26726338",
+      "download_url": "https://images.pexels.com/photos/26726338/pexels-photo-26726338.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_high_security_wall_gate.jpg",
+      "path": "broll/003_high_security_wall_gate.jpg",
+      "concept": "Pagar tinggi untuk privasi dan proteksi maksimal",
+      "query": "tall concrete wall security gate high fence privacy protection villa",
+      "title": "Unsplash by Tim Schmidbauer",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-stone-building-and-plants-under-a-blue-sky-D0NSNH38Nko",
+      "download_url": "https://images.unsplash.com/photo-1745761276588-0b1c59333652?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_open_unfenced_neighborhood.jpg",
+      "path": "broll/004_open_unfenced_neighborhood.jpg",
+      "concept": "Lingkungan tanpa pagar vs kawasan berpagar rapat",
+      "query": "suburban street with open unfenced front lawns community neighborhood",
+      "title": "Unsplash by Mitesh",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-street-with-houses-and-trees-in-the-background-lg_Jz7JVOt4",
+      "download_url": "https://images.unsplash.com/photo-1640147643312-37cb730bf289?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_territorial_boundary_marker.jpg",
+      "path": "broll/005_territorial_boundary_marker.jpg",
+      "concept": "Batas psikologis kepemilikan ruang",
+      "query": "stone wall boundary property line garden entrance marker gate",
+      "title": "Iron gate with lush greenery and trees in the background, set against hillside scenery",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/chapel-wall-gate-church-pierre-9094291/",
+      "download_url": "https://cdn.pixabay.com/photo/2024/10/03/16/58/chapel-9094291_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_security_lock_gate.jpg",
+      "path": "broll/006_security_lock_gate.jpg",
+      "concept": "Rasa aman dan penjaga privasi keluarga",
+      "query": "lock padlock closed iron gate security protection house residential",
+      "title": "Black iron gate with chain lock and gold padlocks on a grassy lawn",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-padlock-on-a-gate-with-a-house-in-the-background-cwkWh_4Fb-M",
+      "download_url": "https://images.unsplash.com/photo-1653431353101-db2699a425be?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_ornamental_entrance_gate.jpg",
+      "path": "broll/007_ornamental_entrance_gate.jpg",
+      "concept": "Gerbang estetika dan kesan pertama sebuah rumah",
+      "query": "decorative ornamental gate entrance welcoming path driveway garden",
+      "title": "Unsplash by Tran Trieu Phu",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-gate-in-the-middle-of-a-lush-green-garden-3FfyrTZutso",
+      "download_url": "https://images.unsplash.com/photo-1701858857605-c41e8ced6e28?w=1280",
+      "license": "free"
+    }
+  ]
+}

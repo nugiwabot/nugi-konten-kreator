@@ -208,6 +208,8 @@ Ajak penonton benar-benar melihat denah rumahnya sendiri.
 
 ## 📚 CAPTION
 
+**Kenapa Kamar Tidur Dipisahkan dari Ruang Lain?**
+
 Kenapa rumah modern punya kamar tidur yang terpisah dari ruang lain?
 
 Jawabannya tidak hanya soal desain.

@@ -682,6 +682,10 @@ class MediaFinder:
                     arch_q = f"{ent} archival documentation"
                     if arch_q not in candidate_queries:
                         candidate_queries.append(arch_q)
+            if style == "formal":
+                formal_q = f"{self._translate_to_core_english(request)}, editorial photograph"
+                if formal_q not in candidate_queries:
+                    candidate_queries.append(formal_q)
             unique: List[str] = []
             for q in candidate_queries:
                 q_clean = " ".join(q.split())

@@ -1,0 +1,1442 @@
+{
+  "project": "05-script",
+  "footage": "\\\\tsclient\\C\\Users\\Nugi\\Documents\\nugi-konten-kreator\\output\\short video\\05-script\\footage\\5.mp4",
+  "duration": 100.29,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 4.94,
+      "start_tc": "00:00:00,000",
+      "end_tc": "00:00:04,940",
+      "text": "Kalau pagar si umau untuk keamanan, kenapa banyak pagar rumah justru dibuat temen deh?",
+      "words": [
+        {
+          "word": " Kalau",
+          "start": 0.0,
+          "end": 0.3
+        },
+        {
+          "word": " pagar",
+          "start": 0.3,
+          "end": 0.7
+        },
+        {
+          "word": " si",
+          "start": 0.7,
+          "end": 0.86
+        },
+        {
+          "word": " umau",
+          "start": 0.86,
+          "end": 1.02
+        },
+        {
+          "word": " untuk",
+          "start": 1.02,
+          "end": 1.2
+        },
+        {
+          "word": " keamanan,",
+          "start": 1.2,
+          "end": 1.86
+        },
+        {
+          "word": " kenapa",
+          "start": 2.06,
+          "end": 2.3
+        },
+        {
+          "word": " banyak",
+          "start": 2.3,
+          "end": 2.76
+        },
+        {
+          "word": " pagar",
+          "start": 2.76,
+          "end": 3.28
+        },
+        {
+          "word": " rumah",
+          "start": 3.28,
+          "end": 3.48
+        },
+        {
+          "word": " justru",
+          "start": 3.48,
+          "end": 4.08
+        },
+        {
+          "word": " dibuat",
+          "start": 4.08,
+          "end": 4.5
+        },
+        {
+          "word": " temen",
+          "start": 4.5,
+          "end": 4.68
+        },
+        {
+          "word": " deh?",
+          "start": 4.68,
+          "end": 4.94
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 5.3,
+      "end": 10.78,
+      "start_tc": "00:00:05,300",
+      "end_tc": "00:00:10,780",
+      "text": "Bahkan ada yang transferan, padahal kalau mau bener-bener tetut, tinggal dibuat aja lebih tinggi, kan?",
+      "words": [
+        {
+          "word": " Bahkan",
+          "start": 5.3,
+          "end": 5.78
+        },
+        {
+          "word": " ada",
+          "start": 5.78,
+          "end": 6.18
+        },
+        {
+          "word": " yang",
+          "start": 6.18,
+          "end": 6.3
+        },
+        {
+          "word": " transferan,",
+          "start": 6.3,
+          "end": 6.98
+        },
+        {
+          "word": " padahal",
+          "start": 7.1,
+          "end": 7.34
+        },
+        {
+          "word": " kalau",
+          "start": 7.34,
+          "end": 7.6
+        },
+        {
+          "word": " mau",
+          "start": 7.6,
+          "end": 7.76
+        },
+        {
+          "word": " bener",
+          "start": 7.76,
+          "end": 8.04
+        },
+        {
+          "word": "-bener",
+          "start": 8.04,
+          "end": 8.3
+        },
+        {
+          "word": " tetut,",
+          "start": 8.3,
+          "end": 8.72
+        },
+        {
+          "word": " tinggal",
+          "start": 8.96,
+          "end": 9.34
+        },
+        {
+          "word": " dibuat",
+          "start": 9.34,
+          "end": 9.74
+        },
+        {
+          "word": " aja",
+          "start": 9.74,
+          "end": 10.0
+        },
+        {
+          "word": " lebih",
+          "start": 10.0,
+          "end": 10.24
+        },
+        {
+          "word": " tinggi,",
+          "start": 10.24,
+          "end": 10.58
+        },
+        {
+          "word": " kan?",
+          "start": 10.74,
+          "end": 10.78
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 11.12,
+      "end": 14.64,
+      "start_tc": "00:00:11,120",
+      "end_tc": "00:00:14,640",
+      "text": "Karena ternyata, pagar itu bukan cuma soal mencegah orang masuk,",
+      "words": [
+        {
+          "word": " Karena",
+          "start": 11.12,
+          "end": 11.36
+        },
+        {
+          "word": " ternyata,",
+          "start": 11.36,
+          "end": 11.88
+        },
+        {
+          "word": " pagar",
+          "start": 12.26,
+          "end": 12.54
+        },
+        {
+          "word": " itu",
+          "start": 12.54,
+          "end": 12.76
+        },
+        {
+          "word": " bukan",
+          "start": 12.76,
+          "end": 13.0
+        },
+        {
+          "word": " cuma",
+          "start": 13.0,
+          "end": 13.3
+        },
+        {
+          "word": " soal",
+          "start": 13.3,
+          "end": 13.66
+        },
+        {
+          "word": " mencegah",
+          "start": 13.66,
+          "end": 14.04
+        },
+        {
+          "word": " orang",
+          "start": 14.04,
+          "end": 14.28
+        },
+        {
+          "word": " masuk,",
+          "start": 14.28,
+          "end": 14.64
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 14.94,
+      "end": 18.92,
+      "start_tc": "00:00:14,940",
+      "end_tc": "00:00:18,920",
+      "text": "pagar juga mengatur seberapa terbuka rumah kita terhadap dunia luar.",
+      "words": [
+        {
+          "word": " pagar",
+          "start": 14.94,
+          "end": 15.18
+        },
+        {
+          "word": " juga",
+          "start": 15.18,
+          "end": 15.42
+        },
+        {
+          "word": " mengatur",
+          "start": 15.42,
+          "end": 15.96
+        },
+        {
+          "word": " seberapa",
+          "start": 15.96,
+          "end": 16.58
+        },
+        {
+          "word": " terbuka",
+          "start": 16.58,
+          "end": 17.0
+        },
+        {
+          "word": " rumah",
+          "start": 17.0,
+          "end": 17.2
+        },
+        {
+          "word": " kita",
+          "start": 17.2,
+          "end": 17.58
+        },
+        {
+          "word": " terhadap",
+          "start": 17.58,
+          "end": 18.1
+        },
+        {
+          "word": " dunia",
+          "start": 18.1,
+          "end": 18.56
+        },
+        {
+          "word": " luar.",
+          "start": 18.56,
+          "end": 18.92
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 19.16,
+      "end": 24.6,
+      "start_tc": "00:00:19,160",
+      "end_tc": "00:00:24,600",
+      "text": "Coba lihat satu rumah dari jalan, ada jalan, ada pagar, setelah itu halaman atau teras,",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 19.16,
+          "end": 19.32
+        },
+        {
+          "word": " lihat",
+          "start": 19.32,
+          "end": 19.54
+        },
+        {
+          "word": " satu",
+          "start": 19.54,
+          "end": 19.82
+        },
+        {
+          "word": " rumah",
+          "start": 19.82,
+          "end": 20.04
+        },
+        {
+          "word": " dari",
+          "start": 20.04,
+          "end": 20.26
+        },
+        {
+          "word": " jalan,",
+          "start": 20.26,
+          "end": 20.68
+        },
+        {
+          "word": " ada",
+          "start": 21.04,
+          "end": 21.2
+        },
+        {
+          "word": " jalan,",
+          "start": 21.2,
+          "end": 21.62
+        },
+        {
+          "word": " ada",
+          "start": 21.9,
+          "end": 22.02
+        },
+        {
+          "word": " pagar,",
+          "start": 22.02,
+          "end": 22.66
+        },
+        {
+          "word": " setelah",
+          "start": 22.78,
+          "end": 23.06
+        },
+        {
+          "word": " itu",
+          "start": 23.06,
+          "end": 23.4
+        },
+        {
+          "word": " halaman",
+          "start": 23.4,
+          "end": 23.84
+        },
+        {
+          "word": " atau",
+          "start": 23.84,
+          "end": 24.1
+        },
+        {
+          "word": " teras,",
+          "start": 24.1,
+          "end": 24.6
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 24.78,
+      "end": 27.24,
+      "start_tc": "00:00:24,780",
+      "end_tc": "00:00:27,240",
+      "text": "kemudian pintu dan baru ruang di dalam rumah.",
+      "words": [
+        {
+          "word": " kemudian",
+          "start": 24.78,
+          "end": 25.08
+        },
+        {
+          "word": " pintu",
+          "start": 25.08,
+          "end": 25.56
+        },
+        {
+          "word": " dan",
+          "start": 25.56,
+          "end": 25.76
+        },
+        {
+          "word": " baru",
+          "start": 25.76,
+          "end": 26.2
+        },
+        {
+          "word": " ruang",
+          "start": 26.2,
+          "end": 26.6
+        },
+        {
+          "word": " di",
+          "start": 26.6,
+          "end": 26.76
+        },
+        {
+          "word": " dalam",
+          "start": 26.76,
+          "end": 26.96
+        },
+        {
+          "word": " rumah.",
+          "start": 26.96,
+          "end": 27.24
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 27.24,
+      "end": 33.48,
+      "start_tc": "00:00:27,240",
+      "end_tc": "00:00:33,480",
+      "text": "Jadi rumah itu sebedarnya punya beberapa lapisan, semakin masuk ke dalam, semakin privat ruangnya.",
+      "words": [
+        {
+          "word": " Jadi",
+          "start": 27.24,
+          "end": 27.88
+        },
+        {
+          "word": " rumah",
+          "start": 27.88,
+          "end": 28.22
+        },
+        {
+          "word": " itu",
+          "start": 28.22,
+          "end": 28.52
+        },
+        {
+          "word": " sebedarnya",
+          "start": 28.52,
+          "end": 29.0
+        },
+        {
+          "word": " punya",
+          "start": 29.0,
+          "end": 29.5
+        },
+        {
+          "word": " beberapa",
+          "start": 29.5,
+          "end": 29.98
+        },
+        {
+          "word": " lapisan,",
+          "start": 29.98,
+          "end": 30.5
+        },
+        {
+          "word": " semakin",
+          "start": 30.84,
+          "end": 31.12
+        },
+        {
+          "word": " masuk",
+          "start": 31.12,
+          "end": 31.38
+        },
+        {
+          "word": " ke",
+          "start": 31.38,
+          "end": 31.52
+        },
+        {
+          "word": " dalam,",
+          "start": 31.52,
+          "end": 31.78
+        },
+        {
+          "word": " semakin",
+          "start": 32.08,
+          "end": 32.4
+        },
+        {
+          "word": " private",
+          "start": 32.4,
+          "end": 32.76
+        },
+        {
+          "word": " ruangnya.",
+          "start": 32.76,
+          "end": 33.48
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 33.9,
+      "end": 38.22,
+      "start_tc": "00:00:33,900",
+      "end_tc": "00:00:38,220",
+      "text": "Pagar juga sering menjadi salah satu batas pertama, tapi disini lah menariknya.",
+      "words": [
+        {
+          "word": " Pagar",
+          "start": 33.9,
+          "end": 34.3
+        },
+        {
+          "word": " juga",
+          "start": 34.3,
+          "end": 34.56
+        },
+        {
+          "word": " sering",
+          "start": 34.56,
+          "end": 34.86
+        },
+        {
+          "word": " menjadi",
+          "start": 34.86,
+          "end": 35.06
+        },
+        {
+          "word": " salah",
+          "start": 35.06,
+          "end": 35.36
+        },
+        {
+          "word": " satu",
+          "start": 35.36,
+          "end": 35.74
+        },
+        {
+          "word": " batas",
+          "start": 35.74,
+          "end": 36.1
+        },
+        {
+          "word": " pertama,",
+          "start": 36.1,
+          "end": 36.56
+        },
+        {
+          "word": " tapi",
+          "start": 36.9,
+          "end": 37.1
+        },
+        {
+          "word": " disini",
+          "start": 37.1,
+          "end": 37.42
+        },
+        {
+          "word": " lah",
+          "start": 37.42,
+          "end": 37.64
+        },
+        {
+          "word": " menariknya.",
+          "start": 37.64,
+          "end": 38.22
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 38.68,
+      "end": 43.82,
+      "start_tc": "00:00:38,680",
+      "end_tc": "00:00:43,820",
+      "text": "Kalau pagar tinggi dan tertutup, orang dari luar itu jauh lebih sulit melihat ke dalam,",
+      "words": [
+        {
+          "word": " Kalau",
+          "start": 38.68,
+          "end": 39.06
+        },
+        {
+          "word": " pagar",
+          "start": 39.06,
+          "end": 39.72
+        },
+        {
+          "word": " tinggi",
+          "start": 39.72,
+          "end": 40.2
+        },
+        {
+          "word": " dan",
+          "start": 40.2,
+          "end": 40.38
+        },
+        {
+          "word": " tertutup,",
+          "start": 40.38,
+          "end": 40.96
+        },
+        {
+          "word": " orang",
+          "start": 41.14,
+          "end": 41.3
+        },
+        {
+          "word": " dari",
+          "start": 41.3,
+          "end": 41.52
+        },
+        {
+          "word": " luar",
+          "start": 41.52,
+          "end": 41.88
+        },
+        {
+          "word": " itu",
+          "start": 41.88,
+          "end": 42.12
+        },
+        {
+          "word": " jauh",
+          "start": 42.12,
+          "end": 42.54
+        },
+        {
+          "word": " lebih",
+          "start": 42.54,
+          "end": 42.68
+        },
+        {
+          "word": " sulit",
+          "start": 42.68,
+          "end": 43.04
+        },
+        {
+          "word": " melihat",
+          "start": 43.04,
+          "end": 43.36
+        },
+        {
+          "word": " ke",
+          "start": 43.36,
+          "end": 43.54
+        },
+        {
+          "word": " dalam,",
+          "start": 43.54,
+          "end": 43.82
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 44.14,
+      "end": 48.72,
+      "start_tc": "00:00:44,140",
+      "end_tc": "00:00:48,720",
+      "text": "kifasinya juga lebih meningkat, tapi hubungan visual dengan jalan juga berkurang.",
+      "words": [
+        {
+          "word": " kifasinya",
+          "start": 44.14,
+          "end": 44.58
+        },
+        {
+          "word": " juga",
+          "start": 44.58,
+          "end": 44.88
+        },
+        {
+          "word": " lebih",
+          "start": 44.88,
+          "end": 45.14
+        },
+        {
+          "word": " meningkat,",
+          "start": 45.14,
+          "end": 45.6
+        },
+        {
+          "word": " tapi",
+          "start": 45.86,
+          "end": 46.24
+        },
+        {
+          "word": " hubungan",
+          "start": 46.24,
+          "end": 46.8
+        },
+        {
+          "word": " visual",
+          "start": 46.8,
+          "end": 47.12
+        },
+        {
+          "word": " dengan",
+          "start": 47.12,
+          "end": 47.48
+        },
+        {
+          "word": " jalan",
+          "start": 47.48,
+          "end": 47.86
+        },
+        {
+          "word": " juga",
+          "start": 47.86,
+          "end": 48.16
+        },
+        {
+          "word": " berkurang.",
+          "start": 48.16,
+          "end": 48.72
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 48.96,
+      "end": 53.1,
+      "start_tc": "00:00:48,960",
+      "end_tc": "00:00:53,100",
+      "text": "Sebaliknya, pagar yang rendah atau transferan membuat rumah lebih terlihat,",
+      "words": [
+        {
+          "word": " Sebaliknya,",
+          "start": 48.96,
+          "end": 49.52
+        },
+        {
+          "word": " pagar",
+          "start": 49.84,
+          "end": 50.14
+        },
+        {
+          "word": " yang",
+          "start": 50.14,
+          "end": 50.34
+        },
+        {
+          "word": " rendah",
+          "start": 50.34,
+          "end": 50.68
+        },
+        {
+          "word": " atau",
+          "start": 50.68,
+          "end": 51.0
+        },
+        {
+          "word": " transferan",
+          "start": 51.0,
+          "end": 51.7
+        },
+        {
+          "word": " membuat",
+          "start": 51.7,
+          "end": 52.0
+        },
+        {
+          "word": " rumah",
+          "start": 52.0,
+          "end": 52.22
+        },
+        {
+          "word": " lebih",
+          "start": 52.22,
+          "end": 52.6
+        },
+        {
+          "word": " terlihat,",
+          "start": 52.6,
+          "end": 53.1
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 53.1,
+      "end": 57.86,
+      "start_tc": "00:00:53,100",
+      "end_tc": "00:00:57,860",
+      "text": "orang bisa saling melihat, menyebabkan merasa lebih terhubung dengan lingkungan.",
+      "words": [
+        {
+          "word": " orang",
+          "start": 53.1,
+          "end": 53.56
+        },
+        {
+          "word": " bisa",
+          "start": 53.56,
+          "end": 53.82
+        },
+        {
+          "word": " saling",
+          "start": 53.82,
+          "end": 54.14
+        },
+        {
+          "word": " melihat,",
+          "start": 54.14,
+          "end": 54.48
+        },
+        {
+          "word": " menyebabkan",
+          "start": 54.86,
+          "end": 55.82
+        },
+        {
+          "word": " merasa",
+          "start": 55.82,
+          "end": 56.22
+        },
+        {
+          "word": " lebih",
+          "start": 56.22,
+          "end": 56.46
+        },
+        {
+          "word": " terhubung",
+          "start": 56.46,
+          "end": 56.88
+        },
+        {
+          "word": " dengan",
+          "start": 56.88,
+          "end": 57.2
+        },
+        {
+          "word": " lingkungan.",
+          "start": 57.2,
+          "end": 57.86
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 58.06,
+      "end": 61.44,
+      "start_tc": "00:00:58,060",
+      "end_tc": "00:01:01,440",
+      "text": "Jadi, kita selalu berhadapan dengan pilihan, mau yang lebih privat,",
+      "words": [
+        {
+          "word": " Jadi,",
+          "start": 58.06,
+          "end": 58.3
+        },
+        {
+          "word": " kita",
+          "start": 58.54,
+          "end": 58.76
+        },
+        {
+          "word": " selalu",
+          "start": 58.76,
+          "end": 59.1
+        },
+        {
+          "word": " berhadapan",
+          "start": 59.1,
+          "end": 59.6
+        },
+        {
+          "word": " dengan",
+          "start": 59.6,
+          "end": 59.88
+        },
+        {
+          "word": " pilihan,",
+          "start": 59.88,
+          "end": 60.32
+        },
+        {
+          "word": " mau",
+          "start": 60.56,
+          "end": 60.68
+        },
+        {
+          "word": " yang",
+          "start": 60.68,
+          "end": 60.88
+        },
+        {
+          "word": " lebih",
+          "start": 60.88,
+          "end": 61.06
+        },
+        {
+          "word": " private,",
+          "start": 61.06,
+          "end": 61.44
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 61.86,
+      "end": 64.62,
+      "start_tc": "00:01:01,860",
+      "end_tc": "00:01:04,620",
+      "text": "mau yang lebih terhubung, mau rumah terasa terlindungi,",
+      "words": [
+        {
+          "word": " mau",
+          "start": 61.86,
+          "end": 62.02
+        },
+        {
+          "word": " yang",
+          "start": 62.02,
+          "end": 62.26
+        },
+        {
+          "word": " lebih",
+          "start": 62.26,
+          "end": 62.44
+        },
+        {
+          "word": " terhubung,",
+          "start": 62.44,
+          "end": 62.94
+        },
+        {
+          "word": " mau",
+          "start": 63.18,
+          "end": 63.26
+        },
+        {
+          "word": " rumah",
+          "start": 63.26,
+          "end": 63.44
+        },
+        {
+          "word": " terasa",
+          "start": 63.44,
+          "end": 63.86
+        },
+        {
+          "word": " terlindungi,",
+          "start": 63.86,
+          "end": 64.62
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 64.76,
+      "end": 70.42,
+      "start_tc": "00:01:04,760",
+      "end_tc": "00:01:10,420",
+      "text": "atau mau rumah terasa terbuka, dan tentu jawabannya bisa berbeda untuk setiap orang.",
+      "words": [
+        {
+          "word": " atau",
+          "start": 64.76,
+          "end": 65.1
+        },
+        {
+          "word": " mau",
+          "start": 65.1,
+          "end": 65.6
+        },
+        {
+          "word": " rumah",
+          "start": 65.6,
+          "end": 65.92
+        },
+        {
+          "word": " terasa",
+          "start": 65.92,
+          "end": 66.4
+        },
+        {
+          "word": " terbuka,",
+          "start": 66.4,
+          "end": 66.9
+        },
+        {
+          "word": " dan",
+          "start": 67.28,
+          "end": 67.4
+        },
+        {
+          "word": " tentu",
+          "start": 67.4,
+          "end": 68.04
+        },
+        {
+          "word": " jawabannya",
+          "start": 68.04,
+          "end": 68.72
+        },
+        {
+          "word": " bisa",
+          "start": 68.72,
+          "end": 69.16
+        },
+        {
+          "word": " berbeda",
+          "start": 69.16,
+          "end": 69.64
+        },
+        {
+          "word": " untuk",
+          "start": 69.64,
+          "end": 69.88
+        },
+        {
+          "word": " setiap",
+          "start": 69.88,
+          "end": 70.2
+        },
+        {
+          "word": " orang.",
+          "start": 70.2,
+          "end": 70.42
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 70.78,
+      "end": 74.56,
+      "start_tc": "00:01:10,780",
+      "end_tc": "00:01:14,560",
+      "text": "Jadi, pagar itu sebenarnya bukan cuma benda yang terkata, jangan masuk.",
+      "words": [
+        {
+          "word": " Jadi,",
+          "start": 70.78,
+          "end": 71.08
+        },
+        {
+          "word": " pagar",
+          "start": 71.34,
+          "end": 71.62
+        },
+        {
+          "word": " itu",
+          "start": 71.62,
+          "end": 71.84
+        },
+        {
+          "word": " sebenarnya",
+          "start": 71.84,
+          "end": 72.24
+        },
+        {
+          "word": " bukan",
+          "start": 72.24,
+          "end": 72.56
+        },
+        {
+          "word": " cuma",
+          "start": 72.56,
+          "end": 72.9
+        },
+        {
+          "word": " benda",
+          "start": 72.9,
+          "end": 73.2
+        },
+        {
+          "word": " yang",
+          "start": 73.2,
+          "end": 73.44
+        },
+        {
+          "word": " terkata,",
+          "start": 73.44,
+          "end": 73.82
+        },
+        {
+          "word": " jangan",
+          "start": 74.06,
+          "end": 74.22
+        },
+        {
+          "word": " masuk.",
+          "start": 74.22,
+          "end": 74.56
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 74.84,
+      "end": 80.06,
+      "start_tc": "00:01:14,840",
+      "end_tc": "00:01:20,060",
+      "text": "Disin pagar juga seperti mengatakan seberapa jauh saya ingin terhubung dengan dunia luar.",
+      "words": [
+        {
+          "word": " Disin",
+          "start": 74.84,
+          "end": 75.16
+        },
+        {
+          "word": " pagar",
+          "start": 75.16,
+          "end": 75.52
+        },
+        {
+          "word": " juga",
+          "start": 75.52,
+          "end": 75.82
+        },
+        {
+          "word": " seperti",
+          "start": 75.82,
+          "end": 76.22
+        },
+        {
+          "word": " mengatakan",
+          "start": 76.22,
+          "end": 76.88
+        },
+        {
+          "word": " seberapa",
+          "start": 76.88,
+          "end": 77.64
+        },
+        {
+          "word": " jauh",
+          "start": 77.64,
+          "end": 78.0
+        },
+        {
+          "word": " saya",
+          "start": 78.0,
+          "end": 78.2
+        },
+        {
+          "word": " ingin",
+          "start": 78.2,
+          "end": 78.48
+        },
+        {
+          "word": " terhubung",
+          "start": 78.48,
+          "end": 78.98
+        },
+        {
+          "word": " dengan",
+          "start": 78.98,
+          "end": 79.28
+        },
+        {
+          "word": " dunia",
+          "start": 79.28,
+          "end": 79.7
+        },
+        {
+          "word": " luar.",
+          "start": 79.7,
+          "end": 80.06
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 80.06,
+      "end": 85.54,
+      "start_tc": "00:01:20,060",
+      "end_tc": "00:01:25,540",
+      "text": "Semakin terbuka pagarnya, semakin mudah rumah berintraksi secara visual dengan lingkungan.",
+      "words": [
+        {
+          "word": " Semakin",
+          "start": 80.06,
+          "end": 80.5
+        },
+        {
+          "word": " terbuka",
+          "start": 80.5,
+          "end": 80.92
+        },
+        {
+          "word": " pagarnya,",
+          "start": 80.92,
+          "end": 81.44
+        },
+        {
+          "word": " semakin",
+          "start": 81.8,
+          "end": 82.08
+        },
+        {
+          "word": " mudah",
+          "start": 82.08,
+          "end": 82.42
+        },
+        {
+          "word": " rumah",
+          "start": 82.42,
+          "end": 82.68
+        },
+        {
+          "word": " berintraksi",
+          "start": 82.68,
+          "end": 83.6
+        },
+        {
+          "word": " secara",
+          "start": 83.6,
+          "end": 84.04
+        },
+        {
+          "word": " visual",
+          "start": 84.04,
+          "end": 84.46
+        },
+        {
+          "word": " dengan",
+          "start": 84.46,
+          "end": 84.9
+        },
+        {
+          "word": " lingkungan.",
+          "start": 84.9,
+          "end": 85.54
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 85.88,
+      "end": 90.34,
+      "start_tc": "00:01:25,880",
+      "end_tc": "00:01:30,340",
+      "text": "Semakin tertutup, semakin kuat batas antara kehidupan pribadi dan juga jalan.",
+      "words": [
+        {
+          "word": " Semakin",
+          "start": 85.88,
+          "end": 86.12
+        },
+        {
+          "word": " tertutup,",
+          "start": 86.12,
+          "end": 86.72
+        },
+        {
+          "word": " semakin",
+          "start": 87.0,
+          "end": 87.28
+        },
+        {
+          "word": " kuat",
+          "start": 87.28,
+          "end": 87.58
+        },
+        {
+          "word": " batas",
+          "start": 87.58,
+          "end": 88.04
+        },
+        {
+          "word": " antara",
+          "start": 88.04,
+          "end": 88.46
+        },
+        {
+          "word": " kehidupan",
+          "start": 88.46,
+          "end": 88.9
+        },
+        {
+          "word": " pribadi",
+          "start": 88.9,
+          "end": 89.38
+        },
+        {
+          "word": " dan",
+          "start": 89.38,
+          "end": 89.64
+        },
+        {
+          "word": " juga",
+          "start": 89.64,
+          "end": 89.96
+        },
+        {
+          "word": " jalan.",
+          "start": 89.96,
+          "end": 90.34
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "start": 90.76,
+      "end": 95.76,
+      "start_tc": "00:01:30,760",
+      "end_tc": "00:01:35,760",
+      "text": "Coba lihat pagar rumah kamu, tinggi, rendah, transferan, atau benar-benar tertutup.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 90.76,
+          "end": 90.9
+        },
+        {
+          "word": " lihat",
+          "start": 90.9,
+          "end": 91.08
+        },
+        {
+          "word": " pagar",
+          "start": 91.08,
+          "end": 91.44
+        },
+        {
+          "word": " rumah",
+          "start": 91.44,
+          "end": 91.58
+        },
+        {
+          "word": " kamu,",
+          "start": 91.58,
+          "end": 91.9
+        },
+        {
+          "word": " tinggi,",
+          "start": 92.3,
+          "end": 92.74
+        },
+        {
+          "word": " rendah,",
+          "start": 93.06,
+          "end": 93.48
+        },
+        {
+          "word": " transferan,",
+          "start": 93.74,
+          "end": 94.26
+        },
+        {
+          "word": " atau",
+          "start": 94.34,
+          "end": 94.56
+        },
+        {
+          "word": " benar",
+          "start": 94.56,
+          "end": 94.82
+        },
+        {
+          "word": "-benar",
+          "start": 94.82,
+          "end": 95.04
+        },
+        {
+          "word": " tertutup.",
+          "start": 95.04,
+          "end": 95.76
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "start": 96.06,
+      "end": 100.06,
+      "start_tc": "00:01:36,060",
+      "end_tc": "00:01:40,060",
+      "text": "Menurut kamu, pagar itu lebih banyak berfungsi untuk keamanan atau privasi.",
+      "words": [
+        {
+          "word": " Menurut",
+          "start": 96.06,
+          "end": 96.36
+        },
+        {
+          "word": " kamu,",
+          "start": 96.36,
+          "end": 96.7
+        },
+        {
+          "word": " pagar",
+          "start": 96.94,
+          "end": 97.2
+        },
+        {
+          "word": " itu",
+          "start": 97.2,
+          "end": 97.38
+        },
+        {
+          "word": " lebih",
+          "start": 97.38,
+          "end": 97.56
+        },
+        {
+          "word": " banyak",
+          "start": 97.56,
+          "end": 97.9
+        },
+        {
+          "word": " berfungsi",
+          "start": 97.9,
+          "end": 98.42
+        },
+        {
+          "word": " untuk",
+          "start": 98.42,
+          "end": 98.6
+        },
+        {
+          "word": " keamanan",
+          "start": 98.6,
+          "end": 99.1
+        },
+        {
+          "word": " atau",
+          "start": 99.1,
+          "end": 99.48
+        },
+        {
+          "word": " privasi.",
+          "start": 99.48,
+          "end": 100.06
+        }
+      ]
+    }
+  ]
+}

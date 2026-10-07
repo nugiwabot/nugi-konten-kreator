@@ -1,0 +1,93 @@
+{
+  "project": "07-script",
+  "headline": "Kenapa Rumah Punya Ruang Tamu?",
+  "audio_duration": 102.89,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 40.8,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_formal_living_room_sofa.jpg",
+      "filename": "001_formal_living_room_sofa.jpg",
+      "concept": "Ruang tamu formal dengan sofa dan meja",
+      "start": 6.43,
+      "end": 12.43,
+      "start_tc": "00:00:06,430",
+      "end_tc": "00:00:12,430",
+      "duration": 6.0,
+      "dialog_cue": "Anih banget kan?"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_welcoming_guest_door.jpg",
+      "filename": "002_welcoming_guest_door.jpg",
+      "concept": "Menerima dan menyapa tamu yang datang",
+      "start": 19.29,
+      "end": 25.29,
+      "start_tc": "00:00:19,290",
+      "end_tc": "00:00:25,290",
+      "duration": 6.0,
+      "dialog_cue": "Untuk orangnya sebenarnya bukan penghuni rumah."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_serving_tea_guests.jpg",
+      "filename": "003_serving_tea_guests.jpg",
+      "concept": "Menyajikan jamuan dan keramahan di ruang tamu",
+      "start": 32.15,
+      "end": 38.15,
+      "start_tc": "00:00:32,150",
+      "end_tc": "00:00:38,150",
+      "duration": 6.0,
+      "dialog_cue": "Seperti tidur, makan, bekerja, bersantai, jadi ketika orang dari luar datang, kita membutuhkan ruang yang bisa menjadi perantara."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_traditional_etiquette_parlor.jpg",
+      "filename": "004_traditional_etiquette_parlor.jpg",
+      "concept": "Ruang tamu sebagai etika sosial dan batas kesopanan",
+      "start": 45.01,
+      "end": 51.01,
+      "start_tc": "00:00:45,010",
+      "end_tc": "00:00:51,010",
+      "duration": 6.0,
+      "dialog_cue": "Tamu bisa masuk ke rumah, tanpa harus masuk ke seluruh kehidupan pribadi kita."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_social_status_showcase.jpg",
+      "filename": "005_social_status_showcase.jpg",
+      "concept": "Wajah rumah yang mempresentasikan citra keluarga",
+      "start": 57.88,
+      "end": 63.88,
+      "start_tc": "00:00:57,880",
+      "end_tc": "00:01:03,880",
+      "duration": 6.0,
+      "dialog_cue": "Coba bayangkan, rumah itu sebagai beberapa lapisan, dekat pintu masuk, ruang relative lebih terbuka, masuk lebih dalam, ruangnya itu lebih privat,"
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_barrier_to_private_rooms.jpg",
+      "filename": "006_barrier_to_private_rooms.jpg",
+      "concept": "Penyekat agar orang luar tidak melihat ke ruang pribadi",
+      "start": 70.74,
+      "end": 76.74,
+      "start_tc": "00:01:10,740",
+      "end_tc": "00:01:16,740",
+      "duration": 6.0,
+      "dialog_cue": "Jadi ada perbedaan besar antara boleh masuk rumah dan boleh masuk ke kehidupan pribadi saya."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_warm_conversation_hosts.jpg",
+      "filename": "007_warm_conversation_hosts.jpg",
+      "concept": "Ruang interaksi sosial yang nyaman dan terkontrol",
+      "start": 83.6,
+      "end": 89.6,
+      "start_tc": "00:01:23,600",
+      "end_tc": "00:01:29,600",
+      "duration": 6.0,
+      "dialog_cue": "dan tanpa sadar, dan nah rumah kita sebenarnya sedang memberitahu siapa yang boleh berada di mana dan seberapa jauh mereka boleh masuk."
+    }
+  ]
+}

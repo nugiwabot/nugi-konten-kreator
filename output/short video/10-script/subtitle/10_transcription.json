@@ -1,0 +1,1487 @@
+{
+  "project": "10-script",
+  "footage": "\\\\tsclient\\C\\Users\\Nugi\\Documents\\nugi-konten-kreator\\output\\short video\\10-script\\footage\\10.mp4",
+  "duration": 100.61,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 5.62,
+      "start_tc": "00:00:00,000",
+      "end_tc": "00:00:05,620",
+      "text": "Kalau satu pintu itu sudah cukup untuk masuk rumah, kenapa banyak rumah itu punya pintu belakang?",
+      "words": [
+        {
+          "word": " Kalau",
+          "start": 0.0,
+          "end": 0.28
+        },
+        {
+          "word": " satu",
+          "start": 0.28,
+          "end": 0.56
+        },
+        {
+          "word": " pintu",
+          "start": 0.56,
+          "end": 0.9
+        },
+        {
+          "word": " itu",
+          "start": 0.9,
+          "end": 1.1
+        },
+        {
+          "word": " sudah",
+          "start": 1.1,
+          "end": 1.4
+        },
+        {
+          "word": " cukup",
+          "start": 1.4,
+          "end": 1.84
+        },
+        {
+          "word": " untuk",
+          "start": 1.84,
+          "end": 2.16
+        },
+        {
+          "word": " masuk",
+          "start": 2.16,
+          "end": 2.44
+        },
+        {
+          "word": " rumah,",
+          "start": 2.44,
+          "end": 2.78
+        },
+        {
+          "word": " kenapa",
+          "start": 3.16,
+          "end": 3.56
+        },
+        {
+          "word": " banyak",
+          "start": 3.56,
+          "end": 4.06
+        },
+        {
+          "word": " rumah",
+          "start": 4.06,
+          "end": 4.26
+        },
+        {
+          "word": " itu",
+          "start": 4.26,
+          "end": 4.54
+        },
+        {
+          "word": " punya",
+          "start": 4.54,
+          "end": 4.84
+        },
+        {
+          "word": " pintu",
+          "start": 4.84,
+          "end": 5.22
+        },
+        {
+          "word": " belakang?",
+          "start": 5.22,
+          "end": 5.62
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 5.82,
+      "end": 7.76,
+      "start_tc": "00:00:05,820",
+      "end_tc": "00:00:07,760",
+      "text": "Bukannya satu pintu saja sudah cukup.",
+      "words": [
+        {
+          "word": " Bukannya",
+          "start": 5.82,
+          "end": 6.1
+        },
+        {
+          "word": " satu",
+          "start": 6.1,
+          "end": 6.44
+        },
+        {
+          "word": " pintu",
+          "start": 6.44,
+          "end": 6.88
+        },
+        {
+          "word": " saja",
+          "start": 6.88,
+          "end": 7.06
+        },
+        {
+          "word": " sudah",
+          "start": 7.06,
+          "end": 7.28
+        },
+        {
+          "word": " cukup.",
+          "start": 7.28,
+          "end": 7.76
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 8.16,
+      "end": 12.18,
+      "start_tc": "00:00:08,160",
+      "end_tc": "00:00:12,180",
+      "text": "Ternyata, dua pintu itu bisa berarti dua jalur kehidupan yang berbeda.",
+      "words": [
+        {
+          "word": " Ternyata,",
+          "start": 8.16,
+          "end": 8.6
+        },
+        {
+          "word": " dua",
+          "start": 8.86,
+          "end": 8.96
+        },
+        {
+          "word": " pintu",
+          "start": 8.96,
+          "end": 9.28
+        },
+        {
+          "word": " itu",
+          "start": 9.28,
+          "end": 9.5
+        },
+        {
+          "word": " bisa",
+          "start": 9.5,
+          "end": 9.74
+        },
+        {
+          "word": " berarti",
+          "start": 9.74,
+          "end": 10.18
+        },
+        {
+          "word": " dua",
+          "start": 10.18,
+          "end": 10.48
+        },
+        {
+          "word": " jalur",
+          "start": 10.48,
+          "end": 10.82
+        },
+        {
+          "word": " kehidupan",
+          "start": 10.82,
+          "end": 11.32
+        },
+        {
+          "word": " yang",
+          "start": 11.32,
+          "end": 11.58
+        },
+        {
+          "word": " berbeda.",
+          "start": 11.58,
+          "end": 12.18
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 12.38,
+      "end": 13.78,
+      "start_tc": "00:00:12,380",
+      "end_tc": "00:00:13,780",
+      "text": "Coba perhatikan pintu depan.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 12.38,
+          "end": 12.54
+        },
+        {
+          "word": " perhatikan",
+          "start": 12.54,
+          "end": 13.0
+        },
+        {
+          "word": " pintu",
+          "start": 13.0,
+          "end": 13.42
+        },
+        {
+          "word": " depan.",
+          "start": 13.42,
+          "end": 13.78
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 14.12,
+      "end": 17.9,
+      "start_tc": "00:00:14,120",
+      "end_tc": "00:00:17,900",
+      "text": "Biasanya, ini adalah wajah utama rumah, orang datang lewat sini.",
+      "words": [
+        {
+          "word": " Biasanya,",
+          "start": 14.12,
+          "end": 14.64
+        },
+        {
+          "word": " ini",
+          "start": 14.92,
+          "end": 15.06
+        },
+        {
+          "word": " adalah",
+          "start": 15.06,
+          "end": 15.28
+        },
+        {
+          "word": " wajah",
+          "start": 15.28,
+          "end": 15.7
+        },
+        {
+          "word": " utama",
+          "start": 15.7,
+          "end": 16.08
+        },
+        {
+          "word": " rumah,",
+          "start": 16.08,
+          "end": 16.34
+        },
+        {
+          "word": " orang",
+          "start": 16.76,
+          "end": 16.92
+        },
+        {
+          "word": " datang",
+          "start": 16.92,
+          "end": 17.3
+        },
+        {
+          "word": " lewat",
+          "start": 17.3,
+          "end": 17.58
+        },
+        {
+          "word": " sini.",
+          "start": 17.58,
+          "end": 17.9
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 18.52,
+      "end": 24.18,
+      "start_tc": "00:00:18,520",
+      "end_tc": "00:00:24,180",
+      "text": "Tamu masuk lewat sini dan akcesnya itu lebih dekat dengan jalan atau ruang yang lebih public.",
+      "words": [
+        {
+          "word": " Tamu",
+          "start": 18.52,
+          "end": 18.88
+        },
+        {
+          "word": " masuk",
+          "start": 18.88,
+          "end": 19.2
+        },
+        {
+          "word": " lewat",
+          "start": 19.2,
+          "end": 19.5
+        },
+        {
+          "word": " sini",
+          "start": 19.5,
+          "end": 19.84
+        },
+        {
+          "word": " dan",
+          "start": 19.84,
+          "end": 20.22
+        },
+        {
+          "word": " akcesnya",
+          "start": 20.22,
+          "end": 20.86
+        },
+        {
+          "word": " itu",
+          "start": 20.86,
+          "end": 21.06
+        },
+        {
+          "word": " lebih",
+          "start": 21.06,
+          "end": 21.34
+        },
+        {
+          "word": " dekat",
+          "start": 21.34,
+          "end": 21.76
+        },
+        {
+          "word": " dengan",
+          "start": 21.76,
+          "end": 22.16
+        },
+        {
+          "word": " jalan",
+          "start": 22.16,
+          "end": 22.56
+        },
+        {
+          "word": " atau",
+          "start": 22.56,
+          "end": 22.96
+        },
+        {
+          "word": " ruang",
+          "start": 22.96,
+          "end": 23.34
+        },
+        {
+          "word": " yang",
+          "start": 23.34,
+          "end": 23.56
+        },
+        {
+          "word": " lebih",
+          "start": 23.56,
+          "end": 23.8
+        },
+        {
+          "word": " public.",
+          "start": 23.8,
+          "end": 24.18
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 24.56,
+      "end": 26.22,
+      "start_tc": "00:00:24,560",
+      "end_tc": "00:00:26,220",
+      "text": "Sekarang kita lihat pintu belakang.",
+      "words": [
+        {
+          "word": " Sekarang",
+          "start": 24.56,
+          "end": 25.02
+        },
+        {
+          "word": " kita",
+          "start": 25.02,
+          "end": 25.28
+        },
+        {
+          "word": " lihat",
+          "start": 25.28,
+          "end": 25.46
+        },
+        {
+          "word": " pintu",
+          "start": 25.46,
+          "end": 25.8
+        },
+        {
+          "word": " belakang.",
+          "start": 25.8,
+          "end": 26.22
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 26.22,
+      "end": 29.0,
+      "start_tc": "00:00:26,220",
+      "end_tc": "00:00:29,000",
+      "text": "Posisinya itu sering kali lebih dekat dengan dapur.",
+      "words": [
+        {
+          "word": " Posisinya",
+          "start": 26.22,
+          "end": 27.12
+        },
+        {
+          "word": " itu",
+          "start": 27.12,
+          "end": 27.28
+        },
+        {
+          "word": " sering",
+          "start": 27.28,
+          "end": 27.52
+        },
+        {
+          "word": " kali",
+          "start": 27.52,
+          "end": 27.74
+        },
+        {
+          "word": " lebih",
+          "start": 27.74,
+          "end": 27.96
+        },
+        {
+          "word": " dekat",
+          "start": 27.96,
+          "end": 28.28
+        },
+        {
+          "word": " dengan",
+          "start": 28.28,
+          "end": 28.56
+        },
+        {
+          "word": " dapur.",
+          "start": 28.56,
+          "end": 29.0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 29.3,
+      "end": 33.34,
+      "start_tc": "00:00:29,300",
+      "end_tc": "00:00:33,340",
+      "text": "Halaman belakang, area service atau bagian rumah yang lebih perifat.",
+      "words": [
+        {
+          "word": " Halaman",
+          "start": 29.3,
+          "end": 29.64
+        },
+        {
+          "word": " belakang,",
+          "start": 29.64,
+          "end": 30.16
+        },
+        {
+          "word": " area",
+          "start": 30.34,
+          "end": 30.52
+        },
+        {
+          "word": " service",
+          "start": 30.52,
+          "end": 31.02
+        },
+        {
+          "word": " atau",
+          "start": 31.02,
+          "end": 31.52
+        },
+        {
+          "word": " bagian",
+          "start": 31.52,
+          "end": 31.9
+        },
+        {
+          "word": " rumah",
+          "start": 31.9,
+          "end": 32.1
+        },
+        {
+          "word": " yang",
+          "start": 32.1,
+          "end": 32.5
+        },
+        {
+          "word": " lebih",
+          "start": 32.5,
+          "end": 32.82
+        },
+        {
+          "word": " perifat.",
+          "start": 32.82,
+          "end": 33.34
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 33.76,
+      "end": 37.26,
+      "start_tc": "00:00:33,760",
+      "end_tc": "00:00:37,260",
+      "text": "Artinya, tidak semua aktivitas harus melewati jalur yang sama.",
+      "words": [
+        {
+          "word": " Artinya,",
+          "start": 33.76,
+          "end": 34.24
+        },
+        {
+          "word": " tidak",
+          "start": 34.48,
+          "end": 34.56
+        },
+        {
+          "word": " semua",
+          "start": 34.56,
+          "end": 34.84
+        },
+        {
+          "word": " aktivitas",
+          "start": 34.84,
+          "end": 35.34
+        },
+        {
+          "word": " harus",
+          "start": 35.34,
+          "end": 35.76
+        },
+        {
+          "word": " melewati",
+          "start": 35.76,
+          "end": 36.32
+        },
+        {
+          "word": " jalur",
+          "start": 36.32,
+          "end": 36.76
+        },
+        {
+          "word": " yang",
+          "start": 36.76,
+          "end": 36.94
+        },
+        {
+          "word": " sama.",
+          "start": 36.94,
+          "end": 37.26
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 37.64,
+      "end": 40.5,
+      "start_tc": "00:00:37,640",
+      "end_tc": "00:00:40,500",
+      "text": "Bayangkan, kalau semua hal itu harus lewat pintu depan.",
+      "words": [
+        {
+          "word": " Bayangkan,",
+          "start": 37.64,
+          "end": 38.16
+        },
+        {
+          "word": " kalau",
+          "start": 38.34,
+          "end": 38.44
+        },
+        {
+          "word": " semua",
+          "start": 38.44,
+          "end": 38.68
+        },
+        {
+          "word": " hal",
+          "start": 38.68,
+          "end": 38.96
+        },
+        {
+          "word": " itu",
+          "start": 38.96,
+          "end": 39.26
+        },
+        {
+          "word": " harus",
+          "start": 39.26,
+          "end": 39.5
+        },
+        {
+          "word": " lewat",
+          "start": 39.5,
+          "end": 39.8
+        },
+        {
+          "word": " pintu",
+          "start": 39.8,
+          "end": 40.1
+        },
+        {
+          "word": " depan.",
+          "start": 40.1,
+          "end": 40.5
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 40.76,
+      "end": 46.3,
+      "start_tc": "00:00:40,760",
+      "end_tc": "00:00:46,300",
+      "text": "Tamu masuk dari sana, barang-barang jah itu masuk dari sana juga, aktivitas dapur juga dari sana.",
+      "words": [
+        {
+          "word": " Tamu",
+          "start": 40.76,
+          "end": 41.02
+        },
+        {
+          "word": " masuk",
+          "start": 41.02,
+          "end": 41.26
+        },
+        {
+          "word": " dari",
+          "start": 41.26,
+          "end": 41.5
+        },
+        {
+          "word": " sana,",
+          "start": 41.5,
+          "end": 41.84
+        },
+        {
+          "word": " barang",
+          "start": 42.26,
+          "end": 42.44
+        },
+        {
+          "word": "-barang",
+          "start": 42.44,
+          "end": 42.62
+        },
+        {
+          "word": " jah",
+          "start": 42.62,
+          "end": 42.84
+        },
+        {
+          "word": " itu",
+          "start": 42.84,
+          "end": 43.02
+        },
+        {
+          "word": " masuk",
+          "start": 43.02,
+          "end": 43.24
+        },
+        {
+          "word": " dari",
+          "start": 43.24,
+          "end": 43.5
+        },
+        {
+          "word": " sana",
+          "start": 43.5,
+          "end": 43.76
+        },
+        {
+          "word": " juga,",
+          "start": 43.76,
+          "end": 44.14
+        },
+        {
+          "word": " aktivitas",
+          "start": 44.42,
+          "end": 44.92
+        },
+        {
+          "word": " dapur",
+          "start": 44.92,
+          "end": 45.42
+        },
+        {
+          "word": " juga",
+          "start": 45.42,
+          "end": 45.66
+        },
+        {
+          "word": " dari",
+          "start": 45.66,
+          "end": 45.9
+        },
+        {
+          "word": " sana.",
+          "start": 45.9,
+          "end": 46.3
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 46.92,
+      "end": 49.74,
+      "start_tc": "00:00:46,920",
+      "end_tc": "00:00:49,740",
+      "text": "Kluar masuk penghuni, semuanya itu lewat satu jalur.",
+      "words": [
+        {
+          "word": " Kluar",
+          "start": 46.92,
+          "end": 47.22
+        },
+        {
+          "word": " masuk",
+          "start": 47.22,
+          "end": 47.46
+        },
+        {
+          "word": " penghuni,",
+          "start": 47.46,
+          "end": 47.92
+        },
+        {
+          "word": " semuanya",
+          "start": 48.16,
+          "end": 48.56
+        },
+        {
+          "word": " itu",
+          "start": 48.56,
+          "end": 48.86
+        },
+        {
+          "word": " lewat",
+          "start": 48.86,
+          "end": 49.04
+        },
+        {
+          "word": " satu",
+          "start": 49.04,
+          "end": 49.26
+        },
+        {
+          "word": " jalur.",
+          "start": 49.26,
+          "end": 49.74
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 49.96,
+      "end": 53.64,
+      "start_tc": "00:00:49,960",
+      "end_tc": "00:00:53,640",
+      "text": "Bisa aja, tapi rumah itu jadi kurang flexible.",
+      "words": [
+        {
+          "word": " Bisa",
+          "start": 49.96,
+          "end": 50.2
+        },
+        {
+          "word": " aja,",
+          "start": 50.2,
+          "end": 50.54
+        },
+        {
+          "word": " tapi",
+          "start": 51.18,
+          "end": 51.62
+        },
+        {
+          "word": " rumah",
+          "start": 51.62,
+          "end": 52.0
+        },
+        {
+          "word": " itu",
+          "start": 52.0,
+          "end": 52.32
+        },
+        {
+          "word": " jadi",
+          "start": 52.32,
+          "end": 52.48
+        },
+        {
+          "word": " kurang",
+          "start": 52.48,
+          "end": 53.0
+        },
+        {
+          "word": " flexible.",
+          "start": 53.0,
+          "end": 53.64
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 53.64,
+      "end": 58.06,
+      "start_tc": "00:00:53,640",
+      "end_tc": "00:00:58,060",
+      "text": "Dangan akces yang berbeda, aktivitas juga bisa dipisahkan.",
+      "words": [
+        {
+          "word": " Dangan",
+          "start": 53.64,
+          "end": 54.4
+        },
+        {
+          "word": " akces",
+          "start": 54.4,
+          "end": 54.78
+        },
+        {
+          "word": " yang",
+          "start": 54.78,
+          "end": 54.98
+        },
+        {
+          "word": " berbeda,",
+          "start": 54.98,
+          "end": 55.56
+        },
+        {
+          "word": " aktivitas",
+          "start": 55.78,
+          "end": 56.26
+        },
+        {
+          "word": " juga",
+          "start": 56.26,
+          "end": 56.56
+        },
+        {
+          "word": " bisa",
+          "start": 56.56,
+          "end": 57.02
+        },
+        {
+          "word": " dipisahkan.",
+          "start": 57.02,
+          "end": 58.06
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 58.36,
+      "end": 63.52,
+      "start_tc": "00:00:58,360",
+      "end_tc": "00:01:03,520",
+      "text": "Tamu punya jalurnya, penghuni juga punya jalurnya, barang juga bisa punya jalurnya.",
+      "words": [
+        {
+          "word": " Tamu",
+          "start": 58.36,
+          "end": 58.8
+        },
+        {
+          "word": " punya",
+          "start": 58.8,
+          "end": 59.12
+        },
+        {
+          "word": " jalurnya,",
+          "start": 59.12,
+          "end": 59.72
+        },
+        {
+          "word": " penghuni",
+          "start": 59.98,
+          "end": 60.38
+        },
+        {
+          "word": " juga",
+          "start": 60.38,
+          "end": 60.64
+        },
+        {
+          "word": " punya",
+          "start": 60.64,
+          "end": 60.96
+        },
+        {
+          "word": " jalurnya,",
+          "start": 60.96,
+          "end": 61.54
+        },
+        {
+          "word": " barang",
+          "start": 61.66,
+          "end": 61.96
+        },
+        {
+          "word": " juga",
+          "start": 61.96,
+          "end": 62.26
+        },
+        {
+          "word": " bisa",
+          "start": 62.26,
+          "end": 62.68
+        },
+        {
+          "word": " punya",
+          "start": 62.68,
+          "end": 62.96
+        },
+        {
+          "word": " jalurnya.",
+          "start": 62.96,
+          "end": 63.52
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 63.78,
+      "end": 67.12,
+      "start_tc": "00:01:03,780",
+      "end_tc": "00:01:07,120",
+      "text": "Jadi pintu belakang itu sebenarnya bukan sekedar pintu tambahan.",
+      "words": [
+        {
+          "word": " Jadi",
+          "start": 63.78,
+          "end": 64.06
+        },
+        {
+          "word": " pintu",
+          "start": 64.06,
+          "end": 64.46
+        },
+        {
+          "word": " belakang",
+          "start": 64.46,
+          "end": 64.8
+        },
+        {
+          "word": " itu",
+          "start": 64.8,
+          "end": 65.02
+        },
+        {
+          "word": " sebenarnya",
+          "start": 65.02,
+          "end": 65.5
+        },
+        {
+          "word": " bukan",
+          "start": 65.5,
+          "end": 65.88
+        },
+        {
+          "word": " sekedar",
+          "start": 65.88,
+          "end": 66.32
+        },
+        {
+          "word": " pintu",
+          "start": 66.32,
+          "end": 66.7
+        },
+        {
+          "word": " tambahan.",
+          "start": 66.7,
+          "end": 67.12
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 67.52,
+      "end": 71.78,
+      "start_tc": "00:01:07,520",
+      "end_tc": "00:01:11,780",
+      "text": "Dia bisa jadi bagian dari cara rumah mengatur kehidupan di dalamnya.",
+      "words": [
+        {
+          "word": " Dia",
+          "start": 67.52,
+          "end": 67.76
+        },
+        {
+          "word": " bisa",
+          "start": 67.76,
+          "end": 68.18
+        },
+        {
+          "word": " jadi",
+          "start": 68.18,
+          "end": 68.46
+        },
+        {
+          "word": " bagian",
+          "start": 68.46,
+          "end": 68.88
+        },
+        {
+          "word": " dari",
+          "start": 68.88,
+          "end": 69.24
+        },
+        {
+          "word": " cara",
+          "start": 69.24,
+          "end": 69.68
+        },
+        {
+          "word": " rumah",
+          "start": 69.68,
+          "end": 70.08
+        },
+        {
+          "word": " mengatur",
+          "start": 70.08,
+          "end": 70.5
+        },
+        {
+          "word": " kehidupan",
+          "start": 70.5,
+          "end": 71.02
+        },
+        {
+          "word": " di",
+          "start": 71.02,
+          "end": 71.24
+        },
+        {
+          "word": " dalamnya.",
+          "start": 71.24,
+          "end": 71.78
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 72.1,
+      "end": 77.82,
+      "start_tc": "00:01:12,100",
+      "end_tc": "00:01:17,820",
+      "text": "Satu pintu itu lebih dekat dengan dunia sosial, satu lagi lebih dekat dengan kehidupan sahar-hari.",
+      "words": [
+        {
+          "word": " Satu",
+          "start": 72.1,
+          "end": 72.4
+        },
+        {
+          "word": " pintu",
+          "start": 72.4,
+          "end": 72.96
+        },
+        {
+          "word": " itu",
+          "start": 72.96,
+          "end": 73.18
+        },
+        {
+          "word": " lebih",
+          "start": 73.18,
+          "end": 73.42
+        },
+        {
+          "word": " dekat",
+          "start": 73.42,
+          "end": 73.76
+        },
+        {
+          "word": " dengan",
+          "start": 73.76,
+          "end": 74.1
+        },
+        {
+          "word": " dunia",
+          "start": 74.1,
+          "end": 74.48
+        },
+        {
+          "word": " sosial,",
+          "start": 74.48,
+          "end": 74.98
+        },
+        {
+          "word": " satu",
+          "start": 75.16,
+          "end": 75.36
+        },
+        {
+          "word": " lagi",
+          "start": 75.36,
+          "end": 75.7
+        },
+        {
+          "word": " lebih",
+          "start": 75.7,
+          "end": 76.12
+        },
+        {
+          "word": " dekat",
+          "start": 76.12,
+          "end": 76.46
+        },
+        {
+          "word": " dengan",
+          "start": 76.46,
+          "end": 76.78
+        },
+        {
+          "word": " kehidupan",
+          "start": 76.78,
+          "end": 77.28
+        },
+        {
+          "word": " sahar",
+          "start": 77.28,
+          "end": 77.62
+        },
+        {
+          "word": "-hari.",
+          "start": 77.62,
+          "end": 77.82
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "start": 77.82,
+      "end": 83.7,
+      "start_tc": "00:01:17,820",
+      "end_tc": "00:01:23,700",
+      "text": "Dan dari posisi pintunya, kita kadang bisa membaca bagaimana sebuah rumah itu sebenarnya digunakan.",
+      "words": [
+        {
+          "word": " Dan",
+          "start": 77.82,
+          "end": 78.28
+        },
+        {
+          "word": " dari",
+          "start": 78.28,
+          "end": 78.6
+        },
+        {
+          "word": " posisi",
+          "start": 78.6,
+          "end": 78.94
+        },
+        {
+          "word": " pintunya,",
+          "start": 78.94,
+          "end": 79.44
+        },
+        {
+          "word": " kita",
+          "start": 79.78,
+          "end": 79.92
+        },
+        {
+          "word": " kadang",
+          "start": 79.92,
+          "end": 80.24
+        },
+        {
+          "word": " bisa",
+          "start": 80.24,
+          "end": 80.54
+        },
+        {
+          "word": " membaca",
+          "start": 80.54,
+          "end": 81.04
+        },
+        {
+          "word": " bagaimana",
+          "start": 81.04,
+          "end": 81.66
+        },
+        {
+          "word": " sebuah",
+          "start": 81.66,
+          "end": 82.14
+        },
+        {
+          "word": " rumah",
+          "start": 82.14,
+          "end": 82.32
+        },
+        {
+          "word": " itu",
+          "start": 82.32,
+          "end": 82.58
+        },
+        {
+          "word": " sebenarnya",
+          "start": 82.58,
+          "end": 83.06
+        },
+        {
+          "word": " digunakan.",
+          "start": 83.06,
+          "end": 83.7
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "start": 84.26,
+      "end": 89.22,
+      "start_tc": "00:01:24,260",
+      "end_tc": "00:01:29,220",
+      "text": "Rumah ternyata bukan cuma kumpulan ruangan, rumah juga adalah sistem jalur.",
+      "words": [
+        {
+          "word": " Rumah",
+          "start": 84.26,
+          "end": 84.64
+        },
+        {
+          "word": " ternyata",
+          "start": 84.64,
+          "end": 85.26
+        },
+        {
+          "word": " bukan",
+          "start": 85.26,
+          "end": 85.52
+        },
+        {
+          "word": " cuma",
+          "start": 85.52,
+          "end": 85.82
+        },
+        {
+          "word": " kumpulan",
+          "start": 85.82,
+          "end": 86.24
+        },
+        {
+          "word": " ruangan,",
+          "start": 86.24,
+          "end": 86.68
+        },
+        {
+          "word": " rumah",
+          "start": 86.96,
+          "end": 87.1
+        },
+        {
+          "word": " juga",
+          "start": 87.1,
+          "end": 87.42
+        },
+        {
+          "word": " adalah",
+          "start": 87.42,
+          "end": 87.76
+        },
+        {
+          "word": " sistem",
+          "start": 87.76,
+          "end": 88.42
+        },
+        {
+          "word": " jalur.",
+          "start": 88.42,
+          "end": 89.22
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "start": 89.42,
+      "end": 91.32,
+      "start_tc": "00:01:29,420",
+      "end_tc": "00:01:31,320",
+      "text": "Coba berhatikan rumah di sekitar kamu.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 89.42,
+          "end": 89.56
+        },
+        {
+          "word": " berhatikan",
+          "start": 89.56,
+          "end": 90.12
+        },
+        {
+          "word": " rumah",
+          "start": 90.12,
+          "end": 90.42
+        },
+        {
+          "word": " di",
+          "start": 90.42,
+          "end": 90.64
+        },
+        {
+          "word": " sekitar",
+          "start": 90.64,
+          "end": 90.98
+        },
+        {
+          "word": " kamu.",
+          "start": 90.98,
+          "end": 91.32
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "start": 91.62,
+      "end": 97.3,
+      "start_tc": "00:01:31,620",
+      "end_tc": "00:01:37,300",
+      "text": "Kalau ada pintu depan dan pintu belakang, coba lihat siapa yang biasanya memakai masing-masing pintu itu.",
+      "words": [
+        {
+          "word": " Kalau",
+          "start": 91.62,
+          "end": 91.78
+        },
+        {
+          "word": " ada",
+          "start": 91.78,
+          "end": 91.94
+        },
+        {
+          "word": " pintu",
+          "start": 91.94,
+          "end": 92.3
+        },
+        {
+          "word": " depan",
+          "start": 92.3,
+          "end": 92.58
+        },
+        {
+          "word": " dan",
+          "start": 92.58,
+          "end": 92.74
+        },
+        {
+          "word": " pintu",
+          "start": 92.74,
+          "end": 93.1
+        },
+        {
+          "word": " belakang,",
+          "start": 93.1,
+          "end": 93.58
+        },
+        {
+          "word": " coba",
+          "start": 93.82,
+          "end": 93.94
+        },
+        {
+          "word": " lihat",
+          "start": 93.94,
+          "end": 94.16
+        },
+        {
+          "word": " siapa",
+          "start": 94.16,
+          "end": 94.8
+        },
+        {
+          "word": " yang",
+          "start": 94.8,
+          "end": 95.04
+        },
+        {
+          "word": " biasanya",
+          "start": 95.04,
+          "end": 95.44
+        },
+        {
+          "word": " memakai",
+          "start": 95.44,
+          "end": 96.0
+        },
+        {
+          "word": " masing",
+          "start": 96.0,
+          "end": 96.5
+        },
+        {
+          "word": "-masing",
+          "start": 96.5,
+          "end": 96.74
+        },
+        {
+          "word": " pintu",
+          "start": 96.74,
+          "end": 97.06
+        },
+        {
+          "word": " itu.",
+          "start": 97.06,
+          "end": 97.3
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "start": 97.72,
+      "end": 100.36,
+      "start_tc": "00:01:37,720",
+      "end_tc": "00:01:40,360",
+      "text": "Dan aktivitas apa yang terjadi di baliknya.",
+      "words": [
+        {
+          "word": " Dan",
+          "start": 97.72,
+          "end": 97.84
+        },
+        {
+          "word": " aktivitas",
+          "start": 97.84,
+          "end": 98.46
+        },
+        {
+          "word": " apa",
+          "start": 98.46,
+          "end": 98.8
+        },
+        {
+          "word": " yang",
+          "start": 98.8,
+          "end": 99.16
+        },
+        {
+          "word": " terjadi",
+          "start": 99.16,
+          "end": 99.72
+        },
+        {
+          "word": " di",
+          "start": 99.72,
+          "end": 99.96
+        },
+        {
+          "word": " baliknya.",
+          "start": 99.96,
+          "end": 100.36
+        }
+      ]
+    }
+  ]
+}

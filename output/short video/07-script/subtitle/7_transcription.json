@@ -1,0 +1,1497 @@
+{
+  "project": "07-script",
+  "footage": "\\\\tsclient\\C\\Users\\Nugi\\Documents\\nugi-konten-kreator\\output\\short video\\07-script\\footage\\7.mp4",
+  "duration": 102.89,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 5.4,
+      "start_tc": "00:00:00,000",
+      "end_tc": "00:00:05,400",
+      "text": "Bayangin, setiap kali ada tamu yang datang ke rumah, kita langsung melajak mereka masuk ke kamar.",
+      "words": [
+        {
+          "word": " Bayangin,",
+          "start": 0.0,
+          "end": 0.64
+        },
+        {
+          "word": " setiap",
+          "start": 0.84,
+          "end": 1.12
+        },
+        {
+          "word": " kali",
+          "start": 1.12,
+          "end": 1.32
+        },
+        {
+          "word": " ada",
+          "start": 1.32,
+          "end": 1.56
+        },
+        {
+          "word": " tamu",
+          "start": 1.56,
+          "end": 1.9
+        },
+        {
+          "word": " yang",
+          "start": 1.9,
+          "end": 2.02
+        },
+        {
+          "word": " datang",
+          "start": 2.02,
+          "end": 2.34
+        },
+        {
+          "word": " ke",
+          "start": 2.34,
+          "end": 2.46
+        },
+        {
+          "word": " rumah,",
+          "start": 2.46,
+          "end": 2.66
+        },
+        {
+          "word": " kita",
+          "start": 3.02,
+          "end": 3.2
+        },
+        {
+          "word": " langsung",
+          "start": 3.2,
+          "end": 3.5
+        },
+        {
+          "word": " melajak",
+          "start": 3.5,
+          "end": 3.9
+        },
+        {
+          "word": " mereka",
+          "start": 3.9,
+          "end": 4.2
+        },
+        {
+          "word": " masuk",
+          "start": 4.2,
+          "end": 4.78
+        },
+        {
+          "word": " ke",
+          "start": 4.78,
+          "end": 4.98
+        },
+        {
+          "word": " kamar.",
+          "start": 4.98,
+          "end": 5.4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 5.62,
+      "end": 6.44,
+      "start_tc": "00:00:05,620",
+      "end_tc": "00:00:06,440",
+      "text": "Anih banget kan?",
+      "words": [
+        {
+          "word": " Anih",
+          "start": 5.62,
+          "end": 5.92
+        },
+        {
+          "word": " banget",
+          "start": 5.92,
+          "end": 6.2
+        },
+        {
+          "word": " kan?",
+          "start": 6.2,
+          "end": 6.44
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 7.18,
+      "end": 13.42,
+      "start_tc": "00:00:07,180",
+      "end_tc": "00:00:13,420",
+      "text": "Padahal kita bisa ngobrol dimana saja, tapi hampir setiap rumah punya satu ruang khusus untuk menerima orang,",
+      "words": [
+        {
+          "word": " Padahal",
+          "start": 7.18,
+          "end": 7.7
+        },
+        {
+          "word": " kita",
+          "start": 7.7,
+          "end": 7.96
+        },
+        {
+          "word": " bisa",
+          "start": 7.96,
+          "end": 8.22
+        },
+        {
+          "word": " ngobrol",
+          "start": 8.22,
+          "end": 8.64
+        },
+        {
+          "word": " dimana",
+          "start": 8.64,
+          "end": 9.0
+        },
+        {
+          "word": " saja,",
+          "start": 9.0,
+          "end": 9.42
+        },
+        {
+          "word": " tapi",
+          "start": 9.64,
+          "end": 9.92
+        },
+        {
+          "word": " hampir",
+          "start": 9.92,
+          "end": 10.28
+        },
+        {
+          "word": " setiap",
+          "start": 10.28,
+          "end": 10.58
+        },
+        {
+          "word": " rumah",
+          "start": 10.58,
+          "end": 10.8
+        },
+        {
+          "word": " punya",
+          "start": 10.8,
+          "end": 11.26
+        },
+        {
+          "word": " satu",
+          "start": 11.26,
+          "end": 11.58
+        },
+        {
+          "word": " ruang",
+          "start": 11.58,
+          "end": 11.8
+        },
+        {
+          "word": " khusus",
+          "start": 11.8,
+          "end": 12.12
+        },
+        {
+          "word": " untuk",
+          "start": 12.12,
+          "end": 12.58
+        },
+        {
+          "word": " menerima",
+          "start": 12.58,
+          "end": 13.08
+        },
+        {
+          "word": " orang,",
+          "start": 13.08,
+          "end": 13.42
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 13.76,
+      "end": 14.84,
+      "start_tc": "00:00:13,760",
+      "end_tc": "00:00:14,840",
+      "text": "ya itu ruang tamu.",
+      "words": [
+        {
+          "word": " ya",
+          "start": 13.76,
+          "end": 13.96
+        },
+        {
+          "word": " itu",
+          "start": 13.96,
+          "end": 14.16
+        },
+        {
+          "word": " ruang",
+          "start": 14.16,
+          "end": 14.44
+        },
+        {
+          "word": " tamu.",
+          "start": 14.44,
+          "end": 14.84
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 15.28,
+      "end": 17.64,
+      "start_tc": "00:00:15,280",
+      "end_tc": "00:00:17,640",
+      "text": "Kenapa kita perlu ruangan khusus?",
+      "words": [
+        {
+          "word": " Kenapa",
+          "start": 15.28,
+          "end": 15.84
+        },
+        {
+          "word": " kita",
+          "start": 15.84,
+          "end": 16.38
+        },
+        {
+          "word": " perlu",
+          "start": 16.38,
+          "end": 16.68
+        },
+        {
+          "word": " ruangan",
+          "start": 16.68,
+          "end": 17.04
+        },
+        {
+          "word": " khusus?",
+          "start": 17.04,
+          "end": 17.64
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 18.1,
+      "end": 20.58,
+      "start_tc": "00:00:18,100",
+      "end_tc": "00:00:20,580",
+      "text": "Untuk orangnya sebenarnya bukan penghuni rumah.",
+      "words": [
+        {
+          "word": " Untuk",
+          "start": 18.1,
+          "end": 18.4
+        },
+        {
+          "word": " orangnya",
+          "start": 18.4,
+          "end": 18.76
+        },
+        {
+          "word": " sebenarnya",
+          "start": 18.76,
+          "end": 19.22
+        },
+        {
+          "word": " bukan",
+          "start": 19.22,
+          "end": 19.6
+        },
+        {
+          "word": " penghuni",
+          "start": 19.6,
+          "end": 20.38
+        },
+        {
+          "word": " rumah.",
+          "start": 20.38,
+          "end": 20.58
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 21.02,
+      "end": 24.52,
+      "start_tc": "00:00:21,020",
+      "end_tc": "00:00:24,520",
+      "text": "Jawabannya adalah berhubungan dengan satu hal penting, ya itu privasi.",
+      "words": [
+        {
+          "word": " Jawabannya",
+          "start": 21.02,
+          "end": 21.46
+        },
+        {
+          "word": " adalah",
+          "start": 21.46,
+          "end": 21.74
+        },
+        {
+          "word": " berhubungan",
+          "start": 21.74,
+          "end": 22.46
+        },
+        {
+          "word": " dengan",
+          "start": 22.46,
+          "end": 22.64
+        },
+        {
+          "word": " satu",
+          "start": 22.64,
+          "end": 22.98
+        },
+        {
+          "word": " hal",
+          "start": 22.98,
+          "end": 23.14
+        },
+        {
+          "word": " penting,",
+          "start": 23.14,
+          "end": 23.54
+        },
+        {
+          "word": " ya",
+          "start": 23.56,
+          "end": 23.64
+        },
+        {
+          "word": " itu",
+          "start": 23.64,
+          "end": 23.84
+        },
+        {
+          "word": " privasi.",
+          "start": 23.84,
+          "end": 24.52
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 25.12,
+      "end": 32.14,
+      "start_tc": "00:00:25,120",
+      "end_tc": "00:00:32,140",
+      "text": "Rumah itu bukan cuma tempat tinggal, di dalam rumah, kita melakukan banyak hal yang gak selalu ingin dilihat oleh orang lain.",
+      "words": [
+        {
+          "word": " Rumah",
+          "start": 25.12,
+          "end": 25.46
+        },
+        {
+          "word": " itu",
+          "start": 25.46,
+          "end": 25.7
+        },
+        {
+          "word": " bukan",
+          "start": 25.7,
+          "end": 26.04
+        },
+        {
+          "word": " cuma",
+          "start": 26.04,
+          "end": 26.38
+        },
+        {
+          "word": " tempat",
+          "start": 26.38,
+          "end": 26.7
+        },
+        {
+          "word": " tinggal,",
+          "start": 26.7,
+          "end": 27.06
+        },
+        {
+          "word": " di",
+          "start": 27.34,
+          "end": 27.4
+        },
+        {
+          "word": " dalam",
+          "start": 27.4,
+          "end": 27.6
+        },
+        {
+          "word": " rumah,",
+          "start": 27.6,
+          "end": 27.94
+        },
+        {
+          "word": " kita",
+          "start": 28.22,
+          "end": 28.4
+        },
+        {
+          "word": " melakukan",
+          "start": 28.4,
+          "end": 28.76
+        },
+        {
+          "word": " banyak",
+          "start": 28.76,
+          "end": 29.34
+        },
+        {
+          "word": " hal",
+          "start": 29.34,
+          "end": 29.66
+        },
+        {
+          "word": " yang",
+          "start": 29.66,
+          "end": 29.92
+        },
+        {
+          "word": " gak",
+          "start": 29.92,
+          "end": 30.14
+        },
+        {
+          "word": " selalu",
+          "start": 30.14,
+          "end": 30.54
+        },
+        {
+          "word": " ingin",
+          "start": 30.54,
+          "end": 30.88
+        },
+        {
+          "word": " dilihat",
+          "start": 30.88,
+          "end": 31.24
+        },
+        {
+          "word": " oleh",
+          "start": 31.24,
+          "end": 31.52
+        },
+        {
+          "word": " orang",
+          "start": 31.52,
+          "end": 31.84
+        },
+        {
+          "word": " lain.",
+          "start": 31.84,
+          "end": 32.14
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 32.48,
+      "end": 40.7,
+      "start_tc": "00:00:32,480",
+      "end_tc": "00:00:40,700",
+      "text": "Seperti tidur, makan, bekerja, bersantai, jadi ketika orang dari luar datang, kita membutuhkan ruang yang bisa menjadi perantara.",
+      "words": [
+        {
+          "word": " Seperti",
+          "start": 32.48,
+          "end": 32.92
+        },
+        {
+          "word": " tidur,",
+          "start": 32.92,
+          "end": 33.5
+        },
+        {
+          "word": " makan,",
+          "start": 33.7,
+          "end": 33.94
+        },
+        {
+          "word": " bekerja,",
+          "start": 34.34,
+          "end": 34.64
+        },
+        {
+          "word": " bersantai,",
+          "start": 34.94,
+          "end": 35.54
+        },
+        {
+          "word": " jadi",
+          "start": 35.96,
+          "end": 36.12
+        },
+        {
+          "word": " ketika",
+          "start": 36.12,
+          "end": 36.44
+        },
+        {
+          "word": " orang",
+          "start": 36.44,
+          "end": 36.78
+        },
+        {
+          "word": " dari",
+          "start": 36.78,
+          "end": 37.0
+        },
+        {
+          "word": " luar",
+          "start": 37.0,
+          "end": 37.32
+        },
+        {
+          "word": " datang,",
+          "start": 37.32,
+          "end": 37.86
+        },
+        {
+          "word": " kita",
+          "start": 38.04,
+          "end": 38.26
+        },
+        {
+          "word": " membutuhkan",
+          "start": 38.26,
+          "end": 38.8
+        },
+        {
+          "word": " ruang",
+          "start": 38.8,
+          "end": 39.1
+        },
+        {
+          "word": " yang",
+          "start": 39.1,
+          "end": 39.32
+        },
+        {
+          "word": " bisa",
+          "start": 39.32,
+          "end": 39.7
+        },
+        {
+          "word": " menjadi",
+          "start": 39.7,
+          "end": 40.08
+        },
+        {
+          "word": " perantara.",
+          "start": 40.08,
+          "end": 40.7
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 41.04,
+      "end": 43.5,
+      "start_tc": "00:00:41,040",
+      "end_tc": "00:00:43,500",
+      "text": "Dan ruang tamu itu melakukan fungsi itu.",
+      "words": [
+        {
+          "word": " Dan",
+          "start": 41.04,
+          "end": 41.16
+        },
+        {
+          "word": " ruang",
+          "start": 41.16,
+          "end": 41.52
+        },
+        {
+          "word": " tamu",
+          "start": 41.52,
+          "end": 41.8
+        },
+        {
+          "word": " itu",
+          "start": 41.8,
+          "end": 42.06
+        },
+        {
+          "word": " melakukan",
+          "start": 42.06,
+          "end": 42.46
+        },
+        {
+          "word": " fungsi",
+          "start": 42.46,
+          "end": 43.14
+        },
+        {
+          "word": " itu.",
+          "start": 43.14,
+          "end": 43.5
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 43.9,
+      "end": 48.62,
+      "start_tc": "00:00:43,900",
+      "end_tc": "00:00:48,620",
+      "text": "Tamu bisa masuk ke rumah, tanpa harus masuk ke seluruh kehidupan pribadi kita.",
+      "words": [
+        {
+          "word": " Tamu",
+          "start": 43.9,
+          "end": 44.28
+        },
+        {
+          "word": " bisa",
+          "start": 44.28,
+          "end": 44.56
+        },
+        {
+          "word": " masuk",
+          "start": 44.56,
+          "end": 44.84
+        },
+        {
+          "word": " ke",
+          "start": 44.84,
+          "end": 44.96
+        },
+        {
+          "word": " rumah,",
+          "start": 44.96,
+          "end": 45.2
+        },
+        {
+          "word": " tanpa",
+          "start": 45.5,
+          "end": 45.92
+        },
+        {
+          "word": " harus",
+          "start": 45.92,
+          "end": 46.26
+        },
+        {
+          "word": " masuk",
+          "start": 46.26,
+          "end": 46.58
+        },
+        {
+          "word": " ke",
+          "start": 46.58,
+          "end": 46.8
+        },
+        {
+          "word": " seluruh",
+          "start": 46.8,
+          "end": 47.2
+        },
+        {
+          "word": " kehidupan",
+          "start": 47.2,
+          "end": 47.76
+        },
+        {
+          "word": " pribadi",
+          "start": 47.76,
+          "end": 48.32
+        },
+        {
+          "word": " kita.",
+          "start": 48.32,
+          "end": 48.62
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 48.62,
+      "end": 58.42,
+      "start_tc": "00:00:48,620",
+      "end_tc": "00:00:58,420",
+      "text": "Coba bayangkan, rumah itu sebagai beberapa lapisan, dekat pintu masuk, ruang relative lebih terbuka, masuk lebih dalam, ruangnya itu lebih privat,",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 48.62,
+          "end": 49.1
+        },
+        {
+          "word": " bayangkan,",
+          "start": 49.1,
+          "end": 49.68
+        },
+        {
+          "word": " rumah",
+          "start": 49.9,
+          "end": 50.0
+        },
+        {
+          "word": " itu",
+          "start": 50.0,
+          "end": 50.28
+        },
+        {
+          "word": " sebagai",
+          "start": 50.28,
+          "end": 50.58
+        },
+        {
+          "word": " beberapa",
+          "start": 50.58,
+          "end": 51.18
+        },
+        {
+          "word": " lapisan,",
+          "start": 51.18,
+          "end": 51.72
+        },
+        {
+          "word": " dekat",
+          "start": 52.04,
+          "end": 52.34
+        },
+        {
+          "word": " pintu",
+          "start": 52.34,
+          "end": 52.62
+        },
+        {
+          "word": " masuk,",
+          "start": 52.62,
+          "end": 53.02
+        },
+        {
+          "word": " ruang",
+          "start": 53.42,
+          "end": 53.7
+        },
+        {
+          "word": " relative",
+          "start": 53.7,
+          "end": 54.1
+        },
+        {
+          "word": " lebih",
+          "start": 54.1,
+          "end": 54.42
+        },
+        {
+          "word": " terbuka,",
+          "start": 54.42,
+          "end": 54.94
+        },
+        {
+          "word": " masuk",
+          "start": 55.56,
+          "end": 55.9
+        },
+        {
+          "word": " lebih",
+          "start": 55.9,
+          "end": 56.16
+        },
+        {
+          "word": " dalam,",
+          "start": 56.16,
+          "end": 56.54
+        },
+        {
+          "word": " ruangnya",
+          "start": 56.94,
+          "end": 57.38
+        },
+        {
+          "word": " itu",
+          "start": 57.38,
+          "end": 57.64
+        },
+        {
+          "word": " lebih",
+          "start": 57.64,
+          "end": 57.92
+        },
+        {
+          "word": " private,",
+          "start": 57.92,
+          "end": 58.42
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 58.98,
+      "end": 63.08,
+      "start_tc": "00:00:58,980",
+      "end_tc": "00:01:03,080",
+      "text": "ruang tamu itu berada di salah satu bagian yang awal dari perjalanan itu.",
+      "words": [
+        {
+          "word": " ruang",
+          "start": 58.98,
+          "end": 59.22
+        },
+        {
+          "word": " tamu",
+          "start": 59.22,
+          "end": 59.48
+        },
+        {
+          "word": " itu",
+          "start": 59.48,
+          "end": 59.64
+        },
+        {
+          "word": " berada",
+          "start": 59.64,
+          "end": 60.02
+        },
+        {
+          "word": " di",
+          "start": 60.02,
+          "end": 60.24
+        },
+        {
+          "word": " salah",
+          "start": 60.24,
+          "end": 60.38
+        },
+        {
+          "word": " satu",
+          "start": 60.38,
+          "end": 60.72
+        },
+        {
+          "word": " bagian",
+          "start": 60.72,
+          "end": 61.16
+        },
+        {
+          "word": " yang",
+          "start": 61.16,
+          "end": 61.42
+        },
+        {
+          "word": " awal",
+          "start": 61.42,
+          "end": 61.98
+        },
+        {
+          "word": " dari",
+          "start": 61.98,
+          "end": 62.2
+        },
+        {
+          "word": " perjalanan",
+          "start": 62.2,
+          "end": 62.72
+        },
+        {
+          "word": " itu.",
+          "start": 62.72,
+          "end": 63.08
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 63.32,
+      "end": 66.46,
+      "start_tc": "00:01:03,320",
+      "end_tc": "00:01:06,460",
+      "text": "Sedangkan kamar tidur biasanya jauh lebih pribadi.",
+      "words": [
+        {
+          "word": " Sedangkan",
+          "start": 63.32,
+          "end": 63.82
+        },
+        {
+          "word": " kamar",
+          "start": 63.82,
+          "end": 64.18
+        },
+        {
+          "word": " tidur",
+          "start": 64.18,
+          "end": 64.56
+        },
+        {
+          "word": " biasanya",
+          "start": 64.56,
+          "end": 65.18
+        },
+        {
+          "word": " jauh",
+          "start": 65.18,
+          "end": 65.76
+        },
+        {
+          "word": " lebih",
+          "start": 65.76,
+          "end": 65.96
+        },
+        {
+          "word": " pribadi.",
+          "start": 65.96,
+          "end": 66.46
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 66.7,
+      "end": 72.2,
+      "start_tc": "00:01:06,700",
+      "end_tc": "00:01:12,200",
+      "text": "Jadi ada perbedaan besar antara boleh masuk rumah dan boleh masuk ke kehidupan pribadi saya.",
+      "words": [
+        {
+          "word": " Jadi",
+          "start": 66.7,
+          "end": 67.08
+        },
+        {
+          "word": " ada",
+          "start": 67.08,
+          "end": 67.54
+        },
+        {
+          "word": " perbedaan",
+          "start": 67.54,
+          "end": 68.02
+        },
+        {
+          "word": " besar",
+          "start": 68.02,
+          "end": 68.28
+        },
+        {
+          "word": " antara",
+          "start": 68.28,
+          "end": 68.8
+        },
+        {
+          "word": " boleh",
+          "start": 68.8,
+          "end": 69.06
+        },
+        {
+          "word": " masuk",
+          "start": 69.06,
+          "end": 69.32
+        },
+        {
+          "word": " rumah",
+          "start": 69.32,
+          "end": 69.66
+        },
+        {
+          "word": " dan",
+          "start": 69.66,
+          "end": 70.04
+        },
+        {
+          "word": " boleh",
+          "start": 70.04,
+          "end": 70.46
+        },
+        {
+          "word": " masuk",
+          "start": 70.46,
+          "end": 70.8
+        },
+        {
+          "word": " ke",
+          "start": 70.8,
+          "end": 71.06
+        },
+        {
+          "word": " kehidupan",
+          "start": 71.06,
+          "end": 71.54
+        },
+        {
+          "word": " pribadi",
+          "start": 71.54,
+          "end": 72.0
+        },
+        {
+          "word": " saya.",
+          "start": 72.0,
+          "end": 72.2
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 72.2,
+      "end": 83.38,
+      "start_tc": "00:01:12,200",
+      "end_tc": "00:01:23,380",
+      "text": "Itu lah kenapa ruang tamu itu sebenarnya bukan sekitar tempat menarus opa, dia adalah jona sosial, tempat kita bisa menerima orang lain, tanpa harus membuka seluruh kehidupan pribadi kita,",
+      "words": [
+        {
+          "word": " Itu",
+          "start": 72.2,
+          "end": 72.88
+        },
+        {
+          "word": " lah",
+          "start": 72.88,
+          "end": 73.04
+        },
+        {
+          "word": " kenapa",
+          "start": 73.04,
+          "end": 73.42
+        },
+        {
+          "word": " ruang",
+          "start": 73.42,
+          "end": 73.76
+        },
+        {
+          "word": " tamu",
+          "start": 73.76,
+          "end": 74.04
+        },
+        {
+          "word": " itu",
+          "start": 74.04,
+          "end": 74.22
+        },
+        {
+          "word": " sebenarnya",
+          "start": 74.22,
+          "end": 74.66
+        },
+        {
+          "word": " bukan",
+          "start": 74.66,
+          "end": 74.98
+        },
+        {
+          "word": " sekitar",
+          "start": 74.98,
+          "end": 75.36
+        },
+        {
+          "word": " tempat",
+          "start": 75.36,
+          "end": 76.0
+        },
+        {
+          "word": " menarus",
+          "start": 76.0,
+          "end": 76.48
+        },
+        {
+          "word": " opa,",
+          "start": 76.48,
+          "end": 76.86
+        },
+        {
+          "word": " dia",
+          "start": 77.04,
+          "end": 77.16
+        },
+        {
+          "word": " adalah",
+          "start": 77.16,
+          "end": 77.42
+        },
+        {
+          "word": " jona",
+          "start": 77.42,
+          "end": 77.78
+        },
+        {
+          "word": " sosial,",
+          "start": 77.78,
+          "end": 78.34
+        },
+        {
+          "word": " tempat",
+          "start": 78.52,
+          "end": 78.8
+        },
+        {
+          "word": " kita",
+          "start": 78.8,
+          "end": 79.0
+        },
+        {
+          "word": " bisa",
+          "start": 79.0,
+          "end": 79.34
+        },
+        {
+          "word": " menerima",
+          "start": 79.34,
+          "end": 79.76
+        },
+        {
+          "word": " orang",
+          "start": 79.76,
+          "end": 80.04
+        },
+        {
+          "word": " lain,",
+          "start": 80.04,
+          "end": 80.38
+        },
+        {
+          "word": " tanpa",
+          "start": 80.8,
+          "end": 81.2
+        },
+        {
+          "word": " harus",
+          "start": 81.2,
+          "end": 81.44
+        },
+        {
+          "word": " membuka",
+          "start": 81.44,
+          "end": 81.78
+        },
+        {
+          "word": " seluruh",
+          "start": 81.78,
+          "end": 82.2
+        },
+        {
+          "word": " kehidupan",
+          "start": 82.2,
+          "end": 82.6
+        },
+        {
+          "word": " pribadi",
+          "start": 82.6,
+          "end": 82.96
+        },
+        {
+          "word": " kita,",
+          "start": 82.96,
+          "end": 83.38
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 83.66,
+      "end": 91.3,
+      "start_tc": "00:01:23,660",
+      "end_tc": "00:01:31,300",
+      "text": "dan tanpa sadar, dan nah rumah kita sebenarnya sedang memberitahu siapa yang boleh berada di mana dan seberapa jauh mereka boleh masuk.",
+      "words": [
+        {
+          "word": " dan",
+          "start": 83.66,
+          "end": 83.76
+        },
+        {
+          "word": " tanpa",
+          "start": 83.76,
+          "end": 84.08
+        },
+        {
+          "word": " sadar,",
+          "start": 84.08,
+          "end": 84.64
+        },
+        {
+          "word": " dan",
+          "start": 84.78,
+          "end": 84.82
+        },
+        {
+          "word": " nah",
+          "start": 84.82,
+          "end": 84.96
+        },
+        {
+          "word": " rumah",
+          "start": 84.96,
+          "end": 85.08
+        },
+        {
+          "word": " kita",
+          "start": 85.08,
+          "end": 85.48
+        },
+        {
+          "word": " sebenarnya",
+          "start": 85.48,
+          "end": 86.08
+        },
+        {
+          "word": " sedang",
+          "start": 86.08,
+          "end": 86.48
+        },
+        {
+          "word": " memberitahu",
+          "start": 86.48,
+          "end": 87.12
+        },
+        {
+          "word": " siapa",
+          "start": 87.12,
+          "end": 87.6
+        },
+        {
+          "word": " yang",
+          "start": 87.6,
+          "end": 87.72
+        },
+        {
+          "word": " boleh",
+          "start": 87.72,
+          "end": 87.94
+        },
+        {
+          "word": " berada",
+          "start": 87.94,
+          "end": 88.38
+        },
+        {
+          "word": " di",
+          "start": 88.38,
+          "end": 88.64
+        },
+        {
+          "word": " mana",
+          "start": 88.64,
+          "end": 88.84
+        },
+        {
+          "word": " dan",
+          "start": 88.84,
+          "end": 89.32
+        },
+        {
+          "word": " seberapa",
+          "start": 89.32,
+          "end": 89.96
+        },
+        {
+          "word": " jauh",
+          "start": 89.96,
+          "end": 90.4
+        },
+        {
+          "word": " mereka",
+          "start": 90.4,
+          "end": 90.6
+        },
+        {
+          "word": " boleh",
+          "start": 90.6,
+          "end": 91.0
+        },
+        {
+          "word": " masuk.",
+          "start": 91.0,
+          "end": 91.3
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 91.7,
+      "end": 99.04,
+      "start_tc": "00:01:31,700",
+      "end_tc": "00:01:39,040",
+      "text": "Coba liat rumah kamu, dari pintu masuk, ruang tamu berada di mana, paling depan yang mana, di tengah atau malah mungkin gak ada.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 91.7,
+          "end": 91.78
+        },
+        {
+          "word": " liat",
+          "start": 91.78,
+          "end": 92.04
+        },
+        {
+          "word": " rumah",
+          "start": 92.04,
+          "end": 92.2
+        },
+        {
+          "word": " kamu,",
+          "start": 92.2,
+          "end": 92.56
+        },
+        {
+          "word": " dari",
+          "start": 92.9,
+          "end": 93.0
+        },
+        {
+          "word": " pintu",
+          "start": 93.0,
+          "end": 93.28
+        },
+        {
+          "word": " masuk,",
+          "start": 93.28,
+          "end": 93.62
+        },
+        {
+          "word": " ruang",
+          "start": 93.9,
+          "end": 94.1
+        },
+        {
+          "word": " tamu",
+          "start": 94.1,
+          "end": 94.4
+        },
+        {
+          "word": " berada",
+          "start": 94.4,
+          "end": 94.7
+        },
+        {
+          "word": " di",
+          "start": 94.7,
+          "end": 94.88
+        },
+        {
+          "word": " mana,",
+          "start": 94.88,
+          "end": 95.1
+        },
+        {
+          "word": " paling",
+          "start": 95.68,
+          "end": 95.96
+        },
+        {
+          "word": " depan",
+          "start": 95.96,
+          "end": 96.3
+        },
+        {
+          "word": " yang",
+          "start": 96.3,
+          "end": 96.48
+        },
+        {
+          "word": " mana,",
+          "start": 96.48,
+          "end": 96.82
+        },
+        {
+          "word": " di",
+          "start": 97.16,
+          "end": 97.24
+        },
+        {
+          "word": " tengah",
+          "start": 97.24,
+          "end": 97.66
+        },
+        {
+          "word": " atau",
+          "start": 97.66,
+          "end": 98.0
+        },
+        {
+          "word": " malah",
+          "start": 98.0,
+          "end": 98.32
+        },
+        {
+          "word": " mungkin",
+          "start": 98.32,
+          "end": 98.56
+        },
+        {
+          "word": " gak",
+          "start": 98.56,
+          "end": 98.76
+        },
+        {
+          "word": " ada.",
+          "start": 98.76,
+          "end": 99.04
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 99.04,
+      "end": 102.66,
+      "start_tc": "00:01:39,040",
+      "end_tc": "00:01:42,660",
+      "text": "Menurut kamu, kenapa posisi ruang tamu itu dibuat seperti itu?",
+      "words": [
+        {
+          "word": " Menurut",
+          "start": 99.04,
+          "end": 99.68
+        },
+        {
+          "word": " kamu,",
+          "start": 99.68,
+          "end": 99.96
+        },
+        {
+          "word": " kenapa",
+          "start": 100.18,
+          "end": 100.44
+        },
+        {
+          "word": " posisi",
+          "start": 100.44,
+          "end": 100.88
+        },
+        {
+          "word": " ruang",
+          "start": 100.88,
+          "end": 101.22
+        },
+        {
+          "word": " tamu",
+          "start": 101.22,
+          "end": 101.48
+        },
+        {
+          "word": " itu",
+          "start": 101.48,
+          "end": 101.64
+        },
+        {
+          "word": " dibuat",
+          "start": 101.64,
+          "end": 102.08
+        },
+        {
+          "word": " seperti",
+          "start": 102.08,
+          "end": 102.3
+        },
+        {
+          "word": " itu?",
+          "start": 102.3,
+          "end": 102.66
+        }
+      ]
+    }
+  ]
+}

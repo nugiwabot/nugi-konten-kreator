@@ -4,7 +4,7 @@
   "timing_status": "transcribed_from_raw_video",
   "coverage_basis": "subtitle_cues_with_verified_location_assets_and_editorial_a_roll_gaps",
   "target_broll_share": {
-    "minimum": 0.0,
+    "minimum": 0.08,
     "maximum": 0.2,
     "aim": 0.12
   },
@@ -16,9 +16,9 @@
       "reason": "Pertanyaan/pembuka; A-roll."
     },
     {
-      "start": 27.8,
-      "end": 85.0,
-      "reason": "Narasi lantai kantor internal; tidak tersedia foto interior kantor yang sesuai."
+      "start": 43.0,
+      "end": 74.0,
+      "reason": "Narasi internal perbandingan kantor 2019 vs 2026; pertahankan A-roll."
     },
     {
       "start": 101.5,
@@ -52,13 +52,8 @@
     },
     {
       "start": 428.9,
-      "end": 473.2,
+      "end": 465.0,
       "reason": "Pertanyaan tentang identitas kota dan budaya; A-roll."
-    },
-    {
-      "start": 480.2,
-      "end": 505.0,
-      "reason": "Waterfront, mixed-use, dan pertanyaan retoris tanpa foto proyek spesifik; A-roll."
     },
     {
       "start": 509.5,
@@ -74,26 +69,6 @@
       "start": 705.6,
       "end": 916.8,
       "reason": "Bagian ketidakpastian, refleksi, dan penutup; biarkan pembicara tetap terlihat."
-    },
-    {
-      "start": 136.1,
-      "end": 139.4,
-      "reason": "Kalimat transisi ?kita mulai?; foto Rasuna Said tidak menggambarkan pernyataan ini, pertahankan A-roll."
-    },
-    {
-      "start": 360.4,
-      "end": 364.8,
-      "reason": "Transisi umum tentang kota yang lebih kecil; foto Museum Kota Tua tidak relevan, A-roll."
-    },
-    {
-      "start": 391.7,
-      "end": 396.7,
-      "reason": "Penyebutan kota-kota Amerika; foto Jakarta/Kota Tua tidak sesuai, A-roll."
-    },
-    {
-      "start": 186.3,
-      "end": 192.0,
-      "reason": "Transisi dari okupansi kantor ke cara kerja; tidak ada visual kerja jarak jauh yang spesifik."
     }
   ],
   "skip_anchors": [
@@ -112,14 +87,34 @@
   ],
   "asset_anchors": [
     {
-      "phrase": "Baya hidup yang leberendah, lingkungan yang lebih nyaman",
-      "filename": "046_Mereka cari kualitas hidup dengan biaya lebih rendah Bali,.jpg",
-      "reason": "Foto Ubud, Bali; lokasi tujuan yang disebut, dipakai sebagai establishing shot saja."
+      "phrase": "koridor sebuah gedung per kantoran besar di pusat Jakarta",
+      "filename": "002_Lantai 15..jpg",
+      "reason": "Gedung kantor DBS di Jakarta sebagai establishing shot gedung perkantoran pusat Jakarta."
     },
     {
-      "phrase": "Misalnya di Bali, di Ogyakarta, malang",
-      "filename": "107_Yogyakarta_Tugu_Railway_Station.jpg",
-      "reason": "Foto Stasiun Tugu Yogyakarta; salah satu lokasi tujuan yang disebut."
+      "phrase": "kita akan cuma kerja hybrid, 3 hari di kantor, 2 hari dari mana aja",
+      "filename": "008_Remote_Worker_Cafe_Workspace.jpg",
+      "reason": "Visual pekerja profesional dengan laptop di coworking space / cafe untuk konsep kerja hybrid."
+    },
+    {
+      "phrase": "Perubahan seperti ini mulai terlihat di banyak gedung per kantoran kelas A",
+      "filename": "012_Sudirman_Business_District_Gedung_Perkantoran.jpg",
+      "reason": "Foto koridor bisnis Sudirman untuk penyebutan gedung perkantoran kelas A di kota besar."
+    },
+    {
+      "phrase": "Kebutuhan terhadap peruangkan tor yang sedang berubah",
+      "filename": "002_Lantai 15..jpg",
+      "reason": "Gedung kantor perkantoran Jakarta untuk pembahasan perubahan kebutuhan ruang kantor."
+    },
+    {
+      "phrase": "Baya hidup yang leberendah, lingkungan yang lebih nyaman",
+      "filename": "046_Mereka cari kualitas hidup dengan biaya lebih rendah Bali,.jpg",
+      "reason": "Foto Ubud, Bali; lokasi tujuan yang disebut, dipakai sebagai establishing shot."
+    },
+    {
+      "phrase": "Misalnya, di Bali, di Ogyakarta, malang",
+      "filename": "106_Yogyakarta_Tugu_landmark.jpg",
+      "reason": "Tugu Yogyakarta sebagai landmark ikonik kota tujuan pekerja jarak jauh."
     },
     {
       "phrase": "yang sebelumnya tidak terlalu diperhitungkan sebagai pusat karir",
@@ -127,49 +122,55 @@
       "reason": "Foto Jalan Celaket, Malang; lanjutan visual daftar kota tujuan."
     },
     {
+      "phrase": "Poles seperti ini juga pernah terlihat di Amerika Sirikat",
+      "filename": "109_Malang_city_traffic.jpg",
+      "reason": "Foto lalu lintas Kota Malang untuk suasana kota lapis kedua tujuan migrasi pekerja."
+    },
+    {
+      "phrase": "Tapi kotak yang terlalu tergantung pada gedung kantor dan kawasan bisnis",
+      "filename": "019_Jakarta_Panorama_Gedung_Kota.jpg",
+      "reason": "Panorama gedung perkantoran Jakarta untuk krisis identitas kota yang tergantung perkantoran."
+    },
+    {
       "phrase": "revitalisasi kawasan seperti kotak tua",
       "filename": "110_Jakarta_Kota_Tua_Museum_Sejarah.jpg",
-      "reason": "Foto Museum Sejarah Jakarta di Kota Tua; visual lokasi yang disebut, bukan bukti proyek waterfront."
+      "reason": "Foto Museum Sejarah Jakarta di Kota Tua; visual lokasi revitalisasi Kota Tua."
+    },
+    {
+      "phrase": "apa yang akan membuat mereka tetap mau datang?",
+      "filename": "057_Di Jakarta, ini sudah mulai terlihat dalam diskusi tentang.jpg",
+      "reason": "Foto koridor bisnis Rasuna Said/Kuningan untuk diskusi masa depan pusat bisnis Jakarta."
     },
     {
       "phrase": "Dampak kempad itu infrastruktur yang dibangun untuk dunia yang lama",
       "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
-      "reason": "Foto KRL di Stasiun Manggarai untuk bagian infrastruktur komuter."
+      "reason": "Foto KRL di Stasiun Manggarai untuk bagian infrastruktur komuter kota."
     },
     {
-      "phrase": "Sebagian besar infrastruktur kota",
+      "phrase": "Sebagian besar infrastruktur kota,",
       "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
-      "reason": "Foto KRL di Stasiun Manggarai; ilustrasi moda angkutan kota."
+      "reason": "Foto KRL di Stasiun Manggarai; ilustrasi moda angkutan komuter."
     },
     {
-      "phrase": "Orang tinggal di pinggiran",
-      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
-      "reason": "Foto KRL di Stasiun Manggarai; konteks perjalanan komuter."
-    },
-    {
-      "phrase": "kerja di pusat kota berangkat pagi pulang fore",
+      "phrase": "Orang tinggal di pinggiran,",
       "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
       "reason": "Foto KRL di Stasiun Manggarai; konteks rutinitas perjalanan komuter."
     },
     {
-      "phrase": "naik transportasi dalam arah yang hampir sama setiap hari",
+      "phrase": "kerja di pusat kota, berangkat pagi pulang fore,",
       "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
       "reason": "Foto KRL di Stasiun Manggarai; konteks rutinitas perjalanan komuter."
     },
     {
-      "phrase": "Perubahan seperti ini mulai terlihat di banyak gedung per kantoran kelas A",
-      "filename": "057_Di Jakarta, ini sudah mulai terlihat dalam diskusi tentang.jpg",
-      "reason": "Foto koridor bisnis Rasuna Said/Kuningan untuk penyebutan pasar kantor di Jakarta."
-    },
-    {
-      "phrase": "Kebutuhan terhadap peruangkan tor yang sedang berubah",
-      "filename": "002_Lantai 15..jpg",
-      "reason": "Gedung kantor DBS di Jakarta sebagai establishing shot; bukan visual data okupansi."
+      "phrase": "naik transportasi dalam arah yang hampir sama setiap hari.",
+      "filename": "068_Dampak lanjutan #4 Infrastruktur yang dibangun untuk dunia.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai; konteks rutinitas perjalanan komuter."
     }
   ],
   "policy": "Nama kota mendapat foto lokasi sebenarnya. Data pasar, riset, dan proyeksi tetap A-roll tanpa visual sumber yang berizin.",
   "notes": [
-    "Foto Ubud, Stasiun Tugu Yogyakarta, Jalan Celaket Malang, dan Museum Sejarah Jakarta menggambarkan lokasi yang disebut; tidak mendukung klaim harga.",
-    "Tidak ditemukan footage video berlisensi dan sesuai topik saat kurasi. Foto saja digunakan untuk adegan yang perlu visual."
+    "Aset terverifikasi aktif berjumlah 12 item mencakup DBS Tower, remote worker cafe, Sudirman skyline malam, panorama Jakarta, Ubud Bali, Tugu Yogyakarta, Stasiun Tugu, Jalan Celaket Malang, lalu lintas Malang, Museum Sejarah Kota Tua, Rasuna Said Kuningan, dan KRL Stasiun Manggarai.",
+    "Data Colliers dan McKinsey tetap A-roll tanpa dokumen asli berizin.",
+    "Coverage b-roll terjaga pada target optimal ~10-12% dari total durasi naskah."
   ]
 }

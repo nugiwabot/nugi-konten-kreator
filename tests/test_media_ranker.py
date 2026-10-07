@@ -191,8 +191,8 @@ class TestMediaRankerFinalRankComputation(unittest.TestCase):
         items[0].embedding_similarity = 0.5
         items[0].reranker_score = 0.8
         result = self.ranker._compute_final_rank(items, emb_ok=True, rer_ok=True)
-        # Expected composite: 0.4 * 0.5 + 0.6 * 0.8 = 0.2 + 0.48 = 0.68
-        self.assertAlmostEqual(result[0].reranker_score, 0.68, places=2)
+        # Expected composite: 0.85 * (0.4 * 0.5 + 0.6 * 0.8) + 0.15 * human_alignment = 0.85 * 0.68 + 0 = 0.578
+        self.assertAlmostEqual(result[0].reranker_score, 0.578, places=2)
 
 
 if __name__ == "__main__":

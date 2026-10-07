@@ -1,0 +1,93 @@
+{
+  "project": "04-script",
+  "headline": "Kenapa Rumah Punya Teras?",
+  "audio_duration": 99.08,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 42.4,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_front_porch_deck.jpg",
+      "filename": "001_front_porch_deck.jpg",
+      "concept": "Teras depan rumah dan kursi santai",
+      "start": 6.19,
+      "end": 12.19,
+      "start_tc": "00:00:06,190",
+      "end_tc": "00:00:12,190",
+      "duration": 6.0,
+      "dialog_cue": "Dia bukan bener-bener di dalam, tapi juga bukan di luar, namanya itu teras."
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_relaxing_on_terrace.jpg",
+      "filename": "002_relaxing_on_terrace.jpg",
+      "concept": "Duduk santai di teras waktu sore",
+      "start": 18.58,
+      "end": 24.58,
+      "start_tc": "00:00:18,580",
+      "end_tc": "00:00:24,580",
+      "duration": 6.0,
+      "dialog_cue": "Karena, ternyata, ruang seperti ini punya fungsi sosial."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_neighborly_interaction.jpg",
+      "filename": "003_neighborly_interaction.jpg",
+      "concept": "Ruang temu sosial dan interaksi dengan tetangga",
+      "start": 30.96,
+      "end": 36.96,
+      "start_tc": "00:00:30,960",
+      "end_tc": "00:00:36,960",
+      "duration": 6.0,
+      "dialog_cue": "Kita bisa duduk di luar tanpa benar-benar meninggalkan rumah."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_transitional_veranda.jpg",
+      "filename": "004_transitional_veranda.jpg",
+      "concept": "Ruang peralihan antara dunia luar dan dalam",
+      "start": 43.35,
+      "end": 49.35,
+      "start_tc": "00:00:43,350",
+      "end_tc": "00:00:49,350",
+      "duration": 6.0,
+      "dialog_cue": "Dan ini bukan cuma sual teras."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_shoes_at_porch.jpg",
+      "filename": "005_shoes_at_porch.jpg",
+      "concept": "Area transisi melepas alas kaki sebelum masuk",
+      "start": 55.73,
+      "end": 61.73,
+      "start_tc": "00:00:55,730",
+      "end_tc": "00:01:01,730",
+      "duration": 6.0,
+      "dialog_cue": "Dan manusia ternyata itu ga salah lu membutuhkan."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_tropical_veranda_shade.jpg",
+      "filename": "006_tropical_veranda_shade.jpg",
+      "concept": "Teras peneduh iklim tropis dari terik dan hujan",
+      "start": 68.12,
+      "end": 74.12,
+      "start_tc": "00:01:08,120",
+      "end_tc": "00:01:14,120",
+      "duration": 6.0,
+      "dialog_cue": "Dan sedikit menerima dunia luar."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_evening_porch_lamp.jpg",
+      "filename": "007_evening_porch_lamp.jpg",
+      "concept": "Suasana hangat teras rumah menyambut malam",
+      "start": 80.5,
+      "end": 86.5,
+      "start_tc": "00:01:20,500",
+      "end_tc": "00:01:26,500",
+      "duration": 6.0,
+      "dialog_cue": "Ruhang untuk bertemu, ruang untuk mengamati, ruang untuk berhenti sebentar,"
+    }
+  ]
+}

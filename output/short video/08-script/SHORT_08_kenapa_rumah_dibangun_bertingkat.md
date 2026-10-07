@@ -228,6 +228,8 @@ Nada ringan, seperti mengajak penonton mengamati rumahnya sendiri.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Dibangun Bertingkat?**
+
 Kenapa manusia membangun rumah bertingkat?
 
 Salah satu alasannya adalah **keterbatasan lahan**.

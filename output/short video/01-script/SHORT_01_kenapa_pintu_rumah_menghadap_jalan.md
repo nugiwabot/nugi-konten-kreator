@@ -181,6 +181,8 @@ Jeda.
 
 ## 📚 CAPTION
 
+**Kenapa Pintu Rumah Sering Menghadap ke Jalan?**
+
 Kenapa pintu rumah sering berada di sisi yang menghadap jalan?
 
 Jawabannya ternyata tidak sesederhana soal akses masuk.

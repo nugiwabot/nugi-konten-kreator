@@ -1,0 +1,129 @@
+{
+  "project": "02-script",
+  "headline": "Kenapa Dulu Dapur Sering Dipisahkan dari Rumah?",
+  "audio_duration": 97.9,
+  "total_broll_duration": 60.0,
+  "coverage_percentage": 61.3,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_outdoor_separate_kitchen.jpg",
+      "filename": "001_outdoor_separate_kitchen.jpg",
+      "concept": "Dapur terpisah dari bangunan utama",
+      "start": 4.45,
+      "end": 10.45,
+      "start_tc": "00:00:04,450",
+      "end_tc": "00:00:10,450",
+      "duration": 6.0,
+      "dialog_cue": "Padahal sekarang dapur itu malah sering jadi pusat rumah, bahkan"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_modern_integrated_kitchen.jpg",
+      "filename": "002_modern_integrated_kitchen.jpg",
+      "concept": "Dapur modern menyatu dengan ruang keluarga",
+      "start": 13.35,
+      "end": 19.35,
+      "start_tc": "00:00:13,350",
+      "end_tc": "00:00:19,350",
+      "duration": 6.0,
+      "dialog_cue": "Tapi pada masa dan tempat tertentu, dapur bisa berada di bagian yang terpisah dari ruang utama."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_open_cooking_fire.jpg",
+      "filename": "003_open_cooking_fire.jpg",
+      "concept": "Memasak menggunakan api dan bara",
+      "start": 22.25,
+      "end": 28.25,
+      "start_tc": "00:00:22,250",
+      "end_tc": "00:00:28,250",
+      "duration": 6.0,
+      "dialog_cue": "api, asap, panas, dan risiko kebakaran."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_smoke_hearth_ventilation.jpg",
+      "filename": "004_smoke_hearth_ventilation.jpg",
+      "concept": "Asap tebal harus keluar dari ruangan",
+      "start": 31.15,
+      "end": 37.15,
+      "start_tc": "00:00:31,150",
+      "end_tc": "00:00:37,150",
+      "duration": 6.0,
+      "dialog_cue": "tanpa teknologi kompor yang ventilasinya seperti sekarang."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_house_fire_danger.jpg",
+      "filename": "005_house_fire_danger.jpg",
+      "concept": "Risiko kebakaran seluruh bangunan",
+      "start": 40.05,
+      "end": 46.05,
+      "start_tc": "00:00:40,050",
+      "end_tc": "00:00:46,050",
+      "duration": 6.0,
+      "dialog_cue": "Karena itu dalam berbagai konteks sejarah, dapur itu bisa di tempatkan lebih jauh dari ruang hidup utama."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_historical_detached_hearth.jpg",
+      "filename": "006_historical_detached_hearth.jpg",
+      "concept": "Dapur ditempatkan jauh dari ruang hidup utama",
+      "start": 48.95,
+      "end": 54.95,
+      "start_tc": "00:00:48,950",
+      "end_tc": "00:00:54,950",
+      "duration": 6.0,
+      "dialog_cue": "Bahkan pada beberapa rumah besar, dapur dan ruang utama memang dibuat terpisah."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_chimney_smoke_vent.jpg",
+      "filename": "007_chimney_smoke_vent.jpg",
+      "concept": "Cerobong asap dan ventilasi semakin baik",
+      "start": 57.85,
+      "end": 63.85,
+      "start_tc": "00:00:57,850",
+      "end_tc": "00:01:03,850",
+      "duration": 6.0,
+      "dialog_cue": "Masalahnya mereka punya cara yang berbeda untuk mengendalikan api dan asap."
+    },
+    {
+      "no": 8,
+      "asset": "broll/008_vintage_cast_iron_stove.jpg",
+      "filename": "008_vintage_cast_iron_stove.jpg",
+      "concept": "Kompor menjadi lebih aman dan terkontrol",
+      "start": 66.75,
+      "end": 72.75,
+      "start_tc": "00:01:06,750",
+      "end_tc": "00:01:12,750",
+      "duration": 6.0,
+      "dialog_cue": "carobong dan ventilasi itu semakin baik, dan cara masak ikut berubah."
+    },
+    {
+      "no": 9,
+      "asset": "broll/009_controlling_fire.jpg",
+      "filename": "009_controlling_fire.jpg",
+      "concept": "Manusia semakin mampu mengendalikan api",
+      "start": 75.65,
+      "end": 81.65,
+      "start_tc": "00:01:15,650",
+      "end_tc": "00:01:21,650",
+      "duration": 6.0,
+      "dialog_cue": "Makannya, dapur moderen itu yang menyatu dengan rumah,"
+    },
+    {
+      "no": 10,
+      "asset": "broll/010_family_kitchen_table.jpg",
+      "filename": "010_family_kitchen_table.jpg",
+      "concept": "Dapur kembali dekat dengan kehidupan keluarga",
+      "start": 84.55,
+      "end": 90.55,
+      "start_tc": "00:01:24,550",
+      "end_tc": "00:01:30,550",
+      "duration": 6.0,
+      "dialog_cue": "dan ketika kita lebih mampu mengendalikan api, kita juga bisa mengubah cara kita membangun rumah."
+    }
+  ]
+}

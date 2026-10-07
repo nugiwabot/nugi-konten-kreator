@@ -210,6 +210,8 @@ Jangan terdengar seperti meminta komentar demi engagement.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Pagar?**
+
 Kenapa rumah punya pagar?
 
 Pagar memang dapat berfungsi sebagai elemen keamanan.

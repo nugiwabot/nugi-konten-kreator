@@ -220,6 +220,8 @@ Tujuannya membuat penonton melihat teras mereka sendiri, bukan merasa sedang dim
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Teras?**
+
 Kenapa banyak rumah memiliki teras, serambi, beranda, atau porch?
 
 Salah satu cara memahaminya adalah sebagai **ruang perantara** antara ruang privat di dalam bangunan dan lingkungan di luarnya.

@@ -208,6 +208,8 @@ Lalu lanjutkan dengan pertanyaan pilihan.
 
 ## 📚 CAPTION
 
+**Kenapa Dulu Dapur Sering Dipisahkan dari Rumah?**
+
 Kenapa dulu dapur sering dibuat terpisah dari ruang utama?
 
 Jawabannya tidak selalu sama di setiap tempat dan periode sejarah.

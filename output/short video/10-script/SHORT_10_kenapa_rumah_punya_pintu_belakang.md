@@ -208,6 +208,8 @@ Ajak penonton benar-benar memperhatikan rumah di sekitar mereka.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Pintu Belakang?**
+
 Kenapa sebagian rumah punya pintu depan dan pintu belakang?
 
 Dalam banyak tipe rumah, akses yang berbeda dapat membantu memisahkan fungsi dan tingkat keterbukaan ruang.

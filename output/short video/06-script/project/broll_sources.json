@@ -1,0 +1,91 @@
+{
+  "project": "06-script",
+  "headline": "Kenapa Kamar Tidur Dipisahkan dari Ruang Lain?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_peaceful_master_bedroom.jpg",
+      "path": "broll/001_peaceful_master_bedroom.jpg",
+      "concept": "Kamar tidur terpisah yang hening dan tenang",
+      "query": "peaceful quiet private master bedroom comfortable bed morning light",
+      "title": "Serene bedroom with large brown comforter, peach-painted wall, and elegant lamp in warm glow",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-bedroom-with-a-bed-nightstand-and-window-uOi4Rxb1KdE",
+      "download_url": "https://images.unsplash.com/photo-1672350562148-8bf371963340?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_closed_bedroom_door.jpg",
+      "path": "broll/002_closed_bedroom_door.jpg",
+      "concept": "Pintu tertutup penanda batas privasi ruang tidur",
+      "query": "closed wooden bedroom door privacy handle home hallway corridor",
+      "title": "Close-up view of an open wooden door with silver lock and handle in frame",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/door-handle-and-lock-in-bedorom-6782276",
+      "download_url": "https://images.pexels.com/photos/6782276/pexels-photo-6782276.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_historical_communal_sleeping.jpg",
+      "path": "broll/003_historical_communal_sleeping.jpg",
+      "concept": "Zaman dulu orang tidur bersama di satu ruangan besar",
+      "query": "historical communal sleeping hall great hall shared beds medieval rustic",
+      "title": "Old building with stacked bunk beds, chests, trunks, and lantern in rustic wooden space",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/castle-dormitory-middle-ages-168647/",
+      "download_url": "https://cdn.pixabay.com/photo/2013/07/29/16/27/castle-168647_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_cozy_bed_sanctuary.jpg",
+      "path": "broll/004_cozy_bed_sanctuary.jpg",
+      "concept": "Kamar sebagai suaka pemulihan dan ruang paling intim",
+      "query": "cozy bedroom reading lamp soft pillow restful sleep sanctuary evening",
+      "title": "Serene bedroom with white linens, wooden headboard, and soft light from ornate window framing trees",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/cozy-bedroom-with-vintage-lamp-and-arched-window-34282678",
+      "download_url": "https://images.pexels.com/photos/34282678/pexels-photo-34282678.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_canopy_curtain_bed.jpg",
+      "path": "broll/005_canopy_curtain_bed.jpg",
+      "concept": "Tirai tempat tidur sebagai awal mula privasi personal",
+      "query": "bed canopy curtain drapery historical four poster privacy bed antique",
+      "title": "Cozy bedroom scene features wooden-framed bed with blue and white checkered curtains and pillows",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/bed-canopy-bed-room-antique-sleep-289313/",
+      "download_url": "https://cdn.pixabay.com/photo/2014/03/17/19/09/bed-289313_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_hallway_bedroom_doors.jpg",
+      "path": "broll/006_hallway_bedroom_doors.jpg",
+      "concept": "Pemisahan kamar anak dan orang tua dalam denah rumah",
+      "query": "modern apartment hallway doors leading to individual bedrooms layout",
+      "title": "Green door stands out against white walls and wooden floors in a minimalist hallway setting",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/building-interior-design-furnitures-8827441/",
+      "download_url": "https://cdn.pixabay.com/photo/2024/06/13/12/24/building-8827441_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_restful_deep_sleep.jpg",
+      "path": "broll/007_restful_deep_sleep.jpg",
+      "concept": "Kebutuhan biologis istirahat tanpa gangguan",
+      "query": "sleeping peaceful darkness cozy bedroom interior night rest recharge",
+      "title": "Serene bedroom with bed against one wall and window draped with sheer white curtains",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/dark-hotel-room-with-curtains-drawn-10343928",
+      "download_url": "https://images.pexels.com/photos/10343928/pexels-photo-10343928.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

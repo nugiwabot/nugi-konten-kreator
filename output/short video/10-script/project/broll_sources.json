@@ -1,0 +1,91 @@
+{
+  "project": "10-script",
+  "headline": "Kenapa Rumah Punya Pintu Belakang?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_back_door_backyard_garden.jpg",
+      "path": "broll/001_back_door_backyard_garden.jpg",
+      "concept": "Pintu belakang menuju halaman belakang rumah",
+      "query": "back door of house leading to private backyard garden patio exit",
+      "title": "Pixabay by mikemora619",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/san-diego-home-san-diego-property-5915531/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/01/14/01/47/san-diego-home-5915531_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_service_alley_lane.jpg",
+      "path": "broll/002_service_alley_lane.jpg",
+      "concept": "Gang belakang untuk akses servis dan utilitas",
+      "query": "narrow service alley lane behind row houses utility back entrance path",
+      "title": "Narrow brick alleyway between two buildings, lined with lush green bushes and a fence",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/sidewalk-between-red-brick-buildings-in-urban-setting-32659702",
+      "download_url": "https://images.pexels.com/photos/32659702/pexels-photo-32659702.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_kitchen_service_chores.jpg",
+      "path": "broll/003_kitchen_service_chores.jpg",
+      "concept": "Pintu belakang untuk urusan dapur, sampah, dan jemuran",
+      "query": "carrying groceries trash through back door kitchen utility laundry area",
+      "title": "Pexels by Juan Pablo Serrano",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/person-standing-near-door-jamb-1549527",
+      "download_url": "https://images.pexels.com/photos/1549527/pexels-photo-1549527.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_emergency_escape_exit.jpg",
+      "path": "broll/004_emergency_escape_exit.jpg",
+      "concept": "Jalur evakuasi dan penyelamatan darurat",
+      "query": "emergency exit doorway escaping safety evacuation route house door open",
+      "title": "White door with black handle partially open, surrounded by a plain white wall",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/closed-white-painted-door-with-exit-signage-t-WxNy6CMyU",
+      "download_url": "https://images.unsplash.com/photo-1520033906782-1684d0e7498e?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_mudroom_boots_transition.jpg",
+      "path": "broll/005_mudroom_boots_transition.jpg",
+      "concept": "Ruang transisi kotor sebelum masuk ke rumah bersih",
+      "query": "mudroom back entrance muddy boots raincoats coats storage laundry room",
+      "title": "Pixabay by vanessat30",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/boots-rainy-day-weather-kids-4344316/",
+      "download_url": "https://cdn.pixabay.com/photo/2019/07/17/16/29/boots-4344316_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_informal_backdoor_entry.jpg",
+      "path": "broll/006_informal_backdoor_entry.jpg",
+      "concept": "Pintu santai untuk keluarga dekat dan tetangga",
+      "query": "informal back door opening to friends neighbors informal access garden",
+      "title": "Serene garden scene features a partially open wooden gate with weathered wood and stone wall",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/garden-gate-garden-old-wooden-5977378/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/02/03/10/12/garden-gate-5977378_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_formal_vs_functional_doors.jpg",
+      "path": "broll/007_formal_vs_functional_doors.jpg",
+      "concept": "Hierarki pintu depan yang megah vs pintu belakang fungsional",
+      "query": "front formal door contrast with informal functional back door architecture",
+      "title": "Stone wall with two doors, one red and one green, partially open on either side",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/vintage-doors-door-historic-1634042/",
+      "download_url": "https://cdn.pixabay.com/photo/2016/08/31/16/30/vintage-doors-1634042_1280.jpg",
+      "license": "free"
+    }
+  ]
+}

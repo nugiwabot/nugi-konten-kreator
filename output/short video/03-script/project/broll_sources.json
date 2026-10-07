@@ -1,0 +1,103 @@
+{
+  "project": "03-script",
+  "headline": "Kenapa Rumah Punya Jendela?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_sunlight_window_interior.jpg",
+      "path": "broll/001_sunlight_window_interior.jpg",
+      "concept": "Cahaya matahari alami masuk lewat jendela",
+      "query": "sunlight streaming through large glass window room morning light",
+      "title": "Large glass-walled room with high ceiling and concrete floor filled with natural light",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/brown-wooden-floor-near-glass-window-pq6ieXBkbeg",
+      "download_url": "https://images.unsplash.com/photo-1585806603129-a591e8ade725?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_fresh_air_ventilation.jpg",
+      "path": "broll/002_fresh_air_ventilation.jpg",
+      "concept": "Sirkulasi udara segar dan ventilasi",
+      "query": "window curtains blowing fresh air ventilation breeze indoors open",
+      "title": "Window with white curtains and floral pattern partially open, revealing a view outside upstairs",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/white-sheer-curtain-on-window-zAkcWWILmko",
+      "download_url": "https://images.unsplash.com/photo-1628233375932-9e761d205fce?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_looking_outside_window.jpg",
+      "path": "broll/003_looking_outside_window.jpg",
+      "concept": "Melihat dunia luar dari kenyamanan rumah",
+      "query": "person looking out window seeing outside world landscape view",
+      "title": "Person standing at a window with silhouetted profile against vibrant sky colors",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/silhouette-of-a-person-looking-through-a-window-at-a-sunset-19807719",
+      "download_url": "https://images.pexels.com/photos/19807719/pexels-photo-19807719.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_dark_ancient_stone_house.jpg",
+      "path": "broll/004_dark_ancient_stone_house.jpg",
+      "concept": "Rumah zaman kuno dengan bukaan minim dan gelap",
+      "query": "ancient dark stone house small window hole historic architecture ruins",
+      "title": "Stone window frame with large hole in crumbling stone wall, contrasting black and white tones",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/windows-brick-building-architecture-649731/",
+      "download_url": "https://cdn.pixabay.com/photo/2015/02/25/23/23/windows-649731_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_wooden_shutters_open.jpg",
+      "path": "broll/005_wooden_shutters_open.jpg",
+      "concept": "Jendela kayu dan daun jendela penutup",
+      "query": "wooden window shutters open sunny morning rustic home wall",
+      "title": "Window with wooden shutters and yellow flowers in a small flower pot on a white",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/a-window-with-wooden-shutters-and-flowers-28206109",
+      "download_url": "https://images.pexels.com/photos/28206109/pexels-photo-28206109.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_glass_condensation_moisture.jpg",
+      "path": "broll/006_glass_condensation_moisture.jpg",
+      "concept": "Pengatur suhu, kelembapan, dan hawa dingin",
+      "query": "condensation on window cold glass indoor climate humidity droplets",
+      "title": "Condensation forms on window surface with mixed water and ice crystals",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-window-with-water-drops-on-it-IjP4aFw7V1Q",
+      "download_url": "https://images.unsplash.com/photo-1573979223706-f901c44cd3d8?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_modern_facade_glass.jpg",
+      "path": "broll/007_modern_facade_glass.jpg",
+      "concept": "Teknologi kaca arsitektur modern",
+      "query": "modern architecture facade floor to ceiling glass windows building",
+      "title": "Curved glass building with multiple levels and reflective windows dominates the urban landscape",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/modern-building-with-curved-glass-windows-and-curtains-eezirlzL2jg",
+      "download_url": "https://images.unsplash.com/photo-1764270594264-4af7654f7cb0?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_window_blinds_privacy.jpg",
+      "path": "broll/008_window_blinds_privacy.jpg",
+      "concept": "Keseimbangan privasi dan keterbukaan visual",
+      "query": "window blinds privacy slats shadow interior room silhouette",
+      "title": "Close-up view of black blinds with evenly spaced vertical slats covering a window",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/grayscale-photo-of-grayscale-of-window-blinds-10822336",
+      "download_url": "https://images.pexels.com/photos/10822336/pexels-photo-10822336.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

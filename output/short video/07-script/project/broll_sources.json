@@ -1,0 +1,91 @@
+{
+  "project": "07-script",
+  "headline": "Kenapa Rumah Punya Ruang Tamu?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_formal_living_room_sofa.jpg",
+      "path": "broll/001_formal_living_room_sofa.jpg",
+      "concept": "Ruang tamu formal dengan sofa dan meja",
+      "query": "formal elegant living room guest receiving sofa coffee table decor",
+      "title": "Cozy living room with natural light pouring in through large window and plush sofa",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-living-room-with-a-couch-and-a-table-with-flowers-on-it-U6ASi3MTA4Q",
+      "download_url": "https://images.unsplash.com/photo-1646338954958-f526aab7d6ee?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_welcoming_guest_door.jpg",
+      "path": "broll/002_welcoming_guest_door.jpg",
+      "concept": "Menerima dan menyapa tamu yang datang",
+      "query": "homeowner opening door welcoming guest with a smile handshake friendly",
+      "title": "Pexels by Kampus Production",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/a-man-wearing-sweater-standing-at-the-doorway-of-the-house-6682774",
+      "download_url": "https://images.pexels.com/photos/6682774/pexels-photo-6682774.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_serving_tea_guests.jpg",
+      "path": "broll/003_serving_tea_guests.jpg",
+      "concept": "Menyajikan jamuan dan keramahan di ruang tamu",
+      "query": "serving tea coffee to guests sitting in beautiful parlor living room",
+      "title": "Pexels by cottonbro studio",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/elderly-couple-drinking-tea-together-7231624",
+      "download_url": "https://images.pexels.com/photos/7231624/pexels-photo-7231624.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_traditional_etiquette_parlor.jpg",
+      "path": "broll/004_traditional_etiquette_parlor.jpg",
+      "concept": "Ruang tamu sebagai etika sosial dan batas kesopanan",
+      "query": "traditional parlor guest reception room antique furniture decor formal",
+      "title": "Spacious living room with high ceiling, large windows, and neutral color palette features sofas",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/living-room-style-antique-chic-2280069/",
+      "download_url": "https://cdn.pixabay.com/photo/2017/05/03/04/22/living-room-2280069_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_social_status_showcase.jpg",
+      "path": "broll/005_social_status_showcase.jpg",
+      "concept": "Wajah rumah yang mempresentasikan citra keluarga",
+      "query": "decor family photos art books displayed in front living room showcase",
+      "title": "Burst by Farah",
+      "provider": "pexafy",
+      "source_url": "https://www.shopify.com/stock-photos/photos/section-of-a-persons-sitting-room-with-a-white-bookshelf",
+      "download_url": "https://burst.shopifycdn.com/photos/section-of-a-persons-sitting-room-with-a-white-bookshelf.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_barrier_to_private_rooms.jpg",
+      "path": "broll/006_barrier_to_private_rooms.jpg",
+      "concept": "Penyekat agar orang luar tidak melihat ke ruang pribadi",
+      "query": "hallway barrier separating front parlor from private family quarters door",
+      "title": "Pixabay by disenchanted13",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/mansion-haunted-house-victorian-978565/",
+      "download_url": "https://cdn.pixabay.com/photo/2015/10/08/22/58/mansion-978565_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_warm_conversation_hosts.jpg",
+      "path": "broll/007_warm_conversation_hosts.jpg",
+      "concept": "Ruang interaksi sosial yang nyaman dan terkontrol",
+      "query": "warm friendly conversation guests hosts sofa living room laughing",
+      "title": "Three people sit on an orange couch in a cozy living room with wooden accents",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/people-talking-while-sitting-on-the-living-room-6184494",
+      "download_url": "https://images.pexels.com/photos/6184494/pexels-photo-6184494.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

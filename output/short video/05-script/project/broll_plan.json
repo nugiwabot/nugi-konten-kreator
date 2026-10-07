@@ -1,0 +1,93 @@
+{
+  "project": "05-script",
+  "headline": "Kenapa Rumah Punya Pagar?",
+  "audio_duration": 100.29,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 41.9,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_perimeter_fence_gate.jpg",
+      "filename": "001_perimeter_fence_gate.jpg",
+      "concept": "Pagar pembatas teritorial hunian",
+      "start": 6.27,
+      "end": 12.27,
+      "start_tc": "00:00:06,270",
+      "end_tc": "00:00:12,270",
+      "duration": 6.0,
+      "dialog_cue": "Bahkan ada yang transferan, padahal kalau mau bener-bener tetut, tinggal dibuat aja lebih tinggi, kan?"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_low_friendly_picket_fence.jpg",
+      "filename": "002_low_friendly_picket_fence.jpg",
+      "concept": "Pagar rendah yang ramah dan terbuka secara sosial",
+      "start": 18.8,
+      "end": 24.8,
+      "start_tc": "00:00:18,800",
+      "end_tc": "00:00:24,800",
+      "duration": 6.0,
+      "dialog_cue": "pagar juga mengatur seberapa terbuka rumah kita terhadap dunia luar."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_high_security_wall_gate.jpg",
+      "filename": "003_high_security_wall_gate.jpg",
+      "concept": "Pagar tinggi untuk privasi dan proteksi maksimal",
+      "start": 31.34,
+      "end": 37.34,
+      "start_tc": "00:00:31,340",
+      "end_tc": "00:00:37,340",
+      "duration": 6.0,
+      "dialog_cue": "Jadi rumah itu sebedarnya punya beberapa lapisan, semakin masuk ke dalam, semakin privat ruangnya."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_open_unfenced_neighborhood.jpg",
+      "filename": "004_open_unfenced_neighborhood.jpg",
+      "concept": "Lingkungan tanpa pagar vs kawasan berpagar rapat",
+      "start": 43.88,
+      "end": 49.88,
+      "start_tc": "00:00:43,880",
+      "end_tc": "00:00:49,880",
+      "duration": 6.0,
+      "dialog_cue": "kifasinya juga lebih meningkat, tapi hubungan visual dengan jalan juga berkurang."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_territorial_boundary_marker.jpg",
+      "filename": "005_territorial_boundary_marker.jpg",
+      "concept": "Batas psikologis kepemilikan ruang",
+      "start": 56.41,
+      "end": 62.41,
+      "start_tc": "00:00:56,410",
+      "end_tc": "00:01:02,410",
+      "duration": 6.0,
+      "dialog_cue": "orang bisa saling melihat, menyebabkan merasa lebih terhubung dengan lingkungan."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_security_lock_gate.jpg",
+      "filename": "006_security_lock_gate.jpg",
+      "concept": "Rasa aman dan penjaga privasi keluarga",
+      "start": 68.95,
+      "end": 74.95,
+      "start_tc": "00:01:08,950",
+      "end_tc": "00:01:14,950",
+      "duration": 6.0,
+      "dialog_cue": "atau mau rumah terasa terbuka, dan tentu jawabannya bisa berbeda untuk setiap orang."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_ornamental_entrance_gate.jpg",
+      "filename": "007_ornamental_entrance_gate.jpg",
+      "concept": "Gerbang estetika dan kesan pertama sebuah rumah",
+      "start": 81.49,
+      "end": 87.49,
+      "start_tc": "00:01:21,490",
+      "end_tc": "00:01:27,490",
+      "duration": 6.0,
+      "dialog_cue": "Semakin terbuka pagarnya, semakin mudah rumah berintraksi secara visual dengan lingkungan."
+    }
+  ]
+}

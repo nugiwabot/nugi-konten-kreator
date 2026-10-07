@@ -1,0 +1,93 @@
+{
+  "project": "06-script",
+  "headline": "Kenapa Kamar Tidur Dipisahkan dari Ruang Lain?",
+  "audio_duration": 110.2,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 38.1,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_peaceful_master_bedroom.jpg",
+      "filename": "001_peaceful_master_bedroom.jpg",
+      "concept": "Kamar tidur terpisah yang hening dan tenang",
+      "start": 6.89,
+      "end": 12.89,
+      "start_tc": "00:00:06,890",
+      "end_tc": "00:00:12,890",
+      "duration": 6.0,
+      "dialog_cue": "dan ruang itu juga dipake untuk makan,"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_closed_bedroom_door.jpg",
+      "filename": "002_closed_bedroom_door.jpg",
+      "concept": "Pintu tertutup penanda batas privasi ruang tidur",
+      "start": 20.66,
+      "end": 26.66,
+      "start_tc": "00:00:20,660",
+      "end_tc": "00:00:26,660",
+      "duration": 6.0,
+      "dialog_cue": "Jadi, kenapa kamar tidur akhirnya menjadi ruang yang begitu penting?"
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_historical_communal_sleeping.jpg",
+      "filename": "003_historical_communal_sleeping.jpg",
+      "concept": "Zaman dulu orang tidur bersama di satu ruangan besar",
+      "start": 34.44,
+      "end": 40.44,
+      "start_tc": "00:00:34,440",
+      "end_tc": "00:00:40,440",
+      "duration": 6.0,
+      "dialog_cue": "Kenapa itu kita membutuhkan tempat yang lebih terlindungi"
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_cozy_bed_sanctuary.jpg",
+      "filename": "004_cozy_bed_sanctuary.jpg",
+      "concept": "Kamar sebagai suaka pemulihan dan ruang paling intim",
+      "start": 48.21,
+      "end": 54.21,
+      "start_tc": "00:00:48,210",
+      "end_tc": "00:00:54,210",
+      "duration": 6.0,
+      "dialog_cue": "ada ruang untuk makan,"
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_canopy_curtain_bed.jpg",
+      "filename": "005_canopy_curtain_bed.jpg",
+      "concept": "Tirai tempat tidur sebagai awal mula privasi personal",
+      "start": 61.99,
+      "end": 67.99,
+      "start_tc": "00:01:01,990",
+      "end_tc": "00:01:07,990",
+      "duration": 6.0,
+      "dialog_cue": "Dan ketika aktifitas itu di bagi, ruang pun ikut menjadi lebih spesifik."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_hallway_bedroom_doors.jpg",
+      "filename": "006_hallway_bedroom_doors.jpg",
+      "concept": "Pemisahan kamar anak dan orang tua dalam denah rumah",
+      "start": 75.76,
+      "end": 81.76,
+      "start_tc": "00:01:15,760",
+      "end_tc": "00:01:21,760",
+      "duration": 6.0,
+      "dialog_cue": "Jadi kamar tidur itu sebenarnya bukan cuma tempat kita meneru kasur."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_restful_deep_sleep.jpg",
+      "filename": "007_restful_deep_sleep.jpg",
+      "concept": "Kebutuhan biologis istirahat tanpa gangguan",
+      "start": 89.54,
+      "end": 95.54,
+      "start_tc": "00:01:29,540",
+      "end_tc": "00:01:35,540",
+      "duration": 6.0,
+      "dialog_cue": "Dan lebih terlindungi saat kita sedang tidak sadar terhadap lingkungan."
+    }
+  ]
+}

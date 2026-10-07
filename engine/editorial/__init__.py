@@ -64,6 +64,22 @@ from engine.editorial.revelation_engine import (
     generate_revelation_template,
     evaluate_revelation
 )
+from engine.editorial.script_auditor import (
+    ScriptAuditor,
+    EvidenceResolver,
+    EvidenceItem,
+    ExtractedClaim,
+    ClaimVerificationResult,
+    ScriptAuditReport,
+    ClaimType,
+    VerificationStatus,
+    Severity,
+    OverallStatus,
+    extract_claims_from_text,
+    audit_script_file,
+    evaluate_nugi_property_brand_fit,
+    PROPERTY_DIMENSION_KEYWORDS
+)
 
 __all__ = [
     # Taxonomy
@@ -86,5 +102,11 @@ __all__ = [
     "classify_story_type", "get_narrative_device", "is_contradiction_required",
     "list_story_types", "STORY_TYPES", "NARRATIVE_DEVICES",
     # Revelation Engine
-    "check_revelation_quality", "generate_revelation_template", "evaluate_revelation"
+    "check_revelation_quality", "generate_revelation_template", "evaluate_revelation",
+    # Script Auditor
+    "ScriptAuditor", "EvidenceResolver", "EvidenceItem", "ExtractedClaim",
+    "ClaimVerificationResult", "ScriptAuditReport", "ClaimType",
+    "VerificationStatus", "Severity", "OverallStatus",
+    "extract_claims_from_text", "audit_script_file",
+    "evaluate_nugi_property_brand_fit", "PROPERTY_DIMENSION_KEYWORDS"
 ]

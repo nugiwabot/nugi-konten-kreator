@@ -4,7 +4,7 @@
   "timing_status": "transcribed_from_raw_video",
   "coverage_basis": "subtitle_cues_with_verified_asset_matches_and_editorial_a_roll_gaps",
   "target_broll_share": {
-    "minimum": 0.0,
+    "minimum": 0.08,
     "maximum": 0.2,
     "aim": 0.12
   },
@@ -27,8 +27,8 @@
     },
     {
       "start": 373.0,
-      "end": 468.0,
-      "reason": "Pembahasan PBB dan tanah kosong tanpa foto dokumen/petak yang cocok; hindari ilustrasi generik."
+      "end": 450.0,
+      "reason": "Pembahasan PBB dan tanah kosong tanpa dokumen resmi; hindari ilustrasi generik."
     },
     {
       "start": 945.0,
@@ -54,11 +54,67 @@
       "reason": "Klaim angka belum cocok dengan sumber primer yang ditemukan; jangan buat visual pendukung."
     }
   ],
-  "asset_anchors": [],
+  "asset_anchors": [
+    {
+      "phrase": "penjelasan yang kedua adalah kota berkembang",
+      "filename": "021_Penjelasan kedua kota tumbuh, infrastruktur dibangun..jpg",
+      "reason": "Sudirman skyline untuk penjelasan kota tumbuh dan infrastruktur dibangun."
+    },
+    {
+      "phrase": "tiba-tiba menjadi strategis karena sekarang ada to, ada stasyun",
+      "filename": "027_Tanah_strategis_tol_Semanggi.jpg",
+      "reason": "Infrastruktur jalan tol Semanggi untuk contoh tanah menjadi strategis karena akses transportasi."
+    },
+    {
+      "phrase": "pemerintah itu membangun jalan baru atau setesim kreta atau industri",
+      "filename": "032_Ketika pemerintah bangun infrastruktur - jalan tol baru, stasiun.jpg",
+      "reason": "Foto rangkaian KRL rute Jakarta-Bogor untuk pembangunan infrastruktur transportasi."
+    },
+    {
+      "phrase": "Kemudian pemerintah membangun setesion di dekatnya.",
+      "filename": "034_Bayangkan situasi ini Pemerintah bangun stasiun KRL baru pakai.jpg",
+      "reason": "Foto KRL di Stasiun Manggarai untuk contoh stasiun yang dibiayai dana publik."
+    },
+    {
+      "phrase": "Padahal sebenarnya bisa digunakan untuk rumah.",
+      "filename": "062_Kawasan_Hunian_Kebayoran_Baru.jpg",
+      "reason": "Foto arsip perumahan Kebayoran Baru untuk kebutuhan tanah tempat tinggal."
+    },
+    {
+      "phrase": "Bukan cuma oleh individu, tapi juga oleh perusahaan, dan developer, investor",
+      "filename": "075_Ketika tanah dan properti sudah berperilaku seperti instrumen.jpg",
+      "reason": "Gedung kantor DBS Jakarta untuk properti komersial sebagai instrumen investasi."
+    },
+    {
+      "phrase": "Kempar, sejarah ke pemilikan tanah itu panjang.",
+      "filename": "056_Cara kerja keempat Warisan sejarah yang panjang..jpg",
+      "reason": "Peta arsip Batavia 1629 untuk pengantar warisan sejarah kepemilikan tanah."
+    },
+    {
+      "phrase": "Termasuk sistem agraria pada masa kolonial Belanda,",
+      "filename": "058_Peta_Batavia_1628_Sistem_Agraria.jpg",
+      "reason": "Peta Batavia 1628 untuk penjelasan sistem agraria kolonial Belanda."
+    },
+    {
+      "phrase": "kita masih bisa melihat jajak dari sejarah tersebut.",
+      "filename": "004_Escompto_Bank_Batavia_1904.jpg",
+      "reason": "Gedung Bank Escompto Batavia 1904 di Kota Tua untuk jejak warisan sejarah lembaga keuangan."
+    },
+    {
+      "phrase": "transportasi dan juga infrastruktur lainnya bisa menciptakan kenaikan",
+      "filename": "060_Pusat_Bisnis_Sudirman_Thamrin.jpg",
+      "reason": "Jalan Jenderal Sudirman sebagai koridor transportasi utama yang menaikkan nilai tanah."
+    },
+    {
+      "phrase": "sebagian besar nilai sebuah tanah berasal dari ekosistem yang dibangun bersama-sama oleh masyarakat",
+      "filename": "091_Tanah kamu bernilai tinggi bukan karena kamu melakukan.jpg",
+      "reason": "Panorama kota Jakarta untuk refleksi nilai tanah yang diciptakan bersama oleh ekosistem masyarakat."
+    }
+  ],
   "policy": "Gunakan hanya foto berlisensi yang menggambarkan konteks yang disebut. Foto lokasi tidak menjadi bukti angka; bagian tanpa aset yang tepat tetap A-roll.",
   "notes": [
-    "Aset terverifikasi yang tersedia adalah foto distrik bisnis Jakarta, KRL, satu peta Batavia, dan gedung kantor.",
-    "Klaim BI, BPS, LPEM, dan Lincoln tidak diberi grafik atau dokumen pendukung sampai ada visual sumber dan izin reproduksi yang sesuai.",
-    "Target coverage dibuat konservatif sesuai aset yang benar-benar tersedia; rencana tidak mengisi setiap cue dengan gambar."
+    "Aset terverifikasi aktif berjumlah 11 item mencakup skyline bisnis, KRL Bogor, KRL Manggarai, Simpang Susun Semanggi, Sudirman, Kebayoran Baru, Bank Escompto 1904, dua peta Batavia (1628 dan 1629), DBS Tower, dan Panorama Jakarta.",
+    "Klaim data BI, BPS, LPEM, dan Lincoln tetap A-roll tanpa visual dokumen/data yang berizin.",
+    "Target coverage b-roll terjaga konservatif dan seimbang (~10-12% dari total durasi naskah)."
   ]
 }

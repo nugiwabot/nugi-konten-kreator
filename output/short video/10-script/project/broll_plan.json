@@ -1,0 +1,93 @@
+{
+  "project": "10-script",
+  "headline": "Kenapa Rumah Punya Pintu Belakang?",
+  "audio_duration": 100.61,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 41.7,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_back_door_backyard_garden.jpg",
+      "filename": "001_back_door_backyard_garden.jpg",
+      "concept": "Pintu belakang menuju halaman belakang rumah",
+      "start": 6.29,
+      "end": 12.29,
+      "start_tc": "00:00:06,290",
+      "end_tc": "00:00:12,290",
+      "duration": 6.0,
+      "dialog_cue": "Bukannya satu pintu saja sudah cukup."
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_service_alley_lane.jpg",
+      "filename": "002_service_alley_lane.jpg",
+      "concept": "Gang belakang untuk akses servis dan utilitas",
+      "start": 18.86,
+      "end": 24.86,
+      "start_tc": "00:00:18,860",
+      "end_tc": "00:00:24,860",
+      "duration": 6.0,
+      "dialog_cue": "Tamu masuk lewat sini dan akcesnya itu lebih dekat dengan jalan atau ruang yang lebih public."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_kitchen_service_chores.jpg",
+      "filename": "003_kitchen_service_chores.jpg",
+      "concept": "Pintu belakang untuk urusan dapur, sampah, dan jemuran",
+      "start": 31.44,
+      "end": 37.44,
+      "start_tc": "00:00:31,440",
+      "end_tc": "00:00:37,440",
+      "duration": 6.0,
+      "dialog_cue": "Halaman belakang, area service atau bagian rumah yang lebih perifat."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_emergency_escape_exit.jpg",
+      "filename": "004_emergency_escape_exit.jpg",
+      "concept": "Jalur evakuasi dan penyelamatan darurat",
+      "start": 44.02,
+      "end": 50.02,
+      "start_tc": "00:00:44,020",
+      "end_tc": "00:00:50,020",
+      "duration": 6.0,
+      "dialog_cue": "Tamu masuk dari sana, barang-barang jah itu masuk dari sana juga, aktivitas dapur juga dari sana."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_mudroom_boots_transition.jpg",
+      "filename": "005_mudroom_boots_transition.jpg",
+      "concept": "Ruang transisi kotor sebelum masuk ke rumah bersih",
+      "start": 56.59,
+      "end": 62.59,
+      "start_tc": "00:00:56,590",
+      "end_tc": "00:01:02,590",
+      "duration": 6.0,
+      "dialog_cue": "Dangan akces yang berbeda, aktivitas juga bisa dipisahkan."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_informal_backdoor_entry.jpg",
+      "filename": "006_informal_backdoor_entry.jpg",
+      "concept": "Pintu santai untuk keluarga dekat dan tetangga",
+      "start": 69.17,
+      "end": 75.17,
+      "start_tc": "00:01:09,170",
+      "end_tc": "00:01:15,170",
+      "duration": 6.0,
+      "dialog_cue": "Dia bisa jadi bagian dari cara rumah mengatur kehidupan di dalamnya."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_formal_vs_functional_doors.jpg",
+      "filename": "007_formal_vs_functional_doors.jpg",
+      "concept": "Hierarki pintu depan yang megah vs pintu belakang fungsional",
+      "start": 81.75,
+      "end": 87.75,
+      "start_tc": "00:01:21,750",
+      "end_tc": "00:01:27,750",
+      "duration": 6.0,
+      "dialog_cue": "Dan dari posisi pintunya, kita kadang bisa membaca bagaimana sebuah rumah itu sebenarnya digunakan."
+    }
+  ]
+}

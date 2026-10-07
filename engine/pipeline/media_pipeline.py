@@ -109,6 +109,7 @@ class MediaPipeline:
         request: str,
         count: int = 10,
         media_type: Optional[str] = None,
+        human_context: Optional[Dict[str, object]] = None,
     ) -> MediaSearchResult:
         """
         Run the full search + ranking pipeline but do NOT download anything.
@@ -117,6 +118,7 @@ class MediaPipeline:
             request: Natural-language visual request.
             count: How many ranked results to return.
             media_type: "image" | "video" | "any" | "photo" (auto-detected if None).
+            human_context: Optional human relatability context dictionary.
 
         Returns:
             MediaSearchResult with ranked candidates.
@@ -207,6 +209,7 @@ class MediaPipeline:
                 fallback_reason=f"No matching candidates found for media_type='{detected_media}'.",
             )
 
+        effective_hc = human_context if human_context is not None else getattr(eq, "human_context", None)
         try:
             ranked, fallback_reason = self.ranker.rank(
                 original_request=request,
@@ -215,7 +218,7 @@ class MediaPipeline:
                 entities=eq.entities,
                 visual_requirement=eq.visual_requirement,
                 era="historical" if eq.is_historical else "auto",
-                human_context=human_context,
+                human_context=effective_hc,
             )
         except TypeError:
             ranked, fallback_reason = self.ranker.rank(

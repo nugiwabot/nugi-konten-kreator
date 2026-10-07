@@ -1,0 +1,129 @@
+{
+  "project": "01-script",
+  "headline": "Kenapa Pintu Rumah Sering Menghadap ke Jalan?",
+  "audio_duration": 78.23,
+  "total_broll_duration": 56.89999999999999,
+  "coverage_percentage": 72.7,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_front_door_street.jpg",
+      "filename": "001_front_door_street.jpg",
+      "concept": "Pintu rumah menghadap ke jalan",
+      "start": 3.56,
+      "end": 9.25,
+      "start_tc": "00:00:03,560",
+      "end_tc": "00:00:09,250",
+      "duration": 5.69,
+      "dialog_cue": "Padahal pintu rumah itu cuma satu hal, itu jalan masuk."
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_doorway_access.jpg",
+      "filename": "002_doorway_access.jpg",
+      "concept": "Jalan masuk / pintu rumah",
+      "start": 10.67,
+      "end": 16.36,
+      "start_tc": "00:00:10,670",
+      "end_tc": "00:00:16,360",
+      "duration": 5.69,
+      "dialog_cue": "Karena ternyata, posisi pintu itu bukan cuma soal keluar masuk."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_side_back_door.jpg",
+      "filename": "003_side_back_door.jpg",
+      "concept": "Pintu dari samping atau belakang",
+      "start": 17.78,
+      "end": 23.47,
+      "start_tc": "00:00:17,780",
+      "end_tc": "00:00:23,470",
+      "duration": 5.69,
+      "dialog_cue": "Pintu juga menentukan bagaimana rumah kita bertemu dengan dunia di luar."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_street_public_space.jpg",
+      "filename": "004_street_public_space.jpg",
+      "concept": "Di luar rumah ada jalan, lebih publik",
+      "start": 24.89,
+      "end": 30.58,
+      "start_tc": "00:00:24,890",
+      "end_tc": "00:00:30,580",
+      "duration": 5.69,
+      "dialog_cue": "lalu ada pagar juga, dan halaman, ada teras, dan akhirnya ada pintu."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_fence_front_yard.jpg",
+      "filename": "005_fence_front_yard.jpg",
+      "concept": "Pagar dan halaman depan",
+      "start": 32.0,
+      "end": 37.69,
+      "start_tc": "00:00:32,000",
+      "end_tc": "00:00:37,690",
+      "duration": 5.69,
+      "dialog_cue": "Nah pintu itu berada tepat di titik pertemuan itu."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_porch_terrace_steps.jpg",
+      "filename": "006_porch_terrace_steps.jpg",
+      "concept": "Teras dan tangga sebelum pintu",
+      "start": 39.12,
+      "end": 44.81,
+      "start_tc": "00:00:39,120",
+      "end_tc": "00:00:44,810",
+      "duration": 5.69,
+      "dialog_cue": "Kita tidak bisa masuk ke rumah, tanpa berarti dunia luar itu langsung masuk ke kehidupan pribadi kita."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_private_living_room.jpg",
+      "filename": "007_private_living_room.jpg",
+      "concept": "Ruang yang paling privat",
+      "start": 46.23,
+      "end": 51.92,
+      "start_tc": "00:00:46,230",
+      "end_tc": "00:00:51,920",
+      "duration": 5.69,
+      "dialog_cue": "sering dibahas sebagai hubungan antara ruang, publik, dan ruang privat."
+    },
+    {
+      "no": 8,
+      "asset": "broll/008_urban_design_blueprint.jpg",
+      "filename": "008_urban_design_blueprint.jpg",
+      "concept": "Arsitektur dan urban design",
+      "start": 53.34,
+      "end": 59.03,
+      "start_tc": "00:00:53,340",
+      "end_tc": "00:00:59,030",
+      "duration": 5.69,
+      "dialog_cue": "Dan menariknya cara sebuah rumah bertemu dengan jalan bisa ikut membentuk karakter sebuah lingkungan."
+    },
+    {
+      "no": 9,
+      "asset": "broll/009_open_front_door.jpg",
+      "filename": "009_open_front_door.jpg",
+      "concept": "Pintu terbuka ke jalan berkomunikasi dengan dunia luar",
+      "start": 60.45,
+      "end": 66.14,
+      "start_tc": "00:01:00,450",
+      "end_tc": "00:01:06,140",
+      "duration": 5.69,
+      "dialog_cue": "Pintu yang terbuka ke jalan, memberikan hubungan yang berbeda di banding pintu yang tersembunyi di belakang pagar."
+    },
+    {
+      "no": 10,
+      "asset": "broll/010_fence_walled_gate.jpg",
+      "filename": "010_fence_walled_gate.jpg",
+      "concept": "Pintu tersembunyi di belakang pagar",
+      "start": 67.56,
+      "end": 73.25,
+      "start_tc": "00:01:07,560",
+      "end_tc": "00:01:13,250",
+      "duration": 5.69,
+      "dialog_cue": "Dia juga seperti cara rumah kita berkomunikasi dengan dunia luar."
+    }
+  ]
+}

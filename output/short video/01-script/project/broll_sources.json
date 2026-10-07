@@ -1,0 +1,127 @@
+{
+  "project": "01-script",
+  "headline": "Kenapa Pintu Rumah Sering Menghadap ke Jalan?",
+  "total_broll": 10,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_front_door_street.jpg",
+      "path": "broll/001_front_door_street.jpg",
+      "concept": "Pintu rumah menghadap ke jalan",
+      "query": "front entrance door house facing street road residential architecture",
+      "title": "Pexels by Andres Alaniz",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/elegant-modern-house-entrance-with-greenery-30082967",
+      "download_url": "https://images.pexels.com/photos/30082967/pexels-photo-30082967.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_doorway_access.jpg",
+      "path": "broll/002_doorway_access.jpg",
+      "concept": "Jalan masuk / pintu rumah",
+      "query": "wooden front door entrance doorway closeup home entry",
+      "title": "Unsplash by Stan Adrian",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-close-up-of-a-wooden-door-on-a-building-husLV-q-JCU",
+      "download_url": "https://images.unsplash.com/photo-1680472805000-9cd0e770d1bc?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_side_back_door.jpg",
+      "path": "broll/003_side_back_door.jpg",
+      "concept": "Pintu dari samping atau belakang",
+      "query": "side entrance door back door garden walkway exterior",
+      "title": "Small, white brick house with blue door on stone path surrounded by lush greenery",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/blue-wooden-door-on-white-concrete-wall-9041531",
+      "download_url": "https://images.pexels.com/photos/9041531/pexels-photo-9041531.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_street_public_space.jpg",
+      "path": "broll/004_street_public_space.jpg",
+      "concept": "Di luar rumah ada jalan, lebih publik",
+      "query": "residential street neighborhood houses sidewalk public road",
+      "title": "Residential street lined with houses and trees in a serene atmosphere with overcast sky",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/charming-suburban-street-with-colorful-houses-31726753",
+      "download_url": "https://images.pexels.com/photos/31726753/pexels-photo-31726753.png?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_fence_front_yard.jpg",
+      "path": "broll/005_fence_front_yard.jpg",
+      "concept": "Pagar dan halaman depan",
+      "query": "house fence gate front yard garden lawn property line",
+      "title": "Wooden gate with vertical slats stands on a grassy lawn surrounded by trees",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/rustic-wooden-fence-in-a-countryside-yard-34065767",
+      "download_url": "https://images.pexels.com/photos/34065767/pexels-photo-34065767.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_porch_terrace_steps.jpg",
+      "path": "broll/006_porch_terrace_steps.jpg",
+      "concept": "Teras dan tangga sebelum pintu",
+      "query": "front porch veranda sitting area entrance steps terrace",
+      "title": "Serene front porch with white columns and wreath above door surrounded by potted plants",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/white-wooden-door-of-a-mansion-6696807",
+      "download_url": "https://images.pexels.com/photos/6696807/pexels-photo-6696807.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_private_living_room.jpg",
+      "path": "broll/007_private_living_room.jpg",
+      "concept": "Ruang yang paling privat",
+      "query": "cozy private living room interior quiet home sanctuary",
+      "title": "Serene living room with large window offering natural light from surrounding trees outdoors",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/cozy-living-room-with-green-armchairs-34503442",
+      "download_url": "https://images.pexels.com/photos/34503442/pexels-photo-34503442.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_urban_design_blueprint.jpg",
+      "path": "broll/008_urban_design_blueprint.jpg",
+      "concept": "Arsitektur dan urban design",
+      "query": "architectural blueprint urban street plan facade design drawing",
+      "title": "Close-up view of architectural drawings with detailed house plans on white paper",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/close-up-shot-of-a-blueprint-4458203",
+      "download_url": "https://images.pexels.com/photos/4458203/pexels-photo-4458203.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 9,
+      "filename": "009_open_front_door.jpg",
+      "path": "broll/009_open_front_door.jpg",
+      "concept": "Pintu terbuka ke jalan berkomunikasi dengan dunia luar",
+      "query": "open front door welcoming warm home light doorway entrance",
+      "title": "Stained glass window casts colorful light onto the wall behind an open wooden door",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/white-wooden-door-with-glass-xMl_MnnLuOo",
+      "download_url": "https://images.unsplash.com/photo-1626670825004-7917d437e109?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 10,
+      "filename": "010_fence_walled_gate.jpg",
+      "path": "broll/010_fence_walled_gate.jpg",
+      "concept": "Pintu tersembunyi di belakang pagar",
+      "query": "house hidden behind tall security fence wall gate privacy",
+      "title": "White house surrounded by lush green trees and shrubs, set against a stone wall",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-house-behind-a-fence-with-trees-in-the-background-I4oXc30uUJY",
+      "download_url": "https://images.unsplash.com/photo-1713526194865-7c93f1f61df5?w=1280",
+      "license": "free"
+    }
+  ]
+}

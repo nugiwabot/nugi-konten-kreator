@@ -1,0 +1,93 @@
+{
+  "project": "08-script",
+  "headline": "Kenapa Rumah Dibangun Bertingkat?",
+  "audio_duration": 108.18,
+  "total_broll_duration": 42.0,
+  "coverage_percentage": 38.8,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_two_story_modern_house.jpg",
+      "filename": "001_two_story_modern_house.jpg",
+      "concept": "Rumah 2 lantai di lahan kota yang padat",
+      "start": 6.76,
+      "end": 12.76,
+      "start_tc": "00:00:06,760",
+      "end_tc": "00:00:12,760",
+      "duration": 6.0,
+      "dialog_cue": "Kenapa manusia itu nalah membangun ke atasnya?"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_wooden_staircase_interior.jpg",
+      "filename": "002_wooden_staircase_interior.jpg",
+      "concept": "Tangga penghubung antar lantai",
+      "start": 20.28,
+      "end": 26.28,
+      "start_tc": "00:00:20,280",
+      "end_tc": "00:00:26,280",
+      "duration": 6.0,
+      "dialog_cue": "kita punya pilihan, itu menyebar atau naik, dan manusia itu sering memilih naik."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_dense_city_narrow_plots.jpg",
+      "filename": "003_dense_city_narrow_plots.jpg",
+      "concept": "Keterbatasan lahan horizontal di perkotaan",
+      "start": 33.81,
+      "end": 39.81,
+      "start_tc": "00:00:33,810",
+      "end_tc": "00:00:39,810",
+      "duration": 6.0,
+      "dialog_cue": "Kalo terus melebar, lama-lama lahan yang tersedi itu habis."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_historical_tall_townhouse.jpg",
+      "filename": "004_historical_tall_townhouse.jpg",
+      "concept": "Sejarah rumah tinggi bertingkat di kota-kota tua dunia",
+      "start": 47.33,
+      "end": 53.33,
+      "start_tc": "00:00:47,330",
+      "end_tc": "00:00:53,330",
+      "duration": 6.0,
+      "dialog_cue": "Luas ruang itu di dalam bangunan bisa bertambah, tanpa menambah luas tanah yang dipakai sebesar itu."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_public_ground_private_upper.jpg",
+      "filename": "005_public_ground_private_upper.jpg",
+      "concept": "Lantai bawah untuk aktivitas publik, lantai atas untuk privat",
+      "start": 60.85,
+      "end": 66.85,
+      "start_tc": "00:01:00,850",
+      "end_tc": "00:01:06,850",
+      "duration": 6.0,
+      "dialog_cue": "beban harus ditopang, tangga harus dibuat, air, dan listrik harus dialirkan."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_second_floor_balcony_view.jpg",
+      "filename": "006_second_floor_balcony_view.jpg",
+      "concept": "Balkon lantai atas memberi sirkulasi udara dan pandangan luas",
+      "start": 74.37,
+      "end": 80.37,
+      "start_tc": "00:01:14,370",
+      "end_tc": "00:01:20,370",
+      "duration": 6.0,
+      "dialog_cue": "Jadi, rumah bertingkat itu sebenarnya bukan cuma gaya."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_compact_vertical_living.jpg",
+      "filename": "007_compact_vertical_living.jpg",
+      "concept": "Inovasi hunian vertikal memaksimalkan fungsi ruang",
+      "start": 87.9,
+      "end": 93.9,
+      "start_tc": "00:01:27,900",
+      "end_tc": "00:01:33,900",
+      "duration": 6.0,
+      "dialog_cue": "Dan kalau di pikir-pikir, lantai buah di rumah kita adalah contoh kecil dari masalah yang juga dihadapi sebuah pota."
+    }
+  ]
+}

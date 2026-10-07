@@ -1,0 +1,127 @@
+{
+  "project": "02-script",
+  "headline": "Kenapa Dulu Dapur Sering Dipisahkan dari Rumah?",
+  "total_broll": 10,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_outdoor_separate_kitchen.jpg",
+      "path": "broll/001_outdoor_separate_kitchen.jpg",
+      "concept": "Dapur terpisah dari bangunan utama",
+      "query": "traditional outdoor separate kitchen building old village rustic",
+      "title": "Unsplash by Snap Wander",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-stone-building-with-a-hole-in-the-side-UmEQL3e7m9w",
+      "download_url": "https://images.unsplash.com/photo-1670368604018-43bef88bc27f?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_modern_integrated_kitchen.jpg",
+      "path": "broll/002_modern_integrated_kitchen.jpg",
+      "concept": "Dapur modern menyatu dengan ruang keluarga",
+      "query": "modern open concept kitchen island dining living room integrated",
+      "title": "Unsplash by Cesar Cid",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-large-kitchen-with-a-center-island-in-the-middle-of-the-room-CIwIkOE-ocA",
+      "download_url": "https://images.unsplash.com/photo-1707189855423-4b8980245072?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_open_cooking_fire.jpg",
+      "path": "broll/003_open_cooking_fire.jpg",
+      "concept": "Memasak menggunakan api dan bara",
+      "query": "cooking wood fire open hearth embers flames cooking",
+      "title": "Bright flames leap high into the air within a fireplace with black metal grate",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-fire-burning-in-a-fireplace-with-lots-of-logs-Ev6PtxZnhyU",
+      "download_url": "https://images.unsplash.com/photo-1635097091161-2844212b645f?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_smoke_hearth_ventilation.jpg",
+      "path": "broll/004_smoke_hearth_ventilation.jpg",
+      "concept": "Asap tebal harus keluar dari ruangan",
+      "query": "thick smoke rising cooking hearth indoor soot ventilation fire",
+      "title": "Black pot emits steam on windowsill with natural light illuminating its surroundings slowly",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/view-of-steam-over-a-pot-on-a-stove-17600188",
+      "download_url": "https://images.pexels.com/photos/17600188/pexels-photo-17600188.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_house_fire_danger.jpg",
+      "path": "broll/005_house_fire_danger.jpg",
+      "concept": "Risiko kebakaran seluruh bangunan",
+      "query": "house fire risk burning wood building danger flames",
+      "title": "Wooden structure engulfed in flames, emitting smoke and orange light against dark blue sky",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/fire-burning-smoke-explosion-wood-6564986/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/08/22/12/18/fire-6564986_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_historical_detached_hearth.jpg",
+      "path": "broll/006_historical_detached_hearth.jpg",
+      "concept": "Dapur ditempatkan jauh dari ruang hidup utama",
+      "query": "old colonial detached kitchen outhouse historic estate brick",
+      "title": "Small old brick shed on grassy field with corrugated metal roof and wooden door",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/an-old-brick-building-with-a-rusted-tin-roof-S6UtgfuACDM",
+      "download_url": "https://images.unsplash.com/photo-1646529874873-0ecec176f221?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_chimney_smoke_vent.jpg",
+      "path": "broll/007_chimney_smoke_vent.jpg",
+      "concept": "Cerobong asap dan ventilasi semakin baik",
+      "query": "brick chimney smoke ventilation flue historical kitchen rooftop",
+      "title": "Old building's chimney emits smoke into clear blue sky amidst surrounding trees",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/old-rustic-chimney-with-smoke-on-tiled-roof-34433907",
+      "download_url": "https://images.pexels.com/photos/34433907/pexels-photo-34433907.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_vintage_cast_iron_stove.jpg",
+      "path": "broll/008_vintage_cast_iron_stove.jpg",
+      "concept": "Kompor menjadi lebih aman dan terkontrol",
+      "query": "cast iron vintage cooking stove historical range kitchen antique",
+      "title": "Vintage stove with two burners on each side in a kitchen setting with old kettle",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/stove-antique-kitchen-stove-old-435954/",
+      "download_url": "https://cdn.pixabay.com/photo/2014/09/04/22/29/stove-435954_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 9,
+      "filename": "009_controlling_fire.jpg",
+      "path": "broll/009_controlling_fire.jpg",
+      "concept": "Manusia semakin mampu mengendalikan api",
+      "query": "chef cooking flame control pan modern gas burner stove kitchen",
+      "title": "Chef stands at attention in busy kitchen, focused on cooking task with frying pan",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/man-in-black-shirt-cooking-19964811",
+      "download_url": "https://images.pexels.com/photos/19964811/pexels-photo-19964811.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 10,
+      "filename": "010_family_kitchen_table.jpg",
+      "path": "broll/010_family_kitchen_table.jpg",
+      "concept": "Dapur kembali dekat dengan kehidupan keluarga",
+      "query": "family gathering warm kitchen dining food table home cooking",
+      "title": "Pexels by cottonbro studio",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/women-and-child-facing-dining-table-3171152",
+      "download_url": "https://images.pexels.com/photos/3171152/pexels-photo-3171152.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

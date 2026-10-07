@@ -1,0 +1,91 @@
+{
+  "project": "09-script",
+  "headline": "Kenapa Rumah Punya Plafon?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_clean_modern_ceiling.jpg",
+      "path": "broll/001_clean_modern_ceiling.jpg",
+      "concept": "Plafon rumah modern yang rapi dan elegan",
+      "query": "clean white ceiling with modern warm recessed downlights interior home",
+      "title": "Three recessed lights mounted on a white ceiling in a straight line arrangement",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/lighting-puntk%C3%B3wki-buro-1972708/",
+      "download_url": "https://cdn.pixabay.com/photo/2017/01/11/19/33/lighting-1972708_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_exposed_roof_truss.jpg",
+      "path": "broll/002_exposed_roof_truss.jpg",
+      "concept": "Rangka atap dan kuda-kuda kayu tanpa plafon",
+      "query": "exposed wooden roof rafters roof truss structure attic beams ceiling",
+      "title": "Close-up view of wooden ceiling with intricate grid pattern composed of light brown beams",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/roof-wooden-roof-architecture-4462171/",
+      "download_url": "https://cdn.pixabay.com/photo/2019/09/09/00/22/roof-4462171_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_thermal_insulation_attic.jpg",
+      "path": "broll/003_thermal_insulation_attic.jpg",
+      "concept": "Plafon penahan panas terik matahari dari genteng",
+      "query": "thermal insulation fiberglass batts ceiling attic thermal comfort heat",
+      "title": "Close-up view of pink insulation material attached to wooden frame on building exterior",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/beige-wooden-frame-qJa6WDmRNwM",
+      "download_url": "https://images.unsplash.com/photo-1543525324-dc2c9006d03d?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_hidden_wires_plumbing.jpg",
+      "path": "broll/004_hidden_wires_plumbing.jpg",
+      "concept": "Menyembunyikan kabel listrik dan pipa di atas plafon",
+      "query": "hidden electrical wires pipes HVAC ductwork behind false ceiling drywall",
+      "title": "Large metal beam spans ceiling, supporting network of exposed wires in construction room",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/construction-site-with-exposed-metal-framing-and-wires-H_cs3mpbkqw",
+      "download_url": "https://images.unsplash.com/photo-1768321906061-67207445bd3f?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_rain_noise_dampening.jpg",
+      "path": "broll/005_rain_noise_dampening.jpg",
+      "concept": "Meredam kebisingan air hujan pada atap seng",
+      "query": "rain falling on metal corrugated roof noise dampening acoustic ceiling",
+      "title": "Close-up view of corrugated metal roof with raindrops creating rhythmic pattern on its surface",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/raining-snowfall-rain-raindrops-6669645/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/09/30/09/53/raining-6669645_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_decorative_wooden_ceiling.jpg",
+      "path": "broll/006_decorative_wooden_ceiling.jpg",
+      "concept": "Estetika dan tata proporsi tinggi ruang yang nyaman",
+      "query": "beautiful coffered decorative wooden ceiling architecture high room interior",
+      "title": "Unsplash by Tomasz Zielonka",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-wooden-structure-with-a-clock-on-the-top-of-it-6bB3mQMLdf0",
+      "download_url": "https://images.unsplash.com/photo-1729286294968-837e7e3603c3?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_cool_ambient_interior.jpg",
+      "path": "broll/007_cool_ambient_interior.jpg",
+      "concept": "Menjaga suhu ruangan tetap sejuk dan stabil",
+      "query": "cozy comfortable room air conditioning cool temperature indoor ceiling home",
+      "title": "Cozy living room with large window flooded by natural light and comfortable seating areas",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/door-curtain-8359468",
+      "download_url": "https://images.pexels.com/photos/8359468/pexels-photo-8359468.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

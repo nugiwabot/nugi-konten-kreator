@@ -1,57 +1,9 @@
 {
-  "version": 1,
-  "workspace": "07-script",
-  "timing_status": "awaiting_main_footage",
-  "target_broll_share": {
-    "minimum": 0.4,
-    "maximum": 0.5,
-    "aim": 0.45
-  },
-  "coverage_basis": "script_text_anchors_until_main_footage_is_available",
-  "skip_segment_ids": [],
-  "skip_time_ranges": [],
-  "skip_anchors": [
-    {
-      "phrase": "Kamu punya selembar kertas",
-      "reason": "Pembuka dokumen tanah belum memiliki contoh dokumen terbuka/berlisensi; A-roll."
-    },
-    {
-      "phrase": "Siapa yang pertama kali memutuskan bahwa tanah bisa dimiliki",
-      "reason": "Pertanyaan utama; A-roll."
-    },
-    {
-      "phrase": "Sistem kepemilikan tanah modern yang kita kenal hari ini adalah konstruksi",
-      "reason": "Pernyataan argumen; beri ruang A-roll."
-    },
-    {
-      "phrase": "Jadi kapan pagar pertama yang punya makna hukum itu muncul",
-      "reason": "Jeda retoris; A-roll sebelum pembahasan Uruk."
-    },
-    {
-      "phrase": "Kota pertama yang tercatat dengan sistem kepemilikan properti yang cukup jelas adalah Uruk",
-      "reason": "Foto situs Uruk/artefak administrasi yang benar belum ditemukan; A-roll, jangan mengganti dengan lokasi lain."
-    },
-    {
-      "phrase": "Di Eropa Abad Pertengahan, sistem feudal bekerja",
-      "reason": "Manuskrip spesifik dengan provenance jelas belum ditemukan; A-roll."
-    },
-    {
-      "phrase": "Undang-Undang Agraria Kolonial tahun 1870 yang dikenal sebagai Agrarische Wet",
-      "reason": "Dokumen hukum primer dan izin reproduksi gambarnya belum terverifikasi; A-roll."
-    },
-    {
-      "phrase": "Tahun 1960, pemerintah Indonesia di bawah Soekarno mengesahkan Undang-Undang Pokok Agraria",
-      "reason": "Tampilkan A-roll hingga salinan hukum primer dan hak reproduksinya terverifikasi."
-    },
-    {
-      "phrase": "Saya ingin mengajak kamu memikirkan satu hal",
-      "reason": "Bagian refleksi dan penutup; A-roll."
-    }
-  ],
-  "policy": "Do not place B-roll over a marked anchor when a subtitle/timeline is generated. Unverified research, legal documents, or locations remain A-roll.",
-  "notes": [
-    "Tidak ada foto Uruk yang cocok di bawah lisensi terverifikasi; jangan pakai foto kota kuno lain sebagai pengganti.",
-    "Foto rumah di perkebunan Deli diambil di Medan tahun 1905; jangan diberi label sebagai perkebunan Jawa.",
-    "Hammurabi tidak disebut sebagai bukti di naskah 07; foto prasastinya hanya digunakan untuk naskah 06."
-  ]
+  "total_video_duration": 956.92,
+  "total_broll_duration": 387.0,
+  "total_mg_duration": 65.0,
+  "total_cutaway_duration": 452.0,
+  "coverage_ratio_percent": 47.23,
+  "target_range": "40% - 50%",
+  "is_valid": true
 }

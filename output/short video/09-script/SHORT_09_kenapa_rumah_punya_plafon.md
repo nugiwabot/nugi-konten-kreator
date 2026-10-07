@@ -212,6 +212,8 @@ Ajak penonton benar-benar memperhatikan plafon rumahnya.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Plafon?**
+
 Kenapa rumah punya plafon?
 
 Plafon bukan sekadar elemen dekoratif.

@@ -1,0 +1,91 @@
+{
+  "project": "08-script",
+  "headline": "Kenapa Rumah Dibangun Bertingkat?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_two_story_modern_house.jpg",
+      "path": "broll/001_two_story_modern_house.jpg",
+      "concept": "Rumah 2 lantai di lahan kota yang padat",
+      "query": "two story modern residential house compact urban lot vertical design",
+      "title": "Modern two-story house with flat roof and large windows on a lush green lawn",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/casa-lar-loft-home-architecture-6240888/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/05/09/12/59/house-6240888_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_wooden_staircase_interior.jpg",
+      "path": "broll/002_wooden_staircase_interior.jpg",
+      "concept": "Tangga penghubung antar lantai",
+      "query": "wooden architectural stairs staircase connecting floors interior home",
+      "title": "Dark wooden staircase descends into darkness with natural light pouring through the window frame",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/high-angle-photography-of-brown-wooden-staire-NAG6NqV91X4",
+      "download_url": "https://images.unsplash.com/photo-1556694620-f2fa2e37b26b?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_dense_city_narrow_plots.jpg",
+      "path": "broll/003_dense_city_narrow_plots.jpg",
+      "concept": "Keterbatasan lahan horizontal di perkotaan",
+      "query": "dense crowded city houses limited urban land narrow plots aerial street",
+      "title": "Unsplash by Andrey Smirnov",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/an-aerial-view-of-a-city-with-lots-of-buildings-cu49UKzmfyo",
+      "download_url": "https://images.unsplash.com/photo-1646162458677-9f1ff34ee6c8?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_historical_tall_townhouse.jpg",
+      "path": "broll/004_historical_tall_townhouse.jpg",
+      "concept": "Sejarah rumah tinggi bertingkat di kota-kota tua dunia",
+      "query": "historical tall multi-story townhouse canal house Amsterdam medieval narrow",
+      "title": "Row of brick buildings line a canal in Amsterdam's historic cityscape with varying architecture",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/houses-sunny-day-urban-amsterdam-2458143/",
+      "download_url": "https://cdn.pixabay.com/photo/2017/06/30/12/05/houses-2458143_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_public_ground_private_upper.jpg",
+      "path": "broll/005_public_ground_private_upper.jpg",
+      "concept": "Lantai bawah untuk aktivitas publik, lantai atas untuk privat",
+      "query": "ground floor living room looking up mezzanine staircase second floor",
+      "title": "Unsplash by Wenya Luo",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-room-with-a-couch-and-chairs-jj7T4Yy3Lrk",
+      "download_url": "https://images.unsplash.com/photo-1651070226922-a25f238c7d43?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_second_floor_balcony_view.jpg",
+      "path": "broll/006_second_floor_balcony_view.jpg",
+      "concept": "Balkon lantai atas memberi sirkulasi udara dan pandangan luas",
+      "query": "view from upper second floor balcony overlooking neighborhood street sky",
+      "title": "Panoramic view of residential neighborhood with clear blue sky and unique architectural houses",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/suburban-neighborhood-with-houses-and-palm-trees-a570mEmLMII",
+      "download_url": "https://images.unsplash.com/photo-1764344888525-fb04fc4244ad?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_compact_vertical_living.jpg",
+      "path": "broll/007_compact_vertical_living.jpg",
+      "concept": "Inovasi hunian vertikal memaksimalkan fungsi ruang",
+      "query": "compact tiny vertical house architecture innovative space design stairs",
+      "title": "Spiral staircase with white walls and beige carpeting leading down to an upper level",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-set-of-stairs-leading-up-to-a-second-floor-QNUHIDsSFdo",
+      "download_url": "https://images.unsplash.com/photo-1715768731993-2fe3762421c4?w=1280",
+      "license": "free"
+    }
+  ]
+}

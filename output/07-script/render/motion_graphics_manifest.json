@@ -1,0 +1,72 @@
+{
+  "project": "07-script",
+  "title": "Siapa yang Pertama Kali Berkata 'Ini Milikku': Sejarah Tersembunyi Kepemilikan Tanah",
+  "resolution": "1920x1080",
+  "design_tokens": "Warm Amber-Ink (Georgia Serif + Segoe UI / Aptos)",
+  "total_cards": 7,
+  "cards": [
+    {
+      "id": "mg_01",
+      "filename": "mg_01_headline_siapa_pemilik_pertama.png",
+      "category": "SEJARAH SISTEM TANAH",
+      "title": "Siapa yang Pertama Kali Berkata 'Ini Milikku'?",
+      "subtitle": "Sejarah Tersembunyi Konstruksi Kepemilikan Tanah — Dari Hutan Liar Menjadi Sertifikat",
+      "role": "Title Headline Card",
+      "recommended_duration_seconds": 8.0
+    },
+    {
+      "id": "mg_02",
+      "filename": "mg_02_rousseau_pagar_pertama.png",
+      "category": "FILSAFAT POLITIK (1755)",
+      "title": "Kutipan Jean-Jacques Rousseau: Pagar Pertama & Masyarakat Sipil",
+      "subtitle": "Discourse on the Origin of Inequality (1755)",
+      "role": "Historical Quote Card",
+      "recommended_duration_seconds": 10.0
+    },
+    {
+      "id": "mg_03",
+      "filename": "mg_03_kronologi_evolusi_tanah.png",
+      "category": "KRONOLOGI PERADABAN",
+      "title": "Garis Waktu Evolusi Kepemilikan Tanah (~10.000 SM s/d 1960 M)",
+      "subtitle": "Neolitik -> Uruk -> Feodal Eropa -> Agrarische Wet 1870 -> UUPA 1960",
+      "role": "Timeline Graphic",
+      "recommended_duration_seconds": 10.0
+    },
+    {
+      "id": "mg_04",
+      "filename": "mg_04_komparasi_adat_vs_kolonial.png",
+      "category": "KOMPARASI HUKUM AGRARIA",
+      "title": "Benturan Dua Logika: Hak Ulayat (Adat) vs Domein Verklaring (Kolonial 1870)",
+      "subtitle": "Akar Sejarah Dualisme dan Sengketa Lahan di Nusantara",
+      "role": "Comparison Matrix",
+      "recommended_duration_seconds": 10.0
+    },
+    {
+      "id": "mg_05",
+      "filename": "mg_05_uupa_1960_tiga_pilar.png",
+      "category": "HUKUM AGRARIA NASIONAL",
+      "title": "Tiga Pilar Hak Tanah UUPA No. 5 Tahun 1960",
+      "subtitle": "Hak Milik, Hak Guna Usaha (HGU), Hak Guna Bangunan (HGB)",
+      "role": "Legal Framework Diagram",
+      "recommended_duration_seconds": 9.0
+    },
+    {
+      "id": "mg_06",
+      "filename": "mg_06_statistik_konflik_kpa.png",
+      "category": "DATA RISET KONTEMPORER",
+      "title": "Data Konsorsium Pembaruan Agraria (KPA): 2.700+ Letusan Konflik Agraria",
+      "subtitle": "Sebaran Sektor Perkebunan Sawit, Tambang, dan Infrastruktur dalam 1 Dekade",
+      "role": "Data Metric Card",
+      "recommended_duration_seconds": 9.0
+    },
+    {
+      "id": "mg_07",
+      "filename": "mg_07_epifani_konstruksi_sosial.png",
+      "category": "TITIK EPIFANI REFLEKSI",
+      "title": "Kepemilikan Tanah Bukan Hukum Alam. Ia Adalah Pilihan Manusia.",
+      "subtitle": "Apa yang dibuat oleh keputusan manusia dapat ditata ulang demi keadilan.",
+      "role": "Epiphany Anchor Card",
+      "recommended_duration_seconds": 9.0
+    }
+  ]
+}

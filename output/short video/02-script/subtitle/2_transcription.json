@@ -1,0 +1,1432 @@
+{
+  "project": "02-script",
+  "footage": "\\\\tsclient\\C\\Users\\Nugi\\Documents\\nugi-konten-kreator\\output\\short video\\02-script\\footage\\2.mp4",
+  "duration": 97.9,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.96,
+      "start_tc": "00:00:00,000",
+      "end_tc": "00:00:02,960",
+      "text": "Kenapa dulu dapur justru sering dijauhkan dari rumah?",
+      "words": [
+        {
+          "word": " Kenapa",
+          "start": 0.0,
+          "end": 0.5
+        },
+        {
+          "word": " dulu",
+          "start": 0.5,
+          "end": 0.76
+        },
+        {
+          "word": " dapur",
+          "start": 0.76,
+          "end": 1.16
+        },
+        {
+          "word": " justru",
+          "start": 1.16,
+          "end": 1.64
+        },
+        {
+          "word": " sering",
+          "start": 1.64,
+          "end": 1.96
+        },
+        {
+          "word": " di",
+          "start": 1.96,
+          "end": 2.06
+        },
+        {
+          "word": " jauhkan",
+          "start": 2.06,
+          "end": 2.44
+        },
+        {
+          "word": " dari",
+          "start": 2.44,
+          "end": 2.62
+        },
+        {
+          "word": " rumah?",
+          "start": 2.62,
+          "end": 2.96
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 3.36,
+      "end": 7.14,
+      "start_tc": "00:00:03,360",
+      "end_tc": "00:00:07,140",
+      "text": "Padahal sekarang dapur itu malah sering jadi pusat rumah, bahkan",
+      "words": [
+        {
+          "word": " Padahal",
+          "start": 3.36,
+          "end": 3.96
+        },
+        {
+          "word": " sekarang",
+          "start": 3.96,
+          "end": 4.36
+        },
+        {
+          "word": " dapur",
+          "start": 4.36,
+          "end": 4.74
+        },
+        {
+          "word": " itu",
+          "start": 4.74,
+          "end": 4.96
+        },
+        {
+          "word": " malah",
+          "start": 4.96,
+          "end": 5.16
+        },
+        {
+          "word": " sering",
+          "start": 5.16,
+          "end": 5.52
+        },
+        {
+          "word": " jadi",
+          "start": 5.52,
+          "end": 5.78
+        },
+        {
+          "word": " pusat",
+          "start": 5.78,
+          "end": 6.16
+        },
+        {
+          "word": " rumah,",
+          "start": 6.16,
+          "end": 6.42
+        },
+        {
+          "word": " bahkan",
+          "start": 6.66,
+          "end": 7.14
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 7.14,
+      "end": 10.78,
+      "start_tc": "00:00:07,140",
+      "end_tc": "00:00:10,780",
+      "text": "ada yang langsung menyatu dengan ruang makan dan ruang keluarga.",
+      "words": [
+        {
+          "word": " ada",
+          "start": 7.14,
+          "end": 7.72
+        },
+        {
+          "word": " yang",
+          "start": 7.72,
+          "end": 7.88
+        },
+        {
+          "word": " langsung",
+          "start": 7.88,
+          "end": 8.18
+        },
+        {
+          "word": " menyatuh",
+          "start": 8.18,
+          "end": 8.64
+        },
+        {
+          "word": " dengan",
+          "start": 8.64,
+          "end": 8.94
+        },
+        {
+          "word": " ruang",
+          "start": 8.94,
+          "end": 9.28
+        },
+        {
+          "word": " makan",
+          "start": 9.28,
+          "end": 9.58
+        },
+        {
+          "word": " dan",
+          "start": 9.58,
+          "end": 9.8
+        },
+        {
+          "word": " ruang",
+          "start": 9.8,
+          "end": 10.22
+        },
+        {
+          "word": " keluarga.",
+          "start": 10.22,
+          "end": 10.78
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 11.08,
+      "end": 16.68,
+      "start_tc": "00:00:11,080",
+      "end_tc": "00:00:16,680",
+      "text": "Tapi pada masa dan tempat tertentu, dapur bisa berada di bagian yang terpisah dari ruang utama.",
+      "words": [
+        {
+          "word": " Tapi",
+          "start": 11.08,
+          "end": 11.44
+        },
+        {
+          "word": " pada",
+          "start": 11.44,
+          "end": 11.7
+        },
+        {
+          "word": " masa",
+          "start": 11.7,
+          "end": 12.0
+        },
+        {
+          "word": " dan",
+          "start": 12.0,
+          "end": 12.2
+        },
+        {
+          "word": " tempat",
+          "start": 12.2,
+          "end": 12.56
+        },
+        {
+          "word": " tertentu,",
+          "start": 12.56,
+          "end": 13.18
+        },
+        {
+          "word": " dapur",
+          "start": 13.46,
+          "end": 13.74
+        },
+        {
+          "word": " bisa",
+          "start": 13.74,
+          "end": 14.08
+        },
+        {
+          "word": " berada",
+          "start": 14.08,
+          "end": 14.48
+        },
+        {
+          "word": " di",
+          "start": 14.48,
+          "end": 14.68
+        },
+        {
+          "word": " bagian",
+          "start": 14.68,
+          "end": 15.02
+        },
+        {
+          "word": " yang",
+          "start": 15.02,
+          "end": 15.18
+        },
+        {
+          "word": " terpisah",
+          "start": 15.18,
+          "end": 15.64
+        },
+        {
+          "word": " dari",
+          "start": 15.64,
+          "end": 15.86
+        },
+        {
+          "word": " ruang",
+          "start": 15.86,
+          "end": 16.28
+        },
+        {
+          "word": " utama.",
+          "start": 16.28,
+          "end": 16.68
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 17.0,
+      "end": 19.88,
+      "start_tc": "00:00:17,000",
+      "end_tc": "00:00:19,880",
+      "text": "Kenapa jauh banyak adalah ternyata sederhana?",
+      "words": [
+        {
+          "word": " Kenapa",
+          "start": 17.0,
+          "end": 17.38
+        },
+        {
+          "word": " jauh",
+          "start": 17.38,
+          "end": 18.24
+        },
+        {
+          "word": " banyak",
+          "start": 18.24,
+          "end": 18.5
+        },
+        {
+          "word": " adalah",
+          "start": 18.5,
+          "end": 18.8
+        },
+        {
+          "word": " ternyata",
+          "start": 18.8,
+          "end": 19.32
+        },
+        {
+          "word": " sederhana?",
+          "start": 19.32,
+          "end": 19.88
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 20.52,
+      "end": 23.8,
+      "start_tc": "00:00:20,520",
+      "end_tc": "00:00:23,800",
+      "text": "api, asap, panas, dan risiko kebakaran.",
+      "words": [
+        {
+          "word": " Api",
+          "start": 20.52,
+          "end": 21.2
+        },
+        {
+          "word": " asa,",
+          "start": 21.2,
+          "end": 21.66
+        },
+        {
+          "word": " panas,",
+          "start": 21.88,
+          "end": 22.22
+        },
+        {
+          "word": " dan",
+          "start": 22.46,
+          "end": 22.58
+        },
+        {
+          "word": " risiko",
+          "start": 22.58,
+          "end": 23.04
+        },
+        {
+          "word": " kebakaran.",
+          "start": 23.04,
+          "end": 23.8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 24.16,
+      "end": 27.78,
+      "start_tc": "00:00:24,160",
+      "end_tc": "00:00:27,780",
+      "text": "Bayangin, kita harus masak menggunakan api di dalam bangunan",
+      "words": [
+        {
+          "word": " Bayangin,",
+          "start": 24.16,
+          "end": 24.68
+        },
+        {
+          "word": " kita",
+          "start": 24.88,
+          "end": 25.08
+        },
+        {
+          "word": " harus",
+          "start": 25.08,
+          "end": 25.32
+        },
+        {
+          "word": " masak",
+          "start": 25.32,
+          "end": 25.8
+        },
+        {
+          "word": " menggunakan",
+          "start": 25.8,
+          "end": 26.2
+        },
+        {
+          "word": " api",
+          "start": 26.2,
+          "end": 26.82
+        },
+        {
+          "word": " di",
+          "start": 26.82,
+          "end": 26.98
+        },
+        {
+          "word": " dalam",
+          "start": 26.98,
+          "end": 27.18
+        },
+        {
+          "word": " bangunan",
+          "start": 27.18,
+          "end": 27.78
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 27.78,
+      "end": 31.44,
+      "start_tc": "00:00:27,780",
+      "end_tc": "00:00:31,440",
+      "text": "tanpa teknologi kompor yang ventilasinya seperti sekarang.",
+      "words": [
+        {
+          "word": " tanpa",
+          "start": 27.78,
+          "end": 28.24
+        },
+        {
+          "word": " teknologi",
+          "start": 28.24,
+          "end": 28.8
+        },
+        {
+          "word": " kompor",
+          "start": 28.8,
+          "end": 29.22
+        },
+        {
+          "word": " yang",
+          "start": 29.22,
+          "end": 29.56
+        },
+        {
+          "word": " ventilasinya",
+          "start": 29.56,
+          "end": 30.42
+        },
+        {
+          "word": " seperti",
+          "start": 30.42,
+          "end": 30.8
+        },
+        {
+          "word": " sekarang.",
+          "start": 30.8,
+          "end": 31.44
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 31.9,
+      "end": 34.88,
+      "start_tc": "00:00:31,900",
+      "end_tc": "00:00:34,880",
+      "text": "Asapnya harus keluar, panasnya harus dikendalikan,",
+      "words": [
+        {
+          "word": " Asapnya",
+          "start": 31.9,
+          "end": 32.32
+        },
+        {
+          "word": " harus",
+          "start": 32.32,
+          "end": 32.66
+        },
+        {
+          "word": " keluar,",
+          "start": 32.66,
+          "end": 33.04
+        },
+        {
+          "word": " panasnya",
+          "start": 33.48,
+          "end": 33.88
+        },
+        {
+          "word": " harus",
+          "start": 33.88,
+          "end": 34.18
+        },
+        {
+          "word": " dikendalikan,",
+          "start": 34.18,
+          "end": 34.88
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 35.16,
+      "end": 39.08,
+      "start_tc": "00:00:35,160",
+      "end_tc": "00:00:39,080",
+      "text": "dan kalau api tidak terkendali, seluruh bangunan bisa ikut terancam.",
+      "words": [
+        {
+          "word": " dan",
+          "start": 35.16,
+          "end": 35.22
+        },
+        {
+          "word": " kalau",
+          "start": 35.22,
+          "end": 35.56
+        },
+        {
+          "word": " api",
+          "start": 35.56,
+          "end": 35.84
+        },
+        {
+          "word": " tidak",
+          "start": 35.84,
+          "end": 36.1
+        },
+        {
+          "word": " terkendali,",
+          "start": 36.1,
+          "end": 36.74
+        },
+        {
+          "word": " seluruh",
+          "start": 37.1,
+          "end": 37.48
+        },
+        {
+          "word": " bangunan",
+          "start": 37.48,
+          "end": 37.98
+        },
+        {
+          "word": " bisa",
+          "start": 37.98,
+          "end": 38.24
+        },
+        {
+          "word": " ikut",
+          "start": 38.24,
+          "end": 38.56
+        },
+        {
+          "word": " terancam.",
+          "start": 38.56,
+          "end": 39.08
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 39.38,
+      "end": 45.46,
+      "start_tc": "00:00:39,380",
+      "end_tc": "00:00:45,460",
+      "text": "Karena itu dalam berbagai konteks sejarah, dapur itu bisa di tempatkan lebih jauh dari ruang hidup utama.",
+      "words": [
+        {
+          "word": " Karena",
+          "start": 39.38,
+          "end": 39.64
+        },
+        {
+          "word": " itu",
+          "start": 39.64,
+          "end": 40.14
+        },
+        {
+          "word": " dalam",
+          "start": 40.14,
+          "end": 40.46
+        },
+        {
+          "word": " berbagai",
+          "start": 40.46,
+          "end": 40.86
+        },
+        {
+          "word": " kontek",
+          "start": 40.86,
+          "end": 41.28
+        },
+        {
+          "word": " sejarah,",
+          "start": 41.28,
+          "end": 41.98
+        },
+        {
+          "word": " dapur",
+          "start": 42.2,
+          "end": 42.4
+        },
+        {
+          "word": " itu",
+          "start": 42.4,
+          "end": 42.6
+        },
+        {
+          "word": " bisa",
+          "start": 42.6,
+          "end": 42.9
+        },
+        {
+          "word": " di",
+          "start": 42.9,
+          "end": 43.06
+        },
+        {
+          "word": " tempatkan",
+          "start": 43.06,
+          "end": 43.54
+        },
+        {
+          "word": " lebih",
+          "start": 43.54,
+          "end": 43.8
+        },
+        {
+          "word": " jauh",
+          "start": 43.8,
+          "end": 44.16
+        },
+        {
+          "word": " dari",
+          "start": 44.16,
+          "end": 44.4
+        },
+        {
+          "word": " ruang",
+          "start": 44.4,
+          "end": 44.8
+        },
+        {
+          "word": " hidup",
+          "start": 44.8,
+          "end": 45.1
+        },
+        {
+          "word": " utama.",
+          "start": 45.1,
+          "end": 45.46
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 45.8,
+      "end": 50.7,
+      "start_tc": "00:00:45,800",
+      "end_tc": "00:00:50,700",
+      "text": "Bahkan pada beberapa rumah besar, dapur dan ruang utama memang dibuat terpisah.",
+      "words": [
+        {
+          "word": " Bahkan",
+          "start": 45.8,
+          "end": 46.36
+        },
+        {
+          "word": " pada",
+          "start": 46.36,
+          "end": 46.66
+        },
+        {
+          "word": " beberapa",
+          "start": 46.66,
+          "end": 47.18
+        },
+        {
+          "word": " rumah",
+          "start": 47.18,
+          "end": 47.56
+        },
+        {
+          "word": " besar,",
+          "start": 47.56,
+          "end": 48.02
+        },
+        {
+          "word": " dapur",
+          "start": 48.4,
+          "end": 48.7
+        },
+        {
+          "word": " dan",
+          "start": 48.7,
+          "end": 48.86
+        },
+        {
+          "word": " ruang",
+          "start": 48.86,
+          "end": 49.1
+        },
+        {
+          "word": " utama",
+          "start": 49.1,
+          "end": 49.48
+        },
+        {
+          "word": " memang",
+          "start": 49.48,
+          "end": 49.72
+        },
+        {
+          "word": " dibuat",
+          "start": 49.72,
+          "end": 50.26
+        },
+        {
+          "word": " terbisa.",
+          "start": 50.26,
+          "end": 50.7
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 51.08,
+      "end": 54.84,
+      "start_tc": "00:00:51,080",
+      "end_tc": "00:00:54,840",
+      "text": "Jadi masalahnya bukan orang dulu nggak suka dapur dekat keluarga.",
+      "words": [
+        {
+          "word": " Jadi",
+          "start": 51.08,
+          "end": 51.48
+        },
+        {
+          "word": " masalahnya",
+          "start": 51.48,
+          "end": 52.18
+        },
+        {
+          "word": " bukan",
+          "start": 52.18,
+          "end": 52.5
+        },
+        {
+          "word": " orang",
+          "start": 52.5,
+          "end": 52.94
+        },
+        {
+          "word": " dulu",
+          "start": 52.94,
+          "end": 53.2
+        },
+        {
+          "word": " nggak",
+          "start": 53.2,
+          "end": 53.48
+        },
+        {
+          "word": " suka",
+          "start": 53.48,
+          "end": 53.7
+        },
+        {
+          "word": " dapur",
+          "start": 53.7,
+          "end": 54.06
+        },
+        {
+          "word": " dekat",
+          "start": 54.06,
+          "end": 54.34
+        },
+        {
+          "word": " keluarga.",
+          "start": 54.34,
+          "end": 54.84
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 54.84,
+      "end": 59.66,
+      "start_tc": "00:00:54,840",
+      "end_tc": "00:00:59,660",
+      "text": "Masalahnya mereka punya cara yang berbeda untuk mengendalikan api dan asap.",
+      "words": [
+        {
+          "word": " Masalahnya",
+          "start": 54.84,
+          "end": 55.6
+        },
+        {
+          "word": " mereka",
+          "start": 55.6,
+          "end": 55.84
+        },
+        {
+          "word": " punya",
+          "start": 55.84,
+          "end": 56.26
+        },
+        {
+          "word": " cara",
+          "start": 56.26,
+          "end": 56.62
+        },
+        {
+          "word": " yang",
+          "start": 56.62,
+          "end": 57.06
+        },
+        {
+          "word": " berbeda",
+          "start": 57.06,
+          "end": 57.58
+        },
+        {
+          "word": " untuk",
+          "start": 57.58,
+          "end": 57.94
+        },
+        {
+          "word": " mengendalikan",
+          "start": 57.94,
+          "end": 58.68
+        },
+        {
+          "word": " api",
+          "start": 58.68,
+          "end": 59.08
+        },
+        {
+          "word": " dan",
+          "start": 59.08,
+          "end": 59.24
+        },
+        {
+          "word": " asap.",
+          "start": 59.24,
+          "end": 59.66
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 60.06,
+      "end": 63.64,
+      "start_tc": "00:01:00,060",
+      "end_tc": "00:01:03,640",
+      "text": "Nah, ketika teknologi mulai berkembang, kompor menjadi lebih aman,",
+      "words": [
+        {
+          "word": " Nah,",
+          "start": 60.06,
+          "end": 60.18
+        },
+        {
+          "word": " ketika",
+          "start": 60.38,
+          "end": 60.74
+        },
+        {
+          "word": " teknologi",
+          "start": 60.74,
+          "end": 61.32
+        },
+        {
+          "word": " mulai",
+          "start": 61.32,
+          "end": 61.56
+        },
+        {
+          "word": " berkembang,",
+          "start": 61.56,
+          "end": 62.14
+        },
+        {
+          "word": " kompor",
+          "start": 62.38,
+          "end": 62.72
+        },
+        {
+          "word": " menjadi",
+          "start": 62.72,
+          "end": 62.98
+        },
+        {
+          "word": " lebih",
+          "start": 62.98,
+          "end": 63.32
+        },
+        {
+          "word": " aman,",
+          "start": 63.32,
+          "end": 63.64
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 64.02,
+      "end": 68.24,
+      "start_tc": "00:01:04,020",
+      "end_tc": "00:01:08,240",
+      "text": "carobong dan ventilasi itu semakin baik, dan cara masak ikut berubah.",
+      "words": [
+        {
+          "word": " carobong",
+          "start": 64.02,
+          "end": 64.36
+        },
+        {
+          "word": " dan",
+          "start": 64.36,
+          "end": 64.62
+        },
+        {
+          "word": " ventilasi",
+          "start": 64.62,
+          "end": 65.14
+        },
+        {
+          "word": " itu",
+          "start": 65.14,
+          "end": 65.36
+        },
+        {
+          "word": " semakin",
+          "start": 65.36,
+          "end": 65.74
+        },
+        {
+          "word": " baik,",
+          "start": 65.74,
+          "end": 66.06
+        },
+        {
+          "word": " dan",
+          "start": 66.56,
+          "end": 66.62
+        },
+        {
+          "word": " cara",
+          "start": 66.62,
+          "end": 66.96
+        },
+        {
+          "word": " masak",
+          "start": 66.96,
+          "end": 67.48
+        },
+        {
+          "word": " ikut",
+          "start": 67.48,
+          "end": 67.78
+        },
+        {
+          "word": " berubah.",
+          "start": 67.78,
+          "end": 68.24
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 68.54,
+      "end": 72.8,
+      "start_tc": "00:01:08,540",
+      "end_tc": "00:01:12,800",
+      "text": "Dapur pun, pelan-pelan bisa kembali lebih dekat dengan hidupan dan keluarga.",
+      "words": [
+        {
+          "word": " Dapur",
+          "start": 68.54,
+          "end": 69.02
+        },
+        {
+          "word": " pun,",
+          "start": 69.02,
+          "end": 69.28
+        },
+        {
+          "word": " pelan",
+          "start": 69.42,
+          "end": 69.58
+        },
+        {
+          "word": "-pelan",
+          "start": 69.58,
+          "end": 69.84
+        },
+        {
+          "word": " bisa",
+          "start": 69.84,
+          "end": 70.14
+        },
+        {
+          "word": " kembali",
+          "start": 70.14,
+          "end": 70.48
+        },
+        {
+          "word": " lebih",
+          "start": 70.48,
+          "end": 70.74
+        },
+        {
+          "word": " dekat",
+          "start": 70.74,
+          "end": 71.08
+        },
+        {
+          "word": " dengan",
+          "start": 71.08,
+          "end": 71.46
+        },
+        {
+          "word": " hidupan",
+          "start": 71.46,
+          "end": 72.0
+        },
+        {
+          "word": " dan",
+          "start": 72.0,
+          "end": 72.2
+        },
+        {
+          "word": " keluarga.",
+          "start": 72.2,
+          "end": 72.8
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 73.18,
+      "end": 75.88,
+      "start_tc": "00:01:13,180",
+      "end_tc": "00:01:15,880",
+      "text": "Makannya, dapur moderen itu yang menyatu dengan rumah,",
+      "words": [
+        {
+          "word": " Makannya,",
+          "start": 73.18,
+          "end": 73.68
+        },
+        {
+          "word": " dapur",
+          "start": 73.96,
+          "end": 74.14
+        },
+        {
+          "word": " moderen",
+          "start": 74.14,
+          "end": 74.56
+        },
+        {
+          "word": " itu",
+          "start": 74.56,
+          "end": 74.88
+        },
+        {
+          "word": " yang",
+          "start": 74.88,
+          "end": 75.06
+        },
+        {
+          "word": " menyatuh",
+          "start": 75.06,
+          "end": 75.36
+        },
+        {
+          "word": " dengan",
+          "start": 75.36,
+          "end": 75.62
+        },
+        {
+          "word": " rumah,",
+          "start": 75.62,
+          "end": 75.88
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 76.12,
+      "end": 78.08,
+      "start_tc": "00:01:16,120",
+      "end_tc": "00:01:18,080",
+      "text": "sebenarnya bukan cuma sualt rendi sen.",
+      "words": [
+        {
+          "word": " sebenarnya",
+          "start": 76.12,
+          "end": 76.5
+        },
+        {
+          "word": " bukan",
+          "start": 76.5,
+          "end": 76.82
+        },
+        {
+          "word": " cuma",
+          "start": 76.82,
+          "end": 77.14
+        },
+        {
+          "word": " sualt",
+          "start": 77.14,
+          "end": 77.48
+        },
+        {
+          "word": " rendi",
+          "start": 77.48,
+          "end": 77.9
+        },
+        {
+          "word": " sen.",
+          "start": 77.9,
+          "end": 78.08
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "start": 78.36,
+      "end": 80.54,
+      "start_tc": "00:01:18,360",
+      "end_tc": "00:01:20,540",
+      "text": "Dia adalah hasil dari satu perubahan besar.",
+      "words": [
+        {
+          "word": " Dia",
+          "start": 78.36,
+          "end": 78.64
+        },
+        {
+          "word": " adalah",
+          "start": 78.64,
+          "end": 78.88
+        },
+        {
+          "word": " hasil",
+          "start": 78.88,
+          "end": 79.28
+        },
+        {
+          "word": " dari",
+          "start": 79.28,
+          "end": 79.46
+        },
+        {
+          "word": " satu",
+          "start": 79.46,
+          "end": 79.82
+        },
+        {
+          "word": " perubahan",
+          "start": 79.82,
+          "end": 80.2
+        },
+        {
+          "word": " besar.",
+          "start": 80.2,
+          "end": 80.54
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "start": 81.04,
+      "end": 83.28,
+      "start_tc": "00:01:21,040",
+      "end_tc": "00:01:23,280",
+      "text": "Manusia itu makin mampu mendalikan api,",
+      "words": [
+        {
+          "word": " Manusia",
+          "start": 81.04,
+          "end": 81.36
+        },
+        {
+          "word": " itu",
+          "start": 81.36,
+          "end": 81.6
+        },
+        {
+          "word": " makin",
+          "start": 81.6,
+          "end": 81.96
+        },
+        {
+          "word": " mampu",
+          "start": 81.96,
+          "end": 82.32
+        },
+        {
+          "word": " mendalikan",
+          "start": 82.32,
+          "end": 82.8
+        },
+        {
+          "word": " api,",
+          "start": 82.8,
+          "end": 83.28
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "start": 83.28,
+      "end": 88.32,
+      "start_tc": "00:01:23,280",
+      "end_tc": "00:01:28,320",
+      "text": "dan ketika kita lebih mampu mengendalikan api, kita juga bisa mengubah cara kita membangun rumah.",
+      "words": [
+        {
+          "word": " dan",
+          "start": 83.28,
+          "end": 83.54
+        },
+        {
+          "word": " ketika",
+          "start": 83.54,
+          "end": 83.96
+        },
+        {
+          "word": " kita",
+          "start": 83.96,
+          "end": 84.28
+        },
+        {
+          "word": " lebih",
+          "start": 84.28,
+          "end": 84.5
+        },
+        {
+          "word": " mampu",
+          "start": 84.5,
+          "end": 84.88
+        },
+        {
+          "word": " mengendalikan",
+          "start": 84.88,
+          "end": 85.48
+        },
+        {
+          "word": " api,",
+          "start": 85.48,
+          "end": 85.84
+        },
+        {
+          "word": " kita",
+          "start": 85.94,
+          "end": 86.1
+        },
+        {
+          "word": " juga",
+          "start": 86.1,
+          "end": 86.32
+        },
+        {
+          "word": " bisa",
+          "start": 86.32,
+          "end": 86.6
+        },
+        {
+          "word": " mengubah",
+          "start": 86.6,
+          "end": 86.98
+        },
+        {
+          "word": " cara",
+          "start": 86.98,
+          "end": 87.26
+        },
+        {
+          "word": " kita",
+          "start": 87.26,
+          "end": 87.56
+        },
+        {
+          "word": " membangun",
+          "start": 87.56,
+          "end": 88.0
+        },
+        {
+          "word": " rumah.",
+          "start": 88.0,
+          "end": 88.32
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "start": 88.66,
+      "end": 89.98,
+      "start_tc": "00:01:28,660",
+      "end_tc": "00:01:29,980",
+      "text": "Coba lihat dapur kami sekarang.",
+      "words": [
+        {
+          "word": " Coba",
+          "start": 88.66,
+          "end": 88.82
+        },
+        {
+          "word": " lihat",
+          "start": 88.82,
+          "end": 89.04
+        },
+        {
+          "word": " dapur",
+          "start": 89.04,
+          "end": 89.38
+        },
+        {
+          "word": " kami",
+          "start": 89.38,
+          "end": 89.58
+        },
+        {
+          "word": " sekarang.",
+          "start": 89.58,
+          "end": 89.98
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "start": 90.4,
+      "end": 94.78,
+      "start_tc": "00:01:30,400",
+      "end_tc": "00:01:34,780",
+      "text": "Dia paling dekat dengan ruang makan, ruang keluarga atau justru dipisahkan.",
+      "words": [
+        {
+          "word": " Dia",
+          "start": 90.4,
+          "end": 90.66
+        },
+        {
+          "word": " paling",
+          "start": 90.66,
+          "end": 90.94
+        },
+        {
+          "word": " dekat",
+          "start": 90.94,
+          "end": 91.26
+        },
+        {
+          "word": " dengan",
+          "start": 91.26,
+          "end": 91.52
+        },
+        {
+          "word": " ruang",
+          "start": 91.52,
+          "end": 91.78
+        },
+        {
+          "word": " makan,",
+          "start": 91.78,
+          "end": 92.08
+        },
+        {
+          "word": " ruang",
+          "start": 92.56,
+          "end": 92.74
+        },
+        {
+          "word": " keluarga",
+          "start": 92.74,
+          "end": 93.12
+        },
+        {
+          "word": " atau",
+          "start": 93.12,
+          "end": 93.44
+        },
+        {
+          "word": " justru",
+          "start": 93.44,
+          "end": 94.02
+        },
+        {
+          "word": " dipisahkan.",
+          "start": 94.02,
+          "end": 94.78
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "start": 95.38,
+      "end": 97.54,
+      "start_tc": "00:01:35,380",
+      "end_tc": "00:01:37,540",
+      "text": "Menarik nggak kalau posisi dapur kita.",
+      "words": [
+        {
+          "word": " Menarik",
+          "start": 95.38,
+          "end": 95.9
+        },
+        {
+          "word": " nggak",
+          "start": 95.9,
+          "end": 96.02
+        },
+        {
+          "word": " kalau",
+          "start": 96.02,
+          "end": 96.38
+        },
+        {
+          "word": " posisi",
+          "start": 96.38,
+          "end": 96.84
+        },
+        {
+          "word": " dapur",
+          "start": 96.84,
+          "end": 97.28
+        },
+        {
+          "word": " kita.",
+          "start": 97.28,
+          "end": 97.54
+        }
+      ]
+    }
+  ]
+}

@@ -214,6 +214,8 @@ Ajak penonton memperhatikan posisi ruang tamu mereka sendiri.
 
 ## 📚 CAPTION
 
+**Kenapa Rumah Punya Ruang Tamu?**
+
 Kenapa rumah punya ruang tamu?
 
 Salah satu cara melihatnya adalah melalui konsep **privasi dan ruang perantara**.

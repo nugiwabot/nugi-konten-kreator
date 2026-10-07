@@ -1,0 +1,105 @@
+{
+  "project": "03-script",
+  "headline": "Kenapa Rumah Punya Jendela?",
+  "audio_duration": 91.56,
+  "total_broll_duration": 48.0,
+  "coverage_percentage": 52.4,
+  "placements": [
+    {
+      "no": 1,
+      "asset": "broll/001_sunlight_window_interior.jpg",
+      "filename": "001_sunlight_window_interior.jpg",
+      "concept": "Cahaya matahari alami masuk lewat jendela",
+      "start": 5.09,
+      "end": 11.09,
+      "start_tc": "00:00:05,090",
+      "end_tc": "00:00:11,090",
+      "duration": 6.0,
+      "dialog_cue": "Padahal kalau tujuhannya kita melindungi diri,"
+    },
+    {
+      "no": 2,
+      "asset": "broll/002_fresh_air_ventilation.jpg",
+      "filename": "002_fresh_air_ventilation.jpg",
+      "concept": "Sirkulasi udara segar dan ventilasi",
+      "start": 15.26,
+      "end": 21.26,
+      "start_tc": "00:00:15,260",
+      "end_tc": "00:00:21,260",
+      "duration": 6.0,
+      "dialog_cue": "Karena ternyata ada beberapa hal yang gak bisa diberikan oleh dinding."
+    },
+    {
+      "no": 3,
+      "asset": "broll/003_looking_outside_window.jpg",
+      "filename": "003_looking_outside_window.jpg",
+      "concept": "Melihat dunia luar dari kenyamanan rumah",
+      "start": 25.43,
+      "end": 31.43,
+      "start_tc": "00:00:25,430",
+      "end_tc": "00:00:31,430",
+      "duration": 6.0,
+      "dialog_cue": "cahaya alami itu sangat penting untuk hidupan di dalam rumah."
+    },
+    {
+      "no": 4,
+      "asset": "broll/004_dark_ancient_stone_house.jpg",
+      "filename": "004_dark_ancient_stone_house.jpg",
+      "concept": "Rumah zaman kuno dengan bukaan minim dan gelap",
+      "start": 35.61,
+      "end": 41.61,
+      "start_tc": "00:00:35,610",
+      "end_tc": "00:00:41,610",
+      "duration": 6.0,
+      "dialog_cue": "Tapi disini lah masalahnya, semakin besar jendela, semakin terbuka juga rumah kita terhadap dunia luar."
+    },
+    {
+      "no": 5,
+      "asset": "broll/005_wooden_shutters_open.jpg",
+      "filename": "005_wooden_shutters_open.jpg",
+      "concept": "Jendela kayu dan daun jendela penutup",
+      "start": 45.78,
+      "end": 51.78,
+      "start_tc": "00:00:45,780",
+      "end_tc": "00:00:51,780",
+      "duration": 6.0,
+      "dialog_cue": "Kita mau mulihat ke luar tapi gak ingin semua orang melihat ke dalam."
+    },
+    {
+      "no": 6,
+      "asset": "broll/006_glass_condensation_moisture.jpg",
+      "filename": "006_glass_condensation_moisture.jpg",
+      "concept": "Pengatur suhu, kelembapan, dan hawa dingin",
+      "start": 55.95,
+      "end": 61.95,
+      "start_tc": "00:00:55,950",
+      "end_tc": "00:01:01,950",
+      "duration": 6.0,
+      "dialog_cue": "itu bisa berbeda-beda tergantung tempat dan kebutuhan."
+    },
+    {
+      "no": 7,
+      "asset": "broll/007_modern_facade_glass.jpg",
+      "filename": "007_modern_facade_glass.jpg",
+      "concept": "Teknologi kaca arsitektur modern",
+      "start": 66.13,
+      "end": 72.13,
+      "start_tc": "00:01:06,130",
+      "end_tc": "00:01:12,130",
+      "duration": 6.0,
+      "dialog_cue": "tirai atau bahkan yang lebih tinggi."
+    },
+    {
+      "no": 8,
+      "asset": "broll/008_window_blinds_privacy.jpg",
+      "filename": "008_window_blinds_privacy.jpg",
+      "concept": "Keseimbangan privasi dan keterbukaan visual",
+      "start": 76.3,
+      "end": 82.3,
+      "start_tc": "00:01:16,300",
+      "end_tc": "00:01:22,300",
+      "duration": 6.0,
+      "dialog_cue": "Kita ingin tetap terlindungi tapi kita juga gak mau sepenuhnya terputus dari dunia."
+    }
+  ]
+}

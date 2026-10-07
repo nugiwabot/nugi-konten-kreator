@@ -60,10 +60,13 @@ engine/data/*.json
 .temp/
 .cache/
 .remotion/
-*.bak
+*.bak*
+*_backup*.kdenlive
 output/*-script/project/capcut/
-output/.broll_query_cache.json
-output/.question_mining_cache.json
+output/**/capcut_draft/
+output/.*.json
+assets/media/test_download/
+**/backup_portrait/
 output/*.jpg
 output/*.jpeg
 output/*.png
@@ -79,20 +82,32 @@ output/*/*.mp4
 output/*/*.webp
 
 # Workspace media assets (keep .gitkeep, ignore all footage, broll, and renders)
-output/*-script/**/*.mp4
-output/*-script/**/*.mov
-output/*-script/**/*.mkv
-output/*-script/**/*.webm
-output/*-script/**/*.wav
-output/*-script/**/*.mp3
-output/*-script/**/*.jpg
-output/*-script/**/*.jpeg
-output/*-script/**/*.png
-output/*-script/**/*.webp
-!output/*-script/**/.gitkeep
+output/**/*.mp4
+output/**/*.mov
+output/**/*.mkv
+output/**/*.webm
+output/**/*.wav
+output/**/*.mp3
+output/**/*.jpg
+output/**/*.jpeg
+output/**/*.png
+output/**/*.webp
+output/**/sfx/
+!output/**/.gitkeep
+
+# Scratch scripts & temporary build test files
+scratch/
 
 # Local sound effects assets
 assets/sound_effects/*.wav
 assets/sound_effects/*.mp3
 !assets/sound_effects/.gitkeep
+
+# Local downloaded media assets
+assets/media/**/*.jpg
+assets/media/**/*.jpeg
+assets/media/**/*.png
+assets/media/**/*.mp4
+!assets/media/**/.gitkeep
+
 

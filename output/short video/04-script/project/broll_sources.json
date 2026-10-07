@@ -1,0 +1,91 @@
+{
+  "project": "04-script",
+  "headline": "Kenapa Rumah Punya Teras?",
+  "total_broll": 7,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_front_porch_deck.jpg",
+      "path": "broll/001_front_porch_deck.jpg",
+      "concept": "Teras depan rumah dan kursi santai",
+      "query": "cozy front porch chairs wooden deck welcoming outdoor seating house",
+      "title": "Two wooden chairs sit facing each other on a porch bathed in sunlight filtering trees",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/tranquil-outdoor-patio-with-wooden-furniture-29929810",
+      "download_url": "https://images.pexels.com/photos/29929810/pexels-photo-29929810.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_relaxing_on_terrace.jpg",
+      "path": "broll/002_relaxing_on_terrace.jpg",
+      "concept": "Duduk santai di teras waktu sore",
+      "query": "person enjoying coffee tea sitting on porch terrace afternoon breeze",
+      "title": "Man sits on black metal chair with crossed legs and wears black t-shirt outdoors",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-man-sitting-in-a-chair-on-a-porch-5OKL1vohC8k",
+      "download_url": "https://images.unsplash.com/photo-1688818274551-de0b66ab6bc2?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_neighborly_interaction.jpg",
+      "path": "broll/003_neighborly_interaction.jpg",
+      "concept": "Ruang temu sosial dan interaksi dengan tetangga",
+      "query": "neighbors chatting greeting across front porch garden fence friendly",
+      "title": "Woman with blonde hair stands beside older man on porch with black metal railing",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/an-elderly-couple-in-front-of-a-house-8806090",
+      "download_url": "https://images.pexels.com/photos/8806090/pexels-photo-8806090.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_transitional_veranda.jpg",
+      "path": "broll/004_transitional_veranda.jpg",
+      "concept": "Ruang peralihan antara dunia luar dan dalam",
+      "query": "covered veranda porch shelter rain sun transition space hallway",
+      "title": "Long wooden porch with white walls and green trim on a street corner surrounded trees",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-long-walkway-lined-with-windows-on-both-sides-of-it-DRHiWIhxO4A",
+      "download_url": "https://images.unsplash.com/photo-1728228713380-f4a38daa9d01?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_shoes_at_porch.jpg",
+      "path": "broll/005_shoes_at_porch.jpg",
+      "concept": "Area transisi melepas alas kaki sebelum masuk",
+      "query": "shoes sandals at front porch doorway entrance transition home",
+      "title": "Pexels by Leyla Kılıç",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/home-entrance-with-stairs-and-double-door-9263523",
+      "download_url": "https://images.pexels.com/photos/9263523/pexels-photo-9263523.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_tropical_veranda_shade.jpg",
+      "path": "broll/006_tropical_veranda_shade.jpg",
+      "concept": "Teras peneduh iklim tropis dari terik dan hujan",
+      "query": "tropical house veranda shade breeze open architecture wooden",
+      "title": "Unsplash by David Kristianto",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-close-up-of-a-wooden-structure-with-trees-in-the-background-ijlvkdJUflA",
+      "download_url": "https://images.unsplash.com/photo-1687103156683-9b67ba79192f?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_evening_porch_lamp.jpg",
+      "path": "broll/007_evening_porch_lamp.jpg",
+      "concept": "Suasana hangat teras rumah menyambut malam",
+      "query": "cozy evening porch light warm glow neighborhood street dusk",
+      "title": "Unsplash by Peter Bryan",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/front-porch-with-rocking-chairs-and-glowing-lanterns-at-night--q-jwvXKp8o",
+      "download_url": "https://images.unsplash.com/photo-1755449347768-b5787fce1101?w=1280",
+      "license": "free"
+    }
+  ]
+}
