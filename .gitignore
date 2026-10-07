@@ -64,7 +64,10 @@ engine/data/*.json
 *_backup*.kdenlive
 output/*-script/project/capcut/
 output/**/capcut_draft/
+output/**/capcut_broll_plan.json
+output/temp_workspace/
 output/.*.json
+output/.workflow_runs/
 assets/media/test_download/
 **/backup_portrait/
 output/*.jpg

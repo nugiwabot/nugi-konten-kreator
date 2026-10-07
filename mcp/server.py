@@ -57,8 +57,10 @@ PORT = cli_args.port
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-# Initialize proposal manager
+# Initialize proposal manager and workflow service
 proposals = ProposalManager(REPO_ROOT)
+from workflows import WorkflowService
+workflow_service = WorkflowService(REPO_ROOT)
 
 # Initialize FastMCP Server with Network and Stdio capability
 mcp = FastMCP(
@@ -346,21 +348,26 @@ def editorial_human_place(topic: str) -> Dict[str, Any]:
 def editorial_fit_score(topic: str) -> Dict[str, Any]:
     """Calculate 100-point editorial fit score across 4 dimensions."""
     from engine.editorial.fit_score import calculate_editorial_fit
-    return {"status": "ok", "topic": topic, "fit_score": calculate_editorial_fit(topic)}
+    idea = {"title": topic} if isinstance(topic, str) else topic
+    return {"status": "ok", "topic": topic, "fit_score": calculate_editorial_fit(idea)}
 
 @mcp.tool(name="nugi_editorial_quality_gate")
 def editorial_quality_gate(topic: str, draft_text: str = "") -> Dict[str, Any]:
     """Evaluate hard quality gates and detect forbidden anti-patterns."""
     from engine.editorial.quality_gate import check_quality_gates, check_anti_patterns
-    q_pass, q_reason = check_quality_gates(topic, 75.0, 7.0)
-    a_pass, a_violations = check_anti_patterns(draft_text or topic)
+    idea = {"title": topic, "text": draft_text}
+    q_res = check_quality_gates(idea)
+    a_violations = check_anti_patterns(draft_text or topic)
+    hard_rejections = q_res.get("hard_rejection_violations", [])
+    passed = (len(hard_rejections) == 0) and (len(a_violations) == 0)
     return {
         "status": "ok",
-        "passed": q_pass and a_pass,
-        "quality_gate_passed": q_pass,
-        "quality_gate_reason": q_reason,
-        "anti_patterns_passed": a_pass,
+        "passed": passed,
+        "quality_gate_passed": len(hard_rejections) == 0,
+        "hard_rejections": hard_rejections,
+        "anti_patterns_passed": len(a_violations) == 0,
         "violations": a_violations,
+        "fit_score": q_res.get("fit_score"),
     }
 
 @mcp.tool(name="nugi_editorial_story_type")
@@ -412,6 +419,21 @@ def editorial_taxonomy() -> Dict[str, Any]:
         "lenses": LENSES,
         "dna_matrices": DNA_MATRICES,
     }
+
+@mcp.tool(name="nugi_editorial_script_audit")
+def editorial_script_audit(script_text: str, title: Optional[str] = None) -> Dict[str, Any]:
+    """Verify factual claims, detect overclaims, causal overstatements, and evaluate Nugi Property brand fit."""
+    from engine.editorial.script_auditor import ScriptAuditor
+    auditor = ScriptAuditor()
+    report = auditor.audit_script(script_text=script_text, editorial_context={"title": title} if title else None)
+    return {"status": "ok", "audit": report.to_dict()}
+
+@mcp.tool(name="nugi_editorial_brand_fit")
+def editorial_brand_fit(script_text_or_topic: str, title: Optional[str] = None) -> Dict[str, Any]:
+    """Evaluate Nugi Properti Brand Fit score (0-20) and strategic lens resonance."""
+    from engine.editorial.script_auditor import evaluate_nugi_property_brand_fit
+    fit = evaluate_nugi_property_brand_fit(script_text=script_text_or_topic, title=title)
+    return {"status": "ok", "brand_fit": fit}
 
 # ------------------------------------------------------------------------------
 # 4. THINKING TOOLS (nugi.thinking.*)
@@ -1335,6 +1357,50 @@ def git_branch() -> Dict[str, Any]:
     """Get active branch and remote tracking status."""
     proc = subprocess.run(["git", "branch", "-vv"], cwd=str(REPO_ROOT), capture_output=True, text=True, encoding='utf-8', errors='replace')
     return {"status": "ok", "branches": proc.stdout.splitlines()}
+
+# ------------------------------------------------------------------------------
+# 20. WORKFLOW ORCHESTRATION TOOLS (nugi.workflow.*)
+# ------------------------------------------------------------------------------
+
+@mcp.tool(name="nugi_workflow_list")
+def workflow_list() -> Dict[str, Any]:
+    """List all available content production workflows with tiers, inputs, and tools."""
+    return {"status": "ok", "workflows": workflow_service.list_workflows()}
+
+@mcp.tool(name="nugi_workflow_explain")
+def workflow_explain(workflow_id: str) -> Dict[str, Any]:
+    """Explain a specific workflow, its ordered steps, dependencies, tools, and rationale."""
+    return {"status": "ok", "explanation": workflow_service.explain_workflow(workflow_id)}
+
+@mcp.tool(name="nugi_workflow_plan")
+def workflow_plan(request: str) -> Dict[str, Any]:
+    """Analyze user intent and generate a structured step-by-step workflow plan (PLAN mode, no side-effects)."""
+    return {"status": "ok", "plan": workflow_service.plan_workflow(request)}
+
+@mcp.tool(name="nugi_workflow_preflight")
+def workflow_preflight(workflow_id: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Evaluate preconditions, missing assets, and readiness before running a workflow (PREFLIGHT mode)."""
+    return {"status": "ok", "preflight": workflow_service.preflight_workflow(workflow_id, context)}
+
+@mcp.tool(name="nugi_workflow_execute")
+def workflow_execute(
+    workflow_id: str,
+    context: Optional[Dict[str, Any]] = None,
+    run_id: Optional[str] = None,
+    dry_run: bool = False,
+) -> Dict[str, Any]:
+    """Execute a workflow step-by-step with state persistence and recovery guidance (EXECUTE mode)."""
+    return workflow_service.execute_workflow(workflow_id=workflow_id, context=context, run_id=run_id, dry_run=dry_run)
+
+@mcp.tool(name="nugi_workflow_status")
+def workflow_status(run_id: str) -> Dict[str, Any]:
+    """Check status, completed steps, and checkpoints of a workflow run."""
+    return {"status": "ok", "run": workflow_service.workflow_status(run_id)}
+
+@mcp.tool(name="nugi_workflow_resume")
+def workflow_resume(run_id: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Resume a halted, blocked, or partially completed workflow run from its last valid checkpoint."""
+    return workflow_service.resume_workflow(run_id=run_id, context=context)
 
 
 if __name__ == "__main__":
