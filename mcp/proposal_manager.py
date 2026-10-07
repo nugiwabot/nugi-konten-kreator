@@ -286,7 +286,7 @@ class ProposalManager:
             if "media" in f_lower or "finder" in f_lower or "visual" in f_lower:
                 tests.append("tests/test_evidence_media_retrieval.py")
                 tests.append("tests/test_media_pipeline.py")
-            if "video" in f_lower or "kdenlive" in f_lower or "capcut" in f_lower:
+            if "video" in f_lower or "timeline" in f_lower or "capcut" in f_lower:
                 tests.append("tests/test_video_pipeline.py")
             if "editorial" in f_lower or "intent" in f_lower or "story" in f_lower:
                 tests.append("tests/test_editorial_identity.py")

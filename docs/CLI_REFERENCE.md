@@ -71,10 +71,10 @@ python -m engine.pipeline.engine_cli generate --topic "Kapan manusia pertama kal
 
 ## 6. Perintah Pipeline Video & Export (`video`)
 
-Menjalankan pipeline pra-produksi video (parsing naskah, alokasi micro-beats, pembuatan subtitle `.srt`, dan ekspor berkas proyek `.kdenlive`):
+Menjalankan pipeline pra-produksi video (parsing naskah, alokasi micro-beats, pembuatan subtitle `.srt`, dan ekspor proyek CapCut Desktop draft):
 
 ```powershell
-python -m engine.pipeline.engine_cli video --script "output/narasi-01/SCRIPT_AND_STORYBOARD.md" --out-dir "output/narasi-01/video"
+python -m engine.pipeline.engine_cli create-video --script "output/narasi-01/SCRIPT_AND_STORYBOARD.md" --output "output/narasi-01/video"
 ```
 
 ---

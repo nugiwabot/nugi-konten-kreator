@@ -47,20 +47,29 @@ def test_content_create_full_broll_coverage(tmp_path):
         status="OK"
     )
 
-    with patch("engine.pipeline.media_finder.MediaFinder", return_value=mock_finder):
-        res = server.content_create(
-            topic="Krisis Keterjangkauan Rumah dan Komuter",
-            dry_run=False,
-            output_folder="test_full_coverage",
-        )
+    import shutil
+    test_out = REPO_ROOT / "output" / "test_full_coverage"
+    if test_out.exists():
+        shutil.rmtree(test_out, ignore_errors=True)
 
-        assert res["status"] == "ok"
-        total_shots = res["total_shots_planned"]
-        assert total_shots >= 4  # Standard talking head script produces multiple shots
+    try:
+        with patch("engine.pipeline.media_finder.MediaFinder", return_value=mock_finder):
+            res = server.content_create(
+                topic="Krisis Keterjangkauan Rumah dan Komuter",
+                dry_run=False,
+                output_folder="test_full_coverage",
+            )
 
-        # Verify finder was called for all shots requiring B-roll
-        call_count = mock_finder.find_and_download.call_count
-        assert call_count > 0
-        manifest = res["manifest"]
-        assert manifest["shots_planned"] == total_shots
-        assert res["total_assets_ready"] >= 1
+            assert res["status"] == "ok"
+            total_shots = res["total_shots_planned"]
+            assert total_shots >= 4  # Standard talking head script produces multiple shots
+
+            # Verify finder was called for all shots requiring B-roll
+            call_count = mock_finder.find_and_download.call_count
+            assert call_count > 0
+            manifest = res["manifest"]
+            assert manifest["shots_planned"] == total_shots
+            assert res["total_assets_ready"] >= 1
+    finally:
+        if test_out.exists():
+            shutil.rmtree(test_out, ignore_errors=True)

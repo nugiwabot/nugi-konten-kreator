@@ -19,7 +19,7 @@ Automated batch faceless video production pipeline:
     ↓
   ROUGH CUT TIMELINE (TimelineData -> timeline.json)
     ↓
-  KDENLIVE PROJECT EXPORT (KdenliveExporter -> Nugi_Narasi_XX.kdenlive)
+  CAPCUT DRAFT EXPORT (CapCutDraftGenerator -> capcut/)
 
 Vertical 9:16 format (1080x1920, 30fps) for TikTok / YouTube Shorts.
 Faceless visual essay / mini-documentary style with visual pacing and metaphor.
@@ -42,11 +42,12 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from engine.pipeline.kdenlive_exporter import KdenliveExporter, TimelineClip, TimelineData
+from engine.pipeline.capcut_engine import CapCutDraftGenerator
 from engine.pipeline.media_downloader import DownloadedFile, MediaDownloader
 from engine.pipeline.media_pipeline import MediaPipeline
 from engine.pipeline.script_parser import NarasiScript, ScriptParser
 from engine.pipeline.srt_generator import SRTGenerator
+from engine.pipeline.timeline_model import SubtitleCue, TimelineClip, TimelineData
 from engine.pipeline.visual_requirements import VisualRequirementsGenerator, VisualShotRequirement
 from engine.providers.media import MediaItem
 
@@ -60,7 +61,7 @@ class NarrativeProductionResult:
     index: int
     title: str
     output_dir: Path
-    kdenlive_file: Path
+    capcut_draft_dir: Path
     timeline_file: Path
     subtitles_file: Path
     sources_file: Path
@@ -79,7 +80,7 @@ class BatchProductionReport:
 
     def print_summary(self) -> None:
         print("\n" + "=" * 65)
-        print("🎬 BATCH VIDEO PRODUCTION COMPLETE")
+        print("🎬 BATCH VIDEO PRODUCTION COMPLETE (CAPCUT DRAFT)")
         print("=" * 65)
         print(f"Script: {self.script_file}")
         print(f"Successfully processed: {len(self.successful_narratives)} / {self.total_narratives} narratives\n")
@@ -88,7 +89,7 @@ class BatchProductionReport:
             print(f"📌 [{res.narrative_id.upper()}] {res.title}")
             print(f"   Duration: {res.duration_seconds:.1f}s | Shots: {res.total_shots} | Assets: {res.assets_downloaded}")
             print(f"   📁 Output:    {res.output_dir}")
-            print(f"   🎥 Kdenlive:  {res.kdenlive_file.name}")
+            print(f"   🎥 CapCut:    {res.capcut_draft_dir}")
             print(f"   ⏱️ Timeline:  {res.timeline_file.name}")
             print(f"   💬 Subtitles: {res.subtitles_file.name}")
             print(f"   📋 Sources:   {res.sources_file.name}\n")
@@ -101,7 +102,7 @@ class BatchProductionReport:
 class VideoPipeline:
     """
     Orchestrates the entire batch video generation pipeline from
-    markdown script to finished Kdenlive project files.
+    markdown script to finished native CapCut draft project folders.
     """
 
     def __init__(
@@ -109,13 +110,13 @@ class VideoPipeline:
         media_pipeline: Optional[MediaPipeline] = None,
         script_parser: Optional[ScriptParser] = None,
         visual_generator: Optional[VisualRequirementsGenerator] = None,
-        kdenlive_exporter: Optional[KdenliveExporter] = None,
+        capcut_generator: Optional[CapCutDraftGenerator] = None,
         srt_generator: Optional[SRTGenerator] = None,
     ):
         self.media_pipeline = media_pipeline or MediaPipeline()
         self.script_parser = script_parser or ScriptParser()
         self.visual_generator = visual_generator or VisualRequirementsGenerator()
-        self.kdenlive_exporter = kdenlive_exporter or KdenliveExporter()
+        self.capcut_generator = capcut_generator or CapCutDraftGenerator()
         self.srt_generator = srt_generator or SRTGenerator()
 
     def run(
@@ -248,19 +249,23 @@ class VideoPipeline:
             clips=timeline_clips,
         )
         timeline_file = narasi_dir / "timeline.json"
-        self.kdenlive_exporter.export_timeline_json(timeline_file, timeline_data)
+        timeline_data.save(timeline_file)
 
-        # 6. Export Kdenlive project file
-        kdenlive_filename = f"{narrative.project_name}.kdenlive"
-        kdenlive_file = narasi_dir / kdenlive_filename
-        self.kdenlive_exporter.export_project(kdenlive_file, timeline_data, srt_path=srt_file)
+        # 6. Export Native CapCut Desktop draft package
+        capcut_draft_dir = narasi_dir / "capcut"
+        self.capcut_generator.generate_from_timeline(
+            timeline=timeline_data,
+            output_draft_dir=capcut_draft_dir,
+            project_name=narrative.project_name,
+            include_subtitles=True,
+        )
 
         return NarrativeProductionResult(
             narrative_id=narrative.id,
             index=narrative.index,
             title=narrative.title,
             output_dir=narasi_dir,
-            kdenlive_file=kdenlive_file,
+            capcut_draft_dir=capcut_draft_dir,
             timeline_file=timeline_file,
             subtitles_file=srt_file,
             sources_file=sources_file,

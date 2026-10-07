@@ -76,27 +76,60 @@ class DynamicScriptSynthesizer:
         if not hook.endswith("?"):
             hook = f"Pernahkah kamu menyadari bahwa {hook.lower()}?"
 
-        tension = (
-            f"Banyak orang mengira ini persoalan sederhana. "
-            f"Namun bukti empiris di lapangan menunjukkan dinamika yang jauh berbeda. "
-            f"{dp_text}"
-        )
+        # Adapt content depth and word count to requested duration
+        dur = max(20, int(target_duration_seconds))
 
-        context_cause = (
-            f"{cause_text} "
-            f"Dampaknya langsung terasa pada kehidupan sehari-hari: {primary_angle.get('human_dilemma', '')}"
-        )
-
-        why_epiphany = (
-            f"{primary_angle.get('why', '')} "
-            f"Ini bukan sekadar soal angka, melainkan bagaimana ruang hidup dan masa depan manusia dibentuk ulang."
-        )
+        if dur <= 35:
+            # Punchy 30s micro-short (~70-85 words)
+            tension = f"Banyak yang mengira ini kebetulan, padahal data menunjukkan sebaliknya. {dp_text}"
+            context_cause = f"{cause_text}"
+            why_epiphany = f"{primary_angle.get('why', '')}"
+        elif dur <= 65:
+            # Standard 60s short (~140-160 words)
+            tension = (
+                f"Banyak orang mengira ini persoalan sederhana. "
+                f"Namun bukti empiris di lapangan menunjukkan dinamika yang jauh berbeda. "
+                f"{dp_text}"
+            )
+            context_cause = (
+                f"{cause_text} "
+                f"Dampaknya langsung terasa pada kehidupan sehari-hari: {primary_angle.get('human_dilemma', '')}"
+            )
+            why_epiphany = (
+                f"{primary_angle.get('why', '')} "
+                f"Ini bukan sekadar soal angka, melainkan bagaimana ruang hidup dan masa depan manusia dibentuk ulang."
+            )
+        else:
+            # Extended 75s - 90s documentary short (~180-220 words)
+            secondary_why = secondary_angle.get("why", "")
+            tension = (
+                f"Banyak orang mengira fenomena ini hanya masalah sementara. "
+                f"Namun bukti empiris di lapangan memperlihatkan pergeseran yang jauh lebih dalam. "
+                f"{dp_text} "
+                f"Kondisi ini bukan terjadi tiba-tiba, melainkan akumulasi dari sistem yang telah berjalan lama."
+            )
+            context_cause = (
+                f"{cause_text} "
+                f"Akibatnya, masyarakat terjebak dalam dilema nyata: {primary_angle.get('human_dilemma', '')} "
+                f"Ketika pilihan semakin terbatas, cara orang memandang tempat tinggal pun ikut bergeser."
+            )
+            why_epiphany = (
+                f"{primary_angle.get('why', '')} "
+                f"{f'Di sisi lain, {secondary_why.lower()} ' if secondary_why and secondary_why != primary_angle.get('why') else ''}"
+                f"Pada akhirnya, rumah dan kota bukan sekadar komoditas ekonomi, melainkan cermin dari bagaimana peradaban kita memperlakukan masa depan warganya."
+            )
 
         # 5. Clean AI Fillers
         hook = self._clean_fillers(hook)
         tension = self._clean_fillers(tension)
         context_cause = self._clean_fillers(context_cause)
         why_epiphany = self._clean_fillers(why_epiphany)
+
+        # Calculate proportional timecodes based on duration
+        t_hook_end = max(4, int(round(dur * 0.12)))
+        t_tension_end = max(t_hook_end + 6, int(round(dur * 0.38)))
+        t_context_end = max(t_tension_end + 8, int(round(dur * 0.72)))
+        t_final = dur
 
         # 6. Format Canonical Production Markdown
         script_md = [
@@ -106,19 +139,19 @@ class DynamicScriptSynthesizer:
             "- **Pilar DNA:** `HUMAN × PLACE × CHANGE × WHY`",
             f"- **Status Epistemik Riset:** `{dossier.epistemic_status}` (Confidence: {int(dossier.overall_confidence * 100)}%)",
             "",
-            "#### NASKAH TALKING-HEAD (Durasi ~60 Detik | Spoken Word)",
+            f"#### NASKAH TALKING-HEAD (Durasi ~{dur} Detik | Spoken Word)",
             "",
             "```text",
-            "[00:00 - 00:08] HOOK",
+            f"[00:00 - {t_hook_end:02d}:00] HOOK" if t_hook_end >= 60 else f"[00:00 - 00:{t_hook_end:02d}] HOOK",
             f"{hook}",
             "",
-            "[00:08 - 00:25] TENSION & PARADOX",
+            f"[00:{t_hook_end:02d} - 00:{t_tension_end:02d}] TENSION & PARADOX" if t_tension_end < 60 else f"[00:{t_hook_end:02d} - {t_tension_end//60:02d}:{t_tension_end%60:02d}] TENSION & PARADOX",
             f"{tension}",
             "",
-            "[00:25 - 00:45] CONTEXT & STRUCTURAL CAUSE",
+            f"[00:{t_tension_end:02d} - 00:{t_context_end:02d}] CONTEXT & STRUCTURAL CAUSE" if t_context_end < 60 else f"[{t_tension_end//60:02d}:{t_tension_end%60:02d} - {t_context_end//60:02d}:{t_context_end%60:02d}] CONTEXT & STRUCTURAL CAUSE",
             f"{context_cause}",
             "",
-            "[00:45 - 00:60] THE REVELATION (THE WHY)",
+            f"[00:{t_context_end:02d} - 00:{t_final:02d}] THE REVELATION (THE WHY)" if t_final < 60 else f"[{t_context_end//60:02d}:{t_context_end%60:02d} - {t_final//60:02d}:{t_final%60:02d}] THE REVELATION (THE WHY)",
             f"{why_epiphany}",
             "```",
             ""

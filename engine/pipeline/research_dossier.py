@@ -79,6 +79,98 @@ class ResearchDossier:
             "created_at": self.created_at,
         }
 
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -> ResearchDossier:
+        """Construct ResearchDossier from serialized dictionary."""
+        claims = []
+        for c in d.get("claims", []):
+            if isinstance(c, Claim):
+                claims.append(c)
+            elif isinstance(c, dict):
+                claims.append(Claim(
+                    id=c.get("id", ""),
+                    text=c.get("text", ""),
+                    claim_type=c.get("claim_type", "FACTUAL"),
+                    status=c.get("status", "UNVERIFIED"),
+                    primary_source_count=c.get("primary_source_count", 0),
+                    secondary_source_count=c.get("secondary_source_count", 0),
+                    confidence_score=c.get("confidence_score", 0.0),
+                    epistemic_notes=c.get("epistemic_notes", ""),
+                    lineage_roots=c.get("lineage_roots", []),
+                    independent_sources_count=c.get("independent_sources_count", 0),
+                ))
+
+        evidence_items = []
+        for e in d.get("evidence_items", []):
+            if isinstance(e, EvidenceItem):
+                evidence_items.append(e)
+            elif isinstance(e, dict):
+                s_dict = e.get("source", {})
+                tier_val = s_dict.get("tier", "S7")
+                try:
+                    tier_enum = SourceTier(tier_val)
+                except Exception:
+                    tier_enum = SourceTier.S7
+                st_val = s_dict.get("source_type", "unknown")
+                try:
+                    st_enum = SourceType(st_val)
+                except Exception:
+                    st_enum = SourceType.UNKNOWN
+
+                source_obj = Source(
+                    url=s_dict.get("url", ""),
+                    publisher=s_dict.get("publisher", ""),
+                    tier=tier_enum,
+                    source_type=st_enum,
+                    title=s_dict.get("title", ""),
+                    reliability=s_dict.get("reliability", "MEDIUM"),
+                    is_primary=s_dict.get("is_primary", False),
+                )
+                evidence_items.append(EvidenceItem(
+                    id=e.get("id", ""),
+                    claim_text=e.get("claim_text", ""),
+                    source=source_obj,
+                    exact_quote=e.get("exact_quote", ""),
+                    retrieved_snippet=e.get("retrieved_snippet", ""),
+                    summary=e.get("summary", ""),
+                    confidence=e.get("confidence", 1.0),
+                    is_supporting=e.get("is_supporting", True),
+                ))
+
+        data_points = []
+        for dp in d.get("data_points", []):
+            if isinstance(dp, DataPoint):
+                data_points.append(dp)
+            elif isinstance(dp, dict):
+                data_points.append(DataPoint(
+                    metric=dp.get("metric", ""),
+                    value=dp.get("value", ""),
+                    unit=dp.get("unit", ""),
+                    period=dp.get("period", ""),
+                    entity=dp.get("entity", ""),
+                    source_name=dp.get("source_name", ""),
+                ))
+
+        return cls(
+            topic=d.get("topic", ""),
+            research_question=d.get("research_question", ""),
+            subquestions=d.get("subquestions", []),
+            key_findings=d.get("key_findings", []),
+            claims=claims,
+            evidence_items=evidence_items,
+            primary_sources=d.get("primary_sources", []),
+            secondary_sources=d.get("secondary_sources", []),
+            timeline=d.get("timeline", []),
+            causal_relationships=d.get("causal_relationships", []),
+            entities=d.get("entities", []),
+            data_points=data_points,
+            narrative_angles=d.get("narrative_angles", []),
+            visual_implications=d.get("visual_implications", []),
+            overall_confidence=d.get("overall_confidence", 0.85),
+            epistemic_status=d.get("epistemic_status", "VERIFIED"),
+            created_at=d.get("created_at", datetime.now(timezone.utc).isoformat()),
+        )
+
     def to_markdown(self) -> str:
         """Render a readable documentary dossier in Markdown."""
         lines = [

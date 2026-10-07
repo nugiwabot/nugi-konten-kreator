@@ -78,196 +78,35 @@ mcp = FastMCP(
 def content_create(
     topic: str,
     format: str = "short",
+    duration_seconds: Optional[float] = None,
     output_folder: Optional[str] = None,
     dry_run: bool = False,
     stage_limit: Optional[str] = None,
     max_broll_shots: Optional[int] = None,
     depth: str = "deep",
+    install_to_capcut: bool = False,
 ) -> Dict[str, Any]:
     """
-    Master Autonomous Content Intelligence Workflow for Nugi.
-    Orchestrates:
-      Topic -> Editorial Qualification -> Deep Research & Dossier -> Script ->
-      Fact-Check (4-State) -> Visual Research -> B-roll Retrieval -> CapCut Draft
+    Master Autonomous Content Production Workflow for Nugi.
+    Orchestrates end-to-end:
+      Executive Producer Plan -> Editorial Qualification -> Deep Research & Dossier ->
+      Story Plan -> Script (Duration-Aware) -> Fact-Check (4-State) -> Visual Blueprint ->
+      B-roll Retrieval & Local Reuse -> Subtitles -> Native CapCut Desktop Draft -> Final Artifact QA
     """
-    import re
-    from engine.editorial.quality_gate import check_quality_gates
-    from engine.pipeline.research_dossier import DossierGenerator
-    from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
-    from engine.editorial.script_auditor import audit_script_with_dossier
-    from engine.editorial.content_scorer import ContentQualityEvaluator
-    from engine.pipeline.script_parser import ScriptParser
-    from engine.pipeline.visual_requirements import VisualRequirementsGenerator
-    from engine.pipeline.media_finder import MediaFinder
-    from engine.pipeline.srt_generator import SRTGenerator
-    from engine.pipeline.auto_edit_capcut import run_pipeline, find_workspace
-
-    folder_name = output_folder or f"prod_{re.sub(r'[^a-zA-Z0-9_]', '_', topic.lower()[:30])}"
-    work_dir = REPO_ROOT / "output" / folder_name
-    work_dir.mkdir(parents=True, exist_ok=True)
-
-    # Step 1: Editorial Quality Gate
-    gate_check = check_quality_gates({"title": topic, "human_question": topic})
-    if not gate_check.get("passed", True) and gate_check.get("hard_rejection", False):
-        return {
-            "status": "REJECTED_BY_EDITORIAL_GATE",
-            "topic": topic,
-            "violations": gate_check.get("violations", []),
-            "reasons": gate_check.get("reasons", ["Topic violates Nugi editorial policy."])
-        }
-
-    # Step 2: Deep Research & Dossier Generation
-    dossier_gen = DossierGenerator()
-    dossier = dossier_gen.build_dossier(topic, depth=depth)
-    dossier_files = dossier_gen.save_dossier_to_workspace(dossier, work_dir)
-
-    if stage_limit == "research":
-        return {
-            "status": "ok",
-            "stage": "research",
-            "topic": topic,
-            "dossier_status": dossier.epistemic_status,
-            "dossier_json": dossier_files["json_path"],
-            "dossier_md": dossier_files["md_path"],
-            "key_findings": dossier.key_findings,
-            "data_points": [dp.to_dict() for dp in dossier.data_points],
-        }
-
-    # Step 3: Script Formulation (Topic-Grounded Dynamic Nugi Production Format)
-    script_synth = DynamicScriptSynthesizer()
-    script_content = script_synth.synthesize_script(dossier)
-    script_path = work_dir / "script.md"
-    script_path.write_text(script_content, encoding="utf-8")
-
-    # Step 4: Epistemic Fact-Check Audit
-    fact_check_result = audit_script_with_dossier(script_content, dossier.to_dict())
-    (work_dir / "fact_check_report.json").write_text(json.dumps(fact_check_result, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    if stage_limit == "script":
-        return {
-            "status": "ok",
-            "stage": "script",
-            "script_file": str(script_path),
-            "fact_check_verdict": fact_check_result["overall_verdict"],
-            "fact_check_pass": fact_check_result["pass_gate"],
-            "dossier_json": dossier_files["json_path"],
-        }
-
-    # Step 5: Visual Research & Micro-Beats
-    parser = ScriptParser()
-    narratives = parser.parse_text(script_content)
-    shots_data = []
-    if narratives:
-        v_gen = VisualRequirementsGenerator()
-        shots = v_gen.generate_shots_for_narrative(narratives[0])
-        shots_data = [
-            {
-                "shot_id": s.shot_id,
-                "section": s.section_name,
-                "visual_requirement": s.visual_requirement,
-                "query": s.search_query,
-                "entities": s.entities,
-                "search_required": s.search_required,
-            }
-            for s in shots
-        ]
-        (work_dir / "broll_plan.json").write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    # Step 6: B-roll Media Retrieval & Downloading (Local-First, Full Shot Coverage)
-    finder = MediaFinder()
-    downloaded_assets = []
-    if not dry_run and shots_data:
-        broll_dir = work_dir / "footage"
-        broll_dir.mkdir(parents=True, exist_ok=True)
-        # Select all shots that genuinely require external or library B-roll footage
-        broll_candidates = [
-            s for s in shots_data
-            if s.get("search_required", True) and s.get("visual_requirement") not in ("NO_BROLL", "NO_VISUAL", "REMOTION_REQUIRED")
-        ]
-        target_shots = broll_candidates if broll_candidates else shots_data
-        if max_broll_shots is not None and max_broll_shots > 0:
-            target_shots = target_shots[:max_broll_shots]
-
-        for s in target_shots:
-            q = s.get("query") or topic
-            vr = s.get("visual_requirement", "GENERIC_ALLOWED")
-            try:
-                res = finder.find_and_download(
-                    request=q,
-                    media="any",
-                    count=2,
-                    folder=f"{folder_name}/footage",
-                    visual_requirement=vr
-                )
-                downloaded_assets.extend([r.to_dict() for r in res.results if r.local_path])
-            except Exception as e:
-                logger.warning(f"B-roll retrieval failed for shot {s.get('shot_id', '')} ({q}): {e}")
-
-    # Step 7: Subtitles & Video Production Blueprint
-    srt_path = work_dir / "subtitles.srt"
-    if narratives:
-        srt_gen = SRTGenerator()
-        srt_gen.write_srt_file(srt_path, narratives[0].sections)
-
-    # Step 8: Comprehensive Content Quality QA (10 Dimensions)
-    quality_evaluator = ContentQualityEvaluator()
-    quality_report = quality_evaluator.evaluate(
-        topic=topic,
-        dossier_data=dossier.to_dict(),
-        script_text=script_content,
-        fact_check_result=fact_check_result,
-        shots_data=shots_data,
-        downloaded_assets=downloaded_assets,
+    from engine.production.production_orchestrator import ProductionOrchestrator
+    orchestrator = ProductionOrchestrator(repo_root=REPO_ROOT)
+    result = orchestrator.run(
+        topic_or_prompt=topic,
+        output_folder=output_folder,
+        format_hint=format,
+        duration_hint=duration_seconds,
+        depth=depth,
+        dry_run=dry_run,
+        stage_limit=stage_limit,
+        max_broll_shots=max_broll_shots,
+        install_to_capcut=install_to_capcut,
     )
-    quality_report_path = work_dir / "content_quality_report.json"
-    quality_report_path.write_text(
-        json.dumps(quality_report.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8"
-    )
-
-    manifest = {
-        "topic": topic,
-        "folder": folder_name,
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "editorial_fit": gate_check.get("fit_score", 85),
-        "epistemic_status": dossier.epistemic_status,
-        "fact_check_verdict": fact_check_result["overall_verdict"],
-        "content_quality": quality_report.to_dict(),
-        "shots_planned": len(shots_data),
-        "assets_downloaded": len(downloaded_assets),
-        "dry_run": dry_run,
-        "artifacts": {
-            "dossier_json": str(dossier_files["json_path"]),
-            "dossier_md": str(dossier_files["md_path"]),
-            "script_md": str(script_path),
-            "fact_check_json": str(work_dir / "fact_check_report.json"),
-            "content_quality_json": str(quality_report_path),
-            "broll_plan_json": str(work_dir / "broll_plan.json"),
-            "subtitles_srt": str(srt_path),
-        }
-    }
-    (work_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    out_status = "ok"
-    if quality_report.overall_score < 70 or quality_report.blockers:
-        out_status = "NEEDS_REVIEW"
-
-    return {
-        "status": out_status,
-        "topic": topic,
-        "workspace_folder": f"output/{folder_name}",
-        "editorial_fit_score": gate_check.get("fit_score", 85),
-        "epistemic_status": dossier.epistemic_status,
-        "fact_check_verdict": fact_check_result["overall_verdict"],
-        "fact_check_pass": fact_check_result["pass_gate"],
-        "content_quality_score": quality_report.overall_score,
-        "content_quality_status": quality_report.status,
-        "dimension_scores": quality_report.dimension_scores,
-        "quality_blockers": quality_report.blockers,
-        "quality_warnings": quality_report.warnings,
-        "total_shots_planned": len(shots_data),
-        "total_assets_ready": len(downloaded_assets),
-        "manifest": manifest,
-    }
+    return result.to_dict()
 
 
 @mcp.tool(name="nugi_research_deep")
@@ -547,7 +386,7 @@ def architecture_overview() -> Dict[str, Any]:
         "layers": {
             "core": "Brand identity, Content DNA, editorial guidelines",
             "engine/editorial": "Human-Place classification, fit score, quality gates, intent, story types",
-            "engine/pipeline": "Media retrieval, video generation, auto-edit Kdenlive/CapCut, SRT generator",
+            "engine/pipeline": "Media retrieval, video generation, auto-edit CapCut, SRT generator",
             "engine/providers": "LAN embedding, LAN reranker, Wikimedia, Internet Archive, Pexafy",
             "output": "Isolated writable workspace for all generated productions and B-roll",
         },
@@ -1174,6 +1013,24 @@ def script_validate(script_path: str) -> Dict[str, Any]:
         return {"error": f"Script not found: {script_path}"}
     return {"status": "ok", "valid": True, "file": str(safe_p.relative_to(REPO_ROOT))}
 
+@mcp.tool(name="nugi_script_draft")
+def script_draft(topic: str, duration_seconds: int = 60, dossier_path: Optional[str] = None) -> Dict[str, Any]:
+    """Draft spoken narrative script grounded in empirical research dossier."""
+    from engine.pipeline.research_dossier import DossierGenerator, ResearchDossier
+    from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
+    if dossier_path and Path(dossier_path).is_file():
+        d_data = json.loads(Path(dossier_path).read_text(encoding="utf-8"))
+        dossier = ResearchDossier.from_dict(d_data)
+    else:
+        dossier = DossierGenerator().build_dossier(topic, depth="quick")
+    script_txt = DynamicScriptSynthesizer().synthesize_script(dossier, target_duration_seconds=duration_seconds)
+    return {
+        "status": "ok",
+        "topic": topic,
+        "duration_seconds": duration_seconds,
+        "script_text": script_txt,
+    }
+
 # ------------------------------------------------------------------------------
 # 10. SUBTITLE TOOLS (nugi.subtitle.*)
 # ------------------------------------------------------------------------------
@@ -1299,30 +1156,6 @@ def video_validate(project_dir: str) -> Dict[str, Any]:
         "total_drafts": len(capcut_drafts),
     }
 
-# ------------------------------------------------------------------------------
-# 12. KDENLIVE TOOLS (nugi.kdenlive.*)
-# ------------------------------------------------------------------------------
-
-@mcp.tool(name="nugi_kdenlive_inspect")
-def kdenlive_inspect(kdenlive_file: str) -> Dict[str, Any]:
-    """Inspect XML structure, tracks, and clips of a Kdenlive project."""
-    safe_p = resolve_safe_path(REPO_ROOT, kdenlive_file)
-    import xml.etree.ElementTree as ET
-    tree = ET.parse(safe_p)
-    root = tree.getroot()
-    producers = len(root.findall(".//producer"))
-    tracks = len(root.findall(".//track"))
-    return {
-        "status": "ok",
-        "file": str(safe_p),
-        "total_producers": producers,
-        "total_tracks": tracks,
-    }
-
-@mcp.tool(name="nugi_kdenlive_validate")
-def kdenlive_validate(kdenlive_file: str) -> Dict[str, Any]:
-    """Validate Kdenlive MLT XML syntax."""
-    return kdenlive_inspect(kdenlive_file)
 
 # ------------------------------------------------------------------------------
 # 13. CAPCUT TOOLS (nugi.capcut.*) — Primary Video Production Engine
@@ -1394,9 +1227,42 @@ def capcut_inspect(draft_content_json: str) -> Dict[str, Any]:
     }
 
 @mcp.tool(name="nugi_capcut_validate")
-def capcut_validate(draft_content_json: str) -> Dict[str, Any]:
-    """Validate CapCut draft structure."""
-    return capcut_inspect(draft_content_json)
+def capcut_validate(draft_path: str) -> Dict[str, Any]:
+    """Deep 16-point integrity and compatibility validation for CapCut Desktop drafts."""
+    from engine.pipeline.capcut_validator import CapCutValidator
+    safe_p = resolve_safe_path(REPO_ROOT, draft_path)
+    draft_dir = safe_p if safe_p.is_dir() else safe_p.parent
+    report = CapCutValidator().validate_draft(draft_dir)
+    return report.to_dict()
+
+@mcp.tool(name="nugi_quality_check")
+def quality_check(workspace: str) -> Dict[str, Any]:
+    """Run full Final QA Engine against all real production artifacts in workspace."""
+    from engine.production.final_qa import FinalQAEngine
+    safe_p = resolve_safe_path(REPO_ROOT, workspace)
+    report = FinalQAEngine().evaluate_production(safe_p)
+    return report.to_dict()
+
+@mcp.tool(name="nugi_remotion_list_templates")
+def remotion_list_templates() -> Dict[str, Any]:
+    """List all available Remotion motion graphics templates."""
+    from engine.pipeline.remotion_engine import RemotionEngine
+    engine = RemotionEngine()
+    templates = engine.list_templates()
+    return {
+        "status": "ok",
+        "available": engine.is_available(),
+        "total": len(templates),
+        "templates": templates,
+    }
+
+@mcp.tool(name="nugi_remotion_render_title_card")
+def remotion_render_title_card(title: str, subtitle: str = "", output_path: Optional[str] = None) -> Dict[str, Any]:
+    """Render documentary title card using Nugi's motion design system."""
+    from engine.pipeline.remotion_engine import RemotionEngine
+    engine = RemotionEngine()
+    out = resolve_safe_path(REPO_ROOT, output_path) if output_path else None
+    return engine.render_title_card(title=title, subtitle=subtitle, output_path=out)
 
 # ------------------------------------------------------------------------------
 # 14. AUTOEDIT TOOLS (nugi.autoedit.*)
@@ -1498,7 +1364,6 @@ def doctor_video() -> Dict[str, Any]:
         "ffprobe": shutil.which("ffprobe") is not None,
         "capcut_installed": capcut_env.get("capcut_installed", False),
         "capcut_draft_dir": str(capcut_env.get("draft_dir", "")),
-        "kdenlive_legacy": shutil.which("kdenlive") is not None,
     }
 
 # ------------------------------------------------------------------------------

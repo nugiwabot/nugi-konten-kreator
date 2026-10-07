@@ -515,7 +515,7 @@ def main():
     # create-video command
     p_cv = subparsers.add_parser(
         "create-video",
-        help="Batch faceless video production: script -> retrieval -> rough cut -> subtitles -> Kdenlive project",
+        help="Batch faceless video production: script -> retrieval -> rough cut -> subtitles -> CapCut draft",
     )
     p_cv.add_argument(
         "--script",
@@ -538,7 +538,7 @@ def main():
     p_cv.add_argument(
         "--dry-run",
         action="store_true",
-        help="Generate timeline, subtitles, and Kdenlive projects without downloading media files",
+        help="Generate timeline, subtitles, and CapCut drafts without downloading media files",
     )
     p_cv.set_defaults(func=cmd_create_video)
 

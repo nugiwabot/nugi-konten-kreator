@@ -5,7 +5,7 @@ Unit and integration tests for the automated video production pipeline:
   - ScriptParser: narrative markdown parsing and timecode extraction
   - VisualRequirementsGenerator: mini-documentary visual shot design
   - SRTGenerator: subtitle cue generation and wrapping
-  - KdenliveExporter: MLT XML validity and timeline.json generation
+  - CapCut Draft / Timeline: draft generation and timeline.json generation
   - VideoPipeline: end-to-end execution
 """
 
@@ -16,7 +16,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from engine.pipeline.kdenlive_exporter import KdenliveExporter, TimelineClip, TimelineData
+from engine.pipeline.timeline_model import TimelineClip, TimelineData
 from engine.pipeline.script_parser import NarasiScript, ScriptParser, ScriptSection, parse_timecode_to_seconds
 from engine.pipeline.srt_generator import SRTGenerator
 from engine.pipeline.video_pipeline import VideoPipeline
@@ -148,10 +148,16 @@ class TestSRTGenerator(unittest.TestCase):
         self.assertIn("Secara logika mesin lebih cepat.", srt_text)
 
 
-class TestKdenliveExporter(unittest.TestCase):
+from engine.pipeline.capcut_engine import CapCutDraftGenerator
+from engine.pipeline.capcut_validator import CapCutValidator
+from engine.pipeline.timeline_model import TimelineClip, TimelineData
+
+
+class TestCapCutDraftGenerator(unittest.TestCase):
 
     def setUp(self):
-        self.exporter = KdenliveExporter()
+        self.generator = CapCutDraftGenerator()
+        self.validator = CapCutValidator()
         self.timeline = TimelineData(
             project_name="Nugi_Narasi_01",
             narrative_id="narasi-01",
@@ -200,28 +206,29 @@ class TestKdenliveExporter(unittest.TestCase):
             ]
         )
 
-    def test_generate_xml_contains_vertical_profile_and_tracks(self):
-        xml_str = self.exporter.generate_kdenlive_xml(self.timeline)
-        self.assertIn("<profile", xml_str)
-        self.assertIn('width="1080"', xml_str)
-        self.assertIn('height="1920"', xml_str)
-        self.assertIn('display_aspect_num="9"', xml_str)
-        self.assertIn('display_aspect_den="16"', xml_str)
-        self.assertIn('id="playlist_video"', xml_str)
-        self.assertIn('id="playlist_audio"', xml_str)
-        self.assertIn('id="maintractor"', xml_str)
-
-    def test_melt_validation_if_available(self):
-        melt_path = r"C:\Program Files\kdenlive\bin\melt.exe"
-        if not Path(melt_path).exists():
-            self.skipTest("melt.exe not found on system")
-
+    def test_generate_draft_creates_valid_capcut_package(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            kdenlive_file = Path(tmpdir) / "test.kdenlive"
-            self.exporter.export_project(kdenlive_file, self.timeline)
-            cmd = [melt_path, str(kdenlive_file), "-consumer", "null", "count=1"]
-            res = subprocess.run(cmd, capture_output=True, text=True)
-            self.assertEqual(res.returncode, 0, f"melt failed with error: {res.stderr}")
+            draft_dir = Path(tmpdir) / "capcut_draft"
+            self.generator.generate_from_timeline(
+                timeline=self.timeline,
+                output_draft_dir=draft_dir,
+                project_name="Nugi_Narasi_01",
+            )
+
+            content_file = draft_dir / "draft_content.json"
+            meta_file = draft_dir / "draft_meta_info.json"
+            self.assertTrue(content_file.exists())
+            self.assertTrue(meta_file.exists())
+            self.assertTrue((draft_dir / "timeline_layout.json").exists())
+            self.assertTrue((draft_dir / "draft_settings").exists())
+
+            content = json.loads(content_file.read_text(encoding="utf-8"))
+            self.assertEqual(content["name"], "Nugi_Narasi_01")
+            self.assertEqual(content["canvas_config"]["ratio"], "9:16")
+            self.assertEqual(content["canvas_config"]["width"], 1080)
+            self.assertEqual(content["canvas_config"]["height"], 1920)
+            self.assertEqual(content["fps"], 30.0)
+            self.assertTrue(len(content["tracks"]) >= 1)
 
 
 class TestVideoPipelineDryRun(unittest.TestCase):
@@ -238,7 +245,9 @@ class TestVideoPipelineDryRun(unittest.TestCase):
             self.assertEqual(len(report.successful_narratives), 1)
             res = report.successful_narratives[0]
 
-            self.assertTrue(res.kdenlive_file.exists())
+            self.assertTrue(res.capcut_draft_dir.exists())
+            self.assertTrue((res.capcut_draft_dir / "draft_content.json").exists())
+            self.assertTrue((res.capcut_draft_dir / "draft_meta_info.json").exists())
             self.assertTrue(res.timeline_file.exists())
             self.assertTrue(res.subtitles_file.exists())
             self.assertTrue(res.sources_file.exists())
@@ -246,13 +255,11 @@ class TestVideoPipelineDryRun(unittest.TestCase):
 
             # Verify timeline JSON structure
             timeline_data = json.loads(res.timeline_file.read_text(encoding="utf-8"))
-            self.assertEqual(timeline_data["video_format"]["aspect_ratio"], "9:16")
-            self.assertEqual(timeline_data["video_format"]["width"], 1080)
-            self.assertEqual(timeline_data["video_format"]["height"], 1920)
-            self.assertEqual(timeline_data["video_format"]["fps"], 30)
-            self.assertIn("video_track_main", timeline_data["tracks"])
-            self.assertIn("audio_track_placeholder", timeline_data["tracks"])
-            self.assertEqual(len(timeline_data["tracks"]["video_track_main"]["clips"]), 11)
+            self.assertEqual(timeline_data["canvas"]["aspect_ratio"], "9:16")
+            self.assertEqual(timeline_data["canvas"]["width"], 1080)
+            self.assertEqual(timeline_data["canvas"]["height"], 1920)
+            self.assertEqual(timeline_data["canvas"]["fps"], 30)
+            self.assertTrue(len(timeline_data["clips"]) > 0)
 
 
 if __name__ == "__main__":

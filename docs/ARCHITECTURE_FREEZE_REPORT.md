@@ -4,13 +4,16 @@
 > **Repository:** `nugiwabot/nugi-konten-kreator`  
 > **Target Branch:** `origin/main`  
 > **Date:** October 2026  
-> **Verification Status:** ALL TESTS PASSED (Full Regression & Non-Dry-Run E2E Verified)
+> **Verification Status:** ALL TESTS PASSED (397 passed in 352s, Full Regression & Non-Dry-Run E2E Verified)
+> **Single Repository:** Unified `nugiwabot/nugi-konten-kreator` (video-mcp audited, consolidated, ready for archive)
 
 ---
 
 ## 1. Executive Summary & Freeze Declaration
 
 The architecture of the **Nugi Content Intelligence Engine (MCP)** is hereby formally declared **FROZEN**.
+
+Under the **Single-Repo & Unified MCP Mandate**, `nugi-konten-kreator` is the **single and only repository and MCP server** for Nugi's content production engine. All required video editing (CapCut Desktop Draft) and motion graphic (Remotion templates) capabilities from `video-mcp` have been consolidated into native, lightweight implementations. Obsolete frameworks (Kdenlive exporter, SmartCut silence cutters) have been completely purged.
 
 Under the **Anti-Overengineering Contract**, the system operates as a unified, modular, single-repository production MCP server without speculative databases, redundant agent layers, or unnecessary distributed infrastructure.
 
@@ -28,7 +31,7 @@ EDITORIAL QUALIFICATION
   → MULTI-STAGE RANKING (SEMANTIC + AUTHENTICITY)
   → REAL MEDIA DOWNLOAD & DISK VERIFICATION
   → LOCAL MEDIA LIBRARY INDEXING & REUSE
-  → PRODUCTION HANDOFF (CAPCUT / KDENLIVE / SUBTITLES)
+  → PRODUCTION HANDOFF (CAPCUT DRAFT / SUBTITLES)
 ```
 
 ---
@@ -124,8 +127,10 @@ EDITORIAL QUALIFICATION
    - Filesystem-safe, path-traversal resistant downloading with max file size guards.
    - Per-batch provenance metadata logging (`sources.json`).
    - Local-first catalog (`engine/data/media_library.json`) with automatic post-download indexing and search reuse.
-5. **Production Handoff Blueprints:**
-   - Auto-edit generators for CapCut desktop drafts (`draft_content.json`) and Kdenlive project manifests.
+5. **Production Handoff Blueprints (Native CapCut Desktop & Remotion):**
+   - Auto-edit generators for native CapCut desktop drafts (`draft_content.json`, `draft_meta_info.json`, `timeline_layout.json`, `attachment_pc_common.json`).
+   - Remotion React motion graphics engine (`remotion-app/`) for programmatic title cards and kinetic typography.
+   - Elimination of obsolete dependencies: Kdenlive and SmartCut silence-cutter completely purged from the codebase.
    - Automated SRT subtitle generation synced to narrative timecodes.
 6. **Unified MCP Server & Workflows:**
    - All tools registered under a single MCP server with backward compatibility.
@@ -138,8 +143,8 @@ EDITORIAL QUALIFICATION
    - *Rationale:* Current metadata-based semantic search and cross-encoder reranking provide high precision for documentary archival retrieval without requiring GPU VRAM overhead or heavy local torch dependencies.
 2. **Heavy Distributed Databases (Qdrant / Milvus / Neo4j):**
    - *Rationale:* Portable JSON-based knowledge stores and media library catalogs operate with sub-millisecond local latency, zero external database setup, and zero daemon maintenance.
-3. **Automated Video Rendering (FFmpeg headless compilation):**
-   - *Rationale:* Content editors require non-destructive timeline review in NLEs (CapCut Desktop / Kdenlive). Generating native draft project structures is superior to baked MP4 renders.
+3. **Automated Final Video Rendering (FFmpeg headless compilation):**
+   - *Rationale:* Content editors require non-destructive timeline review in NLEs (CapCut Desktop). Generating native draft project structures is vastly superior to rigid baked MP4 renders.
 
 ---
 

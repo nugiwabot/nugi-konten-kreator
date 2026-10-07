@@ -1,0 +1,24 @@
+{
+  "name": "video-mcp-remotion-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio src/index.tsx",
+    "render": "remotion render src/index.tsx",
+    "still": "remotion still src/index.tsx",
+    "compositions": "remotion compositions src/index.tsx",
+    "gallery": "remotion still src/index.tsx Nugi-TemplateGallery ../output/template-gallery.png --frame 30"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "typescript": "5.9.2"
+  }
+}

@@ -209,7 +209,7 @@ class WorkflowRegistry:
                         step_id="script_generation",
                         name="Generate Script Draft",
                         description="Compose 3-layer narrative: Spoken Script, Evidence Cards, Research Notes.",
-                        tool_name="script_drafter",
+                        tool_name="nugi_script_draft",
                         required_inputs=["topic"],
                     ),
                     WorkflowStep(
@@ -525,7 +525,7 @@ class WorkflowRegistry:
                         step_id="3_script",
                         name="3. Script Drafting",
                         description="Draft 160-185 word spoken narrative with Layer B & C.",
-                        tool_name="script_drafter",
+                        tool_name="nugi_script_draft",
                         required_inputs=["topic"],
                     ),
                     WorkflowStep(
@@ -625,7 +625,7 @@ class WorkflowRegistry:
                         step_id="2_script",
                         name="2. Longform Script & Chapters",
                         description="Generate structured chapters (Cold Open, Chapters 1-N, Synthesis).",
-                        tool_name="script_drafter",
+                        tool_name="nugi_script_draft",
                         required_inputs=["topic"],
                     ),
                     WorkflowStep(

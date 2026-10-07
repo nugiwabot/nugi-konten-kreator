@@ -1,0 +1,66 @@
+{
+  "brand": {
+    "background": "#D27441",
+    "backgroundDeep": "#9F432F",
+    "paper": "#FFF7E5",
+    "ink": "#4B2119",
+    "mutedInk": "rgba(75, 33, 25, 0.78)",
+    "muted": "#F8DEA1",
+    "gold": "#F7E962",
+    "amber": "#DEA950",
+    "orange": "#D27441",
+    "coral": "#C14E33",
+    "surface": "rgba(91, 37, 26, 0.18)",
+    "surfaceLight": "rgba(255, 247, 229, 0.14)",
+    "border": "rgba(255, 247, 229, 0.34)",
+    "shadow": "rgba(72, 27, 18, 0.24)",
+    "track": "rgba(75, 33, 25, 0.22)",
+    "paperGlow": "rgba(255, 255, 219, 0.28)",
+    "deepGlow": "rgba(121, 40, 28, 0.20)",
+    "mediaShade": "rgba(50, 22, 17, 0.38)",
+    "documentaryShade": "rgba(60, 25, 18, 0.72)",
+    "documentaryShadeEnd": "rgba(60, 25, 18, 0.08)",
+    "focusShade": "rgba(61, 25, 18, 0.82)",
+    "focusShadeEnd": "rgba(61, 25, 18, 0.02)",
+    "sequenceShade": "rgba(59, 25, 18, 0.80)",
+    "galleryShade": "rgba(55, 24, 18, 0.88)",
+    "gradient": "linear-gradient(112deg, #FAF165 0%, #E9C958 30%, #DEA950 57%, #D27441 78%, #C14E33 100%)",
+    "gradientSoft": "linear-gradient(125deg, #F7E962 0%, #E7BE54 38%, #DA9148 72%, #C14E33 100%)",
+    "gradientDeep": "linear-gradient(125deg, #8F3D2E 0%, #B85036 45%, #D27441 100%)",
+    "gradientPaper": "linear-gradient(135deg, #FFF8E7 0%, #F6E8C9 100%)"
+  },
+  "typography": {
+    "family": "Aptos, \"Segoe UI\", Arial, sans-serif",
+    "quoteFamily": "Georgia, \"Times New Roman\", serif",
+    "displayWeight": 760,
+    "bodyWeight": 430,
+    "eyebrowWeight": 700,
+    "tracking": "-0.035em",
+    "trackingWide": "0.12em"
+  },
+  "spacing": {
+    "edge": 0.085,
+    "card": 0.065,
+    "gap": 0.028,
+    "line": 0.004
+  },
+  "motion": {
+    "durations": {"micro": 0.15, "fast": 0.3, "normal": 0.5, "slow": 0.9, "cinematic": 1.4},
+    "distance": {"small": 12, "medium": 24, "large": 48},
+    "scale": {"subtle": 1.03, "medium": 1.06},
+    "staggerMs": {"fast": 60, "normal": 100, "slow": 160},
+    "easing": {
+      "smooth": [0.22, 1, 0.36, 1],
+      "standard": [0.4, 0, 0.2, 1],
+      "emphasized": [0.16, 1, 0.3, 1],
+      "sharp": [0.4, 0, 1, 1]
+    },
+    "profiles": {
+      "cinematic": {"entranceSeconds": 1.4, "exitSeconds": 0.55, "staggerMs": 160, "travel": 0.65, "titleMotion": "mask-reveal", "easing": "smooth"},
+      "documentary": {"entranceSeconds": 0.9, "exitSeconds": 0.38, "staggerMs": 100, "travel": 0.7, "titleMotion": "mask-reveal", "easing": "smooth"},
+      "editorial": {"entranceSeconds": 0.65, "exitSeconds": 0.3, "staggerMs": 80, "travel": 0.85, "titleMotion": "mask-reveal", "easing": "standard"},
+      "minimal": {"entranceSeconds": 0.7, "exitSeconds": 0.3, "staggerMs": 120, "travel": 0.35, "titleMotion": "fade", "easing": "smooth"},
+      "energetic": {"entranceSeconds": 0.48, "exitSeconds": 0.26, "staggerMs": 60, "travel": 1.05, "titleMotion": "wipe", "easing": "emphasized"}
+    }
+  }
+}

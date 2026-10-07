@@ -104,6 +104,56 @@ File dataset pencarian bersifat **opsional, read-only**, dan hanya digunakan seb
 
 ---
 
+## 🎬 Full Autonomous Production Engine & Video Integration
+
+Engine ini mengintegrasikan seluruh rantai produksi konten dari riset mendalam hingga paket draft video siap edit:
+
+```
+[Prompt / Topik Nugi]
+       │
+       ▼
+[Stage 1: Production Plan (Executive Producer Contract)]
+       │
+       ▼
+[Stage 2: Editorial Quality Gate & HP Qualification]
+       │
+       ▼
+[Stage 3: Deep Research Dossier (S0–S7 Source Hierarchy, Crossref, GDELT, BPS)]
+       │
+       ▼
+[Stage 4: Dynamic Script Synthesis (Human × Place × Change × Why, 30s–90s Teleprompter)]
+       │
+       ▼
+[Stage 5: 4-State Fact-Check Audit (VERIFIED, PLAUSIBLE, UNVERIFIED, CONTRADICTED)]
+       │
+       ▼
+[Stage 6: Visual Shot Planning & Micro-Beat Storyboard]
+       │
+       ▼
+[Stage 7: Media Retrieval, Multi-Stage Ranking & Provenance Tracking]
+       │
+       ▼
+[Stage 8: Subtitle Generation (Accurate SRT Cues)]
+       │
+       ▼
+[Stage 9: Native CapCut Desktop Draft Generation (draft_content.json, draft_meta_info.json)]
+       │
+       ▼
+[Stage 10: Remotion Motion Graphics Engine (Dynamic Title Cards & Kinetic Typography)]
+       │
+       ▼
+[Stage 11: Direct Installation to CapCut Desktop User Projects]
+       │
+       ▼
+[Stage 12: Final QA Engine Gatekeeping (Hard Violations + Soft Quality Score)]
+```
+
+> [!NOTE]
+> **Single Repository & Single MCP Mandate:**  
+> Seluruh fungsionalitas pengeditan video (CapCut Desktop Draft) dan motion graphics (Remotion) telah disatukan sepenuhnya ke dalam repositori ini (`nugi-konten-kreator`). Target editor video resmi adalah **CapCut Desktop** (Kdenlive dan silence-cutters usang telah dieliminasi sepenuhnya).
+
+---
+
 ## 🩺 System Health Check (The Doctor Command)
 
 Uji kesehatan dan kesiapan seluruh komponen engine secara mandiri:
@@ -112,7 +162,7 @@ Uji kesehatan dan kesiapan seluruh komponen engine secara mandiri:
 python -m engine.pipeline.engine_cli doctor
 ```
 
-Untuk menjalankan rangkaian pengujian otomatis lengkap (235 tests):
+Untuk menjalankan seluruh rangkaian pengujian otomatis (396+ tests):
 
 ```powershell
 pytest
@@ -124,19 +174,21 @@ pytest
 
 ```text
 nugi-konten-kreator/
-├── core/            # Nilai brand, positioning, Content DNA, kebijakan editorial
-├── research/        # Metodologi riset, mode riset, evaluasi sumber & fakta
-├── thinking/        # Mesin sudut pandang, penalaran kausal, dekonstruksi WHY
-├── skills/          # Kontrak kerja agentik ide, riset, dan skrip
-├── knowledge/       # Korpus pengetahuan psikologi, pengaruh, memori, narasi
-├── engine/          # Pipeline Python mandiri (mining, intent, story, retriever, video)
-│   ├── editorial/   # Modul klasifikasi editorial (HP engine, story type, revelation)
-│   ├── ingestion/   # Indexer korpus dokumen & chunking
-│   ├── pipeline/    # Unified CLI, runner riset, media ranker & video specs
-│   └── providers/   # LAN embedding & reranker client abstractions
-├── evaluation/      # Gerbang kualitas konten & loop pembelajaran
-├── docs/            # Dokumentasi arsitektur, playbook editorial, dan panduan CLI
-├── tests/           # 235 unit & integration tests
-├── output/          # Narasi, storyboard, micro-beats, dan aset visual Nugi
-└── archive/         # Arsip historis sistem agensi lama (out-of-scope)
+├── core/               # Nilai brand, positioning, Content DNA, kebijakan editorial
+├── research/           # Metodologi riset, mode riset, evaluasi sumber & fakta
+├── thinking/           # Mesin sudut pandang, penalaran kausal, dekonstruksi WHY
+├── skills/             # Kontrak kerja agentik ide, riset, dan skrip
+├── knowledge/          # Korpus pengetahuan psikologi, pengaruh, memori, narasi
+├── remotion-app/       # Template Remotion React untuk motion graphics & title card
+├── engine/             # Pipeline Python mandiri
+│   ├── editorial/      # Modul klasifikasi editorial (HP engine, story type, dynamic script)
+│   ├── ingestion/      # Indexer korpus dokumen & chunking
+│   ├── pipeline/       # Timeline model, CapCut draft engine, CapCut validator, Remotion engine
+│   ├── production/     # Executive Producer, Production Manifest, Final QA, Production Orchestrator
+│   └── providers/      # LAN embedding & reranker client abstractions, Crossref, GDELT
+├── evaluation/         # Gerbang kualitas konten & loop pembelajaran
+├── docs/               # Dokumentasi arsitektur, playbook editorial, dan panduan CLI
+├── tests/              # 396+ unit, integration & end-to-end tests
+├── output/             # Output workspace: research dossier, script, subtitles, draft CapCut
+└── archive/            # Arsip historis sistem agensi lama (out-of-scope)
 ```
