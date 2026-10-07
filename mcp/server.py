@@ -81,6 +81,7 @@ def content_create(
     output_folder: Optional[str] = None,
     dry_run: bool = False,
     stage_limit: Optional[str] = None,
+    max_broll_shots: Optional[int] = None,
 ) -> Dict[str, Any]:
     """
     Master Autonomous Content Intelligence Workflow for Nugi.
@@ -191,28 +192,41 @@ def content_create(
                 "visual_requirement": s.visual_requirement,
                 "query": s.search_query,
                 "entities": s.entities,
+                "search_required": s.search_required,
             }
             for s in shots
         ]
         (work_dir / "broll_plan.json").write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    # Step 6: B-roll Media Retrieval & Downloading (Local-First)
+    # Step 6: B-roll Media Retrieval & Downloading (Local-First, Full Shot Coverage)
     finder = MediaFinder()
     downloaded_assets = []
     if not dry_run and shots_data:
         broll_dir = work_dir / "footage"
         broll_dir.mkdir(parents=True, exist_ok=True)
-        for s in shots_data[:5]:
+        # Select all shots that genuinely require external or library B-roll footage
+        broll_candidates = [
+            s for s in shots_data
+            if s.get("search_required", True) and s.get("visual_requirement") not in ("NO_BROLL", "NO_VISUAL", "REMOTION_REQUIRED")
+        ]
+        target_shots = broll_candidates if broll_candidates else shots_data
+        if max_broll_shots is not None and max_broll_shots > 0:
+            target_shots = target_shots[:max_broll_shots]
+
+        for s in target_shots:
             q = s.get("query") or topic
             vr = s.get("visual_requirement", "GENERIC_ALLOWED")
-            res = finder.find_and_download(
-                request=q,
-                media="any",
-                count=2,
-                folder=f"{folder_name}/footage",
-                visual_requirement=vr
-            )
-            downloaded_assets.extend([r.to_dict() for r in res.results if r.local_path])
+            try:
+                res = finder.find_and_download(
+                    request=q,
+                    media="any",
+                    count=2,
+                    folder=f"{folder_name}/footage",
+                    visual_requirement=vr
+                )
+                downloaded_assets.extend([r.to_dict() for r in res.results if r.local_path])
+            except Exception as e:
+                logger.warning(f"B-roll retrieval failed for shot {s.get('shot_id', '')} ({q}): {e}")
 
     # Step 7: Subtitles & Video Production Blueprint
     srt_path = work_dir / "subtitles.srt"
@@ -818,11 +832,20 @@ def research_sources(topic: str) -> Dict[str, Any]:
 
 @mcp.tool(name="nugi_research_evaluate_source")
 def research_evaluate_source(url: str, snippet: str = "") -> Dict[str, Any]:
-    """Evaluate source tier and epistemological credibility."""
-    tier = 2
-    if any(d in url for d in ("gov", "edu", "bps.go.id", "worldbank.org", "unesco.org")):
-        tier = 1
-    return {"status": "ok", "url": url, "source_tier": tier, "is_authoritative": tier == 1}
+    """Evaluate source tier and epistemological credibility using S0-S7 hierarchy."""
+    from engine.providers.evidence_model import classify_source_tier
+    res = classify_source_tier(url, snippet)
+    return {
+        "status": "ok",
+        "url": url,
+        "source_tier": res["tier"].rank,
+        "tier_code": res["tier"].value,
+        "tier_name": res["tier_name"],
+        "source_type": res["source_type"].value,
+        "reliability": res["reliability"],
+        "is_authoritative": res["is_primary"],
+        "is_primary": res["is_primary"]
+    }
 
 @mcp.tool(name="nugi_research_fact_claim_split")
 def research_fact_claim_split(text: str) -> Dict[str, Any]:

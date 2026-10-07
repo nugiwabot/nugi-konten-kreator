@@ -18,6 +18,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -174,7 +175,7 @@ class MediaLibrary:
             return []
 
         q_lower = query.lower()
-        q_words = set(q_lower.split())
+        q_words = set(re.findall(r"\w+", q_lower))
         target_entities = set(e.lower() for e in (entities or []))
 
         scored_candidates = []
@@ -194,19 +195,21 @@ class MediaLibrary:
             entry_entities = set(e.lower() for e in entry.entities)
             if target_entities and target_entities.intersection(entry_entities):
                 score += 0.5
+            elif any(qw in entry_entities or any(qw in ee for ee in entry_entities) for qw in q_words if len(qw) >= 3):
+                score += 0.25
 
-            # Title & Description keyword overlap (Weight: 0.3)
+            # Title & Description keyword overlap (Weight: 0.35)
             text_corpus = f"{entry.title} {entry.description} {entry.query}".lower()
-            corpus_words = set(text_corpus.split())
+            corpus_words = set(re.findall(r"\w+", text_corpus))
             overlap = len(q_words.intersection(corpus_words))
-            score += min(0.3, overlap * 0.08)
+            score += min(0.35, overlap * 0.12)
 
             # Visual requirement compatibility
-            if visual_requirement == entry.visual_requirement:
+            if visual_requirement in (entry.visual_requirement, "auto", "any") or visual_requirement == "GENERIC_ALLOWED":
                 score += 0.1
 
             # Minimum score threshold
-            if score >= 0.2:
+            if score >= 0.15:
                 scored_candidates.append({
                     "score": round(score, 3),
                     "entry": entry

@@ -24,6 +24,8 @@ from engine.providers.evidence_model import (
 )
 from engine.providers.research_base import ResearchProvider
 from engine.providers.openalex_provider import OpenAlexProvider
+from engine.providers.crossref_provider import CrossrefProvider
+from engine.providers.gdelt_provider import GDELTProvider
 from engine.providers.bps_provider import BPSDataProvider
 from engine.providers.search import WebResearchProvider, DDGSWebResearchProvider
 
@@ -179,10 +181,14 @@ class DossierGenerator:
         bps_provider: Optional[ResearchProvider] = None,
         openalex_provider: Optional[ResearchProvider] = None,
         web_provider: Optional[WebResearchProvider] = None,
+        crossref_provider: Optional[ResearchProvider] = None,
+        gdelt_provider: Optional[ResearchProvider] = None,
     ):
         self.bps = bps_provider or BPSDataProvider()
         self.openalex = openalex_provider or OpenAlexProvider()
         self.web = web_provider or DDGSWebResearchProvider()
+        self.crossref = crossref_provider or CrossrefProvider()
+        self.gdelt = gdelt_provider or GDELTProvider()
 
     def build_dossier(self, topic: str, max_evidence_per_source: int = 4) -> ResearchDossier:
         logger.info(f"DossierGenerator: Initiating deep research for '{topic}'")
@@ -196,9 +202,11 @@ class DossierGenerator:
             f"Siapa kelompok masyarakat yang paling terdampak dan bagaimana masa depannya?"
         ]
 
-        # 2. Gather Evidence across Providers
+        # 2. Gather Evidence across Multi-Tier Providers
         bps_evidence = self.bps.search_evidence(topic, max_results=max_evidence_per_source)
         academic_evidence = self.openalex.search_evidence(topic, max_results=max_evidence_per_source)
+        crossref_evidence = self.crossref.search_evidence(topic, max_results=max_evidence_per_source)
+        gdelt_evidence = self.gdelt.search_evidence(topic, max_results=max_evidence_per_source)
         web_raw = self.web.search(topic, max_results=max_evidence_per_source)
 
         web_evidence: List[EvidenceItem] = []
@@ -221,10 +229,17 @@ class DossierGenerator:
                 exact_quote=w.get("content", ""),
                 summary=w.get("title", ""),
                 confidence=0.75 if cls["tier"].rank <= 4 else 0.5,
+                lineage_root=w.get("url", "")
             )
             web_evidence.append(item)
 
-        all_evidence = bps_evidence + academic_evidence + web_evidence
+        # Enforce strict S0-S7 hierarchy: S0 (Archival) -> S1 (BPS/Gov) -> S2 (Academic/Crossref) -> S3 (Wire) -> S4-S7
+        # Authoritative and primary evidence is strictly prioritized before generic web results
+        all_collected = (
+            bps_evidence + academic_evidence + crossref_evidence + gdelt_evidence + web_evidence
+        )
+        all_collected.sort(key=lambda ev: (ev.source.tier.rank, -ev.confidence))
+        all_evidence = all_collected
 
         # 3. Aggregate Data Points
         all_data_points: List[DataPoint] = []
@@ -234,7 +249,7 @@ class DossierGenerator:
         # 4. Formulate Synthesized Claims & Mapping
         claims: List[Claim] = []
         
-        # Claim 1: Macro / Statistical Dimension
+        # Claim 1: Macro / Statistical Dimension (S1 Primary)
         if bps_evidence:
             c1 = Claim(
                 id="claim_structural_data",
@@ -246,26 +261,38 @@ class DossierGenerator:
             c1.evaluate_status()
             claims.append(c1)
 
-        # Claim 2: Academic / Mechanism Dimension
+        # Claim 2: Academic / Mechanism Dimension (S2 Specialist)
+        acad_support = []
         if academic_evidence:
+            acad_support.append(academic_evidence[0])
+        if crossref_evidence:
+            acad_support.append(crossref_evidence[0])
+            
+        if acad_support:
             c2 = Claim(
                 id="claim_academic_mechanism",
-                text=academic_evidence[0].claim_text,
+                text=acad_support[0].claim_text,
                 claim_type="CAUSAL",
-                supporting_evidence=[academic_evidence[0]],
-                primary_source_count=1,
+                supporting_evidence=acad_support,
+                primary_source_count=len(acad_support),
             )
             c2.evaluate_status()
             claims.append(c2)
 
-        # Claim 3: Ground Reality & Sentiment
+        # Claim 3: Ground Reality & Sentiment (S3-S4 Media & Public)
+        media_support = []
+        if gdelt_evidence:
+            media_support.append(gdelt_evidence[0])
         if web_evidence:
+            media_support.append(web_evidence[0])
+
+        if media_support:
             c3 = Claim(
                 id="claim_public_reality",
-                text=f"Realitas publik dan dinamika terkini: {web_evidence[0].summary}",
+                text=f"Realitas publik dan dinamika terkini: {media_support[0].summary}",
                 claim_type="FACTUAL",
-                supporting_evidence=[web_evidence[0]],
-                secondary_source_count=1,
+                supporting_evidence=media_support,
+                secondary_source_count=len(media_support),
             )
             c3.evaluate_status()
             claims.append(c3)

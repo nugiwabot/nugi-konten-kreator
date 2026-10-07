@@ -213,6 +213,9 @@ class EvidenceItem:
     corroboration_sources: List[str] = field(default_factory=list)
     contradiction_notes: str = ""
     uncertainty_level: str = "LOW"  # LOW, MODERATE, HIGH
+    lineage_root: Optional[str] = None  # URL or publisher of root original evidence
+    cited_sources: List[str] = field(default_factory=list)  # Referenced sources/documents
+    is_derivative: bool = False  # True if reporting cites another entity rather than original research
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -236,10 +239,13 @@ class Claim:
     secondary_source_count: int = 0
     confidence_score: float = 0.0
     epistemic_notes: str = ""
+    lineage_roots: List[str] = field(default_factory=list)
+    independent_sources_count: int = 0
 
     def evaluate_status(self) -> str:
         """
-        Calculates verification status according to S0-S7 evidence strength.
+        Calculates verification status according to S0-S7 evidence strength
+        and independent lineage verification.
         """
         has_contradiction = len(self.contradicting_evidence) > 0
         if has_contradiction:
@@ -250,6 +256,15 @@ class Claim:
             self.status = "UNVERIFIED"
             return self.status
 
+        # Deduplicate evidence lineage to prevent syndicated repetition from inflating corroboration
+        lineage_map: Dict[str, List[EvidenceItem]] = {}
+        for e in self.supporting_evidence:
+            root = e.lineage_root or (e.source.url if e.source.url else e.source.publisher)
+            lineage_map.setdefault(root, []).append(e)
+
+        self.lineage_roots = list(lineage_map.keys())
+        self.independent_sources_count = len(lineage_map)
+
         # Count authoritative evidence (S0, S1, S2)
         auth_count = sum(
             1 for e in self.supporting_evidence if e.source.tier.rank <= 2
@@ -258,10 +273,10 @@ class Claim:
             1 for e in self.supporting_evidence if 3 <= e.source.tier.rank <= 4
         )
 
-        if auth_count >= 1 or rep_count >= 2:
+        if auth_count >= 1 or (rep_count >= 2 and self.independent_sources_count >= 2):
             self.status = "VERIFIED"
             self.confidence_score = 0.9 if auth_count >= 1 else 0.8
-        elif rep_count == 1 or len(self.supporting_evidence) >= 2:
+        elif rep_count >= 1 or len(self.supporting_evidence) >= 2 or self.independent_sources_count >= 1:
             self.status = "PROBABLE"
             self.confidence_score = 0.65
         else:
@@ -275,3 +290,4 @@ class Claim:
         d["supporting_evidence"] = [e.to_dict() for e in self.supporting_evidence]
         d["contradicting_evidence"] = [e.to_dict() for e in self.contradicting_evidence]
         return d
+

@@ -118,6 +118,8 @@ assets/media/**/*.mp4
 # Temporary test workspaces generated during pipeline execution & testing
 output/temp_test_ws/
 output/test_scratch/
+output/test_*/
 output/non_existent_ws_99/
 output/prod_*/
 output/research_*/
+assets/media/test_*/
