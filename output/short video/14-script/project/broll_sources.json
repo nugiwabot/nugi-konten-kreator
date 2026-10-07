@@ -1,0 +1,103 @@
+{
+  "project": "14-script",
+  "headline": "Kenapa Kota Dibangun di Tempat Sulit Ditinggali?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_marsh_wetland_landscape.jpg",
+      "path": "broll/001_marsh_wetland_landscape.jpg",
+      "concept": "Lingkungan rawa dan perairan yang sulit ditinggali",
+      "query": "wetland marsh swamp lake water reeds wild landscape",
+      "title": "Photo by gryffyn m on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-body-of-water-surrounded-by-tall-grass-ww5rCUkjo8M",
+      "download_url": "https://images.unsplash.com/photo-1592206880466-f7ccc030fbe6?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_valley_lake_mountains.jpg",
+      "path": "broll/002_valley_lake_mountains.jpg",
+      "concept": "Lembah danau dengan latar perbukitan Texcoco",
+      "query": "tranquil valley lake surrounded by volcanic mountains water landscape",
+      "title": "Serene mountainous landscape with a large lake surrounded by lush greenery and towering trees",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/azores-lake-nature-portugal-6180611/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/04/15/09/16/azores-6180611_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_mesoamerican_ancient_pyramid.jpg",
+      "path": "broll/003_mesoamerican_ancient_pyramid.jpg",
+      "concept": "Peradaban kuno dan piramida Aztec / Mesoamerika",
+      "query": "ancient mesoamerican stone pyramid ruins archaeological historic site",
+      "title": "Large stone pyramid-like structure sits atop a grassy field under clear blue sky",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/maya-stone-pyramid-13782081",
+      "download_url": "https://images.pexels.com/photos/13782081/pexels-photo-13782081.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_water_canal_boats_historic.jpg",
+      "path": "broll/004_water_canal_boats_historic.jpg",
+      "concept": "Jaringan kanal air sebagai jalur transportasi",
+      "query": "narrow water canal calm waterway traditional wooden boats greenery",
+      "title": "Serene canal scene with multiple boats moored along its banks in shades of purple and",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/holland-netherlands-flow-avenue-3406117/",
+      "download_url": "https://cdn.pixabay.com/photo/2018/05/16/15/46/holland-3406117_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_chinampas_floating_gardens.jpg",
+      "path": "broll/005_chinampas_floating_gardens.jpg",
+      "concept": "Sistem pertanian chinampas di perairan kanal",
+      "query": "xochimilco canal agricultural wetland gardens chinampas greenery",
+      "title": "River flows through densely populated area with surrounding fields and buildings along its banks",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/drone-xochimilco-cdmx-mexico-4959052/",
+      "download_url": "https://cdn.pixabay.com/photo/2020/03/23/01/16/drone-4959052_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_adapting_water_agriculture.jpg",
+      "path": "broll/006_adapting_water_agriculture.jpg",
+      "concept": "Manusia beradaptasi dan membangun peradaban di atas air",
+      "query": "traditional farming wetland agriculture canals cultivating land",
+      "title": "Photo by DEZALB on Pixabay (https://pexafy.com/legal/licenses/#pixabay)",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/bali-rice-field-agricultural-780385/",
+      "download_url": "https://cdn.pixabay.com/photo/2015/05/23/10/07/bali-780385_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_modern_mexico_city_view.jpg",
+      "path": "broll/007_modern_mexico_city_view.jpg",
+      "concept": "Pemandangan Mexico City modern di lembah danau",
+      "query": "mexico city historic center aerial view zocalo cathedral skyline",
+      "title": "Large cathedral with two spires and dome dominates cityscape in clear blue aerial view",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/aerial-view-of-city-buildings-6942690",
+      "download_url": "https://images.pexels.com/photos/6942690/pexels-photo-6942690.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_ancient_modern_urban_continuity.jpg",
+      "path": "broll/008_ancient_modern_urban_continuity.jpg",
+      "concept": "Manusia mengubah tempat sulit menjadi pusat peradaban",
+      "query": "historic stone architecture urban public square civilization",
+      "title": "Large ornate stone archway with two smaller arches on either side and above",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/triumphal-arch-under-cloudy-sky-10299007",
+      "download_url": "https://images.pexels.com/photos/10299007/pexels-photo-10299007.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

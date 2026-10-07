@@ -1,0 +1,103 @@
+{
+  "project": "16-script",
+  "headline": "Kenapa Supermarket Membuat Kita Berjalan Lebih Jauh?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_supermarket_entrance_lobby.jpg",
+      "path": "broll/001_supermarket_entrance_lobby.jpg",
+      "concept": "Pintu masuk supermarket menyambut pembeli",
+      "query": "modern supermarket entrance glass doors shopping carts lobby",
+      "title": "Long, narrow hallway lined with red shopping carts, featuring a sloping concrete ceiling",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/shopping-carts-standing-in-a-row-17091382",
+      "download_url": "https://images.pexels.com/photos/17091382/pexels-photo-17091382.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_shopper_with_trolley.jpg",
+      "path": "broll/002_shopper_with_trolley.jpg",
+      "concept": "Pembeli mengambil troli belanja dan mulai berjalan",
+      "query": "customer pushing shopping cart trolley supermarket grocery store",
+      "title": "Person pushing a silver and black shopping cart filled with potatoes and apples",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/white-and-red-metal-bird-cage-3nURJV_L7-8",
+      "download_url": "https://images.unsplash.com/photo-1571340910399-354d2ce7f1dd?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_long_supermarket_aisle.jpg",
+      "path": "broll/003_long_supermarket_aisle.jpg",
+      "concept": "Lorong-lorong belanja panjang dengan deretan rak",
+      "query": "long grocery store aisle shelves packaged food snacks beverages",
+      "title": "Photo by Photoman on Pixabay (https://pexafy.com/legal/licenses/#pixabay)",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/grocery-food-supermarket-groceries-4715107/",
+      "download_url": "https://cdn.pixabay.com/photo/2019/12/23/18/02/grocery-4715107_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_essential_dairy_produce_section.jpg",
+      "path": "broll/004_essential_dairy_produce_section.jpg",
+      "concept": "Barang kebutuhan pokok di bagian dalam toko",
+      "query": "dairy milk refrigerator section grocery store supermarket fresh products",
+      "title": "Photo by CHUTTERSNAP on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/white-and-blue-labeled-pack-on-shelf-6xB6mxsLTV0",
+      "download_url": "https://images.unsplash.com/photo-1622371684824-dc014541a4f5?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_endcap_promotional_display.jpg",
+      "path": "broll/005_endcap_promotional_display.jpg",
+      "concept": "Display promosi di ujung lorong / end-cap",
+      "query": "promotional product endcap display retail store eye catching items",
+      "title": "Photo by ivbelous on Pixabay (https://pexafy.com/legal/licenses/#pixabay)",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/supermarket-shop-sale-purchase-4804892/",
+      "download_url": "https://cdn.pixabay.com/photo/2020/01/30/09/59/supermarket-4804892_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_customer_browsing_products.jpg",
+      "path": "broll/006_customer_browsing_products.jpg",
+      "concept": "Pembeli berhenti melihat barang dan mempertimbangkan pilihan",
+      "query": "shopper examining product box shelf deciding grocery shopping",
+      "title": "Photo by Boxed Water Is Better on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-woman-carrying-a-grocery-basket-of-vegetables-picks-up-a-boxed-water-box-7H1hDt694s8",
+      "download_url": "https://images.unsplash.com/photo-1553531889-56cc480ac5cb?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_filled_shopping_cart.jpg",
+      "path": "broll/007_filled_shopping_cart.jpg",
+      "concept": "Keranjang belanja terisi lebih banyak barang",
+      "query": "full shopping cart groceries snacks food items overhead view",
+      "title": "Photo by Zoshua Colah on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/shopping-cart-filled-in-a-large-grocery-store-421nTYTZLSI",
+      "download_url": "https://images.unsplash.com/photo-1751151950056-cfaf797f4653?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_supermarket_checkout_counter.jpg",
+      "path": "broll/008_supermarket_checkout_counter.jpg",
+      "concept": "Area kasir saat selesai melewati seluruh rute toko",
+      "query": "supermarket checkout counter cashier conveyor belt scanning items",
+      "title": "Photo by sq lim on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-woman-standing-at-a-cash-register-in-a-store-HaZhm6xIUgs",
+      "download_url": "https://images.unsplash.com/photo-1641029956071-272caab5857a?w=1280",
+      "license": "free"
+    }
+  ]
+}

@@ -1,7 +1,12 @@
 import re
+import json
 import logging
+import urllib.request
+import urllib.error
 from typing import List, Dict, Any, Optional
 from urllib.parse import urlparse
+
+from engine.providers.evidence_model import classify_source_tier, SourceTier, SourceType
 
 logger = logging.getLogger(__name__)
 
@@ -25,35 +30,40 @@ class WebResearchProvider:
 
 def classify_source_quality(url: str, publisher: str) -> Dict[str, Any]:
     """
-    Classifies source quality according to the 7-tier hierarchy:
-    1. Primary Source / Official Gov / Academic
-    2. Official Announcement
-    3. Original Research
-    4. Reputable Journalism
-    5. Industry Publication
-    6. Secondary Commentary / Blog
-    7. Social Media
+    Classifies source quality according to the normalized S0-S7 hierarchy.
+    Maintains full backward compatibility with integer 'tier' (1-7).
+    Legacy mapping:
+      S0, S1, S2 -> tier: 1 (Primary / Academic)
+      S3, S4     -> tier: 4 (Reputable Journalism)
+      S5         -> tier: 5 (Industry Publication)
+      S6         -> tier: 6 (Secondary Commentary)
+      S7         -> tier: 7 (Social Media / Weak)
     """
-    domain = urlparse(url).netloc.lower()
+    res = classify_source_tier(url, publisher)
+    tier_enum: SourceTier = res["tier"]
     
-    # Tier 1: Primary Gov, Edu, Academic
-    if any(d in domain for d in [".gov", ".go.id", ".edu", ".ac.id", "arxiv.org", "nature.com", "science.org"]):
-        return {"tier": 1, "tier_name": "Primary Source / Official", "reliability": "HIGH"}
-    
-    # Tier 4: Reputable Journalism
-    if any(d in domain for d in ["reuters.com", "bloomberg.com", "kompas.com", "tempo.co", "bisnis.com", "nytimes.com", "wsj.com", "bbc.com", "theverge.com"]):
-        return {"tier": 4, "tier_name": "Reputable Journalism", "reliability": "HIGH"}
-        
-    # Tier 5: Industry Publication
-    if any(d in domain for d in ["techcrunch.com", "inman.com", "venturebeat.com", "rumah123.com", "lamudi.co.id", "housecanary.com"]):
-        return {"tier": 5, "tier_name": "Industry Publication", "reliability": "MEDIUM_HIGH"}
+    # Map to legacy integer tier for test compatibility
+    if tier_enum in (SourceTier.S0, SourceTier.S1, SourceTier.S2):
+        legacy_tier = 1
+    elif tier_enum in (SourceTier.S3, SourceTier.S4):
+        legacy_tier = 4
+    elif tier_enum == SourceTier.S5:
+        legacy_tier = 5
+    elif tier_enum == SourceTier.S6:
+        legacy_tier = 7  # Legacy tier 7 was Social Media
+    else:
+        legacy_tier = 6  # Legacy tier 6 was Secondary Commentary / Web default
 
-    # Tier 7: Social Media
-    if any(d in domain for d in ["twitter.com", "x.com", "reddit.com", "tiktok.com", "instagram.com"]):
-        return {"tier": 7, "tier_name": "Social Media", "reliability": "LOW_NEEDS_VERIFICATION"}
-        
-    # Default: Tier 6: Secondary commentary
-    return {"tier": 6, "tier_name": "Secondary Commentary / Web", "reliability": "MEDIUM"}
+    return {
+        "tier": legacy_tier,
+        "source_tier": tier_enum.value,
+        "source_tier_rank": tier_enum.rank,
+        "tier_code": tier_enum.value,
+        "tier_name": res["tier_name"],
+        "source_type": res["source_type"].value,
+        "reliability": res["reliability"],
+        "is_primary": res["is_primary"],
+    }
 
 
 class DDGSWebResearchProvider(WebResearchProvider):
@@ -104,11 +114,67 @@ class DDGSWebResearchProvider(WebResearchProvider):
                     "publisher": domain,
                     "relevance": "HIGH" if any(w in title.lower() for w in query.lower().split()[:2]) else "MEDIUM",
                     "source_tier": classification["tier"],
+                    "source_tier_code": classification["tier_code"],
                     "source_tier_name": classification["tier_name"],
-                    "reliability": classification["reliability"]
+                    "reliability": classification["reliability"],
+                    "is_primary": classification["is_primary"]
                 })
                 
         except Exception as e:
             logger.warning(f"DDGS web search failed: {e}. Returning mock/empty fallback.")
             
         return structured_results
+
+
+class SearXNGWebResearchProvider(WebResearchProvider):
+    """
+    SearXNG metasearch provider.
+    Connects to private LAN or public SearXNG instance if configured.
+    """
+    def __init__(self, endpoint_url: Optional[str] = None):
+        import os
+        self.endpoint_url = endpoint_url or os.getenv("SEARXNG_URL", "http://localhost:8080")
+
+    def search(
+        self,
+        query: str,
+        recency: Optional[str] = None,
+        domains: Optional[List[str]] = None,
+        language: str = "id-id",
+        max_results: int = 5
+    ) -> List[Dict[str, Any]]:
+        results = []
+        try:
+            params = {
+                "q": query,
+                "format": "json",
+                "language": language,
+            }
+            if recency:
+                params["time_range"] = "month" if recency == "m" else ("day" if recency == "d" else "year")
+            url = f"{self.endpoint_url}/search?{urllib.parse.urlencode(params)}"
+            req = urllib.request.Request(url, headers={"User-Agent": "NugiContentIntelligence/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                raw_results = data.get("results", [])[:max_results]
+                for r in raw_results:
+                    r_url = r.get("url", "")
+                    domain = urlparse(r_url).netloc
+                    classification = classify_source_quality(r_url, domain)
+                    results.append({
+                        "source": domain,
+                        "title": r.get("title", ""),
+                        "date": r.get("publishedDate", "Recent"),
+                        "url": r_url,
+                        "content": r.get("content", ""),
+                        "publisher": domain,
+                        "relevance": "HIGH",
+                        "source_tier": classification["tier"],
+                        "source_tier_code": classification["tier_code"],
+                        "source_tier_name": classification["tier_name"],
+                        "reliability": classification["reliability"],
+                        "is_primary": classification["is_primary"]
+                    })
+        except Exception as e:
+            logger.warning(f"SearXNG query failed: {e}. Returning empty list.")
+        return results

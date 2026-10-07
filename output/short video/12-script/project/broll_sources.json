@@ -1,0 +1,103 @@
+{
+  "project": "12-script",
+  "headline": "Kenapa Kota-Kota Besar Selalu Macet, Padahal Jalannya Terus Diperlebar?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_city_traffic_congestion.jpg",
+      "path": "broll/001_city_traffic_congestion.jpg",
+      "concept": "Kota besar macet padat kendaraan",
+      "query": "heavy city traffic congestion rush hour cars jammed street",
+      "title": "Busy city street at night with multiple cars moving in both directions downtown",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/urban-traffic-at-dawn-23957127",
+      "download_url": "https://images.pexels.com/photos/23957127/pexels-photo-23957127.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_road_widening_construction.jpg",
+      "path": "broll/002_road_widening_construction.jpg",
+      "concept": "Konstruksi pelebaran jalan dan infrastruktur",
+      "query": "road highway construction widening asphalt roadwork machinery",
+      "title": "Photo by filmvarazsstudio on Pixabay (https://pexafy.com/legal/licenses/#pixabay)",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/road-roller-asphalt-road-work-6750375/",
+      "download_url": "https://cdn.pixabay.com/photo/2021/10/28/19/26/road-roller-6750375_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_wide_empty_highway.jpg",
+      "path": "broll/003_wide_empty_highway.jpg",
+      "concept": "Jalan lebar yang tampak lebih lega dan lancar",
+      "query": "wide open multi lane highway clear road smooth asphalt",
+      "title": "Two-lane highway stretches into the distance under a clear blue sky with lush fields",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/symmetrical-view-of-a-highway-among-desert-8301940",
+      "download_url": "https://images.pexels.com/photos/8301940/pexels-photo-8301940.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_driver_commuter_traffic.jpg",
+      "path": "broll/004_driver_commuter_traffic.jpg",
+      "concept": "Komuter dan pengemudi memutuskan bepergian",
+      "query": "driver commuter driving car city traffic commute morning",
+      "title": "Rearview mirror reflects interior of car and surrounding traffic on city street at dusk",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/man-driving-in-traffic-16750838",
+      "download_url": "https://images.pexels.com/photos/16750838/pexels-photo-16750838.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_traffic_merging_highway.jpg",
+      "path": "broll/005_traffic_merging_highway.jpg",
+      "concept": "Kendaraan dari berbagai rute mulai memenuhi jalan baru",
+      "query": "cars merging onto busy highway packed lanes traffic flow",
+      "title": "Busy highway with multiple lanes filled with white and red cars under bright sunlight",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/aerial-photography-of-highway-road-XC_L00hjUww",
+      "download_url": "https://images.unsplash.com/photo-1504735432588-ab3bf116740f?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_complex_city_interchange.jpg",
+      "path": "broll/006_complex_city_interchange.jpg",
+      "concept": "Sistem lalu lintas yang saling bereaksi dan induced demand",
+      "query": "complex highway interchange overpass traffic city infrastructure",
+      "title": "Highway interchange with multiple lanes and overpasses under heavy vehicular traffic",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/aerial-photography-of-gray-concrete-roads-br9D5K3UTRQ",
+      "download_url": "https://images.unsplash.com/photo-1520594923568-1b5d82587f86?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_aerial_traffic_cityscape.jpg",
+      "path": "broll/007_aerial_traffic_cityscape.jpg",
+      "concept": "Jalan mengubah cara sebuah kota hidup",
+      "query": "aerial drone view dense city highway traffic grid metropolis",
+      "title": "Busy highway with multiple lanes, cars moving in both directions, surrounded by buildings and trees",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/aerial-shot-of-cars-on-the-road-5955920",
+      "download_url": "https://images.pexels.com/photos/5955920/pexels-photo-5955920.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_urban_mobility_transit.jpg",
+      "path": "broll/008_urban_mobility_transit.jpg",
+      "concept": "Mobilitas dan pergerakan manusia di kota",
+      "query": "urban people commuting bus transit public transportation street",
+      "title": "Two people wait on a sidewalk for bus 914 at an open door",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-couple-of-people-standing-in-a-bus-OmN6RC79Fhs",
+      "download_url": "https://images.unsplash.com/photo-1667904682908-a69e25fe1db8?w=1280",
+      "license": "free"
+    }
+  ]
+}

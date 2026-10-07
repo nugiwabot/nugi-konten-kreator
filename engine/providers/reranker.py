@@ -60,6 +60,7 @@ class LocalRerankerProvider(RerankerProvider):
         self.enable_fallback = enable_fallback if enable_fallback is not None else ALLOW_FALLBACK
         self.fallback = FallbackRerankerProvider()
         self._is_available: Optional[bool] = None
+        self._cache: Dict[str, float] = {}
 
     def is_alive(self) -> bool:
         """Pings reranker service with a lightweight test query."""
@@ -120,6 +121,7 @@ class LocalRerankerProvider(RerankerProvider):
                 f"Fallback status: {self.enable_fallback}"
             )
             if self.enable_fallback:
+                logger.warning(f"Reranker server unavailable. Degrading to token-overlap fallback: {e}")
                 return self.fallback.rerank(query, documents, top_n)
             raise ConnectionError(
                 f"Reranker server unreachable at {self.endpoint_url}: {e} (ALLOW_FALLBACK=False)"

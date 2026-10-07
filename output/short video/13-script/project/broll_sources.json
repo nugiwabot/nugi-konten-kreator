@@ -1,0 +1,103 @@
+{
+  "project": "13-script",
+  "headline": "Kenapa Harga Tanah Bisa Mahal Padahal Tanahnya Nggak Bisa Dipindahkan?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_vacant_land_plot.jpg",
+      "path": "broll/001_vacant_land_plot.jpg",
+      "concept": "Sebidang tanah kosong yang diam di tempat",
+      "query": "empty vacant land plot real estate property ground grass field",
+      "title": "Serene rural landscape features large multi-story building and single-story structure amidst lush gr",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/grassland-and-city-buildings-behind-20074182",
+      "download_url": "https://images.pexels.com/photos/20074182/pexels-photo-20074182.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_suburban_rural_open_land.jpg",
+      "path": "broll/002_suburban_rural_open_land.jpg",
+      "concept": "Tanah kosong di area terbuka/pinggiran",
+      "query": "open countryside field rural open land green landscape",
+      "title": "Serene rural landscape with vast open field, lush green grass and distant buildings",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/landscape-meadow-tree-horizon-1522561/",
+      "download_url": "https://cdn.pixabay.com/photo/2016/07/16/19/49/landscape-1522561_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_prime_commercial_district.jpg",
+      "path": "broll/003_prime_commercial_district.jpg",
+      "concept": "Lokasi strategis dekat jalan utama dan pusat bisnis",
+      "query": "prime commercial street central business district high rise buildings",
+      "title": "Bustling city street with tall buildings, clear blue sky, and active traffic and pedestrians",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-city-street-with-tall-buildings-in-the-background-Bx8dsfxTJCM",
+      "download_url": "https://images.unsplash.com/photo-1673140981283-9addfe9a742c?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_transit_hub_station_access.jpg",
+      "path": "broll/004_transit_hub_station_access.jpg",
+      "concept": "Aksesibilitas ke stasiun dan transportasi umum",
+      "query": "commuters walking transit station train subway accessibility hub",
+      "title": "Man walking towards an elevated silver subway train with open doors ahead slowly",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-group-of-people-walking-next-to-a-silver-train-1fWCscQtVJw",
+      "download_url": "https://images.unsplash.com/photo-1698307197314-82f2d5927947?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_urban_amenities_facilities.jpg",
+      "path": "broll/005_urban_amenities_facilities.jpg",
+      "concept": "Fasilitas kota: sekolah, pasar, rumah sakit di sekitar tanah",
+      "query": "city street public facilities school market urban amenities community",
+      "title": "Photo by Lukas on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/an-aerial-view-of-a-parking-lot-in-a-city-WFaMb1btaHM",
+      "download_url": "https://images.unsplash.com/photo-1728238365433-57d9731ace98?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_residential_neighborhood_living.jpg",
+      "path": "broll/006_residential_neighborhood_living.jpg",
+      "concept": "Manusia membeli akses dan kemudahan hidup",
+      "query": "pleasant residential neighborhood houses sidewalks trees community",
+      "title": "Residential street lined with houses and trees in a serene atmosphere with overcast sky",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/charming-suburban-street-with-colorful-houses-31726753",
+      "download_url": "https://images.pexels.com/photos/31726753/pexels-photo-31726753.png?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_urban_planning_aerial_map.jpg",
+      "path": "broll/007_urban_planning_aerial_map.jpg",
+      "concept": "Posisi tanah dalam jaringan kota dan tata ruang",
+      "query": "architectural blueprint urban planning map aerial city layout",
+      "title": "Detailed 3D rendering of cityscape with white and gray buildings and vibrant road colors",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/an-aerial-view-of-a-city-with-a-train-station-FUwxDsG33kc",
+      "download_url": "https://images.unsplash.com/photo-1643199350552-2d970ecad7e3?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_modern_city_skyline_land.jpg",
+      "path": "broll/008_modern_city_skyline_land.jpg",
+      "concept": "Nilai tanah adalah posisi dalam jaringan kehidupan manusia",
+      "query": "aerial view modern city skyline real estate development urban growth",
+      "title": "Tall buildings dominate the city skyline with varying heights and architectural styles visible",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/vancouver-downtown-skyline-with-cloudy-skies-32864203",
+      "download_url": "https://images.pexels.com/photos/32864203/pexels-photo-32864203.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

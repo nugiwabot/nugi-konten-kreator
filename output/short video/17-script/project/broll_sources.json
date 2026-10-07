@@ -1,0 +1,103 @@
+{
+  "project": "17-script",
+  "headline": "Kenapa Kota Punya Jalan yang Lebih Lebar dari yang Kita Kira?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_wide_empty_city_boulevard.jpg",
+      "path": "broll/001_wide_empty_city_boulevard.jpg",
+      "concept": "Jalan kota yang sangat lebar tampak lengang di siang hari",
+      "query": "wide multi lane empty city boulevard asphalt road sunny day",
+      "title": "Photo by hanswell on Pixabay (https://pexafy.com/legal/licenses/#pixabay)",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/tallinn-laagri-road-quarantine-5271546/",
+      "download_url": "https://cdn.pixabay.com/photo/2020/06/07/18/28/tallinn-5271546_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_peak_hour_heavy_traffic.jpg",
+      "path": "broll/002_peak_hour_heavy_traffic.jpg",
+      "concept": "Jalan raya pada jam sibuk (peak hour) padat kapasitas",
+      "query": "busy multi lane road peak hour traffic congested vehicles rush hour",
+      "title": "Busy highway with multiple lanes filled with cars driving on the right side road",
+      "provider": "pexafy",
+      "source_url": "https://pixabay.com//photos/congestion-road-traffic-cars-4567915/",
+      "download_url": "https://cdn.pixabay.com/photo/2019/10/22/07/41/congestion-4567915_1280.jpg",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_large_multilane_intersection.jpg",
+      "path": "broll/003_large_multilane_intersection.jpg",
+      "concept": "Persimpangan kota yang luas dengan banyak lajur belok",
+      "query": "large city intersection multi lane traffic junction overhead road markings",
+      "title": "Triangular-shaped city street intersection with multiple lanes and clear vehicle markings dominates ",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/an-aerial-view-of-a-street-intersection-with-cars-XY0FcmN_bPc",
+      "download_url": "https://images.unsplash.com/photo-1684243458371-a440eea66829?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_bus_truck_turning_radius.jpg",
+      "path": "broll/004_bus_truck_turning_radius.jpg",
+      "concept": "Kendaraan besar seperti bus dan truk butuh ruang manuver luas",
+      "query": "city transit bus large vehicle turning road clearance asphalt street",
+      "title": "Large black bus parked on the side of the road with two men walking nearby",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/black-bus-on-the-road-13160087",
+      "download_url": "https://images.pexels.com/photos/13160087/pexels-photo-13160087.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_road_lane_markings_design.jpg",
+      "path": "broll/005_road_lane_markings_design.jpg",
+      "concept": "Marka lajur, zebra cross, dan desain geometrik jalan",
+      "query": "crisp road markings white lines crosswalk asphalt street traffic lanes",
+      "title": "Close-up view of asphalt road with white crosswalk lines guiding pedestrian traffic upwards",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/close-up-photo-of-pedestrian-lane-1u21iw0vIrc",
+      "download_url": "https://images.unsplash.com/photo-1558879912-38d7a8936871?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_smooth_traffic_flow_arterial.jpg",
+      "path": "broll/006_smooth_traffic_flow_arterial.jpg",
+      "concept": "Arus kendaraan mengalir lancar melayani kebutuhan pergerakan",
+      "query": "vehicles flowing smoothly along broad urban arterial avenue sunny",
+      "title": "Photo by Igor Sporynin on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-city-street-filled-with-lots-of-traffic-next-to-tall-buildings-7K6mI68SomE",
+      "download_url": "https://images.unsplash.com/photo-1730131837001-aec5b1c8db77?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_aerial_urban_road_network.jpg",
+      "path": "broll/007_aerial_urban_road_network.jpg",
+      "concept": "Jaringan jalan kota dari atas yang menghubungkan kawasan",
+      "query": "aerial drone view wide city boulevard urban road grid layout",
+      "title": "Photo by Micko Damnjanovski on Pexels (https://pexafy.com/legal/licenses/#pexels)",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/drone-shot-of-city-10997816",
+      "download_url": "https://images.pexels.com/photos/10997816/pexels-photo-10997816.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_urban_streetscape_city_planning.jpg",
+      "path": "broll/008_urban_streetscape_city_planning.jpg",
+      "concept": "Infrastruktur jalan kota dirancang untuk kapasitas sistem",
+      "query": "modern city streetscape wide sidewalks trees urban design mobility",
+      "title": "Photo by yilia wei on Pexels (https://pexafy.com/legal/licenses/#pexels)",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/urban-street-scene-with-trees-and-buildings-34949438",
+      "download_url": "https://images.pexels.com/photos/34949438/pexels-photo-34949438.jpeg?w=1280",
+      "license": "free"
+    }
+  ]
+}

@@ -189,6 +189,9 @@ class MediaDownloader:
         sources_path = self._write_sources_json(folder_path, report.successful)
         report.sources_json_path = sources_path
 
+        # Register downloaded assets into Local MediaLibrary catalog
+        self._register_in_media_library(items, report.successful)
+
         return report
 
     # ------------------------------------------------------------------
@@ -555,3 +558,33 @@ class MediaDownloader:
         except Exception as e:
             logger.error(f"Failed to write sources.json: {e}")
             return None
+
+    def _register_in_media_library(
+        self,
+        items: List[MediaItem],
+        successful_files: List[DownloadedFile],
+    ) -> None:
+        """Register successfully downloaded media items into local media_library.json catalog."""
+        try:
+            from engine.pipeline.media_library import MediaLibrary
+            library = MediaLibrary()
+            items_by_url = {it.download_url: it for it in items}
+            for sf in successful_files:
+                it = items_by_url.get(sf.download_url)
+                if it:
+                    library.register_asset(
+                        local_path=str(sf.local_path),
+                        provider=it.provider,
+                        source_url=it.source_url,
+                        download_url=it.download_url,
+                        title=it.title,
+                        description=it.description,
+                        creator=it.creator,
+                        date=it.date,
+                        media_type=it.media_type,
+                        entities=getattr(it, "matched_entities", []),
+                        visual_requirement=getattr(it, "visual_requirement", "GENERIC_ALLOWED"),
+                        metadata=it.metadata,
+                    )
+        except Exception as e:
+            logger.warning(f"MediaDownloader: Failed to register assets into MediaLibrary: {e}")

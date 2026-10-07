@@ -1,0 +1,103 @@
+{
+  "project": "11-script",
+  "headline": "Kenapa Minimarket Bisa Ada di Mana-mana?",
+  "total_broll": 8,
+  "sources": [
+    {
+      "index": 1,
+      "filename": "001_minimarket_street_facade.jpg",
+      "path": "broll/001_minimarket_street_facade.jpg",
+      "concept": "Minimarket di pinggir jalan kota",
+      "query": "convenience store modern retail storefront street exterior",
+      "title": "Photo by Alex Quezada on Pexels (https://pexafy.com/legal/licenses/#pexels)",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/a-store-with-a-sign-that-says-soda-28096411",
+      "download_url": "https://images.pexels.com/photos/28096411/pexels-photo-28096411.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 2,
+      "filename": "002_people_passing_shops.jpg",
+      "path": "broll/002_people_passing_shops.jpg",
+      "concept": "Orang berjalan dan berkendara melewati toko",
+      "query": "pedestrians walking past shops sidewalk urban street",
+      "title": "Group of people walk down sidewalk with reflected sunlight from large building windows nearby",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/city-street-at-dawn-26184125",
+      "download_url": "https://images.pexels.com/photos/26184125/pexels-photo-26184125.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 3,
+      "filename": "003_foot_traffic_pedestrians.jpg",
+      "path": "broll/003_foot_traffic_pedestrians.jpg",
+      "concept": "Arus manusia dan mobilitas di depan toko",
+      "query": "busy street foot traffic crowd pedestrians walking sidewalk",
+      "title": "Photo by Lindsey Pak on Unsplash (https://pexafy.com/legal/licenses/#unsplash)",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-group-of-people-walking-down-a-sidewalk-next-to-tall-buildings-PW3i_xGpLCw",
+      "download_url": "https://images.unsplash.com/photo-1721662175392-4936099026e7?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 4,
+      "filename": "004_buying_water_drink.jpg",
+      "path": "broll/004_buying_water_drink.jpg",
+      "concept": "Membeli air minum atau kebutuhan cepat",
+      "query": "customer buying bottled drink beverages convenience store shelf",
+      "title": "Person reaches for a green can of Mountain Dew from a well-stocked refrigerator",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/person-holding-sprite-and-orange-soda-cans-SYVJmsx4z_M",
+      "download_url": "https://images.unsplash.com/photo-1579895989279-38560ff80a3e?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 5,
+      "filename": "005_busy_intersection_retail.jpg",
+      "path": "broll/005_busy_intersection_retail.jpg",
+      "concept": "Persimpangan ramai dan lokasi strategis",
+      "query": "busy city street intersection commercial buildings shops",
+      "title": "Busy city intersection with tall buildings, cars, and pedestrians amidst vibrant street scene",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/a-city-street-filled-with-lots-of-tall-buildings-FzBbDGCKsms",
+      "download_url": "https://images.unsplash.com/photo-1736959343243-f6f1892414c5?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 6,
+      "filename": "006_storefront_parking_visibility.jpg",
+      "path": "broll/006_storefront_parking_visibility.jpg",
+      "concept": "Visibilitas toko dan parkir kendaraan",
+      "query": "storefront view from street parking cars motorcycles entrance",
+      "title": "Motorcycles lined up along sidewalk in organized display near café storefront with gray pavement",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/motorcycles-parked-outside-shops-on-a-street-9LIgxYetJ3s",
+      "download_url": "https://images.unsplash.com/photo-1770980233612-6af54d465c24?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 7,
+      "filename": "007_quick_convenience_purchase.jpg",
+      "path": "broll/007_quick_convenience_purchase.jpg",
+      "concept": "Belanja cepat menghemat waktu dan kemudahan",
+      "query": "customer quick checkout counter paying cashier grocery store",
+      "title": "Photo by Kampus Production on Pexels (https://pexafy.com/legal/licenses/#pexels)",
+      "provider": "pexafy",
+      "source_url": "https://www.pexels.com/photo/paying-using-a-card-8422732",
+      "download_url": "https://images.pexels.com/photos/8422732/pexels-photo-8422732.jpeg?w=1280",
+      "license": "free"
+    },
+    {
+      "index": 8,
+      "filename": "008_urban_movement_city_flow.jpg",
+      "path": "broll/008_urban_movement_city_flow.jpg",
+      "concept": "Bisnis yang dibangun di atas pergerakan manusia",
+      "query": "urban street traffic dynamic city movement vehicles pedestrians",
+      "title": "Busy city street scene with multiple cars and pedestrians under an overpass at night",
+      "provider": "pexafy",
+      "source_url": "https://unsplash.com/photos/people-walk-across-a-sunlit-street-in-a-city-GFq6rSkloXc",
+      "download_url": "https://images.unsplash.com/photo-1771587529613-2b06e70ac497?w=1280",
+      "license": "free"
+    }
+  ]
+}

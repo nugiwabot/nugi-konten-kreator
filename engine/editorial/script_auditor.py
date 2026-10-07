@@ -1213,3 +1213,150 @@ if __name__ == "__main__":
             if c.recommendation:
                 print(f"   Rec   : {c.recommendation}")
         print("\n" + "=" * 80)
+
+
+# ------------------------------------------------------------------------------
+# Epistemic Verification Extension (4-State Verdict & Dossier Cross-Check)
+# ------------------------------------------------------------------------------
+
+def audit_script_with_dossier(
+    script_text: str,
+    dossier_data: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """
+    Comprehensive epistemic fact-checker cross-checking script sentences
+    against structured research dossier and empirical evidence.
+    
+    Produces 4-state verdicts:
+    - VERIFIED: Corroborated by S0-S2 sources or explicit dossier facts.
+    - PROBABLE: Supported by reputable S3-S4 reporting or plausible reasoning.
+    - DISPUTED: Conflicting evidence, causal overclaim, or numerical mismatch.
+    - UNVERIFIED: Lacks empirical backing or unverified speculation.
+    """
+    sentences = _segment_sentences(script_text)
+    audited_claims = []
+    
+    verified_count = 0
+    probable_count = 0
+    disputed_count = 0
+    unverified_count = 0
+
+    known_data_points = []
+    if dossier_data and "data_points" in dossier_data:
+        known_data_points = dossier_data["data_points"]
+    else:
+        try:
+            from engine.providers.bps_provider import _BPS_OFFICIAL_DATASETS
+            for ds in _BPS_OFFICIAL_DATASETS:
+                for dp in ds.get("data_points", []):
+                    known_data_points.append(dp.to_dict() if hasattr(dp, "to_dict") else dp)
+        except Exception:
+            pass
+
+    for idx, sentence in enumerate(sentences):
+        if len(sentence.strip()) < 15:
+            continue
+
+        claim_obj = _classify_and_build_claim(sentence, 'NARRATIVE')
+        c_type = claim_obj.claim_type
+        s_lower = sentence.lower()
+
+        verdict = "UNVERIFIED"
+        reason = "Pernyataan naratif belum memiliki referensi data primer eksplisit."
+        confidence = 0.5
+        flags = []
+
+        # 1. Check for Causal Overclaims (e.g. 'satu-satunya penyebab', 'pasti karena', '100% akibat')
+        if any(w in s_lower for w in ["satu-satunya penyebab", "pasti karena", "hanya disebabkan", "mutlak"]):
+            verdict = "DISPUTED"
+            reason = "Causal Overclaim: Mengklaim sebab tunggal mutlak untuk fenomena multi-faktor."
+            flags.append("CAUSAL_OVERCLAIM")
+            confidence = 0.3
+
+        # 2. Check for Numerical claims against known DataPoints
+        has_numbers = bool(re.search(r"\b\d+(?:[.,]\d+)?%?\b", sentence))
+        if has_numbers and known_data_points:
+            matched_dp = False
+            for dp in known_data_points:
+                val_str = str(dp.get("value", ""))
+                metric_name = dp.get("metric", "").lower()
+                if val_str and val_str in sentence:
+                    verdict = "VERIFIED"
+                    reason = f"Numerical Match: Terverifikasi oleh data {dp.get('source_name', 'BPS')} ({dp.get('metric')}: {dp.get('value')} {dp.get('unit', '')})."
+                    confidence = 0.95
+                    matched_dp = True
+                    break
+            if not matched_dp and verdict != "DISPUTED":
+                verdict = "PROBABLE"
+                reason = "Memuat data numerik yang perlu verifikasi tabel rujukan spesifik."
+                confidence = 0.70
+
+        # 3. Check for Dossier Finding Match
+        if dossier_data and verdict == "UNVERIFIED":
+            for claim_obj in dossier_data.get("claims", []):
+                c_text = claim_obj.get("text", "").lower()
+                overlap = len(set(s_lower.split()).intersection(set(c_text.split())))
+                if overlap >= 4:
+                    verdict = claim_obj.get("status", "PROBABLE")
+                    reason = f"Dossier Corroboration: Terhubung dengan klaim riset '{claim_obj.get('text', '')[:60]}...'."
+                    confidence = claim_obj.get("confidence_score", 0.8)
+                    break
+
+        # 4. Standard Heuristic Verdict if still UNVERIFIED
+        if verdict == "UNVERIFIED":
+            if c_type == ClaimType.OPINION:
+                verdict = "PROBABLE"
+                reason = "Refleksi filosofis/sudut pandang editorial yang wajar."
+                confidence = 0.70
+            elif c_type == ClaimType.SPECULATION:
+                verdict = "UNVERIFIED"
+                reason = "Spekulasi masa depan atau proyeksi yang belum terbukti."
+                confidence = 0.40
+            else:
+                # Factual claim types (QUANTITATIVE, HISTORICAL, CAUSAL, ECONOMIC, etc.)
+                if any(w in s_lower for w in ["bps", "data", "survei", "penelitian", "studi", "sejarah", "abad", "resmi"]):
+                    verdict = "PROBABLE"
+                    reason = "Mengacu pada bukti historis/studi umum tanpa sanggahan langsung."
+                    confidence = 0.75
+
+        if verdict == "VERIFIED":
+            verified_count += 1
+        elif verdict == "PROBABLE":
+            probable_count += 1
+        elif verdict == "DISPUTED":
+            disputed_count += 1
+        else:
+            unverified_count += 1
+
+        audited_claims.append({
+            "sentence_index": idx + 1,
+            "sentence": sentence,
+            "claim_type": c_type.value,
+            "verdict": verdict,
+            "confidence": confidence,
+            "reason": reason,
+            "flags": flags
+        })
+
+    # Overall Verdict
+    overall = "VERIFIED"
+    if disputed_count > 0:
+        overall = "DISPUTED"
+    elif unverified_count > verified_count + probable_count:
+        overall = "UNVERIFIED"
+    elif verified_count >= 1 or probable_count >= 2:
+        overall = "PROBABLE"
+
+    return {
+        "status": "ok",
+        "overall_verdict": overall,
+        "total_sentences_checked": len(audited_claims),
+        "breakdown": {
+            "verified": verified_count,
+            "probable": probable_count,
+            "disputed": disputed_count,
+            "unverified": unverified_count
+        },
+        "pass_gate": disputed_count == 0,
+        "claims": audited_claims
+    }

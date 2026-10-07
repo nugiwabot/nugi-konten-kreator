@@ -71,6 +71,310 @@ mcp = FastMCP(
 )
 
 # ------------------------------------------------------------------------------
+# 0. UNIFIED HIGH-LEVEL CONTENT INTELLIGENCE WORKFLOWS (Core MCP Surface)
+# ------------------------------------------------------------------------------
+
+@mcp.tool(name="nugi_content_create")
+def content_create(
+    topic: str,
+    format: str = "short",
+    output_folder: Optional[str] = None,
+    dry_run: bool = False,
+    stage_limit: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Master Autonomous Content Intelligence Workflow for Nugi.
+    Orchestrates:
+      Topic -> Editorial Qualification -> Deep Research & Dossier -> Script ->
+      Fact-Check (4-State) -> Visual Research -> B-roll Retrieval -> CapCut Draft
+    """
+    import re
+    from engine.editorial.quality_gate import check_quality_gates
+    from engine.pipeline.research_dossier import DossierGenerator
+    from engine.editorial.script_auditor import audit_script_with_dossier
+    from engine.pipeline.script_parser import ScriptParser
+    from engine.pipeline.visual_requirements import VisualRequirementsGenerator
+    from engine.pipeline.media_finder import MediaFinder
+    from engine.pipeline.srt_generator import SRTGenerator
+    from engine.pipeline.auto_edit_capcut import run_pipeline, find_workspace
+
+    folder_name = output_folder or f"prod_{re.sub(r'[^a-zA-Z0-9_]', '_', topic.lower()[:30])}"
+    work_dir = REPO_ROOT / "output" / folder_name
+    work_dir.mkdir(parents=True, exist_ok=True)
+
+    # Step 1: Editorial Quality Gate
+    gate_check = check_quality_gates({"title": topic, "human_question": topic})
+    if not gate_check.get("passed", True) and gate_check.get("hard_rejection", False):
+        return {
+            "status": "REJECTED_BY_EDITORIAL_GATE",
+            "topic": topic,
+            "violations": gate_check.get("violations", []),
+            "reasons": gate_check.get("reasons", ["Topic violates Nugi editorial policy."])
+        }
+
+    # Step 2: Deep Research & Dossier Generation
+    dossier_gen = DossierGenerator()
+    dossier = dossier_gen.build_dossier(topic)
+    dossier_files = dossier_gen.save_dossier_to_workspace(dossier, work_dir)
+
+    if stage_limit == "research":
+        return {
+            "status": "ok",
+            "stage": "research",
+            "topic": topic,
+            "dossier_status": dossier.epistemic_status,
+            "dossier_json": dossier_files["json_path"],
+            "dossier_md": dossier_files["md_path"],
+            "key_findings": dossier.key_findings,
+            "data_points": [dp.to_dict() for dp in dossier.data_points],
+        }
+
+    # Step 3: Script Formulation (Canonical Nugi Production Format)
+    hook = dossier.narrative_angles[0]["revelation"] if dossier.narrative_angles else f"Pernahkah kamu menyadari fakta di balik {topic}?"
+    why = dossier.narrative_angles[0]["why"] if dossier.narrative_angles else "Struktur sistemik yang sering luput dari perhatian kita."
+    c1_text = dossier.claims[0].text if dossier.claims else "Ada kesenjangan besar antara persepsi publik vs realitas empiris."
+    c2_text = dossier.claims[1].text if len(dossier.claims) > 1 else "Riset struktural membuktikan dampak langsung pada ruang hidup manusia."
+
+    script_lines = [
+        f"# NASKAH KONTEN NUGI — {topic.upper()}",
+        "## 📽️ NARASI 1: HUMAN × PLACE",
+        f"### *{topic}*",
+        "- **Pilar DNA:** `HUMAN × PLACE × CHANGE × WHY`",
+        "",
+        "#### NASKAH TALKING-HEAD (Durasi ~60 Detik | 150 Kata)",
+        "",
+        "```text",
+        "[00:00 - 00:08] HOOK",
+        f"{hook}",
+        "",
+        "[00:08 - 00:25] TENSION & PARADOX",
+        f"Banyak dari kita menganggap fenomena ini biasa. Namun data resmi BPS mengungkap cerita yang jauh berbeda.",
+        f"{c1_text}",
+        "",
+        "[00:25 - 00:45] CONTEXT & THE REAL DATA",
+        f"{c2_text}",
+        f"{why}",
+        "",
+        "[00:45 - 00:60] THE REVELATION (THE WHY)",
+        "Pada akhirnya, ruang bukan sekadar dinding dan atap, melainkan benteng pertahanan psikologis dan masa depan kita.",
+        "```",
+    ]
+    script_content = "\n".join(script_lines)
+    script_path = work_dir / "script.md"
+    script_path.write_text(script_content, encoding="utf-8")
+
+    # Step 4: Epistemic Fact-Check Audit
+    fact_check_result = audit_script_with_dossier(script_content, dossier.to_dict())
+    (work_dir / "fact_check_report.json").write_text(json.dumps(fact_check_result, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    if stage_limit == "script":
+        return {
+            "status": "ok",
+            "stage": "script",
+            "script_file": str(script_path),
+            "fact_check_verdict": fact_check_result["overall_verdict"],
+            "fact_check_pass": fact_check_result["pass_gate"],
+            "dossier_json": dossier_files["json_path"],
+        }
+
+    # Step 5: Visual Research & Micro-Beats
+    parser = ScriptParser()
+    narratives = parser.parse_text(script_content)
+    shots_data = []
+    if narratives:
+        v_gen = VisualRequirementsGenerator()
+        shots = v_gen.generate_shots_for_narrative(narratives[0])
+        shots_data = [
+            {
+                "shot_id": s.shot_id,
+                "section": s.section_name,
+                "visual_requirement": s.visual_requirement,
+                "query": s.search_query,
+                "entities": s.entities,
+            }
+            for s in shots
+        ]
+        (work_dir / "broll_plan.json").write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # Step 6: B-roll Media Retrieval & Downloading (Local-First)
+    finder = MediaFinder()
+    downloaded_assets = []
+    if not dry_run and shots_data:
+        broll_dir = work_dir / "footage"
+        broll_dir.mkdir(parents=True, exist_ok=True)
+        for s in shots_data[:5]:
+            q = s.get("query") or topic
+            vr = s.get("visual_requirement", "GENERIC_ALLOWED")
+            res = finder.find_and_download(
+                request=q,
+                media="any",
+                count=2,
+                folder=f"{folder_name}/footage",
+                visual_requirement=vr
+            )
+            downloaded_assets.extend([r.to_dict() for r in res.results if r.local_path])
+
+    # Step 7: Subtitles & Video Production Blueprint
+    srt_path = work_dir / "subtitles.srt"
+    if narratives:
+        srt_gen = SRTGenerator()
+        srt_gen.write_srt_file(srt_path, narratives[0].sections)
+
+    manifest = {
+        "topic": topic,
+        "folder": folder_name,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "editorial_fit": gate_check.get("fit_score", 85),
+        "epistemic_status": dossier.epistemic_status,
+        "fact_check_verdict": fact_check_result["overall_verdict"],
+        "shots_planned": len(shots_data),
+        "assets_downloaded": len(downloaded_assets),
+        "dry_run": dry_run,
+        "artifacts": {
+            "dossier_json": str(dossier_files["json_path"]),
+            "dossier_md": str(dossier_files["md_path"]),
+            "script_md": str(script_path),
+            "fact_check_json": str(work_dir / "fact_check_report.json"),
+            "broll_plan_json": str(work_dir / "broll_plan.json"),
+            "subtitles_srt": str(srt_path),
+        }
+    }
+    (work_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    return {
+        "status": "ok",
+        "topic": topic,
+        "workspace_folder": f"output/{folder_name}",
+        "editorial_fit_score": gate_check.get("fit_score", 85),
+        "epistemic_status": dossier.epistemic_status,
+        "fact_check_verdict": fact_check_result["overall_verdict"],
+        "fact_check_pass": fact_check_result["pass_gate"],
+        "total_shots_planned": len(shots_data),
+        "total_assets_ready": len(downloaded_assets),
+        "manifest": manifest,
+    }
+
+
+@mcp.tool(name="nugi_research_deep")
+def research_deep(
+    topic: str,
+    recency: Optional[str] = "m",
+    max_evidence: int = 5,
+    output_dir: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Execute deep evidence-first research across BPS, OpenAlex, and Web Discovery.
+    Outputs structured research_dossier.json and research_dossier.md.
+    """
+    import re
+    from engine.pipeline.research_dossier import DossierGenerator
+    
+    target_folder = output_dir or f"output/research_{re.sub(r'[^a-zA-Z0-9_]', '_', topic.lower()[:25])}"
+    out_path = resolve_safe_path(REPO_ROOT, target_folder)
+    
+    gen = DossierGenerator()
+    dossier = gen.build_dossier(topic, max_evidence_per_source=max_evidence)
+    files = gen.save_dossier_to_workspace(dossier, out_path)
+
+    return {
+        "status": "ok",
+        "topic": topic,
+        "epistemic_status": dossier.epistemic_status,
+        "overall_confidence": dossier.overall_confidence,
+        "subquestions": dossier.subquestions,
+        "key_findings": dossier.key_findings,
+        "data_points": [dp.to_dict() for dp in dossier.data_points],
+        "claims_count": len(dossier.claims),
+        "primary_sources_count": len(dossier.primary_sources),
+        "secondary_sources_count": len(dossier.secondary_sources),
+        "dossier_json": files["json_path"],
+        "dossier_md": files["md_path"],
+    }
+
+
+@mcp.tool(name="nugi_research_fact_check")
+def research_fact_check(
+    script_text_or_path: str,
+    dossier_path: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Fact-check narrative script against empirical evidence with 4-state verdicts
+    (VERIFIED, PROBABLE, DISPUTED, UNVERIFIED) and causal overclaim detection.
+    """
+    from engine.editorial.script_auditor import audit_script_with_dossier
+    safe_p = REPO_ROOT / script_text_or_path
+    if safe_p.is_file():
+        script_text = safe_p.read_text(encoding="utf-8")
+    else:
+        script_text = script_text_or_path
+
+    dossier_data = None
+    if dossier_path:
+        dp = resolve_safe_path(REPO_ROOT, dossier_path)
+        if dp.exists():
+            dossier_data = json.loads(dp.read_text(encoding="utf-8"))
+
+    return audit_script_with_dossier(script_text, dossier_data)
+
+
+@mcp.tool(name="nugi_visual_research")
+def visual_research(
+    script_text_or_path: str,
+    output_folder: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Perform deep visual research on script: micro-beat decomposition,
+    visual requirement classification (REAL_REQUIRED, etc.), entity preservation,
+    and motion graphic blueprint generation.
+    """
+    from engine.pipeline.script_parser import ScriptParser
+    from engine.pipeline.visual_requirements import VisualRequirementsGenerator
+
+    safe_p = REPO_ROOT / script_text_or_path
+    if safe_p.is_file():
+        script_text = safe_p.read_text(encoding="utf-8")
+    else:
+        script_text = script_text_or_path
+
+    parser = ScriptParser()
+    narratives = parser.parse_text(script_text)
+    if not narratives:
+        return {"error": "Could not parse any narratives from script."}
+
+    v_gen = VisualRequirementsGenerator()
+    shots = v_gen.generate_shots_for_narrative(narratives[0])
+
+    shots_data = [
+        {
+            "shot_id": s.shot_id,
+            "section": s.section_name,
+            "start": s.start_seconds,
+            "end": s.end_seconds,
+            "duration": s.duration_seconds,
+            "visual_requirement": s.visual_requirement,
+            "search_query": s.search_query,
+            "entities": s.entities,
+            "preferred_media_type": getattr(s, "preferred_media_type", "any"),
+            "primary_human_basic_need": getattr(s, "primary_human_basic_need", ""),
+            "human_alignment_score": getattr(s, "human_alignment_score", 0.0),
+        }
+        for s in shots
+    ]
+
+    if output_folder:
+        out_dir = resolve_safe_path(REPO_ROOT, f"output/{output_folder}")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        (out_dir / "broll_plan.json").write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    return {
+        "status": "ok",
+        "narrative_title": narratives[0].title,
+        "total_shots_planned": len(shots_data),
+        "shots": shots_data,
+    }
+
+
+# ------------------------------------------------------------------------------
 # 1. REPOSITORY TOOLS (nugi.repo.*)
 # ------------------------------------------------------------------------------
 

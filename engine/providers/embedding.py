@@ -87,6 +87,7 @@ class LocalEmbeddingProvider(EmbeddingProvider):
         self.fallback = FallbackEmbeddingProvider()
         self._is_available: Optional[bool] = None
         self._detected_dimension: Optional[int] = None
+        self._cache: Dict[str, List[float]] = {}
 
     def is_alive(self) -> bool:
         """Pings embedding service with a lightweight test vector."""
@@ -107,10 +108,29 @@ class LocalEmbeddingProvider(EmbeddingProvider):
     def get_embeddings(self, texts: List[str]) -> List[List[float]]:
         if not texts:
             return []
-        
+
+        # Return cached vectors where available
+        uncached_indices = []
+        uncached_texts = []
+        results: List[Optional[List[float]]] = [None] * len(texts)
+
+        for idx, t in enumerate(texts):
+            t_key = t.strip()
+            if t_key in self._cache:
+                results[idx] = self._cache[t_key]
+            else:
+                uncached_indices.append(idx)
+                uncached_texts.append(t)
+
+        if not uncached_texts:
+            return [r for r in results if r is not None]
+
         if self._is_available is False:
             if self.enable_fallback:
-                return self.fallback.get_embeddings(texts)
+                fallback_embs = self.fallback.get_embeddings(uncached_texts)
+                for idx, emb in zip(uncached_indices, fallback_embs):
+                    results[idx] = emb
+                return [r for r in results if r is not None]
             raise ConnectionError(
                 f"Embedding server unreachable at {self.endpoint_url} and ALLOW_FALLBACK is False."
             )
@@ -135,11 +155,15 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                     data_list = sorted(result.get("data", []), key=lambda x: x.get("index", 0))
                     chunk_embs = [item["embedding"] for item in data_list]
                     embs.extend(chunk_embs)
+                    for orig_text, emb in zip(chunk, chunk_embs):
+                        self._cache[orig_text.strip()] = emb
 
             self._is_available = True
             if embs and not self._detected_dimension:
                 self._detected_dimension = len(embs[0])
-            return embs
+            for idx, emb in zip(uncached_indices, embs):
+                results[idx] = emb
+            return [r for r in results if r is not None]
         except Exception as e:
             self._is_available = False
             logger.warning(
@@ -147,7 +171,11 @@ class LocalEmbeddingProvider(EmbeddingProvider):
                 f"Fallback status: {self.enable_fallback}"
             )
             if self.enable_fallback:
-                return self.fallback.get_embeddings(texts)
+                logger.warning(f"Degrading to deterministic FallbackEmbeddingProvider: {e}")
+                fallback_embs = self.fallback.get_embeddings(uncached_texts)
+                for idx, emb in zip(uncached_indices, fallback_embs):
+                    results[idx] = emb
+                return [r for r in results if r is not None]
             raise ConnectionError(
                 f"Embedding server unreachable at {self.endpoint_url}: {e} (ALLOW_FALLBACK=False)"
             )

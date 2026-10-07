@@ -25,6 +25,8 @@ Reuses existing:
 
 from __future__ import annotations
 
+from engine.pipeline.media_library import MediaLibrary
+
 import logging
 import os
 import re
@@ -316,6 +318,7 @@ class MediaFinder:
         ]
         self.ranker: MediaRanker = ranker or MediaRanker()
         self.downloader: MediaDownloader = downloader or MediaDownloader()
+        self.library: MediaLibrary = MediaLibrary()
 
     # --------------------------------------------------------------------------
     # Public: find (search + rank only)
@@ -446,9 +449,44 @@ class MediaFinder:
             resolved_era, resolved_media, visual_requirement=req_class
         )
 
-        candidates = self._gather_candidates(
-            queries, routed_providers, resolved_media, max_items=max(count * 3, 15)
+        # ── LOCAL LIBRARY FIRST: Check local catalog before remote searches ──
+        local_candidates: List[MediaItem] = []
+        try:
+            local_hits = self.library.search_local(
+                query=request,
+                media_type=resolved_media,
+                entities=entities,
+                visual_requirement=req_class,
+                max_results=count,
+            )
+            for hit in local_hits:
+                local_candidates.append(
+                    MediaItem(
+                        provider="local_library",
+                        id=hit["id"],
+                        title=hit["title"],
+                        description=hit["metadata"].get("description", hit["title"]),
+                        media_type=hit["media_type"],
+                        source_url=hit["source_url"],
+                        download_url=hit["download_url"],
+                        thumbnail_url="",
+                        creator=hit.get("creator", ""),
+                        date=hit.get("date", ""),
+                        license="Local Asset",
+                        visual_requirement=hit.get("visual_requirement", req_class),
+                        matched_entities=hit.get("entities", []),
+                        metadata=hit.get("metadata", {}),
+                    )
+                )
+        except Exception as e:
+            logger.warning(f"MediaFinder: Local library lookup failed: {e}")
+
+        # If local candidates cover the request, we can minimize remote queries
+        remote_max = max(count * 3 - len(local_candidates), 10)
+        remote_candidates = self._gather_candidates(
+            queries, routed_providers, resolved_media, max_items=remote_max
         )
+        candidates = local_candidates + remote_candidates
 
         ranked_items, fallback_reason = self._rank_candidates(
             original_request=request,
