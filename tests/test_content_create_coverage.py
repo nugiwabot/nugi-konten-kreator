@@ -18,7 +18,7 @@ import server
 from engine.pipeline.media_finder import MediaFinderResult, MediaFinderItem
 
 
-def test_content_create_full_broll_coverage(tmp_path):
+def test_content_create_full_broll_coverage(tmp_path, monkeypatch, research_offline):
     """
     Ensure nugi_content_create attempts B-roll retrieval for ALL candidate shots
     without being arbitrarily capped at 5 shots.
@@ -26,14 +26,16 @@ def test_content_create_full_broll_coverage(tmp_path):
     mock_finder = MagicMock()
     mock_item = MediaFinderItem(
         rank=1,
-        title="Sample Broll Asset",
+        title="Commuter housing crisis documentary",
         provider="wikimedia",
         media_type="image",
         score=0.9,
+        matched_entities=["Komuter", "Rumah"],
         source_url="https://commons.wikimedia.org/wiki/File:Sample.jpg",
         download_url="https://upload.wikimedia.org/wikipedia/commons/sample.jpg",
         local_path=str(tmp_path / "sample.jpg"),
     )
+    (tmp_path / "sample.jpg").write_bytes(b"test media bytes")
     mock_finder.find_and_download.return_value = MediaFinderResult(
         request="sample query",
         media_type="any",
@@ -47,29 +49,24 @@ def test_content_create_full_broll_coverage(tmp_path):
         status="OK"
     )
 
-    import shutil
-    test_out = REPO_ROOT / "output" / "test_full_coverage"
-    if test_out.exists():
-        shutil.rmtree(test_out, ignore_errors=True)
+    test_root = tmp_path / "test_repo"
+    monkeypatch.setattr(server, "REPO_ROOT", test_root)
 
-    try:
-        with patch("engine.pipeline.media_finder.MediaFinder", return_value=mock_finder):
-            res = server.content_create(
-                topic="Krisis Keterjangkauan Rumah dan Komuter",
-                dry_run=False,
-                output_folder="test_full_coverage",
-            )
+    with patch("engine.pipeline.media_finder.MediaFinder", return_value=mock_finder):
+        res = server.content_create(
+            topic="Krisis Keterjangkauan Rumah dan Komuter",
+            dry_run=False,
+            output_folder="test_full_coverage",
+        )
 
-            assert res["status"] == "ok"
-            total_shots = res["total_shots_planned"]
-            assert total_shots >= 4  # Standard talking head script produces multiple shots
+        assert res["production_status"] == "BLOCKED"  # No retrieved research evidence can pass fact-check.
+        assert res["fact_check_pass"] is False
+        total_shots = res["total_shots_planned"]
+        assert total_shots >= 4  # Standard talking head script produces multiple shots
 
-            # Verify finder was called for all shots requiring B-roll
-            call_count = mock_finder.find_and_download.call_count
-            assert call_count > 0
-            manifest = res["manifest"]
-            assert manifest["shots_planned"] == total_shots
-            assert res["total_assets_ready"] >= 1
-    finally:
-        if test_out.exists():
-            shutil.rmtree(test_out, ignore_errors=True)
+        # Verify finder was called for all shots requiring B-roll
+        call_count = mock_finder.find_and_download.call_count
+        assert call_count > 0
+        manifest = res["manifest"]
+        assert manifest["shots_planned"] == total_shots
+        assert res["total_assets_ready"] >= 1

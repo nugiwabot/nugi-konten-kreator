@@ -1,194 +1,80 @@
-# 🧠 Nugi Content Creator — Human–Place Content Intelligence Engine
+# Nugi Content Creator
 
-> *"Nugi membongkar hal-hal yang kelihatannya biasa, tetapi ternyata menentukan cara kita hidup."*
+Nugi Content Creator is a single-repository, filesystem-backed editorial and
+production pipeline for Human × Place content.
 
-Repositori ini adalah **NUGI HUMAN–PLACE CONTENT INTELLIGENCE ENGINE** — sebuah sistem editorial mandiri (*standalone*) untuk membangun media pengetahuan dan penceritaan Nugi di Indonesia.
+## Canonical production path
 
----
-
-## 🎯 Tujuan Repositori (Repository Purpose)
-
-Tugas engine ini **HANYA** untuk:
-1. **Discover questions:** Menemukan pertanyaan riil yang ingin dipahami manusia mengenai kehidupan nyata.
-2. **Deep research:** Meriset pertanyaan tersebut menggunakan bukti empiris dan data tepercaya.
-3. **Map causal relationships:** Mengidentifikasi hubungan kausal antara manusia (*Human*) dan ruang tempat manusia hidup (*Place*).
-4. **Understand multi-domain change:** Memahami perubahan dalam sejarah, ekonomi, teknologi, AI, kerja, budaya, geografi, kota, perumahan, dan tanah.
-5. **Construct causal chains:** Membangun rantai kausal multi-tingkat (mengapa suatu sistem terbentuk dan dampaknya).
-6. **Transform into Nugi storytelling:** Mengubah riset menjadi narasi khas Nugi yang tajam, reflektif, membumi, dan bernapas manusia.
-7. **Generate scripts:** Menghasilkan naskah short-form (Shorts/TikTok/Reels) dan long-form (YouTube video esai).
-8. **Support visual/media planning:** Menghasilkan spesifikasi visual per micro-beat, storyboard, dan aset produksi.
-9. **Learn from performance:** Belajar dari performa konten untuk mengasah fit score dan topik masa depan.
-
----
-
-## 🏛️ Identitas Editorial: HUMAN × PLACE × CHANGE × WHY
-
-Model editorial utama repositori ini adalah:
-
-$$\mathbf{HUMAN} \times \mathbf{PLACE} \times \mathbf{CHANGE} \times \mathbf{WHY}$$
-
-### Definisi 4 Pilar:
-- **HUMAN:** Orang-orang, keluarga, pekerja, komunitas, perilaku (*behavior*), identitas, dan kebutuhan eksistensial manusia.
-- **PLACE:** Rumah (*home/house/shelter*), tanah, kota, lingkungan (*neighborhood*), tempat kerja, ruang publik, dan geografi fisik.
-- **CHANGE:** Sejarah, ekonomi, teknologi, AI, infrastruktur, migrasi, budaya, iklim, industri, dan kebijakan publik.
-- **WHY:** Penalaran kausal (*causal reasoning*), sistem tersembunyi (*hidden systems*), insentif ekonomi, psikologi, dan sebab historis.
-
-> [!IMPORTANT]
-> **PROPERTY SEBAGAI THREAD, BUKAN TOPIK WAJIB:**  
-> Properti adalah benang merah (*thread/anchor*) penting di dalam ruang lingkup **PLACE**, namun **BUKAN** subjek wajib di setiap cerita. Cerita tentang geografi, tata ruang kota, psikologi tempat tinggal, sejarah kolonial pemukiman, atau masa depan ruang kerja sepenuhnya sah tanpa harus menyebut transaksi properti.
-
----
-
-## 🧭 Domain Editorial yang Diperbolehkan
-
-- Hunian & shelter (*homes, shelter, housing*)
-- Tanah & kepemilikan (*land, ownership, property rights*)
-- Kota, urbanisasi & arsitektur (*cities, urbanization, architecture, geography*)
-- Hubungan kerja & ruang hidup (*relationship between work and place*)
-- Hubungan teknologi & tempat tinggal (*relationship between technology and place*)
-- Hubungan ekonomi & ruang hidup (*relationship between economy and living space*)
-- Sejarah, migrasi, infrastruktur & transportasi (*history, migration, infrastructure, transportation*)
-- Masa depan cara hidup (*future of living, AI impact on spaces*)
-- Psikologi, perilaku & budaya manusia (*human psychology, behavior, culture*)
-
-*Domain di atas diperbolehkan hanya ketika berkontribusi untuk memahami kehidupan manusia dan/atau di mana serta bagaimana manusia hidup.*
-
----
-
-## 🚫 Apa yang BUKAN Tujuan Repositori Ini
-
-Repositori ini **BUKAN**:
-- CRM atau automasi penjualan
-- WhatsApp lead rotator atau sistem distribusi prospek
-- Layanan landing page properti
-- Sistem manajemen agensi software
-- Portofolio software-house
-- Saluran review tools AI generik
-- Agregator repositori eksternal
-
----
-
-## 🛡️ Batasan Repositori & Independensi Penuh
-
-Sistem ini **berdiri sendiri secara otonom (independently runnable)**:
-- Tidak ada dependensi kode, modul, runtime, atau API terhadap proyek CRM atau sistem penjualan lain.
-- Seluruh sumber kebenaran editorial aktif dibatasi pada direktori:
-  `core/`, `research/`, `thinking/`, `skills/`, `knowledge/`, `engine/`, `evaluation/`, `tests/`, `docs/`, dan `output/`.
-- Seluruh catatan historis agensi masa lalu telah diarsipkan terpisah di [`archive/legacy_agency_system/`](archive/legacy_agency_system/README.md).
-
----
-
-## ⚡ Infrastruktur AI Lokal (LAN Deployment)
-
-Sistem ini terhubung langsung ke infrastruktur inferensi lokal:
-
-```env
-# Local / LAN Embedding (LM Studio / OpenAI Compatible)
-EMBEDDING_URL=http://192.168.0.114:1234/v1/embeddings
-EMBEDDING_MODEL=Qwen3-Embedding-4B-Q4_K_M.gguf
-EMBEDDING_REQUIRED=true
-
-# Local / LAN Reranker (BGE-Reranker-v2-m3 / TEI Compatible)
-RERANKER_URL=http://192.168.0.114:8080/v1/rerank
-RERANKER_REQUIRED=true
-
-# Production Fail-Safe (false = strict fail-fast on production)
-ALLOW_FALLBACK=false
-```
-
----
-
-## 📊 Dataset Pencarian (`riset keyword.json`)
-
-File dataset pencarian bersifat **opsional, read-only**, dan hanya digunakan sebagai sinyal penemuan pertanyaan (*question mining*) dan pengelompokan semantik. Dataset ini tidak diubah dan tidak menjadi dependensi keras.
-
----
-
-## 🎬 Full Autonomous Production Engine & Video Integration
-
-Engine ini mengintegrasikan seluruh rantai produksi konten dari riset mendalam hingga paket draft video siap edit:
-
-```
-[Prompt / Topik Nugi]
-       │
-       ▼
-[Stage 1: Production Plan (Executive Producer Contract)]
-       │
-       ▼
-[Stage 2: Editorial Quality Gate & HP Qualification]
-       │
-       ▼
-[Stage 3: Deep Research Dossier (S0–S7 Source Hierarchy, Crossref, GDELT, BPS)]
-       │
-       ▼
-[Stage 4: Dynamic Script Synthesis (Human × Place × Change × Why, 30s–90s Teleprompter)]
-       │
-       ▼
-[Stage 5: 4-State Fact-Check Audit (VERIFIED, PLAUSIBLE, UNVERIFIED, CONTRADICTED)]
-       │
-       ▼
-[Stage 6: Visual Shot Planning & Micro-Beat Storyboard]
-       │
-       ▼
-[Stage 7: Media Retrieval, Multi-Stage Ranking & Provenance Tracking]
-       │
-       ▼
-[Stage 8: Subtitle Generation (Accurate SRT Cues)]
-       │
-       ▼
-[Stage 9: Native CapCut Desktop Draft Generation (draft_content.json, draft_meta_info.json)]
-       │
-       ▼
-[Stage 10: Remotion Motion Graphics Engine (Dynamic Title Cards & Kinetic Typography)]
-       │
-       ▼
-[Stage 11: Direct Installation to CapCut Desktop User Projects]
-       │
-       ▼
-[Stage 12: Final QA Engine Gatekeeping (Hard Violations + Soft Quality Score)]
-```
-
-> [!NOTE]
-> **Single Repository & Single MCP Mandate:**  
-> Seluruh fungsionalitas pengeditan video (CapCut Desktop Draft) dan motion graphics (Remotion) telah disatukan sepenuhnya ke dalam repositori ini (`nugi-konten-kreator`). Target editor video resmi adalah **CapCut Desktop** (Kdenlive dan silence-cutters usang telah dieliminasi sepenuhnya).
-
----
-
-## 🩺 System Health Check (The Doctor Command)
-
-Uji kesehatan dan kesiapan seluruh komponen engine secara mandiri:
-
-```powershell
-python -m engine.pipeline.engine_cli doctor
-```
-
-Untuk menjalankan seluruh rangkaian pengujian otomatis (396+ tests):
-
-```powershell
-pytest
-```
-
----
-
-## 📁 Struktur Direktori Aktif
+`nugi_content_create` is the primary MCP entry point. It invokes exactly one
+production orchestrator, `ProductionOrchestrator`, and persists each run in
+`output/<run>/manifest.json` (`ProductionManifest` is the only production state
+source of truth).
 
 ```text
-nugi-konten-kreator/
-├── core/               # Nilai brand, positioning, Content DNA, kebijakan editorial
-├── research/           # Metodologi riset, mode riset, evaluasi sumber & fakta
-├── thinking/           # Mesin sudut pandang, penalaran kausal, dekonstruksi WHY
-├── skills/             # Kontrak kerja agentik ide, riset, dan skrip
-├── knowledge/          # Korpus pengetahuan psikologi, pengaruh, memori, narasi
-├── remotion-app/       # Template Remotion React untuk motion graphics & title card
-├── engine/             # Pipeline Python mandiri
-│   ├── editorial/      # Modul klasifikasi editorial (HP engine, story type, dynamic script)
-│   ├── ingestion/      # Indexer korpus dokumen & chunking
-│   ├── pipeline/       # Timeline model, CapCut draft engine, CapCut validator, Remotion engine
-│   ├── production/     # Executive Producer, Production Manifest, Final QA, Production Orchestrator
-│   └── providers/      # LAN embedding & reranker client abstractions, Crossref, GDELT
-├── evaluation/         # Gerbang kualitas konten & loop pembelajaran
-├── docs/               # Dokumentasi arsitektur, playbook editorial, dan panduan CLI
-├── tests/              # 396+ unit, integration & end-to-end tests
-├── output/             # Output workspace: research dossier, script, subtitles, draft CapCut
-└── archive/            # Arsip historis sistem agensi lama (out-of-scope)
+USER / GEMINI / ANTIGRAVITY
+  -> nugi_content_create
+  -> ProductionOrchestrator
+  -> PLAN -> QUALIFY -> RESEARCH -> SCRIPT -> FACT_CHECK
+     -> VISUAL_PLAN -> MEDIA -> SUBTITLE -> CAPCUT -> FINAL_QA
+  -> ProductionManifest + artifacts
 ```
+
+The legacy workflow MCP tools are retained only as compatibility wrappers over
+that same orchestrator and manifest. They do not maintain their own executor,
+pipeline, or state store.
+
+## Production truthfulness
+
+- Media status is recorded per planned shot as `REAL_DOWNLOADED`,
+  `LOCAL_REUSED`, `PLACEHOLDER`, `MISSING`, or `NOT_REQUIRED`.
+- `PLACEHOLDER` is only created in `dry_run=True` and never counts toward
+  production B-roll coverage.
+- Final QA uses hard artifact gates and shot-to-media status mapping. A missing
+  or mismatched manifest, required artifact, fact-check pass, structurally
+  valid CapCut draft, or topic-relevant real media assignment blocks
+  publishability. Merely downloading a file does not prove shot coverage.
+- Fact-check output is reported as `PASS`, `FAIL`, `NEEDS_REVIEW`, or
+  `UNKNOWN`; it is never assumed from a default.
+- One source alone can support `PROBABLE`, not `VERIFIED`; factual publishability
+  requires independent corroboration and a passed script audit.
+- `exact_quote` is populated only from retrieved verbatim text. Provider
+  metadata and summaries use separate fields.
+- Research reports `evidence_strength`, explicitly documented as a heuristic,
+  not statistical confidence.
+- OpenAlex/Crossref citation counts remain source metadata, not topical data.
+  The BPS adapter returns no evidence until live BPS retrieval is implemented.
+
+## CapCut status
+
+The only CapCut generator is `engine/pipeline/capcut_engine.py`; the only
+structural validator is `engine/pipeline/capcut_validator.py`.
+
+- `GENERATED`: package files were created.
+- `VALIDATED`: deterministic structural validation passed.
+- `APP_VERIFIED`: a completed `app_verification.json` records that the draft
+  was opened, checked, and saved in CapCut Desktop.
+- `INVALID`: structural validation failed.
+
+Installing or registering a draft does not by itself produce `APP_VERIFIED`.
+
+## Verification
+
+Run the Python suite with:
+
+```powershell
+python -m pytest -q
+```
+
+`dry_run=True` is useful for structural testing only. A non-dry run still
+requires real provider/network availability and must be judged from its
+generated manifest and `final_qa.json`; the repository does not claim a result
+that has not been observed in the current environment. The normal test suite
+is offline; the live media-download test is opt-in with
+`NUGI_RUN_REAL_E2E=1`.
+
+## Deliberately excluded legacy paths
+
+The duplicate `VideoPipeline`, raw-footage auto-edit/SmartCut path, its
+faster-whisper dependency path, and the separate workflow state store have
+been removed. No database, agent framework, GPU model, or service layer is
+required for the canonical pipeline.

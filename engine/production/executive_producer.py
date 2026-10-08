@@ -33,6 +33,9 @@ class ProductionPlan:
     duration_seconds: float = 75.0
     style: str = "documentary"
     target_audience: str = "general_curious"
+    # Explicit production contract for spoken narration pacing.  QA must read
+    # this value from the plan, never apply a global short-video range.
+    spoken_words_per_minute: float = 138.0
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     # Stage flags & configurations
@@ -61,6 +64,8 @@ class ProductionPlan:
             "duration_seconds": self.duration_seconds,
             "style": self.style,
             "target_audience": self.target_audience,
+            "spoken_words_per_minute": self.spoken_words_per_minute,
+            "target_spoken_words": round(self.duration_seconds * self.spoken_words_per_minute / 60),
             "created_at": self.created_at,
             "research": {
                 "needed": self.research_needed,
@@ -117,6 +122,7 @@ class ProductionPlan:
             duration_seconds=float(data.get("duration_seconds", 75.0)),
             style=data.get("style", "documentary"),
             target_audience=data.get("target_audience", "general_curious"),
+            spoken_words_per_minute=float(data.get("spoken_words_per_minute", 138.0)),
             created_at=data.get("created_at", datetime.now(timezone.utc).isoformat()),
             research_needed=res_cfg.get("needed", True),
             research_depth=res_cfg.get("depth", "deep"),

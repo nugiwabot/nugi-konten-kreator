@@ -103,13 +103,15 @@ class ContentQualityEvaluator:
         if disputed > 0:
             dim["claim_confidence"] = 4.0
             blockers.append(f"Terdapat {disputed} pernyataan dalam naskah yang berstatus DISPUTED / overclaim.")
-        elif overall_verdict == "VERIFIED":
+        elif overall_verdict == "VERIFIED" and fact_check_result.get("pass_gate") is True:
             dim["claim_confidence"] = 9.5
         elif overall_verdict == "PROBABLE":
             dim["claim_confidence"] = 8.0
+            blockers.append("Fact-check berstatus PROBABLE; bukti belum cukup untuk melewati publish gate.")
         else:
             dim["claim_confidence"] = 6.0
             warnings.append(f"Terdapat {unverified} pernyataan naratif yang belum terverifikasi secara empiris.")
+            blockers.append(f"Fact-check berstatus {overall_verdict}; publish gate belum lulus.")
 
         # 5. Story Strength (0 - 10)
         # Structural teleprompter chapters: HOOK, TENSION, CAUSE, REVELATION

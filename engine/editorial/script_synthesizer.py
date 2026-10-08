@@ -55,9 +55,12 @@ class DynamicScriptSynthesizer:
         }
         secondary_angle = dossier.narrative_angles[1] if len(dossier.narrative_angles) > 1 else primary_angle
 
-        # 2. Extract Empirical Proof Points
+        # 2. Extract Empirical Proof Points only from dossier data that is
+        # actually relevant to the research topic. Scholarly citation counts
+        # are not topical statistics (providers omit them from data_points).
         dp_text = ""
-        if dossier.data_points:
+        research_verified = dossier.epistemic_status == "VERIFIED" and bool(dossier.claims)
+        if dossier.data_points and research_verified:
             dp = dossier.data_points[0]
             dp_text = f"Data {dp.source_name or 'resmi'} mencatat {dp.metric} sebesar {dp.value} {dp.unit}."
         elif dossier.claims:
@@ -65,7 +68,7 @@ class DynamicScriptSynthesizer:
 
         # 3. Extract Causal Mechanism
         cause_text = ""
-        if dossier.causal_relationships:
+        if dossier.causal_relationships and research_verified:
             cr = dossier.causal_relationships[0]
             cause_text = f"Pendorong utamanya adalah {cr.get('cause', '').lower()}, yang bekerja melalui {cr.get('mechanism', '').lower()}."
         elif len(dossier.claims) > 1:
@@ -79,7 +82,23 @@ class DynamicScriptSynthesizer:
         # Adapt content depth and word count to requested duration
         dur = max(20, int(target_duration_seconds))
 
-        if dur <= 35:
+        if not research_verified:
+            if dossier.epistemic_status == "DISPUTED":
+                hook = f"Sumber yang diperiksa berbeda pandangan tentang {topic}"
+                tension = "Bukti yang tersedia belum cukup untuk memilih satu penjelasan sebagai fakta."
+                context_cause = "Karena itu, hubungan sebab-akibatnya perlu diperiksa melalui data primer dan sumber independen."
+                why_epiphany = "Sampai ada penguatan bukti, kesimpulan yang bertanggung jawab adalah menahan kepastian."
+            elif dossier.claims:
+                hook = f"Sejumlah sumber memberi petunjuk tentang {topic}, tetapi belum cukup untuk memastikan penyebabnya"
+                tension = f"Temuan awal ini belum terkonfirmasi secara independen. {dp_text}"
+                context_cause = "Karena itu, dampak dan hubungan sebab-akibat yang spesifik belum dapat dipastikan."
+                why_epiphany = "Kesimpulan yang jujur: temuan ini masih perlu dibandingkan dengan data primer dan sumber independen."
+            else:
+                hook = f"Belum ada bukti yang cukup untuk memastikan penyebab {topic}"
+                tension = "Sumber yang berhasil diperiksa belum mengonfirmasi angka atau dampak tertentu."
+                context_cause = "Karena itu, hubungan sebab-akibatnya belum bisa disimpulkan."
+                why_epiphany = "Langkah berikutnya adalah mencari data primer, memeriksa periodenya, lalu membandingkannya dengan penelitian independen."
+        elif dur <= 35:
             # Punchy 30s micro-short (~70-85 words)
             tension = f"Banyak yang mengira ini kebetulan, padahal data menunjukkan sebaliknya. {dp_text}"
             context_cause = f"{cause_text}"
@@ -137,7 +156,7 @@ class DynamicScriptSynthesizer:
             "## 📽️ NARASI 1: HUMAN × PLACE",
             f"### *{topic}*",
             "- **Pilar DNA:** `HUMAN × PLACE × CHANGE × WHY`",
-            f"- **Status Epistemik Riset:** `{dossier.epistemic_status}` (Confidence: {int(dossier.overall_confidence * 100)}%)",
+            f"- **Status Epistemik Riset:** `{dossier.epistemic_status}` (Evidence strength heuristic: {int(dossier.evidence_strength * 100)}%)",
             "",
             f"#### NASKAH TALKING-HEAD (Durasi ~{dur} Detik | Spoken Word)",
             "",

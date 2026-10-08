@@ -1,25 +1,46 @@
-"""
-Tests for OpenAlex Academic Research Provider.
-"""
-import pytest
+"""Deterministic OpenAlex retrieval tests; no network dependency or fake corpus."""
+
+import io
+import json
+from unittest.mock import patch
+
 from engine.providers.openalex_provider import OpenAlexProvider
-from engine.providers.evidence_model import SourceTier, SourceType
 
 
-def test_openalex_offline_fixtures():
-    provider = OpenAlexProvider()
-    fixtures = provider._get_offline_fixtures("urban housing", max_results=2)
-    assert len(fixtures) == 2
-    assert fixtures[0].source.tier == SourceTier.S2
-    assert fixtures[0].source.source_type == SourceType.ACADEMIC
-    assert fixtures[0].source.is_primary is True
-    assert "agglomeration" in fixtures[0].claim_text.lower()
+def _response(data):
+    return io.BytesIO(json.dumps(data).encode("utf-8"))
 
 
-def test_openalex_search_evidence():
-    provider = OpenAlexProvider()
-    # Should safely return structured items even if network drops
-    items = provider.search_evidence("urban sprawl and commuting", max_results=2)
-    assert len(items) > 0
-    assert items[0].source.tier == SourceTier.S2
-    assert items[0].confidence > 0.8
+def test_openalex_abstract_is_a_retrieved_snippet_not_a_quote():
+    payload = {
+        "results": [{
+            "id": "https://openalex.org/W123",
+            "title": "Urban housing and commuting",
+            "publication_year": 2025,
+            "doi": "https://doi.org/10.1234/example",
+            "abstract_inverted_index": {"Rental": [0], "housing": [1], "affects": [2], "mobility.": [3]},
+        }]
+    }
+    with patch("urllib.request.urlopen", return_value=_response(payload)):
+        items = OpenAlexProvider().search_evidence("urban commuting", max_results=1)
+
+    assert len(items) == 1
+    assert items[0].exact_quote == ""
+    assert items[0].retrieved_snippet == "Rental housing affects mobility."
+    assert items[0].is_supporting is True
+
+
+def test_openalex_metadata_without_abstract_is_not_supporting_evidence():
+    payload = {"results": [{"id": "https://openalex.org/W456", "title": "A title only"}]}
+    with patch("urllib.request.urlopen", return_value=_response(payload)):
+        items = OpenAlexProvider().search_evidence("topic", max_results=1)
+
+    assert len(items) == 1
+    assert items[0].retrieved_snippet == ""
+    assert items[0].exact_quote == ""
+    assert items[0].is_supporting is False
+
+
+def test_provider_fails_closed_when_network_fails():
+    with patch("urllib.request.urlopen", side_effect=OSError("offline")):
+        assert OpenAlexProvider().search_evidence("topic", max_results=1) == []

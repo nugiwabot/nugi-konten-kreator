@@ -84,6 +84,7 @@ def content_create(
     stage_limit: Optional[str] = None,
     max_broll_shots: Optional[int] = None,
     depth: str = "deep",
+    recency: Optional[str] = None,
     install_to_capcut: bool = False,
 ) -> Dict[str, Any]:
     """
@@ -105,6 +106,7 @@ def content_create(
         stage_limit=stage_limit,
         max_broll_shots=max_broll_shots,
         install_to_capcut=install_to_capcut,
+        recency=recency,
     )
     return result.to_dict()
 
@@ -128,14 +130,15 @@ def research_deep(
     out_path = resolve_safe_path(REPO_ROOT, target_folder)
     
     gen = DossierGenerator()
-    dossier = gen.build_dossier(topic, max_evidence_per_source=max_evidence, depth=depth)
+    dossier = gen.build_dossier(topic, max_evidence_per_source=max_evidence, depth=depth, recency=recency)
     files = gen.save_dossier_to_workspace(dossier, out_path)
 
     return {
         "status": "ok",
         "topic": topic,
         "epistemic_status": dossier.epistemic_status,
-        "overall_confidence": dossier.overall_confidence,
+        "evidence_strength": dossier.evidence_strength,
+        "evidence_strength_method": "heuristic: source quality, claim coverage, independent lineage, and contradictions",
         "subquestions": dossier.subquestions,
         "key_findings": dossier.key_findings,
         "data_points": [dp.to_dict() for dp in dossier.data_points],
@@ -1085,60 +1088,6 @@ def video_plan(script_path: str) -> Dict[str, Any]:
     """Plan visual shots and timeline blueprint for script narratives."""
     return visual_generate_shots(resolve_safe_path(REPO_ROOT, script_path).read_text(encoding="utf-8"))
 
-@mcp.tool(name="nugi_video_dry_run")
-def video_dry_run(script_path: str, output_folder: str = "video_dry_run") -> Dict[str, Any]:
-    """Simulate end-to-end video pipeline without downloading assets."""
-    from engine.pipeline.video_pipeline import VideoPipeline
-    pipe = VideoPipeline()
-    out_dir = resolve_safe_path(REPO_ROOT, f"output/{output_folder}")
-    safe_script = resolve_safe_path(REPO_ROOT, script_path)
-    report = pipe.run(script_path=safe_script, output_dir=out_dir, dry_run=True)
-    return {
-        "status": "ok",
-        "successful_narratives": len(report.successful_narratives),
-        "failed_narratives": len(report.failed_narratives),
-        "output_dir": str(out_dir),
-    }
-
-@mcp.tool(name="nugi_video_create_project")
-def video_create_project(script_path: str, output_folder: str = "video_project") -> Dict[str, Any]:
-    """Execute complete video pipeline producing CapCut Desktop Draft, SRT subtitles, and shot blueprint in output/."""
-    from engine.pipeline.script_parser import ScriptParser
-    from engine.pipeline.srt_generator import SRTGenerator
-    safe_script = resolve_safe_path(REPO_ROOT, script_path)
-    parser = ScriptParser()
-    narratives = parser.parse_file(safe_script)
-    if not narratives:
-        return {"error": "Could not parse narratives from script."}
-
-    out_dir = resolve_safe_path(REPO_ROOT, f"output/{output_folder}")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    srt_out = out_dir / "subtitles.srt"
-    gen = SRTGenerator()
-    gen.write_srt_file(srt_out, narratives[0].sections)
-
-    shots_info = visual_generate_shots(safe_script.read_text(encoding="utf-8"))
-
-    # Also build CapCut draft if footage exists in workspace
-    from engine.pipeline.auto_edit_capcut import find_workspace, run_pipeline
-    ws = find_workspace(output_folder)
-    capcut_draft_status = "Workspace initialized (place raw footage in footage/ to generate timeline)"
-    if ws and (ws / "footage").exists() and any((ws / "footage").iterdir()):
-        ret = run_pipeline(workspace_name=output_folder, generate_mode=True)
-        capcut_draft_status = "CapCut draft generated successfully" if ret == 0 else f"CapCut generator returned code {ret}"
-
-    return {
-        "status": "ok",
-        "primary_editor": "CapCut Desktop",
-        "narrative": narratives[0].id,
-        "title": narratives[0].title,
-        "total_duration": narratives[0].total_duration_seconds,
-        "subtitles_file": str(srt_out),
-        "total_shots_planned": shots_info.get("total_shots", 0),
-        "output_dir": str(out_dir),
-        "capcut_draft": capcut_draft_status,
-    }
-
 @mcp.tool(name="nugi_video_validate")
 def video_validate(project_dir: str) -> Dict[str, Any]:
     """Validate completeness of CapCut video production artifacts (draft, subtitles, sources)."""
@@ -1160,58 +1109,6 @@ def video_validate(project_dir: str) -> Dict[str, Any]:
 # ------------------------------------------------------------------------------
 # 13. CAPCUT TOOLS (nugi.capcut.*) — Primary Video Production Engine
 # ------------------------------------------------------------------------------
-
-@mcp.tool(name="nugi_capcut_generate")
-def capcut_generate(
-    workspace: str = "01-script",
-    model: str = "base",
-    device: str = "cpu",
-    force_whisper: bool = False,
-    no_subtitle: bool = False,
-    project_name: Optional[str] = None,
-) -> Dict[str, Any]:
-    """Generate CapCut Desktop Draft project package from footage and B-roll in workspace."""
-    from engine.pipeline.auto_edit_capcut import run_pipeline, find_workspace
-    ws_dir = find_workspace(workspace)
-    if not ws_dir:
-        return {"error": f"Workspace '{workspace}' not found in output/ or output/short video/"}
-    ret = run_pipeline(
-        workspace_name=workspace,
-        generate_mode=True,
-        install_mode=False,
-        whisper_model=model,
-        whisper_device=device,
-        force_whisper=force_whisper,
-        no_subtitle=no_subtitle,
-        project_name_arg=project_name,
-    )
-    draft_dir = ws_dir / "project" / "capcut"
-    return {
-        "status": "ok" if ret == 0 else "error",
-        "exit_code": ret,
-        "workspace": str(ws_dir.relative_to(REPO_ROOT)),
-        "draft_created": draft_dir.exists(),
-        "draft_dir": str(draft_dir) if draft_dir.exists() else None,
-    }
-
-@mcp.tool(name="nugi_capcut_install")
-def capcut_install(
-    workspace: str = "01-script",
-    custom_draft_dir: Optional[str] = None,
-) -> Dict[str, Any]:
-    """Install generated CapCut Draft package into CapCut Desktop User Drafts directory."""
-    from engine.pipeline.auto_edit_capcut import find_workspace, install_capcut_draft
-    ws_dir = find_workspace(workspace)
-    if not ws_dir:
-        return {"error": f"Workspace '{workspace}' not found"}
-    draft_pkg = ws_dir / "project" / "capcut"
-    if not draft_pkg.exists():
-        return {"error": f"Draft package not found at '{draft_pkg}'. Run nugi_capcut_generate first."}
-    target_installed = install_capcut_draft(draft_pkg, custom_draft_dir)
-    return {
-        "status": "ok" if target_installed else "failed",
-        "installed_path": str(target_installed) if target_installed else None,
-    }
 
 @mcp.tool(name="nugi_capcut_inspect")
 def capcut_inspect(draft_content_json: str) -> Dict[str, Any]:
@@ -1265,48 +1162,6 @@ def remotion_render_title_card(title: str, subtitle: str = "", output_path: Opti
     return engine.render_title_card(title=title, subtitle=subtitle, output_path=out)
 
 # ------------------------------------------------------------------------------
-# 14. AUTOEDIT TOOLS (nugi.autoedit.*)
-# ------------------------------------------------------------------------------
-
-@mcp.tool(name="nugi_autoedit_analyze")
-def autoedit_analyze(raw_video_path: str) -> Dict[str, Any]:
-    """Inspect raw video resolution, duration, fps, and audio streams."""
-    from engine.pipeline.auto_edit_capcut import get_video_metadata
-    safe_p = resolve_safe_path(REPO_ROOT, raw_video_path)
-    if not safe_p.exists():
-        return {"error": f"Video file not found at '{safe_p}'"}
-    meta = get_video_metadata(safe_p)
-    return {
-        "status": "ok",
-        "video_file": str(safe_p),
-        "duration_seconds": meta.duration_seconds,
-        "width": meta.width,
-        "height": meta.height,
-        "fps": meta.fps,
-        "aspect_ratio": meta.aspect_ratio,
-    }
-
-@mcp.tool(name="nugi_autoedit_validate")
-def autoedit_validate(workspace: str) -> Dict[str, Any]:
-    """Validate CapCut project assembly integrity, footage, subtitles, and draft json."""
-    from engine.pipeline.auto_edit_capcut import find_workspace, find_main_video, get_video_metadata, validate_project
-    ws_dir = find_workspace(workspace)
-    if not ws_dir:
-        return {"error": f"Workspace '{workspace}' not found"}
-    main_v = find_main_video(ws_dir / "footage")
-    meta = get_video_metadata(main_v) if main_v else None
-    srt_p = ws_dir / "subtitle" / "subtitle.srt"
-    plan_p = ws_dir / "project" / "capcut_broll_plan.json"
-    draft_d = ws_dir / "project" / "capcut"
-    issues = validate_project(ws_dir, meta, srt_p, plan_p, draft_d) if meta else ["Main video not found in footage/"]
-    return {
-        "status": "ok" if not issues else "warning",
-        "workspace": str(ws_dir),
-        "is_valid": len(issues) == 0,
-        "issues": issues,
-    }
-
-# ------------------------------------------------------------------------------
 # 15. SYSTEM HEALTH TOOLS (nugi.doctor.*)
 # ------------------------------------------------------------------------------
 
@@ -1356,7 +1211,7 @@ def doctor_retrieval() -> Dict[str, Any]:
 @mcp.tool(name="nugi_doctor_video")
 def doctor_video() -> Dict[str, Any]:
     """Check video tools (FFmpeg, CapCut Desktop environment)."""
-    from engine.pipeline.auto_edit_capcut import detect_capcut_environment
+    from engine.pipeline.capcut_engine import detect_capcut_environment
     capcut_env = detect_capcut_environment()
     return {
         "status": "ok",
@@ -1401,8 +1256,8 @@ def test_research() -> Dict[str, Any]:
 
 @mcp.tool(name="nugi_test_video")
 def test_video() -> Dict[str, Any]:
-    """Run video pipeline test suite."""
-    return test_run("tests/test_video_pipeline.py")
+    """Run canonical production and CapCut validator tests."""
+    return test_run("tests/test_production_orchestrator_e2e.py")
 
 # ------------------------------------------------------------------------------
 # 17. PROPOSAL-BASED PROTECTED CHANGE TOOLS (nugi.change.*)

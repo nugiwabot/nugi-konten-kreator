@@ -14,9 +14,7 @@ import urllib.parse
 from typing import List, Dict, Any, Optional
 
 from engine.providers.research_base import ResearchProvider
-from engine.providers.evidence_model import (
-    EvidenceItem, Source, SourceTier, SourceType, DataPoint
-)
+from engine.providers.evidence_model import EvidenceItem, Source, SourceTier, SourceType
 
 logger = logging.getLogger(__name__)
 
@@ -81,21 +79,13 @@ class OpenAlexProvider(ResearchProvider):
                             word_positions.sort(key=lambda x: x[0])
                             abstract = " ".join(w[1] for w in word_positions[:120])
                         except Exception:
-                            abstract = title
+                            abstract = ""
 
                     summary_text = abstract or title
 
                     # Concept metrics
                     concepts = [c.get("display_name", "") for c in work.get("concepts", [])[:4]]
                     cited_by = work.get("cited_by_count", 0)
-
-                    data_points = []
-                    if cited_by > 0:
-                        data_points.append(DataPoint(
-                            metric="Citations",
-                            value=cited_by,
-                            source_name="OpenAlex Metrics"
-                        ))
 
                     source_entity = Source(
                         url=doi,
@@ -116,60 +106,31 @@ class OpenAlexProvider(ResearchProvider):
 
                     evidence = EvidenceItem(
                         id=f"openalex_{work_id.split('/')[-1]}",
-                        claim_text=f"Academic study '{title}' investigates {', '.join(concepts[:3])}",
+                        claim_text=(
+                            f"Retrieved abstract snippet: {abstract[:300]}"
+                            if abstract else f"Bibliographic record: {title}"
+                        ),
                         source=source_entity,
-                        exact_quote=summary_text[:300],
+                        # Abstract reconstruction is provider-supplied text, but it
+                        # is not a verified verbatim quotation from the publication.
+                        exact_quote="",
+                        retrieved_snippet=abstract,
+                        source_description=(
+                            "OpenAlex metadata and abstract reconstructed from its inverted index."
+                            if abstract else "OpenAlex bibliographic metadata only; no abstract text was returned."
+                        ),
                         summary=summary_text,
-                        data_points=data_points,
+                        # Citation counts measure scholarly attention, not the
+                        # research topic, so they are retained only in source
+                        # metadata and never exposed as topical statistics.
+                        data_points=[],
                         confidence=0.92,
-                        is_supporting=True,
+                        is_supporting=bool(abstract),
                     )
                     items.append(evidence)
 
         except Exception as e:
-            logger.warning(f"OpenAlex search failed: {e}. Providing offline research fallback.")
-            items = self._get_offline_fixtures(query, max_results)
+            logger.warning(f"OpenAlex search failed: {e}. No OpenAlex evidence was retrieved.")
+            return []
 
         return items
-
-    def _get_offline_fixtures(self, query: str, max_results: int) -> List[EvidenceItem]:
-        """Provides verified academic research fixtures when offline."""
-        fixtures = [
-            EvidenceItem(
-                id="fixture_urban_agglomeration",
-                claim_text="Urban agglomeration creates dense social capital and wage premia that survive remote work.",
-                source=Source(
-                    url="https://doi.org/10.1162/rest.2008.90.3.514",
-                    publisher="Journal of Economic Perspectives (NBER)",
-                    tier=SourceTier.S2,
-                    source_type=SourceType.ACADEMIC,
-                    title="The Wealth of Cities: Agglomeration Economies and Spatial Equilibrium",
-                    published_at="2020",
-                    reliability="HIGH",
-                    is_primary=True,
-                    author="Edward L. Glaeser",
-                ),
-                exact_quote="Cities thrive not through physical infrastructure alone, but through dense face-to-face contact and human interaction.",
-                summary="Empirical evidence on why proximity and agglomeration maintain land premiums even amidst technological shifts.",
-                confidence=0.9,
-            ),
-            EvidenceItem(
-                id="fixture_housing_tenure",
-                claim_text="Homeownership obsession is driven by institutional retirement risk and perceived territorial stability.",
-                source=Source(
-                    url="https://doi.org/10.1080/02673037.2018.1487037",
-                    publisher="Housing Studies Journal",
-                    tier=SourceTier.S2,
-                    source_type=SourceType.ACADEMIC,
-                    title="Psychological Ownership and the Meaning of Home in Urban Societies",
-                    published_at="2021",
-                    reliability="HIGH",
-                    is_primary=True,
-                    author="Kemeny & Saunders",
-                ),
-                exact_quote="Long-term mortgage commitment is tolerated as an existential hedge against social obsolescence and tenure insecurity.",
-                summary="Sociological study on tenure choices and mortgage indebtedness as psychological security mechanisms.",
-                confidence=0.88,
-            )
-        ]
-        return fixtures[:max_results]

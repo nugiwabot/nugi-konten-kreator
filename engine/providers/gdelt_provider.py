@@ -68,7 +68,7 @@ class GDELTProvider(ResearchProvider):
                         tier=cls["tier"],
                         source_type=cls["source_type"],
                         title=title,
-                        published_at=seendate[:8] if seendate else "2024",
+                        published_at=seendate[:8] if seendate else "",
                         reliability=cls["reliability"],
                         is_primary=cls["is_primary"],
                     )
@@ -77,40 +77,20 @@ class GDELTProvider(ResearchProvider):
                         id=f"gdelt_{idx}",
                         claim_text=f"Laporan media global ({domain}): {title}",
                         source=source,
-                        exact_quote=f"Liputan media global mengenai {title} yang terdeteksi via jaringan GDELT Project.",
+                        # GDELT's article-list response does not contain article text.
+                        exact_quote="",
+                        source_description=f"GDELT article-list metadata for {domain}: {title}",
                         summary=title,
                         confidence=0.80 if cls["tier"].rank <= 4 else 0.60,
-                        is_supporting=True,
+                        # An article-list title is discovery metadata, not the
+                        # article body or evidence for its underlying claims.
+                        is_supporting=False,
                         lineage_root=art_url
                     )
                     items.append(evidence)
 
         except Exception as e:
-            logger.warning(f"GDELT search failed: {e}. Providing global event intelligence fixtures.")
-            items = self._get_offline_fixtures(query, max_results)
+            logger.warning(f"GDELT search failed: {e}. No GDELT evidence was retrieved.")
+            return []
 
         return items
-
-    def _get_offline_fixtures(self, query: str, max_results: int) -> List[EvidenceItem]:
-        """Provides verified global media event fixtures when offline."""
-        fixtures = [
-            EvidenceItem(
-                id="fixture_gdelt_urban_transition",
-                claim_text="Dinamika urbanisasi Asia Tenggara dan tantangan perumahan generasi muda.",
-                source=Source(
-                    url="https://asia.nikkei.com/Economy/Housing-affordability-crisis-Southeast-Asia",
-                    publisher="Nikkei Asia",
-                    tier=SourceTier.S3,
-                    source_type=SourceType.NEWS_WIRE,
-                    title="Housing Affordability and the Urban Squeeze in Southeast Asia",
-                    published_at="2024",
-                    reliability="HIGH",
-                    is_primary=False,
-                ),
-                exact_quote="Rapid transit-oriented development struggles to outpace suburban land speculation across developing Asian capitals.",
-                summary="Liputan mendalam tentang tantangan hunian di kawasan metropolitan Asia Tenggara.",
-                confidence=0.85,
-                lineage_root="https://asia.nikkei.com"
-            )
-        ]
-        return fixtures[:max_results]

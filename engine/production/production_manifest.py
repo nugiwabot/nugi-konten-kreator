@@ -76,6 +76,38 @@ class ProductionManifest:
         st_val = stage.value if isinstance(stage, ProductionStage) else str(stage)
         return st_val in self.completed_stages
 
+    def invalidate_from(self, stage: str | ProductionStage) -> None:
+        """Forget this stage and all downstream completion claims on bad reuse."""
+        order = [item.value for item in ProductionStage]
+        st_val = stage.value if isinstance(stage, ProductionStage) else str(stage)
+        if st_val not in order:
+            return
+        invalid = set(order[order.index(st_val):])
+        self.completed_stages = [item for item in self.completed_stages if item not in invalid]
+        artifact_keys = {
+            ProductionStage.PLAN.value: {"production_plan"},
+            ProductionStage.RESEARCH.value: {"dossier_json", "dossier_md"},
+            ProductionStage.SCRIPT.value: {"script_md", "story_plan"},
+            ProductionStage.FACT_CHECK.value: {"fact_check_report"},
+            ProductionStage.VISUAL_PLAN.value: {"broll_plan"},
+            ProductionStage.MEDIA.value: {"media_manifest"},
+            ProductionStage.SUBTITLE.value: {"subtitles_srt"},
+            ProductionStage.CAPCUT.value: {"capcut_draft", "timeline_json", "capcut_validation"},
+            ProductionStage.FINAL_QA.value: {"final_qa"},
+        }
+        keys_to_remove = set().union(*(artifact_keys.get(item, set()) for item in invalid))
+        for key in keys_to_remove:
+            self.artifacts.pop(key, None)
+        self.status = "running"
+        if any(item in invalid for item in (ProductionStage.MEDIA.value, ProductionStage.VISUAL_PLAN.value, ProductionStage.SCRIPT.value, ProductionStage.RESEARCH.value)):
+            self.extra_fields.pop("content_quality", None)
+            self.artifacts.pop("content_quality_json", None)
+            self.extra_fields.pop("assets_downloaded", None)
+            self.extra_fields.pop("real_assets_ready", None)
+            self.extra_fields.pop("shots_planned", None)
+        self.quality = {} if ProductionStage.FINAL_QA.value in invalid else self.quality
+        self.updated_at = datetime.now(timezone.utc).isoformat()
+
     def to_dict(self) -> Dict[str, Any]:
         d = {
             "run_id": self.run_id,
@@ -107,6 +139,17 @@ class ProductionManifest:
     def load(cls, manifest_file: Path | str) -> ProductionManifest:
         p = Path(manifest_file).resolve()
         data = json.loads(p.read_text(encoding="utf-8"))
+        known_fields = {
+            "run_id", "topic", "format", "target_duration_seconds", "status",
+            "current_stage", "completed_stages", "artifacts", "quality",
+            "content_quality", "errors", "warnings", "created_at", "updated_at",
+        }
+        # Preserve all truth-bearing fields across resume.  The previous loader
+        # silently dropped them, which could turn a resumed run into a less
+        # informed one than the original run.
+        extra_fields = {key: value for key, value in data.items() if key not in known_fields}
+        if "content_quality" in data:
+            extra_fields["content_quality"] = data["content_quality"]
         return cls(
             topic=data.get("topic", ""),
             run_id=data.get("run_id", f"run_{uuid.uuid4().hex[:12]}"),
@@ -117,6 +160,7 @@ class ProductionManifest:
             completed_stages=data.get("completed_stages", []),
             artifacts=data.get("artifacts", {}),
             quality=data.get("quality", {}),
+            extra_fields=extra_fields,
             errors=data.get("errors", []),
             warnings=data.get("warnings", []),
             created_at=data.get("created_at", datetime.now(timezone.utc).isoformat()),

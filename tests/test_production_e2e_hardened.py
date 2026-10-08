@@ -20,7 +20,7 @@ import server
 from engine.pipeline.media_finder import MediaFinderResult, MediaFinderItem
 
 
-def test_hardened_production_workflow_e2e(tmp_path):
+def test_hardened_production_workflow_e2e(tmp_path, monkeypatch, research_offline):
     """
     Simulates full autonomous execution of content_create with quick depth
     and validates all 7 core workspace production artifacts.
@@ -28,14 +28,16 @@ def test_hardened_production_workflow_e2e(tmp_path):
     mock_finder = MagicMock()
     mock_item = MediaFinderItem(
         rank=1,
-        title="Sample Archive Footage",
+        title="Artificial intelligence workers in creative industries",
         provider="wikimedia",
         media_type="image",
         score=0.92,
+        matched_entities=["Kecerdasan Buatan", "Tenaga Kerja"],
         source_url="https://commons.wikimedia.org/wiki/File:Sample.jpg",
         download_url="https://upload.wikimedia.org/wikipedia/commons/sample.jpg",
         local_path=str(tmp_path / "sample.jpg"),
     )
+    (tmp_path / "sample.jpg").write_bytes(b"test media bytes")
     mock_finder.find_and_download.return_value = MediaFinderResult(
         request="tech sample",
         media_type="any",
@@ -52,6 +54,7 @@ def test_hardened_production_workflow_e2e(tmp_path):
     topic = "Transformasi Kecerdasan Buatan dan Pasar Tenaga Kerja"
     folder_name = "test_hardened_prod"
 
+    monkeypatch.setattr(server, "REPO_ROOT", tmp_path)
     with patch("engine.pipeline.media_finder.MediaFinder", return_value=mock_finder):
         res = server.content_create(
             topic=topic,
@@ -61,12 +64,13 @@ def test_hardened_production_workflow_e2e(tmp_path):
         )
 
     # 1. Assert result status and metrics
-    assert res["status"] in ("ok", "PUBLISH_READY", "MINOR_EDIT")
+    assert res["production_status"] == "BLOCKED"
+    assert res["fact_check_pass"] is False
     assert res["content_quality_score"] > 0
     assert "research_strength" in res["dimension_scores"]
 
     # 2. Assert physical artifacts on disk
-    work_dir = REPO_ROOT / "output" / folder_name
+    work_dir = tmp_path / "output" / folder_name
     assert (work_dir / "research_dossier.json").exists()
     assert (work_dir / "research_dossier.md").exists()
     assert (work_dir / "script.md").exists()

@@ -10,7 +10,11 @@ def test_retriever_initialization():
 
 
 def test_retriever_query_execution():
-    retriever = KnowledgeRetriever()
+    # Keep this unit test independent of a developer's configured local model.
+    retriever = KnowledgeRetriever(
+        embedding_provider=FallbackEmbeddingProvider(dim=128),
+        reranker_provider=FallbackRerankerProvider(),
+    )
     results = retriever.retrieve("prinsip kelangkaan dan rasa takut kehilangan", top_k_candidates=10, top_k_reranked=3)
     assert len(results) > 0
     assert "concept" in results[0]

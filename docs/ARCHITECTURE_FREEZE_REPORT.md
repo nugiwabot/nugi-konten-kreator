@@ -1,174 +1,62 @@
-# ❄️ NUGI CONTENT INTELLIGENCE ENGINE — ARCHITECTURE FREEZE REPORT
+# Architecture Freeze Report
 
-> **Status:** ARCHITECTURE FROZEN & PRODUCTION-READY  
-> **Repository:** `nugiwabot/nugi-konten-kreator`  
-> **Target Branch:** `origin/main`  
-> **Date:** October 2026  
-> **Verification Status:** ALL TESTS PASSED (397 passed in 352s, Full Regression & Non-Dry-Run E2E Verified)
-> **Single Repository:** Unified `nugiwabot/nugi-konten-kreator` (video-mcp audited, consolidated, ready for archive)
+## Status
 
----
+Architecture freeze is a code-level constraint: do not add a second production
+pipeline, state store, CapCut generator, or orchestration framework without a
+demonstrated production requirement. This document does not certify runtime
+production readiness, test counts, a real E2E result, or CapCut Desktop review;
+those are established only by the current verification artifacts.
 
-## 1. Executive Summary & Freeze Declaration
+## Canonical architecture
 
-The architecture of the **Nugi Content Intelligence Engine (MCP)** is hereby formally declared **FROZEN**.
-
-Under the **Single-Repo & Unified MCP Mandate**, `nugi-konten-kreator` is the **single and only repository and MCP server** for Nugi's content production engine. All required video editing (CapCut Desktop Draft) and motion graphic (Remotion templates) capabilities from `video-mcp` have been consolidated into native, lightweight implementations. Obsolete frameworks (Kdenlive exporter, SmartCut silence cutters) have been completely purged.
-
-Under the **Anti-Overengineering Contract**, the system operates as a unified, modular, single-repository production MCP server without speculative databases, redundant agent layers, or unnecessary distributed infrastructure.
-
-The core mission is fulfilled:
-```
-EDITORIAL QUALIFICATION
-  → DEEP RESEARCH & PRIMARY SOURCE HUNT
-  → EVIDENCE LINEAGE & S0–S7 MAPPING
-  → CONTRADICTION & CORROBORATION CHECK
-  → RESEARCH DOSSIER (JSON + MD)
-  → SCRIPT GENERATION (HUMAN × PLACE)
-  → 4-STATE FACT CHECK AUDIT
-  → VISUAL REQUIREMENTS & MICRO-BEAT GENERATION
-  → B-ROLL RETRIEVAL (100% SHOT COVERAGE)
-  → MULTI-STAGE RANKING (SEMANTIC + AUTHENTICITY)
-  → REAL MEDIA DOWNLOAD & DISK VERIFICATION
-  → LOCAL MEDIA LIBRARY INDEXING & REUSE
-  → PRODUCTION HANDOFF (CAPCUT DRAFT / SUBTITLES)
+```text
+nugi_content_create -> mcp.server.content_create -> ProductionOrchestrator
+  -> PLAN -> QUALIFY -> RESEARCH -> STORY/SCRIPT -> FACT_CHECK
+  -> VISUAL_PLAN -> MEDIA -> SUBTITLE -> CAPCUT -> FINAL_QA -> COMPLETE
+  -> ProductionManifest (persisted throughout at output/<run>/manifest.json)
 ```
 
----
+- `ProductionOrchestrator` is the only end-to-end production orchestrator.
+- `ProductionManifest` is the only state source for a production run.
+- `capcut_engine.py` is the only CapCut package generator.
+- `capcut_validator.py` is the only CapCut structural validator.
+- Compatibility workflow MCP methods delegate to the canonical orchestrator and
+  manifest; they do not own execution or state.
 
-## 2. Resolution of the 4 Production Audit Gaps
+## Integrity rules frozen with this architecture
 
-### Gap 1: Research Depth & Primary Source Hierarchy
-- **Resolution:**
-  - `DossierGenerator` (`engine/pipeline/research_dossier.py`) enforces strict evidentiary sorting (`SourceTier` S0 to S7), guaranteeing that S0 (Archival), S1 (BPS / Official Gov / Regulators), and S2 (Academic / OpenAlex / Crossref) strictly precede secondary and generic web results (S3 to S7).
-  - Integrated lightweight, zero-key REST adapters:
-    - **`CrossrefProvider`** (`engine/providers/crossref_provider.py`): Peer-reviewed DOI metadata, journal provenance, and citation metrics.
-    - **`GDELTProvider`** (`engine/providers/gdelt_provider.py`): Global news and event intelligence discovery.
-  - Implemented **Evidence Lineage Tracking** (`engine/providers/evidence_model.py`):
-    - Added `lineage_root`, `cited_sources`, and `is_derivative` to `EvidenceItem`.
-    - `Claim.evaluate_status()` calculates `independent_sources_count` and `lineage_roots`, preventing syndicated media articles that cite a single primary report from falsely inflating independent corroboration counts.
-  - Upgraded `nugi_research_evaluate_source` in `mcp/server.py` to evaluate domains and URLs via the unified `classify_source_tier` S0–S7 engine.
+1. Per-shot media provenance uses `REAL_DOWNLOADED`, `LOCAL_REUSED`,
+   `PLACEHOLDER`, `MISSING`, or `NOT_REQUIRED`. Only real/local files with
+   provenance and topic-relevant metadata count as B-roll coverage; a file's
+   presence alone is not enough.
+2. A missing/irrelevant required shot, invalid manifest lineage, failed
+   research/fact gate, missing artifact, or failed structural CapCut validation
+   is a Final QA hard blocker.
+3. `VALIDATED` is not `APP_VERIFIED`. Desktop verification requires an explicit
+   `app_verification.json` record of opening, checking, and saving the draft.
+4. Fact-check status derives from the report (`PASS`, `FAIL`, `NEEDS_REVIEW`,
+   `UNKNOWN`); no default pass is allowed. A single source is not independent
+   corroboration and cannot make a claim `VERIFIED`.
+5. The fact checker reads spoken narration only. Headings, timecodes, and
+   production metadata are not factual claims.
+6. `exact_quote` is verbatim retrieved text only. Metadata, snippets, and
+   generated summaries are separate fields. Citation counts are not topical
+   statistics.
+7. `evidence_strength` is a documented heuristic rather than statistical
+   confidence. Editorial scoring cannot override failed hard gates.
 
-### Gap 2: Embedding & Reranker Demarcation (Truth in Implementation)
-- **Resolution:**
-  - Audited and established clear architectural truth across three retrieval layers:
-    1. **Media Retrieval Candidate Ranking (`MediaRanker`):** ACTIVE. Uses text-level metadata embeddings (`EmbeddingProvider`) for Stage 1 candidate cosine similarity and cross-encoder neural reranking (`RerankerProvider`) for Stage 2 precision scoring.
-    2. **Knowledge Base Retrieval (`KnowledgeRetriever`):** ACTIVE. Uses `EmbeddingProvider` for Stage 1 vector search (Top 15 candidates) and `RerankerProvider` for Stage 2 precision reranking (Top 3–5 chunks).
-    3. **Research Evidence Retrieval (`DossierGenerator` / `ResearchRunner`):** NOT using vector embeddings or neural cross-encoders. Uses deterministic heuristic source routing, official indicator datasets (BPS), scholarly bibliographic indexing (OpenAlex, Crossref), and S0–S7 tier classification.
-    4. **Local Media Library Search (`MediaLibrary.search_local`):** NOT using neural vector embeddings. Uses exact entity matching, token overlap scoring, and visual requirement compatibility.
-  - *No false claims:* System documentation explicitly states that media ranking is metadata-based and not visual pixel-level embeddings.
+## Removed duplicate paths
 
-### Gap 3: B-Roll Coverage in `nugi_content_create`
-- **Resolution:**
-  - Eliminated the arbitrary `[:5]` shot slicing in `mcp/server.py`.
-  - `nugi_content_create` now inspects all generated shots from `VisualRequirementsGenerator`.
-  - Cleanly excludes shots that do not require external media (`NO_BROLL`, `REMOTION_REQUIRED`, `NO_VISUAL`).
-  - Iterates over 100% of planned shots requiring B-roll, with graceful per-shot try/except isolation to prevent individual provider hiccups from terminating the pipeline.
-  - Added optional `max_broll_shots` parameter for controlled test executions.
+- Legacy `VideoPipeline`.
+- Raw-footage automatic A-roll/auto-edit CapCut engine and its MCP surface.
+- Separate workflow executor, registry, and `.workflow_runs` state store.
+- Legacy faster-whisper subtitle/auto-edit script path.
 
-### Gap 4: Real Non-Dry-Run Download E2E Validation
-- **Resolution:**
-  - Implemented regression suite `tests/test_real_download_e2e.py` verifying the full physical lifecycle:
-    `Visual Requirement (REAL_PREFERRED) → Provider Search (Wikimedia Commons) → Ranking → Network Download → File on Disk (assets/media/) → Non-zero byte verification (>0 bytes) → Media Library Indexing → sources.json metadata persistence → Immediate Local Reuse via MediaLibrary.search_local()`.
-  - Fixed tokenization bug in `MediaLibrary.search_local` using regex alphanumeric word boundary extraction to ensure filenames with parentheses, hyphens, and punctuation match smoothly.
+## Verification boundary
 
-### Production Hardening: Channel Production Readiness Milestones
-
-#### 1. Dynamic Topic-Grounded Synthesis (Zero Hardcoded Narratives)
-- Eliminated all hardcoded housing/KPR/Jabodetabek narrative angles, causal mechanisms, visual needs, and entities in `research_dossier.py`.
-- Implemented dynamic topic synthesis functions (`_extract_entities_from_evidence`, `_synthesize_topic_causality`, `_synthesize_narrative_angles`, `_synthesize_visual_implications`, `_synthesize_timeline`) that derive narrative concepts directly from researched evidence and topic keywords.
-- Verified across 3 completely divergent topic domains (`tests/test_topic_differentiation.py`):
-  - Evergreen Housing vs Modern AI/Tech vs Historical Reformasi 1998 generate completely divergent findings, claims, angles, and visual shots.
-
-#### 2. Semantic Quote Integrity & Freshness Awareness
-- Enforced strict quote truthfulness: `exact_quote` in `EvidenceItem` is strictly populated only when verbatim quotes are extracted (`FAKE GENERATED DESCRIPTION != EXACT QUOTE`).
-- Added `retrieved_snippet` and `source_description` to separate raw search passages from quotes.
-- Implemented `evaluate_recency(published_at, topic_mode)` tracking age, temporal category (`CURRENT`, `RECENT`, `HISTORICAL`), and detecting outdated sources for breaking/news topics (`tests/test_quote_integrity.py`).
-
-#### 3. Resilient Hybrid Web Search Provider
-- Implemented `ResilientWebResearchProvider` (`engine/providers/search.py`):
-  - Primary: SearXNG metasearch when `SEARXNG_URL` is configured and responsive.
-  - Fallback: DuckDuckGo (`DDGSWebResearchProvider`) when SearXNG is unavailable or unset.
-
-#### 4. Topic-Grounded Dynamic Script Formulation (`DynamicScriptSynthesizer`)
-- Implemented `DynamicScriptSynthesizer` (`engine/editorial/script_synthesizer.py`):
-  - Formulates natural spoken Indonesian teleprompter scripts adhering to `HUMAN × PLACE × CHANGE × WHY`.
-  - Injects empirical facts, numbers (`{metric}: {value} {unit}`), and causal mechanisms from the research dossier.
-  - Proactively strips forbidden robotic AI filler phrases (`di era modern ini`, `fenomena ini menarik`, etc.).
-
-#### 5. 10-Dimension Content Quality QA (`ContentQualityEvaluator`)
-- Implemented `ContentQualityEvaluator` (`engine/editorial/content_scorer.py`):
-  - Scores production packages across 10 dimensions (Research Strength, Source Quality, Evidence Coverage, Claim Confidence, Story Strength, Human Relevance, Hook Strength, Originality, Visual Feasibility, Publishability).
-  - Categorizes status: `PUBLISH_READY` (>=90), `MINOR_EDIT` (80-89), `NEEDS_REVIEW` (70-79), `REJECT_AND_RESEARCH_AGAIN` (<70).
-  - Exports `content_quality_report.json` and embeds quality diagnostics in `manifest.json`.
-
----
-
-## 3. Implementation Taxonomy
-
-### ✅ Fully Implemented
-1. **Editorial Intelligence Engine:**
-   - 4 DNA Pillars (`HUMAN`, `PLACE`, `CHANGE`, `WHY`) & 12 Sub-domains.
-   - 10 Human–Place anchor criteria and canonical causal chain validation.
-   - 10 Narrative Archetypes & Epiphany/Revelation quality engine.
-   - 7-Dimension Fit Score (100-point total) & 8 Quality Gates / 12 Hard Rejections.
-2. **Epistemic Research & Evidence Lineage:**
-   - Multi-tier provider integration: BPS (S1), OpenAlex (S2), Crossref (S2), GDELT (S3), Web (S3–S7).
-   - Strict S0–S7 evidentiary sorting.
-   - Atomic `EvidenceItem` and `Claim` with 4 verification states (`VERIFIED`, `PROBABLE`, `DISPUTED`, `UNVERIFIED`).
-   - Lineage root deduplication preventing syndicated repetition bias.
-   - Structured Research Dossier generation (`research_dossier.json` and documentary `research_dossier.md`).
-3. **Visual Requirements & B-Roll Engine:**
-   - 5 Visual Requirement classes: `REAL_REQUIRED`, `REAL_PREFERRED`, `GENERIC_ALLOWED`, `NO_BROLL`, `REMOTION_REQUIRED`.
-   - Multi-provider media abstraction: Pexafy (semantic photo), Wikimedia Commons (documentary photo & video), Internet Archive (archival footage).
-   - Multi-stage ranking: deduplication, embedding similarity, cross-encoder reranking, entity/era authenticity scoring.
-   - 100% shot coverage in autonomous `content_create`.
-4. **Media Downloader & Local Media Library:**
-   - Filesystem-safe, path-traversal resistant downloading with max file size guards.
-   - Per-batch provenance metadata logging (`sources.json`).
-   - Local-first catalog (`engine/data/media_library.json`) with automatic post-download indexing and search reuse.
-5. **Production Handoff Blueprints (Native CapCut Desktop & Remotion):**
-   - Auto-edit generators for native CapCut desktop drafts (`draft_content.json`, `draft_meta_info.json`, `timeline_layout.json`, `attachment_pc_common.json`).
-   - Remotion React motion graphics engine (`remotion-app/`) for programmatic title cards and kinetic typography.
-   - Elimination of obsolete dependencies: Kdenlive and SmartCut silence-cutter completely purged from the codebase.
-   - Automated SRT subtitle generation synced to narrative timecodes.
-6. **Unified MCP Server & Workflows:**
-   - All tools registered under a single MCP server with backward compatibility.
-   - Orchestration workflows: `nugi_content_create`, `nugi_research_deep`, `nugi_research_fact_check`, `nugi_visual_research`, `nugi_media_find`, `nugi_media_download`.
-
----
-
-### ⏸️ Intentionally Deferred
-1. **Pixel-Level / Computer Vision Embeddings (CLIP / SigLIP):**
-   - *Rationale:* Current metadata-based semantic search and cross-encoder reranking provide high precision for documentary archival retrieval without requiring GPU VRAM overhead or heavy local torch dependencies.
-2. **Heavy Distributed Databases (Qdrant / Milvus / Neo4j):**
-   - *Rationale:* Portable JSON-based knowledge stores and media library catalogs operate with sub-millisecond local latency, zero external database setup, and zero daemon maintenance.
-3. **Automated Final Video Rendering (FFmpeg headless compilation):**
-   - *Rationale:* Content editors require non-destructive timeline review in NLEs (CapCut Desktop). Generating native draft project structures is vastly superior to rigid baked MP4 renders.
-
----
-
-### ⚠️ Known Limitations
-1. **LAN AI Endpoint Dependency:**
-   - LAN Embedding (`http://192.168.0.114:1234/v1/embeddings`) and Reranker (`http://192.168.0.114:8080/v1/rerank`) require the local server host to be powered on. When offline, `ALLOW_FALLBACK=true` allows graceful degradation to SHA-256 / keyword overlap scoring.
-2. **Internet Archive Network Latency:**
-   - Public Archive.org APIs can intermittently exhibit 2–3 second latency or rate throttling during peak traffic. Fallback timeouts isolate these delays.
-3. **Pexafy Video Limitation:**
-   - Pexafy MCP natively indexes photography/images only. Video retrieval is exclusively routed to Wikimedia Commons and Internet Archive.
-
----
-
-## 4. Maintenance & Governance Rules Post-Freeze
-
-1. **Bug Fixes:**
-   - Must patch existing modules without redesigning interfaces or data models.
-2. **New Providers:**
-   - Must subclass `ResearchProvider` or `MediaProvider`. No provider-specific bypasses.
-3. **New Topics / Content:**
-   - Handled via prompting, question mining, or editorial taxonomy without architectural modifications.
-4. **Architecture Changes:**
-   - Any modification to core abstractions (`ResearchProvider`, `MediaProvider`, `MediaRanker`, `DossierGenerator`, `EvidenceItem`, `Claim`) requires an explicit Architecture Decision Record (ADR).
-
----
-
-**Certified Ready for Production Deployment.**
+A dry run can validate artifacts and package structure but intentionally uses
+placeholders, so it cannot prove real media coverage. A real non-dry run must
+be recorded from the actual generated `manifest.json`, `media_manifest.json`,
+`final_qa.json`, and CapCut validation report. If CapCut Desktop is unavailable,
+the highest honest CapCut status is `VALIDATED`.

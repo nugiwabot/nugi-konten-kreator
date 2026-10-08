@@ -15,7 +15,7 @@ from typing import List, Dict, Any, Optional
 
 from engine.providers.research_base import ResearchProvider
 from engine.providers.evidence_model import (
-    EvidenceItem, Source, SourceTier, SourceType, DataPoint
+    EvidenceItem, Source, SourceTier, SourceType
 )
 
 logger = logging.getLogger(__name__)
@@ -75,18 +75,10 @@ class CrossrefProvider(ResearchProvider):
                     # Date
                     pub_parts = work.get("published-print", {}).get("date-parts", [[]])[0] or \
                                 work.get("published-online", {}).get("date-parts", [[]])[0] or []
-                    pub_year = str(pub_parts[0]) if pub_parts else "2024"
+                    pub_year = str(pub_parts[0]) if pub_parts else ""
                     
                     # Citation counts
                     citations = work.get("is-referenced-by-count", 0)
-                    data_points = []
-                    if citations > 0:
-                        data_points.append(DataPoint(
-                            metric="Crossref Citations",
-                            value=citations,
-                            source_name=f"{journal} (Crossref)"
-                        ))
-
                     source = Source(
                         url=doi_url,
                         publisher=journal,
@@ -104,42 +96,24 @@ class CrossrefProvider(ResearchProvider):
                         id=f"crossref_{idx}",
                         claim_text=f"Studi akademik terindeks Crossref '{title}' ({pub_year}) dalam {journal}.",
                         source=source,
-                        exact_quote=f"Published work '{title}' by {author_str} in {journal} ({pub_year}). DOI: {doi}",
+                        # Crossref returns bibliographic metadata, not a passage from
+                        # the work.  Metadata must never be presented as a quote.
+                        exact_quote="",
+                        source_description=f"Bibliographic metadata from Crossref: {title} by {author_str} in {journal} ({pub_year}). DOI: {doi}",
                         summary=title,
-                        data_points=data_points,
+                        # Citation counts are metadata about the paper, not
+                        # evidence for the searched topic.
+                        data_points=[],
                         confidence=0.92,
-                        is_supporting=True,
+                        # Bibliographic metadata is useful for discovery, but it
+                        # does not substantiate a topical claim by itself.
+                        is_supporting=False,
                         lineage_root=doi_url or journal
                     )
                     items.append(evidence)
 
         except Exception as e:
-            logger.warning(f"Crossref search failed: {e}. Providing verified academic fixtures.")
-            items = self._get_offline_fixtures(query, max_results)
+            logger.warning(f"Crossref search failed: {e}. No Crossref evidence was retrieved.")
+            return []
 
         return items
-
-    def _get_offline_fixtures(self, query: str, max_results: int) -> List[EvidenceItem]:
-        """Provides verified academic research fixtures when offline."""
-        fixtures = [
-            EvidenceItem(
-                id="fixture_crossref_housing_wealth",
-                claim_text="Akumulasi kekayaan rumah tangga dan segregasi spasial di kota metropolitan.",
-                source=Source(
-                    url="https://doi.org/10.1093/oxrep/grx042",
-                    publisher="Oxford Review of Economic Policy",
-                    tier=SourceTier.S2,
-                    source_type=SourceType.ACADEMIC,
-                    title="Housing Wealth and Inequality: The Mechanics of Urban Capital",
-                    published_at="2023",
-                    reliability="HIGH",
-                    is_primary=True,
-                    author="J. Muellbauer",
-                ),
-                exact_quote="The distribution of residential land value drives intergenerational wealth divergence in modern metropolitan areas.",
-                summary="Analisis empiris mengenai korelasi nilai lahan perkotaan terhadap ketimpangan antar generasi.",
-                confidence=0.91,
-                lineage_root="https://doi.org/10.1093/oxrep/grx042"
-            )
-        ]
-        return fixtures[:max_results]

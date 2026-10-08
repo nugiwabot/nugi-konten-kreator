@@ -8,7 +8,7 @@ Validates generated CapCut drafts against 16 structural, media, and timeline rul
 Strictly separates validation tiers:
   - GENERATED: Project files created on filesystem.
   - VALIDATED: 100% passed all 16 deterministic schema, track, and media checks.
-  - APP_VERIFIED: Confirmed registered in CapCut Desktop user draft library.
+  - APP_VERIFIED: Explicit record confirms opening and checking in CapCut Desktop.
   - INVALID: Structural or media reference failure.
 """
 
@@ -259,9 +259,10 @@ class CapCutValidator:
         else:
             rules_passed += 1
 
-        # Rule 16: Check if registered in CapCut Desktop root_meta_info.json (APP_VERIFIED check)
+        # Rule 16: Registration is useful diagnostic evidence, but is not proof
+        # that CapCut Desktop opened, imported, and rendered this draft.
         rules_checked += 1
-        app_verified = False
+        app_registered = False
         local_app_data = Path(os.environ.get("LOCALAPPDATA") or "~/AppData/Local").resolve()
         root_meta_p = local_app_data / "CapCut" / "User Data" / "Projects" / "com.lveditor.draft" / "root_meta_info.json"
         if root_meta_p.is_file():
@@ -270,11 +271,30 @@ class CapCutValidator:
                 draft_stores = root_meta.get("all_draft_store", [])
                 for ds in draft_stores:
                     if ds.get("draft_id") == c_id or ds.get("draft_fold_path", "").lower() == str(p).replace("\\", "/").lower():
-                        app_verified = True
+                        app_registered = True
                         break
             except Exception:
                 pass
         rules_passed += 1
+
+        # APP_VERIFIED requires an explicit human/application verification
+        # record.  Never infer it from a package, validator pass, or registration
+        # in root_meta_info.json.
+        verification_p = p / "app_verification.json"
+        app_verified = False
+        if verification_p.is_file():
+            try:
+                verification = json.loads(verification_p.read_text(encoding="utf-8"))
+                app_verified = bool(
+                    verification.get("opened_in_capcut_desktop")
+                    and verification.get("timeline_checked")
+                    and verification.get("saved_after_verification")
+                    and verification.get("verified_at")
+                )
+                if not app_verified:
+                    warnings.append("app_verification.json is incomplete; status remains VALIDATED.")
+            except Exception as exc:
+                warnings.append(f"Could not read app_verification.json; status remains VALIDATED: {exc}")
 
         is_valid = len(errors) == 0
         if not is_valid:
@@ -300,6 +320,7 @@ class CapCutValidator:
                 "subtitle_segments": len(mat_texts),
                 "media_files_checked": len(mat_videos),
                 "app_verified": app_verified,
+                "app_registered": app_registered,
             }
         )
         return report

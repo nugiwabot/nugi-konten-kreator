@@ -1,103 +1,98 @@
-"""
-mcp/workflows.py
-================
-MCP Workflow Orchestration Interface for Nugi Konten Kreator.
-Bridges MCP tool calls to engine.workflow execution, preflight, and planning services.
+"""Compatibility MCP workflow surface backed only by ProductionOrchestrator.
+
+The old workflow registry/executor had its own execution graph and persisted
+state. This module keeps the public MCP names while delegating every production
+action and resume lookup to the canonical manifest-based run.
 """
 
 from __future__ import annotations
 
-import logging
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from security import resolve_safe_path, SecurityError
-from engine.workflow import (
-    WorkflowExecutor,
-    WorkflowPlanner,
-    WorkflowPreflight,
-    WorkflowRegistry,
-    WorkflowStateManager,
-    registry,
-)
-
-logger = logging.getLogger(__name__)
+from security import SecurityError, resolve_safe_path
+from engine.production.production_manifest import ProductionManifest
+from engine.production.production_orchestrator import ProductionOrchestrator
 
 
 class WorkflowService:
-    """Singleton service managing MCP workflow interactions."""
+    """Thin compatibility wrapper; it owns no production logic or state."""
+
+    _COMPATIBILITY_WORKFLOWS = {
+        "content_idea": "research",
+        "research_only": "research",
+        "script_only": "script",
+        "fact_check": "script",
+        "content_audit": "script",
+        "short_video": None,
+        "full_video": None,
+        "broll": None,
+        "subtitle": None,
+        "capcut_draft": None,
+    }
 
     def __init__(self, repo_root: Path) -> None:
         self.repo_root = repo_root.resolve()
-        self.registry = registry
-        self.planner = WorkflowPlanner(self.registry)
-        self.preflight = WorkflowPreflight(self.repo_root, self.registry)
-        self.state_mgr = WorkflowStateManager(self.repo_root)
-        self.executor = WorkflowExecutor(self.repo_root, self.registry, self.state_mgr)
 
     def list_workflows(self) -> List[Dict[str, Any]]:
-        """List all available workflows in the registry."""
         return [
             {
-                "workflow_id": wf.workflow_id,
-                "name": wf.name,
-                "description": wf.description,
-                "tier": wf.tier.value,
-                "required_inputs": wf.required_inputs,
-                "optional_inputs": wf.optional_inputs,
-                "side_effects": wf.side_effects,
-                "risk_level": wf.risk_level.value,
-                "total_steps": len(wf.steps),
-                "tools_used": wf.tools_used,
+                "workflow_id": workflow_id,
+                "name": workflow_id.replace("_", " ").title(),
+                "description": "Compatibility view of the canonical ProductionOrchestrator pipeline.",
+                "canonical_entry_point": "nugi_content_create",
+                "required_inputs": ["topic"],
+                "state_source": "ProductionManifest",
             }
-            for wf in self.registry.list_all()
+            for workflow_id in self._COMPATIBILITY_WORKFLOWS
         ]
 
     def explain_workflow(self, workflow_id: str) -> Dict[str, Any]:
-        """Explain the rationale, dependencies, tools, and steps of a specific workflow."""
-        wf = self.registry.get(workflow_id)
-        if not wf:
-            return {
-                "error": f"Workflow '{workflow_id}' not found.",
-                "available_workflows": [w.workflow_id for w in self.registry.list_all()],
-            }
-
+        if workflow_id not in self._COMPATIBILITY_WORKFLOWS:
+            return {"error": f"Workflow '{workflow_id}' not found.", "available_workflows": list(self._COMPATIBILITY_WORKFLOWS)}
         return {
-            "workflow_id": wf.workflow_id,
-            "name": wf.name,
-            "description": wf.description,
-            "tier": wf.tier.value,
-            "required_inputs": wf.required_inputs,
-            "optional_inputs": wf.optional_inputs,
-            "dependencies": wf.dependencies,
-            "tools_used": wf.tools_used,
-            "validation_steps": wf.validation_steps,
-            "side_effects": wf.side_effects,
-            "risk_level": wf.risk_level.value,
-            "steps": [
-                {
-                    "step_number": idx + 1,
-                    "step_id": s.step_id,
-                    "name": s.name,
-                    "description": s.description,
-                    "tool": s.tool_name,
-                    "required_inputs": s.required_inputs,
-                    "is_critical": s.is_critical,
-                }
-                for idx, s in enumerate(wf.steps)
-            ],
-            "why_each_step_exists": self._get_step_rationales(wf.workflow_id),
+            "workflow_id": workflow_id,
+            "compatibility_wrapper": True,
+            "canonical_entry_point": "nugi_content_create",
+            "canonical_orchestrator": "ProductionOrchestrator",
+            "state_source": "ProductionManifest",
+            "stage_limit": self._COMPATIBILITY_WORKFLOWS[workflow_id],
         }
 
     def plan_workflow(self, request: str) -> Dict[str, Any]:
-        """Generate workflow plan from natural language intent."""
-        return self.planner.plan(request)
+        topic = self._topic_from_request(request)
+        return {
+            "mode": "PLAN",
+            "status": "planned" if topic else "needs_input",
+            "canonical_entry_point": "nugi_content_create",
+            "canonical_orchestrator": "ProductionOrchestrator",
+            "topic": topic,
+            "required_inputs": [] if topic else ["topic"],
+            "recommended_next_action": "Run nugi_content_create with the topic." if topic else "Provide a production topic.",
+        }
 
     def preflight_workflow(self, workflow_id: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Evaluate preconditions and missing assets before execution."""
-        clean_ctx = self._sanitize_context(context or {})
-        rep = self.preflight.check(workflow_id, clean_ctx)
-        return rep.to_dict()
+        if workflow_id not in self._COMPATIBILITY_WORKFLOWS:
+            return {"workflow_id": workflow_id, "status": "BLOCKED", "missing_items": ["Unknown workflow_id"]}
+        context = self._sanitize_context(context or {})
+        topic, workspace = self._resolve_topic_and_workspace(context)
+        if not topic:
+            return {
+                "workflow_id": workflow_id,
+                "status": "BLOCKED",
+                "missing_items": ["Missing required input: 'topic' (or a workspace with manifest.json)"],
+                "canonical_entry_point": "nugi_content_create",
+            }
+        return {
+            "workflow_id": workflow_id,
+            "status": "READY",
+            "canonical_entry_point": "nugi_content_create",
+            "canonical_orchestrator": "ProductionOrchestrator",
+            "state_source": "ProductionManifest",
+            "workspace": workspace,
+            "topic": topic,
+        }
 
     def execute_workflow(
         self,
@@ -106,71 +101,95 @@ class WorkflowService:
         run_id: Optional[str] = None,
         dry_run: bool = False,
     ) -> Dict[str, Any]:
-        """Execute a workflow with state tracking and preflight verification."""
-        clean_ctx = self._sanitize_context(context or {})
-        return self.executor.execute(workflow_id=workflow_id, context=clean_ctx, run_id=run_id, dry_run=dry_run)
+        if workflow_id not in self._COMPATIBILITY_WORKFLOWS:
+            return {"status": "failed", "error": f"Workflow '{workflow_id}' not found."}
+        context = self._sanitize_context(context or {})
+        resolved = self._find_manifest(run_id) if run_id else None
+        if resolved:
+            manifest, work_dir = resolved
+            topic = manifest.topic
+            output_folder = str(work_dir.relative_to(self.repo_root / "output"))
+        else:
+            topic, output_folder = self._resolve_topic_and_workspace(context)
+        if not topic:
+            return {"status": "blocked", "error": "A topic or canonical production workspace is required."}
+
+        result = ProductionOrchestrator(repo_root=self.repo_root).run(
+            topic_or_prompt=topic,
+            output_folder=output_folder or context.get("output_folder"),
+            format_hint=context.get("format", "short"),
+            duration_hint=context.get("duration_seconds"),
+            depth=context.get("depth", "deep"),
+            dry_run=dry_run,
+            stage_limit=self._COMPATIBILITY_WORKFLOWS[workflow_id],
+            max_broll_shots=context.get("max_broll_shots"),
+            install_to_capcut=bool(context.get("install_to_capcut", False)),
+            recency=context.get("recency"),
+        )
+        payload = result.to_dict()
+        payload.update({
+            "workflow_id": workflow_id,
+            "compatibility_wrapper": True,
+            "canonical_entry_point": "nugi_content_create",
+        })
+        return payload
 
     def workflow_status(self, run_id: str) -> Dict[str, Any]:
-        """Get the execution state and checkpoint history of a run."""
-        state = self.state_mgr.get_run(run_id)
-        if not state:
-            return {"error": f"Workflow run '{run_id}' not found."}
-        return state.to_dict()
+        resolved = self._find_manifest(run_id)
+        if not resolved:
+            return {"error": f"Production run '{run_id}' not found."}
+        manifest, work_dir = resolved
+        return {"workspace": str(work_dir), "manifest": manifest.to_dict(), "state_source": "ProductionManifest"}
 
     def resume_workflow(self, run_id: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Resume execution of a halted or blocked workflow run."""
-        state = self.state_mgr.get_run(run_id)
-        if not state:
-            return {"error": f"Workflow run '{run_id}' not found."}
+        resolved = self._find_manifest(run_id)
+        if not resolved:
+            return {"status": "failed", "error": f"Production run '{run_id}' not found."}
+        manifest, _ = resolved
+        return self.execute_workflow("short_video", context=context, run_id=manifest.run_id)
 
-        clean_ctx = self._sanitize_context(context or {})
-        return self.executor.execute(workflow_id=state.workflow_id, context=clean_ctx, run_id=run_id)
+    def _find_manifest(self, run_id: Optional[str]) -> Optional[tuple[ProductionManifest, Path]]:
+        if not run_id:
+            return None
+        output_root = self.repo_root / "output"
+        if not output_root.is_dir():
+            return None
+        for manifest_p in output_root.rglob("manifest.json"):
+            try:
+                manifest = ProductionManifest.load(manifest_p)
+            except Exception:
+                continue
+            if manifest.run_id == run_id:
+                return manifest, manifest_p.parent
+        return None
 
-    def _sanitize_context(self, ctx: Dict[str, Any]) -> Dict[str, Any]:
-        """Ensure file paths inside context remain safely confined within the repository."""
-        sanitized = dict(ctx)
-        for key in ["script_path", "raw_video_path", "srt_path", "output_path"]:
-            if key in sanitized and isinstance(sanitized[key], str) and sanitized[key]:
+    def _resolve_topic_and_workspace(self, context: Dict[str, Any]) -> tuple[str, Optional[str]]:
+        topic = str(context.get("topic") or "").strip()
+        workspace = context.get("output_folder") or context.get("workspace")
+        if workspace:
+            candidate = self.repo_root / "output" / str(workspace)
+            manifest_p = candidate / "manifest.json"
+            if manifest_p.is_file():
+                manifest = ProductionManifest.load(manifest_p)
+                return topic or manifest.topic, str(workspace)
+        return topic, str(workspace) if workspace else None
+
+    @staticmethod
+    def _topic_from_request(request: str) -> str:
+        quoted = re.search(r'["“\']([^"”\']+)["”\']', request)
+        if quoted:
+            return quoted.group(1).strip()
+        match = re.search(r"(?:tentang|mengenai|about)\s+([^\n.,;?]+)", request, re.IGNORECASE)
+        return match.group(1).strip() if match else request.strip()
+
+    def _sanitize_context(self, context: Dict[str, Any]) -> Dict[str, Any]:
+        sanitized = dict(context)
+        for key in ("output_folder", "workspace"):
+            value = sanitized.get(key)
+            if isinstance(value, str) and value:
                 try:
-                    safe_p = resolve_safe_path(self.repo_root, sanitized[key])
-                    sanitized[key] = str(safe_p.relative_to(self.repo_root))
-                except (SecurityError, PermissionError):
-                    # Retain original value for validator to handle or fail gracefully
+                    safe = resolve_safe_path(self.repo_root / "output", value)
+                    sanitized[key] = str(safe.relative_to(self.repo_root / "output"))
+                except (SecurityError, ValueError, PermissionError):
                     pass
         return sanitized
-
-    def _get_step_rationales(self, workflow_id: str) -> Dict[str, str]:
-        rationales: Dict[str, Dict[str, str]] = {
-            "content_idea": {
-                "editorial_classify": "Maps topic to proven audience interest anchors and domain taxonomy.",
-                "human_place": "Ensures topic connects with where and how living humans inhabit physical spaces.",
-                "property_brand_fit": "Guarantees Nugi Properti identity: Property is the lens, not always the sales object.",
-                "story_type": "Selects emotional narrative arc (Hidden System, Contradiction, Origin, Reframe).",
-                "why_angle": "Extracts systemic causal chain to prevent superficial trivia storytelling.",
-                "recommendation": "Synthesizes qualifications into definitive GO / PIVOT editorial verdict.",
-            },
-            "fact_check": {
-                "audit_engine": "Extracts empirical claims, verifies against evidence base, identifies overclaims, and checks property brand fit.",
-            },
-            "capcut_draft": {
-                "workspace_preflight": "Verifies all media, subtitle, and script assets exist before assembly.",
-                "footage_analysis": "Checks resolution, FPS, and audio streams to ensure high-quality render output.",
-                "capcut_generate": "Constructs multi-track CapCut timeline draft_content.json.",
-                "capcut_inspect": "Inspects JSON schema and tracks continuity.",
-                "capcut_validate": "Verifies file linkage and asset integrity.",
-            },
-            "short_video": {
-                "1_content_idea": "Guarantees strong hook and property lens before incurring production cost.",
-                "2_research": "Provides empirical facts and citations for Layer B Evidence Cards.",
-                "3_script": "Drafts spoken script calibrated to 160-185 words for natural 65-80s delivery.",
-                "4_fact_audit": "Ensures no unverified claims or false causality slip into published video.",
-                "5_editorial_audit": "Enforces zero hard selling and no promotional anti-patterns.",
-                "6_script_validation": "Verifies natural speaking pace and section boundaries.",
-                "7_visual_plan": "Creates dynamic shot list matching emotional beats with human relatability.",
-                "8_broll": "Discovers authentic archival and context footage across Wikimedia, IA, and Pexafy.",
-                "9_subtitle": "Produces synchronized word-for-word .srt subtitle tracks.",
-                "10_capcut_draft": "Assembles ready-to-edit CapCut timeline draft.",
-                "11_final_validation": "Ensures all project assets are complete and ready for voice-over recording.",
-            },
-        }
-        return rationales.get(workflow_id, {})

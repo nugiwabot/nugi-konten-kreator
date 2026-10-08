@@ -485,62 +485,9 @@ def cmd_doctor(args):
         print(f"[FAIL] {e}\n")
 
 
-def cmd_create_video(args):
-    """Batch faceless video production from structured script."""
-    from engine.pipeline.video_pipeline import VideoPipeline
-
-    print("\n" + "=" * 65)
-    print("🎬 NUGI CONTENT CREATOR — AUTOMATED VIDEO PRODUCTION PIPELINE")
-    print("=" * 65)
-    print(f"Script:     {args.script}")
-    print(f"Output dir: {args.output}")
-    print(f"Target:     {args.narasi}")
-    print(f"Mode:       {'DRY RUN (placeholders)' if args.dry_run else 'FULL PRODUCTION (downloading assets)'}")
-    print("=" * 65 + "\n")
-
-    pipeline = VideoPipeline()
-    report = pipeline.run(
-        script_path=args.script,
-        output_dir=args.output,
-        target_narasi=args.narasi,
-        dry_run=args.dry_run,
-    )
-    report.print_summary()
-
-
 def main():
     parser = argparse.ArgumentParser(description="Nugi Content Intelligence & Influence Engine CLI")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
-
-    # create-video command
-    p_cv = subparsers.add_parser(
-        "create-video",
-        help="Batch faceless video production: script -> retrieval -> rough cut -> subtitles -> CapCut draft",
-    )
-    p_cv.add_argument(
-        "--script",
-        type=str,
-        required=True,
-        help="Path to markdown script file (e.g. 5_Narasi_Konten_TikTok_Shorts_Nugi.md)",
-    )
-    p_cv.add_argument(
-        "--output",
-        type=str,
-        default="output",
-        help="Output directory (default: output)",
-    )
-    p_cv.add_argument(
-        "--narasi",
-        type=str,
-        default="all",
-        help="Process specific narasi ID/index (e.g. '1', 'narasi-01', or 'all')",
-    )
-    p_cv.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Generate timeline, subtitles, and CapCut drafts without downloading media files",
-    )
-    p_cv.set_defaults(func=cmd_create_video)
 
     # doctor command
     p_doctor = subparsers.add_parser("doctor", help="Comprehensive health check: Embedding, Reranker, Store, Media, Config, Rules")

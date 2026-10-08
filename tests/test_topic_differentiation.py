@@ -11,7 +11,7 @@ from engine.pipeline.research_dossier import DossierGenerator
 from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
 
 
-def test_three_topic_synthesis_differentiation():
+def test_three_topic_synthesis_differentiation(research_offline):
     """
     Generate dossiers and scripts for 3 meaningfully distinct topics:
     1. Evergreen Housing / Economy
@@ -33,11 +33,11 @@ def test_three_topic_synthesis_differentiation():
     dossier_ai = gen.build_dossier(topic_ai, max_evidence_per_source=2, depth="quick")
     dossier_history = gen.build_dossier(topic_history, max_evidence_per_source=2, depth="quick")
 
-    # 1. Assert Key Findings Differ
-    assert dossier_housing.key_findings != dossier_ai.key_findings
-    assert dossier_ai.key_findings != dossier_history.key_findings
-    assert "Krisis Keterjangkauan Rumah" in " ".join(dossier_housing.key_findings)
-    assert "Artificial Intelligence" in " ".join(dossier_ai.key_findings)
+    # No retrieval means no topic may inherit another topic's claims. The
+    # epistemic state remains explicit while editorial scaffolding stays local.
+    assert all(d.epistemic_status == "UNVERIFIED" for d in (dossier_housing, dossier_ai, dossier_history))
+    assert all(d.claims == [] and d.evidence_strength == 0.0 for d in (dossier_housing, dossier_ai, dossier_history))
+    assert all("Tidak ada bukti" in d.key_findings[0] for d in (dossier_housing, dossier_ai, dossier_history))
 
     # 2. Assert Entities Differ
     assert dossier_housing.entities != dossier_ai.entities
@@ -53,7 +53,7 @@ def test_three_topic_synthesis_differentiation():
     cause_history = dossier_history.causal_relationships[0]["cause"]
     assert cause_housing != cause_ai
     assert cause_ai != cause_history
-    assert "Artificial Intelligence" in cause_ai or "ai" in cause_ai.lower() or "industri" in cause_ai.lower()
+    assert topic_ai.lower() in cause_ai.lower()
 
     # 4. Assert Narrative Angles Differ
     angle_housing = dossier_housing.narrative_angles[0]["revelation"]

@@ -1,143 +1,65 @@
-# 💻 Engine CLI Reference Guide
+# CLI reference
 
-> **Human-life B-roll:** Untuk scene manusia sehari-hari, engine akan mengutamakan visual orang nyata + tempat nyata dan menampilkan Human Fit scores pada preview.
-
-Antarmuka baris perintah terpadu (*Unified CLI*) menyediakan akses ke seluruh subsistem Nugi Content Creator melalui modul `engine.pipeline.engine_cli`.
-
-Jalankan perintah dari direktori root repositori:
+Run commands from the repository root:
 
 ```powershell
 python -m engine.pipeline.engine_cli [COMMAND] [OPTIONS]
 ```
 
----
+End-to-end production is exposed through the MCP tool `nugi_content_create`,
+not through a second CLI pipeline. The CLI provides focused utilities:
 
-## 1. Perintah Pemeriksaan Sistem (`doctor`)
-
-Memeriksa kesehatan seluruh infrastruktur (koneksi server embedding LAN, server reranker LAN, indeks korpus pengetahuan, dan integritas modul editorial):
+## System and research
 
 ```powershell
 python -m engine.pipeline.engine_cli doctor
+python -m engine.pipeline.engine_cli research "Dampak transportasi publik pada komuter Jakarta"
+python -m engine.pipeline.engine_cli retrieve "kelangkaan dan rasa takut kehilangan" --top-n 3
+python -m engine.pipeline.engine_cli reindex --pages 30
 ```
 
----
+`doctor` checks local configuration and available services. `research` performs
+runtime web research. `retrieve` queries the local knowledge store and requires
+its configured embedding/reranking services unless fallback is enabled.
 
-## 2. Perintah Ekstraksi Pertanyaan (`mine` / `question-mine`)
+## Question mining
 
-Mengekstraksi dan mengelompokkan pertanyaan dari dataset eksternal opsional (`riset keyword.json`) menggunakan klasterisasi semantik adaptif (atau override manual) dan validasi reranker:
+The `question-mine` command (alias `mine`) reads an explicit JSON or JSONL
+dataset:
 
 ```powershell
-# Ekstraksi dengan jalur file default (menggunakan adaptive threshold otomatis)
-python -m engine.pipeline.engine_cli mine
-
-# Ekstraksi dari file spesifik dengan override threshold jarak cosine manual
-python -m engine.pipeline.engine_cli mine --dataset "output/riset keyword.json" --threshold 0.35 --top-k 10
-
-# Menonaktifkan kalkulasi adaptive threshold (menggunakan fallback default 0.30)
-python -m engine.pipeline.engine_cli mine --dataset "output/riset keyword.json" --no-adaptive --force-rebuild
+python -m engine.pipeline.engine_cli question-mine `
+  --dataset "output/riset-keyword.json" `
+  --output "output/question-opportunities.json" `
+  --top-k 10 --max-queries 100 --json
 ```
 
----
+Other options include `--min-results`, `--threshold`, `--no-adaptive`, and
+`--force-rebuild`. `--dataset` is required.
 
-## 3. Perintah Evaluasi Ide & Anchor (`evaluate`)
+## Media
 
-Menguji keselarasan topik terhadap identitas editorial, 10 kriteria Human–Place anchor, intensi, dan skor kelayakan:
+The `media` command group supports search, download, script extraction, and
+provider diagnostics:
 
 ```powershell
-python -m engine.pipeline.engine_cli evaluate --topic "Kenapa harga tanah di pinggiran kota selalu naik lebih cepat dari kenaikan gaji?"
+python -m engine.pipeline.engine_cli media search "Monumen Nasional Jakarta" --count 5 --media photo
+python -m engine.pipeline.engine_cli media download "arsip transportasi Jakarta" --count 3 --folder "transportasi"
+python -m engine.pipeline.engine_cli media from-script "output/script.md" --folder "script-assets" --count-per-scene 2
+python -m engine.pipeline.engine_cli media doctor
 ```
 
----
-
-## 4. Perintah Riset Epistemik (`research`)
-
-Menjalankan riset berbasis fakta vs klaim pada topik tertentu dengan menyerap korpus pengetahuan lokal dan retrieval dua tahap:
+`media find` (also available as top-level `media-find` / `find-media`) uses
+MediaFinder and supports `--media`, `--era`, `--style`, `--visual-requirement`
+(`--vr`), `--count`, optional `--download`, `--folder`, and `--output`:
 
 ```powershell
-python -m engine.pipeline.engine_cli research --query "Dampak remote work dan AI terhadap keterjangkauan rumah di pinggiran kota"
+python -m engine.pipeline.engine_cli media-find `
+  --query "kereta komuter Jakarta" `
+  --media photo --era present --style documentary `
+  --visual-requirement REAL_REQUIRED --count 5
 ```
 
----
-
-## 5. Perintah Pembuatan Narasi & Storyboard (`generate`)
-
-Menghasilkan struktur narasi multi-beat (Shorts/TikTok atau Video Esai Panjang) beserta spesifikasi visual shot-by-shot:
-
-```powershell
-python -m engine.pipeline.engine_cli generate --topic "Kapan manusia pertama kali menetap dan berhenti nomaden?" --story-type origin --format short
-```
-
----
-
-## 6. Perintah Pipeline Video & Export (`video`)
-
-Menjalankan pipeline pra-produksi video (parsing naskah, alokasi micro-beats, pembuatan subtitle `.srt`, dan ekspor proyek CapCut Desktop draft):
-
-```powershell
-python -m engine.pipeline.engine_cli create-video --script "output/narasi-01/SCRIPT_AND_STORYBOARD.md" --output "output/narasi-01/video"
-```
-
----
-
-## 7. Pencarian Aset Visual & Footage (`media-find`)
-
-Pencarian aset foto dan video berkualitas menggunakan modul terpadu `MediaFinder`. Mendukung penyaringan era, gaya visual (*visual style*), jenis media (*photo/video/any*), perutean penyedia otomatis (Pexafy, Wikimedia Commons, Internet Archive), dan pengunduhan batch dengan penyimpanan metadata lisensi/provenance:
-
-```powershell
-# Foto formal pekerja kantor modern (Pexafy / Stock photo)
-python -m engine.pipeline.engine_cli media-find \
-  --query "manusia bekerja di kantor modern" \
-  --media photo \
-  --era present \
-  --style formal \
-  --count 8
-
-# Footage sejarah manusia mulai menetap (Wikimedia Commons + Internet Archive)
-python -m engine.pipeline.engine_cli media-find \
-  --query "manusia mulai menetap pada zaman prasejarah" \
-  --media any \
-  --era historical \
-  --style documentary \
-  --count 8
-
-# Visual konseptual masa depan rumah dengan AI
-python -m engine.pipeline.engine_cli media-find \
-  --query "rumah masa depan dengan AI" \
-  --media photo \
-  --era future \
-  --style conceptual \
-  --count 8
-
-# Pencarian sekaligus mengunduh file ke assets/media/ dan mencatat provenance di sources.json
-python -m engine.pipeline.engine_cli media-find \
-  --query "arsip sejarah revolusi industri di pabrik" \
-  --media any \
-  --era historical \
-  --style archival \
-  --count 5 \
-  --download \
-  --folder "revolusi_industri"
-
-# Pencarian bukti sejarah otentik dengan hard gate (REAL_REQUIRED)
-python -m engine.pipeline.engine_cli media-find \
-  --query "D-Day pendaratan Normandia 6 Juni 1944" \
-  --vr REAL_REQUIRED \
-  --era historical \
-  --media video
-
-# Untuk dokumentasi lengkap Evidence-Based B-Roll & Visual Retrieval System, lihat docs/EVIDENCE_BASED_BROLL.md
-```
-
-
-
-### Human Fit pada preview
-
-Untuk scene dengan konteks manusia, preview MediaFinder dapat menampilkan:
-
-    Need = human basic need
-    Lens = HEALTH / WEALTH / RELATIONSHIP
-    Everyday = relevansi pengalaman sehari-hari
-    Place = relevansi tempat manusia hidup
-    Alignment = skor gabungan
-
-Gunakan skor sebagai **sinyal relevansi editorial**, bukan sebagai skor emosi orang yang tampil di foto/video.
+The CLI does not provide the removed `create-video`, `VideoPipeline`, or
+auto-edit/CapCut commands. See the [architecture freeze report](ARCHITECTURE_FREEZE_REPORT.md)
+for the canonical MCP-to-orchestrator call graph.

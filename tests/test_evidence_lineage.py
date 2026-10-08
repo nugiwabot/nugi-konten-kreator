@@ -88,7 +88,47 @@ def test_dossier_generator_enforces_s0_s7_hierarchy():
     DossierGenerator must sort all evidence so primary/authoritative sources (S0-S2)
     precede secondary/generic web results (S3-S7).
     """
-    gen = DossierGenerator()
+    class FixedProvider:
+        def __init__(self, items):
+            self.items = items
+
+        def search_evidence(self, query, max_results=5):
+            return self.items[:max_results]
+
+    class EmptyWeb:
+        def search(self, query, recency=None, max_results=5):
+            return []
+
+    primary = EvidenceItem(
+        id="bps_fixture",
+        claim_text="Official survey recorded a measured housing indicator.",
+        source=Source(
+            url="https://bps.go.id/release/example",
+            publisher="BPS",
+            tier=SourceTier.S1,
+            source_type=SourceType.STATISTICS,
+            is_primary=True,
+        ),
+        retrieved_snippet="Official survey recorded a measured housing indicator.",
+        is_supporting=True,
+        confidence=0.95,
+        lineage_root="https://bps.go.id/release/example",
+    )
+    secondary = EvidenceItem(
+        id="media_fixture",
+        claim_text="A secondary report describes a related trend.",
+        source=Source(url="https://example.org/report", publisher="Example Media", tier=SourceTier.S4),
+        retrieved_snippet="A secondary report describes a related trend.",
+        is_supporting=True,
+        lineage_root="https://example.org/report",
+    )
+    gen = DossierGenerator(
+        bps_provider=FixedProvider([primary]),
+        openalex_provider=FixedProvider([]),
+        crossref_provider=FixedProvider([]),
+        gdelt_provider=FixedProvider([secondary]),
+        web_provider=EmptyWeb(),
+    )
     dossier = gen.build_dossier("krisis hunian komuter", max_evidence_per_source=2)
 
     # Check evidence sorting: tier ranks must be monotonically non-decreasing

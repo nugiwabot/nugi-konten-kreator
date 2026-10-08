@@ -68,6 +68,7 @@ output/**/capcut_broll_plan.json
 output/temp_workspace/
 output/.*.json
 output/.workflow_runs/
+output/goal_real_e2e_20261008/
 assets/media/test_download/
 **/backup_portrait/
 output/*.jpg
@@ -124,3 +125,4 @@ output/prod_*/
 output/research_*/
 assets/media/test_*/
 assets/media/prod_*/
+assets/media/goal_real_e2e_20261008/

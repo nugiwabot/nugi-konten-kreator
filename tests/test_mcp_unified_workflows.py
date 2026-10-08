@@ -15,12 +15,20 @@ if str(REPO_ROOT) not in sys.path:
 import server
 
 
-def test_mcp_research_deep():
-    res = server.research_deep(topic="krisis keterjangkauan rumah", max_evidence=2)
+def test_mcp_research_deep(tmp_path, monkeypatch, research_offline):
+    monkeypatch.setattr(server, "REPO_ROOT", tmp_path)
+    res = server.research_deep(
+        topic="krisis keterjangkauan rumah",
+        recency="w",
+        max_evidence=2,
+        output_dir=str(tmp_path / "research"),
+    )
     assert res["status"] == "ok"
-    assert res["epistemic_status"] in ("VERIFIED", "PROBABLE")
+    assert res["epistemic_status"] == "UNVERIFIED"
     assert len(res["subquestions"]) >= 3
-    assert len(res["key_findings"]) >= 2
+    assert res["key_findings"] == ["Tidak ada bukti yang dapat diverifikasi berhasil diambil pada sesi riset ini."]
+    assert res["claims_count"] == 0
+    assert res["evidence_strength"] == 0.0
     assert "dossier_json" in res
     assert "dossier_md" in res
 
@@ -36,7 +44,8 @@ def test_mcp_research_fact_check():
     assert res["status"] == "ok"
     assert res["overall_verdict"] == "DISPUTED"  # Causal overclaim flagged
     assert res["breakdown"]["disputed"] >= 1
-    assert res["breakdown"]["verified"] >= 1
+    assert res["breakdown"]["verified"] == 0  # No BPS table was retrieved.
+    assert res["pass_gate"] is False
 
 
 def test_mcp_visual_research():
@@ -60,7 +69,8 @@ Pada tahun 1976, skema KPR pertama resmi diperkenalkan di Indonesia.
     assert "shots" in res
 
 
-def test_mcp_content_create_dry_run():
+def test_mcp_content_create_dry_run(tmp_path, monkeypatch, research_offline):
+    monkeypatch.setattr(server, "REPO_ROOT", tmp_path)
     res = server.content_create(
         topic="Mengapa manusia membangun pemukiman",
         format="short",

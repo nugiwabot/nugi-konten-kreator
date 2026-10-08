@@ -69,6 +69,9 @@ class KnowledgeRetriever:
         1. Candidates: up to top_k_candidates (default 15)
         2. Reranked: top_k_reranked (default 3 to 5)
         """
+        if not query or not query.strip():
+            return []
+
         if not self._chunks:
             self._load_store()
             if not self._chunks:

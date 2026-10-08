@@ -53,7 +53,7 @@ def test_classify_source_tier_domains():
 
 
 def test_claim_status_evaluation():
-    # Claim with single S1 primary source -> VERIFIED
+    # One authoritative source supports the claim but does not independently corroborate it.
     s_bps = Source(
         url="https://bps.go.id",
         publisher="BPS",
@@ -71,8 +71,8 @@ def test_claim_status_evaluation():
         text="Defisit perumahan nasional mencapai 9.9 juta unit",
         supporting_evidence=[ev_bps]
     )
-    assert claim1.evaluate_status() == "VERIFIED"
-    assert claim1.confidence_score >= 0.85
+    assert claim1.evaluate_status() == "PROBABLE"
+    assert claim1.confidence_score < 0.85
 
     # Claim with contradictory evidence -> DISPUTED
     ev_contradict = EvidenceItem(

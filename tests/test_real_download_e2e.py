@@ -18,6 +18,8 @@ from engine.pipeline.visual_requirements import REAL_PREFERRED
 
 
 @pytest.mark.filterwarnings("ignore::urllib3.exceptions.InsecureRequestWarning")
+@pytest.mark.network
+@pytest.mark.skipif(os.environ.get("NUGI_RUN_REAL_E2E") != "1", reason="set NUGI_RUN_REAL_E2E=1 to run live media download")
 def test_real_download_e2e_pipeline():
     """
     Executes a real non-dry-run E2E retrieval:

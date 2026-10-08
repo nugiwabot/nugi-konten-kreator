@@ -317,17 +317,23 @@ class Claim:
         self.lineage_roots = list(lineage_map.keys())
         self.independent_sources_count = len(lineage_map)
 
-        # Count authoritative evidence (S0, S1, S2)
-        auth_count = sum(
-            1 for e in self.supporting_evidence if e.source.tier.rank <= 2
-        )
+        # A single source can be authoritative yet still be wrong, incomplete,
+        # or irrelevant to the exact assertion.  Reserve VERIFIED for
+        # independent corroboration, whether primary sources or reputable
+        # reporting; one source alone can only make a claim PROBABLE.
+        auth_lineages = {
+            e.lineage_root or (e.source.url if e.source.url else e.source.publisher)
+            for e in self.supporting_evidence
+            if e.source.tier.rank <= 2
+        }
+        auth_count = len(auth_lineages)
         rep_count = sum(
             1 for e in self.supporting_evidence if 3 <= e.source.tier.rank <= 4
         )
 
-        if auth_count >= 1 or (rep_count >= 2 and self.independent_sources_count >= 2):
+        if auth_count >= 2 or (rep_count >= 2 and self.independent_sources_count >= 2):
             self.status = "VERIFIED"
-            self.confidence_score = 0.9 if auth_count >= 1 else 0.8
+            self.confidence_score = 0.9 if auth_count >= 2 else 0.8
         elif rep_count >= 1 or len(self.supporting_evidence) >= 2 or self.independent_sources_count >= 1:
             self.status = "PROBABLE"
             self.confidence_score = 0.65

@@ -52,7 +52,8 @@ class ResearchDossier:
     data_points: List[DataPoint]
     narrative_angles: List[Dict[str, str]]
     visual_implications: List[Dict[str, str]]
-    overall_confidence: float = 0.85
+    # A transparent heuristic, not a statistical confidence interval.
+    evidence_strength: float = 0.0
     epistemic_status: str = "VERIFIED"  # VERIFIED, PROBABLE, DISPUTED, UNVERIFIED
     created_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
@@ -64,7 +65,8 @@ class ResearchDossier:
             "research_question": self.research_question,
             "subquestions": self.subquestions,
             "key_findings": self.key_findings,
-            "overall_confidence": self.overall_confidence,
+            "evidence_strength": self.evidence_strength,
+            "evidence_strength_method": "heuristic: source quality, claim coverage, independent lineage, and contradictions",
             "epistemic_status": self.epistemic_status,
             "claims": [c.to_dict() for c in self.claims],
             "evidence_items": [e.to_dict() for e in self.evidence_items],
@@ -166,7 +168,8 @@ class ResearchDossier:
             data_points=data_points,
             narrative_angles=d.get("narrative_angles", []),
             visual_implications=d.get("visual_implications", []),
-            overall_confidence=d.get("overall_confidence", 0.85),
+            # Read legacy dossiers without perpetuating the misleading name.
+            evidence_strength=d.get("evidence_strength", d.get("overall_confidence", 0.0)),
             epistemic_status=d.get("epistemic_status", "VERIFIED"),
             created_at=d.get("created_at", datetime.now(timezone.utc).isoformat()),
         )
@@ -175,7 +178,7 @@ class ResearchDossier:
         """Render a readable documentary dossier in Markdown."""
         lines = [
             f"# RESEARCH DOSSIER: {self.topic.upper()}",
-            f"> **Generated:** {self.created_at} | **Status:** {self.epistemic_status} | **Confidence:** {int(self.overall_confidence * 100)}%",
+            f"> **Generated:** {self.created_at} | **Status:** {self.epistemic_status} | **Evidence strength (heuristic):** {int(self.evidence_strength * 100)}%",
             "",
             "## 1. RESEARCH QUESTION & SUBQUESTIONS",
             f"**Core Question:** {self.research_question}",
@@ -404,6 +407,23 @@ def _synthesize_timeline(topic: str, all_evidence: List[EvidenceItem]) -> List[D
     ]
 
 
+def _topic_terms(topic: str) -> set[str]:
+    stopwords = {
+        "about", "after", "and", "atau", "bagaimana", "bagi", "dalam", "dan",
+        "dari", "dengan", "di", "how", "ini", "ke", "kenapa", "mengapa",
+        "of", "pada", "perihal", "tentang", "the", "untuk", "yang",
+    }
+    return {
+        term for term in re.findall(r"[a-z0-9]+", topic.lower())
+        if len(term) >= 4 and term not in stopwords
+    }
+
+
+def _topic_relevance_count(topic: str, text: str) -> int:
+    """Simple overlap heuristic used only to avoid unrelated source-to-claim mapping."""
+    return len(_topic_terms(topic) & set(re.findall(r"[a-z0-9]+", text.lower())))
+
+
 class DossierGenerator:
     """
     Orchestrates the entire research phase:
@@ -431,7 +451,8 @@ class DossierGenerator:
         self,
         topic: str,
         max_evidence_per_source: int = 4,
-        depth: str = "deep"
+        depth: str = "deep",
+        recency: Optional[str] = None,
     ) -> ResearchDossier:
         logger.info(f"DossierGenerator: Initiating research for '{topic}' (depth: {depth})")
         
@@ -457,18 +478,14 @@ class DossierGenerator:
         academic_evidence = self.openalex.search_evidence(topic, max_results=limit)
         crossref_evidence = self.crossref.search_evidence(topic, max_results=limit)
         gdelt_evidence = self.gdelt.search_evidence(topic, max_results=limit)
-        web_raw = self.web.search(topic, max_results=limit)
+        # Only the web provider exposes a cross-provider recency contract.  It
+        # must be passed through instead of being accepted only at the MCP edge.
+        web_raw = self.web.search(topic, recency=recency, max_results=limit)
 
         web_evidence: List[EvidenceItem] = []
         for idx, w in enumerate(web_raw):
             cls = classify_source_tier(w.get("url", ""), w.get("publisher", ""))
             raw_content = w.get("content", "")
-            
-            # Semantic honesty: exact_quote MUST ONLY contain real verbatim quote text
-            exact_quote_val = ""
-            quote_match = re.search(r'["\u201c]([^"\u201d]{15,})["\u201d]', raw_content)
-            if quote_match:
-                exact_quote_val = quote_match.group(1).strip()
 
             s = Source(
                 url=w.get("url", ""),
@@ -484,7 +501,9 @@ class DossierGenerator:
                 id=f"web_{idx}",
                 claim_text=raw_content[:200],
                 source=s,
-                exact_quote=exact_quote_val,
+                # Web search returns a result snippet, not a source-verified
+                # transcript. Keep it as a retrieved snippet, never a quote.
+                exact_quote="",
                 retrieved_snippet=raw_content,
                 source_description=f"{w.get('publisher', 'Web')}: {w.get('title', '')}",
                 summary=w.get("title", ""),
@@ -497,7 +516,11 @@ class DossierGenerator:
         contradiction_evidence: List[EvidenceItem] = []
         if depth in ("deep", "investigative"):
             try:
-                contra_raw = self.web.search(f"{topic} kritik mitos kegagalan resiko", max_results=2)
+                contra_raw = self.web.search(
+                    f"{topic} kritik mitos kegagalan resiko",
+                    recency=recency,
+                    max_results=2,
+                )
                 for c_idx, cw in enumerate(contra_raw):
                     c_cls = classify_source_tier(cw.get("url", ""), cw.get("publisher", ""))
                     c_content = cw.get("content", "")
@@ -544,7 +567,7 @@ class DossierGenerator:
         claims: List[Claim] = []
         
         # Claim 1: Macro / Statistical Dimension (S1 Primary)
-        if bps_evidence:
+        if bps_evidence and bps_evidence[0].is_supporting:
             c1 = Claim(
                 id="claim_structural_data",
                 text=bps_evidence[0].claim_text,
@@ -556,38 +579,44 @@ class DossierGenerator:
             claims.append(c1)
 
         # Claim 2: Academic / Mechanism Dimension (S2 Specialist)
-        acad_support = []
-        if academic_evidence:
-            acad_support.append(academic_evidence[0])
-        if crossref_evidence:
-            acad_support.append(crossref_evidence[0])
+        acad_support = [
+            item for item in academic_evidence
+            if item.is_supporting
+            and (item.retrieved_snippet or item.exact_quote)
+            and _topic_relevance_count(topic, item.retrieved_snippet or item.exact_quote) >= max(1, min(2, len(_topic_terms(topic))))
+        ]
+        # Crossref provides bibliographic metadata only, so its entries remain
+        # source leads and do not support a factual or mechanistic claim.
             
         if acad_support:
             c2 = Claim(
                 id="claim_academic_mechanism",
                 text=acad_support[0].claim_text,
                 claim_type="CAUSAL",
-                supporting_evidence=acad_support,
-                primary_source_count=len(acad_support),
+                # Other papers found for the broad query do not automatically
+                # corroborate this particular abstract's statement.
+                supporting_evidence=[acad_support[0]],
+                primary_source_count=1,
             )
             c2.evaluate_status()
             claims.append(c2)
 
         # Claim 3: Ground Reality & Sentiment (S3-S4 Media & Public)
-        media_support = []
-        if gdelt_evidence:
-            media_support.append(gdelt_evidence[0])
-        if web_evidence:
-            media_support.append(web_evidence[0])
+        media_support = [
+            item for item in web_evidence
+            if item.is_supporting
+            and (item.retrieved_snippet or item.exact_quote)
+            and _topic_relevance_count(topic, item.retrieved_snippet or item.exact_quote) >= max(1, min(2, len(_topic_terms(topic))))
+        ]
 
         if media_support:
             # Only attach counter-evidence to Claim 3 if in investigative depth
             c3_contra = contradiction_evidence[:1] if (contradiction_evidence and depth == "investigative") else []
             c3 = Claim(
                 id="claim_public_reality",
-                text=f"Realitas publik dan dinamika terkini: {media_support[0].summary}",
+                text=media_support[0].claim_text,
                 claim_type="FACTUAL",
-                supporting_evidence=media_support,
+                supporting_evidence=[media_support[0]],
                 contradicting_evidence=c3_contra,
                 secondary_source_count=len(media_support),
             )
@@ -611,10 +640,7 @@ class DossierGenerator:
                 secondary_sources.append(entry)
 
         # 6. Key Findings (Topic-grounded, not hardcoded)
-        key_findings = [
-            f"Bukti data dan studi menunjukkan dinamika nyata yang mendorong fenomena {topic}.",
-            f"Terdapat kesenjangan antara persepsi populer vs mekanisme struktural yang terverifikasi dalam riset.",
-        ]
+        key_findings: List[str] = []
         if claims:
             key_findings.append(f"Fakta utama teridentifikasi: {claims[0].text[:120]}")
         if len(claims) > 1:
@@ -622,6 +648,8 @@ class DossierGenerator:
         if all_data_points:
             dp0 = all_data_points[0]
             key_findings.append(f"Indikator terukur: {dp0.metric} tercatat sebesar {dp0.value} {dp0.unit} ({dp0.source_name}).")
+        if not key_findings:
+            key_findings.append("Tidak ada bukti yang dapat diverifikasi berhasil diambil pada sesi riset ini.")
 
         # 7. Topic-Grounded Synthesis
         entities = _extract_entities_from_evidence(topic, all_evidence)
@@ -635,12 +663,16 @@ class DossierGenerator:
         all_verified = all(c.status == "VERIFIED" for c in claims) if claims else False
         primary_verified = any(c.status == "VERIFIED" and c.id in ("claim_structural_data", "claim_academic_mechanism") for c in claims)
 
-        if all_verified:
+        if not claims:
+            epistemic_status = "UNVERIFIED"
+        elif all_verified:
             epistemic_status = "VERIFIED"
         elif has_disputes and not primary_verified:
             epistemic_status = "DISPUTED"
         else:
             epistemic_status = "PROBABLE"
+
+        evidence_strength = self._calculate_evidence_strength(claims, all_evidence)
 
         return ResearchDossier(
             topic=topic,
@@ -657,9 +689,39 @@ class DossierGenerator:
             data_points=all_data_points,
             narrative_angles=narrative_angles,
             visual_implications=visual_implications,
-            overall_confidence=0.88 if len(primary_sources) >= 1 else 0.70,
+            evidence_strength=evidence_strength,
             epistemic_status=epistemic_status
         )
+
+    @staticmethod
+    def _calculate_evidence_strength(
+        claims: List[Claim],
+        evidence: List[EvidenceItem],
+    ) -> float:
+        """Return an explainable heuristic score; it is not a confidence claim."""
+        usable_evidence = [
+            item for item in evidence
+            if item.is_supporting and (item.exact_quote or item.retrieved_snippet)
+        ]
+        if not usable_evidence:
+            return 0.0
+
+        quality = sum(max(0.0, 1.0 - (item.source.tier.rank / 8.0)) for item in usable_evidence) / len(usable_evidence)
+        if claims:
+            claim_support = sum(
+                1.0 if claim.status == "VERIFIED" else 0.65 if claim.status == "PROBABLE" else 0.25 if claim.status == "UNVERIFIED" else 0.0
+                for claim in claims
+            ) / len(claims)
+            independent = min(
+                1.0,
+                sum(max(1, claim.independent_sources_count) for claim in claims) / (2.0 * len(claims)),
+            )
+            contradiction_penalty = 0.2 if any(claim.status == "DISPUTED" for claim in claims) else 0.0
+        else:
+            claim_support = 0.0
+            independent = 0.0
+            contradiction_penalty = 0.0
+        return round(max(0.0, min(1.0, 0.45 * quality + 0.4 * claim_support + 0.15 * independent - contradiction_penalty)), 3)
 
     def save_dossier_to_workspace(
         self,

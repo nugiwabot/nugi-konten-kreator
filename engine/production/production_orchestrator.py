@@ -6,14 +6,15 @@ Location: engine/production/production_orchestrator.py
 
 Single canonical orchestrator replacing all fragmented workflow runners.
 Executes the unified 12-stage production pipeline:
-  QUALIFY -> PLAN -> RESEARCH -> STORY -> SCRIPT -> FACT_CHECK ->
+  PLAN -> QUALIFY -> RESEARCH -> STORY/SCRIPT -> FACT_CHECK ->
   VISUAL_PLAN -> MEDIA -> SUBTITLE -> CAPCUT -> FINAL_QA -> COMPLETE
 
-Guarantees:
-  - 100% deterministic execution
-  - Resumable: recovers from checkpoints using manifest.json & filesystem state
-  - Idempotent: avoids redundant downloads, duplicate searches, or corrupted states
-  - Native CapCut Draft output: always materializes a valid project folder
+Runtime contract:
+  - Resumes only manifest-linked artifacts that pass stage-specific checks.
+  - External research and media results are not deterministic; provenance and
+    current status are recorded rather than assumed.
+  - Missing or irrelevant real media remains MISSING and blocks Final QA.
+  - CapCut output is structurally validated; Desktop use is not inferred.
 """
 
 from __future__ import annotations
@@ -63,9 +64,8 @@ class ProductionRunResult:
         out_status = "ok" if self.status in ("PUBLISH_READY", "MINOR_EDIT", "STAGE_LIMITED", "ok") else self.status
         content_q = self.manifest.get("content_quality", {})
         cq_score = content_q.get("overall_score", round(self.quality_score, 1))
-        dim_scores = content_q.get("dimension_scores", self.qa_report.get("dimension_scores", {
-            "research_strength": 9.0, "source_quality": 8.5, "evidence_coverage": 8.5, "claim_confidence": 9.0
-        }))
+        dim_scores = content_q.get("dimension_scores", self.qa_report.get("dimensional_scores", {}))
+        fact_check_status = self.manifest.get("fact_check_status", "UNKNOWN")
 
         return {
             "status": out_status,
@@ -83,10 +83,11 @@ class ProductionRunResult:
             "manifest": self.manifest,
             "stage": self.manifest.get("current_stage", "complete"),
             "total_shots_planned": self.manifest.get("shots_planned", len(self.manifest.get("shots", []))),
-            "total_assets_ready": self.manifest.get("assets_downloaded", 0),
+            "total_assets_ready": self.manifest.get("real_assets_ready", 0),
             "script_file": self.artifacts.get("script_md", ""),
-            "fact_check_verdict": self.manifest.get("fact_check_verdict", "VERIFIED"),
-            "fact_check_pass": True,
+            "fact_check_verdict": self.manifest.get("fact_check_verdict", "UNKNOWN"),
+            "fact_check_status": fact_check_status,
+            "fact_check_pass": fact_check_status == "PASS",
         }
 
 
@@ -118,6 +119,7 @@ class ProductionOrchestrator:
         stage_limit: Optional[str] = None,
         max_broll_shots: Optional[int] = None,
         install_to_capcut: bool = False,
+        recency: Optional[str] = None,
     ) -> ProductionRunResult:
         """
         Executes end-to-end production autonomously.
@@ -133,18 +135,57 @@ class ProductionOrchestrator:
         if manifest_path.is_file():
             manifest = ProductionManifest.load(manifest_path)
             logger.info(f"Loaded existing production state manifest from {manifest_path} (Run ID: {manifest.run_id})")
+            original_topic = manifest.extra_fields.get("input_topic", manifest.topic)
+            if original_topic != topic_or_prompt:
+                raise ValueError(
+                    "Output folder already belongs to a different production topic. "
+                    "Choose a new output_folder rather than reusing stale artifacts."
+                )
+            requested_contract = {
+                "format": format_hint,
+                "duration_hint": duration_hint,
+                "depth": depth,
+                "recency": recency,
+                "max_broll_shots": max_broll_shots,
+            }
+            previous_contract = manifest.extra_fields.get("input_contract")
+            if previous_contract != requested_contract:
+                if previous_contract is None or any(
+                    previous_contract.get(key) != requested_contract.get(key)
+                    for key in ("format", "duration_hint", "max_broll_shots")
+                ):
+                    manifest.invalidate_from(ProductionStage.PLAN)
+                else:
+                    manifest.invalidate_from(ProductionStage.RESEARCH)
         else:
             manifest = ProductionManifest(topic=topic_or_prompt, format=format_hint)
+        manifest.extra_fields["input_topic"] = topic_or_prompt
+        manifest.extra_fields["input_contract"] = {
+            "format": format_hint,
+            "duration_hint": duration_hint,
+            "depth": depth,
+            "recency": recency,
+            "max_broll_shots": max_broll_shots,
+        }
+        manifest.extra_fields["run_mode"] = "DRY_RUN" if dry_run else "REAL_RUN"
+        manifest.extra_fields["research_recency"] = recency
 
         # ----------------------------------------------------------------------
         # STAGE 1: PLAN (Executive Producer Contract)
         # ----------------------------------------------------------------------
         manifest.current_stage = ProductionStage.PLAN.value
         plan_file = work_dir / "production_plan.json"
-        if manifest.is_stage_done(ProductionStage.PLAN) and plan_file.is_file():
+        if self._stage_artifact_valid(
+            manifest,
+            ProductionStage.PLAN,
+            "production_plan",
+            plan_file,
+            lambda: ProductionPlan.load(plan_file).topic == manifest.topic,
+        ):
             plan = ProductionPlan.load(plan_file)
             logger.info("Resuming: Existing production plan reused.")
         else:
+            manifest.invalidate_from(ProductionStage.PLAN)
             plan = ExecutiveProducer.parse_user_request(
                 topic_or_prompt=topic_or_prompt,
                 format_hint=format_hint,
@@ -156,6 +197,7 @@ class ProductionOrchestrator:
                 plan.max_broll_shots = max_broll_shots
             plan.save(work_dir)
             manifest.mark_stage_completed(ProductionStage.PLAN, {"production_plan": str(plan_file)})
+            manifest.save(work_dir)
 
         manifest.topic = plan.topic
         manifest.target_duration_seconds = plan.duration_seconds
@@ -180,6 +222,7 @@ class ProductionOrchestrator:
                 manifest=manifest.to_dict(),
             )
         manifest.mark_stage_completed(ProductionStage.QUALIFY)
+        manifest.save(work_dir)
 
         # ----------------------------------------------------------------------
         # STAGE 3: RESEARCH & EVIDENCE DOSSIER
@@ -188,18 +231,27 @@ class ProductionOrchestrator:
         dossier_json_p = work_dir / "research_dossier.json"
         dossier_md_p = work_dir / "research_dossier.md"
 
-        if manifest.is_stage_done(ProductionStage.RESEARCH) and dossier_json_p.is_file():
+        if self._stage_artifact_valid(
+            manifest,
+            ProductionStage.RESEARCH,
+            "dossier_json",
+            dossier_json_p,
+            lambda: json.loads(dossier_json_p.read_text(encoding="utf-8")).get("topic") == plan.topic
+            and isinstance(json.loads(dossier_json_p.read_text(encoding="utf-8")).get("evidence_items", []), list),
+        ) and dossier_md_p.is_file():
             logger.info("Resuming: Existing research dossier reused.")
             d_dict = json.loads(dossier_json_p.read_text(encoding="utf-8"))
             dossier = ResearchDossier.from_dict(d_dict)
         else:
+            manifest.invalidate_from(ProductionStage.RESEARCH)
             dossier_gen = DossierGenerator()
-            dossier = dossier_gen.build_dossier(plan.topic, depth=plan.research_depth)
+            dossier = dossier_gen.build_dossier(plan.topic, depth=plan.research_depth, recency=recency)
             dossier_files = dossier_gen.save_dossier_to_workspace(dossier, work_dir)
             manifest.mark_stage_completed(
                 ProductionStage.RESEARCH,
                 {"dossier_json": str(dossier_json_p), "dossier_md": str(dossier_md_p)}
             )
+            manifest.save(work_dir)
 
         if stage_limit == "research":
             manifest.save(work_dir)
@@ -212,10 +264,19 @@ class ProductionOrchestrator:
         script_p = work_dir / "script.md"
         story_plan_p = work_dir / "story_plan.json"
 
-        if manifest.is_stage_done(ProductionStage.SCRIPT) and script_p.is_file():
+        if self._stage_artifact_valid(
+            manifest,
+            ProductionStage.SCRIPT,
+            "script_md",
+            script_p,
+            lambda: script_p.read_text(encoding="utf-8").strip() != ""
+            and json.loads(story_plan_p.read_text(encoding="utf-8")).get("topic") == plan.topic
+            and float(json.loads(story_plan_p.read_text(encoding="utf-8")).get("duration_seconds", -1)) == float(plan.duration_seconds),
+        ) and story_plan_p.is_file():
             logger.info("Resuming: Existing script reused.")
             script_content = script_p.read_text(encoding="utf-8")
         else:
+            manifest.invalidate_from(ProductionStage.SCRIPT)
             # Derive story archetype & narrative devices
             st_info = classify_story_type(plan.topic)
             story_archetype = st_info.get("primary_type", "historical_investigative")
@@ -240,6 +301,7 @@ class ProductionOrchestrator:
                 ProductionStage.SCRIPT,
                 {"script_md": str(script_p), "story_plan": str(story_plan_p)}
             )
+            manifest.save(work_dir)
 
         # ----------------------------------------------------------------------
         # STAGE 5: FACT-CHECK AUDIT
@@ -247,15 +309,37 @@ class ProductionOrchestrator:
         manifest.current_stage = ProductionStage.FACT_CHECK.value
         fact_check_p = work_dir / "fact_check_report.json"
 
-        if manifest.is_stage_done(ProductionStage.FACT_CHECK) and fact_check_p.is_file():
+        if self._stage_artifact_valid(
+            manifest,
+            ProductionStage.FACT_CHECK,
+            "fact_check_report",
+            fact_check_p,
+            lambda: (
+                json.loads(fact_check_p.read_text(encoding="utf-8")).get("production_run_id") == manifest.run_id
+                and json.loads(fact_check_p.read_text(encoding="utf-8")).get("topic") == plan.topic
+                and json.loads(fact_check_p.read_text(encoding="utf-8")).get("overall_verdict") in ("VERIFIED", "PROBABLE", "DISPUTED", "UNVERIFIED", "UNKNOWN")
+            ),
+        ):
             logger.info("Resuming: Existing fact check report reused.")
             fact_check_result = json.loads(fact_check_p.read_text(encoding="utf-8"))
         else:
+            manifest.invalidate_from(ProductionStage.FACT_CHECK)
             fact_check_result = audit_script_with_dossier(script_content, dossier.to_dict())
+            fact_check_result["production_run_id"] = manifest.run_id
+            fact_check_result["topic"] = plan.topic
             fact_check_p.write_text(json.dumps(fact_check_result, indent=2, ensure_ascii=False), encoding="utf-8")
             manifest.mark_stage_completed(ProductionStage.FACT_CHECK, {"fact_check_report": str(fact_check_p)})
+            manifest.save(work_dir)
 
-        manifest.extra_fields["fact_check_verdict"] = fact_check_result.get("overall_verdict", "VERIFIED")
+        fact_check_verdict = str(fact_check_result.get("overall_verdict", "UNKNOWN")).upper()
+        fact_check_status = {
+            "VERIFIED": "PASS",
+            "DISPUTED": "FAIL",
+            "PROBABLE": "NEEDS_REVIEW",
+            "UNVERIFIED": "NEEDS_REVIEW",
+        }.get(fact_check_verdict, "UNKNOWN")
+        manifest.extra_fields["fact_check_verdict"] = fact_check_verdict
+        manifest.extra_fields["fact_check_status"] = fact_check_status
 
         if stage_limit == "script":
             manifest.current_stage = "script"
@@ -270,10 +354,18 @@ class ProductionOrchestrator:
         narratives = self.script_parser.parse_text(script_content)
         shots_data: List[Dict[str, Any]] = []
 
-        if manifest.is_stage_done(ProductionStage.VISUAL_PLAN) and broll_plan_p.is_file():
+        if self._stage_artifact_valid(
+            manifest,
+            ProductionStage.VISUAL_PLAN,
+            "broll_plan",
+            broll_plan_p,
+            lambda: isinstance(json.loads(broll_plan_p.read_text(encoding="utf-8")), list)
+            and all(isinstance(shot, dict) and shot.get("shot_id") for shot in json.loads(broll_plan_p.read_text(encoding="utf-8"))),
+        ):
             logger.info("Resuming: Existing visual B-roll plan reused.")
             shots_data = json.loads(broll_plan_p.read_text(encoding="utf-8"))
         else:
+            manifest.invalidate_from(ProductionStage.VISUAL_PLAN)
             if narratives:
                 shots = self.visual_gen.generate_shots_for_narrative(narratives[0])
                 shots_data = [
@@ -295,6 +387,7 @@ class ProductionOrchestrator:
                 ]
                 broll_plan_p.write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
                 manifest.mark_stage_completed(ProductionStage.VISUAL_PLAN, {"broll_plan": str(broll_plan_p)})
+                manifest.save(work_dir)
 
         # ----------------------------------------------------------------------
         # STAGE 7: MEDIA RETRIEVAL & LOCAL REUSE
@@ -304,10 +397,27 @@ class ProductionOrchestrator:
         footage_dir.mkdir(parents=True, exist_ok=True)
         media_manifest_p = work_dir / "media_manifest.json"
         downloaded_assets: List[Dict[str, Any]] = []
+        media_shots: List[Dict[str, Any]] = []
+        reusable_media = self._load_reusable_media(
+            manifest=manifest,
+            media_manifest_path=media_manifest_p,
+            expected_shots=shots_data,
+            topic=plan.topic,
+            dry_run=dry_run,
+        )
+        if reusable_media is not None:
+            downloaded_assets, media_shots = reusable_media
+        else:
+            manifest.invalidate_from(ProductionStage.MEDIA)
 
-        # Find existing assets on disk for local reuse
+        # A media file alone is not evidence of coverage.  Track every required
+        # shot and its provenance so Final QA can judge the mapping truthfully.
         existing_files = list(footage_dir.glob("*"))
-        valid_media_files = [f for f in existing_files if f.suffix.lower() in {".mp4", ".mov", ".mkv", ".webm", ".jpg", ".jpeg", ".png", ".webp"}]
+        media_extensions = {".mp4", ".mov", ".mkv", ".webm", ".jpg", ".jpeg", ".png", ".webp"}
+        valid_media_files = [
+            f for f in existing_files
+            if f.suffix.lower() in media_extensions and "_storyboard" not in f.stem.lower()
+        ]
 
         MINIMAL_PNG_BYTES = (
             b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00"
@@ -315,7 +425,9 @@ class ProductionOrchestrator:
             b"\x00\x00\x00\x00IEND\xaeB`\x82"
         )
 
-        if dry_run and shots_data:
+        if reusable_media is not None:
+            logger.info("Resuming: Valid per-shot media manifest reused.")
+        elif dry_run and shots_data:
             logger.info("Dry-run mode active: generating storyboard placeholder frames for timeline.")
             for idx, s in enumerate(shots_data, 1):
                 s_id = s.get("shot_id", f"shot_{idx:02d}")
@@ -327,20 +439,26 @@ class ProductionOrchestrator:
                     "local_path": str(ph_path.resolve()),
                     "title": f"Storyboard Frame {s_id}",
                     "media_type": "image",
+                    "media_status": "PLACEHOLDER",
                     "dry_run": True,
                 })
-                valid_media_files.append(ph_path)
+                media_shots.append({
+                    "shot_id": s_id,
+                    "required": self._shot_requires_media(s),
+                    "status": "PLACEHOLDER" if self._shot_requires_media(s) else "NOT_REQUIRED",
+                    "local_path": str(ph_path.resolve()),
+                    "reason": "Storyboard placeholder is permitted only for DRY_RUN." if self._shot_requires_media(s) else "Visual plan does not require retrieved B-roll.",
+                })
         elif not dry_run and shots_data:
             finder = self.media_finder or media_finder_mod.MediaFinder()
             target_shots = [
                 s for s in shots_data
-                if s.get("search_required", True) and s.get("visual_requirement") not in ("NO_BROLL", "NO_VISUAL", "REMOTION_REQUIRED")
+                if self._shot_requires_media(s)
             ]
-            if not target_shots:
-                target_shots = shots_data
             if plan.max_broll_shots is not None and plan.max_broll_shots > 0:
                 target_shots = target_shots[:plan.max_broll_shots]
 
+            query_cache: Dict[str, Optional[Dict[str, Any]]] = {}
             for s in target_shots:
                 # Check if this shot already has a dedicated downloaded file
                 s_id = s.get("shot_id", "")
@@ -352,11 +470,36 @@ class ProductionOrchestrator:
                         "local_path": str(existing_for_shot[0].resolve()),
                         "title": existing_for_shot[0].name,
                         "media_type": "video" if existing_for_shot[0].suffix.lower() in {".mp4", ".mov", ".webm"} else "image",
-                        "reused": True,
+                        "media_status": "LOCAL_REUSED",
+                    })
+                    media_shots.append({
+                        "shot_id": s_id,
+                        "required": True,
+                        "status": "LOCAL_REUSED",
+                        "local_path": str(existing_for_shot[0].resolve()),
                     })
                     continue
 
                 q = s.get("query") or plan.topic
+                if plan.topic.lower() not in q.lower():
+                    q = f"{q} {plan.topic}".strip()
+                s["query"] = q
+                query_key = " ".join(q.lower().split())
+                if query_key in query_cache:
+                    cached_item = query_cache[query_key]
+                    if cached_item is not None:
+                        reused = dict(cached_item)
+                        reused["shot_id"] = s_id
+                        reused["media_status"] = "LOCAL_REUSED"
+                        downloaded_assets.append(reused)
+                        media_shots.append({
+                            "shot_id": s_id,
+                            "required": True,
+                            "status": "LOCAL_REUSED",
+                            "local_path": reused["local_path"],
+                            "source_url": reused.get("source_url", ""),
+                        })
+                    continue
                 vr = s.get("visual_requirement", "GENERIC_ALLOWED")
                 try:
                     res = finder.find_and_download(
@@ -366,31 +509,68 @@ class ProductionOrchestrator:
                         folder=f"{folder_name}/footage",
                         visual_requirement=vr
                     )
+                    accepted = False
                     for r in res.results:
-                        if r.local_path and Path(r.local_path).is_file():
+                        if r.local_path and Path(r.local_path).is_file() and Path(r.local_path).stat().st_size > 0:
                             d_item = r.to_dict()
                             d_item["shot_id"] = s_id
+                            d_item["media_status"] = "REAL_DOWNLOADED"
+                            if not self.qa_engine.media_asset_matches_topic(s, d_item, plan.topic):
+                                logger.warning(
+                                    "Rejected downloaded media for shot %s because its title/entities do not match topic '%s'.",
+                                    s_id,
+                                    plan.topic,
+                                )
+                                continue
                             downloaded_assets.append(d_item)
                             valid_media_files.append(Path(r.local_path))
+                            media_shots.append({
+                                "shot_id": s_id,
+                                "required": True,
+                                "status": "REAL_DOWNLOADED",
+                                "local_path": str(Path(r.local_path).resolve()),
+                                "source_url": d_item.get("source_url", ""),
+                            })
+                            query_cache[query_key] = d_item
+                            accepted = True
+                            break
+                    if not accepted:
+                        query_cache[query_key] = None
                 except Exception as e:
                     logger.warning(f"B-roll search failed for shot {s_id} ('{q}'): {e}")
+                    query_cache[query_key] = None
 
-            # For any shot lacking downloaded media, provide a storyboard placeholder fallback
+            # Persist the topic-grounded search strings used for media lookup.
+            broll_plan_p.write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+            # Production runs never manufacture coverage with a placeholder.
+            # Every required shot remains visibly MISSING when acquisition fails.
             for idx, s in enumerate(shots_data, 1):
                 s_id = s.get("shot_id", f"shot_{idx:02d}")
-                has_asset = any(a.get("shot_id") == s_id for a in downloaded_assets)
-                if not has_asset:
-                    ph_path = footage_dir / f"{s_id}_storyboard.png"
-                    if not ph_path.is_file():
-                        ph_path.write_bytes(MINIMAL_PNG_BYTES)
-                    downloaded_assets.append({
+                if self._shot_requires_media(s) and not any(a.get("shot_id") == s_id for a in downloaded_assets):
+                    was_attempted = any(target.get("shot_id") == s_id for target in target_shots)
+                    media_shots.append({
                         "shot_id": s_id,
-                        "local_path": str(ph_path.resolve()),
-                        "title": f"Storyboard Fallback {s_id}",
-                        "media_type": "image",
-                        "fallback": True,
+                        "required": True,
+                        "status": "MISSING",
+                        "reason": (
+                            "No real downloadable or reusable local media was acquired for this required shot."
+                            if was_attempted else "Required shot was skipped by max_broll_shots and has no real media assignment."
+                        ),
                     })
-                    valid_media_files.append(ph_path)
+
+        # Include shots that do not need B-roll in the manifest rather than
+        # treating them as failed coverage requirements.
+        recorded_shots = {entry["shot_id"] for entry in media_shots}
+        for idx, s in enumerate(shots_data, 1):
+            s_id = s.get("shot_id", f"shot_{idx:02d}")
+            if s_id not in recorded_shots:
+                media_shots.append({
+                    "shot_id": s_id,
+                    "required": self._shot_requires_media(s),
+                    "status": "NOT_REQUIRED",
+                    "reason": "The visual plan does not require retrieved B-roll for this shot.",
+                })
 
         # Write media manifest with provenance
         media_manifest_data = {
@@ -398,10 +578,14 @@ class ProductionOrchestrator:
             "folder": str(footage_dir),
             "total_assets": len(downloaded_assets),
             "assets": downloaded_assets,
+            "shots": media_shots,
+            "run_mode": "DRY_RUN" if dry_run else "REAL_RUN",
+            "production_run_id": manifest.run_id,
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
         media_manifest_p.write_text(json.dumps(media_manifest_data, indent=2, ensure_ascii=False), encoding="utf-8")
         manifest.mark_stage_completed(ProductionStage.MEDIA, {"media_manifest": str(media_manifest_p)})
+        manifest.save(work_dir)
 
         # Legacy 10-Dimension Content Quality Report & Manifest sync
         quality_evaluator = ContentQualityEvaluator()
@@ -421,15 +605,34 @@ class ProductionOrchestrator:
         manifest.extra_fields["content_quality"] = quality_report.to_dict()
         manifest.extra_fields["shots_planned"] = len(shots_data)
         manifest.extra_fields["assets_downloaded"] = len(downloaded_assets)
+        manifest.extra_fields["real_assets_ready"] = sum(
+            1 for asset in downloaded_assets
+            if asset.get("media_status") in {"REAL_DOWNLOADED", "LOCAL_REUSED"}
+        )
 
         # ----------------------------------------------------------------------
         # STAGE 8: SUBTITLE GENERATION
         # ----------------------------------------------------------------------
         manifest.current_stage = ProductionStage.SUBTITLE.value
         srt_p = work_dir / "subtitles.srt"
-        if not srt_p.is_file() and narratives:
-            self.srt_gen.write_srt_file(srt_p, narratives[0].sections)
+        subtitle_valid = self._stage_artifact_valid(
+            manifest,
+            ProductionStage.SUBTITLE,
+            "subtitles_srt",
+            srt_p,
+            lambda: bool(srt_p.read_text(encoding="utf-8").strip())
+            and "-->" in srt_p.read_text(encoding="utf-8"),
+        )
+        if not subtitle_valid:
+            manifest.invalidate_from(ProductionStage.SUBTITLE)
+            if narratives:
+                self.srt_gen.write_srt_file(srt_p, narratives[0].sections)
+        if not srt_p.is_file() or not srt_p.read_text(encoding="utf-8").strip() or "-->" not in srt_p.read_text(encoding="utf-8"):
+            manifest.mark_failed(ProductionStage.SUBTITLE, "Subtitle generation did not produce a non-empty SRT with timecodes")
+            manifest.save(work_dir)
+            return self._build_result(manifest, plan, work_dir, folder_name)
         manifest.mark_stage_completed(ProductionStage.SUBTITLE, {"subtitles_srt": str(srt_p)})
+        manifest.save(work_dir)
 
         # ----------------------------------------------------------------------
         # STAGE 9: NATIVE CAPCUT DRAFT GENERATION
@@ -467,12 +670,6 @@ class ProductionOrchestrator:
 
             # Match with downloaded asset
             matched_asset = next((a for a in downloaded_assets if a.get("shot_id") == s_id), None)
-            if not matched_asset and valid_media_files:
-                # Fallback to cycling available media
-                fallback_file = valid_media_files[idx % len(valid_media_files)]
-                m_type = "video" if fallback_file.suffix.lower() in {".mp4", ".mov", ".webm"} else "image"
-                matched_asset = {"local_path": str(fallback_file.resolve()), "title": fallback_file.name, "media_type": m_type}
-
             asset_p = matched_asset.get("local_path") if matched_asset else None
             m_type = matched_asset.get("media_type", "image") if matched_asset else "image"
 
@@ -525,9 +722,22 @@ class ProductionOrchestrator:
             except Exception as e:
                 logger.warning(f"Could not install to CapCut desktop library: {e}")
 
+        capcut_validation = self.capcut_val.validate_draft(capcut_draft_dir)
+        capcut_validation_p = work_dir / "capcut_validation.json"
+        capcut_validation_p.write_text(
+            json.dumps(capcut_validation.to_dict(), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        manifest.extra_fields["capcut_status"] = capcut_validation.status
+        manifest.extra_fields["capcut_app_installed_path"] = str(installed_path) if installed_path else ""
+
         manifest.mark_stage_completed(
             ProductionStage.CAPCUT,
-            {"capcut_draft": str(capcut_draft_dir), "timeline_json": str(timeline_p)}
+            {
+                "capcut_draft": str(capcut_draft_dir),
+                "timeline_json": str(timeline_p),
+                "capcut_validation": str(capcut_validation_p),
+            }
         )
 
         # ----------------------------------------------------------------------
@@ -549,6 +759,92 @@ class ProductionOrchestrator:
         return self._build_result(manifest, plan, work_dir, folder_name, qa_report)
 
     @staticmethod
+    def _stage_artifact_valid(
+        manifest: ProductionManifest,
+        stage: ProductionStage,
+        artifact_key: str,
+        expected_path: Path,
+        validator: Any,
+    ) -> bool:
+        """Reuse only a manifest-linked artifact that passes its stage check."""
+        if not manifest.is_stage_done(stage) or not expected_path.is_file():
+            return False
+        recorded_path = manifest.artifacts.get(artifact_key)
+        if not recorded_path:
+            return False
+        try:
+            return Path(recorded_path).resolve() == expected_path.resolve() and bool(validator())
+        except Exception as exc:
+            logger.info("Cannot reuse %s artifact %s: %s", stage.value, expected_path, exc)
+            return False
+
+    @staticmethod
+    def _shot_requires_media(shot: Dict[str, Any]) -> bool:
+        return bool(shot.get("search_required", True)) and shot.get("visual_requirement") not in {
+            "NO_BROLL", "NO_VISUAL", "REMOTION_REQUIRED"
+        }
+
+    def _load_reusable_media(
+        self,
+        manifest: ProductionManifest,
+        media_manifest_path: Path,
+        expected_shots: List[Dict[str, Any]],
+        topic: str,
+        dry_run: bool,
+    ) -> Optional[tuple[List[Dict[str, Any]], List[Dict[str, Any]]]]:
+        expected_mode = "DRY_RUN" if dry_run else "REAL_RUN"
+
+        def valid() -> bool:
+            data = json.loads(media_manifest_path.read_text(encoding="utf-8"))
+            if (
+                data.get("production_run_id") != manifest.run_id
+                or data.get("topic") != topic
+                or data.get("run_mode") != expected_mode
+                or not isinstance(data.get("assets"), list)
+                or not isinstance(data.get("shots"), list)
+            ):
+                return False
+            shot_map = {item.get("shot_id"): item for item in data["shots"] if item.get("shot_id")}
+            assets_by_shot = {
+                item.get("shot_id"): item for item in data["assets"] if isinstance(item, dict) and item.get("shot_id")
+            }
+            expected_ids = {item.get("shot_id") for item in expected_shots}
+            if set(shot_map) != expected_ids:
+                return False
+            for shot in expected_shots:
+                entry = shot_map.get(shot.get("shot_id"), {})
+                required = self._shot_requires_media(shot)
+                if entry.get("required") != required:
+                    return False
+                status = entry.get("status")
+                if required and dry_run and status != "PLACEHOLDER":
+                    return False
+                if required and not dry_run and status not in {"REAL_DOWNLOADED", "LOCAL_REUSED"}:
+                    # Failed or placeholder assignments should be retried when a
+                    # user resumes a real production run.
+                    return False
+                if status in {"REAL_DOWNLOADED", "LOCAL_REUSED", "PLACEHOLDER"}:
+                    local_path = Path(entry.get("local_path", ""))
+                    if not local_path.is_file() or local_path.stat().st_size <= 0:
+                        return False
+                if required and status in {"REAL_DOWNLOADED", "LOCAL_REUSED"}:
+                    asset = {**assets_by_shot.get(shot.get("shot_id"), {}), **entry}
+                    if not self.qa_engine.media_asset_matches_topic(shot, asset, topic):
+                        return False
+            return True
+
+        if not self._stage_artifact_valid(
+            manifest,
+            ProductionStage.MEDIA,
+            "media_manifest",
+            media_manifest_path,
+            valid,
+        ):
+            return None
+        data = json.loads(media_manifest_path.read_text(encoding="utf-8"))
+        return data["assets"], data["shots"]
+
+    @staticmethod
     def _parse_srt_timestamp(ts: str) -> float:
         parts = ts.replace(",", ".").split(":")
         h = float(parts[0])
@@ -564,8 +860,8 @@ class ProductionOrchestrator:
         folder_name: str,
         qa_report: Optional[FinalQAReport] = None,
     ) -> ProductionRunResult:
-        qa_dict = qa_report.to_dict() if qa_report else {"verdict": "STAGE_LIMITED", "overall_quality_score": 85.0}
-        score = qa_report.overall_quality_score if qa_report else 85.0
+        qa_dict = qa_report.to_dict() if qa_report else {"verdict": "STAGE_LIMITED", "overall_quality_score": 0.0}
+        score = qa_report.overall_quality_score if qa_report else 0.0
         verdict = qa_report.verdict if qa_report else "STAGE_LIMITED"
 
         return ProductionRunResult(

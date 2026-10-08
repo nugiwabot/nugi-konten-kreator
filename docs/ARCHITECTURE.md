@@ -1,72 +1,74 @@
-# 🏗️ System Architecture: Nugi Human–Place Content Intelligence Engine
+# Nugi Content Creator — architecture
 
-## 1. Overview & Purpose
+The repository has one end-to-end production path. Focused research, media,
+editorial, and diagnostic tools remain callable independently, but none owns a
+second production state machine.
 
-**Nugi Content Creator** adalah sistem kecerdasan editorial independen yang dirancang untuk:
-1. **Discover questions:** Menemukan pertanyaan riil yang ingin dipahami manusia mengenai kehidupan nyata.
-2. **Deep research:** Meriset pertanyaan tersebut menggunakan bukti empiris (data institusional, sejarah, laporan ekonomi).
-3. **Map causal relationships:** Mengidentifikasi hubungan sebab-akibat antara manusia (*Human*) dan ruang tempat manusia hidup (*Place*).
-4. **Contextualize changes:** Memahami perubahan dalam sejarah, ekonomi, teknologi, AI, kerja, budaya, geografi, kota, perumahan, dan lahan.
-5. **Construct causal chains:** Membangun rantai kausal multi-tingkat (bukan sekadar korelasi dangkal).
-6. **Distinctive storytelling:** Mengubah riset menjadi narasi khas persona Nugi (tenang, tajam, reflektif, non-sales, bernapas manusia).
-7. **Multi-format scripts:** Menghasilkan naskah short-form (Shorts/TikTok/Reels) dan long-form (YouTube video esai).
-8. **Visual/media planning:** Menghasilkan spesifikasi visual per micro-beat, query ekspansi aset, dan storyboard.
-9. **Learning loop:** Belajar secara berkesinambungan dari performa konten untuk mengasah fit score dan topik masa depan.
+## Canonical call graph
 
----
-
-## 2. Diagram Alur Sistem (System Dataflow)
-
-```mermaid
-graph TD
-    A[User Golden Prompt / Question Mining] --> B[Executive Producer Contract & Production Plan]
-    B --> C[Intent Classifier & Human–Place Engine]
-    C --> D[Story Type Engine: 10 Archetypes]
-    D --> E[Knowledge Retrieval & LAN Reranker]
-    E --> F[Epistemic Research & Dossier Generator (S0–S7)]
-    F --> G[Dynamic Script Synthesizer & Causal Reasoning]
-    G --> H[4-State Fact Check Audit]
-    H --> I[Visual Shot Planning & Micro-Beat Storyboard]
-    I --> J[Media Retrieval, Multi-Stage Ranking & Provenance]
-    J --> K[Subtitle Generator (SRT)]
-    K --> L[Native CapCut Desktop Draft Generator]
-    L --> M[Remotion Motion Graphics & Title Cards]
-    M --> N[CapCut Desktop Library Auto-Installation]
-    N --> O[Final QA Engine & Gatekeeping Report]
+```text
+MCP nugi_content_create
+  -> mcp.server.content_create
+  -> ProductionOrchestrator.run
+       -> ExecutiveProducer: production_plan.json
+       -> editorial quality qualification
+       -> DossierGenerator: research_dossier.json/.md
+            -> BPS adapter (fail-closed until live retrieval exists)
+            -> OpenAlex abstracts / Crossref metadata / GDELT discovery
+            -> web retrieval with recency passed through
+       -> DynamicScriptSynthesizer: script.md + story_plan.json
+       -> audit_script_with_dossier: fact_check_report.json
+       -> VisualRequirementsGenerator: broll_plan.json
+       -> MediaFinder: per-shot real search/download and media_manifest.json
+       -> SRTGenerator: subtitles.srt
+       -> TimelineData + CapCutDraftGenerator: timeline + draft package
+       -> CapCutValidator: capcut_validation.json
+       -> FinalQAEngine: final_qa.json
+       -> ProductionManifest: run status, completed stages, artifact links
 ```
 
----
+`mcp/workflows.py` preserves legacy workflow tool names as thin compatibility
+wrappers. They delegate to `ProductionOrchestrator` and read the same
+`ProductionManifest`; they do not define another executor or state store.
 
-## 3. Komponen Inti (Core Components)
+## Production state and reuse
 
-### A. Editorial Intelligence (`engine/editorial/`)
-- `taxonomy.py`: Klasifikasi 4 pilar utama (`human`, `place`, `change`, `why`) dan 12 sub-domain.
-- `intent_classifier.py`: Pengklasifikasi intensi pencarian (15 kelas: historical, origin, economic, urban, dll.) yang memprioritaskan intensi substantif atas kata tanya generik.
-- `human_place_engine.py`: Uji anchor 10 kriteria Human–Place dan deteksi rantai kausal kanonikal.
-- `story_type.py`: Klasifikasi ke dalam 10 arketipe narasi beserta seleksi *narrative device* yang alami (kontradiksi bukan syarat wajib).
-- `revelation_engine.py`: Penilai kualitas dan generator cetak biru momen epifani dengan penegakan rantai kausal dan penolakan kalimat klise AI.
-- `fit_score.py`: Penghitung skor editorial fit 7-dimensi tepat 100 poin (Human Relevance 25, Human–Place Anchor 20, WHY Depth 20, Evidence 15, Story Type Fit 10, Novelty 5, Editorial Coherence 5).
-- `quality_gate.py`: 8 gerbang kualitas wajib dan 12 aturan penolakan mutlak (*hard rejections*).
-- `script_synthesizer.py`: `DynamicScriptSynthesizer` yang menghasilkan naskah teleprompter berdurasi dinamis (30s–90s) dengan injeksi data empiris dari research dossier.
+`ProductionManifest` at `output/<run>/manifest.json` is the authoritative
+record for a run. Resume checks the completed stage, manifest-linked artifact,
+topic/run identity, requested input contract, and stage-specific validity before
+reuse. Invalidating an upstream stage clears downstream completion and artifact
+claims. A file merely existing on disk is not sufficient evidence of a
+completed stage.
 
-### B. Ingestion & Retrieval (`engine/ingestion/` & `engine/providers/`)
-- `embedding.py`: Abstraksi provider embedding lokal (LM Studio di `http://192.168.0.114:1234/v1/embeddings`) dengan fallback deterministik SHA-256 untuk testing.
-- `reranker.py`: Abstraksi provider cross-encoder reranker (BGE-Reranker di `http://192.168.0.114:8080/v1/rerank`).
-- `retriever.py`: Two-stage knowledge retriever (vektor kandidat top-k dilanjutkan reranking presisi).
-- `crossref_provider.py`: Query metadata jurnal akademis ber-DOI tanpa API key.
-- `gdelt_provider.py`: Pemantauan berita global dan analisis peristiwa internasional.
-- `search.py`: `ResilientWebResearchProvider` (SearXNG dengan fallback DuckDuckGo).
+External research and media results can vary with provider availability and
+recency. The pipeline records those results and fails closed; it does not claim
+that external calls are deterministic.
 
-### C. Video & Timeline Engine (`engine/pipeline/`)
-- `timeline_model.py`: Model kanonikal timeline (`TimelineClip`, `SubtitleCue`, `MusicTrack`, `TimelineData`) yang independen dari editor target.
-- `capcut_engine.py`: `CapCutDraftGenerator` yang menghasilkan paket native folder CapCut Desktop 9.x/10.x lengkap (`draft_content.json`, `draft_meta_info.json`, `timeline_layout.json`, `attachment_pc_common.json`) dan dapat langsung di-install ke library pengguna (`User Data/Projects/com.lveditor.draft`).
-- `capcut_validator.py`: `CapCutValidator` dengan 16 aturan validasi struktural, track ID, timecode, media existence, dan JSON compliance (status: `GENERATED`, `VALIDATED`, `APP_VERIFIED`).
-- `remotion_engine.py`: Integrasi komponen React Remotion untuk rendering motion graphics, kinetic typography, dan title cards.
-- `video_pipeline.py`: Perencanaan produksi video terpadu (script parsing, visual shot generation, SRT generation, dan CapCut timeline creation).
+## Evidence and publishability
 
-### D. Autonomous Production Orchestration (`engine/production/`)
-- `executive_producer.py`: Merumuskan `production_plan.json` berdasarkan prompt, durasi, gaya, serta menentukan strategi reuse aset.
-- `production_manifest.py`: `ProductionManifest` pelacak status tiap stage produksi yang mendukung idempoten dan resume dari stage sebelumnya.
-- `final_qa.py`: `FinalQAEngine` penegak gerbang kualitas final (10 dimensi hard gates + soft score) yang menghasilkan `final_qa.json`.
-- `production_orchestrator.py`: `ProductionOrchestrator` yang mengeksekusi 12 tahapan produksi end-to-end tanpa intervensi manual.
+- `exact_quote` is reserved for source text actually retrieved verbatim.
+  Search-result snippets and bibliographic metadata remain separate.
+- Citation counts are source metadata, not topical statistics.
+- One source alone supports at most `PROBABLE`; `VERIFIED` requires independent
+  corroboration. Evidence-strength numbers are explicitly heuristic.
+- The script auditor evaluates spoken narration, not headings, timecodes, or
+  production metadata.
+- Final QA requires a verified dossier and fact-check pass, valid run-linked
+  artifacts, real media mapped to each required shot, and matching topic
+  relevance. Dry-run placeholders never count as coverage.
+- `ContentQualityEvaluator` supplies editorial scores; it cannot override a
+  failed fact-check or Final QA gate.
 
+## CapCut
+
+`capcut_engine.py` is the single native draft generator. `capcut_validator.py`
+is the structural validator. `VALIDATED` records a deterministic file/schema
+check; `APP_VERIFIED` requires an explicit record that CapCut Desktop opened,
+the timeline was checked, and the project was saved. Installation or
+registration alone does not prove application-level verification.
+
+## Removed duplicate paths
+
+The legacy `VideoPipeline`, raw-footage auto-edit/SmartCut path, separate
+workflow executor/registry/state store, and faster-whisper subtitle script
+were removed. The supported production entry point is `nugi_content_create`.

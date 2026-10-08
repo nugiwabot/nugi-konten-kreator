@@ -288,3 +288,20 @@ def test_11_nugi_property_brand_fit():
     assert rep.property_brand_fit is not None
     assert rep.property_brand_fit["score"] >= 17
 
+
+def test_dossier_audit_ignores_production_metadata_and_timecode_labels():
+    from engine.editorial.script_auditor import audit_script_with_dossier
+
+    script = """# NASKAH PRODUKSI
+- **Status Epistemik Riset:** `VERIFIED` (Evidence strength heuristic: 99%)
+```text
+[00:00 - 00:05] HOOK
+Belum ada sumber yang cukup untuk memastikan penyebabnya.
+```"""
+
+    report = audit_script_with_dossier(script, dossier_data={})
+
+    assert report["overall_verdict"] in {"UNVERIFIED", "PROBABLE"}
+    assert all("Status Epistemik" not in claim["sentence"] for claim in report["claims"])
+    assert all("00:00" not in claim["sentence"] for claim in report["claims"])
+

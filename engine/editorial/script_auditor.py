@@ -545,6 +545,43 @@ def _segment_sentences(text: str) -> List[str]:
     return [s.strip() for s in raw_sents if s.strip()]
 
 
+def _extract_spoken_narration(script_text: str) -> str:
+    """Return narration only; production headings and metadata are not claims."""
+    lines = script_text.splitlines()
+    spoken_fence_types = {"text", "txt", "narration", "spoken"}
+    has_spoken_fence = any(
+        line.strip().startswith("```")
+        and line.strip()[3:].strip().lower() in spoken_fence_types
+        for line in lines
+    )
+    in_fence = False
+    count_fence = False
+    narration = []
+    for raw_line in lines:
+        line = raw_line.strip()
+        if line.startswith("```"):
+            if not in_fence:
+                in_fence = True
+                count_fence = line[3:].strip().lower() in spoken_fence_types
+            else:
+                in_fence = False
+                count_fence = False
+            continue
+        if in_fence:
+            if not count_fence:
+                continue
+        elif has_spoken_fence:
+            continue
+        if not line or line.startswith(("#", "---", "- **", "* **")):
+            continue
+        if line.lower().startswith(("metadata:", "status epistemik", "title:", "judul:")):
+            continue
+        if re.match(r"^\[\d{2}:\d{2}.*\]\s+[A-Z][A-Z &/\-]*$", line):
+            continue
+        narration.append(line)
+    return "\n".join(narration)
+
+
 def _classify_and_build_claim(sentence: str, section_name: str) -> Optional[ExtractedClaim]:
     """Analyzes a single sentence and constructs a classified ExtractedClaim."""
     lower = sentence.lower()
@@ -1233,7 +1270,7 @@ def audit_script_with_dossier(
     - DISPUTED: Conflicting evidence, causal overclaim, or numerical mismatch.
     - UNVERIFIED: Lacks empirical backing or unverified speculation.
     """
-    sentences = _segment_sentences(script_text)
+    sentences = _segment_sentences(_extract_spoken_narration(script_text))
     audited_claims = []
     
     verified_count = 0
@@ -1244,14 +1281,6 @@ def audit_script_with_dossier(
     known_data_points = []
     if dossier_data and "data_points" in dossier_data:
         known_data_points = dossier_data["data_points"]
-    else:
-        try:
-            from engine.providers.bps_provider import _BPS_OFFICIAL_DATASETS
-            for ds in _BPS_OFFICIAL_DATASETS:
-                for dp in ds.get("data_points", []):
-                    known_data_points.append(dp.to_dict() if hasattr(dp, "to_dict") else dp)
-        except Exception:
-            pass
 
     for idx, sentence in enumerate(sentences):
         if len(sentence.strip()) < 15:
@@ -1343,14 +1372,18 @@ def audit_script_with_dossier(
             "flags": flags
         })
 
-    # Overall Verdict
-    overall = "VERIFIED"
+    # Derive the overall status from claims actually checked. An empty report
+    # is UNKNOWN; unchecked factual claims cannot be promoted to VERIFIED.
     if disputed_count > 0:
         overall = "DISPUTED"
-    elif unverified_count > verified_count + probable_count:
+    elif not audited_claims:
+        overall = "UNKNOWN"
+    elif unverified_count > 0:
         overall = "UNVERIFIED"
-    elif verified_count >= 1 or probable_count >= 2:
+    elif probable_count > 0:
         overall = "PROBABLE"
+    else:
+        overall = "VERIFIED"
 
     return {
         "status": "ok",
@@ -1362,6 +1395,6 @@ def audit_script_with_dossier(
             "disputed": disputed_count,
             "unverified": unverified_count
         },
-        "pass_gate": disputed_count == 0,
+        "pass_gate": overall == "VERIFIED",
         "claims": audited_claims
     }

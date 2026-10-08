@@ -39,6 +39,7 @@ def test_content_quality_evaluator_high_quality():
     )
     fact_check_result = {
         "overall_verdict": "VERIFIED",
+        "pass_gate": True,
         "breakdown": {"verified": 3, "probable": 1, "disputed": 0, "unverified": 0}
     }
     shots_data = [
@@ -86,3 +87,17 @@ def test_content_quality_evaluator_disputed_overclaim():
 
     assert len(report.blockers) > 0
     assert report.status in ("NEEDS_REVIEW", "REJECT_AND_RESEARCH_AGAIN")
+
+
+def test_unverified_fact_check_cannot_receive_publish_ready_label():
+    report = ContentQualityEvaluator().evaluate(
+        topic="Topik uji",
+        dossier_data={"claims": [], "primary_sources": [], "evidence_items": []},
+        script_text="Naskah dengan struktur yang perlu diperiksa.",
+        fact_check_result={"overall_verdict": "UNVERIFIED", "pass_gate": False, "breakdown": {"unverified": 1}},
+        shots_data=[],
+        downloaded_assets=[],
+    )
+
+    assert report.status not in {"PUBLISH_READY", "MINOR_EDIT"}
+    assert any("publish gate" in blocker.lower() for blocker in report.blockers)

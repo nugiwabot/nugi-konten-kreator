@@ -14,6 +14,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+import pytest
 
 from engine.pipeline.capcut_engine import CapCutDraftGenerator
 from engine.pipeline.capcut_validator import CapCutValidator
@@ -22,6 +23,8 @@ from engine.production.executive_producer import ExecutiveProducer, ProductionPl
 from engine.production.final_qa import FinalQAEngine, QAVerdict
 from engine.production.production_manifest import ProductionManifest, ProductionStage
 from engine.production.production_orchestrator import ProductionOrchestrator
+
+pytestmark = pytest.mark.usefixtures("research_offline")
 
 
 class TestExecutiveProducerContract(unittest.TestCase):
@@ -79,6 +82,26 @@ class TestProductionManifestState(unittest.TestCase):
             loaded = ProductionManifest.load(manifest_file)
             self.assertEqual(loaded.topic, "Rumah Kosong Jepang")
             self.assertTrue(loaded.is_stage_done(ProductionStage.RESEARCH))
+
+    def test_invalidate_from_forgets_downstream_artifact_and_quality_claims(self):
+        manifest = ProductionManifest(topic="Topic")
+        manifest.completed_stages = ["plan", "research", "media", "capcut", "final_qa"]
+        manifest.artifacts = {
+            "dossier_json": "dossier.json",
+            "media_manifest": "media.json",
+            "capcut_validation": "validation.json",
+            "final_qa": "qa.json",
+            "content_quality_json": "quality.json",
+        }
+        manifest.extra_fields.update({"content_quality": {"overall_score": 99}, "real_assets_ready": 3})
+
+        manifest.invalidate_from(ProductionStage.MEDIA)
+
+        self.assertEqual(manifest.completed_stages, ["plan", "research"])
+        self.assertNotIn("media_manifest", manifest.artifacts)
+        self.assertNotIn("content_quality_json", manifest.artifacts)
+        self.assertNotIn("content_quality", manifest.extra_fields)
+        self.assertEqual(manifest.status, "running")
 
 
 class TestCapCutDraftAndValidation(unittest.TestCase):
@@ -152,6 +175,46 @@ class TestFinalQAEngine(unittest.TestCase):
             self.assertEqual(report.verdict, QAVerdict.BLOCKED.value)
             self.assertTrue(len(report.hard_blockers) > 0)
             self.assertIn("Missing production_plan.json", report.hard_blockers)
+
+    def test_spoken_word_counter_counts_only_narration_text(self):
+        script = """# Production notes
+Metadata: 999 words
+```python
+this code must not count at all
+```
+```text
+[00:00 - 00:08] HOOK
+Satu dua tiga empat lima.
+```"""
+        self.assertEqual(FinalQAEngine._spoken_word_count(script), 5)
+
+    def test_media_coverage_requires_topic_relevance_not_only_a_file(self):
+        shot = {"shot_id": "shot_01", "query": "Jakarta commuter train"}
+        generic_asset = {
+            "media_status": "REAL_DOWNLOADED",
+            "source_url": "https://example.org/photo",
+            "title": "Group of people outdoors",
+        }
+        relevant_asset = {
+            "media_status": "REAL_DOWNLOADED",
+            "source_url": "https://example.org/photo",
+            "title": "Jakarta commuter rail platform",
+        }
+
+        self.assertFalse(FinalQAEngine.media_asset_matches_topic(shot, generic_asset, "Jakarta transportasi publik komuter"))
+        self.assertTrue(FinalQAEngine.media_asset_matches_topic(shot, relevant_asset, "Jakarta transportasi publik komuter"))
+
+    def test_final_qa_requires_manifest_and_explicit_pacing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ws = Path(tmpdir)
+            (ws / "production_plan.json").write_text(
+                json.dumps({"topic": "uji", "duration_seconds": 60}), encoding="utf-8"
+            )
+
+            report = FinalQAEngine().evaluate_production(ws)
+
+            self.assertTrue(any("Missing manifest.json" in item for item in report.hard_blockers))
+            self.assertTrue(any("spoken_words_per_minute" in item for item in report.hard_blockers))
 
     def test_final_qa_blocks_on_disputed_claims(self):
         with tempfile.TemporaryDirectory() as tmpdir:
