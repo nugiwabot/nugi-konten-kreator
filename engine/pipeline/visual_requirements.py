@@ -15,7 +15,7 @@ Editing Principles:
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
 from engine.pipeline.script_parser import NarasiScript, ScriptSection
@@ -73,6 +73,19 @@ class VisualShotRequirement:
     everyday_relevance_score: float = 0.0
     human_place_relevance_score: float = 0.0
     human_alignment_score: float = 0.0
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Serialize the full retrieval contract without implying assets exist."""
+        data = asdict(self)
+        data["query"] = self.search_query
+        data["search_query"] = self.search_query
+        data["start_frame"] = self.start_frame
+        data["end_frame"] = self.end_frame
+        data["duration_frames"] = self.duration_frames
+        data["visual_evidence_policy"] = "VISUALS_DO_NOT_SUBSTITUTE_FOR_CLAIM_EVIDENCE"
+        data["asset_availability"] = "NOT_CHECKED"
+        data["rights_status"] = "NOT_CHECKED"
+        return data
 
     @property
     def start_frame(self) -> int:
