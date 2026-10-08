@@ -10,6 +10,7 @@ on:
       - "tests/test_narrative_integrity.py"
       - "tests/test_visual_media_plan.py"
       - "tests/test_final_qa_integrity.py"
+      - "tests/test_production_orchestrator_e2e.py"
       - "tests/test_script_auditor.py"
       - "tests/conftest.py"
       - ".github/workflows/autonomous-intelligence.yml"
@@ -34,7 +35,7 @@ jobs:
         run: python -m pip install python-dotenv pytest
 
       - name: Compile Python sources
-        run: python -m compileall -q engine mcp tests/test_autonomous_intelligence.py tests/test_research_dossier.py tests/test_narrative_integrity.py tests/test_script_auditor.py tests/test_visual_media_plan.py tests/test_final_qa_integrity.py
+        run: python -m compileall -q engine mcp tests/test_autonomous_intelligence.py tests/test_research_dossier.py tests/test_narrative_integrity.py tests/test_script_auditor.py tests/test_visual_media_plan.py tests/test_final_qa_integrity.py tests/test_production_orchestrator_e2e.py
 
       - name: Run autonomous intelligence regression
         run: python -m unittest discover -s tests -p "test_autonomous_intelligence.py" -v
@@ -50,3 +51,6 @@ jobs:
 
       - name: Run final QA integration regression
         run: python -m pytest -q tests/test_final_qa_integrity.py
+
+      - name: Run production orchestration end-to-end regression
+        run: python -m pytest -q tests/test_production_orchestrator_e2e.py
