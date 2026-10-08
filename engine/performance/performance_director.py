@@ -269,6 +269,55 @@ def _apply_emphasis(text: str, emphasis: Optional[str], pitch: str) -> str:
     return text[:match.start()] + replacement + text[match.end():]
 
 
+def _apply_question_shape(
+    text: str,
+    clause_index: int,
+    clause_count: int,
+) -> str:
+    """Give rhetorical questions a visible hook-to-landing contour."""
+    body, punctuation = _strip_terminal_punctuation(text)
+    words = _words(body)
+    if not words:
+        return text
+
+    # The opening question word gets the first upward movement.
+    opener = re.match(
+        r"^(pernah|kenapa|mengapa|bagaimana|apa|kok|gimana)\b",
+        body,
+        flags=re.IGNORECASE,
+    )
+    if opener and clause_index == 0:
+        word = opener.group(1)
+        body = (
+            body[:opener.start(1)]
+            + f"**{word.upper()}↗**"
+            + body[opener.end(1):]
+        )
+
+    # The final meaningful word becomes the rhetorical landing.
+    if clause_index == clause_count - 1:
+        candidates = [
+            w for w in _words(body)
+            if w not in QUESTION_START and w not in STOPWORDS and len(w) >= 4
+        ]
+        if candidates:
+            target = candidates[-1]
+            pattern = re.compile(
+                rf"(?<![A-Za-zÀ-ÿ]){re.escape(target)}(?![A-Za-zÀ-ÿ])",
+                re.IGNORECASE,
+            )
+            match = pattern.search(body)
+            if match and "**" not in body[match.start():match.end()]:
+                word = match.group(0)
+                body = (
+                    body[:match.start()]
+                    + f"**{word.upper()}↘**"
+                    + body[match.end():]
+                )
+
+    return body + punctuation
+
+
 def _annotate_clause(
     clause: str,
     role: str,
@@ -294,6 +343,11 @@ def _annotate_clause(
         pitch = "falling"
     else:
         pitch = "flat"
+
+    # Questions get a hook-to-landing contour:
+    # opening question word rises, final semantic word lands.
+    if is_question:
+        return _apply_question_shape(clause, clause_index, clause_count)
 
     emphasis = _emphasis_word(body, role, clause_index, clause_count)
     body = _apply_emphasis(body, emphasis, pitch)
