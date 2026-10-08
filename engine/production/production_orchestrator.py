@@ -33,6 +33,7 @@ from engine.editorial.script_auditor import audit_script_with_dossier
 from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
 from engine.editorial.story_type import classify_story_type
 from engine.editorial.story_planner import build_story_plan
+from engine.editorial.editorial_learning import build_editorial_learning_record, update_editorial_learning_history
 from engine.pipeline.capcut_engine import CapCutDraftGenerator
 from engine.pipeline.capcut_validator import CapCutValidator
 import engine.pipeline.media_finder as media_finder_mod
@@ -820,6 +821,20 @@ class ProductionOrchestrator:
 
         manifest.quality = qa_report.to_dict()
         manifest.mark_stage_completed(ProductionStage.FINAL_QA, {"final_qa": str(qa_p)})
+
+        # STAGE 11: EDITORIAL LEARNING. This records observed outcomes and
+        # optional human feedback; it never changes scores or approval gates.
+        learning_record = build_editorial_learning_record(work_dir)
+        learning_p = work_dir / "editorial_learning.json"
+        learning_p.write_text(
+            json.dumps(learning_record, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        history_summary = update_editorial_learning_history(work_dir.parent, learning_record)
+        manifest.artifacts["editorial_learning"] = str(learning_p)
+        manifest.extra_fields["editorial_learning_status"] = learning_record["learning_status"]
+        manifest.extra_fields["editorial_learning_history"] = history_summary
+        manifest.save(work_dir)
 
         # Complete status
         manifest.current_stage = ProductionStage.COMPLETE.value
