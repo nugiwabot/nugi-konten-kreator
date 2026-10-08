@@ -33,9 +33,9 @@ def test_learning_record_summarizes_observed_outcome_without_inventing_feedback(
 
     assert record["run_id"] == "run-1"
     assert record["learning_status"] == "WAITING_FOR_HUMAN_FEEDBACK"
-    assert record["production_outcome"]["qa_verdict"] == "BLOCKED"
-    assert record["production_outcome"]["blocker_categories"] == ["evidence", "visual_media"]
-    assert record["production_outcome"]["media_status_counts"] == {"REAL_DOWNLOADED": 1, "MISSING": 1}
+    assert record["qa_verdict"] == "BLOCKED"
+    assert record["blocker_categories"] == ["evidence", "visual_media"]
+    assert record["media_status_counts"] == {"REAL_DOWNLOADED": 1, "MISSING": 1}
     assert record["human_feedback_recorded"] is False
     assert "audience_retention" not in record["production_outcome"]
     assert record["is_publishable"] if "is_publishable" in record else record["production_outcome"]["is_publishable"] is False
