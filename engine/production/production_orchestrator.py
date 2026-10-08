@@ -277,7 +277,10 @@ class ProductionOrchestrator:
             script_p,
             lambda: script_p.read_text(encoding="utf-8").strip() != ""
             and json.loads(story_plan_p.read_text(encoding="utf-8")).get("topic") == plan.topic
-            and float(json.loads(story_plan_p.read_text(encoding="utf-8")).get("duration_seconds", -1)) == float(plan.duration_seconds),
+            and float(json.loads(story_plan_p.read_text(encoding="utf-8")).get("duration_seconds", -1)) == float(plan.duration_seconds)
+            and json.loads(story_plan_p.read_text(encoding="utf-8")).get("schema_version") == 1
+            and isinstance(json.loads(story_plan_p.read_text(encoding="utf-8")).get("beats"), list)
+            and bool(json.loads(story_plan_p.read_text(encoding="utf-8")).get("beats")),
         ) and story_plan_p.is_file():
             logger.info("Resuming: Existing script reused.")
             script_content = script_p.read_text(encoding="utf-8")
