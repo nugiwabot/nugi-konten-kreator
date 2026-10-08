@@ -32,6 +32,18 @@ class PerformanceDirectorTests(unittest.TestCase):
         self.assertIn("Kenapa", rendered)
         self.assertIn("rumah", rendered)
 
+    def test_corpus_vocabulary_changes_delivery(self):
+        source = "Pernah kepikiran nggak, kenapa rumah makin mahal? Padahal gaji kita juga naik."
+        rendered = render_inline_script(annotate_script(source))
+        self.assertIn("**PERNAH KEPIKIRAN NGGAK↗**", rendered)
+        self.assertIn("**PADAHAL↗↘**", rendered)
+
+    def test_reveal_vocabulary_changes_delivery(self):
+        source = "Masalahnya bukan harga rumah. Melainkan akses terhadap ruang hidup."
+        rendered = render_inline_script(annotate_script(source))
+        self.assertIn("**MASALAHNYA↗↘**", rendered)
+        self.assertIn("**MELAINKAN↗↘**", rendered)
+
     def test_question_has_hook_and_landing(self):
         source = "Pernah merasa heran: beberapa tahun lalu kamu menabung untuk uang muka rumah, tapi saat gajimu kini meningkat, harga rumah incaranmu justru melesat jauh lebih tinggi?"
         rendered = render_inline_script(annotate_script(source))
