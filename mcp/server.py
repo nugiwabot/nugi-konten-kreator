@@ -124,9 +124,13 @@ def content_create(
         recency_hint=recency,
     )
 
-    if resolved.intent == "DISCOVER_CONTENT":
+    if resolved.intent == "DISCOVER_CONTENT" or (resolved.intent == "CREATE_CONTENT" and not resolved.topic):
         from engine.editorial.idea_discovery import IdeaDiscoveryEngine
-        return IdeaDiscoveryEngine(repo_root=REPO_ROOT).discover(count=resolved.requested_count)
+        discovery = IdeaDiscoveryEngine(repo_root=REPO_ROOT).discover(count=resolved.requested_count)
+        discovery["request_plan"] = resolved.to_dict()
+        discovery["production_status"] = "IDEAS_READY"
+        discovery["next_action"] = "select_a_candidate_and_run_nugi_content_create"
+        return discovery
 
     effective_topic = resolved.topic or topic
     effective_duration = duration_seconds if duration_seconds is not None else resolved.duration_seconds
