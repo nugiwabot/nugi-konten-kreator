@@ -23,6 +23,7 @@ def build_editorial_learning_record(workspace_dir):
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "run_id": manifest.get("run_id", ""),
         "topic": manifest.get("topic", ""),
+        "learning_status": "HUMAN_FEEDBACK_RECORDED" if _read(ws / "editorial_feedback.json").get("schema_version") == 1 else "WAITING_FOR_HUMAN_FEEDBACK",
         "qa_verdict": qa.get("verdict", "UNKNOWN"),
         "is_publishable": qa.get("is_publishable") is True,
         "quality_score": qa.get("overall_quality_score"),
