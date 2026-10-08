@@ -235,7 +235,7 @@ def main() -> int:
     for feed in [x.strip() for x in os.getenv("EXTRA_RSS_FEEDS", "").split(";") if x.strip()]:
         run_provider("extra_rss_feed", lambda _q, feed=feed: rss_items(feed, "extra_rss_feed"), "configured feed")
 
-    unique: dict[str, dict[str, Any]] =     for row in all_rows:
+    unique: dict[str, dict[str, Any]] = {}\n    for row in all_rows:
         key = re.sub(r"[?#].*$", "", row["source_url"]).rstrip("/").lower()
         if key and key not in unique:
             unique[key] = row
