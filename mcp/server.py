@@ -146,6 +146,7 @@ def content_create(
         max_broll_shots=max_broll_shots,
         install_to_capcut=install_to_capcut,
         recency=effective_recency,
+        request_plan=resolved.to_dict(),
     )
     payload = result.to_dict()
     payload["request_plan"] = resolved.to_dict()
