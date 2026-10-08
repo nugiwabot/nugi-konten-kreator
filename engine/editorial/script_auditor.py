@@ -1649,7 +1649,7 @@ def audit_narrative_integrity(
         if quoted_parts:
             exact_quotes = []
             for claim in claims:
-                exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(claim.get("text", "")))
+                exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(claim.get("text", ""))))
             for evidence in (dossier_data.get("evidence_items", []) or []):
                 if isinstance(evidence, dict):
                     exact_quote_text = str(evidence.get("exact_quote", "") or "")
