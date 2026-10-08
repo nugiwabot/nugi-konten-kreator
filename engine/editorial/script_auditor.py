@@ -1258,7 +1258,8 @@ if __name__ == "__main__":
 
 def audit_script_with_dossier(
     script_text: str,
-    dossier_data: Optional[Dict[str, Any]] = None
+    dossier_data: Optional[Dict[str, Any]] = None,
+    story_plan: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     Comprehensive epistemic fact-checker cross-checking script sentences
@@ -1321,9 +1322,12 @@ def audit_script_with_dossier(
                     matched_dp = True
                     break
             if not matched_dp and verdict != "DISPUTED":
-                verdict = "PROBABLE"
-                reason = "Memuat data numerik yang perlu verifikasi tabel rujukan spesifik."
-                confidence = 0.70
+                # A number not found in the dossier is not "probable" merely
+                # because the dossier contains other data points.
+                verdict = "UNVERIFIED"
+                reason = "Angka dalam naskah tidak cocok dengan nilai data point yang tersedia di dossier."
+                flags.append("UNLINKED_NUMERICAL_DETAIL")
+                confidence = 0.25
 
         # 3. Check for Dossier Finding Match
         if dossier_data and verdict == "UNVERIFIED":
@@ -1331,9 +1335,18 @@ def audit_script_with_dossier(
                 c_text = claim_obj.get("text", "").lower()
                 overlap = len(set(s_lower.split()).intersection(set(c_text.split())))
                 if overlap >= 4:
-                    verdict = claim_obj.get("status", "PROBABLE")
-                    reason = f"Dossier Corroboration: Terhubung dengan klaim riset '{claim_obj.get('text', '')[:60]}...'."
-                    confidence = claim_obj.get("confidence_score", 0.8)
+                    dossier_status = str(claim_obj.get("status", "UNVERIFIED")).upper()
+                    if dossier_status in {"VERIFIED", "PROBABLE"}:
+                        verdict = dossier_status
+                        reason = f"Dossier Corroboration: Terhubung dengan klaim riset '{claim_obj.get('text', '')[:60]}...'."
+                        confidence = float(claim_obj.get("confidence_score", 0.8) or 0.8)
+                    else:
+                        verdict = "UNVERIFIED"
+                        reason = (
+                            f"Klaim terkait di dossier berstatus {dossier_status}; "
+                            "kemiripan teks tidak cukup untuk menaikkan status bukti."
+                        )
+                        confidence = 0.25
                     break
 
         # 4. Standard Heuristic Verdict if still UNVERIFIED
@@ -1385,7 +1398,7 @@ def audit_script_with_dossier(
     else:
         overall = "VERIFIED"
 
-    return {
+    report = {
         "status": "ok",
         "overall_verdict": overall,
         "total_sentences_checked": len(audited_claims),
@@ -1397,4 +1410,144 @@ def audit_script_with_dossier(
         },
         "pass_gate": overall == "VERIFIED",
         "claims": audited_claims
+    }
+    report["narrative_integrity"] = audit_narrative_integrity(
+        script_text, dossier_data or {}, story_plan
+    )
+    # Fact-check verdict alone is not sufficient for editorial readiness.
+    integrity_gate = report["narrative_integrity"]["gate_status"]
+    report["editorial_gate"] = {
+        "status": integrity_gate,
+        "publication_approval": False,
+        "reason": report["narrative_integrity"]["summary"],
+    }
+    return report
+
+
+def audit_narrative_integrity(
+    script_text: str,
+    dossier_data: Optional[Dict[str, Any]] = None,
+    story_plan: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Check that story-plan references and risky script details stay inside dossier evidence."""
+    dossier_data = dossier_data or {}
+    claims = dossier_data.get("claims", []) or []
+    data_points = dossier_data.get("data_points", []) or []
+    causal_relationships = dossier_data.get("causal_relationships", []) or []
+    supported_claims = [
+        claim for claim in claims if isinstance(claim, dict)
+        and str(claim.get("status", "UNVERIFIED")).upper() in {"VERIFIED", "PROBABLE"}
+    ]
+    supported_text = " ".join(
+        [str(c.get("text", "")) for c in supported_claims]
+        + [str(dp.get("value", "")) + " " + str(dp.get("metric", "")) for dp in data_points if isinstance(dp, dict)]
+    )
+    findings: List[Dict[str, Any]] = []
+
+    if story_plan:
+        for beat in story_plan.get("beats", []) or []:
+            if not isinstance(beat, dict):
+                continue
+            refs = beat.get("evidence_claims", []) or []
+            if beat.get("evidence_status") == "SUPPORTED_CLAIM":
+                invalid_refs = [
+                    ref for ref in refs if not isinstance(ref, dict)
+                    or str(ref.get("status", "UNVERIFIED")).upper() not in {"VERIFIED", "PROBABLE"}
+                ]
+                if not refs or invalid_refs:
+                    findings.append({
+                        "code": "STORY_PLAN_OVERSTATES_EVIDENCE",
+                        "severity": "CRITICAL",
+                        "beat_id": beat.get("beat_id", ""),
+                        "message": "Beat ditandai didukung, tetapi referensi klaim tidak ada atau status buktinya belum mendukung.",
+                        "recommendation": "Ubah status beat menjadi GAP_OR_QUESTION atau perbaiki referensi berdasarkan dossier.",
+                    })
+
+            dossier_by_id = {
+                str(c.get("id", "")): c for c in claims
+                if isinstance(c, dict) and c.get("id") not in (None, "")
+            }
+            for ref in refs:
+                if not isinstance(ref, dict):
+                    continue
+                ref_id = str(ref.get("id", ""))
+                source_claim = dossier_by_id.get(ref_id) if ref_id else None
+                if ref_id and source_claim is None:
+                    findings.append({
+                        "code": "STORY_PLAN_CLAIM_REFERENCE_MISSING",
+                        "severity": "HIGH",
+                        "beat_id": beat.get("beat_id", ""),
+                        "message": f"Referensi klaim '{ref_id}' tidak ditemukan di dossier.",
+                        "recommendation": "Sinkronkan story plan dengan klaim yang benar-benar tersimpan di dossier.",
+                    })
+                elif source_claim and str(source_claim.get("status", "UNVERIFIED")).upper() not in {"VERIFIED", "PROBABLE"} and str(ref.get("status", "")).upper() in {"VERIFIED", "PROBABLE"}:
+                    findings.append({
+                        "code": "STORY_PLAN_PROMOTES_UNRESOLVED_CLAIM",
+                        "severity": "CRITICAL",
+                        "beat_id": beat.get("beat_id", ""),
+                        "message": "Status klaim di story plan lebih kuat daripada status klaim sumber di dossier.",
+                        "recommendation": "Turunkan status beat dan pertahankan ketidakpastian klaim.",
+                    })
+
+    narration = _extract_spoken_narration(script_text)
+    sentences = _segment_sentences(narration)
+    causal_markers = (
+        "menyebabkan", "mengakibatkan", "memicu", "berujung pada",
+        "pendorong utamanya", "penyebab utamanya", "karena itulah",
+    )
+    has_supported_causal_path = any(
+        isinstance(item, dict) and item.get("cause") and item.get("mechanism")
+        and str(item.get("status", "")).upper() in {"VERIFIED", "PROBABLE"}
+        for item in causal_relationships
+    )
+    for sentence in sentences:
+        lower = sentence.lower()
+        if re.search(r"\b\d+(?:[.,]\d+)?\s*(?:%|persen|juta|miliar|triliun|tahun|orang|unit)\b", lower):
+            numbers = re.findall(r"\d+(?:[.,]\d+)?", sentence)
+            dossier_numbers = set(re.findall(r"\d+(?:[.,]\d+)?", supported_text))
+            missing = [number for number in numbers if number not in dossier_numbers]
+            if missing:
+                findings.append({
+                    "code": "SCRIPT_NUMERIC_DETAIL_NOT_LINKED",
+                    "severity": "HIGH",
+                    "sentence": sentence,
+                    "message": f"Detail angka {', '.join(missing)} tidak ditemukan pada klaim/data yang berstatus VERIFIED atau PROBABLE di dossier.",
+                    "recommendation": "Hapus angka tersebut atau tambahkan sumber yang mendukungnya ke dossier dan jalankan fact-check ulang.",
+                })
+        if any(marker in lower for marker in causal_markers) and not has_supported_causal_path:
+            findings.append({
+                "code": "CAUSAL_ASSERTION_NEEDS_EVIDENCE",
+                "severity": "MEDIUM",
+                "sentence": sentence,
+                "message": "Kalimat memakai bahasa sebab-akibat, tetapi dossier belum mencatat jalur kausal yang berstatus VERIFIED/PROBABLE.",
+                "recommendation": "Ubah menjadi pertanyaan/hipotesis atau dukung dengan sumber yang menguji mekanisme kausal.",
+            })
+
+    # Stable de-duplication prevents repeated warnings for the same sentence/code.
+    unique_findings = []
+    seen = set()
+    for finding in findings:
+        key = (finding.get("code"), finding.get("sentence"), finding.get("beat_id"))
+        if key not in seen:
+            seen.add(key)
+            unique_findings.append(finding)
+    findings = unique_findings
+
+    if any(item["severity"] == "CRITICAL" for item in findings):
+        gate = "BLOCKED"
+    elif findings or str(dossier_data.get("epistemic_status", "UNVERIFIED")).upper() != "VERIFIED":
+        gate = "REVIEW_REQUIRED"
+    else:
+        gate = "ELIGIBLE_FOR_EDITORIAL_REVIEW"
+
+    return {
+        "schema_version": 1,
+        "gate_status": gate,
+        "summary": (
+            f"{len(findings)} temuan integritas narasi; status gate {gate}. "
+            "Status ini bukan persetujuan publikasi."
+        ),
+        "finding_count": len(findings),
+        "findings": findings,
+        "publication_approval": False,
     }
