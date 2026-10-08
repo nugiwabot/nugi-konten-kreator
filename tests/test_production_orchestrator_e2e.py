@@ -300,6 +300,11 @@ class TestProductionOrchestratorE2E(unittest.TestCase):
             self.assertTrue((ws / "capcut" / "draft_content.json").is_file())
             self.assertTrue((ws / "capcut" / "draft_meta_info.json").is_file())
             self.assertTrue((ws / "final_qa.json").is_file())
+            self.assertTrue((ws / "editorial_learning.json").is_file())
+            self.assertTrue((repo_root / "output" / "editorial_learning_history.json").is_file())
+            learning = json.loads((ws / "editorial_learning.json").read_text(encoding="utf-8"))
+            self.assertEqual(learning["run_id"], result.run_id)
+            self.assertEqual(learning["learning_status"], "WAITING_FOR_HUMAN_FEEDBACK")
             self.assertTrue((ws / "manifest.json").is_file())
 
             # Verify CapCut validation
