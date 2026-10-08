@@ -111,6 +111,30 @@ class FinalQAEngine:
             except Exception as exc:
                 hard_blockers.append(f"Corrupt manifest.json: {exc}")
 
+        # Story Plan is the bridge between evidence-aware writing and visual
+        # production. Never accept a missing, stale, or malformed plan as a
+        # complete production artifact.
+        story_plan_p = ws / "story_plan.json"
+        artifacts_checked["story_plan"] = story_plan_p.is_file()
+        if not story_plan_p.is_file():
+            hard_blockers.append("Missing story_plan.json")
+        else:
+            try:
+                story_plan_data = json.loads(story_plan_p.read_text(encoding="utf-8"))
+                if not isinstance(story_plan_data, dict):
+                    raise ValueError("story_plan.json must contain an object")
+                if story_plan_data.get("schema_version") != 1:
+                    hard_blockers.append("story_plan.json has an unsupported or missing schema_version")
+                if not story_plan_data.get("beats"):
+                    hard_blockers.append("story_plan.json contains no narrative beats")
+                if manifest_data.get("topic") and story_plan_data.get("topic") != manifest_data.get("topic"):
+                    hard_blockers.append("story_plan.json topic does not match manifest.json")
+                recorded_story_plan = manifest_data.get("artifacts", {}).get("story_plan")
+                if not recorded_story_plan or Path(recorded_story_plan).resolve() != story_plan_p.resolve():
+                    hard_blockers.append("ProductionManifest Story Plan path does not match this workspace")
+            except Exception as exc:
+                hard_blockers.append(f"Corrupt story_plan.json: {exc}")
+
         # 1. Production Plan artifact check, including its explicit narration
         # pacing contract.
         plan_p = ws / "production_plan.json"
@@ -214,6 +238,24 @@ class FinalQAEngine:
                 else:
                     hard_blockers.append(f"Fact check report is {fact_status}")
                     scores["fact_integrity"] = 0.0
+
+                # Stage 08's narrative-integrity gate is an independent hard
+                # gate; a VERIFIED headline verdict cannot override it.
+                integrity = fact_data.get("narrative_integrity")
+                if not isinstance(integrity, dict) or integrity.get("schema_version") != 1:
+                    hard_blockers.append("Fact-check report lacks a valid narrative-integrity report (schema_version=1)")
+                else:
+                    integrity_status = str(integrity.get("gate_status", "UNKNOWN")).upper()
+                    if integrity_status == "BLOCKED":
+                        hard_blockers.append("Narrative integrity gate is BLOCKED")
+                    elif integrity_status != "ELIGIBLE_FOR_EDITORIAL_REVIEW":
+                        hard_blockers.append(
+                            f"Narrative integrity gate requires review (status: {integrity_status})"
+                        )
+                    if integrity.get("publication_approval") is True:
+                        warnings.append(
+                            "Narrative-integrity report claims publication approval; this system does not grant it automatically"
+                        )
             except Exception as e:
                 hard_blockers.append(f"Corrupt fact_check_report.json: {e}")
 
