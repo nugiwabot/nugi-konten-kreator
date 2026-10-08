@@ -61,6 +61,17 @@ class ContentOpportunity:
     niche_fit_score: float = 0.0
     niche_decision: str = "NEEDS_SCOPING"
     niche_fit_reason: str = ""
+    scoping_status: str = "NEEDS_SCOPING"
+    central_question: str = ""
+    concrete_case: str = ""
+    scope_geography: str = ""
+    scope_timeframe: str = ""
+    target_population: str = ""
+    mechanism_hypothesis: str = ""
+    alternative_explanations: List[str] = field(default_factory=list)
+    angle_options: List[Dict[str, str]] = field(default_factory=list)
+    evidence_needed: List[str] = field(default_factory=list)
+    scoping_reason: str = ""
     opportunity_score: float = 0.0
     novelty_score: float = 0.0
     evidence_signal: float = 0.0
@@ -316,6 +327,121 @@ def _dedupe_candidates(candidates: Sequence[ContentOpportunity], existing: Seque
         seen.append(title)
     return accepted
 
+
+_SCOPE_PLACE_PATTERNS = (
+    r"\b(indonesia|jakarta|bandung|surabaya|yogyakarta|medan|bekasi|semarang|makassar|singapura|jepang|amerika)\b",
+    r"\b(kota|kabupaten|provinsi|desa|kawasan|perumahan|kecamatan)\s+[A-Z][\w-]+",
+)
+_SCOPE_POPULATIONS = {
+    "property": "rumah tangga, calon pembeli/penyewa, dan pemilik properti yang relevan dengan kasus",
+    "city": "warga, komuter, pekerja, dan pengguna ruang di lokasi yang dipilih",
+    "economy": "kelompok rumah tangga atau pekerja yang mengalami dampak ekonomi tersebut",
+    "work": "pekerja dan organisasi yang terpengaruh oleh perubahan cara kerja",
+    "ai": "pekerja atau pengguna yang berinteraksi langsung dengan teknologi terkait",
+    "history": "orang atau komunitas yang hidup pada periode dan tempat yang diteliti",
+}
+_SCOPE_EVIDENCE_BASE = [
+    "sumber primer atau dokumen resmi yang menjelaskan kasus dan kronologinya",
+    "data yang relevan untuk menguji skala atau perubahan fenomena",
+    "pelaporan kredibel atau penelitian independen untuk menguji konteks",
+    "bukti yang menunjukkan siapa terdampak dan bagaimana dampaknya terjadi",
+]
+
+
+def build_story_scope(
+    topic: str,
+    classification: Optional[Dict[str, Any]] = None,
+    niche_decision: str = "NEEDS_SCOPING",
+) -> Dict[str, Any]:
+    """Build a transparent, provisional scope brief without asserting unverified causes."""
+    raw = re.sub(r"\s+", " ", (topic or "").strip())
+    meta = classification or classify_topic(raw)
+    domain = str(meta.get("primary_domain", "human") or "human")
+    lens = str(meta.get("lens", "sociology") or "sociology")
+    has_question = bool(re.search(r"\?\s*$", raw))
+    has_place = any(re.search(pattern, raw, flags=re.IGNORECASE) for pattern in _SCOPE_PLACE_PATTERNS)
+    year_match = re.search(r"\b(?:19\d{2}|20\d{2}|2050)\b", raw)
+    has_time = bool(year_match or re.search(r"\b(dulu|sekarang|sejak|selama|periode|abad ke-\d+)\b", raw, flags=re.IGNORECASE))
+    has_concrete_case = has_place or bool(year_match)
+    central_question = raw if has_question else (
+        f"Apa mekanisme yang membuat {raw.rstrip('.')} terjadi, dan siapa yang paling terdampak?"
+        if raw else "Fenomena konkret apa yang perlu dijelaskan, dan siapa yang paling terdampak?"
+    )
+    if has_place:
+        geography = "Lokasi yang disebut dalam sinyal awal; verifikasi batas wilayahnya saat riset."
+    else:
+        geography = "Belum ditentukan; pilih satu lokasi atau bandingkan maksimal dua lokasi yang relevan."
+    if year_match:
+        timeframe = f"Periode awal yang disebut: {year_match.group(0)}; verifikasi rentang waktunya."
+    elif has_time:
+        timeframe = "Petunjuk waktu ada pada sinyal, tetapi rentang awal-akhir perlu ditetapkan."
+    else:
+        timeframe = "Belum ditentukan; tetapkan periode yang cukup sempit untuk dibandingkan."
+    concrete_case = (
+        "Kasus awal: gunakan fenomena dalam judul sebagai kandidat kasus; identitas dan batas kasus harus diverifikasi."
+        if has_concrete_case
+        else "Belum ada kasus spesifik; pilih satu lokasi, kebijakan, kelompok, objek, atau kejadian terdokumentasi."
+    )
+    population = _SCOPE_POPULATIONS.get(
+        domain,
+        "kelompok manusia yang mengalami konsekuensi langsung dari fenomena ini",
+    )
+    mechanism = (
+        f"Uji apakah insentif, aturan/desain institusi, kondisi tempat, atau perubahan perilaku "
+        f"menjelaskan fenomena dalam domain {domain}; ini hipotesis kerja, bukan kesimpulan."
+    )
+    angles = [
+        {
+            "id": "mechanism",
+            "label": "Mekanisme di balik fenomena",
+            "question": f"Mekanisme atau insentif apa yang dapat menjelaskan {raw.rstrip('.?')}?",
+            "editorial_purpose": "Menjelaskan bagaimana sistem bekerja; jangan menyatakan sebab sebelum ada bukti.",
+        },
+        {
+            "id": "human_tradeoff",
+            "label": "Konsekuensi bagi manusia",
+            "question": f"Siapa yang paling diuntungkan, dirugikan, atau harus berkompromi ketika {raw.rstrip('.?')}?",
+            "editorial_purpose": "Membuat dampak pada waktu, uang, akses, pilihan, atau kehidupan sehari-hari menjadi konkret.",
+        },
+        {
+            "id": "change_over_time",
+            "label": "Perubahan dan konteks",
+            "question": f"Apa yang berubah dari waktu ke waktu sehingga {raw.rstrip('.?')} menjadi penting?",
+            "editorial_purpose": "Menelusuri kronologi dan membandingkan penjelasan historis dengan kondisi sekarang.",
+        },
+    ]
+    alternatives = [
+        "Insentif ekonomi atau kendala biaya.",
+        "Aturan, kebijakan, atau desain institusi.",
+        "Geografi, infrastruktur, atau akses terhadap lokasi dan layanan.",
+        "Perubahan perilaku, demografi, atau preferensi manusia.",
+    ]
+    evidence_needed = list(_SCOPE_EVIDENCE_BASE)
+    if domain in {"economy", "property", "city"}:
+        evidence_needed.append("data harga, biaya, mobilitas, pasokan/permintaan, atau indikator lokal yang sesuai dengan kasus")
+    if domain == "history" or lens == "history":
+        evidence_needed.append("arsip atau dokumen sezaman untuk menghindari narasi sejarah yang hanya bersandar pada ringkasan modern")
+    ready = niche_decision == "QUALIFIED" and has_concrete_case and has_question
+    scoping_status = "READY_FOR_RESEARCH" if ready else "NEEDS_SCOPING"
+    reason = (
+        "Ada pertanyaan dan petunjuk kasus spesifik; batas lokasi/periode serta kelayakan bukti tetap harus diverifikasi."
+        if ready
+        else "Masih berupa kandidat editorial: tetapkan kasus, batas lokasi/periode, dan pertanyaan yang dapat dijawab sebelum riset mendalam."
+    )
+    return {
+        "scoping_status": scoping_status,
+        "central_question": central_question,
+        "concrete_case": concrete_case,
+        "scope_geography": geography,
+        "scope_timeframe": timeframe,
+        "target_population": population,
+        "mechanism_hypothesis": mechanism,
+        "alternative_explanations": alternatives,
+        "angle_options": angles,
+        "evidence_needed": evidence_needed,
+        "scoping_reason": reason,
+    }
+
 class IdeaDiscoveryEngine:
     def __init__(self, *, rss_service: Optional[Any] = None, repo_root: Optional[Path] = None):
         self.rss_service = rss_service or RSSDiscoveryService()
@@ -419,6 +545,7 @@ class IdeaDiscoveryEngine:
             niche_fit_score=niche["score"],
             niche_decision=niche["decision"],
             niche_fit_reason=niche["reason"],
+            **build_story_scope(headline, classification, niche["decision"]),
             opportunity_score=round(opportunity, 2),
             novelty_score=round(novelty, 2),
             evidence_signal=round(evidence, 2),
@@ -528,6 +655,7 @@ class IdeaDiscoveryEngine:
                         niche_fit_score=niche["score"],
                         niche_decision=niche["decision"],
                         niche_fit_reason=niche["reason"],
+                        **build_story_scope(seed, classification, niche["decision"]),
                         opportunity_score=round(opportunity, 2),
                         novelty_score=round(novelty, 2),
                         evidence_signal=8.0,
