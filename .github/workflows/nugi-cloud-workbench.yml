@@ -1,0 +1,153 @@
+name: Nugi Cloud Workbench
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Cloud operation to run"
+        required: true
+        type: choice
+        default: preflight
+        options:
+          - preflight
+          - discover
+      count:
+        description: "How many ideas to return (1-20)"
+        required: true
+        type: number
+        default: 5
+      queries:
+        description: "Optional semicolon-separated discovery queries; leave empty for Nugi defaults"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nugi-cloud-workbench-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: ${{ inputs.operation == 'preflight' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Inspect cloud readiness without running production
+        shell: bash
+        run: |
+          set -euo pipefail
+          report="cloud-preflight-report.md"
+          {
+            echo "# Nugi Cloud Workbench — Preflight"
+            echo
+            echo "- Run ID: ${GITHUB_RUN_ID}"
+            echo "- Commit: ${GITHUB_SHA}"
+            echo "- Python: $(python --version 2>&1)"
+            echo
+            echo "## Required source files"
+            for path in \
+              engine/editorial/idea_discovery.py \
+              engine/pipeline/research_dossier.py \
+              engine/pipeline/media_finder.py \
+              engine/config.py \
+              scripts/cloud_discover.py; do
+              if [[ -f "$path" ]]; then
+                echo "- PASS: ${path} exists"
+              else
+                echo "- FAIL: ${path} is missing"
+                exit 1
+              fi
+            done
+            echo
+            echo "## Dependency manifests"
+            found=0
+            for path in requirements.txt pyproject.toml setup.py Pipfile poetry.lock; do
+              if [[ -f "$path" ]]; then
+                echo "- FOUND: ${path}"
+                found=1
+              fi
+            done
+            if [[ "$found" -eq 0 ]]; then
+              echo "- BLOCKER for full production runtime: no standard root Python dependency manifest was found."
+              echo "- The discovery-only operation installs python-dotenv explicitly and uses the existing stdlib-based RSS discovery path."
+            fi
+            echo
+            echo "## Local-service configuration"
+            echo "- EMBEDDING_URL default: http://192.168.0.114:1234/v1/embeddings"
+            echo "- RERANKER_URL default: http://192.168.0.114:8080/v1/rerank"
+            echo "- Discovery runs without research enrichment and does not call these office-LAN endpoints."
+            echo
+            echo "## Scope guard"
+            echo "- No research, script generation, media download, subtitle, or CapCut step was executed."
+          } > "$report"
+          cat "$report"
+
+      - name: Upload preflight report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nugi-cloud-preflight-${{ github.run_id }}
+          path: cloud-preflight-report.md
+          if-no-files-found: error
+          retention-days: 7
+
+  discover:
+    if: ${{ inputs.operation == 'discover' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install minimal discovery dependency
+        run: python -m pip install --disable-pip-version-check "python-dotenv==1.0.1"
+
+      - name: Compile discovery modules
+        run: |
+          python -m compileall -q \
+            engine/editorial/idea_discovery.py \
+            engine/editorial/fit_score.py \
+            engine/editorial/story_type.py \
+            engine/editorial/taxonomy.py \
+            engine/editorial/visual_feasibility.py \
+            engine/intelligence/rss.py \
+            scripts/cloud_discover.py
+
+      - name: Run discovery only
+        env:
+          DISCOVERY_COUNT: ${{ inputs.count }}
+          DISCOVERY_QUERIES: ${{ inputs.queries }}
+          RSS_DISCOVERY_ENABLED: "true"
+          EMBEDDING_REQUIRED: "false"
+          RERANKER_REQUIRED: "false"
+          ALLOW_FALLBACK: "true"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/cloud_discover.py \
+            --count "$DISCOVERY_COUNT" \
+            --queries "$DISCOVERY_QUERIES" \
+            --output-dir cloud-output/discover
+
+      - name: Upload discovery results
+        uses: actions/upload-artifact@v4
+        with:
+          name: nugi-cloud-discovery-${{ github.run_id }}
+          path: cloud-output/discover/
+          if-no-files-found: error
+          retention-days: 7
