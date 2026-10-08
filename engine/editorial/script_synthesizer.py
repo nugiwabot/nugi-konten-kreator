@@ -39,12 +39,18 @@ class DynamicScriptSynthesizer:
     def synthesize_script(
         self,
         dossier: ResearchDossier,
-        target_duration_seconds: int = 60
+        target_duration_seconds: int = 60,
+        story_plan: Optional[Dict[str, Any]] = None,
     ) -> str:
         """
-        Synthesizes a 60-second talking-head teleprompter script strictly derived
-        from the provided ResearchDossier.
+        Synthesize a script from the dossier. When a structured story plan is
+        supplied, use its evidence-aware beats and preserve uncertainty.
         """
+        if story_plan:
+            return self._synthesize_from_story_plan(
+                dossier, target_duration_seconds, story_plan
+            )
+
         topic = dossier.topic
         
         # 1. Extract Anchor Data & Angles
@@ -177,6 +183,69 @@ class DynamicScriptSynthesizer:
         ]
 
         return "\n".join(script_md)
+
+
+    def _synthesize_from_story_plan(
+        self,
+        dossier: ResearchDossier,
+        target_duration_seconds: int,
+        story_plan: Dict[str, Any],
+    ) -> str:
+        """Render the supplied story outline without promoting unsupported claims."""
+        topic = dossier.topic
+        beats = [
+            beat for beat in story_plan.get("beats", [])
+            if isinstance(beat, dict) and str(beat.get("narration_seed", "")).strip()
+        ]
+        duration = max(20, int(target_duration_seconds or 60))
+        if not beats:
+            return self.synthesize_script(dossier, target_duration_seconds)
+
+        def stamp(seconds: int) -> str:
+            return f"{seconds // 60:02d}:{seconds % 60:02d}"
+
+        sections = []
+        count = len(beats)
+        for index, beat in enumerate(beats):
+            start = int(round(duration * index / count))
+            end = int(round(duration * (index + 1) / count))
+            seed = self._clean_fillers(str(beat["narration_seed"]))
+            stage = str(beat.get("stage", f"BEAT {index + 1}")).replace("_", " ").upper()
+            evidence_status = str(beat.get("evidence_status", "GAP_OR_QUESTION"))
+            if index == 0:
+                narration = seed
+            elif evidence_status == "SUPPORTED_CLAIM":
+                narration = f"Untuk menjawabnya, kita perlu melihat bukti ini: {seed}"
+            elif "HUMAN" in stage or "REFLECTION" in stage:
+                narration = f"Di titik ini, pertanyaan pentingnya adalah: {seed}"
+            else:
+                narration = seed
+            sections.append(f"[{stamp(start)} - {stamp(end)}] {stage}\n{narration}")
+
+        limitations = []
+        if str(story_plan.get("epistemic_status", "UNVERIFIED")).upper() != "VERIFIED":
+            limitations.append(
+                "Status riset belum VERIFIED. Jangan menyajikan klaim yang belum terkonfirmasi sebagai fakta."
+            )
+        if not story_plan.get("evidence_summary", {}).get("supported_claims_used"):
+            limitations.append(
+                "Belum ada klaim VERIFIED/PROBABLE dalam story plan; perlakukan naskah sebagai kerangka investigasi, bukan kesimpulan final."
+            )
+
+        lines = [
+            f"# NASKAH KONTEN NUGI — {topic.upper()}",
+            f"- Story type: {story_plan.get('story_type_name', story_plan.get('story_type', 'unclassified'))}",
+            f"- Narrative device: {story_plan.get('narrative_device', 'not specified')}",
+            f"- Status epistemik riset: {story_plan.get('epistemic_status', 'UNVERIFIED')}",
+            f"- Durasi target: sekitar {duration} detik",
+            "",
+            "## STORY PLAN / DRAFT NARASI",
+            "",
+            *[line for section in sections for line in (section, "")],
+        ]
+        if limitations:
+            lines.extend(["", "## CATATAN EDITORIAL — JANGAN DIBACAKAN", *[f"- {item}" for item in limitations]])
+        return "\n".join(lines).strip() + "\n"
 
     def _clean_fillers(self, text: str) -> str:
         """Removes generic robotic clichés from text."""
