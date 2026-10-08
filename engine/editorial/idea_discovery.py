@@ -556,6 +556,12 @@ class IdeaDiscoveryEngine:
             "count_returned": len(ranked),
             "queries": list(queries),
             "signals_considered": len(feed_items),
+            "topic_memory": {
+                "indexed_titles": len(existing_topics),
+                "similarity_cutoff": 0.72,
+                "omitted_candidates": len(deduplication_diagnostics),
+                "examples": deduplication_diagnostics[:10],
+            },
             "candidates": [item.to_dict() for item in ranked],
             "safety": {
                 "feed_items_are_discovery_only": True,
