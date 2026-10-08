@@ -137,6 +137,12 @@ jobs:
           EMBEDDING_REQUIRED: "false"
           RERANKER_REQUIRED: "false"
           ALLOW_FALLBACK: "true"
+          SEARXNG_BASE_URL: ${{ vars.SEARXNG_BASE_URL }}
+          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+          MEDIACLOUD_API_TOKEN: ${{ secrets.MEDIACLOUD_API_TOKEN }}
+          EXTRA_RSS_FEEDS: ${{ vars.EXTRA_RSS_FEEDS }}
         shell: bash
         run: |
           set -euo pipefail
@@ -179,6 +185,7 @@ jobs:
             engine/editorial/visual_feasibility.py \
             engine/intelligence/rss.py \
             scripts/cloud_discover.py \
+            scripts/cloud_sources.py \
             scripts/cloud_research.py
 
       - name: Discover and extract accessible article content
@@ -195,7 +202,13 @@ jobs:
           python scripts/cloud_discover.py \
             --count "$DISCOVERY_COUNT" \
             --queries "$DISCOVERY_QUERIES" \
-            --output-dir cloud-output/research/discovery
+            --output-dir cloud-output/research/idea-discovery
+          python scripts/cloud_sources.py \
+            --count "$DISCOVERY_COUNT" \
+            --queries "$DISCOVERY_QUERIES" \
+            --language id \
+            --country ID \
+            --output cloud-output/research/discovery/discovery.json
           python scripts/cloud_research.py \
             --discovery-json cloud-output/research/discovery/discovery.json \
             --output-dir cloud-output/research
@@ -209,5 +222,7 @@ jobs:
             cloud-output/research/sources.json
             cloud-output/research/extraction-summary.json
             cloud-output/research/articles/
+            cloud-output/research/discovery/
+            cloud-output/research/idea-discovery/
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 30
