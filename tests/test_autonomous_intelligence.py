@@ -274,5 +274,70 @@ class TestVisualFeasibilityPreflight(unittest.TestCase):
         self.assertEqual(preflight["confidence"], "LOW")
 
 
+class TestEvidenceAwareStoryPlanning(unittest.TestCase):
+    def test_story_plan_uses_story_type_and_keeps_unverified_claims_as_gaps(self):
+        from types import SimpleNamespace
+        from engine.editorial.story_planner import build_story_plan
+        from engine.editorial.story_type import classify_story_type
+
+        dossier = SimpleNamespace(
+            topic="Kenapa sistem transportasi kota berubah?",
+            research_question="Apa yang mendorong perubahan sistem transportasi kota?",
+            claims=[
+                SimpleNamespace(
+                    id="c1", text="Sebuah klaim yang belum terverifikasi.",
+                    status="UNVERIFIED", confidence_score=0.1, independent_sources_count=0,
+                )
+            ],
+            narrative_angles=[{"human_dilemma": "Bagaimana perubahan ini memengaruhi perjalanan harian?"}],
+            causal_relationships=[],
+            evidence_gaps=[{"gap": "Tidak ada sumber primer"}],
+            epistemic_status="UNVERIFIED",
+            evidence_strength=0.1,
+        )
+        story_type = classify_story_type(dossier.topic)
+        plan = build_story_plan(dossier, story_type, duration_seconds=75)
+
+        self.assertEqual(plan["story_type"], story_type["primary_type"])
+        self.assertTrue(plan["beats"])
+        self.assertEqual(plan["evidence_summary"]["supported_claims_used"], 0)
+        self.assertEqual(plan["evidence_summary"]["unresolved_claims"], 1)
+        self.assertFalse(plan["evidence_summary"]["publication_approval"])
+        self.assertTrue(any("belum terverifikasi" in beat["narration_seed"].lower()
+                            for beat in plan["beats"]))
+
+    def test_script_synthesis_uses_story_plan_and_keeps_uncertainty_note(self):
+        from types import SimpleNamespace
+        from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
+
+        dossier = SimpleNamespace(topic="Uji topik")
+        plan = {
+            "topic": "Uji topik",
+            "story_type": "hidden_system",
+            "story_type_name": "HIDDEN SYSTEM STORY",
+            "narrative_device": "expose_mechanism",
+            "epistemic_status": "UNVERIFIED",
+            "evidence_summary": {"supported_claims_used": 0},
+            "beats": [{
+                "stage": "HOOK",
+                "narration_seed": "Apa yang benar-benar diketahui tentang topik ini?",
+                "evidence_status": "GAP_OR_QUESTION",
+            }, {
+                "stage": "EVIDENCE",
+                "narration_seed": "Bukti spesifik belum tersedia.",
+                "evidence_status": "GAP_OR_QUESTION",
+            }],
+        }
+
+        script = DynamicScriptSynthesizer().synthesize_script(
+            dossier, target_duration_seconds=60, story_plan=plan
+        )
+
+        self.assertIn("STORY PLAN / DRAFT NARASI", script)
+        self.assertIn("Apa yang benar-benar diketahui", script)
+        self.assertIn("kerangka investigasi", script)
+        self.assertNotIn("data menunjukkan sebaliknya", script)
+
+
 if __name__ == "__main__":
     unittest.main()
