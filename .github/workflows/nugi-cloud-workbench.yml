@@ -52,9 +52,9 @@ jobs:
               engine/editorial/script_synthesizer.py \
               engine/config.py; do
               if [[ -f "$path" ]]; then
-                echo "- PASS: `$path` exists"
+                echo "- PASS: ${path} exists"
               else
-                echo "- FAIL: `$path` is missing"
+                echo "- FAIL: ${path} is missing"
                 exit 1
               fi
             done
@@ -63,7 +63,7 @@ jobs:
             found=0
             for path in requirements.txt pyproject.toml setup.py Pipfile poetry.lock; do
               if [[ -f "$path" ]]; then
-                echo "- FOUND: `$path`"
+                echo "- FOUND: ${path}"
                 found=1
               fi
             done
@@ -72,8 +72,8 @@ jobs:
             fi
             echo
             echo "## Local-service configuration"
-            echo "- EMBEDDING_URL default: `http://192.168.0.114:1234/v1/embeddings`"
-            echo "- RERANKER_URL default: `http://192.168.0.114:8080/v1/rerank`"
+            echo "- EMBEDDING_URL default: http://192.168.0.114:1234/v1/embeddings"
+            echo "- RERANKER_URL default: http://192.168.0.114:8080/v1/rerank"
             echo "- These office-LAN endpoints are not called by this preflight."
             echo
             echo "## Scope guard"
