@@ -89,7 +89,7 @@ def idea_discover(count: int = 5) -> Dict[str, Any]:
     from engine.editorial.idea_discovery import IdeaDiscoveryEngine
 
     engine = IdeaDiscoveryEngine(repo_root=REPO_ROOT)
-    return engine.discover(count=count)
+    return engine.discover(count=count, enrich_with_research=True, research_top_n=min(count, 3), research_depth="quick")
 
 
 @mcp.tool(name="nugi_content_create")
@@ -126,7 +126,12 @@ def content_create(
 
     if resolved.intent == "DISCOVER_CONTENT" or (resolved.intent == "CREATE_CONTENT" and not resolved.topic):
         from engine.editorial.idea_discovery import IdeaDiscoveryEngine
-        discovery = IdeaDiscoveryEngine(repo_root=REPO_ROOT).discover(count=resolved.requested_count)
+        discovery = IdeaDiscoveryEngine(repo_root=REPO_ROOT).discover(
+            count=resolved.requested_count,
+            enrich_with_research=True,
+            research_top_n=min(resolved.requested_count, 3),
+            research_depth="quick",
+        )
         discovery["request_plan"] = resolved.to_dict()
         discovery["production_status"] = "IDEAS_READY"
         discovery["next_action"] = "select_a_candidate_and_run_nugi_content_create"
