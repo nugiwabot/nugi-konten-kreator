@@ -32,6 +32,12 @@ class PerformanceDirectorTests(unittest.TestCase):
         self.assertIn("Kenapa", rendered)
         self.assertIn("rumah", rendered)
 
+    def test_question_has_hook_and_landing(self):
+        source = "Pernah merasa heran: beberapa tahun lalu kamu menabung untuk uang muka rumah, tapi saat gajimu kini meningkat, harga rumah incaranmu justru melesat jauh lebih tinggi?"
+        rendered = render_inline_script(annotate_script(source))
+        self.assertIn("**PERNAH↗**", rendered)
+        self.assertIn("**TINGGI↘**", rendered)
+
     def test_inline_output_uses_thought_boundaries(self):
         source = "Kita bekerja lebih keras, namun garis finis kepemilikan hunian seolah terus digeser menjauh."
         rendered = render_inline_script(annotate_script(source))
