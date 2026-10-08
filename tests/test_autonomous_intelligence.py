@@ -227,5 +227,52 @@ class TestIdeaDiscovery(unittest.TestCase):
         self.assertIsInstance(result["candidates"][0]["story_type"], str)
 
 
+class TestVisualFeasibilityPreflight(unittest.TestCase):
+    def test_specific_scoped_case_has_routes_without_claiming_assets_exist(self):
+        from engine.editorial.idea_discovery import build_story_scope
+        from engine.editorial.visual_feasibility import assess_visual_feasibility
+
+        topic = "Kenapa harga rumah di Bandung berubah pada 2024?"
+        scope = build_story_scope(topic, {"primary_domain": "property", "lens": "economics"}, "QUALIFIED")
+        result = assess_visual_feasibility(topic, scope)
+
+        self.assertEqual(result["status"], "VISUALS_FEASIBLE")
+        route_ids = {route["id"] for route in result["visual_routes"]}
+        self.assertIn("place_and_geography", route_ids)
+        self.assertIn("data_and_charts", route_ids)
+        self.assertFalse(result["asset_search_performed"])
+        self.assertFalse(result["asset_availability_verified"])
+        self.assertFalse(result["download_performed"])
+        self.assertTrue(all(route["availability"] == "NOT_CHECKED" for route in result["visual_routes"]))
+
+    def test_broad_topic_is_partial_and_surfaces_missing_specific_location(self):
+        from engine.editorial.visual_feasibility import assess_visual_feasibility
+
+        result = assess_visual_feasibility(
+            "Kenapa ekonomi dunia terus berubah?",
+            {"scoping_status": "NEEDS_SCOPING", "concrete_case": "Belum ada kasus spesifik"},
+        )
+
+        self.assertEqual(result["status"], "VISUALS_PARTIAL")
+        self.assertIn("specific_location_not_identified", result["risk_flags"])
+        self.assertTrue(result["recommended_next_step"])
+        self.assertFalse(result["asset_availability_verified"])
+
+    def test_discovery_candidate_serializes_visual_preflight_separately_from_asset_search(self):
+        rss = FakeRSS([FakeFeedItem(
+            title="Kenapa harga rumah di Bandung berubah pada 2024?",
+            canonical_url="https://example.com/visual-preflight",
+        )])
+        with TemporaryDirectory() as td:
+            result = IdeaDiscoveryEngine(rss_service=rss, repo_root=Path(td)).discover(
+                count=1, include_evergreen_fallback=False
+            )
+
+        preflight = result["candidates"][0]["visual_preflight"]
+        self.assertIn(preflight["status"], {"VISUALS_FEASIBLE", "VISUALS_PARTIAL"})
+        self.assertFalse(preflight["asset_search_performed"])
+        self.assertEqual(preflight["confidence"], "LOW")
+
+
 if __name__ == "__main__":
     unittest.main()
