@@ -138,6 +138,20 @@ def build_story_plan(
             "visual_direction": "Pilih visual spesifik hanya jika relevan dengan beat; verifikasi aset pada tahap visual/media.",
         })
 
+    # Make unresolved claims visible even when a story type has no explicit
+    # "evidence" beat (for example, hidden-system short form).
+    if unresolved_refs and not any(
+        ref.get("id") == unresolved_refs[0]["id"]
+        for beat in beats for ref in beat.get("evidence_claims", [])
+    ) and beats:
+        target = next((beat for beat in beats if beat.get("requires_evidence")), beats[min(1, len(beats) - 1)])
+        target["evidence_claims"].append(unresolved_refs[0])
+        target["evidence_status"] = "GAP_OR_QUESTION"
+        target["narration_seed"] = (
+            f"Klaim yang belum terverifikasi: {unresolved_refs[0]['text']} "
+            "Klaim ini belum boleh disampaikan sebagai fakta."
+        )
+
     return {
         "schema_version": 1,
         "topic": topic,
