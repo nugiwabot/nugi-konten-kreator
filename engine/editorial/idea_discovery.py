@@ -277,7 +277,7 @@ def _read_existing_content(repo_root: Path, limit: Optional[int] = None) -> List
                     break
                 match = re.match(r"^title\s*:\s*(.*?)\s*$", line, flags=re.IGNORECASE)
                 if match:
-                    title = match.group(1).strip().strip("\\\"\' ")
+                    title = match.group(1).strip().strip("\"' ")
                     break
         if not title:
             title = next((line.lstrip("#").strip() for line in lines if re.match(r"^\s*#{1,6}\s+", line)), "")
