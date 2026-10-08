@@ -37,7 +37,7 @@ def test_learning_record_summarizes_observed_outcome_without_inventing_feedback(
     assert record["blocker_categories"] == ["evidence", "visual_media"]
     assert record["media_status_counts"] == {"REAL_DOWNLOADED": 1, "MISSING": 1}
     assert record["human_feedback_recorded"] is False
-    assert "audience_retention" not in record["production_outcome"]
+    assert "audience_retention" not in record
     assert record["is_publishable"] if "is_publishable" in record else record["production_outcome"]["is_publishable"] is False
 
 
