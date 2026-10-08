@@ -59,6 +59,11 @@ class ContentOpportunity:
     nugi_fit_score: float = 0.0
     recency_score: float = 0.0
     visual_potential_score: float = 0.0
+    evidence_strength: float = 0.0
+    research_claims_count: int = 0
+    research_primary_sources_count: int = 0
+    research_status: str = "NOT_RESEARCHED"
+    research_findings: List[str] = field(default_factory=list)
     selection_reason: List[str] = field(default_factory=list)
     status: str = "DISCOVERY_ONLY"
 
@@ -293,6 +298,40 @@ class IdeaDiscoveryEngine:
             selection_reason=reasons,
         )
 
+    def _enrich_with_research(self, candidate: ContentOpportunity, depth: str = "quick") -> None:
+        """Run a bounded evidence pass on one candidate without making discovery a hard dependency."""
+        try:
+            from engine.pipeline.research_dossier import DossierGenerator
+
+            research_topic = candidate.source_headline or candidate.suggested_title
+            dossier = DossierGenerator().build_dossier(
+                research_topic,
+                max_evidence_per_source=2,
+                depth=depth,
+                recency="m",
+            )
+            candidate.evidence_strength = round(float(dossier.evidence_strength), 3)
+            candidate.research_claims_count = len(dossier.claims)
+            candidate.research_primary_sources_count = len(dossier.primary_sources)
+            candidate.research_status = str(dossier.epistemic_status or "UNKNOWN")
+            candidate.research_findings = [str(item) for item in dossier.key_findings[:3]]
+            evidence_bonus = min(12.0, candidate.evidence_strength * 12.0)
+            source_bonus = min(6.0, candidate.research_primary_sources_count * 2.0)
+            candidate.opportunity_score = round(
+                min(100.0, candidate.opportunity_score + evidence_bonus + source_bonus),
+                2,
+            )
+            candidate.selection_reason.append(
+                f"bounded evidence pass: {candidate.research_status}, "
+                f"strength {candidate.evidence_strength:.2f}, "
+                f"{candidate.research_primary_sources_count} primary-source leads"
+            )
+        except Exception as exc:
+            candidate.research_status = "RESEARCH_UNAVAILABLE"
+            candidate.selection_reason.append(
+                "evidence pass unavailable; candidate remains discovery-only"
+            )
+
     def discover(
         self,
         *,
@@ -300,6 +339,9 @@ class IdeaDiscoveryEngine:
         queries: Optional[Sequence[str]] = None,
         include_evergreen_fallback: bool = True,
         max_items_per_query: int = 8,
+        enrich_with_research: bool = False,
+        research_top_n: int = 2,
+        research_depth: str = "quick",
     ) -> Dict[str, Any]:
         requested = max(1, min(20, int(count)))
         queries = tuple(queries or DEFAULT_DISCOVERY_QUERIES)
@@ -359,7 +401,13 @@ class IdeaDiscoveryEngine:
                     )
                 )
 
-        ranked = _dedupe_candidates(candidates, existing_topics)[:requested]
+        ranked = _dedupe_candidates(candidates, existing_topics)[: max(requested, min(20, requested + 3))]
+        if enrich_with_research and ranked:
+            for candidate in ranked[: max(0, min(int(research_top_n), 3))]:
+                self._enrich_with_research(candidate, depth=research_depth)
+            ranked.sort(key=lambda x: x.opportunity_score, reverse=True)
+
+        ranked = ranked[:requested]
         return {
             "status": "ok",
             "intent": "DISCOVER_CONTENT",
