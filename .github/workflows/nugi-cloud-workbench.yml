@@ -12,16 +12,12 @@ on:
           - preflight
           - discover
       count:
-        description: "Maximum number of ideas to return (discover only)"
+        description: "How many ideas to return (1-20)"
         required: true
-        type: choice
-        default: "5"
-        options:
-          - "3"
-          - "5"
-          - "10"
+        type: number
+        default: 5
       queries:
-        description: "Optional discovery queries, one per line; leave blank for the default Nugi queries"
+        description: "Optional semicolon-separated discovery queries; leave empty for Nugi defaults"
         required: false
         type: string
         default: ""
@@ -64,7 +60,8 @@ jobs:
               engine/editorial/idea_discovery.py \
               engine/pipeline/research_dossier.py \
               engine/pipeline/media_finder.py \
-              engine/config.py; do
+              engine/config.py \
+              scripts/cloud_discover.py; do
               if [[ -f "$path" ]]; then
                 echo "- PASS: ${path} exists"
               else
@@ -82,18 +79,17 @@ jobs:
               fi
             done
             if [[ "$found" -eq 0 ]]; then
-              echo "- BLOCKER: no standard root Python dependency manifest was found."
+              echo "- BLOCKER for full production runtime: no standard root Python dependency manifest was found."
+              echo "- The discovery-only operation installs python-dotenv explicitly and uses the existing stdlib-based RSS discovery path."
             fi
             echo
             echo "## Local-service configuration"
             echo "- EMBEDDING_URL default: http://192.168.0.114:1234/v1/embeddings"
             echo "- RERANKER_URL default: http://192.168.0.114:8080/v1/rerank"
-            echo "- These office-LAN endpoints are not called by this preflight."
+            echo "- Discovery runs without research enrichment and does not call these office-LAN endpoints."
             echo
             echo "## Scope guard"
-            echo "- This run only inspects repository readiness."
-            echo "- No content discovery, research, script generation, media download, subtitle, or CapCut step was executed."
-            echo "- Cloud content operations remain disabled until their runtime path is tested."
+            echo "- No research, script generation, media download, subtitle, or CapCut step was executed."
           } > "$report"
           cat "$report"
 
@@ -118,87 +114,40 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install minimal runtime dependency
-        run: python -m pip install --disable-pip-version-check python-dotenv
+      - name: Install minimal discovery dependency
+        run: python -m pip install --disable-pip-version-check "python-dotenv==1.0.1"
 
-      - name: Run isolated idea discovery
+      - name: Compile discovery modules
+        run: |
+          python -m compileall -q \
+            engine/editorial/idea_discovery.py \
+            engine/editorial/fit_score.py \
+            engine/editorial/story_type.py \
+            engine/editorial/taxonomy.py \
+            engine/editorial/visual_feasibility.py \
+            engine/intelligence/rss.py \
+            scripts/cloud_discover.py
+
+      - name: Run discovery only
         env:
           DISCOVERY_COUNT: ${{ inputs.count }}
           DISCOVERY_QUERIES: ${{ inputs.queries }}
           RSS_DISCOVERY_ENABLED: "true"
-          ALLOW_FALLBACK: "true"
           EMBEDDING_REQUIRED: "false"
           RERANKER_REQUIRED: "false"
+          ALLOW_FALLBACK: "true"
         shell: bash
         run: |
           set -euo pipefail
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-          from engine.editorial.idea_discovery import DEFAULT_DISCOVERY_QUERIES, IdeaDiscoveryEngine
-
-          count = int(os.environ.get("DISCOVERY_COUNT", "5"))
-          raw_queries = os.environ.get("DISCOVERY_QUERIES", "")
-          queries = [line.strip() for line in raw_queries.splitlines() if line.strip()]
-          if not queries:
-              queries = list(DEFAULT_DISCOVERY_QUERIES)
-
-          result = IdeaDiscoveryEngine(repo_root=Path.cwd()).discover(
-              count=count,
-              queries=queries,
-              include_evergreen_fallback=True,
-              max_items_per_query=8,
-              enrich_with_research=False,
-          )
-          result["cloud_run"] = {
-              "operation": "discover",
-              "run_id": os.environ.get("GITHUB_RUN_ID", ""),
-              "commit": os.environ.get("GITHUB_SHA", ""),
-              "scope": "idea discovery only; no research, script, media download, subtitle, or CapCut",
-          }
-
-          output = Path("cloud-output")
-          output.mkdir(exist_ok=True)
-          (output / "discovery.json").write_text(
-              json.dumps(result, ensure_ascii=False, indent=2),
-              encoding="utf-8",
-          )
-
-          lines = [
-              "# Nugi Cloud Discovery",
-              "",
-              f"- Status: {result.get('status', 'unknown')}",
-              f"- Signals considered: {result.get('signals_considered', 0)}",
-              f"- Ideas returned: {result.get('count_returned', 0)}",
-              f"- Queries: {', '.join(result.get('queries', []))}",
-              "",
-              "> Discovery leads only. These results are not verified facts and must not be used as factual script claims without research.",
-              "",
-          ]
-          for index, item in enumerate(result.get("candidates", []), start=1):
-              lines.extend([
-                  f"## {index}. {item.get('suggested_title', 'Untitled')}",
-                  "",
-                  f"- Opportunity score: {item.get('opportunity_score', 0)}",
-                  f"- Domain: {item.get('primary_domain', 'unknown')}",
-                  f"- Niche decision: {item.get('niche_decision', 'unknown')}",
-                  f"- Source: {item.get('source_names') or ['Evergreen fallback']}",
-                  f"- Original headline: {item.get('source_headline') or 'Evergreen idea'}",
-                  f"- URL: {item.get('source_url') or 'N/A'}",
-                  f"- Human question: {item.get('human_question', '')}",
-                  f"- Central question: {item.get('central_question', '')}",
-                  f"- Evidence needed: {'; '.join(item.get('evidence_needed', []))}",
-                  "",
-              ])
-          (output / "discovery-report.md").write_text("\n".join(lines), encoding="utf-8")
-          print((output / "discovery-report.md").read_text(encoding="utf-8"))
-          PY
+          python scripts/cloud_discover.py \
+            --count "$DISCOVERY_COUNT" \
+            --queries "$DISCOVERY_QUERIES" \
+            --output-dir cloud-output/discover
 
       - name: Upload discovery results
         uses: actions/upload-artifact@v4
         with:
           name: nugi-cloud-discovery-${{ github.run_id }}
-          path: cloud-output/
+          path: cloud-output/discover/
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 7
