@@ -477,6 +477,7 @@ class IdeaDiscoveryEngine:
         queries = tuple(queries or DEFAULT_DISCOVERY_QUERIES)
         feed_items = self._collect_signals(queries, max_items_per_query=max_items_per_query)
         existing_topics = _read_existing_content(self.repo_root)
+        deduplication_diagnostics: List[Dict[str, Any]] = []
         candidates: List[ContentOpportunity] = []
 
         for item in feed_items:
@@ -541,7 +542,7 @@ class IdeaDiscoveryEngine:
                     )
                 )
 
-        ranked = _dedupe_candidates(candidates, existing_topics)[: max(requested, min(20, requested + 3))]
+        ranked = _dedupe_candidates(candidates, existing_topics, diagnostics=deduplication_diagnostics)[: max(requested, min(20, requested + 3))]
         if enrich_with_research and ranked:
             for candidate in ranked[: max(0, min(int(research_top_n), 3))]:
                 self._enrich_with_research(candidate, depth=research_depth)
