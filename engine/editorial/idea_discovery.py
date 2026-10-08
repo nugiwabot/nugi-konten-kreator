@@ -406,6 +406,8 @@ class IdeaDiscoveryEngine:
             source_names=source_names,
             source_count=len(source_names),
             published_at=str(getattr(item, "published_at", "") or ""),
+            origin_kind="rss_feed",
+            epistemic_role="discovery_only",
             primary_domain=classification.get("primary_domain", ""),
             anchor=classification.get("anchor", ""),
             lens=classification.get("lens", ""),
@@ -512,6 +514,8 @@ class IdeaDiscoveryEngine:
                 candidates.append(
                     ContentOpportunity(
                         suggested_title=seed,
+                        origin_kind="evergreen_seed",
+                        epistemic_role="discovery_only",
                         primary_domain=classification.get("primary_domain", ""),
                         anchor=classification.get("anchor", ""),
                         lens=classification.get("lens", ""),
