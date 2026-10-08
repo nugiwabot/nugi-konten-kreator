@@ -1652,8 +1652,13 @@ def audit_narrative_integrity(
                 exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(claim.get("text", "")))
             for evidence in (dossier_data.get("evidence_items", []) or []):
                 if isinstance(evidence, dict):
-                    exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(evidence.get("exact_quote", ""))))
-                    exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(evidence.get("content", evidence.get("text", ""))))
+                    exact_quote_text = str(evidence.get("exact_quote", "") or "")
+                    evidence_text = str(evidence.get("content", evidence.get("text", "")) or "")
+                    if exact_quote_text:
+                        exact_quotes.append(exact_quote_text)
+                    if evidence_text:
+                        exact_quotes.append(evidence_text)
+                    exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', exact_quote_text + " " + evidence_text))
             for quoted in quoted_parts:
                 if not any(quoted.strip().lower() in known.lower() for known in exact_quotes):
                     findings.append({
