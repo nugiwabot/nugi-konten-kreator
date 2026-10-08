@@ -12,6 +12,25 @@ Example:
 
 Kita bekerja lebih keras↗ / dan menyisihkan tabungan lebih tekun↘, / namun **GARIS FINIS↗** kepemilikan hunian / seolah terus digeser / menjauh↘.
 
+## Corpus-derived delivery vocabulary
+
+The Performance Director learns its delivery vocabulary from the real Nugi script corpus:
+
+output/short video/TELEPROMPTER_SHORT_21-40.md
+
+The corpus is used only to learn how Nugi naturally frames thoughts, not to inject facts into a new script.
+
+The main delivery families are:
+
+- HOOK — “pernah nggak”, “pernah kepikiran”, “pernah heran”, “pernah perhatikan”, “bayangkan”
+- CURIOSITY — “kenapa ya”, “kok”, question openings
+- CONTRAST — “padahal”, “tapi”, “namun”, “justru”, “melainkan”, “bukan sekadar”, “bukan cuma”, “bukan karena”
+- REVEAL — “ternyata”, “masalahnya”, “jawabannya”, “artinya”, “yang sebenarnya”, “tanpa disadari”, “sadar atau nggak”
+- BUILD — “pertama”, “kedua”, “selain itu”, “ditambah lagi”, “di sisi lain”
+- REFLECTIVE — “pada akhirnya”, “mungkin”, “hari ini”, “coba tengok”, “itulah”
+
+These patterns affect pitch, pacing and pause placement. This makes the generated script closer to a spoken thought process rather than a marked-up written essay.
+
 ## Cue language
 
 - **↗** = pitch naik sedikit.
