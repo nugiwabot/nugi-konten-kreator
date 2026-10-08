@@ -33,3 +33,35 @@ def build_editorial_learning_record(workspace_dir):
         "human_feedback_recorded": (ws / "editorial_feedback.json").is_file(),
         "note": "Automated QA is not audience performance or human publication approval.",
     }
+
+
+
+def update_editorial_learning_history(output_root, record):
+    """Keep a local, run-keyed history for comparing future production runs."""
+    root = Path(output_root).resolve()
+    root.mkdir(parents=True, exist_ok=True)
+    path = root / "editorial_learning_history.json"
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        old = {}
+    runs = old.get("runs", [])
+    if not isinstance(runs, list):
+        runs = []
+    run_id = str(record.get("run_id", ""))
+    runs = [item for item in runs if not isinstance(item, dict) or str(item.get("run_id", "")) != run_id]
+    runs.append(record)
+    runs.sort(key=lambda item: str(item.get("generated_at", "")) if isinstance(item, dict) else "")
+    history = {
+        "schema_version": 1,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "run_count": len(runs),
+        "human_feedback_run_count": sum(
+            1 for item in runs
+            if isinstance(item, dict) and item.get("human_feedback_recorded") is True
+        ),
+        "runs": runs,
+        "interpretation": "Observational history only; does not automatically change editorial decisions.",
+    }
+    path.write_text(json.dumps(history, indent=2, ensure_ascii=False), encoding="utf-8")
+    return {"path": str(path), "run_count": len(runs)}
