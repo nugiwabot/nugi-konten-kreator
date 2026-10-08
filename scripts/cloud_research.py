@@ -39,6 +39,7 @@ class ArticleTextParser(HTMLParser):
         self.skip_depth = 0
         self.meta: dict[str, str] = {}
         self.canonical = ""
+        self.links: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_dict = {k.lower(): (v or "") for k, v in attrs}
@@ -49,6 +50,8 @@ class ArticleTextParser(HTMLParser):
                 self.meta[key.lower()] = value[:2000]
         if tag == "link" and attrs_dict.get("rel", "").lower() == "canonical":
             self.canonical = attrs_dict.get("href", "")
+        if tag == "a" and attrs_dict.get("href"):
+            self.links.append(attrs_dict["href"])
         if tag == "title":
             self.in_title = True
         if tag in SKIP_TAGS:
@@ -99,7 +102,7 @@ def safe_http_url(url: str) -> bool:
         return False
 
 
-def fetch_page(url: str) -> tuple[str, str, str]:
+def fetch_page(url: str, redirect_depth: int = 0) -> tuple[str, str, str, str]:
     if not safe_http_url(url):
         raise ValueError("invalid_or_unsafe_url")
     request = urllib.request.Request(url, headers={
@@ -124,6 +127,26 @@ def fetch_page(url: str) -> tuple[str, str, str]:
     parser = ArticleTextParser()
     parser.feed(source)
     text = parser.text()
+    # Google News RSS links can land on a thin wrapper instead of article text.
+    # Try publisher canonical/external links, with a small recursion bound.
+    if len(text) < 350 and redirect_depth < 2 and (urllib.parse.urlsplit(final_url).hostname or "").lower() == "news.google.com":
+        candidates = []
+        if parser.canonical:
+            candidates.append(urllib.parse.urljoin(final_url, html.unescape(parser.canonical)))
+        for href in parser.links:
+            candidate = urllib.parse.urljoin(final_url, html.unescape(href))
+            host = (urllib.parse.urlsplit(candidate).hostname or "").lower()
+            if host and not (host == "google.com" or host.endswith(".google.com") or host.endswith("googleusercontent.com")):
+                candidates.append(candidate)
+        seen = set()
+        for candidate in candidates:
+            if candidate in seen or not safe_http_url(candidate):
+                continue
+            seen.add(candidate)
+            try:
+                return fetch_page(candidate, redirect_depth + 1)
+            except (urllib.error.URLError, TimeoutError, ValueError, OSError):
+                continue
     title = (
         parser.meta.get("og:title")
         or parser.meta.get("twitter:title")
@@ -138,7 +161,7 @@ def fetch_page(url: str) -> tuple[str, str, str]:
     )
     if len(text) < 350:
         raise ValueError("insufficient_extractable_text")
-    return title[:500], text, published[:120]
+    return title[:500], text, published[:120], final_url
 
 
 def main() -> int:
@@ -188,11 +211,12 @@ def main() -> int:
             record["error"] = "No canonical source URL was supplied by discovery."
         else:
             try:
-                article_title, text, published = fetch_page(url)
+                article_title, text, published, resolved_url = fetch_page(url)
                 record.update({
                     "extraction_status": "EXTRACTED_TEXT",
                     "content_type": "text/html",
                     "article_title": article_title,
+                    "resolved_url": resolved_url,
                     "article_published_at": published,
                     "text_chars": len(text),
                     "text": text,
@@ -200,7 +224,8 @@ def main() -> int:
                 article_path = articles_dir / f"article-{i:03d}.md"
                 article_path.write_text(
                     f"# {article_title or title}\n\n"
-                    f"- Original URL: {url}\n"
+                    f"- Discovery URL: {url}\n"
+                    f"- Resolved article URL: {resolved_url}\n"
                     f"- Retrieved at (UTC): {generated_at}\n"
                     f"- Publisher date: {published or 'Not found'}\n"
                     f"- Extraction status: EXTRACTED_TEXT (heuristic extraction; completeness not guaranteed)\n\n"
@@ -215,6 +240,7 @@ def main() -> int:
         report.extend([
             f"## {i}. {title}", "",
             f"- Discovery source: {url or 'No URL'}",
+            f"- Resolved article URL: {record.get('resolved_url', 'Not resolved')}",
             f"- Published date from discovery: {item.get('published_at') or 'Unknown'}",
             f"- Extraction status: **{record['extraction_status']}**",
         ])
@@ -244,6 +270,12 @@ def main() -> int:
     (root / "sources.json").write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (root / "extraction-summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Research extraction complete: {successful}/{len(records)} pages yielded extractable text.")
+    failures: dict[str, int] = {}
+    for row in records:
+        if row["extraction_status"] != "EXTRACTED_TEXT":
+            reason = row.get("error", "unknown").split(":", 1)[-1].strip() or "unknown"
+            failures[reason] = failures.get(reason, 0) + 1
+    print("Failure summary: " + json.dumps(failures, ensure_ascii=False, sort_keys=True))
     return 0
 
 
