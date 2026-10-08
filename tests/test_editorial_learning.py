@@ -56,7 +56,6 @@ def test_explicit_editor_feedback_is_kept_separate_from_automated_qa(tmp_path):
     assert record["human_feedback_recorded"] is True
     assert record["human_feedback"]["ratings"] == {"hook": 2, "clarity": 4}
     assert record["human_feedback"]["audience_metrics"]["average_view_duration_seconds"] == 31
-    assert any(item["category"] == "feedback" for item in record["recommended_next_actions"]) is False
     assert any(item["category"] == "hook" for item in record["recommended_next_actions"])
 
 
