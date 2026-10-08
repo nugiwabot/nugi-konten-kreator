@@ -495,66 +495,124 @@ class ProductionOrchestrator:
                     })
                     continue
 
-                q = s.get("query") or plan.topic
-                if plan.topic.lower() not in q.lower():
-                    q = f"{q} {plan.topic}".strip()
-                s["query"] = q
-                query_key = " ".join(q.lower().split())
-                if query_key in query_cache:
-                    cached_item = query_cache[query_key]
-                    if cached_item is not None:
-                        reused = dict(cached_item)
-                        reused["shot_id"] = s_id
-                        reused["media_status"] = "LOCAL_REUSED"
-                        downloaded_assets.append(reused)
-                        media_shots.append({
-                            "shot_id": s_id,
-                            "required": True,
-                            "status": "LOCAL_REUSED",
-                            "local_path": reused["local_path"],
-                            "source_url": reused.get("source_url", ""),
-                        })
-                    continue
+                primary_query = s.get("query") or s.get("search_query") or plan.topic
+                raw_queries = [primary_query] + list(s.get("fallback_queries") or [])
+                search_queries: List[str] = []
+                for raw_query in raw_queries:
+                    query = str(raw_query or "").strip()
+                    if not query:
+                        continue
+                    if plan.topic.lower() not in query.lower():
+                        query = f"{query} {plan.topic}".strip()
+                    normalized = " ".join(query.lower().split())
+                    if normalized not in {" ".join(item.lower().split()) for item in search_queries}:
+                        search_queries.append(query)
+                s["query"] = search_queries[0] if search_queries else plan.topic
+                s["media_search_attempts"] = []
                 vr = s.get("visual_requirement", "GENERIC_ALLOWED")
-                try:
-                    res = finder.find_and_download(
-                        request=q,
-                        media="any",
-                        count=1,
-                        folder=f"{folder_name}/footage",
-                        visual_requirement=vr,
-                        research_intelligence=research_intelligence,
-                    )
-                    accepted = False
-                    for r in res.results:
-                        if r.local_path and Path(r.local_path).is_file() and Path(r.local_path).stat().st_size > 0:
-                            d_item = r.to_dict()
+                media_type = s.get("preferred_media_type", "any")
+                era = s.get("era", "auto")
+                style = "archival" if era in {"historical", "past"} else ("conceptual" if era == "future" else "documentary")
+                accepted = False
+
+                for q in search_queries:
+                    query_key = " ".join(q.lower().split())
+                    if query_key in query_cache:
+                        cached_item = query_cache[query_key]
+                        s["media_search_attempts"].append({
+                            "query": q,
+                            "status": "CACHE_HIT" if cached_item else "CACHE_MISS",
+                        })
+                        if cached_item is not None:
+                            reused = dict(cached_item)
+                            reused["shot_id"] = s_id
+                            reused["media_status"] = "LOCAL_REUSED"
+                            downloaded_assets.append(reused)
+                            media_shots.append({
+                                "shot_id": s_id,
+                                "required": True,
+                                "status": "LOCAL_REUSED",
+                                "local_path": reused.get("local_path", ""),
+                                "source_url": reused.get("source_url", ""),
+                                "license": reused.get("license", ""),
+                                "rights_status": reused.get("rights_status", "UNKNOWN"),
+                                "selected_query": q,
+                                "visual_evidence_policy": s.get("visual_evidence_policy", "VISUALS_DO_NOT_SUBSTITUTE_FOR_CLAIM_EVIDENCE"),
+                            })
+                            accepted = True
+                            break
+                        continue
+
+                    try:
+                        res = finder.find_and_download(
+                            request=q,
+                            media=media_type,
+                            era=era,
+                            style=style,
+                            count=1,
+                            folder=f"{folder_name}/footage",
+                            visual_requirement=vr,
+                            research_intelligence=research_intelligence,
+                        )
+                        s["media_search_attempts"].append({
+                            "query": q,
+                            "status": res.status,
+                            "providers_contacted": list(res.providers_contacted),
+                            "candidate_count": res.total_candidates_found,
+                            "usable_results": res.usable_results,
+                        })
+                        found = False
+                        for item in res.results:
+                            if not item.local_path or not Path(item.local_path).is_file() or Path(item.local_path).stat().st_size <= 0:
+                                continue
+                            d_item = item.to_dict()
                             d_item["shot_id"] = s_id
                             d_item["media_status"] = "REAL_DOWNLOADED"
+                            d_item["selected_query"] = q
                             if not self.qa_engine.media_asset_matches_topic(s, d_item, plan.topic):
                                 logger.warning(
                                     "Rejected downloaded media for shot %s because its title/entities do not match topic '%s'.",
                                     s_id,
                                     plan.topic,
                                 )
+                                s["media_search_attempts"][-1]["status"] = "REJECTED_TOPIC_MISMATCH"
                                 continue
                             downloaded_assets.append(d_item)
-                            valid_media_files.append(Path(r.local_path))
+                            valid_media_files.append(Path(item.local_path))
                             media_shots.append({
                                 "shot_id": s_id,
                                 "required": True,
                                 "status": "REAL_DOWNLOADED",
-                                "local_path": str(Path(r.local_path).resolve()),
+                                "local_path": str(Path(item.local_path).resolve()),
                                 "source_url": d_item.get("source_url", ""),
+                                "title": d_item.get("title", ""),
+                                "provider": d_item.get("provider", ""),
+                                "creator": d_item.get("creator", ""),
+                                "license": d_item.get("license", ""),
+                                "license_url": d_item.get("license_url", ""),
+                                "rights_status": d_item.get("rights_status", "UNKNOWN"),
+                                "selected_query": q,
+                                "visual_evidence_policy": s.get("visual_evidence_policy", "VISUALS_DO_NOT_SUBSTITUTE_FOR_CLAIM_EVIDENCE"),
                             })
                             query_cache[query_key] = d_item
                             accepted = True
+                            found = True
                             break
-                    if not accepted:
+                        if not found:
+                            query_cache[query_key] = None
+                        if accepted:
+                            break
+                    except Exception as exc:
+                        logger.warning("B-roll search failed for shot %s ('%s'): %s", s_id, q, exc)
+                        s["media_search_attempts"].append({"query": q, "status": "SEARCH_ERROR", "error": str(exc)})
                         query_cache[query_key] = None
-                except Exception as e:
-                    logger.warning(f"B-roll search failed for shot {s_id} ('{q}'): {e}")
-                    query_cache[query_key] = None
+
+                if not accepted:
+                    s["media_acquisition_status"] = "MISSING"
+                    s["media_acquisition_reason"] = "No relevant downloadable asset found after primary and fallback queries."
+                else:
+                    s["media_acquisition_status"] = "ACQUIRED"
+
 
             # Persist the topic-grounded search strings used for media lookup.
             broll_plan_p.write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
