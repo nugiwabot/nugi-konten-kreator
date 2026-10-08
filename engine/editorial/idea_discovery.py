@@ -85,6 +85,25 @@ class ContentOpportunity:
     research_findings: List[str] = field(default_factory=list)
     selection_reason: List[str] = field(default_factory=list)
     status: str = "DISCOVERY_ONLY"
+    visual_preflight: Dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        # Stage 06 is a preflight only: it must not search, download, or claim
+        # that any media asset has been found or cleared for reuse.
+        if not self.visual_preflight:
+            from engine.editorial.visual_feasibility import assess_visual_feasibility
+
+            self.visual_preflight = assess_visual_feasibility(
+                self.source_headline or self.suggested_title,
+                {
+                    "scoping_status": self.scoping_status,
+                    "central_question": self.central_question,
+                    "concrete_case": self.concrete_case,
+                    "scope_geography": self.scope_geography,
+                    "scope_timeframe": self.scope_timeframe,
+                    "angle_options": self.angle_options,
+                },
+            )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
