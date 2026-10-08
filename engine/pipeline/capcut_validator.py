@@ -221,7 +221,11 @@ class CapCutValidator:
         for v in mat_videos:
             v_path = v.get("path")
             if v_path:
-                norm_p = Path(v_path.replace("/", "\\"))
+                # Keep native path semantics on the current OS. Replacing
+                # forward slashes with backslashes breaks POSIX absolute paths
+                # such as /tmp/... even though CapCut JSON uses slash-normalized
+                # paths for portability.
+                norm_p = Path(v_path)
                 if not norm_p.is_file():
                     missing_media_files.append(str(norm_p))
         if missing_media_files:
