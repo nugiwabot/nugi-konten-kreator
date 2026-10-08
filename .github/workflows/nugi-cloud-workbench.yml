@@ -162,7 +162,7 @@ jobs:
   research:
     if: ${{ inputs.operation == 'research' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -196,6 +196,12 @@ jobs:
           EMBEDDING_REQUIRED: "false"
           RERANKER_REQUIRED: "false"
           ALLOW_FALLBACK: "true"
+          SEARXNG_BASE_URL: ${{ vars.SEARXNG_BASE_URL }}
+          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+          MEDIACLOUD_API_TOKEN: ${{ secrets.MEDIACLOUD_API_TOKEN }}
+          EXTRA_RSS_FEEDS: ${{ vars.EXTRA_RSS_FEEDS }}
         shell: bash
         run: |
           set -euo pipefail
