@@ -56,6 +56,11 @@ automatically.
 The engine returns an opportunity score, editorial fit score, novelty signal,
 source provenance, human question, deeper-why direction and selection reasons.
 
+For the MCP discovery path, the top two or three candidates also receive a
+bounded evidence pass through the existing DossierGenerator. This pass is a
+ranking signal only; final claims still require the normal deep research and
+fact-check gates in production.
+
 ## Safety rules
 
 1. Discovery never bypasses deep research.
