@@ -129,7 +129,7 @@ def fetch_page(url: str, redirect_depth: int = 0) -> tuple[str, str, str, str]:
     text = parser.text()
     # Google News RSS links can land on a thin wrapper instead of article text.
     # Try publisher canonical/external links, with a small recursion bound.
-    if len(text) < 350 and redirect_depth < 2:
+    if len(text) < 350 and redirect_depth < 2 and (urllib.parse.urlsplit(final_url).hostname or "").lower() == "news.google.com":
         candidates = []
         if parser.canonical:
             candidates.append(urllib.parse.urljoin(final_url, html.unescape(parser.canonical)))
