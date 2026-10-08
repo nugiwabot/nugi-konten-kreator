@@ -55,6 +55,62 @@ class TestAutonomousRequestResolution(unittest.TestCase):
 
 
 class TestIdeaDiscovery(unittest.TestCase):
+
+    def test_niche_qualification_accepts_clear_human_system_topic(self):
+        from engine.editorial.idea_discovery import evaluate_niche_alignment
+
+        result = evaluate_niche_alignment(
+            "Kenapa banyak minimarket berdiri berdekatan dan memengaruhi pilihan konsumen?"
+        )
+        self.assertEqual(result["decision"], "QUALIFIED")
+        self.assertGreaterEqual(result["score"], 55)
+        self.assertTrue(result["has_place_connection"])
+        self.assertTrue(result["has_human_relevance"])
+
+    def test_niche_qualification_rejects_off_niche_celebrity_gossip(self):
+        from engine.editorial.idea_discovery import evaluate_niche_alignment
+
+        result = evaluate_niche_alignment("Skandal asmara selebritas viral minggu ini")
+        self.assertEqual(result["decision"], "REJECTED")
+        self.assertEqual(result["score"], 0)
+
+    def test_niche_qualification_marks_broad_topic_for_scoping(self):
+        from engine.editorial.idea_discovery import evaluate_niche_alignment
+
+        result = evaluate_niche_alignment("Kenapa ekonomi dunia terus berubah?")
+        self.assertEqual(result["decision"], "NEEDS_SCOPING")
+        self.assertGreaterEqual(result["score"], 25)
+        self.assertFalse(result["has_place_connection"])
+        self.assertTrue(result["has_system_connection"])
+
+    def test_niche_qualification_keeps_borderline_historical_topic_for_scoping(self):
+        from engine.editorial.idea_discovery import evaluate_niche_alignment
+
+        result = evaluate_niche_alignment("Sejarah ekonomi Indonesia")
+        self.assertEqual(result["decision"], "NEEDS_SCOPING")
+        self.assertGreaterEqual(result["score"], 25)
+        self.assertLess(result["score"], 55)
+
+    def test_discovery_filters_rejected_candidates_but_keeps_evidence_boundary(self):
+        rss = FakeRSS([
+            FakeFeedItem(
+                title="Skandal asmara selebritas viral minggu ini",
+                canonical_url="https://example.com/off-niche",
+            ),
+            FakeFeedItem(
+                title="Kenapa banyak minimarket berdiri berdekatan dan memengaruhi pilihan konsumen?",
+                canonical_url="https://example.com/in-niche",
+            ),
+        ])
+        with TemporaryDirectory() as td:
+            result = IdeaDiscoveryEngine(rss_service=rss, repo_root=Path(td)).discover(
+                count=2, include_evergreen_fallback=False
+            )
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["count_returned"], 1)
+        self.assertEqual(result["candidates"][0]["niche_decision"], "QUALIFIED")
+        self.assertTrue(result["safety"]["feed_items_are_discovery_only"])
+
     def test_discovery_ranks_candidates_and_preserves_evidence_boundary(self):
         published = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
         rss = FakeRSS([
