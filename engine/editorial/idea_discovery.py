@@ -53,6 +53,9 @@ class ContentOpportunity:
     human_question: str = ""
     deeper_why: str = ""
     editorial_fit_score: float = 0.0
+    niche_fit_score: float = 0.0
+    niche_decision: str = "NEEDS_SCOPING"
+    niche_fit_reason: str = ""
     opportunity_score: float = 0.0
     novelty_score: float = 0.0
     evidence_signal: float = 0.0
@@ -97,6 +100,97 @@ def _days_old(date_text: str) -> float:
         return max(0.0, (datetime.now(timezone.utc) - value.astimezone(timezone.utc)).total_seconds() / 86400.0)
     except Exception:
         return 30.0
+
+
+
+# Explicit niche qualification is intentionally separate from Editorial Fit Score.
+# These patterns operate on the original signal, before generated narrative fields
+# are added, so generic AI-generated wording cannot make an unrelated topic fit.
+_PLACE_NICHE_PATTERNS = (
+    r"\b(rumah|properti|kpr|tanah|lahan|hunian|perumahan|kost|apartemen|ruko|developer|pengembang)\b",
+    r"\b(kota|urbanisasi|tata ruang|transportasi|komuter|macet|mrt|lrt|jalan tol|infrastruktur|desa|kampung|kawasan|ruang publik)\b",
+    r"\b(minimarket|supermarket|pasar|warung|toko|ritel|retail|sewa|harga rumah|harga tanah|tempat tinggal)\b",
+)
+_SYSTEM_NICHE_PATTERNS = (
+    r"\b(ekonomi|inflasi|suku bunga|biaya hidup|harga|gaji|upah|bisnis|perusahaan|pasokan|permintaan|pasar kerja)\b",
+    r"\b(ai|teknologi|algoritma|otomasi|otomatisasi|internet|digital|pekerjaan|kerja|kantor|industri|infrastruktur)\b",
+    r"\b(sejarah|kolonial|kebijakan|regulasi|pemerintah|institusi|sistem|aturan|demografi|populasi|penduduk)\b",
+    r"\b(psikologi|perilaku|kebiasaan|identitas|kelas sosial|status sosial|insentif|konsumen|konsumerisme)\b",
+)
+_HUMAN_RELEVANCE_PATTERNS = (
+    r"\b(manusia|orang|warga|masyarakat|keluarga|pekerja|konsumen|penduduk|generasi|anak muda)\b",
+    r"\b(kehidupan|hidup|pilihan|waktu|uang|akses|kebutuhan|rasa aman|dampak|mengubah|memengaruhi|mempengaruhi)\b",
+)
+_SPECIFIC_CASE_PATTERNS = (
+    r"\b(indonesia|jakarta|bandung|surabaya|yogyakarta|medan|bekasi|semarang|makassar|singapura|jepang|amerika)\b",
+    r"\b(19\d{2}|20\d{2}|abad ke-\d+)\b",
+)
+
+
+def evaluate_niche_alignment(
+    title: str,
+    classification: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Score whether an original topic signal fits Nugi's human/place/system niche.
+
+    The score is a transparent heuristic, not a calibrated probability. It is
+    deliberately computed from the original title rather than generated copy.
+    """
+    text = re.sub(r"\s+", " ", str(title or "")).strip().lower()
+    place_match = any(re.search(pattern, text) for pattern in _PLACE_NICHE_PATTERNS)
+    system_match = any(re.search(pattern, text) for pattern in _SYSTEM_NICHE_PATTERNS)
+    human_match = any(re.search(pattern, text) for pattern in _HUMAN_RELEVANCE_PATTERNS)
+    specific_case = any(re.search(pattern, text) for pattern in _SPECIFIC_CASE_PATTERNS)
+    question_match = bool(re.search(
+        r"\b(kenapa|mengapa|bagaimana|why|how|apa yang membuat|apa sebab)\b",
+        text,
+    ))
+
+    score = 0
+    matched_dimensions: List[str] = []
+    if place_match:
+        score += 35
+        matched_dimensions.append("place/living environment")
+    if system_match:
+        score += 25
+        matched_dimensions.append("system/mechanism")
+    if human_match:
+        score += 20
+        matched_dimensions.append("human consequence")
+    if specific_case and (place_match or system_match):
+        score += 10
+        matched_dimensions.append("specific case or context")
+    if question_match:
+        score += 10
+        matched_dimensions.append("explanatory question")
+    score = min(100, score)
+
+    # A human-only or trending-only headline cannot qualify by itself. It needs
+    # a credible place or system connection, not just a generic human keyword.
+    has_niche_anchor = place_match or system_match
+    if has_niche_anchor and score >= 55 and human_match:
+        decision = "QUALIFIED"
+        reason = "Ada koneksi niche dan konsekuensi manusia yang cukup jelas untuk masuk ke riset mendalam."
+    elif has_niche_anchor and score >= 25:
+        decision = "NEEDS_SCOPING"
+        reason = "Ada sinyal tempat/sistem, tetapi pertanyaan atau konsekuensi manusia perlu dipertegas sebelum riset mendalam."
+    else:
+        decision = "REJECTED"
+        reason = "Judul belum menunjukkan hubungan bermakna dengan tempat, sistem, atau mekanisme yang membentuk kehidupan manusia."
+
+    if matched_dimensions:
+        reason += " Dimensi terdeteksi: " + ", ".join(matched_dimensions) + "."
+    return {
+        "score": float(score),
+        "decision": decision,
+        "reason": reason,
+        "matched_dimensions": matched_dimensions,
+        "has_place_connection": place_match,
+        "has_system_connection": system_match,
+        "has_human_relevance": human_match,
+        "specific_case": specific_case,
+        "explanatory_question": question_match,
+    }
 
 
 def _recency_score(date_text: str) -> float:
@@ -236,6 +330,7 @@ class IdeaDiscoveryEngine:
             return None
 
         classification = classify_topic(headline)
+        niche = evaluate_niche_alignment(headline, classification)
         story_type_result = classify_story_type(headline)
         story_type = story_type_result.get("primary_type", "hidden_system") if isinstance(story_type_result, dict) else str(story_type_result)
         fit = calculate_editorial_fit(
@@ -253,7 +348,7 @@ class IdeaDiscoveryEngine:
         fit_score = float(fit.get("total_score", 0.0))
         source_names = self._source_names([item])
         recency = _recency_score(str(getattr(item, "published_at", "") or ""))
-        nugi_fit = 20.0
+        nugi_fit = niche["score"] / 5.0
         novelty = max(
             0.0,
             15.0 - max((_similarity(headline, prior) for prior in existing_topics), default=0.0) * 15.0,
@@ -273,6 +368,7 @@ class IdeaDiscoveryEngine:
             "current discovery signal from configured intelligence feeds",
             f"editorial fit {fit_score:.0f}/100",
             f"Nugi-domain alignment: {classification.get('primary_domain')}",
+            f"niche qualification {niche['decision']} ({niche['score']:.0f}/100): {niche['reason']}",
         ]
         return ContentOpportunity(
             suggested_title=_narrative_title(headline, classification),
@@ -289,6 +385,9 @@ class IdeaDiscoveryEngine:
             human_question=_human_question(headline, classification),
             deeper_why=_deeper_why(classification),
             editorial_fit_score=fit_score,
+            niche_fit_score=niche["score"],
+            niche_decision=niche["decision"],
+            niche_fit_reason=niche["reason"],
             opportunity_score=round(opportunity, 2),
             novelty_score=round(novelty, 2),
             evidence_signal=round(evidence, 2),
@@ -351,7 +450,7 @@ class IdeaDiscoveryEngine:
 
         for item in feed_items:
             candidate = self._make_candidate(item, existing_topics)
-            if candidate:
+            if candidate and candidate.niche_decision != "REJECTED":
                 candidates.append(candidate)
 
         if include_evergreen_fallback and len(candidates) < requested:
@@ -372,11 +471,15 @@ class IdeaDiscoveryEngine:
                     }
                 )
                 fit_score = float(fit.get("total_score", 0.0))
+                niche = evaluate_niche_alignment(seed, classification)
+                if niche["decision"] == "REJECTED":
+                    continue
                 novelty = max(
                     0.0,
                     15.0 - max((_similarity(seed, prior) for prior in existing_topics), default=0.0) * 15.0,
                 )
-                opportunity = min(95.0, 52.0 + novelty + min(15.0, fit_score * 0.15))
+                nugi_fit = niche["score"] / 5.0
+                opportunity = min(95.0, 32.0 + nugi_fit + novelty + min(15.0, fit_score * 0.15))
                 candidates.append(
                     ContentOpportunity(
                         suggested_title=seed,
@@ -388,15 +491,19 @@ class IdeaDiscoveryEngine:
                         human_question=_human_question(seed, classification),
                         deeper_why=_deeper_why(classification),
                         editorial_fit_score=fit_score,
+                        niche_fit_score=niche["score"],
+                        niche_decision=niche["decision"],
+                        niche_fit_reason=niche["reason"],
                         opportunity_score=round(opportunity, 2),
                         novelty_score=round(novelty, 2),
                         evidence_signal=8.0,
-                        nugi_fit_score=20.0,
+                        nugi_fit_score=round(nugi_fit, 2),
                         recency_score=3.0,
                         visual_potential_score=4.0,
                         selection_reason=[
                             "evergreen fallback because current-feed coverage is insufficient",
                             f"editorial fit {fit_score:.0f}/100",
+                            f"niche qualification {niche['decision']} ({niche['score']:.0f}/100): {niche['reason']}",
                         ],
                     )
                 )
