@@ -89,7 +89,7 @@ def build_story_plan(
             elif unresolved_refs:
                 refs = [unresolved_refs[0]]
                 narration_seed = (
-                    f"Klaim yang masih perlu diverifikasi: {unresolved_refs[0]['text']} "
+                    f"Klaim yang belum terverifikasi: {unresolved_refs[0]['text']} "
                     "Klaim ini belum boleh disampaikan sebagai fakta."
                 )
             else:
