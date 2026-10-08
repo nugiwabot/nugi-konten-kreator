@@ -23,6 +23,21 @@ The legacy workflow MCP tools are retained only as compatibility wrappers over
 that same orchestrator and manifest. They do not maintain their own executor,
 pipeline, or state store.
 
+## Minimal-instruction intelligence
+
+nugi_content_create now resolves sparse natural-language requests before entering
+production. Missing format, duration, research depth and production steps are
+inferred conservatively, while explicit user constraints win.
+
+For content discovery, the same MCP surface can route a request such as
+"cari 5 topik terbaik minggu ini" to the additive IdeaDiscoveryEngine instead of
+treating the instruction as a literal topic. Feed results remain discovery-only
+until deep research verifies them.
+
+A standalone nugi_request_plan MCP tool exposes the resolved execution contract,
+and nugi_idea_discover exposes ranked opportunity discovery.
+
+
 ## Production truthfulness
 
 - Media status is recorded per planned shot as `REAL_DOWNLOADED`,
