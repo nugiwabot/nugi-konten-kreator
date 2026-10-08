@@ -49,6 +49,8 @@ class FinalQAReport:
     artifacts_checked: Dict[str, bool] = field(default_factory=dict)
     dimensional_scores: Dict[str, float] = field(default_factory=dict)
     media_coverage_pct: float = 0.0
+    narrative_integrity_status: str = "UNKNOWN"
+    editorial_review_required: bool = True
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -56,6 +58,8 @@ class FinalQAReport:
             "is_publishable": self.is_publishable,
             "overall_quality_score": round(self.overall_quality_score, 1),
             "media_coverage_pct": round(self.media_coverage_pct, 1),
+            "narrative_integrity_status": self.narrative_integrity_status,
+            "editorial_review_required": self.editorial_review_required,
             "hard_blockers": self.hard_blockers,
             "warnings": self.warnings,
             "artifacts_checked": self.artifacts_checked,
@@ -81,6 +85,8 @@ class FinalQAEngine:
         warnings: List[str] = []
         artifacts_checked: Dict[str, bool] = {}
         scores: Dict[str, float] = {}
+        narrative_integrity_status = "UNKNOWN"
+        editorial_review_required = True
 
         # The manifest is the production state source of truth, so it is a hard
         # requirement before any output can be called publishable.
@@ -214,6 +220,47 @@ class FinalQAEngine:
                 else:
                     hard_blockers.append(f"Fact check report is {fact_status}")
                     scores["fact_integrity"] = 0.0
+
+                integrity = fact_data.get("narrative_integrity")
+                editorial_gate = fact_data.get("editorial_gate", {})
+                if not isinstance(integrity, dict) or integrity.get("schema_version") != 1:
+                    hard_blockers.append(
+                        "Fact-check report is missing a supported narrative_integrity report (schema_version=1)"
+                    )
+                else:
+                    narrative_integrity_status = str(integrity.get("gate_status", "UNKNOWN")).upper()
+                    if integrity.get("publication_approval") is not False:
+                        hard_blockers.append(
+                            "Narrative integrity report must not claim automatic publication approval"
+                        )
+                    if isinstance(editorial_gate, dict) and editorial_gate:
+                        if str(editorial_gate.get("status", "")).upper() != narrative_integrity_status:
+                            hard_blockers.append(
+                                "Fact-check editorial_gate status does not match narrative_integrity gate_status"
+                            )
+                        if editorial_gate.get("publication_approval") is not False:
+                            hard_blockers.append(
+                                "Fact-check editorial_gate must not grant automatic publication approval"
+                            )
+
+                    if narrative_integrity_status == "BLOCKED":
+                        hard_blockers.append(
+                            "Narrative integrity gate is BLOCKED; resolve critical findings before continuing"
+                        )
+                    elif narrative_integrity_status == "REVIEW_REQUIRED":
+                        editorial_review_required = True
+                        warnings.append(
+                            "Narrative integrity requires human editorial review; this run cannot be marked publishable"
+                        )
+                    elif narrative_integrity_status == "ELIGIBLE_FOR_EDITORIAL_REVIEW":
+                        editorial_review_required = True
+                        warnings.append(
+                            "Narrative passed automated integrity checks but still requires human editorial review; no publication approval was granted"
+                        )
+                    else:
+                        hard_blockers.append(
+                            f"Unknown narrative integrity gate status: {narrative_integrity_status}"
+                        )
             except Exception as e:
                 hard_blockers.append(f"Corrupt fact_check_report.json: {e}")
 
@@ -376,6 +423,9 @@ class FinalQAEngine:
         if hard_blockers:
             verdict = QAVerdict.BLOCKED.value
             is_publishable = False
+        elif editorial_review_required:
+            verdict = QAVerdict.NEEDS_REVIEW.value
+            is_publishable = False
         elif overall_score >= 80.0 and len(warnings) == 0:
             verdict = QAVerdict.PUBLISH_READY.value
             is_publishable = True
@@ -395,6 +445,8 @@ class FinalQAEngine:
             artifacts_checked=artifacts_checked,
             dimensional_scores=scores,
             media_coverage_pct=coverage_pct,
+            narrative_integrity_status=narrative_integrity_status,
+            editorial_review_required=editorial_review_required,
         )
 
     @staticmethod
