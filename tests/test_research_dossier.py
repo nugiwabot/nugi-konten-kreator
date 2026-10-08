@@ -182,6 +182,44 @@ def test_rss_escalation_queries_trigger_structured_research_providers(monkeypatc
     assert dossier.evidence_items == []
 
 
+def test_dossier_reports_evidence_gaps_and_not_publication_approval(research_offline):
+    dossier = DossierGenerator().build_dossier("kenapa harga tanah terus naik", depth="quick")
+    assert dossier.research_readiness["status"] == "INSUFFICIENT_EVIDENCE"
+    assert dossier.research_readiness["is_publication_approval"] is False
+    assert dossier.research_readiness["verified_claims"] == 0
+    assert any("Belum ada klaim" in gap["gap"] for gap in dossier.evidence_gaps)
+    assert any("sumber primer" in gap["gap"].lower() for gap in dossier.evidence_gaps)
+    assert any("mode quick" in gap["gap"].lower() for gap in dossier.evidence_gaps)
+    assert "RESEARCH READINESS & EVIDENCE GAPS" in dossier.to_markdown()
+
+
+def test_evidence_gap_report_excludes_discovery_leads_from_support_counts():
+    from engine.pipeline.research_dossier import _build_evidence_gap_report
+    from engine.providers.evidence_model import EvidenceItem, Source, SourceTier, SourceType
+    lead = EvidenceItem(
+        id="lead", claim_text="Headline only",
+        source=Source(
+            url="https://example.com/lead", publisher="Example",
+            tier=SourceTier.S1, source_type=SourceType.GOVERNMENT,
+            metadata={"evidence_role": "DISCOVERY_ONLY"},
+        ),
+        retrieved_snippet="Search snippet, not verified source text", is_supporting=True,
+    )
+    report = _build_evidence_gap_report([], [lead], [], 1, "deep")
+    assert report["research_readiness"]["supporting_evidence_count"] == 0
+    assert report["research_readiness"]["primary_source_count"] == 0
+    assert report["research_readiness"]["discovery_leads_excluded"] == 1
+    assert report["research_readiness"]["status"] == "INSUFFICIENT_EVIDENCE"
+
+
+def test_dossier_readiness_and_claim_coverage_survive_serialization(research_offline):
+    dossier = DossierGenerator().build_dossier("urbanisasi dan komuter", depth="quick")
+    restored = ResearchDossier.from_dict(dossier.to_dict())
+    assert restored.research_readiness == dossier.research_readiness
+    assert restored.evidence_gaps == dossier.evidence_gaps
+    assert restored.claim_coverage == dossier.claim_coverage
+
+
 def test_script_does_not_assert_data_or_causality_without_research(research_offline):
     dossier = DossierGenerator().build_dossier("transportasi publik Jakarta", depth="quick")
     script = DynamicScriptSynthesizer().synthesize_script(dossier, target_duration_seconds=30)
