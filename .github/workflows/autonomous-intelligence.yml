@@ -8,6 +8,7 @@ on:
       - "tests/test_autonomous_intelligence.py"
       - "tests/test_research_dossier.py"
       - "tests/test_narrative_integrity.py"
+      - "tests/test_visual_media_plan.py"
       - "tests/test_script_auditor.py"
       - "tests/conftest.py"
       - ".github/workflows/autonomous-intelligence.yml"
@@ -32,7 +33,7 @@ jobs:
         run: python -m pip install python-dotenv pytest
 
       - name: Compile Python sources
-        run: python -m compileall -q engine mcp tests/test_autonomous_intelligence.py tests/test_research_dossier.py tests/test_narrative_integrity.py tests/test_script_auditor.py
+        run: python -m compileall -q engine mcp tests/test_autonomous_intelligence.py tests/test_research_dossier.py tests/test_narrative_integrity.py tests/test_script_auditor.py tests/test_visual_media_plan.py
 
       - name: Run autonomous intelligence regression
         run: python -m unittest discover -s tests -p "test_autonomous_intelligence.py" -v
@@ -42,3 +43,6 @@ jobs:
 
       - name: Run narrative integrity regression
         run: python -m pytest -q tests/test_narrative_integrity.py
+
+      - name: Run visual media plan regression
+        run: python -m pytest -q tests/test_visual_media_plan.py
