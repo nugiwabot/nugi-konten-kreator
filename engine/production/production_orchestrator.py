@@ -399,23 +399,7 @@ class ProductionOrchestrator:
             manifest.invalidate_from(ProductionStage.VISUAL_PLAN)
             if narratives:
                 shots = self.visual_gen.generate_shots_for_narrative(narratives[0])
-                shots_data = [
-                    {
-                        "shot_id": s.shot_id,
-                        "section_name": s.section_name,
-                        "section_type": s.section_type,
-                        "start_seconds": s.start_seconds,
-                        "end_seconds": s.end_seconds,
-                        "duration_seconds": s.duration_seconds,
-                        "text_overlay": s.text_overlay,
-                        "visual_description": s.visual_description,
-                        "visual_requirement": s.visual_requirement,
-                        "query": s.search_query,
-                        "entities": s.entities,
-                        "search_required": s.search_required,
-                    }
-                    for s in shots
-                ]
+                shots_data = [s.to_dict() for s in shots]
                 broll_plan_p.write_text(json.dumps(shots_data, indent=2, ensure_ascii=False), encoding="utf-8")
                 manifest.mark_stage_completed(ProductionStage.VISUAL_PLAN, {"broll_plan": str(broll_plan_p)})
                 manifest.save(work_dir)
