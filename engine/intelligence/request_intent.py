@@ -143,6 +143,15 @@ def _extract_topic(text: str) -> str:
     topic = re.sub(r"\b(?:youtube|reels?|tiktok)\b", " ", topic, flags=re.IGNORECASE)
     topic = re.sub(r"\b(?:minggu|bulan)\s+ini\b", " ", topic, flags=re.IGNORECASE)
     topic = re.sub(r"\s+", " ", topic).strip(" .,:;-")
+    # Generic production commands are not content topics.
+    if re.fullmatch(
+        r"(?:\d{1,2}\s+)?(?:shorts?|reels?|videos?|script(?:s)?|konten|ide|topik)(?:\s+(?:video|konten|script|shorts?))?",
+        topic,
+        flags=re.IGNORECASE,
+    ):
+        return ""
+    if re.fullmatch(r"\d{1,2}", topic):
+        return ""
     return topic
 
 
