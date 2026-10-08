@@ -111,6 +111,53 @@ class TestIdeaDiscovery(unittest.TestCase):
         self.assertEqual(result["candidates"][0]["niche_decision"], "QUALIFIED")
         self.assertTrue(result["safety"]["feed_items_are_discovery_only"])
 
+    def test_scoping_generates_bounded_question_and_competing_angles(self):
+        from engine.editorial.idea_discovery import build_story_scope
+
+        result = build_story_scope(
+            "Kenapa harga rumah di Bandung berubah pada 2024?",
+            {"primary_domain": "property", "lens": "economics"},
+            "QUALIFIED",
+        )
+        self.assertEqual(result["scoping_status"], "READY_FOR_RESEARCH")
+        self.assertIn("Bandung", result["central_question"])
+        self.assertTrue(result["concrete_case"])
+        self.assertEqual(len(result["angle_options"]), 3)
+        self.assertEqual(
+            {angle["id"] for angle in result["angle_options"]},
+            {"mechanism", "human_tradeoff", "change_over_time"},
+        )
+        self.assertGreaterEqual(len(result["evidence_needed"]), 4)
+
+    def test_scoping_keeps_broad_topic_in_needs_scoping(self):
+        from engine.editorial.idea_discovery import build_story_scope
+
+        result = build_story_scope(
+            "Kenapa ekonomi dunia terus berubah?",
+            {"primary_domain": "economy", "lens": "economics"},
+            "NEEDS_SCOPING",
+        )
+        self.assertEqual(result["scoping_status"], "NEEDS_SCOPING")
+        self.assertIn("Belum ada kasus spesifik", result["concrete_case"])
+        self.assertIn("maksimal dua lokasi", result["scope_geography"])
+        self.assertEqual(len(result["alternative_explanations"]), 4)
+
+    def test_discovery_candidates_include_scoping_brief_without_claiming_verified_status(self):
+        rss = FakeRSS([FakeFeedItem(
+            title="Kenapa harga rumah di Bandung berubah pada 2024?",
+            canonical_url="https://example.com/scoping",
+        )])
+        with TemporaryDirectory() as td:
+            result = IdeaDiscoveryEngine(rss_service=rss, repo_root=Path(td)).discover(
+                count=1, include_evergreen_fallback=False
+            )
+        candidate = result["candidates"][0]
+        self.assertIn(candidate["scoping_status"], {"READY_FOR_RESEARCH", "NEEDS_SCOPING"})
+        self.assertTrue(candidate["central_question"])
+        self.assertEqual(len(candidate["angle_options"]), 3)
+        self.assertEqual(candidate["epistemic_role"], "discovery_only")
+        self.assertEqual(candidate["status"], "DISCOVERY_ONLY")
+
     def test_topic_memory_indexes_more_than_120_markdown_files(self):
         from engine.editorial.idea_discovery import _read_existing_content
 
