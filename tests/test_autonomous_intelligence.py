@@ -65,6 +65,7 @@ class TestIdeaDiscovery(unittest.TestCase):
         self.assertTrue(result["safety"]["feed_items_are_discovery_only"])
         self.assertTrue(result["safety"]["deep_research_required_before_script_claims"])
         self.assertTrue(result["candidates"][0]["suggested_title"])
+        self.assertIsInstance(result["candidates"][0]["story_type"], str)
 
 
 if __name__ == "__main__":
