@@ -46,6 +46,13 @@ class TestAutonomousRequestResolution(unittest.TestCase):
         self.assertEqual(result.requested_count, 5)
         self.assertTrue(result.needs_idea_discovery)
 
+    def test_topicless_batch_request_requires_discovery_first(self):
+        result = resolve_request("Buat 10 short video")
+        self.assertEqual(result.intent, "CREATE_CONTENT")
+        self.assertEqual(result.topic, "")
+        self.assertEqual(result.requested_count, 10)
+        self.assertTrue(result.needs_idea_discovery)
+
 
 class TestIdeaDiscovery(unittest.TestCase):
     def test_discovery_ranks_candidates_and_preserves_evidence_boundary(self):
