@@ -1,57 +1,72 @@
 # Performance Director
 
-The Performance Director is a delivery layer for finished Nugi scripts.
+Performance Director is the vocal-delivery layer for finished Nugi scripts.
+
+## Primary output
+
+The default output is now an **inline performance script**, designed to look like the script format used during recording practice.
+
+Example:
+
+**Pernah↗** merasa heran / beberapa tahun lalu / kamu menabung untuk uang muka rumah↘, / tapi saat **GAJIMU↗** kini meningkat / harga rumah incaranmu / justru melesat jauh lebih **TINGGI↘**?
+
+Kita bekerja lebih keras↗ / dan menyisihkan tabungan lebih tekun↘, / namun **GARIS FINIS↗** kepemilikan hunian / seolah terus digeser / menjauh↘.
+
+## Cue language
+
+- **↗** = pitch naik sedikit.
+- **↘** = pitch turun / landing.
+- **↗↘** = naik lalu turun untuk reveal atau kontras.
+- **↘↗** = perubahan arah yang lembut bila diperlukan.
+- **BOLD** = kata yang perlu terasa lebih penting.
+- **/** = batas frasa atau thought unit.
+- **...** = jeda lebih panjang.
+- Cue adalah panduan visual; jangan dibaca keras-keras.
+
+Sistem sengaja tidak menandai setiap kata. Baseline-nya tetap conversational; cue hanya berubah ketika pikiran atau fungsi kalimat berubah.
 
 ## Pipeline
 
 SCRIPT
 → THOUGHT UNITS
-→ PITCH
-→ PACE
+→ CLAUSES
+→ PITCH CUES
 → EMPHASIS
 → PAUSE
-→ DELIVERY INTENTION
-→ LEARNING EXPLANATION
-
-A normal teleprompter helps with what to say.
-This feature helps with how to say it and why the delivery changes.
+→ TELEPROMPTER
 
 ## Local CLI
 
 Run from repository root:
 
-python -m engine.performance.performance_director "output/02-script/SCRIPT.md"
+python -m engine.performance.performance_director "path/to/SCRIPT.md"
 
 Or inline:
 
 python -m engine.performance.performance_director --text "Kenapa kita masih tinggal di kota?"
 
 Outputs:
-- script_performance.md
-- script_teleprompter.txt
-- performance_plan.json
 
-Use --output-dir for a custom output folder.
+- script_performance.md — inline coaching script
+- script_teleprompter.txt — clean wording without cues
+- performance_plan.json — structured cue metadata
 
 ## MCP
 
 The MCP server exposes:
+
 nugi_performance_director
 
-It accepts a repository-relative script path or inline script text and can save a performance package to output/.
+After a finished script, ask the agent to use Performance Director. The returned script_performance field is the inline visual format.
 
-## Design rule
+Recommended instruction:
 
-The feature does not rewrite a finished script.
-It overlays coaching instructions.
+Gunakan Performance Director untuk script ini. Fokus hanya pada script dengan cue intonasi inline seperti ↗, ↘, bold emphasis, slash untuk frasa, dan ... untuk pause. Jangan tambahkan penjelasan.
 
-The engine is dependency-free and deterministic, so it can be used without an additional API/model. AI agents can add semantic refinement while keeping the same output contract.
+## Design rules
 
-## Learning philosophy
-
-Do not mark every sentence dramatically.
-
-The creator should learn a baseline:
-natural conversational delivery → change only when the thought changes.
-
-The long-term goal is to make the cues unnecessary because the patterns become internalized.
+1. Do not rewrite the finished script.
+2. Preserve the original wording.
+3. Add visual delivery cues directly beside words or thought boundaries.
+4. Do not over-emphasize every sentence.
+5. Keep the clean teleprompter output unchanged.
