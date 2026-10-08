@@ -45,6 +45,11 @@ class ContentOpportunity:
     source_names: List[str] = field(default_factory=list)
     source_count: int = 0
     published_at: str = ""
+    origin_kind: str = "unknown"
+    epistemic_role: str = "discovery_only"
+    memory_overlap_score: float = 0.0
+    memory_overlap_title: str = ""
+    memory_overlap_reason: str = ""
     primary_domain: str = ""
     anchor: str = ""
     lens: str = ""
