@@ -495,22 +495,13 @@ class ProductionOrchestrator:
                     })
                     continue
 
-                primary_query = s.get("query") or s.get("search_query") or plan.topic
-                raw_queries = [primary_query] + list(s.get("fallback_queries") or [])
-                search_queries: List[str] = []
-                for raw_query in raw_queries:
-                    query = str(raw_query or "").strip()
-                    if not query:
-                        continue
-                    if plan.topic.lower() not in query.lower():
-                        query = f"{query} {plan.topic}".strip()
-                    normalized = " ".join(query.lower().split())
-                    if normalized not in {" ".join(item.lower().split()) for item in search_queries}:
-                        search_queries.append(query)
+                search_queries = self._build_media_search_queries(s, plan.topic)
                 s["query"] = search_queries[0] if search_queries else plan.topic
                 s["media_search_attempts"] = []
                 vr = s.get("visual_requirement", "GENERIC_ALLOWED")
                 media_type = s.get("preferred_media_type", "any")
+                if media_type == "image":
+                    media_type = "photo"
                 era = s.get("era", "auto")
                 style = "archival" if era in {"historical", "past"} else ("conceptual" if era == "future" else "documentary")
                 accepted = False
@@ -851,6 +842,25 @@ class ProductionOrchestrator:
         except Exception as exc:
             logger.info("Cannot reuse %s artifact %s: %s", stage.value, expected_path, exc)
             return False
+
+    @staticmethod
+    def _build_media_search_queries(shot: Dict[str, Any], topic: str) -> List[str]:
+        """Build deduplicated, topic-grounded queries from a visual plan record."""
+        primary = shot.get("query") or shot.get("search_query") or topic
+        raw_queries = [primary] + list(shot.get("fallback_queries") or [])
+        queries: List[str] = []
+        seen: Set[str] = set()
+        for raw_query in raw_queries:
+            query = str(raw_query or "").strip()
+            if not query:
+                continue
+            if topic and topic.lower() not in query.lower():
+                query = f"{query} {topic}".strip()
+            normalized = " ".join(query.lower().split())
+            if normalized not in seen:
+                seen.add(normalized)
+                queries.append(query)
+        return queries
 
     @staticmethod
     def _shot_requires_media(shot: Dict[str, Any]) -> bool:
