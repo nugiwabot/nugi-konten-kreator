@@ -31,6 +31,9 @@ from engine.providers.bps_provider import BPSDataProvider
 from engine.providers.search import (
     WebResearchProvider, DDGSWebResearchProvider, ResilientWebResearchProvider
 )
+from engine.intelligence.research import build_research_intelligence
+from engine.intelligence.rss import RSSDiscoveryService
+from engine.config import RSS_DISCOVERY_ENABLED
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +61,7 @@ class ResearchDossier:
     created_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
+    research_intelligence: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -79,6 +83,7 @@ class ResearchDossier:
             "narrative_angles": self.narrative_angles,
             "visual_implications": self.visual_implications,
             "created_at": self.created_at,
+            "research_intelligence": self.research_intelligence,
         }
 
     @classmethod
@@ -172,6 +177,7 @@ class ResearchDossier:
             evidence_strength=d.get("evidence_strength", d.get("overall_confidence", 0.0)),
             epistemic_status=d.get("epistemic_status", "VERIFIED"),
             created_at=d.get("created_at", datetime.now(timezone.utc).isoformat()),
+            research_intelligence=d.get("research_intelligence", {}),
         )
 
     def to_markdown(self) -> str:
@@ -261,6 +267,24 @@ class ResearchDossier:
         lines.append("### Secondary Sources (S3–S6):")
         for ss in self.secondary_sources:
             lines.append(f"- **[{ss.get('tier', 'S4')}]** [{ss.get('publisher', '')}]({ss.get('url', '')}): *{ss.get('title', '')}*")
+
+        intelligence = self.research_intelligence or {}
+        if intelligence.get("rss_discoveries"):
+            lines.extend(["", "## 9. RSS DISCOVERY LEADS (NOT VERIFIED EVIDENCE)"])
+            for item in intelligence["rss_discoveries"][:20]:
+                lines.append(
+                    f"- [{item.get('source_name', 'Feed')}]({item.get('canonical_url', '')}): "
+                    f"{item.get('title', '')} ({item.get('published_at', 'date unknown')}) — DISCOVERY_ONLY"
+                )
+        if intelligence.get("primary_source_queries"):
+            lines.extend(["", "## 10. SOURCE ESCALATION QUERIES"])
+            for query in intelligence["primary_source_queries"]:
+                lines.append(f"- `{query}`")
+            for result in intelligence.get("escalation_results", [])[:6]:
+                lines.append(
+                    f"  - Search lead: [{result.get('title', '')}]({result.get('url', '')}) "
+                    f"— {result.get('publisher', '')}; NOT VERIFIED EVIDENCE"
+                )
 
         return "\n".join(lines)
 
@@ -674,6 +698,36 @@ class DossierGenerator:
 
         evidence_strength = self._calculate_evidence_strength(claims, all_evidence)
 
+        research_intelligence = {}
+        if RSS_DISCOVERY_ENABLED:
+            try:
+                feed_items = RSSDiscoveryService().discover(topic, max_items=20)
+                intelligence = build_research_intelligence(
+                    topic, feed_items, recency=recency, evidence_entities=entities
+                )
+                for query in intelligence.primary_source_queries[:2]:
+                    try:
+                        search_rows = self.web.search(query, recency=recency, max_results=2)
+                    except Exception as exc:
+                        logger.info("Primary-source follow-up search skipped: %s", exc)
+                        search_rows = []
+                    for row in search_rows:
+                        intelligence.escalation_results.append({
+                            "title": str(row.get("title", ""))[:500],
+                            "url": str(row.get("url", ""))[:2000],
+                            "publisher": str(row.get("publisher", row.get("source", "Web")))[:200],
+                            "published_at": str(row.get("date", ""))[:120],
+                            "query": query,
+                            "evidence_status": "DISCOVERY_ONLY",
+                        })
+                research_intelligence = intelligence.to_dict()
+            except Exception as exc:
+                logger.info("RSS discovery skipped after adapter error: %s", exc)
+        else:
+            research_intelligence = build_research_intelligence(
+                topic, recency=recency, evidence_entities=entities
+            ).to_dict()
+
         return ResearchDossier(
             topic=topic,
             research_question=f"Mengapa fenomena {topic} terjadi dan bagaimana dampak nyatanya terhadap manusia?",
@@ -690,7 +744,8 @@ class DossierGenerator:
             narrative_angles=narrative_angles,
             visual_implications=visual_implications,
             evidence_strength=evidence_strength,
-            epistemic_status=epistemic_status
+            epistemic_status=epistemic_status,
+            research_intelligence=research_intelligence,
         )
 
     @staticmethod

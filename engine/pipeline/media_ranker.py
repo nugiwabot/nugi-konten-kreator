@@ -586,6 +586,12 @@ class MediaRanker:
                 semantic_score = item.reranker_score
             else:
                 semantic_score = item.keyword_score
+            item.semantic_score = round(semantic_score, 4)
+            item.contextual_score = round(
+                0.35 * item.entity_match_score + 0.25 * item.event_match_score
+                + 0.20 * item.location_match_score + 0.20 * item.temporal_match_score, 4
+            )
+            item.generic_penalty = 0.12 if item.is_generic and item.contextual_score < 0.35 else 0.0
 
             if visual_requirement == REAL_REQUIRED:
                 # Authenticity, entity match, and temporal/event match dominate heavily (Section 20)
@@ -608,6 +614,8 @@ class MediaRanker:
                     0.85 * semantic_score
                     + 0.15 * item.human_alignment_score
                 )
+
+            composite = max(0.0, composite - item.generic_penalty)
 
             # Penalize rejected candidates to 0 so they never outrank authentic candidates
             if item.rejection_reason:

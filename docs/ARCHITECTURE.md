@@ -16,10 +16,11 @@ MCP nugi_content_create
             -> BPS adapter (fail-closed until live retrieval exists)
             -> OpenAlex abstracts / Crossref metadata / GDELT discovery
             -> web retrieval with recency passed through
+            -> RSS/Atom discovery leads + bounded primary-source follow-up queries
        -> DynamicScriptSynthesizer: script.md + story_plan.json
        -> audit_script_with_dossier: fact_check_report.json
        -> VisualRequirementsGenerator: broll_plan.json
-       -> MediaFinder: per-shot real search/download and media_manifest.json
+       -> MediaFinder: capability-routed per-shot search, rank, rights gate, and provenance
        -> SRTGenerator: subtitles.srt
        -> TimelineData + CapCutDraftGenerator: timeline + draft package
        -> CapCutValidator: capcut_validation.json
@@ -44,6 +45,13 @@ External research and media results can vary with provider availability and
 recency. The pipeline records those results and fails closed; it does not claim
 that external calls are deterministic.
 
+RSS/Atom headlines and their attachments are discovery metadata only. They do
+not enter dossier evidence_items, support claims, or download as B-roll. The
+dossier stores them separately with a DISCOVERY_ONLY status, plus bounded
+follow-up search leads for source escalation. RSS is optional, cached in-process,
+limited to configured feeds and response sizes, and can use an explicitly
+configured self-hosted RSSHub endpoint.
+
 ## Evidence and publishability
 
 - `exact_quote` is reserved for source text actually retrieved verbatim.
@@ -58,6 +66,14 @@ that external calls are deterministic.
   relevance. Dry-run placeholders never count as coverage.
 - `ContentQualityEvaluator` supplies editorial scores; it cannot override a
   failed fact-check or Final QA gate.
+
+Media providers are ordered by engine/data/media_provider_capabilities.json and
+filtered by era and media capability. REAL_REQUIRED excludes providers
+classified as stock discovery. Media search can display assets with unknown
+rights as discovery candidates, but automatic downloads require an explicit
+reusable rights classification. sources.json records the license statement and
+URL, rights status, retrieval query, provider capabilities, score breakdown,
+and selection reason.
 
 ## CapCut
 

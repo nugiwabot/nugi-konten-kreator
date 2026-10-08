@@ -15,6 +15,7 @@ def research_offline(monkeypatch):
     monkeypatch.setattr(CrossrefProvider, "search_evidence", lambda self, query, max_results=5: [])
     monkeypatch.setattr(GDELTProvider, "search_evidence", lambda self, query, max_results=5: [])
     monkeypatch.setattr(ResilientWebResearchProvider, "search", lambda self, query, recency=None, max_results=5: [])
+    monkeypatch.setattr("engine.pipeline.research_dossier.RSS_DISCOVERY_ENABLED", False)
     return None
 
 

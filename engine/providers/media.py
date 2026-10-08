@@ -9,8 +9,8 @@ implement MediaProvider and return a consistent List[MediaItem].
 Scoring fields (embedding_similarity, reranker_score, keyword_score, final_rank)
 are populated later by MediaRanker — they are NOT part of provider responsibility.
 
-License metadata is stored informationally only.
-It is NEVER used as a download filter or gatekeeper.
+License and rights metadata travels with each candidate. Automatic downloads
+are gated on an explicit reusable rights classification.
 """
 
 from __future__ import annotations
@@ -18,6 +18,8 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
+
+from engine.providers.capabilities import get_provider_capabilities
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +45,7 @@ class MediaItem:
     download_url: str    # Direct downloadable file URL
     thumbnail_url: str   # Preview/thumb URL (may be empty)
 
-    # Provenance metadata (informational only)
+    # Provenance metadata and per-asset rights
     creator: str
     date: str
     license: str         # Stored as-is — never used as download filter
@@ -56,6 +58,13 @@ class MediaItem:
 
     # Extra provider-specific metadata
     metadata: Dict[str, Any] = field(default_factory=dict)
+
+    # Retrieval and per-asset rights observability.
+    license_url: str = ""
+    rights_status: str = "UNKNOWN"
+    retrieval_query: str = ""
+    provider_capability: str = ""
+    selection_reason: str = ""
 
     # Scoring fields — populated by MediaRanker, not providers (*)
     keyword_score: float = 0.0
@@ -76,6 +85,9 @@ class MediaItem:
     is_generic: bool = False
     matched_entities: List[str] = field(default_factory=list)
     rejection_reason: str = ""
+    semantic_score: float = 0.0
+    contextual_score: float = 0.0
+    generic_penalty: float = 0.0
 
     # Human relatability alignment — populated by MediaRanker.
     # These are editorial relevance scores, not claims about the people depicted.
@@ -137,6 +149,10 @@ class MediaProvider:
     """
 
     PROVIDER_NAME: str = "base"
+
+    def capabilities(self) -> Dict[str, Any]:
+        """Return the machine-readable capability profile, if registered."""
+        return get_provider_capabilities(self.PROVIDER_NAME)
 
     def search_media(
         self,

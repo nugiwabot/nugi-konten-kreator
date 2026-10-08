@@ -1,0 +1,91 @@
+﻿1
+00:00:00,000 --> 00:00:04,520
+Pernah nggak kamu lewat, sebuah jalan yang lebar-nya itu, lebar-bar banget, tapi ternyata sepi.
+
+2
+00:00:04,860 --> 00:00:08,580
+Sampai kita mungkin berfikir ini sebenarnya buat apa sih, bukannya kebesaran.
+
+3
+00:00:09,060 --> 00:00:11,620
+Tapi coba lihat dari sulit pandang perancang kotak.
+
+4
+00:00:11,800 --> 00:00:16,060
+Jalan itu, nggak selalu dirancang berdasarkan jumlah kendaraan yang kita lihat sekarang.
+
+5
+00:00:16,620 --> 00:00:21,600
+Karena, ada perbedaan antara jalan yang terlihat kosong dan jalan yang memang tidak dibutuhkan.
+
+6
+00:00:21,940 --> 00:00:24,560
+Sebuah jalan itu bisa sepi di siang hari,
+
+7
+00:00:24,860 --> 00:00:29,120
+tapi mampu menangani polonga kendaraan yang jauh lebih tinggi pada jamsi buk.
+
+8
+00:00:29,120 --> 00:00:34,360
+Dan bukan cuma soal mobil yang dihitung, disenjalan juga mempertimbangkan fungsi jalan-nya,
+
+9
+00:00:34,640 --> 00:00:37,300
+kecepatan, kendaraan besar, persimpangan,
+
+10
+00:00:37,780 --> 00:00:40,280
+lajur untuk belok, serta kebutuhan keselamatan.
+
+11
+00:00:40,720 --> 00:00:46,460
+Bahkan jumlah lajur pada suatu jalan, dapat ditentukan menggunakan analisis permintaan pada jampuncak,
+
+12
+00:00:46,640 --> 00:00:49,320
+bukan sekedar melihat terata-terata kendaraan sepanjang hari.
+
+13
+00:00:49,640 --> 00:00:52,580
+Makannya, ruang yang kelihatannya berlebihan pada satu waktu,
+
+14
+00:00:53,060 --> 00:00:56,220
+belum tentu berlebihan kalau kita melihat seluruh sistemnya.
+
+15
+00:00:56,520 --> 00:00:57,820
+Tapi ada hal yang menarik.
+
+16
+00:00:57,820 --> 00:01:03,620
+Kadang, sebuah jalan memang bisa memeliki kapasitas yang lebih besar dari padah kebutuhan aktualnya.
+
+17
+00:01:03,760 --> 00:01:09,900
+Misalnya, karena perubahan pola, perjalanan atau pertumbuhan yang ternyata tidak terjadi seperti perkiraan.
+
+18
+00:01:10,160 --> 00:01:17,120
+Bahkan, FWA mencetat bahwa ada jalan yang dirancang berdasarkan perkiraan yang kemudian tidak terrealisasi,
+
+19
+00:01:17,480 --> 00:01:20,720
+sehingga akhirnya itu memeliki kapasitas yang berlebi.
+
+20
+00:01:21,140 --> 00:01:23,600
+Jadi jalan yang sepi belum tentu salah disen.
+
+21
+00:01:23,600 --> 00:01:28,100
+Tapi jalan yang terus kosong juga bukan otomatis berarti disainya sudah optimal.
+
+22
+00:01:28,480 --> 00:01:32,860
+Karena dalam kotak, dibutuhkan itu bukan cuma berarti dipakai penuh step saat.
+
+23
+00:01:33,300 --> 00:01:39,140
+Kadang yang kita lihat sebagai ruang kosong, sebenarnya adalah ruang yang disiapkan untuk kondisi tertentu.

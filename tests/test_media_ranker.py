@@ -194,6 +194,16 @@ class TestMediaRankerFinalRankComputation(unittest.TestCase):
         # Expected composite: 0.85 * (0.4 * 0.5 + 0.6 * 0.8) + 0.15 * human_alignment = 0.85 * 0.68 + 0 = 0.578
         self.assertAlmostEqual(result[0].reranker_score, 0.578, places=2)
 
+    def test_generic_low_context_candidate_gets_penalty_and_score_breakdown(self):
+        item = _make_item(item_id="generic", download_url="https://example.com/generic.jpg")
+        item.embedding_similarity = 0.8
+        item.is_generic = True
+        result = self.ranker._compute_final_rank([item], emb_ok=True, rer_ok=False)
+        self.assertEqual(result[0].generic_penalty, 0.12)
+        self.assertEqual(result[0].semantic_score, 0.8)
+        self.assertEqual(result[0].contextual_score, 0.0)
+        self.assertAlmostEqual(result[0].reranker_score, 0.56, places=2)
+
 
 if __name__ == "__main__":
     unittest.main()

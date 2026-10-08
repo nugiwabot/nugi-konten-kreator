@@ -16,9 +16,9 @@ SECURITY:
   - Downloads are always scoped within MEDIA_ASSETS_DIR or an explicit base
   - No shell commands are executed
 
-LICENSE NOTE:
-  - License metadata is stored in sources.json informatively.
-  - It is NEVER used as a filter or download gatekeeper.
+RIGHTS:
+  - Automatic downloads require explicit reusable rights for each asset.
+  - Unknown and editorial-only items remain discovery results.
 """
 
 from __future__ import annotations
@@ -39,6 +39,7 @@ from engine.config import (
     MEDIA_MAX_FILE_SIZE_MB,
 )
 from engine.providers.media import MediaItem
+from engine.providers.rights import is_reusable_rights_status, item_rights_status
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +65,11 @@ class DownloadedFile:
     date: str
     license: str       # Stored informatively — not a filter
     retrieved_at: str
+    license_url: str = ""
+    rights_status: str = "UNKNOWN"
+    retrieval_query: str = ""
+    provider_capability: str = ""
+    selection_reason: str = ""
     file_size_bytes: int = 0
     embedding_similarity: float = 0.0
     reranker_score: float = 0.0
@@ -212,6 +218,11 @@ class MediaDownloader:
             logger.warning(f"Skipping '{item.title}': no download_url or thumbnail_url")
             return None
 
+        rights_status = item_rights_status(item)
+        if not is_reusable_rights_status(rights_status):
+            logger.info("Skipping '%s': reuse rights are %s", item.title, rights_status)
+            return None
+
         # Gate: Skip candidate if REAL_REQUIRED candidate failed authenticity gate
         if getattr(item, "visual_requirement", "") == "REAL_REQUIRED" and getattr(item, "rejection_reason", ""):
             logger.warning(
@@ -265,6 +276,11 @@ class MediaDownloader:
             creator=item.creator,
             date=item.date,
             license=item.license,
+            license_url=getattr(item, "license_url", "") or (item.metadata or {}).get("license_url", ""),
+            rights_status=rights_status,
+            retrieval_query=getattr(item, "retrieval_query", ""),
+            provider_capability=getattr(item, "provider_capability", ""),
+            selection_reason=getattr(item, "selection_reason", ""),
             retrieved_at=datetime.now(timezone.utc).isoformat(),
             file_size_bytes=size,
             embedding_similarity=item.embedding_similarity,
@@ -497,7 +513,7 @@ class MediaDownloader:
         """
         Write / merge sources.json in folder_path.
         Merges with existing file if present (append new entries).
-        License info is stored as-is — never used as a filter.
+        Only items with explicit reusable rights reach this persistence step.
         """
         sources_path = folder_path / "sources.json"
 
@@ -524,6 +540,11 @@ class MediaDownloader:
                 "creator": df.creator,
                 "date": df.date,
                 "license": df.license,
+                "license_url": df.license_url,
+                "rights_status": df.rights_status,
+                "retrieval_query": df.retrieval_query,
+                "provider_capability": df.provider_capability,
+                "selection_reason": df.selection_reason,
                 "retrieved_at": df.retrieved_at,
                 "file_size_bytes": df.file_size_bytes,
                 "relevance_scores": {
@@ -544,10 +565,7 @@ class MediaDownloader:
 
         payload = {
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "note": (
-                "License information is stored informatively for traceability only. "
-                "It does not imply any particular usage right or restriction."
-            ),
+            "rights_policy": "Only assets classified as explicitly reusable were downloaded; verify source terms before publication.",
             "assets": list(asset_map.values()),
         }
 
@@ -583,8 +601,17 @@ class MediaDownloader:
                         date=it.date,
                         media_type=it.media_type,
                         entities=getattr(it, "matched_entities", []),
+                        query=getattr(it, "retrieval_query", ""),
                         visual_requirement=getattr(it, "visual_requirement", "GENERIC_ALLOWED"),
-                        metadata=it.metadata,
+                        metadata={
+                            **(it.metadata or {}),
+                            "license": it.license,
+                            "license_url": getattr(it, "license_url", ""),
+                            "rights_status": getattr(it, "rights_status", "UNKNOWN"),
+                            "retrieval_query": getattr(it, "retrieval_query", ""),
+                            "provider_capability": getattr(it, "provider_capability", ""),
+                            "selection_reason": getattr(it, "selection_reason", ""),
+                        },
                     )
         except Exception as e:
             logger.warning(f"MediaDownloader: Failed to register assets into MediaLibrary: {e}")

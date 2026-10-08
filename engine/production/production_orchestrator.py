@@ -257,6 +257,8 @@ class ProductionOrchestrator:
             manifest.save(work_dir)
             return self._build_result(manifest, plan, work_dir, folder_name)
 
+        research_intelligence = getattr(dossier, "research_intelligence", {}) or {}
+
         # ----------------------------------------------------------------------
         # STAGE 4: STORY & SCRIPT SYNTHESIS
         # ----------------------------------------------------------------------
@@ -507,7 +509,8 @@ class ProductionOrchestrator:
                         media="any",
                         count=1,
                         folder=f"{folder_name}/footage",
-                        visual_requirement=vr
+                        visual_requirement=vr,
+                        research_intelligence=research_intelligence,
                     )
                     accepted = False
                     for r in res.results:

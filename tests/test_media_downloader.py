@@ -202,6 +202,14 @@ class TestDownloadBatch(unittest.TestCase):
         asset = data["assets"][0]
         self.assertEqual(asset["license"], "CC BY-SA 4.0")
 
+    def test_unknown_rights_are_not_downloaded(self):
+        item = _make_item(title="Unclear rights", license="free to view")
+        with patch("urllib.request.urlopen") as urlopen:
+            report = self.dl.download_batch([item], folder="unknown-rights", count=1)
+        urlopen.assert_not_called()
+        self.assertEqual(report.success_count, 0)
+        self.assertEqual(report.failed[0].reason, "Download failed — see log for details")
+
     def test_failed_download_recorded_in_report(self):
         import urllib.error
         item = _make_item(title="Fail Item", download_url="https://example.com/fail.jpg")

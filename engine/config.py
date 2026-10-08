@@ -37,3 +37,21 @@ WIKIMEDIA_API_URL = os.getenv("WIKIMEDIA_API_URL", "https://commons.wikimedia.or
 INTERNET_ARCHIVE_API_URL = os.getenv("INTERNET_ARCHIVE_API_URL", "https://archive.org")
 PEXAFY_MCP_URL = os.getenv("PEXAFY_MCP_URL", "https://mcp.pexafy.com/mcp")
 PEXAFY_API_KEY = os.getenv("PEXAFY_API_KEY", "")
+
+# RSS / discovery intelligence. All feeds are optional, cached in-process, and
+# discovery-only; an unavailable source does not block research or production.
+RSS_DISCOVERY_ENABLED = os.getenv("RSS_DISCOVERY_ENABLED", "true").lower() in ("true", "1", "yes")
+RSS_FEED_REGISTRY_PATH = Path(os.getenv("RSS_FEED_REGISTRY_PATH", str(BASE_DIR / "engine" / "data" / "feed_registry.json")))
+RSSHUB_BASE_URL = os.getenv("RSSHUB_BASE_URL", "")
+RSSHUB_FALLBACK_URL = os.getenv("RSSHUB_FALLBACK_URL", "")
+RSS_CACHE_TTL_SECONDS = int(os.getenv("RSS_CACHE_TTL_SECONDS", "900"))
+RSS_FETCH_TIMEOUT_SECONDS = int(os.getenv("RSS_FETCH_TIMEOUT_SECONDS", "8"))
+RSS_MAX_FEED_BYTES = int(os.getenv("RSS_MAX_FEED_BYTES", str(2 * 1024 * 1024)))
+RSS_MAX_SOURCES_PER_QUERY = int(os.getenv("RSS_MAX_SOURCES_PER_QUERY", "5"))
+MEDIA_REUSABLE_LICENSES = tuple(
+    item.strip().upper()
+    for item in os.getenv(
+        "MEDIA_REUSABLE_LICENSES",
+        "PUBLIC_DOMAIN,CC0,CC_BY,CC_BY_SA,COMMERCIAL_ALLOWED,FREE_WITH_ATTRIBUTION",
+    ).split(",") if item.strip()
+)

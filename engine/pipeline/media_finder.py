@@ -55,9 +55,12 @@ from engine.pipeline.visual_requirements import (
     classify_visual_requirement,
     extract_entities,
 )
+from engine.providers.capabilities import get_provider_capabilities, route_provider_names
 from engine.providers.internet_archive_provider import InternetArchiveProvider
+from engine.providers.library_of_congress_provider import LibraryOfCongressProvider
 from engine.providers.media import MediaItem, MediaProvider
 from engine.providers.pexafy_provider import PexafyProvider
+from engine.providers.rights import is_reusable_rights_status, item_rights_status
 from engine.providers.wikimedia_provider import WikimediaProvider
 
 logger = logging.getLogger(__name__)
@@ -165,6 +168,13 @@ class MediaFinderItem:
     date: str = ""
     license: str = ""
     license_url: str = ""
+    rights_status: str = "UNKNOWN"
+    query: str = ""
+    capability: List[str] = field(default_factory=list)
+    semantic_score: float = 0.0
+    contextual_score: float = 0.0
+    generic_penalty: float = 0.0
+    selection_reason: str = ""
     local_path: Optional[str] = None
     width: int = 0
     height: int = 0
@@ -178,6 +188,9 @@ class MediaFinderItem:
     event_match_score: float = 0.0
     source_specificity_score: float = 0.0
     matched_entities: List[str] = field(default_factory=list)
+    matched_event: str = ""
+    matched_location: str = ""
+    matched_time: str = ""
     rejection_reason: str = ""
     is_archival: bool = False
     is_generic: bool = False
@@ -315,6 +328,7 @@ class MediaFinder:
             PexafyProvider(),
             WikimediaProvider(),
             InternetArchiveProvider(),
+            LibraryOfCongressProvider(),
         ]
         self.ranker: MediaRanker = ranker or MediaRanker()
         self.downloader: MediaDownloader = downloader or MediaDownloader()
@@ -332,6 +346,7 @@ class MediaFinder:
         style: str = "auto",
         count: int = 8,
         visual_requirement: str = "auto",
+        research_intelligence: Optional[Dict[str, Any]] = None,
     ) -> MediaFinderResult:
         """
         Search for photos or videos matching the natural-language request.
@@ -443,7 +458,8 @@ class MediaFinder:
 
         queries = self._generate_query_intelligence(
             request, resolved_era, resolved_style, media=resolved_media,
-            entities=entities, visual_requirement=req_class
+            entities=entities, visual_requirement=req_class,
+            research_intelligence=research_intelligence,
         )
         routed_providers = self._route_providers(
             resolved_era, resolved_media, visual_requirement=req_class
@@ -472,7 +488,12 @@ class MediaFinder:
                         thumbnail_url="",
                         creator=hit.get("creator", ""),
                         date=hit.get("date", ""),
-                        license="Local Asset",
+                        license=hit.get("metadata", {}).get("license", ""),
+                        license_url=hit.get("metadata", {}).get("license_url", ""),
+                        rights_status=hit.get("metadata", {}).get("rights_status", "UNKNOWN"),
+                        retrieval_query=hit.get("metadata", {}).get("retrieval_query", ""),
+                        provider_capability=hit.get("metadata", {}).get("provider_capability", ""),
+                        selection_reason=hit.get("metadata", {}).get("selection_reason", ""),
                         visual_requirement=hit.get("visual_requirement", req_class),
                         matched_entities=hit.get("entities", []),
                         metadata=hit.get("metadata", {}),
@@ -553,6 +574,7 @@ class MediaFinder:
         count: int = 8,
         folder: Optional[str] = None,
         visual_requirement: str = "auto",
+        research_intelligence: Optional[Dict[str, Any]] = None,
     ) -> MediaFinderResult:
         """
         Search for media and download the top ranked candidates to the local filesystem.
@@ -565,13 +587,18 @@ class MediaFinder:
             style=style,
             count=count,
             visual_requirement=visual_requirement,
+            research_intelligence=research_intelligence,
         )
         if not result.results or result.status in ("NO_BROLL", "REMOTION_REQUIRED", "INSUFFICIENT_EVIDENCE"):
             return result
 
-        # Convert MediaFinderItem back to MediaItem for MediaDownloader
+        # Convert only assets with explicit reusable rights into download items.
         media_items: List[MediaItem] = []
         for r in result.results:
+            r.rights_status = item_rights_status(r)
+            if not is_reusable_rights_status(r.rights_status):
+                r.selection_reason = (r.selection_reason + "; " if r.selection_reason else "") + f"Discovery only: rights status {r.rights_status} does not allow automatic reuse"
+                continue
             media_items.append(
                 MediaItem(
                     provider=r.provider,
@@ -585,6 +612,11 @@ class MediaFinder:
                     creator=r.creator,
                     date=r.date,
                     license=r.license,
+                    license_url=r.license_url,
+                    rights_status=r.rights_status,
+                    retrieval_query=r.query,
+                    provider_capability=", ".join(r.capability),
+                    selection_reason=r.selection_reason,
                     file_size_bytes=0,
                     width=r.width,
                     height=r.height,
@@ -603,8 +635,15 @@ class MediaFinder:
                     rejection_reason=r.rejection_reason,
                     is_archival=r.is_archival,
                     is_generic=r.is_generic,
+                    semantic_score=r.semantic_score,
+                    contextual_score=r.contextual_score,
+                    generic_penalty=r.generic_penalty,
                 )
             )
+
+        if not media_items:
+            result.fallback_reason = (result.fallback_reason + " " if result.fallback_reason else "") + "No candidate had explicit reusable rights; results remain discovery-only."
+            return result
 
         target_folder = folder or f"finder/{self._sanitize_folder_name(request)}"
         download_report: DownloadReport = self.downloader.download_batch(
@@ -701,6 +740,7 @@ class MediaFinder:
         media: str = "any",
         entities: Optional[List[str]] = None,
         visual_requirement: str = "auto",
+        research_intelligence: Optional[Dict[str, Any]] = None,
     ) -> List[str]:
         """
         Transform a natural language visual request into distinct query variants.
@@ -730,7 +770,7 @@ class MediaFinder:
                 if q_clean and q_clean not in unique:
                     unique.append(q_clean)
             if unique:
-                return unique
+                return self._append_research_queries(unique, research_intelligence, request)
 
         core_english = self._translate_to_core_english(request)
 
@@ -790,7 +830,36 @@ class MediaFinder:
             if q_clean and q_clean not in unique_queries:
                 unique_queries.append(q_clean)
 
-        return unique_queries
+        return self._append_research_queries(unique_queries, research_intelligence, request)
+
+    @staticmethod
+    def _append_research_queries(
+        base_queries: List[str],
+        research_intelligence: Optional[Dict[str, Any]],
+        request: str,
+    ) -> List[str]:
+        """Add bounded event/entity/place expansions from structured research."""
+        if not isinstance(research_intelligence, dict):
+            return base_queries
+        extras = research_intelligence.get("recommended_broll_queries", [])
+        if not isinstance(extras, list):
+            return base_queries
+        request_terms = {w for w in re.findall(r"[a-z0-9]+", request.lower()) if len(w) > 3}
+        result = list(base_queries)
+        for extra in extras[:5]:
+            if not isinstance(extra, str) or not extra.strip():
+                continue
+            # Keep research-derived additions tied to this shot/topic. If there
+            # is no token overlap, the request itself must appear in the query.
+            extra_terms = {w for w in re.findall(r"[a-z0-9]+", extra.lower()) if len(w) > 3}
+            if request_terms and not request_terms.intersection(extra_terms) and request.lower() not in extra.lower():
+                continue
+            clean = " ".join(extra.split())
+            if clean not in result:
+                result.append(clean)
+            if len(result) >= 10:
+                break
+        return result
 
     def _translate_to_core_english(self, text: str) -> str:
         """Translate key phrases and terms from Indonesian to clean English core concept."""
@@ -961,6 +1030,20 @@ class MediaFinder:
         selected: List[MediaProvider] = []
         vr = (visual_requirement or "GENERIC_ALLOWED").upper().strip()
 
+        # Prefer the machine-readable capability matrix; the legacy ordering
+        # below remains a fallback for unusual/custom provider names.
+        routed_names = route_provider_names(
+            by_name.keys(), era=era, media_type=media, visual_requirement=vr
+        )
+        if vr == REAL_REQUIRED:
+            routed_names = [
+                name for name in routed_names
+                if get_provider_capabilities(name).get("source_role") != "stock_discovery"
+            ]
+        routed = [by_name[name] for name in routed_names if name in by_name]
+        if routed:
+            return routed
+
         # ── REAL_REQUIRED: Pexafy is DISABLED ──
         if vr == REAL_REQUIRED:
             if media == "video":
@@ -1071,6 +1154,10 @@ class MediaFinder:
                         f"(video={v_cnt}, image={img_cnt}) for query='{q}' (requested_type='{provider_media_type}')"
                     )
                     for item in items:
+                        item.retrieval_query = item.retrieval_query or q
+                        profile = provider.capabilities()
+                        item.provider_capability = ", ".join(profile.get("capabilities", []))
+                        item.rights_status = item_rights_status(item)
                         key = item.dedup_key()
                         if key not in seen_keys:
                             seen_keys.add(key)
@@ -1155,6 +1242,21 @@ class MediaFinder:
 
         results: List[MediaFinderItem] = []
         for rank_idx, item in enumerate(ranked[:count], 1):
+            profile = get_provider_capabilities(item.provider)
+            semantic_score = item.semantic_score or item.embedding_similarity or item.reranker_score or item.keyword_score
+            contextual_score = item.contextual_score or (
+                0.35 * item.entity_match_score + 0.25 * item.event_match_score
+                + 0.20 * item.location_match_score + 0.20 * item.temporal_match_score
+            )
+            rights_status = item_rights_status(item)
+            reason_parts = [f"Ranked #{rank_idx} by contextual and semantic fit"]
+            if item.matched_entities:
+                reason_parts.append("matched entities: " + ", ".join(item.matched_entities[:4]))
+            if item.event_match_score > 0.5:
+                reason_parts.append("event context matched")
+            if item.is_archival:
+                reason_parts.append("archival source")
+            reason_parts.append(f"reuse rights: {rights_status.lower()}")
             results.append(
                 MediaFinderItem(
                     rank=rank_idx,
@@ -1168,7 +1270,14 @@ class MediaFinder:
                     creator=item.creator,
                     date=item.date,
                     license=item.license,
-                    license_url=item.metadata.get("license_url", ""),
+                    license_url=item.license_url or item.metadata.get("license_url", ""),
+                    rights_status=rights_status,
+                    query=item.retrieval_query,
+                    capability=profile.get("capabilities", []),
+                    semantic_score=round(semantic_score, 4),
+                    contextual_score=round(contextual_score, 4),
+                    generic_penalty=item.generic_penalty,
+                    selection_reason="; ".join(reason_parts),
                     local_path=None,
                     width=item.width,
                     height=item.height,
@@ -1182,6 +1291,9 @@ class MediaFinder:
                     event_match_score=item.event_match_score,
                     source_specificity_score=item.source_specificity_score,
                     matched_entities=item.matched_entities,
+                    matched_event=str(item.metadata.get("matched_event", "")),
+                    matched_location=str(item.metadata.get("matched_location", "")),
+                    matched_time=str(item.metadata.get("matched_time", "")),
                     rejection_reason=item.rejection_reason,
                     is_archival=item.is_archival,
                     is_generic=item.is_generic,
