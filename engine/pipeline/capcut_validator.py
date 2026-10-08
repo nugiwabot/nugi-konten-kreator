@@ -221,7 +221,8 @@ class CapCutValidator:
         for v in mat_videos:
             v_path = v.get("path")
             if v_path:
-                norm_p = Path(v_path.replace("/", "\\"))
+                # Normalize Windows and POSIX separators to the host filesystem convention.
+                norm_p = Path(v_path.replace("\\", "/"))
                 if not norm_p.is_file():
                     missing_media_files.append(str(norm_p))
         if missing_media_files:
