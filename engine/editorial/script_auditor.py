@@ -1258,7 +1258,8 @@ if __name__ == "__main__":
 
 def audit_script_with_dossier(
     script_text: str,
-    dossier_data: Optional[Dict[str, Any]] = None
+    dossier_data: Optional[Dict[str, Any]] = None,
+    story_plan: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     Comprehensive epistemic fact-checker cross-checking script sentences
@@ -1321,9 +1322,12 @@ def audit_script_with_dossier(
                     matched_dp = True
                     break
             if not matched_dp and verdict != "DISPUTED":
-                verdict = "PROBABLE"
-                reason = "Memuat data numerik yang perlu verifikasi tabel rujukan spesifik."
-                confidence = 0.70
+                # A number not found in the dossier is not "probable" merely
+                # because the dossier contains other data points.
+                verdict = "UNVERIFIED"
+                reason = "Angka dalam naskah tidak cocok dengan nilai data point yang tersedia di dossier."
+                flags.append("UNLINKED_NUMERICAL_DETAIL")
+                confidence = 0.25
 
         # 3. Check for Dossier Finding Match
         if dossier_data and verdict == "UNVERIFIED":
@@ -1331,9 +1335,18 @@ def audit_script_with_dossier(
                 c_text = claim_obj.get("text", "").lower()
                 overlap = len(set(s_lower.split()).intersection(set(c_text.split())))
                 if overlap >= 4:
-                    verdict = claim_obj.get("status", "PROBABLE")
-                    reason = f"Dossier Corroboration: Terhubung dengan klaim riset '{claim_obj.get('text', '')[:60]}...'."
-                    confidence = claim_obj.get("confidence_score", 0.8)
+                    dossier_status = str(claim_obj.get("status", "UNVERIFIED")).upper()
+                    if dossier_status in {"VERIFIED", "PROBABLE"}:
+                        verdict = dossier_status
+                        reason = f"Dossier Corroboration: Terhubung dengan klaim riset '{claim_obj.get('text', '')[:60]}...'."
+                        confidence = float(claim_obj.get("confidence_score", 0.8) or 0.8)
+                    else:
+                        verdict = "UNVERIFIED"
+                        reason = (
+                            f"Klaim terkait di dossier berstatus {dossier_status}; "
+                            "kemiripan teks tidak cukup untuk menaikkan status bukti."
+                        )
+                        confidence = 0.25
                     break
 
         # 4. Standard Heuristic Verdict if still UNVERIFIED
@@ -1385,7 +1398,7 @@ def audit_script_with_dossier(
     else:
         overall = "VERIFIED"
 
-    return {
+    report = {
         "status": "ok",
         "overall_verdict": overall,
         "total_sentences_checked": len(audited_claims),
@@ -1398,3 +1411,296 @@ def audit_script_with_dossier(
         "pass_gate": overall == "VERIFIED",
         "claims": audited_claims
     }
+    report["narrative_integrity"] = audit_narrative_integrity(
+        script_text, dossier_data or {}, story_plan
+    )
+    # Fact-check verdict alone is not sufficient for editorial readiness.
+    integrity_gate = report["narrative_integrity"]["gate_status"]
+    report["editorial_gate"] = {
+        "status": integrity_gate,
+        "publication_approval": False,
+        "reason": report["narrative_integrity"]["summary"],
+    }
+    return report
+
+
+def audit_narrative_integrity(
+    script_text: str,
+    dossier_data: Optional[Dict[str, Any]] = None,
+    story_plan: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Audit evidence traceability and narrative claims without granting publication approval."""
+    dossier_data = dossier_data or {}
+    claims = [item for item in (dossier_data.get("claims", []) or []) if isinstance(item, dict)]
+    data_points = [item for item in (dossier_data.get("data_points", []) or []) if isinstance(item, dict)]
+    causal_relationships = dossier_data.get("causal_relationships", []) or []
+    findings: List[Dict[str, Any]] = []
+
+    discovery_roles = {"DISCOVERY_ONLY", "RESEARCH_DISCOVERY", "BIBLIOGRAPHIC_DISCOVERY"}
+
+    def roles_in(value: Any) -> List[str]:
+        roles: List[str] = []
+        if isinstance(value, dict):
+            for key in ("evidence_role", "role", "evidence_status"):
+                if key in value and isinstance(value[key], str):
+                    roles.append(value[key].upper())
+            for key in ("metadata", "source", "supporting_evidence", "evidence", "items"):
+                if key in value:
+                    roles.extend(roles_in(value[key]))
+        elif isinstance(value, list):
+            for item in value:
+                roles.extend(roles_in(item))
+        return roles
+
+    def is_discovery_only_claim(claim: Dict[str, Any]) -> bool:
+        evidence = claim.get("supporting_evidence", claim.get("evidence", []))
+        roles = roles_in(evidence)
+        return bool(roles) and all(role in discovery_roles for role in roles)
+
+    def claim_is_supported(claim: Dict[str, Any]) -> bool:
+        return (
+            str(claim.get("status", "UNVERIFIED")).upper() in {"VERIFIED", "PROBABLE"}
+            and not is_discovery_only_claim(claim)
+        )
+
+    supported_claims = [claim for claim in claims if claim_is_supported(claim)]
+    supported_text = " ".join(
+        [str(claim.get("text", "")) for claim in supported_claims]
+        + [str(dp.get("value", "")) + " " + str(dp.get("metric", "")) for dp in data_points]
+    )
+    dossier_by_id = {
+        str(claim.get("id", "")): claim for claim in claims
+        if str(claim.get("id", "")).strip()
+    }
+
+    if story_plan:
+        for beat in story_plan.get("beats", []) or []:
+            if not isinstance(beat, dict):
+                continue
+            refs = beat.get("evidence_claims", []) or []
+            if str(beat.get("evidence_status", "")).upper() == "SUPPORTED_CLAIM":
+                invalid_refs = [
+                    ref for ref in refs
+                    if not isinstance(ref, dict)
+                    or str(ref.get("status", "UNVERIFIED")).upper() not in {"VERIFIED", "PROBABLE"}
+                ]
+                if not refs or invalid_refs:
+                    findings.append({
+                        "code": "STORY_PLAN_OVERSTATES_EVIDENCE",
+                        "severity": "CRITICAL",
+                        "beat_id": beat.get("beat_id", ""),
+                        "message": "Beat ditandai didukung, tetapi referensi klaim tidak ada atau status buktinya belum mendukung.",
+                        "recommendation": "Ubah status beat menjadi GAP_OR_QUESTION atau sinkronkan referensinya dengan dossier.",
+                    })
+            for ref in refs:
+                if not isinstance(ref, dict):
+                    continue
+                ref_id = str(ref.get("id", ""))
+                source_claim = dossier_by_id.get(ref_id) if ref_id else None
+                if ref_id and source_claim is None:
+                    findings.append({
+                        "code": "STORY_PLAN_CLAIM_REFERENCE_MISSING",
+                        "severity": "HIGH",
+                        "beat_id": beat.get("beat_id", ""),
+                        "message": f"Referensi klaim '{ref_id}' tidak ditemukan di dossier.",
+                        "recommendation": "Sinkronkan story plan dengan klaim yang benar-benar tersimpan di dossier.",
+                    })
+                elif source_claim:
+                    source_status = str(source_claim.get("status", "UNVERIFIED")).upper()
+                    ref_status = str(ref.get("status", "UNVERIFIED")).upper()
+                    if source_status not in {"VERIFIED", "PROBABLE"} and ref_status in {"VERIFIED", "PROBABLE"}:
+                        findings.append({
+                            "code": "STORY_PLAN_PROMOTES_UNRESOLVED_CLAIM",
+                            "severity": "CRITICAL",
+                            "beat_id": beat.get("beat_id", ""),
+                            "message": "Status klaim di story plan lebih kuat daripada status klaim sumber di dossier.",
+                            "recommendation": "Turunkan status beat dan pertahankan ketidakpastian klaim.",
+                        })
+                    if is_discovery_only_claim(source_claim) and str(beat.get("evidence_status", "")).upper() == "SUPPORTED_CLAIM":
+                        findings.append({
+                            "code": "DISCOVERY_ONLY_USED_AS_SUPPORT",
+                            "severity": "CRITICAL",
+                            "beat_id": beat.get("beat_id", ""),
+                            "message": "Beat memakai sumber discovery-only sebagai dukungan klaim.",
+                            "recommendation": "Cari bukti substantif yang bisa diperiksa; RSS, hasil pencarian, dan metadata bibliografi hanya petunjuk riset.",
+                        })
+
+    narration = _extract_spoken_narration(script_text)
+    sentences = _segment_sentences(narration)
+    causal_markers = (
+        "menyebabkan", "mengakibatkan", "memicu", "berujung pada",
+        "pendorong utamanya", "penyebab utamanya", "karena itulah",
+        "mendorong", "akibatnya",
+    )
+    qualifiers = (
+        "belum terverifikasi", "belum terkonfirmasi", "belum boleh disampaikan sebagai fakta",
+        "belum cukup", "belum dapat dipastikan", "belum bisa dipastikan",
+        "tidak dapat dipastikan", "masih perlu diverifikasi", "masih perlu diuji",
+        "mungkin", "bisa jadi", "diperkirakan", "cenderung", "menurut studi",
+        "menurut penelitian", "berdasarkan laporan", "bukti awal", "sebagai hipotesis",
+        "sebagai pertanyaan", "belum ada dasar yang cukup",
+    )
+    factual_markers = (
+        "tercatat", "mencatat", "menunjukkan bahwa", "membuktikan", "terbukti",
+        "menurut ", "berdasarkan ", "penelitian", "survei", "data menunjukkan",
+        "data mencatat", "secara resmi", "jumlahnya", "sebesar",
+    )
+    has_supported_causal_path = any(
+        isinstance(item, dict) and item.get("cause") and item.get("mechanism")
+        and str(item.get("status", "")).upper() in {"VERIFIED", "PROBABLE"}
+        for item in causal_relationships
+    )
+
+    stop_words = {
+        "yang", "dan", "atau", "dari", "untuk", "dengan", "pada", "dalam",
+        "adalah", "ini", "itu", "akan", "bisa", "belum", "sudah", "karena",
+        "sebagai", "lebih", "juga", "tentang", "terhadap", "oleh", "para",
+        "sebuah", "dapat", "tidak", "kita", "mereka", "hingga", "saat",
+    }
+
+    def tokens(value: str) -> set[str]:
+        return {
+            token for token in re.findall(r"[a-zA-ZÀ-ÿ0-9]+", value.lower())
+            if len(token) > 3 and token not in stop_words
+        }
+
+    def best_matching_claim(sentence: str) -> Optional[Dict[str, Any]]:
+        sentence_tokens = tokens(sentence)
+        if len(sentence_tokens) < 3:
+            return None
+        best_claim = None
+        best_score = 0.0
+        for claim in claims:
+            claim_tokens = tokens(str(claim.get("text", "")))
+            if len(claim_tokens) < 3:
+                continue
+            intersection = len(sentence_tokens & claim_tokens)
+            score = intersection / max(1, min(len(sentence_tokens), len(claim_tokens)))
+            if intersection >= 3 and score > best_score:
+                best_score = score
+                best_claim = claim
+        return best_claim if best_score >= 0.34 else None
+
+    for sentence in sentences:
+        clean_sentence = sentence.strip()
+        if len(clean_sentence) < 20:
+            continue
+        lower = clean_sentence.lower()
+        qualified = any(marker in lower for marker in qualifiers)
+        matched_claim = best_matching_claim(clean_sentence)
+        matched_status = str(matched_claim.get("status", "UNVERIFIED")).upper() if matched_claim else ""
+        matched_discovery_only = bool(matched_claim and is_discovery_only_claim(matched_claim))
+
+        if matched_claim and (matched_status in {"UNVERIFIED", "DISPUTED", "CONTRADICTED", "CONFLICTING_EVIDENCE"} or matched_discovery_only):
+            if not qualified:
+                findings.append({
+                    "code": "UNRESOLVED_CLAIM_ASSERTED_AS_FACT",
+                    "severity": "CRITICAL",
+                    "sentence": clean_sentence,
+                    "claim_id": matched_claim.get("id", ""),
+                    "claim_status": "DISCOVERY_ONLY" if matched_discovery_only else matched_status,
+                    "message": "Naskah menyatakan atau mengulang klaim yang belum didukung, diperselisihkan, atau hanya berasal dari petunjuk discovery tanpa kualifikasi yang memadai.",
+                    "recommendation": "Hapus klaim, ubah menjadi pertanyaan/ketidakpastian yang jelas, atau tambahkan bukti substantif ke dossier.",
+                })
+            else:
+                findings.append({
+                    "code": "UNRESOLVED_CLAIM_QUALIFIED",
+                    "severity": "LOW",
+                    "sentence": clean_sentence,
+                    "claim_id": matched_claim.get("id", ""),
+                    "claim_status": "DISCOVERY_ONLY" if matched_discovery_only else matched_status,
+                    "message": "Klaim belum terkonfirmasi disebut dengan pembatasan; pastikan redaksi tetap jelas bagi penonton.",
+                    "recommendation": "Pertahankan pembatasan dan jangan menyuntingnya menjadi kepastian saat produksi.",
+                })
+
+        if any(marker in lower for marker in causal_markers) and not has_supported_causal_path and not qualified:
+            findings.append({
+                "code": "CAUSAL_ASSERTION_NEEDS_EVIDENCE",
+                "severity": "MEDIUM",
+                "sentence": clean_sentence,
+                "message": "Kalimat memakai bahasa sebab-akibat, tetapi dossier belum mencatat jalur kausal yang berstatus VERIFIED/PROBABLE.",
+                "recommendation": "Ubah menjadi pertanyaan/hipotesis atau dukung dengan sumber yang menguji mekanisme kausal.",
+            })
+
+        numeric_match = re.search(r"\b\d+(?:[.,]\d+)?\s*(?:%|persen|juta|miliar|triliun|tahun|orang|unit|kali)\b", lower)
+        if numeric_match:
+            numbers = re.findall(r"\d+(?:[.,]\d+)?", clean_sentence)
+            dossier_numbers = set(re.findall(r"\d+(?:[.,]\d+)?", supported_text))
+            missing = [number for number in numbers if number not in dossier_numbers]
+            if missing:
+                findings.append({
+                    "code": "SCRIPT_NUMERIC_DETAIL_NOT_LINKED",
+                    "severity": "HIGH",
+                    "sentence": clean_sentence,
+                    "message": f"Detail angka {', '.join(missing)} tidak ditemukan pada klaim/data yang didukung di dossier.",
+                    "recommendation": "Hapus angka tersebut atau tambahkan sumber yang mendukungnya ke dossier lalu jalankan fact-check ulang.",
+                })
+
+        if any(marker in lower for marker in factual_markers) and not matched_claim and not qualified:
+            findings.append({
+                "code": "FACTUAL_ASSERTION_NOT_LINKED_TO_DOSSIER",
+                "severity": "HIGH",
+                "sentence": clean_sentence,
+                "message": "Kalimat memakai atribusi atau bahasa faktual, tetapi tidak cocok dengan klaim yang tercatat di dossier.",
+                "recommendation": "Tautkan kalimat ke klaim dossier yang tepat atau ubah redaksinya agar tidak menyiratkan bukti yang tidak tersedia.",
+            })
+
+        quoted_parts = re.findall(r'["“](.{4,180}?)[”"]', clean_sentence)
+        if quoted_parts:
+            exact_quotes = []
+            for claim in claims:
+                exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', str(claim.get("text", ""))))
+            for evidence in (dossier_data.get("evidence_items", []) or []):
+                if isinstance(evidence, dict):
+                    exact_quote_text = str(evidence.get("exact_quote", "") or "")
+                    evidence_text = str(evidence.get("content", evidence.get("text", "")) or "")
+                    if exact_quote_text:
+                        exact_quotes.append(exact_quote_text)
+                    if evidence_text:
+                        exact_quotes.append(evidence_text)
+                    exact_quotes.extend(re.findall(r'["“](.{4,180}?)[”"]', exact_quote_text + " " + evidence_text))
+            for quoted in quoted_parts:
+                if not any(quoted.strip().lower() in known.lower() for known in exact_quotes):
+                    findings.append({
+                        "code": "QUOTE_PROVENANCE_MISSING",
+                        "severity": "HIGH",
+                        "sentence": clean_sentence,
+                        "message": "Kutipan langsung tidak ditemukan dalam teks bukti atau kutipan yang tersimpan di dossier.",
+                        "recommendation": "Hapus tanda kutip atau tambahkan teks kutipan asli beserta sumber dan konteksnya ke dossier.",
+                    })
+                    break
+
+    unique_findings = []
+    seen = set()
+    for finding in findings:
+        key = (finding.get("code"), finding.get("sentence"), finding.get("beat_id"), finding.get("claim_id"))
+        if key not in seen:
+            seen.add(key)
+            unique_findings.append(finding)
+    findings = unique_findings
+
+    if any(item["severity"] == "CRITICAL" for item in findings):
+        gate = "BLOCKED"
+    elif findings or str(dossier_data.get("epistemic_status", "UNVERIFIED")).upper() != "VERIFIED":
+        gate = "REVIEW_REQUIRED"
+    else:
+        gate = "ELIGIBLE_FOR_EDITORIAL_REVIEW"
+
+    severity_counts = {
+        level: sum(1 for item in findings if item.get("severity") == level)
+        for level in ("CRITICAL", "HIGH", "MEDIUM", "LOW")
+    }
+    return {
+        "schema_version": 1,
+        "gate_status": gate,
+        "summary": (
+            f"{len(findings)} temuan integritas narasi; {severity_counts['CRITICAL']} blocker kritis, "
+            f"{severity_counts['HIGH']} temuan prioritas tinggi; status gate {gate}. "
+            "Status ini bukan persetujuan publikasi."
+        ),
+        "finding_count": len(findings),
+        "severity_counts": severity_counts,
+        "findings": findings,
+        "publication_approval": False,
+    }
+
