@@ -32,6 +32,7 @@ from engine.editorial.quality_gate import check_quality_gates
 from engine.editorial.script_auditor import audit_script_with_dossier
 from engine.editorial.script_synthesizer import DynamicScriptSynthesizer
 from engine.editorial.story_type import classify_story_type
+from engine.editorial.story_planner import build_story_plan
 from engine.pipeline.capcut_engine import CapCutDraftGenerator
 from engine.pipeline.capcut_validator import CapCutValidator
 import engine.pipeline.media_finder as media_finder_mod
@@ -286,20 +287,28 @@ class ProductionOrchestrator:
             st_info = classify_story_type(plan.topic)
             story_archetype = st_info.get("primary_type", "historical_investigative")
 
-            story_plan = {
-                "topic": plan.topic,
+            story_plan = build_story_plan(
+                dossier=dossier,
+                story_type_info=st_info,
+                duration_seconds=plan.duration_seconds,
+            )
+            # Keep legacy fields for downstream consumers and historical workspaces.
+            story_plan.update({
                 "story_archetype": story_archetype,
-                "narrative_device": st_info.get("narrative_device", {}),
                 "narrative_angles": getattr(dossier, "narrative_angles", []),
                 "causal_relationships": getattr(dossier, "causal_relationships", []),
                 "timeline": getattr(dossier, "timeline", []),
-                "duration_seconds": plan.duration_seconds,
-            }
+            })
             story_plan_p.write_text(json.dumps(story_plan, indent=2, ensure_ascii=False), encoding="utf-8")
 
-            # Dynamic duration-aware script synthesis
+            # The script is rendered from the same outline, with evidence status
+            # and uncertainty carried through to the narration draft.
             synthesizer = DynamicScriptSynthesizer()
-            script_content = synthesizer.synthesize_script(dossier, target_duration_seconds=int(plan.duration_seconds))
+            script_content = synthesizer.synthesize_script(
+                dossier,
+                target_duration_seconds=int(plan.duration_seconds),
+                story_plan=story_plan,
+            )
             script_p.write_text(script_content, encoding="utf-8")
 
             manifest.mark_stage_completed(
