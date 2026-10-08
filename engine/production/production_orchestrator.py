@@ -335,13 +335,19 @@ class ProductionOrchestrator:
                 json.loads(fact_check_p.read_text(encoding="utf-8")).get("production_run_id") == manifest.run_id
                 and json.loads(fact_check_p.read_text(encoding="utf-8")).get("topic") == plan.topic
                 and json.loads(fact_check_p.read_text(encoding="utf-8")).get("overall_verdict") in ("VERIFIED", "PROBABLE", "DISPUTED", "UNVERIFIED", "UNKNOWN")
+                and json.loads(fact_check_p.read_text(encoding="utf-8")).get("narrative_integrity", {}).get("schema_version") == 1
             ),
         ):
             logger.info("Resuming: Existing fact check report reused.")
             fact_check_result = json.loads(fact_check_p.read_text(encoding="utf-8"))
         else:
             manifest.invalidate_from(ProductionStage.FACT_CHECK)
-            fact_check_result = audit_script_with_dossier(script_content, dossier.to_dict())
+            story_plan_data = json.loads(story_plan_p.read_text(encoding="utf-8"))
+            fact_check_result = audit_script_with_dossier(
+                script_content,
+                dossier.to_dict(),
+                story_plan=story_plan_data,
+            )
             fact_check_result["production_run_id"] = manifest.run_id
             fact_check_result["topic"] = plan.topic
             fact_check_p.write_text(json.dumps(fact_check_result, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -355,8 +361,16 @@ class ProductionOrchestrator:
             "PROBABLE": "NEEDS_REVIEW",
             "UNVERIFIED": "NEEDS_REVIEW",
         }.get(fact_check_verdict, "UNKNOWN")
+        integrity_status = str(
+            fact_check_result.get("narrative_integrity", {}).get("gate_status", "REVIEW_REQUIRED")
+        ).upper()
+        if integrity_status == "BLOCKED":
+            fact_check_status = "FAIL"
+        elif integrity_status != "ELIGIBLE_FOR_EDITORIAL_REVIEW" or fact_check_verdict != "VERIFIED":
+            fact_check_status = "NEEDS_REVIEW"
         manifest.extra_fields["fact_check_verdict"] = fact_check_verdict
         manifest.extra_fields["fact_check_status"] = fact_check_status
+        manifest.extra_fields["narrative_integrity_status"] = integrity_status
 
         if stage_limit == "script":
             manifest.current_stage = "script"
