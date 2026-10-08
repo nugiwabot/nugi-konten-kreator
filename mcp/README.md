@@ -16,6 +16,13 @@ nugi_content_create
 `recency` is passed to the dossier's web retrieval provider. It is an actual
 retrieval input, not an interface-only parameter.
 
+Minimal natural-language requests are resolved before production.
+Use `nugi_request_plan` to inspect that decision contract without executing
+production. Use `nugi_idea_discover` or a discovery request through
+`nugi_content_create` to generate ranked content opportunities. The discovery
+path uses RSS/news signals and a bounded evidence pass; discovery headlines
+remain discovery-only until the normal research and fact-check gates run.
+
 `nugi_workflow_plan`, `nugi_workflow_preflight`, `nugi_workflow_execute`,
 `nugi_workflow_status`, and `nugi_workflow_resume` remain solely for backward
 compatibility. They are thin wrappers around `ProductionOrchestrator` and
