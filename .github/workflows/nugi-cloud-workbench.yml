@@ -11,6 +11,7 @@ on:
         options:
           - preflight
           - discover
+          - research
       count:
         description: "How many ideas to return (1-20)"
         required: true
@@ -151,3 +152,62 @@ jobs:
           path: cloud-output/discover/
           if-no-files-found: error
           retention-days: 7
+
+  research:
+    if: ${{ inputs.operation == 'research' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install minimal discovery dependency
+        run: python -m pip install --disable-pip-version-check "python-dotenv==1.0.1"
+
+      - name: Compile research workbench
+        run: |
+          python -m compileall -q \
+            engine/editorial/idea_discovery.py \
+            engine/editorial/fit_score.py \
+            engine/editorial/story_type.py \
+            engine/editorial/taxonomy.py \
+            engine/editorial/visual_feasibility.py \
+            engine/intelligence/rss.py \
+            scripts/cloud_discover.py \
+            scripts/cloud_research.py
+
+      - name: Discover and extract accessible article content
+        env:
+          DISCOVERY_COUNT: ${{ inputs.count }}
+          DISCOVERY_QUERIES: ${{ inputs.queries }}
+          RSS_DISCOVERY_ENABLED: "true"
+          EMBEDDING_REQUIRED: "false"
+          RERANKER_REQUIRED: "false"
+          ALLOW_FALLBACK: "true"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/cloud_discover.py \
+            --count "$DISCOVERY_COUNT" \
+            --queries "$DISCOVERY_QUERIES" \
+            --output-dir cloud-output/research/discovery
+          python scripts/cloud_research.py \
+            --discovery-json cloud-output/research/discovery/discovery.json \
+            --output-dir cloud-output/research
+
+      - name: Upload research report and extracted text
+        uses: actions/upload-artifact@v4
+        with:
+          name: nugi-cloud-research-${{ github.run_id }}
+          path: |
+            cloud-output/research/research-report.md
+            cloud-output/research/sources.json
+            cloud-output/research/extraction-summary.json
+            cloud-output/research/articles/
+          if-no-files-found: error
+          retention-days: 14
