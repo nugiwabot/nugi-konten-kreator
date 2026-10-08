@@ -35,6 +35,86 @@ EMOTION = ("aneh", "takut", "khawatir", "marah", "sedih", "mengejutkan")
 QUESTION_START = ("kenapa", "mengapa", "bagaimana", "apa", "kok", "gimana")
 LAND_MARKERS = ("pada akhirnya", "kesimpulannya", "yang sebenarnya", "bukanlah", "adalah")
 
+# Learned from the actual Nugi short-script corpus in:
+# output/short video/TELEPROMPTER_SHORT_21-40.md
+#
+# These are not content facts. They are DELIVERY PATTERNS: recurring
+# conversational constructions that make Nugi's scripts sound curious,
+# explanatory, contrastive, and reflective rather than read aloud.
+PERFORMANCE_LEXICON = {
+    "HOOK": (
+        "pernah nggak", "pernah kepikiran", "pernah heran",
+        "pernah sadar", "pernah perhatikan", "coba tengok",
+        "masih ingat", "sering dengar", "niatnya", "bayangkan",
+        "kalau dipikir",
+    ),
+    "CURIOSITY": (
+        "kenapa ya", "kok", "apa mungkin", "pernah nggak",
+        "pernah kepikiran", "pernah heran", "pernah sadar",
+        "pernah perhatikan",
+    ),
+    "CONTRAST": (
+        "padahal", "tapi", "namun", "justru", "melainkan",
+        "bukan sekadar", "bukan cuma", "bukan karena",
+        "sementara",
+    ),
+    "REVEAL": (
+        "ternyata", "masalahnya", "jawabannya", "artinya",
+        "yang sebenarnya", "tanpa disadari", "sadar atau nggak",
+        "kita sebenarnya", "yang terjadi", "sebenarnya",
+    ),
+    "BUILD": (
+        "pertama", "kedua", "selain itu", "ditambah lagi",
+        "di sisi lain", "yang terpenting",
+    ),
+    "REFLECTIVE": (
+        "pada akhirnya", "mungkin", "hari ini", "coba tengok",
+        "itulah", "dengan kata lain",
+    ),
+}
+
+# Phrase-level coaching: the phrase determines how the speaker should
+# physically move the voice. This is deliberately richer than a simple
+# question/statement classifier.
+PERFORMANCE_STYLES = {
+    "HOOK": {
+        "pitch": "rising",
+        "pace": "conversational",
+        "pause": 0.45,
+        "delivery": "Seperti baru terpikir sesuatu dan ingin mengajak satu orang ikut berpikir.",
+    },
+    "CURIOSITY": {
+        "pitch": "rising",
+        "pace": "conversational",
+        "pause": 0.6,
+        "delivery": "Nada ingin tahu; jangan terdengar seperti membaca pertanyaan yang sudah diketahui jawabannya.",
+    },
+    "CONTRAST": {
+        "pitch": "contrast",
+        "pace": "controlled",
+        "pause": 0.55,
+        "delivery": "Beri belokan suara pada kata kontras, lalu tahan agar gagasan berikutnya terasa penting.",
+    },
+    "REVEAL": {
+        "pitch": "contrast",
+        "pace": "slow",
+        "pause": 0.8,
+        "delivery": "Turunkan tempo, beri ruang, lalu jatuhkan nada pada inti penemuan.",
+    },
+    "BUILD": {
+        "pitch": "flat",
+        "pace": "brisk",
+        "pause": 0.3,
+        "delivery": "Sedikit lebih cepat dan ringan agar rangkaian alasan terasa hidup.",
+    },
+    "REFLECTIVE": {
+        "pitch": "falling",
+        "pace": "slow",
+        "pause": 1.0,
+        "delivery": "Lebih tenang dan personal; biarkan kalimat terasa seperti pemikiran yang baru selesai.",
+    },
+}
+
 
 @dataclass(frozen=True)
 class PerformanceCue:
@@ -78,6 +158,26 @@ def _meaningful_word(text: str) -> Optional[str]:
 def _marker(text: str, markers: Sequence[str]) -> bool:
     lower = text.lower()
     return any(item in lower for item in markers)
+
+
+def _performance_marker(text: str, category: str) -> Optional[str]:
+    """Return the strongest matching corpus-derived delivery phrase."""
+    lower = text.lower()
+    candidates = PERFORMANCE_LEXICON.get(category, ())
+    matches = [phrase for phrase in candidates if phrase in lower]
+    if not matches:
+        return None
+    # Prefer the longest phrase: "bukan sekadar" should beat "bukan".
+    return max(matches, key=len)
+
+
+def _performance_category(text: str) -> Optional[str]:
+    """Infer delivery intent from recurring constructions in Nugi scripts."""
+    # Priority matters: reveal/contrast should beat generic conversational words.
+    for category in ("HOOK", "CURIOSITY", "CONTRAST", "REVEAL", "BUILD", "REFLECTIVE"):
+        if _performance_marker(text, category):
+            return category
+    return None
 
 
 def split_thought_units(script: str) -> List[str]:
@@ -126,6 +226,18 @@ def classify_unit(text: str, index: int, total: int) -> Tuple[str, str, str, str
     reflection = _marker(text, REFLECT)
     emotion = _marker(text, EMOTION)
     list_like = len(re.findall(r",|;", text)) >= 2
+    corpus_category = _performance_category(text)
+
+    # Corpus-derived delivery vocabulary takes priority over generic syntax.
+    if corpus_category in PERFORMANCE_STYLES:
+        style = PERFORMANCE_STYLES[corpus_category]
+        return (
+            corpus_category,
+            style["pitch"],
+            style["pace"],
+            str(style["pause"]),
+            style["delivery"],
+        )
 
     if question:
         return "CURIOUS", "rising", "mixed", "0.6", (
@@ -326,9 +438,9 @@ def _annotate_clause(
 ) -> str:
     body, punctuation = _strip_terminal_punctuation(clause)
 
-    is_question = role == "CURIOUS"
-    is_reveal = _marker(body, REVEAL)
-    is_contrast = _marker(body, CONTRAST)
+    is_question = role in {"CURIOUS", "HOOK"} or _marker(body, PERFORMANCE_LEXICON["CURIOSITY"])
+    is_reveal = role == "REVEAL" or _marker(body, REVEAL) or _performance_marker(body, "REVEAL")
+    is_contrast = role == "CONTRAST" or _marker(body, CONTRAST) or _performance_marker(body, "CONTRAST")
     is_landing = (
         clause_index == clause_count - 1
         or _marker(body, LAND_MARKERS)
@@ -348,6 +460,38 @@ def _annotate_clause(
     # opening question word rises, final semantic word lands.
     if is_question:
         return _apply_question_shape(clause, clause_index, clause_count)
+
+    # Corpus-derived discourse markers receive their own visible contour.
+    if role == "HOOK":
+        marker = _performance_marker(body, "HOOK")
+        if marker:
+            body = re.sub(
+                rf"(?<![A-Za-zÀ-ÿ]){re.escape(marker)}(?![A-Za-zÀ-ÿ])",
+                lambda m: f"**{m.group(0).upper()}↗**",
+                body,
+                count=1,
+                flags=re.IGNORECASE,
+            )
+    elif role == "REVEAL":
+        marker = _performance_marker(body, "REVEAL")
+        if marker:
+            body = re.sub(
+                rf"(?<![A-Za-zÀ-ÿ]){re.escape(marker)}(?![A-Za-zÀ-ÿ])",
+                lambda m: f"**{m.group(0).upper()}↗↘**",
+                body,
+                count=1,
+                flags=re.IGNORECASE,
+            )
+    elif role == "CONTRAST":
+        marker = _performance_marker(body, "CONTRAST")
+        if marker:
+            body = re.sub(
+                rf"(?<![A-Za-zÀ-ÿ]){re.escape(marker)}(?![A-Za-zÀ-ÿ])",
+                lambda m: f"**{m.group(0).upper()}↗↘**",
+                body,
+                count=1,
+                flags=re.IGNORECASE,
+            )
 
     emphasis = _emphasis_word(body, role, clause_index, clause_count)
     body = _apply_emphasis(body, emphasis, pitch)
