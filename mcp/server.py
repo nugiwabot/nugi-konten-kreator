@@ -230,7 +230,7 @@ def research_fact_check(
 def performance_director(
     script_text_or_path: str,
     output_folder: Optional[str] = None,
-    include_legend: bool = True,
+    include_legend: bool = False,
 ) -> Dict[str, Any]:
     """
     Convert a finished script into a vocal-performance learning sheet.
@@ -251,12 +251,12 @@ def performance_director(
 
     from engine.performance.performance_director import (
         annotate_script,
-        render_annotated,
         render_clean,
+        render_inline_script,
     )
 
     doc = annotate_script(script_text, source_name=source_name)
-    annotated_text = render_annotated(doc, include_legend=include_legend)
+    annotated_text = render_inline_script(doc)
     clean_text = render_clean(doc)
 
     result: Dict[str, Any] = {
