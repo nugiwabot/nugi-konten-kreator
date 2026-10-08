@@ -63,6 +63,9 @@ class ResearchDossier:
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
     research_intelligence: Dict[str, Any] = field(default_factory=dict)
+    evidence_gaps: List[Dict[str, Any]] = field(default_factory=list)
+    claim_coverage: List[Dict[str, Any]] = field(default_factory=list)
+    research_readiness: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -85,6 +88,9 @@ class ResearchDossier:
             "visual_implications": self.visual_implications,
             "created_at": self.created_at,
             "research_intelligence": self.research_intelligence,
+            "evidence_gaps": self.evidence_gaps,
+            "claim_coverage": self.claim_coverage,
+            "research_readiness": self.research_readiness,
         }
 
     @classmethod
@@ -191,6 +197,9 @@ class ResearchDossier:
             epistemic_status=d.get("epistemic_status", "VERIFIED"),
             created_at=d.get("created_at", datetime.now(timezone.utc).isoformat()),
             research_intelligence=d.get("research_intelligence", {}),
+            evidence_gaps=d.get("evidence_gaps", []),
+            claim_coverage=d.get("claim_coverage", []),
+            research_readiness=d.get("research_readiness", {}),
         )
 
     def to_markdown(self) -> str:
@@ -243,6 +252,25 @@ class ResearchDossier:
                 for ce in c.contradicting_evidence:
                     lines.append(f"  - [{ce.source.tier.value}] *{ce.source.publisher}*: {ce.summary}")
             lines.append("")
+
+        if self.research_readiness or self.evidence_gaps or self.claim_coverage:
+            readiness = self.research_readiness or {}
+            lines.extend([
+                "",
+                "## 4A. RESEARCH READINESS & EVIDENCE GAPS",
+                f"- **Readiness:** {readiness.get('status', 'NOT_ASSESSED')}",
+                f"- **Interpretation:** {readiness.get('summary', 'No readiness summary available.')}",
+                f"- **Supporting claims:** {readiness.get('supporting_claims', 0)} / {readiness.get('claim_count', len(self.claims))}",
+                f"- **Primary sources:** {readiness.get('primary_source_count', len(self.primary_sources))}",
+            ])
+            for gap in self.evidence_gaps:
+                lines.append(f"- **Gap [{gap.get('severity', 'INFO')}]:** {gap.get('gap', '')} — {gap.get('next_action', '')}")
+            for coverage in self.claim_coverage:
+                lines.append(
+                    f"- **Claim coverage [{coverage.get('status', 'UNVERIFIED')}]:** "
+                    f"{coverage.get('claim', '')} | supporting sources: {coverage.get('supporting_source_count', 0)}; "
+                    f"independent lineages: {coverage.get('independent_sources_count', 0)}"
+                )
 
         lines.extend([
             "## 5. CAUSAL RELATIONSHIPS & HUMAN-PLACE ANCHOR",
@@ -466,6 +494,120 @@ def _topic_terms(topic: str) -> set[str]:
 def _topic_relevance_count(topic: str, text: str) -> int:
     """Simple overlap heuristic used only to avoid unrelated source-to-claim mapping."""
     return len(_topic_terms(topic) & set(re.findall(r"[a-z0-9]+", text.lower())))
+
+
+
+def _build_evidence_gap_report(
+    claims: List[Claim],
+    evidence: List[EvidenceItem],
+    data_points: List[DataPoint],
+    discovery_count: int,
+    depth: str,
+) -> Dict[str, Any]:
+    """Summarize evidence coverage and next actions without promoting search leads."""
+    excluded_roles = {"DISCOVERY_ONLY", "RESEARCH_DISCOVERY", "BIBLIOGRAPHIC_DISCOVERY"}
+    supporting = [
+        item for item in evidence
+        if item.is_supporting
+        and item.source.metadata.get("evidence_role") not in excluded_roles
+        and (item.exact_quote or item.retrieved_snippet)
+    ]
+    primary = {
+        item.source.url or item.source.publisher for item in supporting
+        if item.source.tier.rank <= 2 and (item.source.url or item.source.publisher)
+    }
+    coverage: List[Dict[str, Any]] = []
+    gaps: List[Dict[str, str]] = []
+    for claim in claims:
+        claim_support = [
+            item for item in claim.supporting_evidence
+            if item.is_supporting
+            and item.source.metadata.get("evidence_role") not in excluded_roles
+            and (item.exact_quote or item.retrieved_snippet)
+        ]
+        coverage.append({
+            "claim_id": claim.id,
+            "claim": claim.text,
+            "claim_type": claim.claim_type,
+            "status": claim.status,
+            "supporting_source_count": len({
+                item.source.url or item.source.publisher for item in claim_support
+                if item.source.url or item.source.publisher
+            }),
+            "independent_sources_count": claim.independent_sources_count,
+            "has_contradiction": bool(claim.contradicting_evidence),
+        })
+        if claim.status in {"UNVERIFIED", "DISPUTED"}:
+            gaps.append({
+                "severity": "HIGH",
+                "gap": f"Klaim '{claim.text[:140]}' berstatus {claim.status}.",
+                "next_action": "Cari sumber yang langsung mendukung atau membantah klaim; jangan narasikan sebagai fakta terkonfirmasi.",
+            })
+        elif claim.status == "PROBABLE":
+            gaps.append({
+                "severity": "MEDIUM",
+                "gap": f"Klaim '{claim.text[:140]}' belum VERIFIED.",
+                "next_action": "Cari corroboration independen dan periksa apakah sumber mendukung klaim yang sama.",
+            })
+        if claim.claim_type in {"CAUSAL", "NUMERICAL"} and claim.independent_sources_count < 2:
+            gaps.append({
+                "severity": "HIGH" if claim.claim_type == "CAUSAL" else "MEDIUM",
+                "gap": f"Klaim {claim.claim_type.lower()} belum memiliki dua jalur bukti independen.",
+                "next_action": "Cari sumber primer atau penelitian independen yang menguji mekanisme/angka secara langsung.",
+            })
+    if not claims:
+        gaps.append({
+            "severity": "HIGH",
+            "gap": "Belum ada klaim yang berhasil dibentuk dari bukti pendukung.",
+            "next_action": "Persempit pertanyaan, cari dokumen primer/data resmi, lalu bentuk klaim atomik yang bisa diuji.",
+        })
+    if not primary:
+        gaps.append({
+            "severity": "HIGH",
+            "gap": "Belum ada sumber primer/otoritatif yang dipakai sebagai bukti pendukung.",
+            "next_action": "Prioritaskan data resmi, dokumen asli, arsip, atau penelitian sumber pertama.",
+        })
+    if not data_points:
+        gaps.append({
+            "severity": "MEDIUM",
+            "gap": "Belum ada data point terstruktur yang berhasil diekstrak.",
+            "next_action": "Cari statistik atau indikator yang sesuai; jangan mengarang angka.",
+        })
+    if depth == "quick":
+        gaps.append({
+            "severity": "INFO",
+            "gap": "Riset memakai mode quick sehingga cakupan pencarian dan pemeriksaan kontradiksi terbatas.",
+            "next_action": "Lakukan riset lebih mendalam sebelum menggunakan klaim penting dalam naskah.",
+        })
+    if discovery_count:
+        gaps.append({
+            "severity": "INFO",
+            "gap": f"Ada {discovery_count} lead pencarian/RSS yang tetap terpisah dari bukti klaim.",
+            "next_action": "Buka sumber asli dan verifikasi isi, konteks, tanggal, serta dukungannya; judul/snippet saja tidak cukup.",
+        })
+    verified = sum(c.status == "VERIFIED" for c in claims)
+    probable = sum(c.status == "PROBABLE" for c in claims)
+    disputed = sum(c.status == "DISPUTED" for c in claims)
+    if not claims or verified == 0:
+        status, summary = "INSUFFICIENT_EVIDENCE", "Belum ada klaim terverifikasi; dossier ini mengarahkan riset, bukan menjadi dasar klaim final."
+    elif disputed:
+        status, summary = "CONTRADICTIONS_REQUIRE_REVIEW", "Ada klaim yang diperselisihkan; selesaikan atau tampilkan perbedaan bukti secara eksplisit."
+    elif probable or verified < len(claims) or not primary:
+        status, summary = "PARTIAL_EVIDENCE", "Sebagian bukti tersedia, tetapi masih ada klaim yang memerlukan corroboration atau sumber primer."
+    else:
+        status, summary = "EVIDENCE_REVIEW_REQUIRED", "Klaim berstatus VERIFIED menurut heuristik; tinjauan editorial tetap wajib sebelum produksi."
+    return {
+        "research_readiness": {
+            "status": status, "summary": summary, "claim_count": len(claims),
+            "verified_claims": verified, "probable_claims": probable, "disputed_claims": disputed,
+            "supporting_claims": sum(c.status in {"VERIFIED", "PROBABLE"} for c in claims),
+            "primary_source_count": len(primary), "supporting_evidence_count": len(supporting),
+            "discovery_leads_excluded": discovery_count, "depth": depth,
+            "is_publication_approval": False,
+        },
+        "claim_coverage": coverage,
+        "evidence_gaps": gaps,
+    }
 
 
 class DossierGenerator:
@@ -791,6 +933,8 @@ class DossierGenerator:
             discovery_record(item) for item in web_evidence
         ][:20]
 
+        evidence_report = _build_evidence_gap_report(claims, all_evidence, all_data_points, len(all_discoveries), depth)
+
         return ResearchDossier(
             topic=topic,
             research_question=f"Mengapa fenomena {topic} terjadi dan bagaimana dampak nyatanya terhadap manusia?",
@@ -809,6 +953,9 @@ class DossierGenerator:
             evidence_strength=evidence_strength,
             epistemic_status=epistemic_status,
             research_intelligence=research_intelligence,
+            evidence_gaps=evidence_report["evidence_gaps"],
+            claim_coverage=evidence_report["claim_coverage"],
+            research_readiness=evidence_report["research_readiness"],
         )
 
     @staticmethod
