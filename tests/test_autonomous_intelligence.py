@@ -111,6 +111,55 @@ class TestIdeaDiscovery(unittest.TestCase):
         self.assertEqual(result["candidates"][0]["niche_decision"], "QUALIFIED")
         self.assertTrue(result["safety"]["feed_items_are_discovery_only"])
 
+    def test_topic_memory_indexes_more_than_120_markdown_files(self):
+        from engine.editorial.idea_discovery import _read_existing_content
+
+        with TemporaryDirectory() as td:
+            output = Path(td) / "output"
+            output.mkdir()
+            for index in range(125):
+                (output / f"topic-{index:03d}.md").write_text(
+                    f"# Historical topic {index}\n\nContent for topic {index}.",
+                    encoding="utf-8",
+                )
+            indexed = _read_existing_content(Path(td))
+        self.assertEqual(len(indexed), 125)
+        self.assertIn("Historical topic 124", indexed)
+
+    def test_discovery_exposes_duplicate_reason_in_memory_summary(self):
+        rss = FakeRSS([FakeFeedItem(title="Kenapa harga rumah di pinggiran kota terus berubah?")])
+        with TemporaryDirectory() as td:
+            output = Path(td) / "output"
+            output.mkdir()
+            (output / "old-topic.md").write_text(
+                "# Kenapa harga rumah di pinggiran kota terus berubah?\n", encoding="utf-8"
+            )
+            result = IdeaDiscoveryEngine(rss_service=rss, repo_root=Path(td)).discover(
+                count=1, include_evergreen_fallback=False
+            )
+        self.assertEqual(result["count_returned"], 0)
+        self.assertEqual(result["topic_memory"]["indexed_titles"], 1)
+        self.assertEqual(result["topic_memory"]["omitted_candidates"], 1)
+        duplicate = result["topic_memory"]["examples"][0]
+        self.assertGreaterEqual(duplicate["similarity"], 0.72)
+        self.assertIn("Near-duplicate", duplicate["reason"])
+
+    def test_candidate_serializes_discovery_provenance_and_overlap_fields(self):
+        rss = FakeRSS([FakeFeedItem(
+            title="Kenapa banyak minimarket berdiri berdekatan dan memengaruhi pilihan konsumen?",
+            source_name="Test Feed",
+            canonical_url="https://example.com/provenance",
+        )])
+        with TemporaryDirectory() as td:
+            result = IdeaDiscoveryEngine(rss_service=rss, repo_root=Path(td)).discover(
+                count=1, include_evergreen_fallback=False
+            )
+        candidate = result["candidates"][0]
+        self.assertEqual(candidate["origin_kind"], "rss_feed")
+        self.assertEqual(candidate["epistemic_role"], "discovery_only")
+        self.assertIn("memory_overlap_reason", candidate)
+        self.assertIn("source_url", candidate)
+
     def test_discovery_ranks_candidates_and_preserves_evidence_boundary(self):
         published = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
         rss = FakeRSS([
