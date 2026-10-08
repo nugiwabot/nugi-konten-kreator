@@ -12,7 +12,7 @@ def _read(path):
         return {}
 
 
-def build_editorial_learning_record(workspace_dir):
+def build_editorial_learning_record(workspace_dir, generated_at=None):
     ws = Path(workspace_dir).resolve()
     manifest = _read(ws / "manifest.json")
     qa = _read(ws / "final_qa.json")
@@ -63,7 +63,7 @@ def build_editorial_learning_record(workspace_dir):
             media_counts[status] = media_counts.get(status, 0) + 1
     return {
         "schema_version": 1,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": generated_at or datetime.now(timezone.utc).isoformat(),
         "run_id": manifest.get("run_id", ""),
         "topic": manifest.get("topic", ""),
         "learning_status": "HUMAN_FEEDBACK_RECORDED" if feedback_valid else "WAITING_FOR_HUMAN_FEEDBACK",
