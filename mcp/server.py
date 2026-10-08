@@ -65,7 +65,7 @@ workflow_service = WorkflowService(REPO_ROOT)
 # Initialize FastMCP Server with Network and Stdio capability
 mcp = FastMCP(
     "nugi-konten-kreator",
-    instructions="Controlled semantic interface for Nugi Konten Kreator repository.",
+    instructions="Controlled semantic interface for Nugi Konten Kreator repository. Use nugi_performance_director after a finished script needs vocal delivery coaching; preserve the script wording and add pitch, pace, emphasis, pause, delivery and rationale cues.",
     host=HOST,
     port=PORT,
 )
@@ -224,6 +224,69 @@ def research_fact_check(
             dossier_data = json.loads(dp.read_text(encoding="utf-8"))
 
     return audit_script_with_dossier(script_text, dossier_data)
+
+
+@mcp.tool(name="nugi_performance_director")
+def performance_director(
+    script_text_or_path: str,
+    output_folder: Optional[str] = None,
+    include_legend: bool = True,
+) -> Dict[str, Any]:
+    """
+    Convert a finished script into a vocal-performance learning sheet.
+    Preserve wording; add pitch, pace, emphasis, pauses, delivery intent and rationale.
+    """
+    candidate = script_text_or_path.strip()
+    script_text = candidate
+    source_name = "inline-script"
+
+    if "\n" not in candidate and "\r" not in candidate:
+        try:
+            safe_p = resolve_safe_path(REPO_ROOT, candidate)
+        except SecurityError:
+            safe_p = None
+        if safe_p is not None and safe_p.is_file():
+            script_text = safe_p.read_text(encoding="utf-8")
+            source_name = str(safe_p.relative_to(REPO_ROOT)).replace("\\", "/")
+
+    from engine.performance.performance_director import (
+        annotate_script,
+        render_annotated,
+        render_clean,
+    )
+
+    doc = annotate_script(script_text, source_name=source_name)
+    annotated_text = render_annotated(doc, include_legend=include_legend)
+    clean_text = render_clean(doc)
+
+    result: Dict[str, Any] = {
+        "status": "ok",
+        "source": source_name,
+        "segments": len(doc.cues),
+        "performance_plan": doc.to_dict(),
+        "script_performance": annotated_text,
+        "script_teleprompter": clean_text,
+    }
+
+    if output_folder:
+        out_dir = resolve_safe_path(REPO_ROOT, f"output/{output_folder}")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        annotated = out_dir / "script_performance.md"
+        teleprompter = out_dir / "script_teleprompter.txt"
+        plan = out_dir / "performance_plan.json"
+        annotated.write_text(annotated_text, encoding="utf-8")
+        teleprompter.write_text(clean_text, encoding="utf-8")
+        plan.write_text(
+            json.dumps(doc.to_dict(), ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        result["files"] = [
+            str(annotated.relative_to(REPO_ROOT)),
+            str(teleprompter.relative_to(REPO_ROOT)),
+            str(plan.relative_to(REPO_ROOT)),
+        ]
+
+    return result
 
 
 @mcp.tool(name="nugi_visual_research")
