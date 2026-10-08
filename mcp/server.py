@@ -74,6 +74,24 @@ mcp = FastMCP(
 # 0. UNIFIED HIGH-LEVEL CONTENT INTELLIGENCE WORKFLOWS (Core MCP Surface)
 # ------------------------------------------------------------------------------
 
+@mcp.tool(name="nugi_request_plan")
+def request_plan(request: str) -> Dict[str, Any]:
+    """Resolve a minimal natural-language instruction into a safe execution plan."""
+    from engine.intelligence.request_intent import resolve_request
+
+    resolved = resolve_request(request)
+    return {"status": "ok", "request_plan": resolved.to_dict()}
+
+
+@mcp.tool(name="nugi_idea_discover")
+def idea_discover(count: int = 5) -> Dict[str, Any]:
+    """Discover and rank content opportunities using Nugi intelligence sources."""
+    from engine.editorial.idea_discovery import IdeaDiscoveryEngine
+
+    engine = IdeaDiscoveryEngine(repo_root=REPO_ROOT)
+    return engine.discover(count=count)
+
+
 @mcp.tool(name="nugi_content_create")
 def content_create(
     topic: str,
@@ -88,27 +106,50 @@ def content_create(
     install_to_capcut: bool = False,
 ) -> Dict[str, Any]:
     """
-    Master Autonomous Content Production Workflow for Nugi.
-    Orchestrates end-to-end:
-      Executive Producer Plan -> Editorial Qualification -> Deep Research & Dossier ->
-      Story Plan -> Script (Duration-Aware) -> Fact-Check (4-State) -> Visual Blueprint ->
-      B-roll Retrieval & Local Reuse -> Subtitles -> Native CapCut Desktop Draft -> Final Artifact QA
+    Master autonomous content production entry point.
+
+    The user may provide a fully specified topic or a sparse natural-language
+    instruction. Missing format, duration, research depth and production steps
+    are inferred safely. A discovery-only request is routed to idea discovery
+    instead of being mistaken for a literal content topic.
     """
+    from engine.intelligence.request_intent import resolve_request
     from engine.production.production_orchestrator import ProductionOrchestrator
-    orchestrator = ProductionOrchestrator(repo_root=REPO_ROOT)
-    result = orchestrator.run(
-        topic_or_prompt=topic,
-        output_folder=output_folder,
+
+    resolved = resolve_request(
+        topic,
         format_hint=format,
         duration_hint=duration_seconds,
-        depth=depth,
+        depth_hint=depth,
+        recency_hint=recency,
+    )
+
+    if resolved.intent == "DISCOVER_CONTENT":
+        from engine.editorial.idea_discovery import IdeaDiscoveryEngine
+        return IdeaDiscoveryEngine(repo_root=REPO_ROOT).discover(count=resolved.requested_count)
+
+    effective_topic = resolved.topic or topic
+    effective_duration = duration_seconds if duration_seconds is not None else resolved.duration_seconds
+    effective_format = resolved.format
+    effective_depth = resolved.research_depth
+    effective_recency = recency or resolved.recency
+
+    orchestrator = ProductionOrchestrator(repo_root=REPO_ROOT)
+    result = orchestrator.run(
+        topic_or_prompt=effective_topic,
+        output_folder=output_folder,
+        format_hint=effective_format,
+        duration_hint=effective_duration,
+        depth=effective_depth,
         dry_run=dry_run,
         stage_limit=stage_limit,
         max_broll_shots=max_broll_shots,
         install_to_capcut=install_to_capcut,
-        recency=recency,
+        recency=effective_recency,
     )
-    return result.to_dict()
+    payload = result.to_dict()
+    payload["request_plan"] = resolved.to_dict()
+    return payload
 
 
 @mcp.tool(name="nugi_research_deep")
