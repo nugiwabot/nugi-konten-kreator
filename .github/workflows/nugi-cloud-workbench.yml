@@ -1,0 +1,92 @@
+name: Nugi Cloud Workbench
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Cloud operation to run"
+        required: true
+        type: choice
+        default: preflight
+        options:
+          - preflight
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nugi-cloud-workbench-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: ${{ inputs.operation == 'preflight' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Inspect cloud readiness without running production
+        shell: bash
+        run: |
+          set -euo pipefail
+          report="cloud-preflight-report.md"
+          {
+            echo "# Nugi Cloud Workbench — Preflight"
+            echo
+            echo "- Run ID: ${GITHUB_RUN_ID}"
+            echo "- Commit: ${GITHUB_SHA}"
+            echo "- Python: $(python --version 2>&1)"
+            echo
+            echo "## Required source files"
+            for path in \
+              engine/editorial/idea_discovery.py \
+              engine/pipeline/research_dossier.py \
+              engine/pipeline/media_finder.py \
+              engine/editorial/script_synthesizer.py \
+              engine/config.py; do
+              if [[ -f "$path" ]]; then
+                echo "- PASS: `$path` exists"
+              else
+                echo "- FAIL: `$path` is missing"
+                exit 1
+              fi
+            done
+            echo
+            echo "## Dependency manifests"
+            found=0
+            for path in requirements.txt pyproject.toml setup.py Pipfile poetry.lock; do
+              if [[ -f "$path" ]]; then
+                echo "- FOUND: `$path`"
+                found=1
+              fi
+            done
+            if [[ "$found" -eq 0 ]]; then
+              echo "- BLOCKER: no standard root Python dependency manifest was found."
+            fi
+            echo
+            echo "## Local-service configuration"
+            echo "- EMBEDDING_URL default: `http://192.168.0.114:1234/v1/embeddings`"
+            echo "- RERANKER_URL default: `http://192.168.0.114:8080/v1/rerank`"
+            echo "- These office-LAN endpoints are not called by this preflight."
+            echo
+            echo "## Scope guard"
+            echo "- This run only inspects repository readiness."
+            echo "- No content discovery, research, script generation, media download, subtitle, or CapCut step was executed."
+            echo "- Cloud content operations remain disabled until their dependency/runtime path is tested in a later stage."
+          } > "$report"
+          cat "$report"
+
+      - name: Upload preflight report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nugi-cloud-preflight-${{ github.run_id }}
+          path: cloud-preflight-report.md
+          if-no-files-found: error
+          retention-days: 7
