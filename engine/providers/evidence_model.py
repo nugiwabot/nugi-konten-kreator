@@ -310,8 +310,22 @@ class Claim:
 
         # Deduplicate evidence lineage to prevent syndicated repetition from inflating corroboration
         lineage_map: Dict[str, List[EvidenceItem]] = {}
+        headline_roots: Dict[str, str] = {}
+        roots_by_item: Dict[int, str] = {}
         for e in self.supporting_evidence:
-            root = e.lineage_root or (e.source.url if e.source.url else e.source.publisher)
+            metadata_root = str(e.source.metadata.get("lineage_root") or e.source.metadata.get("syndicated_from") or "")
+            normalized_title = re.sub(r"[^a-z0-9]+", " ", (e.source.title or "").lower()).strip()
+            if metadata_root:
+                root = metadata_root
+            elif normalized_title and normalized_title in headline_roots:
+                # Exact same normalized headlines from different outlet URLs
+                # are conservatively treated as one potential wire lineage.
+                root = headline_roots[normalized_title]
+            else:
+                root = e.lineage_root or (e.source.url if e.source.url else e.source.publisher)
+                if normalized_title:
+                    headline_roots[normalized_title] = root
+            roots_by_item[id(e)] = root
             lineage_map.setdefault(root, []).append(e)
 
         self.lineage_roots = list(lineage_map.keys())
@@ -322,7 +336,7 @@ class Claim:
         # independent corroboration, whether primary sources or reputable
         # reporting; one source alone can only make a claim PROBABLE.
         auth_lineages = {
-            e.lineage_root or (e.source.url if e.source.url else e.source.publisher)
+            roots_by_item[id(e)]
             for e in self.supporting_evidence
             if e.source.tier.rank <= 2
         }

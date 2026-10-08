@@ -49,6 +49,8 @@ htmlcov/
 *.pdf
 *.epub
 engine/data/*.json
+!engine/data/feed_registry.json
+!engine/data/media_provider_capabilities.json
 !engine/data/.gitkeep
 
 # AI Workspace Lock — machine-local state & ACL backups

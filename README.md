@@ -43,6 +43,40 @@ pipeline, or state store.
   not statistical confidence.
 - OpenAlex/Crossref citation counts remain source metadata, not topical data.
   The BPS adapter returns no evidence until live BPS retrieval is implemented.
+- PubMed and Europe PMC abstracts are stored as research-discovery leads; they
+  are not quotes or claim support. Web-search and GDELT article-list results
+  are discovery-only as well. Source headlines never become verified claims.
+
+## Research and media providers
+
+The committed `engine/data/feed_registry.json` seeds RSS/Atom discovery with
+ANTARA, BBC, NASA Photojournal, BRIN, USGS Earthquakes, and The Guardian. Feed
+items are bounded, cached leads only. RSSHub remains optional and uses only an
+explicitly configured self-hosted endpoint. `FeedRegistry.import_opml_to_file`
+can merge an OPML file into a registry; new feeds remain disabled until
+reviewed.
+
+MediaFinder routes Wikimedia Commons, Internet Archive, Library of Congress,
+Openverse, DPLA, Europeana, NASA Images, and DVIDS using the committed capability
+matrix. Pexafy remains an optional stock fallback and is excluded from
+`REAL_REQUIRED`. Openverse and NASA work without credentials; DPLA,
+Europeana, and DVIDS need `DPLA_API_KEY`, `EUROPEANA_API_KEY`, and
+`DVIDS_API_KEY`. PubMed and Europe PMC need no key; optional `PUBMED_API_KEY`,
+`NCBI_TOOL`, and `NCBI_EMAIL` configure NCBI E-utilities. See `.env.example`.
+
+Every media result retains its landing page, direct/preview URL, rights status,
+license URL, creator/credit, retrieval query, provider role, matched context,
+and selection reason. Ambiguous rights remain discovery-only and cannot be
+automatically downloaded. DVIDS API terms permit commercial use of API media;
+item credit and source links are retained. NASA results remain non-reusable
+unless item metadata gives an explicit reusable rights signal.
+
+Visual verification is an injectable interface that runs on at most the top
+five results for `REAL_REQUIRED` or entity-specific `REAL_PREFERRED` shots. No
+vision model endpoint is configured, so the default state is
+`VISUAL_UNKNOWN`; text metadata ranking is never described as pixel-level
+verification. Future shots are labelled as forecast, research-backed,
+projection, concept, speculative, or generated, and marked illustrative.
 
 ## CapCut status
 

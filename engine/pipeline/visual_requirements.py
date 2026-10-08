@@ -60,6 +60,7 @@ class VisualShotRequirement:
     entity_type: str = ""
     entities: List[str] = field(default_factory=list)
     era: str = "auto"
+    future_mode: str = ""  # FORECAST, RESEARCH_BACKED, PROJECTION, CONCEPT, SPECULATIVE, GENERATED
     source_role: str = GENERIC_ATMOSPHERE
     motion_spec: Optional[Dict[str, Any]] = None
     search_required: bool = True
@@ -119,6 +120,41 @@ _STAT_PATTERNS = [
     re.compile(r"\b(populasi|harga rumah|biaya hidup|data statistik|angka kemiskinan|pertumbuhan ekonomi|pdb|inflasi|penjualan)\b.*\b(meningkat|melonjak|naik|turun|berlipat|tumbuh)\b", re.IGNORECASE),
     re.compile(r"\b(meningkat|melonjak|tumbuh)\s+dua\s+kali\s+lipat\b", re.IGNORECASE),
 ]
+
+
+_FUTURE_MODE_CUES = {
+    "FORECAST": ("forecast", "forecasts", "ramalan", "prakiraan"),
+    "RESEARCH_BACKED": ("research-backed", "research backed", "berdasarkan riset", "didukung riset"),
+    "PROJECTION": ("projection", "projected", "proyeksi", "diproyeksikan"),
+    "SPECULATIVE": ("speculative", "speculation", "spekulatif", "spekulasi"),
+    "GENERATED": ("generated", "ai-generated", "imagined", "rekaan", "buatan ai"),
+    "CONCEPT": ("concept", "conceptual", "konsep", "futuristic", "futuristik", "masa depan", "future"),
+}
+
+
+def classify_future_intent(text: str) -> str:
+    """Label future-oriented visuals so illustrative media is never future evidence."""
+    lower = (text or "").lower()
+    for mode in ("FORECAST", "RESEARCH_BACKED", "PROJECTION", "SPECULATIVE", "GENERATED", "CONCEPT"):
+        if any(cue in lower for cue in _FUTURE_MODE_CUES[mode]):
+            return mode
+    return ""
+
+
+def classify_visual_era(text: str) -> str:
+    """Classify a shot's stated time context without interpreting visuals as proof."""
+    lower = (text or "").lower()
+    future_cues = (
+        "future", "futuristic", "masa depan", "futuristik", "speculative", "spekulatif",
+        "near-future", "forecast", "ramalan", "prakiraan", "projection", "proyeksi",
+    )
+    if re.search(r"\b20(?:3[0-9]|[4-9][0-9])\b", lower) or any(cue in lower for cue in future_cues):
+        return "future"
+    if any(cue in lower for cue in ("hari ini", "saat ini", "sekarang", "today", "current", "present day", "kontemporer")):
+        return "present"
+    if any(cue in lower for cue in ("sejarah", "historical", "historic", "masa lalu", "zaman", "abad", "archival", "arsip", "perang dunia")) or re.search(r"\b(1[6-9][0-9]{2}|20[0-2][0-9])\b", lower):
+        return "historical"
+    return "timeless"
 
 
 def extract_entities(text: str) -> List[Dict[str, str]]:
@@ -438,6 +474,8 @@ class VisualRequirementsGenerator:
 
         keywords = self._extract_keywords(sec.text)
         v_req, v_type, ents, m_spec, s_role = classify_visual_requirement(sec.text)
+        visual_era = classify_visual_era(sec.text)
+        future_mode = classify_future_intent(sec.text) if visual_era == "future" else ""
         human_map = analyze_human_relatability(sec.text)
         ent_names = [e["name"] for e in ents]
         primary_ent_type = ents[0]["type"] if ents else ""
@@ -489,6 +527,8 @@ class VisualRequirementsGenerator:
                     entity_type=primary_ent_type,
                     entities=ent_names,
                     source_role=s_role,
+                    era=visual_era,
+                    future_mode=future_mode,
                     motion_spec=m_spec,
                     search_required=(v_req not in (NO_BROLL, REMOTION_REQUIRED)),
                     primary_human_basic_need=human_map["human_basic_need"],

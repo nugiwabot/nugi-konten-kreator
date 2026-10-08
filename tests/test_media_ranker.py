@@ -199,10 +199,10 @@ class TestMediaRankerFinalRankComputation(unittest.TestCase):
         item.embedding_similarity = 0.8
         item.is_generic = True
         result = self.ranker._compute_final_rank([item], emb_ok=True, rer_ok=False)
-        self.assertEqual(result[0].generic_penalty, 0.12)
+        self.assertEqual(result[0].generic_penalty, 0.28)
         self.assertEqual(result[0].semantic_score, 0.8)
         self.assertEqual(result[0].contextual_score, 0.0)
-        self.assertAlmostEqual(result[0].reranker_score, 0.56, places=2)
+        self.assertAlmostEqual(result[0].reranker_score, 0.40, places=2)
 
 
 if __name__ == "__main__":

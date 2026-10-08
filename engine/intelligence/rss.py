@@ -102,6 +102,8 @@ class FeedEventCluster:
     items: List[FeedItem]
     source_count: int
     source_diversity: int
+    lineage_roots: List[str] = field(default_factory=list)
+    lineage_method: str = "conservative_headline_and_byline_heuristic"
     corroboration: str = "DISCOVERY_ONLY"
     conflicting_claims: List[str] = field(default_factory=list)
 
@@ -313,7 +315,13 @@ class FeedRegistry:
         matched = [s for s in enabled if tokens.intersection({tag.lower() for tag in s.tags + [s.category, s.region, s.country]})]
         # Keep at least general-news sources for a current-event request.
         general = [s for s in enabled if s.category.lower() in {"news", "general_news", "science", "research"}]
-        return list(dict.fromkeys(matched + general))
+        result: List[FeedSource] = []
+        seen_ids = set()
+        for source in matched + general:
+            if source.id not in seen_ids:
+                seen_ids.add(source.id)
+                result.append(source)
+        return result
 
     def import_opml(self, payload: bytes, *, default_trust_tier: str = "S4") -> List[FeedSource]:
         """Parse OPML outline feeds into disabled-by-default source definitions."""
@@ -335,6 +343,35 @@ class FeedRegistry:
                 name=name[:120], feed_url=url, route_type="direct", trust_tier=default_trust_tier,
                 rights_policy="editorial_discovery_only", evidence_role="discovery_only", enabled=False,
             ))
+        return imported
+
+    def save_file(self, path: Optional[Path] = None) -> Path:
+        """Persist the current registry as UTF-8 JSON."""
+        path = path or DEFAULT_REGISTRY
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {"version": 1, "description": "Curated, extensible RSS/Atom source catalog. Feed content is discovery only.",
+                   "sources": [asdict(source) for source in self.sources]}
+        temp_path = path.with_suffix(path.suffix + ".tmp")
+        temp_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        temp_path.replace(path)
+        return path
+
+    def import_opml_to_file(
+        self,
+        payload: bytes,
+        *,
+        path: Optional[Path] = None,
+        default_trust_tier: str = "S4",
+    ) -> List[FeedSource]:
+        """Merge OPML feeds into a registry with imported rows disabled by default."""
+        imported = self.import_opml(payload, default_trust_tier=default_trust_tier)
+        by_id = {source.id: source for source in self.sources}
+        for source in imported:
+            # A repeated OPML import updates the same disabled entry, never
+            # silently enabling a newly supplied feed URL.
+            by_id.setdefault(source.id, source)
+        self.sources = list(by_id.values())
+        self.save_file(path)
         return imported
 
 
@@ -568,6 +605,48 @@ def _source_domain(item: FeedItem) -> str:
     return host.lower().removeprefix("www.")
 
 
+def _headline_lineage(item: FeedItem) -> str:
+    """Estimate syndicated lineage conservatively from explicit markers/bylines."""
+    text = f"{item.title} {item.description} {item.content}".lower()
+    wire_markers = {
+        "reuters": ("reuters",),
+        "associated_press": ("associated press", "ap news", "ap photo"),
+        "afp": ("agence france-presse", "afp"),
+    }
+    for wire, markers in wire_markers.items():
+        if any(marker in text for marker in markers):
+            return f"wire:{wire}"
+    authors = sorted({re.sub(r"[^a-z0-9]+", " ", author.lower()).strip() for author in item.authors if author.strip()})
+    normalized_title = re.sub(r"[^a-z0-9]+", " ", item.title.lower()).strip()
+    if authors:
+        return f"byline:{authors[0]}:{normalized_title}"
+    return f"headline:{normalized_title}"
+
+
+def _headline_conflicts(group: Sequence[FeedItem]) -> List[str]:
+    conflicts: List[str] = []
+    directions = {
+        "up": ("rise", "rises", "rose", "increase", "increases", "increased", "naik", "meningkat", "melonjak"),
+        "down": ("fall", "falls", "fell", "decrease", "decreases", "decreased", "turun", "menurun", "merosot"),
+    }
+    observed = set()
+    numeric = {}
+    for item in group:
+        title = item.title.lower()
+        for direction, cues in directions.items():
+            if any(cue in title for cue in cues):
+                observed.add(direction)
+        for value, unit in re.findall(r"\b(\d+(?:[.,]\d+)?)\s*(%|percent|juta|million|billion|units?|people|cases?)\b", title):
+            numeric.setdefault(unit, set()).add(value.replace(",", "."))
+    if len(observed) > 1:
+        conflicts.append("Headlines use opposite increase/decrease language; verify against primary sources.")
+    for unit, values in numeric.items():
+        if len(values) > 1:
+            conflicts.append(f"Headlines contain differing numeric values for unit '{unit}'; verify against primary sources.")
+            break
+    return conflicts
+
+
 def cluster_feed_items(items: Sequence[FeedItem]) -> List[FeedEventCluster]:
     """Cluster near-identical headlines without treating syndication as corroboration."""
     clusters: List[List[FeedItem]] = []
@@ -587,12 +666,16 @@ def cluster_feed_items(items: Sequence[FeedItem]) -> List[FeedEventCluster]:
     for index, group in enumerate(clusters, 1):
         title = group[0].title
         sources = sorted({_source_domain(item) for item in group})
+        roots = sorted({_headline_lineage(item) for item in group})
         published = min((item.published_at for item in group if item.published_at), default="")
         entities = sorted({entity for item in group for entity in re.findall(r"\b[A-Z][\w-]{2,}(?:\s+[A-Z][\w-]{2,})*", item.title)})
+        locations = sorted({match.group(1) for item in group for match in re.finditer(r"\b(?:in|at|near|di|ke|dari)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})", item.title)})
         results.append(FeedEventCluster(
             id=f"event_{index:03d}", canonical_event=title,
             published_at=published, related_entities=entities,
-            locations=[], items=list(group), source_count=len(sources), source_diversity=len(sources),
+            locations=locations, items=list(group), source_count=len(sources), source_diversity=len(roots),
+            lineage_roots=roots,
             corroboration="DISCOVERY_ONLY",
+            conflicting_claims=_headline_conflicts(group),
         ))
     return results

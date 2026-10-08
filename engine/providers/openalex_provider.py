@@ -100,7 +100,9 @@ class OpenAlexProvider(ResearchProvider):
                         metadata={
                             "cited_by_count": cited_by,
                             "concepts": concepts,
-                            "openalex_id": work_id
+                            "openalex_id": work_id,
+                            "evidence_role": "ABSTRACT_RESEARCH_DISCOVERY",
+                            "abstract_is_not_a_quote": True,
                         }
                     )
 

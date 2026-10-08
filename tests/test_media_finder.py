@@ -166,6 +166,15 @@ class TestMediaFinder(unittest.TestCase):
         self.assertEqual(res.total_candidates_found, 0)
         self.assertEqual(len(res.queries), 0)
 
+    def test_candidate_search_results_are_cached_per_provider_query(self):
+        provider = FakeProvider("wikimedia", items=[
+            make_test_item("wikimedia", "Jakarta Archive", url="https://wiki.example/jakarta.jpg")
+        ])
+        finder = MediaFinder(providers=[provider], ranker=FakeRanker(), downloader=FakeDownloader())
+        found = finder._gather_candidates(["Jakarta archive", "Jakarta archive"], [provider], "photo", max_items=10)
+        self.assertEqual(len(found), 1)
+        self.assertEqual(len(provider.searches), 1)
+
     # 2. Formal photo request
     def test_formal_photo_request(self):
         res = self.finder.find(

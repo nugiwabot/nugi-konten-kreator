@@ -46,6 +46,7 @@ from engine.providers.embedding import (
     cosine_similarity,
 )
 from engine.providers.media import MediaItem
+from engine.providers.capabilities import get_provider_capabilities
 from engine.providers.reranker import (
     FallbackRerankerProvider,
     LocalRerankerProvider,
@@ -442,15 +443,27 @@ class MediaRanker:
                 event_match_score = 1.0
 
             # 5. Source Specificity Score
+            profile = get_provider_capabilities(item.provider)
+            provider_role = str(profile.get("source_role", "")).lower()
+            is_archive = any(cue in provider_role for cue in ("archive", "library"))
+            is_official = any(cue in provider_role for cue in ("official", "government", "science"))
+            is_stock = "stock" in provider_role
+            is_open_catalog = "open_media" in provider_role
             is_generic = any(gp in title_lower for gp in generic_title_patterns)
             if is_generic and not matched_names:
                 source_specificity_score = 0.15
                 item.is_generic = True
-            elif item.provider in ("internet_archive", "wikimedia"):
-                source_specificity_score = 0.95 if matched_names else 0.8
+            elif is_archive:
+                source_specificity_score = 0.92 if matched_names else 0.78
                 item.is_archival = True
+            elif is_official:
+                source_specificity_score = 0.82 if matched_names else 0.62
+            elif is_open_catalog:
+                source_specificity_score = 0.72 if matched_names else 0.45
+            elif is_stock:
+                source_specificity_score = 0.48 if matched_names else 0.30
             else:
-                source_specificity_score = 0.6 if matched_names else 0.4
+                source_specificity_score = 0.62 if matched_names else 0.40
 
             # 6. Human Relatability Alignment
             # Scores whether the candidate metadata points toward the same human/lived-life
@@ -548,6 +561,15 @@ class MediaRanker:
             item.event_match_score = round(event_match_score, 4)
             item.source_specificity_score = round(source_specificity_score, 4)
             item.matched_entities = matched_names
+            matched_events = [e["name"] for e in event_entities if e["name"].lower() in text_pool]
+            matched_locations = [e["name"] for e in loc_entities if e["name"].lower() in text_pool]
+            requested_times = [e["name"] for e in entities if e.get("type") in ("DATE", "YEAR", "HISTORICAL_PERIOD")]
+            matched_times = [value for value in requested_times if value.lower() in text_pool]
+            if not matched_times and years_req and years_req[0] in text_pool:
+                matched_times.append(years_req[0])
+            item.metadata["matched_event"] = ", ".join(matched_events)
+            item.metadata["matched_location"] = ", ".join(matched_locations)
+            item.metadata["matched_time"] = ", ".join(matched_times)
 
             if visual_requirement == REAL_REQUIRED:
                 if any(e.get("type") == "DOCUMENT" for e in entities):
@@ -591,7 +613,7 @@ class MediaRanker:
                 0.35 * item.entity_match_score + 0.25 * item.event_match_score
                 + 0.20 * item.location_match_score + 0.20 * item.temporal_match_score, 4
             )
-            item.generic_penalty = 0.12 if item.is_generic and item.contextual_score < 0.35 else 0.0
+            item.generic_penalty = 0.28 if item.is_generic and item.contextual_score < 0.65 else 0.0
 
             if visual_requirement == REAL_REQUIRED:
                 # Authenticity, entity match, and temporal/event match dominate heavily (Section 20)

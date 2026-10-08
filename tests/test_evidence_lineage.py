@@ -83,6 +83,24 @@ def test_independent_evidence_lineages_verify_claim():
     assert claim.confidence_score >= 0.80
 
 
+def test_copied_headlines_from_different_domains_do_not_add_corroboration():
+    headline = "Housing backlog rises as young households struggle"
+    first = EvidenceItem(
+        id="news_a", claim_text="The same wire story", source=Source(
+            url="https://outlet-a.example/story", publisher="Outlet A", tier=SourceTier.S3, title=headline,
+        ), retrieved_snippet="Same story text.",
+    )
+    second = EvidenceItem(
+        id="news_b", claim_text="The same wire story republished", source=Source(
+            url="https://outlet-b.example/story", publisher="Outlet B", tier=SourceTier.S3, title=headline,
+        ), retrieved_snippet="Same story text.",
+    )
+    claim = Claim(id="copied", text="Housing backlog rises", supporting_evidence=[first, second])
+    claim.evaluate_status()
+    assert claim.independent_sources_count == 1
+    assert claim.status == "PROBABLE"
+
+
 def test_dossier_generator_enforces_s0_s7_hierarchy():
     """
     DossierGenerator must sort all evidence so primary/authoritative sources (S0-S2)
@@ -127,6 +145,8 @@ def test_dossier_generator_enforces_s0_s7_hierarchy():
         openalex_provider=FixedProvider([]),
         crossref_provider=FixedProvider([]),
         gdelt_provider=FixedProvider([secondary]),
+        pubmed_provider=FixedProvider([]),
+        europe_pmc_provider=FixedProvider([]),
         web_provider=EmptyWeb(),
     )
     dossier = gen.build_dossier("krisis hunian komuter", max_evidence_per_source=2)

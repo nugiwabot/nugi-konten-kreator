@@ -202,6 +202,38 @@ class TestDownloadBatch(unittest.TestCase):
         asset = data["assets"][0]
         self.assertEqual(asset["license"], "CC BY-SA 4.0")
 
+    def test_sources_json_preserves_context_attribution_and_visual_review(self):
+        item = _make_item(
+            title="Jakarta archive photo",
+            metadata={
+                "attribution": "National Archive / CC BY",
+                "provider_rights_model": "per_asset_license",
+                "matched_event": "Jakarta flood",
+                "matched_location": "Jakarta",
+                "matched_time": "2024",
+                "matched_era": "historical",
+                "visual_verification_status": "VISUALLY_CONSISTENT",
+                "visual_verification_method": "mock",
+                "visual_verification_reason": "landmark is consistent",
+                "semantic_score": 0.81,
+                "contextual_score": 0.75,
+            },
+            matched_entities=["Jakarta"],
+            visual_requirement="REAL_PREFERRED",
+            source_role="DIRECT_CONTEXT",
+        )
+        with patch("urllib.request.urlopen", return_value=self._mock_response(b"DATA")):
+            report = self.dl.download_batch([item], folder="context-metadata-test", count=1)
+
+        with open(report.sources_json_path, "r", encoding="utf-8") as f:
+            asset = json.load(f)["assets"][0]
+        self.assertEqual(asset["attribution"], "National Archive / CC BY")
+        self.assertEqual(asset["provider_rights_model"], "per_asset_license")
+        self.assertEqual(asset["matched_context"]["event"], "Jakarta flood")
+        self.assertEqual(asset["matched_context"]["location"], "Jakarta")
+        self.assertEqual(asset["visual_verification"]["status"], "VISUALLY_CONSISTENT")
+        self.assertEqual(asset["relevance_scores"]["semantic_score"], 0.81)
+
     def test_unknown_rights_are_not_downloaded(self):
         item = _make_item(title="Unclear rights", license="free to view")
         with patch("urllib.request.urlopen") as urlopen:

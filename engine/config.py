@@ -38,6 +38,15 @@ INTERNET_ARCHIVE_API_URL = os.getenv("INTERNET_ARCHIVE_API_URL", "https://archiv
 PEXAFY_MCP_URL = os.getenv("PEXAFY_MCP_URL", "https://mcp.pexafy.com/mcp")
 PEXAFY_API_KEY = os.getenv("PEXAFY_API_KEY", "")
 
+# Optional public-catalog API credentials. Providers with missing required
+# credentials remain available as empty, non-blocking fallbacks.
+DPLA_API_KEY = os.getenv("DPLA_API_KEY", "")
+EUROPEANA_API_KEY = os.getenv("EUROPEANA_API_KEY", "")
+DVIDS_API_KEY = os.getenv("DVIDS_API_KEY", "")
+PUBMED_API_KEY = os.getenv("PUBMED_API_KEY", "")
+NCBI_TOOL = os.getenv("NCBI_TOOL", "NugiContentIntelligence")
+NCBI_EMAIL = os.getenv("NCBI_EMAIL", "")
+
 # RSS / discovery intelligence. All feeds are optional, cached in-process, and
 # discovery-only; an unavailable source does not block research or production.
 RSS_DISCOVERY_ENABLED = os.getenv("RSS_DISCOVERY_ENABLED", "true").lower() in ("true", "1", "yes")

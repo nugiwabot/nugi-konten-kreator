@@ -41,7 +41,9 @@ def test_dossier_save_to_workspace(tmp_path, research_offline):
     assert md_path.stat().st_size > 500
 
 
-def test_recency_reaches_primary_and_contradiction_web_searches():
+def test_recency_reaches_primary_and_contradiction_web_searches(monkeypatch):
+    import engine.pipeline.research_dossier as dossier_module
+    monkeypatch.setattr(dossier_module, "RSS_DISCOVERY_ENABLED", False)
     class EmptyProvider:
         def search_evidence(self, query, max_results=5):
             return []
@@ -60,6 +62,8 @@ def test_recency_reaches_primary_and_contradiction_web_searches():
         openalex_provider=EmptyProvider(),
         crossref_provider=EmptyProvider(),
         gdelt_provider=EmptyProvider(),
+        pubmed_provider=EmptyProvider(),
+        europe_pmc_provider=EmptyProvider(),
         web_provider=web,
     )
     dossier = generator.build_dossier("urbanisasi", depth="deep", recency="w")
@@ -99,6 +103,8 @@ def test_rss_leads_are_serialized_separately_from_dossier_evidence(monkeypatch):
         openalex_provider=EmptyProvider(),
         crossref_provider=EmptyProvider(),
         gdelt_provider=EmptyProvider(),
+        pubmed_provider=EmptyProvider(),
+        europe_pmc_provider=EmptyProvider(),
         web_provider=EmptyWeb(),
     )
     dossier = generator.build_dossier("Jakarta flood response", depth="quick")
@@ -108,6 +114,72 @@ def test_rss_leads_are_serialized_separately_from_dossier_evidence(monkeypatch):
     assert restored.research_intelligence["evidence_status"] == "DISCOVERY_ONLY"
     assert restored.evidence_items == []
     assert "RSS DISCOVERY LEADS (NOT VERIFIED EVIDENCE)" in restored.to_markdown()
+
+
+def test_web_search_snippets_are_separate_discovery_leads(monkeypatch):
+    import engine.pipeline.research_dossier as dossier_module
+    monkeypatch.setattr(dossier_module, "RSS_DISCOVERY_ENABLED", False)
+    class EmptyProvider:
+        def search_evidence(self, query, max_results=5):
+            return []
+
+    class SearchLeadWeb:
+        def search(self, query, recency=None, max_results=5):
+            return [{"title": "Jakarta transit report", "url": "https://example.org/report",
+                     "publisher": "Example", "content": "A search snippet about Jakarta public transit."}]
+
+    generator = DossierGenerator(
+        bps_provider=EmptyProvider(), openalex_provider=EmptyProvider(),
+        crossref_provider=EmptyProvider(), gdelt_provider=EmptyProvider(),
+        pubmed_provider=EmptyProvider(), europe_pmc_provider=EmptyProvider(), web_provider=SearchLeadWeb(),
+    )
+    dossier = generator.build_dossier("Jakarta public transit", depth="quick")
+    assert dossier.evidence_items == []
+    assert dossier.claims == []
+    assert dossier.research_intelligence["web_discoveries"][0]["evidence_status"] == "DISCOVERY_ONLY"
+    assert "NOT CLAIM EVIDENCE" in dossier.to_markdown()
+
+
+def test_rss_escalation_queries_trigger_structured_research_providers(monkeypatch):
+    from engine.intelligence.rss import FeedItem
+    import engine.pipeline.research_dossier as dossier_module
+
+    class EmptyProvider:
+        def search_evidence(self, query, max_results=5):
+            return []
+
+    class SearchSpy(EmptyProvider):
+        def __init__(self):
+            self.queries = []
+
+        def search_evidence(self, query, max_results=5):
+            self.queries.append(query)
+            return []
+
+    class EmptyWeb:
+        def search(self, query, recency=None, max_results=5):
+            return []
+
+    feed_item = FeedItem(
+        source_id="wire", source_name="Wire", feed_url="https://wire.example/rss",
+        title="Jakarta earthquake relief report", canonical_url="https://wire.example/story",
+    )
+
+    class RSS:
+        def discover(self, query, max_items=25):
+            return [feed_item]
+
+    monkeypatch.setattr(dossier_module, "RSS_DISCOVERY_ENABLED", True)
+    monkeypatch.setattr(dossier_module, "RSSDiscoveryService", RSS)
+    pubmed, europe = SearchSpy(), SearchSpy()
+    generator = DossierGenerator(
+        bps_provider=EmptyProvider(), openalex_provider=EmptyProvider(), crossref_provider=EmptyProvider(),
+        gdelt_provider=EmptyProvider(), pubmed_provider=pubmed, europe_pmc_provider=europe, web_provider=EmptyWeb(),
+    )
+    dossier = generator.build_dossier("Jakarta earthquake", depth="quick")
+    assert any("Jakarta earthquake relief report" in query for query in pubmed.queries[1:])
+    assert any("Jakarta earthquake relief report" in query for query in europe.queries[1:])
+    assert dossier.evidence_items == []
 
 
 def test_script_does_not_assert_data_or_causality_without_research(research_offline):

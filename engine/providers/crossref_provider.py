@@ -89,7 +89,7 @@ class CrossrefProvider(ResearchProvider):
                         reliability="HIGH",
                         is_primary=True,
                         author=author_str,
-                        metadata={"doi": doi, "citations": citations}
+                        metadata={"doi": doi, "citations": citations, "evidence_role": "BIBLIOGRAPHIC_DISCOVERY"}
                     )
 
                     evidence = EvidenceItem(

@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "providers": {
+    "wikimedia": {
+      "capabilities": [
+        "historical_photo",
+        "historical_video",
+        "modern_photo",
+        "open_license",
+        "provenance",
+        "direct_download"
+      ],
+      "media_types": [
+        "image",
+        "video"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "future",
+        "timeless"
+      ],
+      "source_role": "archive_and_open_media",
+      "subject_domains": [
+        "general",
+        "history",
+        "culture",
+        "science",
+        "geography"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "per_asset_license_metadata",
+      "commercial_reuse_policy": "license_dependent",
+      "download_capability": true,
+      "api_type": "public_api",
+      "rate_limit": "respect_api_response_and_retry_after",
+      "requires_key": false,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 1,
+        "historical_video": 3,
+        "present_photo": 1,
+        "present_video": 2,
+        "future_photo": 2,
+        "future_video": 2,
+        "generic_photo": 1,
+        "generic_video": 2
+      }
+    },
+    "internet_archive": {
+      "capabilities": [
+        "historical_photo",
+        "historical_video",
+        "modern_video",
+        "provenance",
+        "direct_download"
+      ],
+      "media_types": [
+        "image",
+        "video"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "future",
+        "timeless"
+      ],
+      "source_role": "digital_archive",
+      "subject_domains": [
+        "general",
+        "history",
+        "culture",
+        "science"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "item_level_license_metadata_may_be_missing",
+      "commercial_reuse_policy": "license_dependent_or_discovery_only",
+      "download_capability": true,
+      "api_type": "public_metadata_api",
+      "rate_limit": "polite_requests_with_backoff",
+      "requires_key": false,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 2,
+        "historical_video": 1,
+        "present_photo": 3,
+        "present_video": 1,
+        "future_photo": 3,
+        "future_video": 1,
+        "generic_photo": 3,
+        "generic_video": 1
+      }
+    },
+    "loc": {
+      "capabilities": [
+        "historical_photo",
+        "official_archive",
+        "metadata",
+        "rights_advisory"
+      ],
+      "media_types": [
+        "image"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "timeless"
+      ],
+      "source_role": "national_library_archive",
+      "subject_domains": [
+        "history",
+        "culture",
+        "government",
+        "geography"
+      ],
+      "geographic_scope": "global_collection_us_focused",
+      "rights_model": "per_item_rights_advisory",
+      "commercial_reuse_policy": "discovery_only_unless_explicit_license_is_reusable",
+      "download_capability": true,
+      "api_type": "public_json_api",
+      "rate_limit": "20_requests_per_minute",
+      "requires_key": false,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 1,
+        "historical_video": 2,
+        "present_photo": 2,
+        "present_video": 3,
+        "future_photo": 4,
+        "future_video": 4,
+        "generic_photo": 3,
+        "generic_video": 4
+      }
+    },
+    "pexafy": {
+      "capabilities": [
+        "modern_photo",
+        "semantic_stock_search"
+      ],
+      "media_types": [
+        "image"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "future",
+        "timeless"
+      ],
+      "source_role": "stock_discovery",
+      "subject_domains": [
+        "general",
+        "business",
+        "lifestyle",
+        "technology"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "provider_license_label_requires_verification",
+      "commercial_reuse_policy": "unknown_until_license_terms_are_explicit",
+      "download_capability": true,
+      "api_type": "optional_mcp_adapter",
+      "rate_limit": "provider_plan_limited",
+      "requires_key": true,
+      "free_access": false,
+      "route_priority": {
+        "historical_photo": 4,
+        "historical_video": 4,
+        "present_photo": 4,
+        "present_video": 4,
+        "future_photo": 3,
+        "future_video": 4,
+        "generic_photo": 4,
+        "generic_video": 4
+      }
+    },
+    "openverse": {
+      "capabilities": [
+        "open_license_media",
+        "image_search",
+        "per_asset_license",
+        "attribution",
+        "direct_download"
+      ],
+      "media_types": [
+        "image"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "future",
+        "timeless"
+      ],
+      "source_role": "open_media_catalog",
+      "subject_domains": [
+        "general",
+        "history",
+        "culture",
+        "science",
+        "geography"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "per_asset_license_url_and_attribution",
+      "commercial_reuse_policy": "license_dependent",
+      "download_capability": true,
+      "api_type": "public_rest_api",
+      "rate_limit": "bounded_requests_retry_after_and_in_memory_cache",
+      "requires_key": false,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 2,
+        "present_photo": 2,
+        "future_photo": 3,
+        "generic_photo": 1
+      }
+    },
+    "dpla": {
+      "capabilities": [
+        "historical_photo",
+        "archive",
+        "metadata",
+        "rights_advisory"
+      ],
+      "media_types": [
+        "image"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "timeless"
+      ],
+      "source_role": "digital_archive",
+      "subject_domains": [
+        "history",
+        "culture",
+        "government",
+        "geography"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "per_item_rights_and_preview_metadata",
+      "commercial_reuse_policy": "per_item_rights_review",
+      "download_capability": true,
+      "api_type": "public_json_api",
+      "rate_limit": "bounded_requests_retry_after_and_in_memory_cache",
+      "requires_key": true,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 2,
+        "present_photo": 5,
+        "generic_photo": 4
+      }
+    },
+    "europeana": {
+      "capabilities": [
+        "historical_photo",
+        "archive",
+        "metadata",
+        "rights_advisory"
+      ],
+      "media_types": [
+        "image"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "timeless"
+      ],
+      "source_role": "european_digital_archive",
+      "subject_domains": [
+        "history",
+        "culture",
+        "science",
+        "geography"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "per_item_edm_rights",
+      "commercial_reuse_policy": "per_item_rights_review",
+      "download_capability": true,
+      "api_type": "public_json_api",
+      "rate_limit": "bounded_requests_retry_after_and_in_memory_cache",
+      "requires_key": true,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 2,
+        "present_photo": 4,
+        "generic_photo": 4
+      }
+    },
+    "nasa": {
+      "capabilities": [
+        "historical_photo",
+        "modern_photo",
+        "modern_video",
+        "space_science",
+        "metadata",
+        "asset_manifest"
+      ],
+      "media_types": [
+        "image",
+        "video"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "timeless"
+      ],
+      "source_role": "official_science_media",
+      "subject_domains": [
+        "science",
+        "space",
+        "earth",
+        "astronomy",
+        "geography"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "NASA_or_third_party_rights_per_asset",
+      "commercial_reuse_policy": "unknown_until_item_rights_are_checked",
+      "download_capability": true,
+      "api_type": "public_json_api",
+      "rate_limit": "bounded_requests_retry_after_and_in_memory_cache",
+      "requires_key": false,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 3,
+        "historical_video": 3,
+        "present_photo": 2,
+        "present_video": 2,
+        "generic_photo": 2,
+        "generic_video": 2
+      }
+    },
+    "dvids": {
+      "capabilities": [
+        "historical_photo",
+        "modern_photo",
+        "historical_video",
+        "modern_video",
+        "official_military_media",
+        "attribution",
+        "direct_download"
+      ],
+      "media_types": [
+        "image",
+        "video"
+      ],
+      "eras": [
+        "historical",
+        "present",
+        "timeless"
+      ],
+      "source_role": "official_government_media",
+      "subject_domains": [
+        "military",
+        "government",
+        "history",
+        "geography",
+        "current_events"
+      ],
+      "geographic_scope": "global",
+      "rights_model": "DVIDS_API_terms_with_item_attribution",
+      "commercial_reuse_policy": "commercial_use_allowed_by_DVIDS_API_terms",
+      "download_capability": true,
+      "api_type": "public_json_api",
+      "rate_limit": "bounded_requests_retry_after_and_in_memory_cache",
+      "requires_key": true,
+      "free_access": true,
+      "route_priority": {
+        "historical_photo": 2,
+        "historical_video": 2,
+        "present_photo": 1,
+        "present_video": 1,
+        "generic_photo": 3,
+        "generic_video": 2
+      }
+    }
+  }
+}

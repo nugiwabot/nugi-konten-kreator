@@ -75,6 +75,29 @@ reusable rights classification. sources.json records the license statement and
 URL, rights status, retrieval query, provider capabilities, score breakdown,
 and selection reason.
 
+The default media adapters are Wikimedia Commons, Internet Archive, Library of
+Congress, Openverse, DPLA, Europeana, NASA Images, and DVIDS; Pexafy is an
+optional stock adapter. The RSS registry is committed and labels every feed as
+discovery-only. RSSHub is self-hosted and opt-in. Openverse and NASA are keyless;
+DPLA, Europeana, and DVIDS are inactive without their optional API keys.
+
+PubMed and Europe PMC are available through `DossierGenerator`. Their
+bibliographic records and abstracts go into `research_intelligence` as
+`DISCOVERY_ONLY`, with exact quotes empty and full text clearly marked as not
+fetched. RSS escalation queries call those structured providers as well as the
+web search path; search snippets remain leads and do not back factual claims.
+Repeated normalized news headlines share a conservative lineage key when
+claims are evaluated, while event clusters expose outlet count, estimated
+lineage diversity, locations, dates, and headline conflicts.
+
+`visual_verification.py` defines an injectable interface for a shortlist of at
+most five fact-specific results. It is only called for `REAL_REQUIRED` and
+entity-specific `REAL_PREFERRED` requests. No vision endpoint is configured;
+the default records `VISUAL_UNKNOWN`, and only an injected verifier can report
+`VISUALLY_CONSISTENT` or `VISUAL_MISMATCH`. Future visuals carry explicit
+forecast/research-backed/projection/concept/speculative/generated intent and a
+flag that the image is illustrative rather than evidence of a future event.
+
 ## CapCut
 
 `capcut_engine.py` is the single native draft generator. `capcut_validator.py`

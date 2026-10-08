@@ -80,6 +80,7 @@ class DownloadedFile:
     authenticity_score: float = 0.0
     entity_match_score: float = 0.0
     matched_entities: List[str] = field(default_factory=list)
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -292,6 +293,7 @@ class MediaDownloader:
             authenticity_score=getattr(item, "authenticity_score", 0.0),
             entity_match_score=getattr(item, "entity_match_score", 0.0),
             matched_entities=getattr(item, "matched_entities", []),
+            metadata=dict(getattr(item, "metadata", {}) or {}),
         )
 
     def _fetch_file(
@@ -551,8 +553,30 @@ class MediaDownloader:
                     "embedding_similarity": df.embedding_similarity,
                     "reranker_score": df.reranker_score,
                     "final_rank": df.final_rank,
+                    "semantic_score": df.metadata.get("semantic_score", df.embedding_similarity),
+                    "contextual_score": df.metadata.get("contextual_score", 0.0),
+                    "generic_penalty": df.metadata.get("generic_penalty", 0.0),
                 },
+                "attribution": df.metadata.get("attribution", df.metadata.get("credit", "")),
+                "provider_rights_model": df.metadata.get("provider_rights_model", ""),
+                "metadata": df.metadata,
             }
+            if any(df.metadata.get(key) for key in ("matched_event", "matched_location", "matched_time", "matched_era", "future_mode")):
+                asset_entry["matched_context"] = {
+                    "entities": df.matched_entities or df.metadata.get("matched_entities", []),
+                    "event": df.metadata.get("matched_event", ""),
+                    "location": df.metadata.get("matched_location", ""),
+                    "time": df.metadata.get("matched_time", ""),
+                    "era": df.metadata.get("matched_era", ""),
+                    "future_mode": df.metadata.get("future_mode", ""),
+                    "future_visual_is_illustrative": df.metadata.get("future_visual_is_illustrative", False),
+                }
+            if df.metadata.get("visual_verification_status"):
+                asset_entry["visual_verification"] = {
+                    "status": df.metadata.get("visual_verification_status"),
+                    "method": df.metadata.get("visual_verification_method", ""),
+                    "reason": df.metadata.get("visual_verification_reason", ""),
+                }
             if df.visual_requirement or df.source_role:
                 asset_entry["evidence"] = {
                     "visual_requirement": df.visual_requirement,
@@ -560,6 +584,9 @@ class MediaDownloader:
                     "authenticity_score": df.authenticity_score,
                     "entity_match_score": df.entity_match_score,
                     "matched_entities": df.matched_entities,
+                    "matched_event": df.metadata.get("matched_event", ""),
+                    "matched_location": df.metadata.get("matched_location", ""),
+                    "matched_time": df.metadata.get("matched_time", ""),
                 }
             asset_map[df.filename] = asset_entry
 

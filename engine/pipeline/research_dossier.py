@@ -28,6 +28,7 @@ from engine.providers.openalex_provider import OpenAlexProvider
 from engine.providers.crossref_provider import CrossrefProvider
 from engine.providers.gdelt_provider import GDELTProvider
 from engine.providers.bps_provider import BPSDataProvider
+from engine.providers.scholarly_providers import EuropePMCProvider, PubMedProvider
 from engine.providers.search import (
     WebResearchProvider, DDGSWebResearchProvider, ResilientWebResearchProvider
 )
@@ -130,8 +131,12 @@ class ResearchDossier:
                     tier=tier_enum,
                     source_type=st_enum,
                     title=s_dict.get("title", ""),
+                    published_at=s_dict.get("published_at", ""),
+                    retrieved_at=s_dict.get("retrieved_at", datetime.now(timezone.utc).isoformat()),
                     reliability=s_dict.get("reliability", "MEDIUM"),
                     is_primary=s_dict.get("is_primary", False),
+                    author=s_dict.get("author", ""),
+                    metadata=s_dict.get("metadata", {}),
                 )
                 evidence_items.append(EvidenceItem(
                     id=e.get("id", ""),
@@ -139,9 +144,17 @@ class ResearchDossier:
                     source=source_obj,
                     exact_quote=e.get("exact_quote", ""),
                     retrieved_snippet=e.get("retrieved_snippet", ""),
+                    source_description=e.get("source_description", ""),
                     summary=e.get("summary", ""),
+                    data_points=[DataPoint(**dp) for dp in e.get("data_points", []) if isinstance(dp, dict)],
                     confidence=e.get("confidence", 1.0),
                     is_supporting=e.get("is_supporting", True),
+                    corroboration_sources=e.get("corroboration_sources", []),
+                    contradiction_notes=e.get("contradiction_notes", ""),
+                    uncertainty_level=e.get("uncertainty_level", "LOW"),
+                    lineage_root=e.get("lineage_root"),
+                    cited_sources=e.get("cited_sources", []),
+                    is_derivative=e.get("is_derivative", False),
                 ))
 
         data_points = []
@@ -275,6 +288,13 @@ class ResearchDossier:
                 lines.append(
                     f"- [{item.get('source_name', 'Feed')}]({item.get('canonical_url', '')}): "
                     f"{item.get('title', '')} ({item.get('published_at', 'date unknown')}) — DISCOVERY_ONLY"
+                )
+        if intelligence.get("scholarly_discoveries") or intelligence.get("web_discoveries"):
+            lines.extend(["", "## 9A. RESEARCH & SEARCH DISCOVERY LEADS (NOT CLAIM EVIDENCE)"])
+            for item in (intelligence.get("scholarly_discoveries", []) + intelligence.get("web_discoveries", []))[:30]:
+                lines.append(
+                    f"- [{item.get('publisher', 'Discovery')}]({item.get('url', '')}): "
+                    f"*{item.get('title', '')}* ({item.get('published_at', 'date unknown')}) — DISCOVERY_ONLY"
                 )
         if intelligence.get("primary_source_queries"):
             lines.extend(["", "## 10. SOURCE ESCALATION QUERIES"])
@@ -464,12 +484,16 @@ class DossierGenerator:
         web_provider: Optional[WebResearchProvider] = None,
         crossref_provider: Optional[ResearchProvider] = None,
         gdelt_provider: Optional[ResearchProvider] = None,
+        pubmed_provider: Optional[ResearchProvider] = None,
+        europe_pmc_provider: Optional[ResearchProvider] = None,
     ):
         self.bps = bps_provider or BPSDataProvider()
         self.openalex = openalex_provider or OpenAlexProvider()
         self.web = web_provider or ResilientWebResearchProvider()
         self.crossref = crossref_provider or CrossrefProvider()
         self.gdelt = gdelt_provider or GDELTProvider()
+        self.pubmed = pubmed_provider or PubMedProvider()
+        self.europe_pmc = europe_pmc_provider or EuropePMCProvider()
 
     def build_dossier(
         self,
@@ -502,6 +526,10 @@ class DossierGenerator:
         academic_evidence = self.openalex.search_evidence(topic, max_results=limit)
         crossref_evidence = self.crossref.search_evidence(topic, max_results=limit)
         gdelt_evidence = self.gdelt.search_evidence(topic, max_results=limit)
+        # PubMed/Europe PMC abstracts and records are discovery leads. They are
+        # kept out of claim support until a cited publication is reviewed.
+        pubmed_discoveries = self.pubmed.search_evidence(topic, max_results=limit)
+        europe_pmc_discoveries = self.europe_pmc.search_evidence(topic, max_results=limit)
         # Only the web provider exposes a cross-provider recency contract.  It
         # must be passed through instead of being accepted only at the MCP edge.
         web_raw = self.web.search(topic, recency=recency, max_results=limit)
@@ -520,6 +548,7 @@ class DossierGenerator:
                 published_at=w.get("date", ""),
                 reliability=cls["reliability"],
                 is_primary=cls["is_primary"],
+                metadata={"evidence_role": "DISCOVERY_ONLY", "snippet_is_not_source_text": True},
             )
             item = EvidenceItem(
                 id=f"web_{idx}",
@@ -532,6 +561,7 @@ class DossierGenerator:
                 source_description=f"{w.get('publisher', 'Web')}: {w.get('title', '')}",
                 summary=w.get("title", ""),
                 confidence=0.75 if cls["tier"].rank <= 4 else 0.5,
+                is_supporting=False,
                 lineage_root=w.get("url", "")
             )
             web_evidence.append(item)
@@ -557,6 +587,7 @@ class DossierGenerator:
                         published_at=cw.get("date", ""),
                         reliability=c_cls["reliability"],
                         is_primary=c_cls["is_primary"],
+                        metadata={"evidence_role": "DISCOVERY_ONLY", "snippet_is_not_source_text": True},
                     )
                     contra_item = EvidenceItem(
                         id=f"contra_{c_idx}",
@@ -576,9 +607,15 @@ class DossierGenerator:
                 logger.info(f"Contradiction probe skipped: {e}")
 
         # Enforce strict S0-S7 hierarchy: S0 (Archival) -> S1 (BPS/Gov) -> S2 (Academic/Crossref) -> S3 (Wire) -> S4-S7
-        all_collected = (
-            bps_evidence + academic_evidence + crossref_evidence + gdelt_evidence + web_evidence + contradiction_evidence
+        all_discoveries = (
+            crossref_evidence + gdelt_evidence + pubmed_discoveries
+            + europe_pmc_discoveries + web_evidence + contradiction_evidence
         )
+        all_collected = [
+            item for item in (bps_evidence + academic_evidence)
+            if item.is_supporting
+        ]
+        all_collected.extend(item for item in gdelt_evidence if item.is_supporting)
         all_collected.sort(key=lambda ev: (ev.source.tier.rank, -ev.confidence))
         all_evidence = all_collected
 
@@ -626,12 +663,7 @@ class DossierGenerator:
             claims.append(c2)
 
         # Claim 3: Ground Reality & Sentiment (S3-S4 Media & Public)
-        media_support = [
-            item for item in web_evidence
-            if item.is_supporting
-            and (item.retrieved_snippet or item.exact_quote)
-            and _topic_relevance_count(topic, item.retrieved_snippet or item.exact_quote) >= max(1, min(2, len(_topic_terms(topic))))
-        ]
+        media_support: List[EvidenceItem] = []
 
         if media_support:
             # Only attach counter-evidence to Claim 3 if in investigative depth
@@ -705,6 +737,12 @@ class DossierGenerator:
                 intelligence = build_research_intelligence(
                     topic, feed_items, recency=recency, evidence_entities=entities
                 )
+                # Escalation heads are bounded follow-up query seeds. Search
+                # snippets remain leads; structured literature hits are also
+                # captured below without becoming claim evidence.
+                for query in intelligence.primary_source_queries[:2]:
+                    pubmed_discoveries.extend(self.pubmed.search_evidence(query, max_results=2))
+                    europe_pmc_discoveries.extend(self.europe_pmc.search_evidence(query, max_results=2))
                 for query in intelligence.primary_source_queries[:2]:
                     try:
                         search_rows = self.web.search(query, recency=recency, max_results=2)
@@ -727,6 +765,31 @@ class DossierGenerator:
             research_intelligence = build_research_intelligence(
                 topic, recency=recency, evidence_entities=entities
             ).to_dict()
+
+        def discovery_record(item: EvidenceItem) -> Dict[str, Any]:
+            return {
+                "id": item.id,
+                "title": item.source.title or item.summary,
+                "url": item.source.url,
+                "publisher": item.source.publisher,
+                "published_at": item.source.published_at,
+                "source_tier": item.source.tier.value,
+                "evidence_role": item.source.metadata.get("evidence_role", "RESEARCH_DISCOVERY"),
+                "abstract_preview": (item.retrieved_snippet or "")[:600],
+                "exact_quote": "",
+                "lineage_root": item.lineage_root or item.source.url,
+                "evidence_status": "DISCOVERY_ONLY",
+            }
+
+        research_intelligence["research_discoveries"] = [
+            discovery_record(item) for item in all_discoveries
+        ][:100]
+        research_intelligence["scholarly_discoveries"] = [
+            discovery_record(item) for item in (pubmed_discoveries + europe_pmc_discoveries)
+        ][:40]
+        research_intelligence["web_discoveries"] = [
+            discovery_record(item) for item in web_evidence
+        ][:20]
 
         return ResearchDossier(
             topic=topic,
@@ -756,7 +819,9 @@ class DossierGenerator:
         """Return an explainable heuristic score; it is not a confidence claim."""
         usable_evidence = [
             item for item in evidence
-            if item.is_supporting and (item.exact_quote or item.retrieved_snippet)
+            if item.is_supporting
+            and item.source.metadata.get("evidence_role") not in {"DISCOVERY_ONLY", "RESEARCH_DISCOVERY", "BIBLIOGRAPHIC_DISCOVERY"}
+            and (item.exact_quote or item.retrieved_snippet)
         ]
         if not usable_evidence:
             return 0.0

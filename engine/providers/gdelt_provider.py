@@ -71,6 +71,7 @@ class GDELTProvider(ResearchProvider):
                         published_at=seendate[:8] if seendate else "",
                         reliability=cls["reliability"],
                         is_primary=cls["is_primary"],
+                        metadata={"evidence_role": "DISCOVERY_ONLY", "article_text_fetched": False},
                     )
                     
                     evidence = EvidenceItem(

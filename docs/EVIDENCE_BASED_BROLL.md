@@ -327,3 +327,28 @@ Interpretasi:
 - <0.40: lemah untuk scene yang memang membutuhkan human-life context.
 
 Authenticity/evidence tetap menjadi gate utama untuk REAL_REQUIRED. Human alignment tidak boleh menggantikan bukti.
+
+## 9. Provider, rights, and visual-review provenance
+
+MediaFinder routes Wikimedia Commons, Internet Archive, Library of Congress,
+Openverse, DPLA, Europeana, NASA Images, and DVIDS from the committed
+`engine/data/media_provider_capabilities.json` matrix. Pexafy is a stock
+fallback and is excluded from `REAL_REQUIRED`. Providers with missing API keys
+return no results and leave other providers available.
+
+Every candidate keeps its source landing page, direct/preview URL, license and
+license URL, rights status, creator/credit, query, capability role, matched
+context, score breakdown, and selection reason. A preview or an API's general
+terms are not used to infer asset rights. Unknown or restrictive item rights
+remain discovery-only and are not automatically downloaded.
+
+For `REAL_REQUIRED` and entity-specific `REAL_PREFERRED`, an injected visual
+verifier may inspect only the top five ranked candidates. The default verifier
+returns `VISUAL_UNKNOWN`, because this repository has no configured vision
+endpoint. Text metadata ranking never claims that the image pixels were
+checked. Results record the visual state, method, and reason.
+
+Future-oriented shots carry `FORECAST`, `RESEARCH_BACKED`, `PROJECTION`,
+`CONCEPT`, `SPECULATIVE`, or `GENERATED` intent. Search results for those shots
+are marked illustrative; a future-looking image is not evidence that the
+depicted event will happen.

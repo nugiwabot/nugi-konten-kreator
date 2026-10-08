@@ -30,6 +30,8 @@ from engine.pipeline.media_library import MediaLibrary
 import logging
 import os
 import re
+import copy
+import time
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -53,15 +55,24 @@ from engine.pipeline.visual_requirements import (
     NO_VISUAL,
     PRIMARY_EVIDENCE,
     classify_visual_requirement,
+    classify_future_intent,
     extract_entities,
 )
 from engine.providers.capabilities import get_provider_capabilities, route_provider_names
 from engine.providers.internet_archive_provider import InternetArchiveProvider
 from engine.providers.library_of_congress_provider import LibraryOfCongressProvider
+from engine.providers.media_catalog_providers import (
+    DPLAProvider,
+    DVIDSMediaProvider,
+    EuropeanaProvider,
+    NASAMediaProvider,
+    OpenverseProvider,
+)
 from engine.providers.media import MediaItem, MediaProvider
 from engine.providers.pexafy_provider import PexafyProvider
 from engine.providers.rights import is_reusable_rights_status, item_rights_status
 from engine.providers.wikimedia_provider import WikimediaProvider
+from engine.pipeline.visual_verification import UnknownVisualVerifier, VisualVerifier
 
 logger = logging.getLogger(__name__)
 
@@ -138,9 +149,8 @@ _HISTORICAL_CUES = {
 }
 
 _FUTURE_CUES = {
-    "masa depan", "future", "futuristik", "futuristic", "ai", "artificial intelligence",
-    "2050", "spekulatif", "speculative", "near-future", "kecerdasan buatan",
-    "robotik", "konsep masa depan",
+    "masa depan", "future", "futuristik", "futuristic", "future ai", "ai di masa depan", "kecerdasan buatan masa depan",
+    "2050", "spekulatif", "speculative", "near-future", "robotik", "konsep masa depan",
 }
 
 _PRESENT_CUES = {
@@ -201,6 +211,10 @@ class MediaFinderItem:
     human_alignment_score: float = 0.0
     human_basic_need: str = ""
     life_lens: str = ""
+    future_mode: str = ""
+    visual_verification_status: str = "VISUAL_UNKNOWN"
+    visual_verification_method: str = "none"
+    visual_verification_reason: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -231,6 +245,7 @@ class MediaFinderResult:
     search_completed: bool = True
     usable_results: int = 0
     fallback_allowed: bool = True
+    future_mode: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -322,6 +337,7 @@ class MediaFinder:
         providers: Optional[List[MediaProvider]] = None,
         ranker: Optional[MediaRanker] = None,
         downloader: Optional[MediaDownloader] = None,
+        visual_verifier: Optional[VisualVerifier] = None,
     ):
         # Default providers: Pexafy, Wikimedia Commons, Internet Archive
         self.providers: List[MediaProvider] = providers if providers is not None else [
@@ -329,10 +345,18 @@ class MediaFinder:
             WikimediaProvider(),
             InternetArchiveProvider(),
             LibraryOfCongressProvider(),
+            OpenverseProvider(),
+            DPLAProvider(),
+            EuropeanaProvider(),
+            NASAMediaProvider(),
+            DVIDSMediaProvider(),
         ]
         self.ranker: MediaRanker = ranker or MediaRanker()
         self.downloader: MediaDownloader = downloader or MediaDownloader()
         self.library: MediaLibrary = MediaLibrary()
+        self.visual_verifier: VisualVerifier = visual_verifier or UnknownVisualVerifier()
+        self._search_cache: Dict[Tuple[str, str, str], Tuple[float, List[MediaItem]]] = {}
+        self._provider_cooldowns: Dict[str, float] = {}
 
     # --------------------------------------------------------------------------
     # Public: find (search + rank only)
@@ -449,6 +473,7 @@ class MediaFinder:
         resolved_media = self._normalize_media_type(media, request)
         resolved_era = self._resolve_era(era, request)
         resolved_style = self._resolve_style(style, resolved_era, request)
+        future_mode = classify_future_intent(request) if resolved_era == "future" else ""
 
         logger.info(
             f"MediaFinder.find: request='{request}', requested_media='{media}', "
@@ -520,6 +545,12 @@ class MediaFinder:
             visual_requirement=req_class,
         )
 
+        self._verify_shortlist(ranked_items, request, req_class, resolved_era, future_mode)
+        ranked_items = [
+            item for item in ranked_items
+            if item.visual_verification_status != "VISUAL_MISMATCH"
+        ]
+
         providers_contacted = [p.PROVIDER_NAME for p in routed_providers]
 
         # Evaluate usable results and authenticity gate (Section 10, 22)
@@ -559,6 +590,7 @@ class MediaFinder:
             search_completed=True,
             usable_results=len(usable_items),
             fallback_allowed=fallback_allowed,
+            future_mode=future_mode,
         )
 
     # --------------------------------------------------------------------------
@@ -773,6 +805,7 @@ class MediaFinder:
                 return self._append_research_queries(unique, research_intelligence, request)
 
         core_english = self._translate_to_core_english(request)
+        future_mode = classify_future_intent(request) if era == "future" else ""
 
         # 1. Primary descriptive query
         if media == "video":
@@ -823,6 +856,10 @@ class MediaFinder:
         fallback = self._build_fallback_query(core_english, media=media)
 
         queries = [primary, style_variant, contextual, fallback]
+        if future_mode in {"FORECAST", "RESEARCH_BACKED", "PROJECTION"}:
+            queries.append(f"{core_english} forecast projection chart scenario illustration")
+        elif future_mode in {"CONCEPT", "SPECULATIVE", "GENERATED"}:
+            queries.append(f"{core_english} conceptual speculative future illustration")
         # Deduplicate while preserving order
         unique_queries: List[str] = []
         for q in queries:
@@ -843,16 +880,34 @@ class MediaFinder:
             return base_queries
         extras = research_intelligence.get("recommended_broll_queries", [])
         if not isinstance(extras, list):
-            return base_queries
+            extras = []
+        events = research_intelligence.get("visual_events", [])
+        locations = research_intelligence.get("visual_locations", [])
+        periods = research_intelligence.get("visual_time_periods", [])
+        if isinstance(events, list):
+            for event in events[:3]:
+                if not isinstance(event, str) or not event.strip():
+                    continue
+                parts = [event.strip()]
+                if isinstance(locations, list) and locations:
+                    parts.append(str(locations[0]))
+                if isinstance(periods, list) and periods:
+                    parts.append(str(periods[0]))
+                suffix = "archival documentary photograph footage" if research_intelligence.get("recency") == "historical_or_general" else "documentary photograph footage"
+                parts.append(suffix)
+                extras.append(" ".join(parts))
         request_terms = {w for w in re.findall(r"[a-z0-9]+", request.lower()) if len(w) > 3}
+        topic_text = str(research_intelligence.get("topic", ""))
+        topic_terms = {w for w in re.findall(r"[a-z0-9]+", topic_text.lower()) if len(w) > 3}
+        context_terms = request_terms | topic_terms
         result = list(base_queries)
-        for extra in extras[:5]:
+        for extra in extras[:8]:
             if not isinstance(extra, str) or not extra.strip():
                 continue
             # Keep research-derived additions tied to this shot/topic. If there
             # is no token overlap, the request itself must appear in the query.
             extra_terms = {w for w in re.findall(r"[a-z0-9]+", extra.lower()) if len(w) > 3}
-            if request_terms and not request_terms.intersection(extra_terms) and request.lower() not in extra.lower():
+            if context_terms and not context_terms.intersection(extra_terms) and request.lower() not in extra.lower() and (not topic_text or topic_text.lower() not in extra.lower()):
                 continue
             clean = " ".join(extra.split())
             if clean not in result:
@@ -976,7 +1031,7 @@ class MediaFinder:
         lower_req = request.lower()
         if any(w in lower_req for w in _HISTORICAL_CUES) or _YEAR_RE.search(request):
             return "historical"
-        if any(w in lower_req for w in _FUTURE_CUES):
+        if any(w in lower_req for w in _FUTURE_CUES) or re.search(r"\b20(?:3[0-9]|[4-9][0-9])\b", lower_req):
             return "future"
         if any(w in lower_req for w in _PRESENT_CUES):
             return "present"
@@ -1141,12 +1196,24 @@ class MediaFinder:
             for provider in providers:
                 if len(candidates) >= max_items:
                     break
+                provider_name = str(provider.PROVIDER_NAME).lower()
+                if self._provider_cooldowns.get(provider_name, 0.0) > time.monotonic():
+                    continue
+                cache_key = (provider_name, " ".join(q.lower().split()), provider_media_type)
                 try:
-                    items = provider.search_media(
-                        query=q,
-                        media_type=provider_media_type,
-                        max_results=max(max_items - len(candidates), 5),
-                    )
+                    cached = self._search_cache.get(cache_key)
+                    if cached and cached[0] > time.monotonic():
+                        items = copy.deepcopy(cached[1])
+                    else:
+                        items = provider.search_media(
+                            query=q,
+                            media_type=provider_media_type,
+                            max_results=max(max_items - len(candidates), 5),
+                        )
+                        if items:
+                            if len(self._search_cache) >= 256:
+                                self._search_cache.pop(next(iter(self._search_cache)))
+                            self._search_cache[cache_key] = (time.monotonic() + 600, copy.deepcopy(items))
                     v_cnt = sum(1 for it in items if (it.media_type or "").lower() == "video")
                     img_cnt = sum(1 for it in items if (it.media_type or "").lower() == "image")
                     logger.info(
@@ -1156,6 +1223,9 @@ class MediaFinder:
                     for item in items:
                         item.retrieval_query = item.retrieval_query or q
                         profile = provider.capabilities()
+                        item.metadata.setdefault("provider_source_role", profile.get("source_role", ""))
+                        item.metadata.setdefault("provider_rights_model", profile.get("rights_model", ""))
+                        item.metadata.setdefault("provider_rights_policy", profile.get("commercial_reuse_policy", ""))
                         item.provider_capability = ", ".join(profile.get("capabilities", []))
                         item.rights_status = item_rights_status(item)
                         key = item.dedup_key()
@@ -1163,6 +1233,7 @@ class MediaFinder:
                             seen_keys.add(key)
                             candidates.append(item)
                 except Exception as e:
+                    self._provider_cooldowns[provider_name] = time.monotonic() + 15.0
                     logger.warning(
                         f"MediaFinder: Provider {provider.PROVIDER_NAME} failed for query '{q}': {e}"
                     )
@@ -1257,6 +1328,30 @@ class MediaFinder:
             if item.is_archival:
                 reason_parts.append("archival source")
             reason_parts.append(f"reuse rights: {rights_status.lower()}")
+            selection_reason = "; ".join(reason_parts)
+            result_metadata = dict(item.metadata or {})
+            result_metadata.update({
+                "retrieval_query": item.retrieval_query,
+                "matched_entities": list(item.matched_entities),
+                "matched_event": str(result_metadata.get("matched_event", "")),
+                "matched_location": str(result_metadata.get("matched_location", "")),
+                "matched_time": str(result_metadata.get("matched_time", "")),
+                "matched_era": era,
+                "visual_requirement": item.visual_requirement or visual_requirement,
+                "source_role": item.source_role or ("PRIMARY_EVIDENCE" if visual_requirement == REAL_REQUIRED else "DIRECT_CONTEXT"),
+                "selection_reason": selection_reason,
+                "semantic_score": round(semantic_score, 4),
+                "contextual_score": round(contextual_score, 4),
+                "final_score": round(item.reranker_score, 4),
+                "generic_penalty": item.generic_penalty,
+                "authenticity_score": item.authenticity_score,
+                "entity_match_score": item.entity_match_score,
+                "temporal_match_score": item.temporal_match_score,
+                "location_match_score": item.location_match_score,
+                "event_match_score": item.event_match_score,
+                "source_specificity_score": item.source_specificity_score,
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+            })
             results.append(
                 MediaFinderItem(
                     rank=rank_idx,
@@ -1277,11 +1372,11 @@ class MediaFinder:
                     semantic_score=round(semantic_score, 4),
                     contextual_score=round(contextual_score, 4),
                     generic_penalty=item.generic_penalty,
-                    selection_reason="; ".join(reason_parts),
+                    selection_reason=selection_reason,
                     local_path=None,
                     width=item.width,
                     height=item.height,
-                    metadata=item.metadata,
+                    metadata=result_metadata,
                     visual_requirement=item.visual_requirement or visual_requirement,
                     source_role=item.source_role or ("PRIMARY_EVIDENCE" if visual_requirement == REAL_REQUIRED else "DIRECT_CONTEXT"),
                     authenticity_score=item.authenticity_score,
@@ -1304,10 +1399,57 @@ class MediaFinder:
                     human_alignment_score=item.human_alignment_score,
                     human_basic_need=item.human_basic_need,
                     life_lens=item.life_lens,
+                    future_mode=str(item.metadata.get("future_mode", "")),
+                    visual_verification_status=str(item.metadata.get("visual_verification_status", "VISUAL_UNKNOWN")),
+                    visual_verification_method=str(item.metadata.get("visual_verification_method", "none")),
+                    visual_verification_reason=str(item.metadata.get("visual_verification_reason", "")),
                 )
             )
 
         return results, fallback_reason
+
+    def _verify_shortlist(
+        self,
+        results: List[MediaFinderItem],
+        request: str,
+        visual_requirement: str,
+        era: str,
+        future_mode: str,
+    ) -> None:
+        """Run the injected verifier only against the small evidence shortlist."""
+        should_verify = visual_requirement == REAL_REQUIRED or (
+            visual_requirement == REAL_PREFERRED and bool(extract_entities(request))
+        )
+        context = {"era": era, "future_mode": future_mode, "visual_requirement": visual_requirement}
+        shortlist = results[: min(5, len(results))] if should_verify else []
+        for item in results:
+            if future_mode:
+                item.future_mode = future_mode
+                item.metadata["future_mode"] = future_mode
+                item.metadata["future_visual_is_illustrative"] = True
+            if item not in shortlist:
+                continue
+            try:
+                verification = self.visual_verifier.verify(item, request, context)
+            except Exception as exc:
+                verification = None
+                item.visual_verification_reason = f"Verifier error; result remains unknown: {exc}"
+            if verification is None:
+                item.visual_verification_status = "VISUAL_UNKNOWN"
+                item.visual_verification_method = "error"
+                item.visual_verification_reason = item.visual_verification_reason or "Verifier unavailable."
+            else:
+                status = str(getattr(verification, "status", "VISUAL_UNKNOWN")).upper()
+                if status not in {"VISUALLY_CONSISTENT", "VISUAL_MISMATCH", "VISUAL_UNKNOWN"}:
+                    status = "VISUAL_UNKNOWN"
+                item.visual_verification_status = status
+                item.visual_verification_method = str(getattr(verification, "method", "unknown"))
+                item.visual_verification_reason = str(getattr(verification, "reason", ""))[:500]
+            item.metadata["visual_verification_status"] = item.visual_verification_status
+            item.metadata["visual_verification_method"] = item.visual_verification_method
+            item.metadata["visual_verification_reason"] = item.visual_verification_reason
+            if item.visual_verification_status == "VISUAL_MISMATCH":
+                item.rejection_reason = (item.rejection_reason + "; " if item.rejection_reason else "") + "Visual verifier reported a mismatch"
 
     @staticmethod
     def _sanitize_folder_name(name: str) -> str:
