@@ -619,9 +619,14 @@ class ProductionOrchestrator:
                         "required": True,
                         "status": "MISSING",
                         "reason": (
-                            "No real downloadable or reusable local media was acquired for this required shot."
+                            "No relevant downloadable or reusable local media was acquired after primary and fallback queries."
                             if was_attempted else "Required shot was skipped by max_broll_shots and has no real media assignment."
                         ),
+                        "search_attempts": s.get("media_search_attempts", []),
+                        "visual_evidence_policy": s.get(
+                            "visual_evidence_policy", "VISUALS_DO_NOT_SUBSTITUTE_FOR_CLAIM_EVIDENCE"
+                        ),
+                        "rights_status": "NOT_ACQUIRED",
                     })
 
         # Include shots that do not need B-roll in the manifest rather than
