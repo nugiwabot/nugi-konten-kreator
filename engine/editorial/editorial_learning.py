@@ -68,7 +68,7 @@ def build_editorial_learning_record(workspace_dir):
         "topic": manifest.get("topic", ""),
         "learning_status": "HUMAN_FEEDBACK_RECORDED" if feedback_valid else "WAITING_FOR_HUMAN_FEEDBACK",
         "qa_verdict": qa.get("verdict", "UNKNOWN"),
-        "is_publishable": qa.get("is_publishable") is True,
+        "production_outcome": {"is_publishable": qa.get("is_publishable") is True},
         "quality_score": qa.get("overall_quality_score"),
         "media_coverage_pct": qa.get("media_coverage_pct"),
         "fact_check_verdict": fact.get("overall_verdict", "UNKNOWN"),
