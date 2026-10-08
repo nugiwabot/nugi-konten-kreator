@@ -1,0 +1,31 @@
+name: Autonomous Intelligence Regression
+
+on:
+  pull_request:
+    paths:
+      - "engine/**"
+      - "mcp/**"
+      - "tests/test_autonomous_intelligence.py"
+      - ".github/workflows/autonomous-intelligence.yml"
+  push:
+    branches:
+      - main
+      - "feat/**"
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile Python sources
+        run: python -m compileall -q engine mcp tests/test_autonomous_intelligence.py
+
+      - name: Run autonomous intelligence regression
+        run: python -m unittest discover -s tests -p "test_autonomous_intelligence.py" -v

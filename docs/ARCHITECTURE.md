@@ -5,6 +5,22 @@ editorial, and diagnostic tools remain callable independently, but none owns a
 second production state machine.
 
 ## Canonical call graph
+## Request understanding layer
+
+MCP natural-language requests are first resolved by a deterministic request
+intent layer. This is a planning layer only; it does not create a second
+executor or state store.
+
+```text
+USER REQUEST
+  -> RequestIntentResolver
+  -> resolved execution contract
+  -> ProductionOrchestrator
+```
+
+The resolved request plan is persisted as manifest metadata so a resumed run
+retains the original autonomous decision context.
+
 
 ```text
 MCP nugi_content_create

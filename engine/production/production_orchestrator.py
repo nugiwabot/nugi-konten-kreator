@@ -120,6 +120,7 @@ class ProductionOrchestrator:
         max_broll_shots: Optional[int] = None,
         install_to_capcut: bool = False,
         recency: Optional[str] = None,
+        request_plan: Optional[Dict[str, Any]] = None,
     ) -> ProductionRunResult:
         """
         Executes end-to-end production autonomously.
@@ -169,6 +170,8 @@ class ProductionOrchestrator:
         }
         manifest.extra_fields["run_mode"] = "DRY_RUN" if dry_run else "REAL_RUN"
         manifest.extra_fields["research_recency"] = recency
+        if request_plan is not None:
+            manifest.extra_fields["request_plan"] = request_plan
 
         # ----------------------------------------------------------------------
         # STAGE 1: PLAN (Executive Producer Contract)
