@@ -231,7 +231,8 @@ class IdeaDiscoveryEngine:
             return None
 
         classification = classify_topic(headline)
-        story_type = classify_story_type(headline)
+        story_type_result = classify_story_type(headline)
+        story_type = story_type_result.get("primary_type", "hidden_system") if isinstance(story_type_result, dict) else str(story_type_result)
         fit = calculate_editorial_fit(
             {
                 "title": headline,
@@ -314,7 +315,8 @@ class IdeaDiscoveryEngine:
         if include_evergreen_fallback and len(candidates) < requested:
             for seed in EVERGREEN_SEEDS:
                 classification = classify_topic(seed)
-                story_type = classify_story_type(seed)
+                story_type_result = classify_story_type(seed)
+                story_type = story_type_result.get("primary_type", "hidden_system") if isinstance(story_type_result, dict) else str(story_type_result)
                 fit = calculate_editorial_fit(
                     {
                         "title": seed,
