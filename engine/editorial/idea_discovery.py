@@ -251,41 +251,65 @@ def _deeper_why(classification: Dict[str, Any]) -> str:
     )
 
 
-def _read_existing_content(repo_root: Path, limit: int = 120) -> List[str]:
+def _read_existing_content(repo_root: Path, limit: Optional[int] = None) -> List[str]:
+    """Read one title per Markdown artifact; discovery uses the full index by default."""
     output = repo_root / "output"
     if not output.is_dir():
         return []
-
-    texts: List[str] = []
-    for path in sorted(output.rglob("*.md"))[:limit]:
+    paths = sorted(output.rglob("*.md"))
+    if limit is not None:
+        paths = paths[:max(0, int(limit))]
+    titles: List[str] = []
+    for path in paths:
         try:
-            content = path.read_text(encoding="utf-8", errors="replace")
+            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
         except OSError:
             continue
-        heading = next(
-            (line.strip("# ").strip() for line in content.splitlines() if line.startswith("#")),
-            "",
-        )
-        if heading:
-            texts.append(heading[:240])
-        elif content.strip():
-            texts.append(content[:240])
-    return texts
+        title = ""
+        if lines and lines[0].strip() == "---":
+            for line in lines[1:]:
+                if line.strip() == "---":
+                    break
+                match = re.match(r"^title\s*:\s*(.*?)\s*$", line, flags=re.IGNORECASE)
+                if match:
+                    title = match.group(1).strip().strip("\\\"\' ")
+                    break
+        if not title:
+            title = next((line.lstrip("#").strip() for line in lines if re.match(r"^\s*#{1,6}\s+", line)), "")
+        if not title:
+            title = next((line.strip() for line in lines if line.strip() and line.strip() != "---"), "")
+        if title:
+            titles.append(title[:240])
+    return titles
 
 
-def _dedupe_candidates(
-    candidates: Sequence[ContentOpportunity],
-    existing: Sequence[str],
-) -> List[ContentOpportunity]:
+def _best_overlap(candidate_title: str, existing: Sequence[str]) -> Tuple[float, str]:
+    best_score, best_title = 0.0, ""
+    for prior in existing:
+        score = _similarity(candidate_title, prior)
+        if score > best_score:
+            best_score, best_title = score, prior
+    return best_score, best_title
+
+
+def _dedupe_candidates(candidates: Sequence[ContentOpportunity], existing: Sequence[str], diagnostics: Optional[List[Dict[str, Any]]] = None) -> List[ContentOpportunity]:
     accepted: List[ContentOpportunity] = []
     seen = list(existing)
-    for candidate in sorted(candidates, key=lambda x: x.opportunity_score, reverse=True):
-        if any(_similarity(candidate.suggested_title, prior) >= 0.72 for prior in seen):
+    threshold = 0.72
+    for candidate in sorted(candidates, key=lambda item: item.opportunity_score, reverse=True):
+        title = candidate.source_headline or candidate.suggested_title
+        score, matched = _best_overlap(title, seen)
+        candidate.memory_overlap_score = round(score, 3)
+        candidate.memory_overlap_title = matched if score > 0 else ""
+        if score >= threshold:
+            candidate.memory_overlap_reason = f"Near-duplicate of indexed topic (similarity {score:.3f} >= {threshold:.2f}); omitted from shortlist."
+            if diagnostics is not None:
+                diagnostics.append({"candidate_title": title, "matched_title": matched, "similarity": round(score, 3), "reason": candidate.memory_overlap_reason})
             continue
+        candidate.memory_overlap_reason = f"Closest indexed title similarity {score:.3f}; duplicate threshold {threshold:.2f}." if matched else "No indexed title crossed the duplicate threshold."
         accepted.append(candidate)
-        seen.append(candidate.suggested_title)
+        seen.append(title)
     return accepted
-
 
 class IdeaDiscoveryEngine:
     def __init__(self, *, rss_service: Optional[Any] = None, repo_root: Optional[Path] = None):
