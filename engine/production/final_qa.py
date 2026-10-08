@@ -86,7 +86,7 @@ class FinalQAEngine:
         artifacts_checked: Dict[str, bool] = {}
         scores: Dict[str, float] = {}
         narrative_integrity_status = "UNKNOWN"
-        editorial_review_required = True
+        editorial_review_required = False
 
         # The manifest is the production state source of truth, so it is a hard
         # requirement before any output can be called publishable.
