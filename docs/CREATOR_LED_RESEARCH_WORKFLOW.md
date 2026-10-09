@@ -21,13 +21,30 @@ Workflow ini dibuat agar AI menyiapkan bahan riset dan outline cerita untuk vide
 
 Temukan ide dan pertanyaan yang menarik serta cocok dengan arah editorial Nugi: HUMAN × PLACE × CHANGE × WHY. Properti adalah salah satu anchor, bukan topik wajib untuk semua video.
 
+**Referensi wajib untuk discovery:** mulai dengan membaca dan menerapkan [skills/discover-phenomena.md](../skills/discover-phenomena.md). Skill ini adalah panduan utama untuk menghasilkan query pencarian yang fleksibel dan menemukan kasus nyata yang tidak biasa. Gunakan juga [skills/research-topic.md](../skills/research-topic.md) setelah kandidat dipilih, serta [skills/generate-ideas.md](../skills/generate-ideas.md) bila perlu memperluas sudut editorial. Jangan mengasumsikan ada skill terpisah bernama “Keyword Finder” jika file yang dimaksud tidak ditemukan; gunakan skill discovery yang benar-benar ada di repository ini.
+
+#### Cara melakukan discovery agar selalu segar dan kreatif
+
+- **Lakukan pencarian web aktual, bukan hanya brainstorming keyword.** Untuk topik berita dan fenomena terkini, cari berita/sumber yang baru diterbitkan dan periksa tanggal publikasi sekaligus tanggal kejadian. Gunakan rentang waktu yang sesuai (misalnya 7 hari, 30 hari, atau lebih lama bila topiknya berkembang perlahan). Jangan menyebut sesuatu “terbaru” tanpa memeriksa tanggal.
+- **Mulai dari fenomena, bukan dari daftar keyword tetap.** Bentuk query berdasarkan temuan awal, lalu ubah arah pencarian mengikuti petunjuk baru yang muncul. Jangan mengulang template atau daftar kata kunci yang sama setiap sesi.
+- **Jelajahi beberapa jalur secara paralel:** berita terkini; kejadian aneh atau langka; hasil yang bertentangan dengan dugaan umum; kegagalan dan keputusan dengan dampak tak terduga; penemuan ilmiah; perubahan kota/properti; perilaku manusia; bisnis dan ekonomi; AI/teknologi; sejarah yang baru mendapat bukti atau konteks baru; serta fenomena lokal Indonesia dan kasus internasional.
+- **Kreatif dalam merangkai query.** Campurkan istilah lokal dan Inggris, lokasi, industri, periode, nama institusi, jenis kejadian, mekanisme, data, laporan investigasi, dan konsekuensi manusia. Buat beberapa jalur pencarian yang benar-benar berbeda—bukan sekadar mengganti satu kata dalam query yang sama.
+- **Biarkan bukti mengubah keyword.** Setelah menemukan petunjuk, buat query lanjutan dari nama orang/tempat/lembaga, tanggal, dokumen, istilah teknis, angka, penjelasan alternatif, atau akibat yang disebut sumber. Cari juga kata kunci yang dapat membantah dugaan awal.
+- **Jangan terlalu deterministik terhadap niche.** HUMAN × PLACE × CHANGE × WHY adalah kompas editorial, bukan pagar sempit. Mulai dari fenomena unik lintas bidang, lalu nilai apakah hubungannya dengan manusia, tempat, perubahan, properti, kota, bisnis, teknologi, atau kehidupan sehari-hari memang alami. Jangan memaksakan hubungan properti pada semua topik.
+- **Campurkan topik fresh dan evergreen secara sadar.** Utamakan berita terbaru ketika ada perkembangan yang relevan, tetapi jangan mengabaikan fenomena lama, arsip, kasus historis, atau pertanyaan fundamental yang kembali relevan karena peristiwa baru. Bedakan jelas berita aktual dari kisah lama yang kembali ramai.
+- **Hindari pengulangan.** Bandingkan kandidat dengan daftar topik/script yang sudah ada jika tersedia. Jangan hanya mengganti judul atau keyword untuk mengulang kasus yang sama; pertahankan topik serupa hanya jika ada bukti baru, sudut investigasi baru, atau pertanyaan yang berbeda.
+- **Validasi kandidat sebelum merekomendasikan.** Hasil search, headline, cuplikan pencarian, dan posting viral hanyalah petunjuk. Buka sumbernya, cek tanggal dan konteks, cari sumber independen/primer, dan beri label “belum terverifikasi” jika bukti belum cukup. Jangan mengarang berita, kejadian, tautan, atau klaim.
+- **Pilih karena ada cerita yang bisa diselidiki, bukan karena terdengar aneh.** Cari pertanyaan yang jelas, mekanisme atau sebab-akibat yang mungkin ditelusuri, kronologi, bukti, kontradiksi, dan dampak manusia. Jangan membuat judul sensasional yang tidak ditopang sumber.
+
 Untuk setiap kandidat, jelaskan:
 - Topik dan pertanyaan utama.
 - Mengapa topik menarik atau relevan.
+- Apakah ini berita/kejadian baru, perkembangan terbaru dari kasus lama, atau topik evergreen/historis.
+- Tanggal kejadian dan tanggal publikasi sumber jika tersedia.
 - Cerita atau pertanyaan yang bisa ditelusuri.
 - Ketersediaan sumber yang layak.
 - Hal yang masih perlu diverifikasi.
-
+- Query lanjutan yang muncul dari temuan awal, bukan hanya query template.
 ### 2. Research
 
 Cari sumber asli dan sumber sekunder yang kredibel. Prioritaskan dokumen primer, data resmi, penelitian akademik, laporan institusi, wawancara langsung, dan media tepercaya sesuai topiknya.
