@@ -56,6 +56,15 @@ class TestAutonomousRequestResolution(unittest.TestCase):
 
 class TestIdeaDiscovery(unittest.TestCase):
 
+    def test_default_queries_cover_multiple_human_place_system_lanes(self):
+        from engine.editorial.idea_discovery import DEFAULT_DISCOVERY_QUERIES, EVERGREEN_SEEDS
+
+        self.assertGreaterEqual(len(DEFAULT_DISCOVERY_QUERIES), 8)
+        joined = " ".join(DEFAULT_DISCOVERY_QUERIES).lower()
+        for theme in ("rumah", "transportasi", "pekerjaan", "sejarah", "konsumen", "lingkungan", "demografi"):
+            self.assertIn(theme, joined)
+        self.assertGreaterEqual(len(EVERGREEN_SEEDS), 8)
+
     def test_niche_qualification_accepts_clear_human_system_topic(self):
         from engine.editorial.idea_discovery import evaluate_niche_alignment
 

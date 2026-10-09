@@ -111,7 +111,24 @@ def gdelt(query: str) -> list[dict[str, Any]]:
         "query": query, "mode": "ArtList", "format": "json", "sort": "DateDesc", "maxrecords": "25"
     })
     data = get_json(url)
-    return [row for item in data.get("articles", []) if (row := candidate(item.get("title"), item.get("url"), item.get("seendate", "") + " " + item.get("domain", ""), "gdelt", item.get("seendate")))]
+    return [
+        row
+        for item in data.get("articles", [])
+        if (
+            row := candidate(
+                item.get("title"),
+                item.get("url"),
+                "GDELT index metadata; publisher domain: "
+                + str(item.get("domain") or "unknown")
+                + "; language: "
+                + str(item.get("language") or "unknown")
+                + "; source country: "
+                + str(item.get("sourcecountry") or "unknown"),
+                "gdelt",
+                item.get("seendate"),
+            )
+        )
+    ]
 
 
 def openalex(query: str) -> list[dict[str, Any]]:
@@ -164,7 +181,6 @@ def brave(query: str, key: str) -> list[dict[str, Any]]:
 
 
 def tavily(query: str, key: str) -> list[dict[str, Any]]:
-    data = json.loads(request("https://api.tavily.com/search", {"Content-Type": "application/json"})) if False else None
     payload = json.dumps({"api_key": key, "query": query, "topic": "news", "search_depth": "basic", "max_results": 10}).encode()
     req = urllib.request.Request("https://api.tavily.com/search", data=payload, headers={"User-Agent": USER_AGENT, "Content-Type": "application/json", "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as response:
