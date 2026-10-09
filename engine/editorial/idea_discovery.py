@@ -20,20 +20,28 @@ from engine.editorial.taxonomy import classify_topic
 from engine.intelligence.rss import RSSDiscoveryService
 
 
+# Query lanes are intentionally varied while preserving the editorial lens:
+# human consequences explained through places, incentives, institutions, and change.
 DEFAULT_DISCOVERY_QUERIES: Tuple[str, ...] = (
-    "rumah properti tanah kota Indonesia",
-    "urbanisasi transportasi kota Indonesia",
-    "AI pekerjaan kota Indonesia",
-    "sejarah kota Indonesia",
-    "perubahan ruang hidup manusia Indonesia",
+    "rumah harga tanah sewa biaya hidup Indonesia",
+    "urbanisasi transportasi kemacetan infrastruktur kota Indonesia",
+    "AI otomasi pekerjaan upah dampak pekerja Indonesia",
+    "sejarah kebijakan kota perubahan ruang hidup Indonesia",
+    "pasar tradisional minimarket perubahan perilaku konsumen Indonesia",
+    "perumahan akses sekolah rumah sakit ketimpangan kota Indonesia",
+    "industri pabrik tambang lingkungan masyarakat lokal Indonesia",
+    "demografi generasi muda keluarga tempat tinggal pekerjaan Indonesia",
 )
 
 EVERGREEN_SEEDS: Tuple[str, ...] = (
     "Kenapa rumah yang lebih murah sering meminta kita membayar dengan waktu?",
     "Kenapa kota besar terus tumbuh meski hidup di dalamnya terasa semakin mahal?",
     "Bagaimana pekerjaan mengubah bentuk kota dan rumah tempat manusia tinggal?",
-    "Kenapa manusia selalu mengubah tempat tinggalnya ketika teknologi berubah?",
+    "Kenapa teknologi baru bisa mengubah upah, kebiasaan, dan tempat manusia bekerja?",
     "Mengapa harga tanah bisa mengubah bentuk kota lebih jauh daripada arsitektur?",
+    "Kenapa pasar dan toko di sekitar kita berubah, dan siapa yang paling terdampak?",
+    "Bagaimana kebijakan transportasi mengubah kesempatan kerja dan biaya hidup warga?",
+    "Mengapa perubahan industri bisa mengubah lingkungan sekaligus masa depan sebuah kota?",
 )
 
 
