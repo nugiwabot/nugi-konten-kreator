@@ -239,7 +239,7 @@ Nilai kandidat secara kualitatif, jangan memberi skor presisi yang tidak didukun
 - **Berbeda dari konten lama:** bukan sekadar judul baru untuk gagasan atau kasus yang sama.
 - **Layak divisualisasikan:** ada kemungkinan visual relevan seperti lokasi, arsip, dokumen, peta, objek, data, atau diagram.
 
-Tahan atau tolak kandidat yang hanya bergantung pada rumor, sumber anonim yang tidak dapat dikorroborasi, klaim konspirasi tanpa bukti, atau judul sensasional tanpa kasus yang bisa ditemukan. Ketidakmampuan menemukan bukti bukan alasan untuk mengisi kekosongan dengan dugaan.
+Tahan atau tolak kandidat yang hanya bergantung pada rumor, sumber anonim yang tidak dapat dikonfirmasi oleh sumber independen, klaim konspirasi tanpa bukti, atau judul sensasional tanpa kasus yang bisa ditemukan. Ketidakmampuan menemukan bukti bukan alasan untuk mengisi kekosongan dengan dugaan.
 
 ---
 
