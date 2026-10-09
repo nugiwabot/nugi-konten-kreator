@@ -1,5 +1,7 @@
 # Creator-Led Research Workflow
 
+> **Konteks penggunaan:** dokumen ini adalah panduan utama ketika bekerja di repository GitHub `nugiwabot/nugi-konten-kreator` melalui Nugi Konten Kreator MCP atau lingkungan kerja yang terhubung dengannya. Gunakan repository sebagai sumber kebenaran untuk skill, tool, dan aturan teknis. Instruksi ini tidak membuat tool baru dan tidak mengubah perilaku kode produksi.
+
 ## Tujuan
 
 Workflow ini dibuat agar AI menyiapkan bahan riset dan outline cerita untuk video YouTube, sedangkan Nugi menulis sendiri script teleprompter-nya. Tujuannya bukan hanya menghasilkan video, tetapi juga melatih kemampuan riset, memahami topik, menyusun narasi, dan berbicara natural.
@@ -15,11 +17,39 @@ Workflow ini dibuat agar AI menyiapkan bahan riset dan outline cerita untuk vide
 - Jangan mengubah pipeline, konfigurasi, atau kode produksi tanpa permintaan eksplisit.
 - Jangan menjalankan pipeline end-to-end yang menghasilkan script untuk permintaan yang hanya membutuhkan riset dan outline.
 
+## Menggunakan Tools MCP dan Infrastruktur yang Sudah Ada
+
+Repository ini sudah memiliki Nugi Konten Kreator MCP dan komponen riset/retrieval. Saat MCP tersebut benar-benar tersedia di sesi kerja, **panggil tools yang relevan secara langsung**; jangan hanya membaca dokumentasinya, menyebut nama tool, atau meniru hasilnya secara manual.
+
+Nama di bawah adalah nama tool yang terdokumentasi pada repository. Daftar tool yang benar-benar terhubung di sesi saat ini tetap menjadi acuan. Jika tool tidak tersedia atau pemanggilannya gagal, jangan mengaku sudah menjalankannya. Jelaskan batasannya dan lanjutkan dengan alternatif yang tersedia.
+
+### Urutan pemanfaatan yang disarankan
+
+1. **Pahami repository dan hindari topik berulang.** Gunakan `nugi_repo_tree`, `nugi_repo_read`, `nugi_repo_find`, dan/atau `nugi_repo_search` untuk membaca skill, dokumentasi editorial, serta daftar script/topik lama yang relevan. Gunakan `nugi_repo_status` hanya bila status workspace perlu diketahui. Jangan membaca atau memindai seluruh repository tanpa alasan; fokus pada file yang diperlukan.
+2. **Discovery topik.** Jika pengguna belum menentukan topik, gunakan `nugi_idea_discover(count=...)` untuk memperoleh peluang konten terurut dari sumber intelijen yang tersedia. Tool ini merupakan discovery awal dengan sinyal RSS/berita dan pemeriksaan bukti terbatas. Perlakukan hasilnya sebagai kandidat, bukan fakta final. Perluas dengan pencarian web aktual jika tersedia.
+3. **Rencanakan permintaan bila perlu.** Gunakan `nugi_request_plan(request=...)` untuk memeriksa bagaimana permintaan natural-language diklasifikasikan sebelum memilih langkah kerja, terutama jika ada risiko permintaan riset dianggap sebagai produksi konten.
+4. **Riset mendalam untuk kandidat terpilih.** Gunakan `nugi_research_deep(topic=..., recency=..., max_evidence=..., depth=...)` jika tool ini tersedia. Pilih recency sesuai pertanyaan: `w` untuk perkembangan sekitar satu minggu, `m` untuk sekitar satu bulan, dan `all` untuk topik evergreen atau historis. Jangan menganggap dossier otomatis membuktikan semua klaim; periksa sumber, tanggal, cakupan bukti, dan kontradiksinya. Tool ini dapat menyimpan dossier ke folder output repository; gunakan lokasi output yang aman dan jangan menimpa artefak pengguna tanpa alasan.
+5. **Retrieval pengetahuan permanen.** Gunakan `nugi_knowledge_retrieve(query=..., top_k=...)` ketika perlu mengambil framework storytelling, pengetahuan editorial, psikologi/perilaku, atau referensi permanen yang tersimpan. Tool ini dirancang untuk vector search yang dilanjutkan precision reranking. Bila perlu memeriksa kesiapan index, gunakan `nugi_knowledge_index_status()`. Retrieval bukan pengganti riset web dan bukan sumber untuk memverifikasi berita terbaru.
+6. **Klasifikasi editorial atau question mining bila relevan.** `nugi_editorial_classify_topic(topic=...)` dapat membantu menilai domain/anchor/lensa editorial, tetapi jangan memaksakan koneksi properti jika tidak alami. Gunakan `nugi_question_mine` hanya jika tugasnya memang menambang pertanyaan dari dataset yang sudah tersedia; periksa file dan kontrak tool terlebih dahulu, jangan mengarang atau membuat dataset baru hanya untuk memanggilnya.
+
+### Batasan teknis yang wajib ditaati
+
+- Sesuai `retrieval/embedding.md`, embedding internal **hanya untuk permanent knowledge retrieval**, bukan untuk mencari berita atau perkembangan terkini. Topik aktual harus ditelusuri melalui Runtime Web Research/pencarian web.
+- Ikuti abstraksi provider dan konfigurasi yang sudah ada. Jangan memanggil endpoint lokal secara manual, mengganti URL/model, mengubah `.env`, melakukan reindex, atau mengubah index tanpa kebutuhan yang jelas dan izin yang sesuai.
+- Ikuti `retrieval/reranking.md` dan `docs/LOCAL_AI_INFRASTRUCTURE.md`. Jangan menganggap embedding/reranker aktif hanya karena dokumentasinya ada. Jika layanan gagal atau menolak fallback, catat keterbatasannya; jangan menyatakan retrieval dua tahap berhasil jika tidak.
+- `nugi_content_create` adalah entry point produksi dan dapat menghasilkan script serta artefak produksi. **Jangan gunakan untuk tugas research-brief dan outline saja.** Utamakan tool MCP terfokus seperti `nugi_idea_discover` dan `nugi_research_deep`.
+- `nugi_research_fact_check` ditujukan untuk mengaudit script/narasi terhadap bukti. Jangan membuat script hanya agar tool itu bisa dipakai; gunakan hanya ketika pengguna memberikan script atau memang meminta audit naskah.
+- Periksa kontrak input dan output tool sebelum pemanggilan bila belum jelas. Jangan memanggil tool yang tidak cocok hanya demi memakai sebanyak mungkin tools. Gunakan hanya yang menambah nilai untuk tugas.
+- Jangan menjalankan CLI, end-to-end pipeline, atau tools produksi sebagai pengganti tool riset terfokus ketika hal itu tidak diperlukan. Jika MCP tidak terhubung tetapi akses terminal memang tersedia dan dibutuhkan, rujuk `docs/CLI_REFERENCE.md` dan laporkan dengan jelas metode yang benar-benar digunakan.
+- Tool calls, retrieval, dan hasil search harus dipisahkan dari verifikasi faktual. Tetap buka dan periksa sumber asli jika memungkinkan, cari bukti pembanding, dan jelaskan ketidakpastian.
+
 ## Alur kerja
 
 ### 1. Discovery
 
 Temukan ide dan pertanyaan yang menarik serta cocok dengan arah editorial Nugi: HUMAN × PLACE × CHANGE × WHY. Properti adalah salah satu anchor, bukan topik wajib untuk semua video.
+
+Untuk discovery tanpa topik spesifik, prioritaskan pemanggilan `nugi_idea_discover` jika tersedia, lalu telusuri kandidat terbaik menggunakan pencarian web/Runtime Web Research dan skill discovery. Gunakan hasil MCP sebagai pintu masuk pencarian, bukan sebagai vonis kebenaran. Jika topik sudah ditentukan, lewati discovery umum yang tidak perlu dan langsung telusuri bukti. 
 
 **Referensi wajib untuk discovery:** mulai dengan membaca dan menerapkan [skills/discover-phenomena.md](../skills/discover-phenomena.md). Skill ini adalah panduan utama untuk menghasilkan query pencarian yang fleksibel dan menemukan kasus nyata yang tidak biasa. Gunakan juga [skills/research-topic.md](../skills/research-topic.md) setelah kandidat dipilih, serta [skills/generate-ideas.md](../skills/generate-ideas.md) bila perlu memperluas sudut editorial. Jangan mengasumsikan ada skill terpisah bernama “Keyword Finder” jika file yang dimaksud tidak ditemukan; gunakan skill discovery yang benar-benar ada di repository ini.
 
