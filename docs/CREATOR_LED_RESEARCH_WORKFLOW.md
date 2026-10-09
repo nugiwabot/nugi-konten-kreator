@@ -17,6 +17,20 @@ Workflow ini dibuat agar AI menyiapkan bahan riset dan outline cerita untuk vide
 - Jangan mengubah pipeline, konfigurasi, atau kode produksi tanpa permintaan eksplisit.
 - Jangan menjalankan pipeline end-to-end yang menghasilkan script untuk permintaan yang hanya membutuhkan riset dan outline.
 
+## Larangan Membaca Script dan Topik Lama — Wajib Dipatuhi
+
+Sampai batch pertama script yang **ditulis sendiri oleh Nugi** selesai dibuat, AI **dilarang membaca, membuka, mencari, mengambil, merangkum, membandingkan, atau menggunakan isi script/topik konten lama** dari repository atau dataset mana pun. Larangan ini berlaku walaupun tool MCP dapat mengaksesnya atau AI menganggapnya berguna untuk mencegah pengulangan.
+
+Secara khusus, jangan:
+- mencari atau membaca file script, draft, teleprompter, caption, daftar topik, bank ide, maupun hasil produksi konten lama;
+- memakai `nugi_repo_tree`, `nugi_repo_read`, `nugi_repo_find`, `nugi_repo_search`, `nugi_question_mine`, atau tool lain untuk menelusuri isi konten lama;
+- menggunakan topik lama sebagai sinyal untuk memilih, menolak, mengurutkan, atau membentuk topik baru;
+- mengasumsikan script yang sudah ada di repository ditulis sendiri oleh Nugi.
+
+Untuk tahap ini, AI hanya boleh membaca dokumentasi kerja, skill, instruksi, definisi/kontrak tools MCP, dan dokumentasi teknis yang diperlukan untuk menjalankan riset. Discovery harus berdiri sendiri berdasarkan fenomena, pencarian web aktual, bukti, dan arahan yang diberikan Nugi sekarang.
+
+Larangan ini baru boleh dicabut **setelah batch pertama script yang ditulis sendiri oleh Nugi selesai dibuat**. Sampai saat itu, jangan memeriksa apakah batch tersebut sudah ada dengan cara membaca atau mencari isi script. Tunggu instruksi Nugi yang jelas bahwa batch pertama sudah selesai dan konten lama boleh dibaca.
+
 ## Menggunakan Tools MCP dan Infrastruktur yang Sudah Ada
 
 Repository ini sudah memiliki Nugi Konten Kreator MCP dan komponen riset/retrieval. Saat MCP tersebut benar-benar tersedia di sesi kerja, **panggil tools yang relevan secara langsung**; jangan hanya membaca dokumentasinya, menyebut nama tool, atau meniru hasilnya secara manual.
@@ -25,12 +39,12 @@ Nama di bawah adalah nama tool yang terdokumentasi pada repository. Daftar tool 
 
 ### Urutan pemanfaatan yang disarankan
 
-1. **Pahami repository dan hindari topik berulang.** Gunakan `nugi_repo_tree`, `nugi_repo_read`, `nugi_repo_find`, dan/atau `nugi_repo_search` untuk membaca skill, dokumentasi editorial, serta daftar script/topik lama yang relevan. Gunakan `nugi_repo_status` hanya bila status workspace perlu diketahui. Jangan membaca atau memindai seluruh repository tanpa alasan; fokus pada file yang diperlukan.
+1. **Pahami hanya dokumentasi dan kemampuan teknis yang relevan.** Gunakan `nugi_repo_read`, `nugi_repo_find`, dan/atau `nugi_repo_search` hanya untuk membaca dokumentasi, skill, kontrak tools MCP, serta dokumentasi retrieval/infrastruktur. Jangan gunakan tool repository untuk mencari atau membaca isi script, topik konten, dataset ide, output, maupun riwayat konten lama.
 2. **Discovery topik.** Jika pengguna belum menentukan topik, gunakan `nugi_idea_discover(count=...)` untuk memperoleh peluang konten terurut dari sumber intelijen yang tersedia. Tool ini merupakan discovery awal dengan sinyal RSS/berita dan pemeriksaan bukti terbatas. Perlakukan hasilnya sebagai kandidat, bukan fakta final. Perluas dengan pencarian web aktual jika tersedia.
 3. **Rencanakan permintaan bila perlu.** Gunakan `nugi_request_plan(request=...)` untuk memeriksa bagaimana permintaan natural-language diklasifikasikan sebelum memilih langkah kerja, terutama jika ada risiko permintaan riset dianggap sebagai produksi konten.
 4. **Riset mendalam untuk kandidat terpilih.** Gunakan `nugi_research_deep(topic=..., recency=..., max_evidence=..., depth=...)` jika tool ini tersedia. Pilih recency sesuai pertanyaan: `w` untuk perkembangan sekitar satu minggu, `m` untuk sekitar satu bulan, dan `all` untuk topik evergreen atau historis. Jangan menganggap dossier otomatis membuktikan semua klaim; periksa sumber, tanggal, cakupan bukti, dan kontradiksinya. Tool ini dapat menyimpan dossier ke folder output repository; gunakan lokasi output yang aman dan jangan menimpa artefak pengguna tanpa alasan.
 5. **Retrieval pengetahuan permanen.** Gunakan `nugi_knowledge_retrieve(query=..., top_k=...)` ketika perlu mengambil framework storytelling, pengetahuan editorial, psikologi/perilaku, atau referensi permanen yang tersimpan. Tool ini dirancang untuk vector search yang dilanjutkan precision reranking. Bila perlu memeriksa kesiapan index, gunakan `nugi_knowledge_index_status()`. Retrieval bukan pengganti riset web dan bukan sumber untuk memverifikasi berita terbaru.
-6. **Klasifikasi editorial atau question mining bila relevan.** `nugi_editorial_classify_topic(topic=...)` dapat membantu menilai domain/anchor/lensa editorial, tetapi jangan memaksakan koneksi properti jika tidak alami. Gunakan `nugi_question_mine` hanya jika tugasnya memang menambang pertanyaan dari dataset yang sudah tersedia; periksa file dan kontrak tool terlebih dahulu, jangan mengarang atau membuat dataset baru hanya untuk memanggilnya.
+6. **Klasifikasi editorial atau question mining bila relevan.** `nugi_editorial_classify_topic(topic=...)` dapat membantu menilai domain/anchor/lensa editorial, tetapi jangan memaksakan koneksi properti jika tidak alami. Jangan gunakan `nugi_question_mine` pada tahap ini karena tool tersebut membaca dataset konten/hasil pencarian yang bisa memuat materi lama. Tool itu baru boleh dipertimbangkan setelah Nugi secara jelas mengizinkan pembacaan konten lama.
 
 ### Batasan teknis yang wajib ditaati
 
